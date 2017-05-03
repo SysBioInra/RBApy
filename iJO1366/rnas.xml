@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RBARnas>
+   <listOfComponents>
+      <component id="A" name="Adenosine residue" type="Nucleotide" weight="2.9036"/>
+      <component id="C" name="Cytosine residue" type="Nucleotide" weight="2.7017"/>
+      <component id="G" name="Guanine residue" type="Nucleotide" weight="3.0382"/>
+      <component id="U" name="Uramine residue" type="Nucleotide" weight="2.7102"/>
+   </listOfComponents>
+   <listOfSpecies>
+      <rna compartment="c" id="rrnO-16S" name="rrnO-16S" sequence="uuuaucggagaguuugauccuggcucaggacgaacgcuggcggcgugccuaauacaugcaagucgagcggacagaugggagcuugcucccugauguuagcggcggacgggugaguaacacguggguaaccugccuguaagacugggauaacuccgggaaaccggggcuaauaccggaugguuguuugaaccgcaugguucaaacauaaaagguggcuucggcuaccacuuacagauggacccgcggcgcauuagcuaguuggugagguaacggcucaccaaggcgacgaugcguagccgaccugagagggugaucggccacacugggacugagacacggcccagacuccuacgggaggcagcaguagggaaucuuccgcaauggacgaaagucugacggagcaacgccgcgugagugaugaagguuuucggaucguaaagcucuguuguuagggaagaacaagugccguucgaauagggcgguaccuugacgguaccuaaccagaaagccacggcuaacuacgugccagcagccgcgguaauacguagguggcaagcguuguccggaauuauugggcguaaagggcucgcaggcgguuucuuaagucugaugugaaagcccccggcucaaccggggagggucauuggaaacuggggaacuugagugcagaagaggagaguggaauuccacguguagcggugaaaugcguagagauguggaggaacaccaguggcgaaggcgacucucuggucuguaacugacgcugaggagcgaaagcguggggagcgaacaggauuagauacccugguaguccacgccguaaacgaugagugcuaaguguuaggggguuuccgccccuuagugcugcagcuaacgcauuaagcacuccgccuggggaguacggucgcaagacugaaacucaaaggaauugacgggggcccgcacaagcgguggagcaugugguuuaauucgaagcaacgcgaagaaccuuaccaggucuugacauccucugacaauccuagagauaggacguccccuucgggggcagagugacagguggugcaugguugucgucagcucgugucgugagauguuggguuaagucccgcaacgagcgcaacccuugaucuuaguugccagcauucaguugggcacucuaaggugacugccggugacaaaccggaggaagguggggaugacgucaaaucaucaugccccuuaugaccugggcuacacacgugcuacaauggacagaacaaagggcagcgaaaccgcgagguuaagccaaucccacaaaucuguucucaguucggaucgcagucugcaacucgacugcgugaagcuggaaucgcuaguaaucgcggaucagcaugccgcggugaauacguucccgggccuuguacacaccgcccgucacaccacgagaguuuguaacacccgaagucggugagguaaccuuuuaggagccagccgccgaaggugggacagaugauuggggugaagucguaacaagguagccguaucggaaggugcggcuggaucaccuccuuucu">
+         <composition>
+            <componentReference component="A" stoichiometry="382"/>
+            <componentReference component="C" stoichiometry="365"/>
+            <componentReference component="G" stoichiometry="491"/>
+            <componentReference component="U" stoichiometry="315"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="rrnO-23S" name="rrnO-23S" sequence="gguuaaguuagaaagggcgcacgguggaugccuuggcacuaggagccgaugaaggacgggacgaacaccgauaugcuucggggagcuguaagcaagcuuugauccggagauuuccgaauggggaaacccaccacucguaauggagugguauccauaucugaauucauaggauaugagaaggcagacccggggaacugaaacaucuaaguacccggaggaagagaaagcaaaugcgauucccugaguagcggcgagcgaaacgggaucagcccaaaccaagaggcuugccucuugggguuguaggacacucuguacggaguuacaaaggaacgagguagaugaagaggucuggaaaggcccgccauaggagguaacagcccuguagucaaaacuucguucucuccugaguggauccugaguacggcggaacacgugaaauuccgucggaauccgggaggaccaucucccaaggcuaaauacucccuagugaccgauagugaaccaguaccgugagggaaaggugaaaagcaccccggaaggggagugaaagagauccugaaaccgugugccuacaaguagucagagcccguuaacgggugauggcgugccuuuuguagaaugaaccggcgaguuacgaucucgugcaagguuaagcagaagaugcggagccgcagcgaaagcgagucugaauagggcgcaugaguacguggucguagacccgaaaccaggugaucuacccauguccagggugaaguucagguaacacugaauggaggcccgaacccacgcacguugaaaagugcggggaugagguguggguaggggugaaaugccaaucgaaccuggagauagcugguucucuccgaaauagcuuuagggcuagccucaagguaagagucuuggagguagagcacugauuggacuaggggccccuaccggguuaccgaauucagucaaacuccgaaugccaaugacuuauccuugggagucagacugcgagugauaagauccguagucgaaagggaaacagcccagaccgccagcuaaggucccaaaguauacguuaaguggaaaaggauguggaguugcuuagacaaccaggauguuggcuuagaagcagccaccauuuaaagagugcguaauagcucacuggucgagugacucugcgccgaaaauguaccggggcuaaacguaucaccgaagcugcggacuguucuucgaacagugguaggagagcguucuaagggcugugaagccagaccggaaggacugguggagcgcuuagaagugagaaugccgguaugaguagcgaaagaggggugagaauccccuccaccgaaugccuaagguuuccugaggaaggcucguccgcucaggguuagucgggaccuaagccgaggccgaaaggcguaggcgauggacaacagguugauauuccuguaccaccuccucaccauuugagcaauggggggacgcaggaggauaggguaagcgcgguauuggauauccgcguccaagcaguuaggcugggaaauaggcaaauccguuucccauaaggcugagcugugauggcgagcgaaauauaguagcgaaguuccugauuccacacugccaagaaaagccucuagcgaggugagaggugcccguaccgcaaaccgacacagguaggcgaggagagaauccuaaggugaucgagagaacucucguuaaggaacucggcaaaaugaccccguaacuucgggagaaggggugcucuguuagggugcaagcccgagagagccgcagugaauaggcccaggcgacuguuuagcaaaaacacaggucucugcgaagccguaaggcgaaguauaggggcugacgccugcccggugcuggaagguuaagaggagcgcuuagcguaagcgaaggugcgaauugaagccccaguaaacggcggccguaacuauaacgguccuaagguagcgaaauuccuugucggguaaguuccgacccgcacgaaaggcgcaacgaucugggcacugucucaacgagagacucggugaaauuauaguaccugugaagaugcagguuacccgcgacaggacggaaagaccccguggagcuuuacugcagccugauauugaauguugguacagcuuguacaggauagguaggagccuuggaaaccggagcgccagcuucgguggaggcaucggugggauacuacccuggcuguauugaccuucuaacccgccgcccuuaucgggcggggagacagugucaggugggcaguuugacuggggcggucgccuccuaaaagguaacggaggcgcccaaagguucccucagaaugguuggaaaucauucgcagaguguaaaggcacaagggagcuugacugcgagaccuacaagucgagcagggacgaaagucgggcuuagugauccggugguuccgcauggaagggccaucgcucaacggauaaaagcuaccccggggauaacaggcuuaucucccccaagaguccacaucgacggggagguuuggcaccucgaugucggcucaucgcauccuggggcuguagucggucccaaggguugggcuguucgcccauuaaagcgguacgcgagcuggguucagaacgucgugagacaguucggucccuauccgucgcgggcgcaggaaauuugagaggagcuguccuuaguacgagaggaccgggauggacgcaccgcugguguaccaguuguucugccaagggcaucgcuggguagcuaugugcggacgggauaagugcugaaagcaucuaagcaugaagccccccucaagaugagauuucccauuccgcaaggaaguaagaucccugaaagaugaucagguugauaggucugagguggaaguguggcgacacauggagcugacagauacuaaucgaucgaggacuuaaccau">
+         <composition>
+            <componentReference component="A" stoichiometry="779"/>
+            <componentReference component="C" stoichiometry="658"/>
+            <componentReference component="G" stoichiometry="920"/>
+            <componentReference component="U" stoichiometry="571"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="rrnO-5S" name="rrnO-5S" sequence="uuugguggcgauagcgaagaggucacacccguucccauaccgaacacggaaguuaagcucuucagcgccgaugguagucggggguuucccccugugagaguaggacgccgcc">
+         <composition>
+            <componentReference component="A" stoichiometry="23"/>
+            <componentReference component="C" stoichiometry="31"/>
+            <componentReference component="G" stoichiometry="35"/>
+            <componentReference component="U" stoichiometry="23"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="mrna" name="average mRNA" sequence="">
+         <composition>
+            <componentReference component="A" stoichiometry="0.2818"/>
+            <componentReference component="C" stoichiometry="0.2181"/>
+            <componentReference component="G" stoichiometry="0.2171"/>
+            <componentReference component="U" stoichiometry="0.283"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnaala_c" name="(2516253-2516178)  Ala (GGC) 76 bp  Sc: 86.51" sequence="ggggcuauagcucagcugggagagcgcuugcauggcaugcaagaggucagcgguucgaucccgcuuagcuccacca">
+         <composition>
+            <componentReference component="A" stoichiometry="15"/>
+            <componentReference component="C" stoichiometry="21"/>
+            <componentReference component="U" stoichiometry="15"/>
+            <componentReference component="G" stoichiometry="25"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnaarg_c" name="(2816571-2816495)  Arg (ACG) 77 bp  Sc: 87.22" sequence="gcauccguagcucagcuggauagaguacucggcuacgaaccgagcggucggagguucgaauccucccggaugcacca">
+         <composition>
+            <componentReference component="A" stoichiometry="17"/>
+            <componentReference component="C" stoichiometry="23"/>
+            <componentReference component="U" stoichiometry="14"/>
+            <componentReference component="G" stoichiometry="23"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnaasn_c" name="(2042573-2042648)  Asn (GTT) 76 bp  Sc: 87.13" sequence="uccucuguaguucagucgguagaacggcggacuguuaauccguaugucacugguucgaguccagucagaggagcca">
+         <composition>
+            <componentReference component="A" stoichiometry="16"/>
+            <componentReference component="C" stoichiometry="18"/>
+            <componentReference component="U" stoichiometry="20"/>
+            <componentReference component="G" stoichiometry="22"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnaasp_c" name="(228928-229004)  Asp (GTC) 77 bp  Sc: 90.74" sequence="ggagcgguaguucagucgguuagaauaccugccugucacgcagggggucgcggguucgagucccguccguuccgcca">
+         <composition>
+            <componentReference component="A" stoichiometry="11"/>
+            <componentReference component="C" stoichiometry="22"/>
+            <componentReference component="U" stoichiometry="17"/>
+            <componentReference component="G" stoichiometry="27"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnacys_c" name="(1990011-1989938)  Cys (GCA) 74 bp  Sc: 51.48" sequence="ggcgcguuaacaaagcgguuauguagcggauugcaaauccgucuaguccgguucgacuccggaacgcgccucca">
+         <composition>
+            <componentReference component="A" stoichiometry="16"/>
+            <componentReference component="C" stoichiometry="21"/>
+            <componentReference component="U" stoichiometry="16"/>
+            <componentReference component="G" stoichiometry="21"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnagln_c" name="(695839-695765)  Gln (CTG) 75 bp  Sc: 75.83" sequence="ugggguaucgccaagcgguaaggcaccggauucugauuccggcauuccgagguucgaauccucguaccccagcca">
+         <composition>
+            <componentReference component="A" stoichiometry="15"/>
+            <componentReference component="C" stoichiometry="23"/>
+            <componentReference component="U" stoichiometry="16"/>
+            <componentReference component="G" stoichiometry="21"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnaglu_c" name="(3941458-3941533)  Glu (TTC) 76 bp  Sc: 59.80" sequence="guccccuucgucuagaggcccaggacaccgcccuuucacggcgguaacagggguucgaauccccuaggggacgcca">
+         <composition>
+            <componentReference component="A" stoichiometry="14"/>
+            <componentReference component="C" stoichiometry="27"/>
+            <componentReference component="U" stoichiometry="13"/>
+            <componentReference component="G" stoichiometry="22"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnagly_c" name="(2997079-2997006)  Gly (CCC) 74 bp  Sc: 78.75" sequence="gcgggcguaguucaaugguagaacgagagcuucccaagcucuauacgaggguucgauucccuucgcccgcucca">
+         <composition>
+            <componentReference component="A" stoichiometry="15"/>
+            <componentReference component="C" stoichiometry="22"/>
+            <componentReference component="U" stoichiometry="17"/>
+            <componentReference component="G" stoichiometry="20"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnahis_c" name="(3980533-3980608)  His (GTG) 76 bp  Sc: 84.86" sequence="guggcuauagcucaguugguagagcccuggauugugauuccaguugucguggguucgaaucccauuagccacccca">
+         <composition>
+            <componentReference component="A" stoichiometry="14"/>
+            <componentReference component="C" stoichiometry="19"/>
+            <componentReference component="U" stoichiometry="22"/>
+            <componentReference component="G" stoichiometry="21"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnaile_c" name="(225381-225457)  Ile (GAT) 77 bp  Sc: 88.37" sequence="aggcuuguagcucaggugguuagagcgcaccccugauaagggugaggucggugguucaaguccacucaggccuacca">
+         <composition>
+            <componentReference component="A" stoichiometry="16"/>
+            <componentReference component="C" stoichiometry="19"/>
+            <componentReference component="U" stoichiometry="17"/>
+            <componentReference component="G" stoichiometry="25"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnaleu_c" name="(4494428-4494512)  Leu (CAA) 85 bp  Sc: 79.12" sequence="gccgaaguggcgaaaucgguagacgcaguugauucaaaaucaaccguagaaauacgugccgguucgaguccggccuucggcacca">
+         <composition>
+            <componentReference component="A" stoichiometry="23"/>
+            <componentReference component="C" stoichiometry="22"/>
+            <componentReference component="U" stoichiometry="16"/>
+            <componentReference component="G" stoichiometry="24"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnalys_c" name="(780066-780141)  Lys (TTT) 76 bp  Sc: 99.54" sequence="gggucguuagcucaguugguagagcaguugacuuuuaaucaauuggucgcagguucgaauccugcacgacccacca">
+         <composition>
+            <componentReference component="A" stoichiometry="17"/>
+            <componentReference component="C" stoichiometry="18"/>
+            <componentReference component="U" stoichiometry="21"/>
+            <componentReference component="G" stoichiometry="20"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnamet_c" name="(3316311-3316235)  Met (CAT) 77 bp  Sc: 82.92" sequence="cgcgggguggagcagccugguagcucgucgggcucauaacccgaagaucgucgguucaaauccggcccccgcaacca">
+         <composition>
+            <componentReference component="A" stoichiometry="15"/>
+            <componentReference component="C" stoichiometry="26"/>
+            <componentReference component="U" stoichiometry="12"/>
+            <componentReference component="G" stoichiometry="24"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnaphe_c" name="(3108388-3108463)  Phe (GAA) 76 bp  Sc: 84.11" sequence="gcccggauagcucagucgguagagcaggggauugaaaauccccguguccuugguucgauuccgaguccgggcacca">
+         <composition>
+            <componentReference component="A" stoichiometry="15"/>
+            <componentReference component="C" stoichiometry="21"/>
+            <componentReference component="U" stoichiometry="16"/>
+            <componentReference component="G" stoichiometry="24"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnapro_c" name="(3706715-3706639)  Pro (CGG) 77 bp  Sc: 85.12" sequence="cggugauuggcgcagccugguagcgcacuucguucgggacgaaggggucggagguucgaauccucuaucaccgacca">
+         <composition>
+            <componentReference component="A" stoichiometry="14"/>
+            <componentReference component="C" stoichiometry="21"/>
+            <componentReference component="U" stoichiometry="16"/>
+            <componentReference component="G" stoichiometry="26"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnasecys_c" name="(3834245-3834335)  SeC(p) (TCA) 91 bp  Sc: 75.19" sequence="ggaagaucgucgucuccggugaggcggcuggacuucaaauccaguuggggccgccagcggucccgggcagguucgacuccugugaucuucc">
+         <composition>
+            <componentReference component="A" stoichiometry="13"/>
+            <componentReference component="C" stoichiometry="27"/>
+            <componentReference component="U" stoichiometry="20"/>
+            <componentReference component="G" stoichiometry="31"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnaser_c" name="(2041581-2041492)  Ser (CGA) 90 bp  Sc: 75.49" sequence="ggagagaugccggagcggcugaacggaccggucucgaaaaccggaguaggggcaacucuaccggggguucaaaucccccucucuccgcca">
+         <composition>
+            <componentReference component="A" stoichiometry="20"/>
+            <componentReference component="C" stoichiometry="28"/>
+            <componentReference component="U" stoichiometry="13"/>
+            <componentReference component="G" stoichiometry="29"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnathr_c" name="(296402-296478)  Thr (CGT) 77 bp  Sc: 42.36" sequence="gcucaaguaguuaaaaaugcauuaacaucgcauucguaaugcgaaggucguagguucgacuccuauuaucggcacca">
+         <composition>
+            <componentReference component="A" stoichiometry="23"/>
+            <componentReference component="C" stoichiometry="17"/>
+            <componentReference component="U" stoichiometry="21"/>
+            <componentReference component="G" stoichiometry="16"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnatrp_c" name="(3944980-3945055)  Trp (CCA) 76 bp  Sc: 82.06" sequence="aggggcguaguucaauugguagagcaccggucuccaaaaccggguguugggaguucgagucucuccgccccugcca">
+         <composition>
+            <componentReference component="A" stoichiometry="14"/>
+            <componentReference component="C" stoichiometry="21"/>
+            <componentReference component="U" stoichiometry="17"/>
+            <componentReference component="G" stoichiometry="24"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnatyr_c" name="(1286845-1286761)  Tyr (GTA) 85 bp  Sc: 66.93" sequence="ggugggguucccgagcggccaaagggagcagacuguaaaucugccgucaucgacuucgaagguucgaauccuucccccaccacca">
+         <composition>
+            <componentReference component="A" stoichiometry="19"/>
+            <componentReference component="C" stoichiometry="27"/>
+            <componentReference component="U" stoichiometry="16"/>
+            <componentReference component="G" stoichiometry="23"/>
+         </composition>
+      </rna>
+      <rna compartment="c" id="M_trnaval_c" name="(1744459-1744535)  Val (GAC) 77 bp  Sc: 92.34" sequence="gcguucauagcucaguugguuagagcaccaccuugacauggugggggucguugguucgaguccaauugaacgcacca">
+         <composition>
+            <componentReference component="A" stoichiometry="16"/>
+            <componentReference component="C" stoichiometry="18"/>
+            <componentReference component="U" stoichiometry="20"/>
+            <componentReference component="G" stoichiometry="23"/>
+         </composition>
+      </rna>
+
+   </listOfSpecies>
+</RBARnas>

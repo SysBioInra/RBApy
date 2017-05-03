@@ -1,0 +1,3 @@
+Following genes could not be retrieved in uniprot:
+s0001, b1692
+Please check identifiers and remove notes if reaction  is actually a spontaneous reaction.

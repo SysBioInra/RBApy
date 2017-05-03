@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RBAParameters>
+   <listOfMaximalDensities>
+      <maximalDensity compartment="c" value="4.8972"/>
+      <maximalDensity compartment="mp">
+         <functionReference function="protein_concentration"/>
+         <functionReference function="average_protein_weight"/>
+         <functionReference function="fraction_membrane_protein"/>
+      </maximalDensity>
+   </listOfMaximalDensities>
+   <listOfFunctions>
+      <function id="protein_concentration" type="linear">
+         <listOfParameters>
+            <parameter id="LINEAR_COEF" value="-0.0048302"/>
+            <parameter id="LINEAR_CONSTANT" value="0.031256"/>
+            <parameter id="X_MIN" value="0.25"/>
+            <parameter id="X_MAX" value="1.6"/>
+            <parameter id="Y_MIN" value="-Inf"/>
+            <parameter id="Y_MAX" value="Inf"/>
+         </listOfParameters>
+      </function>
+      <function id="average_protein_weight" type="constant">
+         <listOfParameters>
+            <parameter id="CONSTANT" value="202"/>
+         </listOfParameters>
+      </function>
+      <function id="fraction_cytosol_protein" type="constant">
+         <listOfParameters>
+            <parameter id="CONSTANT" value="0.7"/>
+         </listOfParameters>
+      </function>
+      <function id="fraction_membrane_protein" type="constant">
+         <listOfParameters>
+            <parameter id="CONSTANT" value="0.2"/>
+         </listOfParameters>
+      </function>
+      <function id="fraction_external_protein" type="constant">
+         <listOfParameters>
+            <parameter id="CONSTANT" value="0.1"/>
+         </listOfParameters>
+      </function>
+      <function id="fraction_nonenzymatic_cytosol_protein" type="linear">
+         <listOfParameters>
+            <parameter id="LINEAR_COEF" value="-0.0502"/>
+            <parameter id="LINEAR_CONSTANT" value="0.3526"/>
+            <parameter id="X_MIN" value="0.25"/>
+            <parameter id="X_MAX" value="1.6"/>
+            <parameter id="Y_MIN" value="0"/>
+            <parameter id="Y_MAX" value="1"/>
+         </listOfParameters>
+      </function>
+      <function id="fraction_nonenzymatic_membrane_protein" type="linear">
+         <listOfParameters>
+            <parameter id="LINEAR_COEF" value="-0.0496"/>
+            <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+            <parameter id="X_MIN" value="0.25"/>
+            <parameter id="X_MAX" value="1.6"/>
+            <parameter id="Y_MIN" value="0"/>
+            <parameter id="Y_MAX" value="1"/>
+         </listOfParameters>
+      </function>
+      <function id="fraction_nonenzymatic_external_protein" type="constant">
+         <listOfParameters>
+            <parameter id="LINEAR_COEF" value="-0.0496"/>
+            <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+            <parameter id="X_MIN" value="0.25"/>
+            <parameter id="X_MAX" value="1.6"/>
+            <parameter id="Y_MIN" value="0"/>
+            <parameter id="Y_MAX" value="1"/>
+            <parameter id="CONSTANT" value="1"/>
+         </listOfParameters>
+      </function>
+      <function id="number_flagella" type="linear">
+         <listOfParameters>
+            <parameter id="LINEAR_COEF" value="4.5197"/>
+            <parameter id="LINEAR_CONSTANT" value="3.7991"/>
+            <parameter id="X_MIN" value="0.25"/>
+            <parameter id="X_MAX" value="1.6"/>
+            <parameter id="Y_MIN" value="-Inf"/>
+            <parameter id="Y_MAX" value="Inf"/>
+         </listOfParameters>
+      </function>
+      <function id="flagella_speed" type="constant">
+         <listOfParameters>
+            <parameter id="CONSTANT" value="5.81"/>
+         </listOfParameters>
+      </function>
+      <function id="flagella_H_consumption" type="constant">
+         <listOfParameters>
+            <parameter id="CONSTANT" value="0.9415"/>
+         </listOfParameters>
+      </function>
+      <function id="ribosomeEfficiencyMM" type="michaelisMenten">
+         <listOfParameters>
+            <parameter id="kmax" value="97200"/>
+            <parameter id="Km" value="0.5"/>
+            <parameter id="Y_MIN" value="32400"/>
+         </listOfParameters>
+      </function>
+      <function id="ribosomeEfficiencyCM" type="constant">
+         <listOfParameters>
+            <parameter id="CONSTANT" value="57600"/>
+         </listOfParameters>
+      </function>
+      <function id="fractionActiveRibosomes" type="exponential">
+         <listOfParameters>
+            <parameter id="RATE" value="-0.083333"/>
+         </listOfParameters>
+      </function>
+      <function id="chaperoneEfficiencyLM" type="linear">
+         <listOfParameters>
+            <parameter id="LINEAR_COEF" value="36044.48"/>
+            <parameter id="LINEAR_CONSTANT" value="-2888.0051"/>
+            <parameter id="X_MIN" value="0.25"/>
+            <parameter id="X_MAX" value="1.6"/>
+            <parameter id="Y_MIN" value="-Inf"/>
+            <parameter id="Y_MAX" value="Inf"/>
+         </listOfParameters>
+      </function>
+      <function id="chaperoneEfficiencyMedium1" type="constant">
+         <listOfParameters>
+            <parameter id="CONSTANT" value="6527.9186"/>
+         </listOfParameters>
+      </function>
+      <function id="chaperoneEfficiencyMedium2" type="constant">
+         <listOfParameters>
+            <parameter id="CONSTANT" value="17084.7265"/>
+         </listOfParameters>
+      </function>
+      <function id="chaperoneEfficiencyMedium3" type="constant">
+         <listOfParameters>
+            <parameter id="CONSTANT" value="31062.1295"/>
+         </listOfParameters>
+      </function>
+      <function id="chaperoneEfficiencyMedium4" type="constant">
+         <listOfParameters>
+            <parameter id="CONSTANT" value="37735.0375"/>
+         </listOfParameters>
+      </function>
+      <function id="chaperoneEfficiencyMedium5" type="constant">
+         <listOfParameters>
+            <parameter id="CONSTANT" value="51426.1502"/>
+         </listOfParameters>
+      </function>
+      <function id="maintenanceATP" type="linear">
+         <listOfParameters>
+            <parameter id="LINEAR_COEF" value="12.1595"/>
+            <parameter id="LINEAR_CONSTANT" value="-3.1595"/>
+            <parameter id="X_MIN" value="1"/>
+            <parameter id="X_MAX" value="Inf"/>
+            <parameter id="Y_MIN" value="-Inf"/>
+            <parameter id="Y_MAX" value="Inf"/>
+         </listOfParameters>
+      </function>
+   </listOfFunctions>
+</RBAParameters>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RBADna>
+   <listOfComponents>
+      <component id="A" name="Adenosine residue" type="Nucleotide" weight="0"/>
+      <component id="C" name="Cytosine residue" type="Nucleotide" weight="0"/>
+      <component id="G" name="Guanine residue" type="Nucleotide" weight="0"/>
+      <component id="T" name="Thymine residue" type="Nucleotide" weight="0"/>
+   </listOfComponents>
+   <listOfSpecies>
+      <dna compartment="c" id="dna" name="average dna composition" sequence="">
+         <composition>
+            <componentReference component="A" stoichiometry="0.2818"/>
+            <componentReference component="C" stoichiometry="0.2181"/>
+            <componentReference component="G" stoichiometry="0.2171"/>
+            <componentReference component="T" stoichiometry="0.283"/>
+         </composition>
+      </dna>
+   </listOfSpecies>
+</RBADna>
