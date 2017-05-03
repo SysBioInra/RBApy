@@ -1,0 +1,219 @@
+<?xml version="1.0" ?>
+<RBAParameters>
+  <listOfMaximalDensities>
+    <maximalDensity compartment="Cytoplasm" value="4.8972"/>
+    <maximalDensity compartment="Cell_inner_membrane">
+      <functionReference function="amino_acid_concentration"/>
+      <functionReference function="fraction_protein_Cell_inner_membrane"/>
+    </maximalDensity>
+    <maximalDensity compartment="Cell_membrane">
+      <functionReference function="amino_acid_concentration"/>
+      <functionReference function="fraction_protein_Cell_membrane"/>
+    </maximalDensity>
+    <maximalDensity compartment="Bacterial_flagellum_basal_body">
+      <functionReference function="amino_acid_concentration"/>
+      <functionReference function="fraction_protein_Bacterial_flagellum_basal_body"/>
+    </maximalDensity>
+    <maximalDensity compartment="Periplasm">
+      <functionReference function="amino_acid_concentration"/>
+      <functionReference function="fraction_protein_Periplasm"/>
+    </maximalDensity>
+    <maximalDensity compartment="Membrane">
+      <functionReference function="amino_acid_concentration"/>
+      <functionReference function="fraction_protein_Membrane"/>
+    </maximalDensity>
+    <maximalDensity compartment="Cell_outer_membrane">
+      <functionReference function="amino_acid_concentration"/>
+      <functionReference function="fraction_protein_Cell_outer_membrane"/>
+    </maximalDensity>
+  </listOfMaximalDensities>
+  <listOfFunctions>
+    <function id="fraction_protein_Cytoplasm" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.7"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Secreted" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.1"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Cell_inner_membrane" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0333333333333"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Cell_membrane" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0333333333333"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Bacterial_flagellum_basal_body" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0333333333333"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Periplasm" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0333333333333"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Membrane" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0333333333333"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Cell_outer_membrane" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0333333333333"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Cytoplasm" type="linear">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.3526"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0502"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Secreted" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="1"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Cell_inner_membrane" type="linear">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Cell_membrane" type="linear">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Bacterial_flagellum_basal_body" type="linear">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Periplasm" type="linear">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Membrane" type="linear">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Cell_outer_membrane" type="linear">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="inverse_average_protein_length" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.003125"/>
+      </listOfParameters>
+    </function>
+    <function id="amino_acid_concentration" type="linear">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="-inf"/>
+        <parameter id="LINEAR_CONSTANT" value="6.3138"/>
+        <parameter id="Y_MAX" value="inf"/>
+        <parameter id="LINEAR_COEF" value="-0.9757"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="flagella_speed" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="5.81"/>
+      </listOfParameters>
+    </function>
+    <function id="flagella_h_consumption" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.9415"/>
+      </listOfParameters>
+    </function>
+    <function id="number_flagella" type="linear">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="-inf"/>
+        <parameter id="LINEAR_CONSTANT" value="3.7991"/>
+        <parameter id="Y_MAX" value="inf"/>
+        <parameter id="LINEAR_COEF" value="4.5197"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="ribosome_efficiency_MM" type="michaelisMenten">
+      <listOfParameters>
+        <parameter id="kmax" value="97200"/>
+        <parameter id="Y_MIN" value="32400"/>
+        <parameter id="Km" value="0.5"/>
+      </listOfParameters>
+    </function>
+    <function id="ribosome_efficiency_CM" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="97200"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_active_ribosomes" type="exponential">
+      <listOfParameters>
+        <parameter id="RATE" value="-0.083333"/>
+      </listOfParameters>
+    </function>
+    <function id="chaperone_efficiency_LM" type="linear">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="-inf"/>
+        <parameter id="LINEAR_CONSTANT" value="-2888.0051"/>
+        <parameter id="Y_MAX" value="inf"/>
+        <parameter id="LINEAR_COEF" value="36044.48"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="maintenance_atp" type="linear">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="-inf"/>
+        <parameter id="LINEAR_CONSTANT" value="-3.1595"/>
+        <parameter id="Y_MAX" value="inf"/>
+        <parameter id="LINEAR_COEF" value="12.1595"/>
+        <parameter id="X_MAX" value="inf"/>
+        <parameter id="X_MIN" value="1"/>
+      </listOfParameters>
+    </function>
+  </listOfFunctions>
+</RBAParameters>

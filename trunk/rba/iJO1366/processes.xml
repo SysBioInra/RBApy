@@ -1,0 +1,804 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RBAProcesses>
+   <listOfProcesses>
+      <process cellDesign="yes" compartment="c" id="P_TA" name="Translation apparatus">
+         <capacityConstraint>
+            <machineryComposition>
+               <listOfReactants>
+                  <speciesReference species="rrnO-16S" stoichiometry="1"/>
+                  <speciesReference species="rrnO-23S" stoichiometry="1"/>
+                  <speciesReference species="rrnO-5S" stoichiometry="1"/>
+                  <speciesReference species="M_gtp_c" stoichiometry="2"/>
+                  <speciesReference species="M_h2o_c" stoichiometry="2"/>
+                  <speciesReference species="b1716" stoichiometry="1"/>
+                  <speciesReference species="b3984" stoichiometry="1"/>
+                  <speciesReference species="b3636" stoichiometry="1"/>
+                  <speciesReference species="b3305" stoichiometry="1"/>
+                  <speciesReference species="b2185" stoichiometry="1"/>
+                  <speciesReference species="ecc:c4627" stoichiometry="1"/>
+                  <speciesReference species="b3297" stoichiometry="1"/>
+                  <speciesReference species="b3186" stoichiometry="1"/>
+                  <speciesReference species="b3321" stoichiometry="1"/>
+                  <speciesReference species="b3294" stoichiometry="1"/>
+                  <speciesReference species="b3311" stoichiometry="1"/>
+                  <speciesReference species="b4203" stoichiometry="1"/>
+                  <speciesReference species="b0911" stoichiometry="1"/>
+                  <speciesReference species="b3296" stoichiometry="1"/>
+                  <speciesReference species="b3301" stoichiometry="1"/>
+                  <speciesReference species="b3986" stoichiometry="4"/>
+                  <speciesReference species="b0169" stoichiometry="1"/>
+                  <speciesReference species="b4202" stoichiometry="1"/>
+                  <speciesReference species="b3314" stoichiometry="1"/>
+                  <speciesReference species="b2609" stoichiometry="1"/>
+                  <speciesReference species="eoh:ECO103_1609" stoichiometry="1"/>
+                  <speciesReference species="b4200" stoichiometry="1"/>
+                  <speciesReference species="b3341" stoichiometry="1"/>
+                  <speciesReference species="b3309" stoichiometry="1"/>
+                  <speciesReference species="b3319" stoichiometry="1"/>
+                  <speciesReference species="ebw:BWG_0937" stoichiometry="1"/>
+                  <speciesReference species="b3317" stoichiometry="1"/>
+                  <speciesReference species="b3230" stoichiometry="1"/>
+                  <speciesReference species="b3312" stoichiometry="1"/>
+                  <speciesReference species="ecs:ECs4064" stoichiometry="1"/>
+                  <speciesReference species="b3637" stoichiometry="1"/>
+                  <speciesReference species="b3936" stoichiometry="1"/>
+                  <speciesReference species="b3315" stoichiometry="1"/>
+                  <speciesReference species="b3306" stoichiometry="1"/>
+                  <speciesReference species="b3298" stoichiometry="1"/>
+                  <speciesReference species="b3231" stoichiometry="1"/>
+                  <speciesReference species="b3307" stoichiometry="1"/>
+                  <speciesReference species="b3303" stoichiometry="1"/>
+                  <speciesReference species="ece:Z4418" stoichiometry="1"/>
+                  <speciesReference species="b3342" stoichiometry="1"/>
+                  <speciesReference species="ecs:ECs2424" stoichiometry="1"/>
+                  <speciesReference species="b3318" stoichiometry="1"/>
+                  <speciesReference species="b3302" stoichiometry="1"/>
+                  <speciesReference species="b3165" stoichiometry="1"/>
+                  <speciesReference species="b3310" stoichiometry="1"/>
+                  <speciesReference species="b3313" stoichiometry="1"/>
+                  <speciesReference species="b0023" stoichiometry="1"/>
+                  <speciesReference species="b3316" stoichiometry="1"/>
+                  <speciesReference species="b3304" stoichiometry="1"/>
+                  <speciesReference species="b3320" stoichiometry="1"/>
+                  <speciesReference species="ecs:ECs4164" stoichiometry="1"/>
+                  <speciesReference species="b3983" stoichiometry="1"/>
+                  <speciesReference species="b3985" stoichiometry="1"/>
+                  <speciesReference species="ecm:EcSMS35_2758" stoichiometry="1"/>
+                  <speciesReference species="b3308" stoichiometry="1"/>
+                  <speciesReference species="b3339" stoichiometry="5.4"/>
+                  <speciesReference species="b0170" stoichiometry="0.18"/>
+                  <speciesReference species="b3340" stoichiometry="0.8"/>
+                  <speciesReference species="b0884" stoichiometry="0.25"/>
+                  <speciesReference species="b3168" stoichiometry="0.3"/>
+                  <speciesReference species="b1718" stoichiometry="0.2"/>
+                  <speciesReference species="b4147" stoichiometry="0.8"/>
+                  <speciesReference species="b1211" stoichiometry="0.25"/>
+                  <speciesReference species="b2891" stoichiometry="0.25"/>
+               </listOfReactants>
+               <listOfProducts>
+                  <speciesReference species="M_gdp_c" stoichiometry="2"/>
+                  <speciesReference species="M_pi_c" stoichiometry="2"/>
+                  <speciesReference species="M_h_c" stoichiometry="2"/>
+               </listOfProducts>
+            </machineryComposition>
+            <capacity>
+               <functionReference function="ribosomeEfficiencyMM"/>
+               <functionReference function="fractionActiveRibosomes"/>
+            </capacity>
+         </capacityConstraint>
+         <operatingCosts>
+            <production componentMap="translation" set="protein"/>
+         </operatingCosts>
+         <targets>
+            <targetValue species="average_protein_c">
+               <functionReference function="protein_concentration"/>
+               <functionReference function="fraction_cytosol_protein"/>
+               <functionReference function="fraction_nonenzymatic_cytosol_protein"/>
+            </targetValue>
+            <targetValue species="average_protein_e">
+               <functionReference function="protein_concentration"/>
+               <functionReference function="fraction_excreted_protein"/>
+               <functionReference function="fraction_nonenzymatic_excreted_protein"/>
+            </targetValue>
+            <targetValue species="average_protein_p">
+               <functionReference function="protein_concentration"/>
+               <functionReference function="fraction_periplasmic_protein"/>
+               <functionReference function="fraction_nonenzymatic_periplasmic_protein"/>
+            </targetValue>
+            <targetValue species="average_protein_im">
+               <functionReference function="protein_concentration"/>
+               <functionReference function="fraction_inner_membrane_protein"/>
+               <functionReference function="fraction_nonenzymatic_inner_membrane_protein"/>
+            </targetValue>
+            <targetValue species="average_protein_om">
+               <functionReference function="protein_concentration"/>
+               <functionReference function="fraction_outer_membrane_protein"/>
+               <functionReference function="fraction_nonenzymatic_outer_membrane_protein"/>
+            </targetValue>
+         </targets>
+      </process>
+      <process cellDesign="yes" compartment="c" id="P_CHP" name="Chaperone">
+         <capacityConstraint>
+            <machineryComposition>
+               <listOfReactants>
+                  <speciesReference species="eco:b0436" stoichiometry="1"/>
+                  <speciesReference species="eco:b4143" stoichiometry="14"/>
+                  <speciesReference species="eco:b4142" stoichiometry="7"/>
+                  <speciesReference species="eco:b0014" stoichiometry="1"/>
+                  <speciesReference species="eco:b2614" stoichiometry="2"/>
+                  <speciesReference species="eco:b0015" stoichiometry="2"/>
+               </listOfReactants>
+            </machineryComposition>
+            <capacity>
+               <functionReference function="chaperoneEfficiencyLM"/>
+            </capacity>
+         </capacityConstraint>
+         <operatingCosts>
+            <production componentMap="folding" set="protein"/>
+         </operatingCosts>
+      </process>
+      <process cellDesign="no" compartment="c" id="P_TSC" name="Transcription machinery">
+         <operatingCosts>
+            <production componentMap="transcription" set="rna"/>
+         </operatingCosts>
+         <targets>
+            <targetValue species="mrna" value="0.01"/>
+             <targetValue species="M_trnacys_c" value="0.000642"/>
+             <targetValue species="M_trnapro_c" value="0.001550"/>
+             <targetValue species="M_trnahis_c" value="0.000664"/>
+             <targetValue species="M_trnaasp_c" value="0.001690"/>
+             <targetValue species="M_trnaser_c" value="0.001513"/>
+             <targetValue species="M_trnagln_c" value="0.001845"/>
+             <targetValue species="M_trnaile_c" value="0.002037"/>
+             <targetValue species="M_trnamet_c" value="0.001078"/>
+             <targetValue species="M_trnalys_c" value="0.002406"/>
+             <targetValue species="M_trnathr_c" value="0.001779"/>
+             <targetValue species="M_trnaphe_c" value="0.001299"/>
+             <targetValue species="M_trnaala_c" value="0.003602"/>
+             <targetValue species="M_trnagly_c" value="0.004295"/>
+             <targetValue species="M_trnaglu_c" value="0.001845"/>
+             <targetValue species="M_trnaleu_c" value="0.003159"/>
+             <targetValue species="M_trnaarg_c" value="0.002074"/>
+             <targetValue species="M_trnatrp_c" value="0.000399"/>
+             <targetValue species="M_trnaasn_c" value="0.001690"/>
+             <targetValue species="M_trnatyr_c" value="0.000967"/>
+             <targetValue species="M_trnaval_c" value="0.002967"/>
+            <targetValue dilution_compensation="0" species="mrna" value="0.15996"/>
+         </targets>
+      </process>
+      <process cellDesign="no" compartment="c" id="P_REP" name="Replication machinery">
+         <operatingCosts>
+            <production componentMap="replication" set="dna"/>
+         </operatingCosts>
+         <targets>
+            <targetValue species="dna" value="0.0807"/>
+         </targets>
+      </process>
+      <process cellDesign="no" compartment="c" id="P_mRNAdeg" name="mRNA degradation">
+         <operatingCosts>
+            <degradation componentMap="rnaDegradation" set="rna"/>
+         </operatingCosts>
+         <targets>
+            <targetValue degradation="1" dilution_compensation="0" species="mrna" value="0.15996"/>
+         </targets>
+      </process>
+      <process cellDesign="no" compartment="c" id="P_MET_PROD" name="Metabolite production">
+         <targets>
+            <targetValue species="M_coa_c" value="0.0003"/>
+            <targetValue species="M_nad_c" value="0.0162"/>
+            <targetValue species="M_nadp_c" value="0.0009"/>
+            <targetValue species="M_nadph_c" value="0.0002"/>
+            <targetValue species="M_k_c" value="0.7063"/>
+            <targetValue species="M_spmd_c" value="0.007"/>
+            <targetValue species="M_adp_c" value="0.0026"/>
+            <targetValue species="M_cdp_c" value="0.0003"/>
+            <targetValue species="M_udp_c" value="0"/>
+            <targetValue species="M_amp_c" value="0.0047"/>
+            <targetValue species="M_gmp_c" value="0.0005"/>
+            <targetValue species="M_cmp_c" value="0.001"/>
+            <targetValue species="M_ump_c" value="0"/>
+            <targetValue species="M_gdp_c" value="0.0002"/>
+            <targetValue species="M_pi_c" value="0.0144"/>
+            <targetValue species="M_gtp_c" value="0.0004"/>
+            <targetValue species="M_atp_c" value="0.003"/>
+            <targetValue species="M_utp_c" value="0"/>
+            <targetValue species="M_ctp_c" value="0.0005"/>
+         </targets>
+      </process>
+      <process cellDesign="no" compartment="c" id="P_Xc_PROD" name="Macrocomponent production">
+         <targets>
+            <targetValue species="M_pe161_c" value="0.054154"/>
+            <targetValue species="M_pe161_p" value="0.02106"/>
+            <targetValue species="M_pe160_c" value="0.017868"/>
+            <targetValue species="M_pe160_p" value="0.045946"/>
+            <targetValue species="M_udcpdp_c" value="5.5e-05"/>
+            <targetValue species="M_murein5px4p_p" value="0.013894"/>
+            <targetValue species="M_btn_c" value="2e-06"/>
+            <targetValue species="M_kdo2lipid4_e" value="0.019456"/>
+         </targets>
+      </process>
+      <process cellDesign="no" compartment="c" id="P_flagella" name="Flagella activation">
+         <targets>
+            <targetReaction reaction="R_Th">
+               <functionReference function="number_flagella"/>
+               <functionReference function="flagella_speed"/>
+               <functionReference function="flagella_H_consumption"/>
+            </targetReaction>
+         </targets>
+      </process>
+   </listOfProcesses>
+   <listOfComponentMaps>
+      <componentMap id="translation">
+         <constantCost>
+            <listOfReactants>
+               <speciesReference species="M_fmettrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="1"/>
+               <speciesReference species="M_h2o_c" stoichiometry="1"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnamet_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="1"/>
+               <speciesReference species="M_pi_c" stoichiometry="1"/>
+               <speciesReference species="M_h_c" stoichiometry="1"/>
+            </listOfProducts>
+         </constantCost>
+         <cost component="ala" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_alatrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnaala_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="arg" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_argtrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnaarg_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="asn" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_asntrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnaasn_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="asp" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_asptrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnaasp_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="cys" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_cystrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnacys_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="gln" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_glntrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnagln_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="glu" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_glutrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnaglu_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="gly" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_glytrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnagly_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="his" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_histrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnahis_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="ile" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_iletrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnaile_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="leu" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_leutrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnaleu_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="lys" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_lystrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnalys_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="met" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_mettrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnamet_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="phe" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_phetrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnaphe_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="pro" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_protrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnapro_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="ser" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_sertrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnaser_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="thr" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_thrtrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnathr_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="trp" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_trptrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnatrp_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="tyr" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_tyrtrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnatyr_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="val" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_valtrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnaval_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="sec" processingCost="1">
+            <listOfReactants>
+               <speciesReference species="M_sectrna_c" stoichiometry="1"/>
+               <speciesReference species="M_gtp_c" stoichiometry="2"/>
+               <speciesReference species="M_h2o_c" stoichiometry="2"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_trnasecys_c" stoichiometry="1"/>
+               <speciesReference species="M_gdp_c" stoichiometry="2"/>
+               <speciesReference species="M_pi_c" stoichiometry="2"/>
+               <speciesReference species="M_h_c" stoichiometry="2"/>
+            </listOfProducts>
+         </cost>
+         <cost component="pydx5p_c">
+            <listOfReactants>
+               <speciesReference species="M_pydx5p_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="zn2_c">
+            <listOfReactants>
+               <speciesReference species="M_zn2_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="mg2_c">
+            <listOfReactants>
+               <speciesReference species="M_mg2_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="fe2_c">
+            <listOfReactants>
+               <speciesReference species="M_fe2_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="cobalt2_c">
+            <listOfReactants>
+               <speciesReference species="M_cobalt2_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="nad_c">
+            <listOfReactants>
+               <speciesReference species="M_nad_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="mn2_c">
+            <listOfReactants>
+               <speciesReference species="M_mn2_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="cu2_c">
+            <listOfReactants>
+               <speciesReference species="M_cu2_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="ni2_c">
+            <listOfReactants>
+               <speciesReference species="M_ni2_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="ca2_c">
+            <listOfReactants>
+               <speciesReference species="M_ca2_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="pheme_c">
+            <listOfReactants>
+               <speciesReference species="M_pheme_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="fmnh2_c">
+            <listOfReactants>
+               <speciesReference species="M_fmnh2_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="fad_c">
+            <listOfReactants>
+               <speciesReference species="M_fad_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="k_c">
+            <listOfReactants>
+               <speciesReference species="M_k_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="bmocogdp_c">
+            <listOfReactants>
+               <speciesReference species="M_bmocogdp_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="fmn_c">
+            <listOfReactants>
+               <speciesReference species="M_fmn_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="hemeO_c">
+            <listOfReactants>
+               <speciesReference species="M_hemeO_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="q8_c">
+            <listOfReactants>
+               <speciesReference species="M_q8_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="sheme_c">
+            <listOfReactants>
+               <speciesReference species="M_sheme_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="thmpp_c">
+            <listOfReactants>
+               <speciesReference species="M_thmpp_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="lipoate_c">
+            <listOfReactants>
+               <speciesReference species="M_lipoate_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="nadp_c">
+            <listOfReactants>
+               <speciesReference species="M_nadp_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="pan4p_c">
+            <listOfReactants>
+               <speciesReference species="M_pan4p_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="adocbl_c">
+            <listOfReactants>
+               <speciesReference species="M_adocbl_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="cl_c">
+            <listOfReactants>
+               <speciesReference species="M_cl_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="hco3_c">
+            <listOfReactants>
+               <speciesReference species="M_hco3_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="pyr_c">
+            <listOfReactants>
+               <speciesReference species="M_pyr_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+         <cost component="mpt_c">
+            <listOfReactants>
+               <speciesReference species="M_mpt_c" stoichiometry="1"/>
+            </listOfReactants>
+         </cost>
+      </componentMap>
+      <componentMap id="folding">
+         <cost component="ala" processingCost="0.1"/>
+         <cost component="arg" processingCost="0.1"/>
+         <cost component="asn" processingCost="0.1"/>
+         <cost component="asp" processingCost="0.1"/>
+         <cost component="cys" processingCost="0.1"/>
+         <cost component="gln" processingCost="0.1"/>
+         <cost component="glu" processingCost="0.1"/>
+         <cost component="gly" processingCost="0.1"/>
+         <cost component="his" processingCost="0.1"/>
+         <cost component="ile" processingCost="0.1"/>
+         <cost component="leu" processingCost="0.1"/>
+         <cost component="lys" processingCost="0.1"/>
+         <cost component="met" processingCost="0.1"/>
+         <cost component="phe" processingCost="0.1"/>
+         <cost component="pro" processingCost="0.1"/>
+         <cost component="ser" processingCost="0.1"/>
+         <cost component="thr" processingCost="0.1"/>
+         <cost component="trp" processingCost="0.1"/>
+         <cost component="tyr" processingCost="0.1"/>
+         <cost component="val" processingCost="0.1"/>
+      </componentMap>
+      <componentMap id="transcription">
+         <cost component="A">
+            <listOfReactants>
+               <speciesReference species="M_atp_c" stoichiometry="1"/>
+               <speciesReference species="M_h2o_c" stoichiometry="1"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_ppi_c" stoichiometry="1"/>
+               <speciesReference species="M_h_c" stoichiometry="1"/>
+            </listOfProducts>
+         </cost>
+         <cost component="C">
+            <listOfReactants>
+               <speciesReference species="M_ctp_c" stoichiometry="1"/>
+               <speciesReference species="M_h2o_c" stoichiometry="1"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_ppi_c" stoichiometry="1"/>
+               <speciesReference species="M_h_c" stoichiometry="1"/>
+            </listOfProducts>
+         </cost>
+         <cost component="G">
+            <listOfReactants>
+               <speciesReference species="M_gtp_c" stoichiometry="1"/>
+               <speciesReference species="M_h2o_c" stoichiometry="1"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_ppi_c" stoichiometry="1"/>
+               <speciesReference species="M_h_c" stoichiometry="1"/>
+            </listOfProducts>
+         </cost>
+         <cost component="U">
+            <listOfReactants>
+               <speciesReference species="M_utp_c" stoichiometry="1"/>
+               <speciesReference species="M_h2o_c" stoichiometry="1"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_ppi_c" stoichiometry="1"/>
+               <speciesReference species="M_h_c" stoichiometry="1"/>
+            </listOfProducts>
+         </cost>
+      </componentMap>
+      <componentMap id="rnaDegradation">
+         <cost component="A">
+            <listOfReactants>
+               <speciesReference species="M_h2o_c" stoichiometry="1"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_amp_c" stoichiometry="1"/>
+               <speciesReference species="M_h_c" stoichiometry="1"/>
+            </listOfProducts>
+         </cost>
+         <cost component="C">
+            <listOfReactants>
+               <speciesReference species="M_h2o_c" stoichiometry="1"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_cmp_c" stoichiometry="1"/>
+               <speciesReference species="M_h_c" stoichiometry="1"/>
+            </listOfProducts>
+         </cost>
+         <cost component="G">
+            <listOfReactants>
+               <speciesReference species="M_h2o_c" stoichiometry="1"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_gmp_c" stoichiometry="1"/>
+               <speciesReference species="M_h_c" stoichiometry="1"/>
+            </listOfProducts>
+         </cost>
+         <cost component="U">
+            <listOfReactants>
+               <speciesReference species="M_h2o_c" stoichiometry="1"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_ump_c" stoichiometry="1"/>
+               <speciesReference species="M_h_c" stoichiometry="1"/>
+            </listOfProducts>
+         </cost>
+      </componentMap>
+      <componentMap id="replication">
+         <cost component="A">
+            <listOfReactants>
+               <speciesReference species="M_datp_c" stoichiometry="1"/>
+               <speciesReference species="M_h2o_c" stoichiometry="1"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_ppi_c" stoichiometry="1"/>
+               <speciesReference species="M_h_c" stoichiometry="1"/>
+            </listOfProducts>
+         </cost>
+         <cost component="C">
+            <listOfReactants>
+               <speciesReference species="M_dctp_c" stoichiometry="1"/>
+               <speciesReference species="M_h2o_c" stoichiometry="1"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_ppi_c" stoichiometry="1"/>
+               <speciesReference species="M_h_c" stoichiometry="1"/>
+            </listOfProducts>
+         </cost>
+         <cost component="G">
+            <listOfReactants>
+               <speciesReference species="M_dgtp_c" stoichiometry="1"/>
+               <speciesReference species="M_h2o_c" stoichiometry="1"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_ppi_c" stoichiometry="1"/>
+               <speciesReference species="M_h_c" stoichiometry="1"/>
+            </listOfProducts>
+         </cost>
+         <cost component="T">
+            <listOfReactants>
+               <speciesReference species="M_dttp_c" stoichiometry="1"/>
+               <speciesReference species="M_h2o_c" stoichiometry="1"/>
+            </listOfReactants>
+            <listOfProducts>
+               <speciesReference species="M_ppi_c" stoichiometry="1"/>
+               <speciesReference species="M_h_c" stoichiometry="1"/>
+            </listOfProducts>
+         </cost>
+      </componentMap>
+   </listOfComponentMaps>
+</RBAProcesses>

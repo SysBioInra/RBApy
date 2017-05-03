@@ -1,0 +1,203 @@
+<?xml version="1.0" ?>
+<RBARnas>
+  <listOfComponents>
+    <component id="A" name="Adenosine residue" type="Nucleotide" weight="2.9036"/>
+    <component id="C" name="Cytosine residue" type="Nucleotide" weight="2.7017"/>
+    <component id="G" name="Guanine residue" type="Nucleotide" weight="3.0382"/>
+    <component id="U" name="Uramine residue" type="Nucleotide" weight="2.7102"/>
+  </listOfComponents>
+  <listOfMacromolecules>
+    <macromolecule compartment="Cytoplasm" id="M_trnaala_c">
+      <composition>
+        <componentReference component="A" stoichiometry="15"/>
+        <componentReference component="C" stoichiometry="21"/>
+        <componentReference component="U" stoichiometry="15"/>
+        <componentReference component="G" stoichiometry="25"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnaarg_c">
+      <composition>
+        <componentReference component="A" stoichiometry="17"/>
+        <componentReference component="C" stoichiometry="23"/>
+        <componentReference component="U" stoichiometry="14"/>
+        <componentReference component="G" stoichiometry="23"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnaasp_c">
+      <composition>
+        <componentReference component="A" stoichiometry="16"/>
+        <componentReference component="C" stoichiometry="18"/>
+        <componentReference component="U" stoichiometry="20"/>
+        <componentReference component="G" stoichiometry="22"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnaasp_c">
+      <composition>
+        <componentReference component="A" stoichiometry="11"/>
+        <componentReference component="C" stoichiometry="22"/>
+        <componentReference component="U" stoichiometry="17"/>
+        <componentReference component="G" stoichiometry="27"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnacys_c">
+      <composition>
+        <componentReference component="A" stoichiometry="16"/>
+        <componentReference component="C" stoichiometry="21"/>
+        <componentReference component="U" stoichiometry="16"/>
+        <componentReference component="G" stoichiometry="21"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnagln_c">
+      <composition>
+        <componentReference component="A" stoichiometry="15"/>
+        <componentReference component="C" stoichiometry="23"/>
+        <componentReference component="U" stoichiometry="16"/>
+        <componentReference component="G" stoichiometry="21"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnaglu_c">
+      <composition>
+        <componentReference component="A" stoichiometry="14"/>
+        <componentReference component="C" stoichiometry="27"/>
+        <componentReference component="U" stoichiometry="13"/>
+        <componentReference component="G" stoichiometry="22"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnagly_c">
+      <composition>
+        <componentReference component="A" stoichiometry="15"/>
+        <componentReference component="C" stoichiometry="22"/>
+        <componentReference component="U" stoichiometry="17"/>
+        <componentReference component="G" stoichiometry="20"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnahis_c">
+      <composition>
+        <componentReference component="A" stoichiometry="14"/>
+        <componentReference component="C" stoichiometry="19"/>
+        <componentReference component="U" stoichiometry="22"/>
+        <componentReference component="G" stoichiometry="21"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnaile_c">
+      <composition>
+        <componentReference component="A" stoichiometry="16"/>
+        <componentReference component="C" stoichiometry="19"/>
+        <componentReference component="U" stoichiometry="17"/>
+        <componentReference component="G" stoichiometry="25"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnaleu_c">
+      <composition>
+        <componentReference component="A" stoichiometry="23"/>
+        <componentReference component="C" stoichiometry="22"/>
+        <componentReference component="U" stoichiometry="16"/>
+        <componentReference component="G" stoichiometry="24"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnalys_c">
+      <composition>
+        <componentReference component="A" stoichiometry="17"/>
+        <componentReference component="C" stoichiometry="18"/>
+        <componentReference component="U" stoichiometry="21"/>
+        <componentReference component="G" stoichiometry="20"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnamet_c">
+      <composition>
+        <componentReference component="A" stoichiometry="15"/>
+        <componentReference component="C" stoichiometry="26"/>
+        <componentReference component="U" stoichiometry="12"/>
+        <componentReference component="G" stoichiometry="24"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnaphe_c">
+      <composition>
+        <componentReference component="A" stoichiometry="15"/>
+        <componentReference component="C" stoichiometry="21"/>
+        <componentReference component="U" stoichiometry="16"/>
+        <componentReference component="G" stoichiometry="24"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnapro_c">
+      <composition>
+        <componentReference component="A" stoichiometry="14"/>
+        <componentReference component="C" stoichiometry="21"/>
+        <componentReference component="U" stoichiometry="16"/>
+        <componentReference component="G" stoichiometry="26"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnaser_c">
+      <composition>
+        <componentReference component="A" stoichiometry="20"/>
+        <componentReference component="C" stoichiometry="28"/>
+        <componentReference component="U" stoichiometry="13"/>
+        <componentReference component="G" stoichiometry="29"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnathr_c">
+      <composition>
+        <componentReference component="A" stoichiometry="23"/>
+        <componentReference component="C" stoichiometry="17"/>
+        <componentReference component="U" stoichiometry="21"/>
+        <componentReference component="G" stoichiometry="16"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnatrp_c">
+      <composition>
+        <componentReference component="A" stoichiometry="14"/>
+        <componentReference component="C" stoichiometry="21"/>
+        <componentReference component="U" stoichiometry="17"/>
+        <componentReference component="G" stoichiometry="24"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnatyr_c">
+      <composition>
+        <componentReference component="A" stoichiometry="19"/>
+        <componentReference component="C" stoichiometry="27"/>
+        <componentReference component="U" stoichiometry="16"/>
+        <componentReference component="G" stoichiometry="23"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="M_trnaval_c">
+      <composition>
+        <componentReference component="A" stoichiometry="16"/>
+        <componentReference component="C" stoichiometry="18"/>
+        <componentReference component="U" stoichiometry="20"/>
+        <componentReference component="G" stoichiometry="23"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="rrnO-16S">
+      <composition>
+        <componentReference component="A" stoichiometry="382"/>
+        <componentReference component="C" stoichiometry="365"/>
+        <componentReference component="U" stoichiometry="315"/>
+        <componentReference component="G" stoichiometry="491"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="rrnO-23S">
+      <composition>
+        <componentReference component="A" stoichiometry="779"/>
+        <componentReference component="C" stoichiometry="658"/>
+        <componentReference component="U" stoichiometry="571"/>
+        <componentReference component="G" stoichiometry="920"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="rrnO-5S">
+      <composition>
+        <componentReference component="A" stoichiometry="23"/>
+        <componentReference component="C" stoichiometry="31"/>
+        <componentReference component="U" stoichiometry="23"/>
+        <componentReference component="G" stoichiometry="35"/>
+      </composition>
+    </macromolecule>
+    <macromolecule compartment="Cytoplasm" id="mrna">
+      <composition>
+        <componentReference component="A" stoichiometry="0.2818"/>
+        <componentReference component="C" stoichiometry="0.2181"/>
+        <componentReference component="U" stoichiometry="0.283"/>
+        <componentReference component="G" stoichiometry="0.2171"/>
+      </composition>
+    </macromolecule>
+  </listOfMacromolecules>
+</RBARnas>

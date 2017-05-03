@@ -1,0 +1,12 @@
+
+charged is always M_t + aa + _c
+
+RNA (uncharged M_trna_c)
+----------------------
+{'ala','arg','asn','asp','cys','gln','glu', ...
+'gly','his','ile','leu','lys','met','phe', ...
+'pro','ser','thr','trp','tyr','val'}
+
+RNA2 (uncharged M_trna2_c)
+-------------------------
+{'cys','glu','gln','leu','thr'};
