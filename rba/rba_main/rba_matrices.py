@@ -26,13 +26,15 @@ class RbaMatrices(object):
         self.reversibility = [r.reversible for r in reactions]
         self.S = self._extract_S(self.metabolites, reactions)
         # extract functions
-        self.functions = Functions(data)
+        self.functions = Functions(data.parameters.functions)
         # extract density constraints
-        self.density = Density(data, self.functions)
+        compartments = [c.id for c in data.metabolism.compartments]
+        self.density = Density(data.parameters.maximal_densities,
+                               self.functions, compartments)
         # extract base species composition (metabolites + polymers)
         self.species = Species(data, self.metabolites)
         # extract enzyme information
-        self.enzymes = Enzymes(data, self.species)
+        self.enzymes = Enzymes(data.enzymes, self.species, self.reactions)
         # add synthesis reaction for metabolites that are also macromolecules
         (new_reactions, names) = self.species.metabolite_synthesis()
         if len(new_reactions) > 0:
@@ -40,10 +42,9 @@ class RbaMatrices(object):
             self.S = hstack([self.S] + new_reactions)
             self.reactions += names
             self.reversibility += [False] * nb_reactions
-            self.enzymes.add_null_enzymes(nb_reactions)
         # extract process information
-        self.processes = Processes(data, self.species,
-                                   self.reactions, self.functions)
+        self.processes = Processes(data.processes.processes,
+                                   self.species, self.functions)
         
         ## setup medium
         self.enzymes.efficiency.update_import(data.medium)

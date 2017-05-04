@@ -7,26 +7,26 @@ class RbaSolver(object):
         self._model = model
         # convenience variables
         reactions = model.reactions
+        enzymes = model.enzymes.ids
         processes = model.processes.ids
         compartments = model.density.compartments
         nb_reactions = len(reactions)
+        nb_enzymes = len(enzymes)
         nb_processes = len(processes)
         nb_compartments = len(compartments)
         # column information
-        self.col_names = reactions \
-                         + [r + '_enzyme' for r in reactions] \
+        self.col_names = reactions + enzymes \
                          + [p + '_machinery' for p in processes]
-        self.reaction_cols = numpy.arange(0, nb_reactions)
-        self.enzyme_cols = numpy.arange(nb_reactions, 2*nb_reactions)
-        self.process_cols = numpy.arange(2*nb_reactions,
-                                         2*nb_reactions+nb_processes)
+        self.reaction_cols = numpy.arange(nb_reactions)
+        self.enzyme_cols = nb_reactions + numpy.arange(nb_enzymes)
+        self.process_cols = nb_reactions+nb_enzymes+numpy.arange(nb_processes)
         # equality row information
         self.eq_row_names = model.metabolites \
                             + [p + '_capacity' for p in processes] \
-                            + [n + '_flux' for n in model.processes.reaction_names]
+                            + [n + '_flux' for n in model.processes.target_reaction]
         # inequality row information
-        self.ineq_row_names = [r + '_forward_flux' for r in reactions] \
-                              + [r + '_backward_flux' for r in reactions]\
+        self.ineq_row_names = [e + '_forward_capacity' for e in enzymes] \
+                              + [e + '_backward_capacity' for e in enzymes]\
                               + [c + '_density' for c in compartments]
         # upper bound, lower bound, objective function
         nb_cols = len(self.col_names)
@@ -36,26 +36,29 @@ class RbaSolver(object):
         self.LB[self.reaction_cols] = -1e3*numpy.array(model.reversibility)
         self.f[self.enzyme_cols] = 1
         # constant building blocks
-        self._empty_RxR = coo_matrix((nb_reactions, nb_reactions))
-        self._empty_RxP = coo_matrix((nb_reactions, nb_processes))
+        self._empty_ExP = coo_matrix((nb_enzymes, nb_processes))
         self._empty_PxR = coo_matrix((nb_processes, nb_reactions))
         self._empty_CxR = coo_matrix((nb_compartments, nb_reactions))
-        self._empty_2R = numpy.zeros(2*nb_reactions)
-        self._eye_RxR = eye(nb_reactions)
-        nb_target_reactions = len(model.processes.reaction_index)
-        self._target_reactions \
-            = coo_matrix(([-1]*nb_target_reactions,
-                          (range(nb_target_reactions),
-                           model.processes.reaction_index)),
-                         shape = (nb_target_reactions, nb_cols))
+        self._empty_2E = numpy.zeros(2*nb_enzymes)
+        # indicator matrices
+        R_ind = [reactions.index(r) for r in model.enzymes.reaction_catalyzed]
+        self._R_to_E = coo_matrix(([1]*nb_enzymes, (range(nb_enzymes), R_ind)),
+                                  shape = (nb_enzymes, nb_reactions))
+        R_ind = [reactions.index(r) for r in model.processes.target_reaction]
+        nb_TR = len(R_ind)
+        self._target_reactions = coo_matrix(([1]*nb_TR, (range(nb_TR), R_ind)),
+                                            shape = (nb_TR, nb_cols))
+        self._lb_reactions \
+            = [reactions.index(r) for r in model.processes.lb_reaction]
+        self._ub_reactions \
+            = [reactions.index(r) for r in model.processes.ub_reaction]
 
     def build_matrices(self, mu):
         ## build A
         (forward, backward) = self._model.enzymes.efficiency.compute(mu)
-        forward_rows = hstack([self._eye_RxR, -diags(forward), self._empty_RxP])
-        backward_rows = hstack([-self._eye_RxR,
-                                -diags(backward),
-                                self._empty_RxP])
+        forward_rows = hstack([self._R_to_E, -diags(forward), self._empty_ExP])
+        backward_rows = hstack([-self._R_to_E,
+                                -diags(backward), self._empty_ExP])
         c_indices = self._model.density.compartment_indices
         density_rows = hstack([self._empty_CxR,
                                self._model.enzymes.machinery.weight[c_indices],
@@ -79,13 +82,13 @@ class RbaSolver(object):
         density_rows = self._model.density.maximum.compute(mu) \
                        - weight[c_indices].T
         r_fluxes = self._model.processes.reaction_value.compute(mu)
-        self.b = numpy.concatenate([self._empty_2R, density_rows])
-        self.beq = -numpy.concatenate([fluxes, processing, r_fluxes])
+        self.b = numpy.concatenate([self._empty_2E, density_rows])
+        self.beq = numpy.concatenate([-fluxes, -processing, r_fluxes])
 
         ## update lower bounds and upper bounds
-        self.LB[self.reaction_cols[self._model.processes.lb_index]] \
+        self.LB[self.reaction_cols[self._lb_reactions]] \
             = self._model.processes.lb.compute(mu)
-        self.UB[self.reaction_cols[self._model.processes.ub_index]] \
+        self.UB[self.reaction_cols[self._ub_reactions]] \
             = self._model.processes.ub.compute(mu)
 
     def solve(self, scaling_factor = 1000):

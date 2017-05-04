@@ -837,7 +837,7 @@ class Enzyme(object):
 
     @classmethod
     def from_xml_node(cls, node):
-        result = cls(node.get('id'), node.get('zeroCost'))
+        result = cls(node.get('id'), is_true(node.get('zeroCost')))
         n = get_unique_child(node, MachineryComposition.tag, False)
         if n is not None:
             result.machinery_composition = MachineryComposition.from_xml_node(n)

@@ -5,9 +5,9 @@ import numpy
 import abc
 
 class Functions:
-    def __init__(self, data):
+    def __init__(self, functions):
         self.functions = {}
-        for fn in data.parameters.functions:
+        for fn in functions:
             params = {p.id: p.value for p in fn.parameters}
             self.functions[fn.id] = build_function(fn.type, params, fn.variable)
 
