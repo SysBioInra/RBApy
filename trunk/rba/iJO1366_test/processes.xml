@@ -168,26 +168,26 @@
       <targets>
         <listOfConcentrations>
           <targetSpecies value="0.01" species="mrna"/>
-          <targetSpecies value="0.003602" species="M_trnaala_c"/>
-          <targetSpecies value="0.000642" species="M_trnacys_c"/>
-          <targetSpecies value="0.00169" species="M_trnaasp_c"/>
-          <targetSpecies value="0.001845" species="M_trnaglu_c"/>
-          <targetSpecies value="0.001299" species="M_trnaphe_c"/>
-          <targetSpecies value="0.004295" species="M_trnagly_c"/>
-          <targetSpecies value="0.000664" species="M_trnahis_c"/>
-          <targetSpecies value="0.002037" species="M_trnaile_c"/>
-          <targetSpecies value="0.002406" species="M_trnalys_c"/>
-          <targetSpecies value="0.003159" species="M_trnaleu_c"/>
-          <targetSpecies value="0.001078" species="M_trnamet_c"/>
-          <targetSpecies value="0.00169" species="M_trnaasn_c"/>
-          <targetSpecies value="0.00155" species="M_trnapro_c"/>
-          <targetSpecies value="0.001845" species="M_trnagln_c"/>
-          <targetSpecies value="0.002074" species="M_trnaarg_c"/>
-          <targetSpecies value="0.001513" species="M_trnaser_c"/>
-          <targetSpecies value="0.001779" species="M_trnathr_c"/>
-          <targetSpecies value="0.002967" species="M_trnaval_c"/>
-          <targetSpecies value="0.000399" species="M_trnatrp_c"/>
-          <targetSpecies value="0.000967" species="M_trnatyr_c"/>
+          <targetSpecies value="4.80266666667e-05" species="M_trnaala_c"/>
+          <targetSpecies value="8.56e-06" species="M_trnacys_c"/>
+          <targetSpecies value="2.25333333333e-05" species="M_trnaasp_c"/>
+          <targetSpecies value="2.46e-05" species="M_trnaglu_c"/>
+          <targetSpecies value="1.732e-05" species="M_trnaphe_c"/>
+          <targetSpecies value="5.72666666667e-05" species="M_trnagly_c"/>
+          <targetSpecies value="8.85333333333e-06" species="M_trnahis_c"/>
+          <targetSpecies value="2.716e-05" species="M_trnaile_c"/>
+          <targetSpecies value="3.208e-05" species="M_trnalys_c"/>
+          <targetSpecies value="4.212e-05" species="M_trnaleu_c"/>
+          <targetSpecies value="1.43733333333e-05" species="M_trnamet_c"/>
+          <targetSpecies value="2.25333333333e-05" species="M_trnaasn_c"/>
+          <targetSpecies value="2.06666666667e-05" species="M_trnapro_c"/>
+          <targetSpecies value="2.46e-05" species="M_trnagln_c"/>
+          <targetSpecies value="2.76533333333e-05" species="M_trnaarg_c"/>
+          <targetSpecies value="2.01733333333e-05" species="M_trnaser_c"/>
+          <targetSpecies value="2.372e-05" species="M_trnathr_c"/>
+          <targetSpecies value="3.956e-05" species="M_trnaval_c"/>
+          <targetSpecies value="5.32e-06" species="M_trnatrp_c"/>
+          <targetSpecies value="1.28933333333e-05" species="M_trnatyr_c"/>
         </listOfConcentrations>
         <listOfProductionFluxes>
           <targetSpecies value="0.15996" species="mrna"/>
@@ -202,7 +202,7 @@
       </operations>
       <targets>
         <listOfConcentrations>
-          <targetSpecies value="0.087" species="dna"/>
+          <targetSpecies value="0.0807" species="dna"/>
         </listOfConcentrations>
       </targets>
     </process>
@@ -226,6 +226,7 @@
           <targetSpecies value="0.007" species="M_spmd_c"/>
           <targetSpecies value="0.0144" species="M_pi_c"/>
           <targetSpecies value="0.001" species="M_cmp_c"/>
+          <targetSpecies value="0.0004" species="M_10fthf_c"/>
           <targetSpecies value="0.7063" species="M_k_c"/>
           <targetSpecies value="0.0005" species="M_ctp_c"/>
           <targetSpecies value="0.0003" species="M_coa_c"/>
@@ -236,6 +237,7 @@
           <targetSpecies value="0.0005" species="M_gmp_c"/>
           <targetSpecies value="0.0002" species="M_gdp_c"/>
           <targetSpecies value="0.0003" species="M_cdp_c"/>
+          <targetSpecies value="0.0009" species="M_ppi_c"/>
           <targetSpecies value="0.0004" species="M_gtp_c"/>
         </listOfConcentrations>
       </targets>
@@ -257,10 +259,11 @@
         <listOfReactants>
           <speciesReference species="M_fmettrna_c" stoichiometry="1"/>
           <speciesReference species="M_gtp_c" stoichiometry="1"/>
-          <speciesReference species="M_h2o_c" stoichiometry="1"/>
+          <speciesReference species="M_h2o_c" stoichiometry="2"/>
         </listOfReactants>
         <listOfProducts>
           <speciesReference species="M_trnamet_c" stoichiometry="1"/>
+          <speciesReference species="M_for_c" stoichiometry="1"/>
           <speciesReference species="M_gdp_c" stoichiometry="1"/>
           <speciesReference species="M_pi_c" stoichiometry="1"/>
           <speciesReference species="M_h_c" stoichiometry="1"/>

@@ -1,7 +1,7 @@
 
 import libsbml
-import re
 import copy
+import itertools
 
 from ..rba_xml import *
 
@@ -40,10 +40,11 @@ class SBMLFilter:
         self.external_metabolites = [m.id for m in self.species \
                                      if m.boundary_condition]
 
-        # identify transport reactions
+        # identify membrane and transport reactions
         self.imported_metabolites = []
         self._find_transport_reactions()
-
+        self._find_membrane_reactions()
+        
     def _find_cytosol(self, input_document):
         return 'c'
             
@@ -114,6 +115,17 @@ class SBMLFilter:
             compartment = input_document.getModel().getSpecies(metabolite.id).compartment
             if compartment in external_compartments:
                 metabolite.boundary_condition = True
+
+    def _find_membrane_reactions(self):
+        """
+        Identify all reactions whose enzyme is at least partly in the membrane.
+        """
+        self.has_membrane_enzyme = {}
+        for r in self.reactions:
+            compartments = [m.species.rsplit('_',1)[1]
+                            for m in itertools.chain(r.reactants, r.products)]
+            self.has_membrane_enzyme[r.id] \
+                = any(c != compartments[0] for c in compartments[1:])
 
     def _find_transport_reactions(self):
         """
