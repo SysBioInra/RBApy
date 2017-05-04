@@ -65,7 +65,20 @@ Target concentrations for tRNAs are wrong (Stephan)
 ---------------------------------------------------
 Targets were originally expressed as a nucleotide concentration, not a tRNA
 concentration. We need to divide them by the length of tRNAs. A quick fix
-has been implemented, it might be good to go through it again.
+has been implemented (division by an arbitrary number), it might be good to 
+go through it again.
+
+Create a table for unknown proteins from the SBML (Stephan)
+-----------------------------------------------------------
+It might be nice to have a table that lists all the proteins from SBML 
+that could not be retrieved in Uniprot. The user may then choose by which
+protein from uniprot to replace them *or* replace it with a spontaneous
+protein or an average protein in the compartment of their choice (!!!).
+
+Include information retrieved automatically in helper files (Stephan)
+--------------------------------------------------------------------
+See if and how we should include this information for each helper file.
+
 
 RBA algorithm
 =============

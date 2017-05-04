@@ -76,6 +76,7 @@ class PreRba(object):
         self._enzyme_comp = sbml_data.enzymes
         self._external_metabolites = sbml_data.external_metabolites
         self._imported_metabolites = sbml_data.imported_metabolites
+        self._has_membrane_enzyme = sbml_data.has_membrane_enzyme
         self._species_ids = [s.id for s in sbml_data.species]
         self._reaction_ids = [r.id for r in sbml_data.reactions]
 
@@ -202,16 +203,19 @@ class PreRba(object):
                 if sto > 0:
                     reactants.append(SpeciesReference(name, sto))
 
-            # enzymatic activity
-            if self._imported_metabolites.has_key(reaction):
+            # base enzymatic activity
+            if self._has_membrane_enzyme[reaction]:
                 enzyme.enzymatic_activity.enzyme_efficiencies\
                                          .append(tra_efficiency)
-                for m in self._imported_metabolites[reaction]:
-                    enzyme.enzymatic_activity.transporter_efficiency.append\
-                        (Function('', 'michaelisMenten', MM_parameters, m))
             else:
                 enzyme.enzymatic_activity.enzyme_efficiencies\
                                          .append(def_efficiency)
+
+            # transport activity
+            if self._imported_metabolites.has_key(reaction):
+                for m in self._imported_metabolites[reaction]:
+                    enzyme.enzymatic_activity.transporter_efficiency.append\
+                        (Function('', 'michaelisMenten', MM_parameters, m))
 
         return enzyme_list
 
