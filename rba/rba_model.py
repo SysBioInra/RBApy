@@ -46,7 +46,9 @@ class RbaModel(object):
         matrices = RbaMatrices(self)
         if catalytic_function is not None:
             matrices.enzymes.efficiency.set_function(catalytic_function)
-        return RbaSolver(matrices).solve(scaling_factor)
+        solver = RbaSolver(matrices)
+        solver.solve(scaling_factor)
+        return solver
 
     def write_files(self, output_dir = None):
         """
