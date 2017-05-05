@@ -23,7 +23,6 @@ class RbaSolver(object):
         # equality row information
         self.eq_row_names = blocks.metabolites \
                             + [p + '_capacity' for p in processes] \
-                            + [n + '_flux' for n in blocks.processes.target_reaction]
         # inequality row information
         self.ineq_row_names = [e + '_forward_capacity' for e in enzymes] \
                               + [e + '_backward_capacity' for e in enzymes]\
@@ -44,10 +43,8 @@ class RbaSolver(object):
         R_ind = [reactions.index(r) for r in blocks.enzymes.reaction_catalyzed]
         self._R_to_E = coo_matrix(([1]*nb_enzymes, (range(nb_enzymes), R_ind)),
                                   shape = (nb_enzymes, nb_reactions))
-        R_ind = [reactions.index(r) for r in blocks.processes.target_reaction]
-        nb_TR = len(R_ind)
-        self._target_reactions = coo_matrix(([1]*nb_TR, (range(nb_TR), R_ind)),
-                                            shape = (nb_TR, nb_cols))
+        self._target_reactions \
+            = [reactions.index(r) for r in blocks.processes.target_reaction]
         self._lb_reactions \
             = [reactions.index(r) for r in blocks.processes.lb_reaction]
         self._ub_reactions \
@@ -74,22 +71,24 @@ class RbaSolver(object):
                                mu*self._blocks.enzymes.machinery.processing_cost,
                                mu*self._blocks.processes.machinery.processing_cost
                                -diags(capacity)])
-        self.Aeq = vstack([metab_rows, process_rows, self._target_reactions])
+        self.Aeq = vstack([metab_rows, process_rows])
 
         ## build b and beq
         (fluxes, processing, weight) \
             = self._blocks.processes.target_values.compute(mu)
         density_rows = self._blocks.density.maximum.compute(mu) \
                        - weight[c_indices].T
-        r_fluxes = self._blocks.processes.reaction_value.compute(mu)
         self.b = numpy.concatenate([self._empty_2E, density_rows])
-        self.beq = numpy.concatenate([-fluxes, -processing, r_fluxes])
+        self.beq = numpy.concatenate([-fluxes, -processing])
 
         ## update lower bounds and upper bounds
         self.LB[self.reaction_cols[self._lb_reactions]] \
             = self._blocks.processes.lb.compute(mu)
         self.UB[self.reaction_cols[self._ub_reactions]] \
             = self._blocks.processes.ub.compute(mu)
+        r_fluxes = self._blocks.processes.reaction_value.compute(mu)
+        self.LB[self.reaction_cols[self._target_reactions]] = r_fluxes
+        self.UB[self.reaction_cols[self._target_reactions]] = r_fluxes
 
     def solve(self, scaling_factor = 1000):
         """

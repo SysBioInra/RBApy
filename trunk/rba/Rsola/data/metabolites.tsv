@@ -1,24 +1,24 @@
 ID	NAME	SBML ID	CONCENTRATION
 NAD	NAD	M_nad_c	0.0162
 ILETRNA	Charged trna ile	M_iletrna_c	
-TRNAILE	Uncharged trna ile	M_trnaile_c	0.002037
+TRNAILE	Uncharged trna ile	M_trnaile_c	2.716e-05
 CHEBI:57540	NAD(+)	[MISSING]	
 dCTP	dCTP	M_dctp_c	
 LYSTRNA	Charged trna lys	M_lystrna_c	
 HISTRNA	Charged trna his	M_histrna_c	
-TRNAPRO	Uncharged trna pro	M_trnapro_c	0.00155
+TRNAPRO	Uncharged trna pro	M_trnapro_c	2.06666666667e-05
 CHEBI:21137	[3Fe-4S] cluster	[MISSING]	
 CHEBI:28938	NH4(+)	[MISSING]	
 CHEBI:60539	Mo-bis(molybdopterin guanine dinucleotide)	[MISSING]	
-TRNALEU	Uncharged trna leu	M_trnaleu_c	0.003159
+TRNALEU	Uncharged trna leu	M_trnaleu_c	4.212e-05
 TYRTRNA	Charged trna tyr	M_tyrtrna_c	
 CHEBI:61717	heme c	[MISSING]	
 CHEBI:29033	Fe(2+)	[MISSING]	
 CHEBI:58210	FMN	[MISSING]	
 CHEBI:29035	Mn(2+)	[MISSING]	
 LEUTRNA	Charged trna leu	M_leutrna_c	
-CHEBI:49601	[2Fe-2S] cluster	[MISSING]	
-H	H	M_h_c	
+TRPTRNA	Charged trna trp	M_trptrna_c	
+H	Proton	M_h_c	
 GLNTRNA	Charged trna gln	M_glntrna_c	
 CHEBI:597326	pyridoxal 5'-phosphate	[MISSING]	
 CHEBI:48828	Co(2+)	[MISSING]	
@@ -26,41 +26,42 @@ SPMD	SPMD	M_spmd_c	0.007
 dGTP	dGTP	M_dgtp_c	
 CHEBI:29108	Ca(2+)	[MISSING]	
 CHEBI:29105	Zn(2+)	[MISSING]	
-TRNAVAL	Uncharged trna val	M_trnaval_c	0.002967
+TRNAVAL	Uncharged trna val	M_trnaval_c	3.956e-05
 CHEBI:29103	K(+)	[MISSING]	
-TRNACYS	Uncharged trna cys	M_trnacys_c	0.000642
+TRNACYS	Uncharged trna cys	M_trnacys_c	8.56e-06
 VALTRNA	Charged trna val	M_valtrna_c	
-Pi	Pi	M_pi_c	0.0144
+Pi	Phosphate	M_pi_c	0.0144
 CHEBI:24875	Fe cation	[MISSING]	
 CMP	CMP	M_cmp_c	0.001
-TRNAARG	Uncharged trna arg	M_trnaarg_c	0.002074
-TRNAMET	Uncharged trna met	M_trnamet_c	0.001078
-TRNALYS	Uncharged trna lys	M_trnalys_c	0.002406
+TRNAARG	Uncharged trna arg	M_trnaarg_c	2.76533333333e-05
+TRNAMET	Uncharged trna met	M_trnamet_c	1.43733333333e-05
+TRNALYS	Uncharged trna lys	M_trnalys_c	3.208e-05
 CHEBI:57925	glutathione	[MISSING]	
 CHEBI:30413	heme	[MISSING]	
 CHEBI:60240	a divalent metal cation	[MISSING]	
 AMP	AMP	M_amp_c	0.0047
 PROTRNA	Charged trna pro	M_protrna_c	
+FOR	Formate	M_for_c	
 CHEBI:25516	Ni cation	[MISSING]	
-K	K	M_k_c	0.7063
+10FTHF	10-Formyltetrahydrofolate	M_10fthf_c	0.0004
+K	Potassium	M_k_c	0.7063
 CHEBI:83088	(R)-lipoate	[MISSING]	
 dTTP	dTTP	M_dttp_c	
 CHEBI:23378	Cu cation	[MISSING]	
 GLYTRNA	Charged trna gly	M_glytrna_c	
 ARGTRNA	Charged trna arg	M_argtrna_c	
-TRNAALA	Uncharged trna ala	M_trnaala_c	0.003602
+TRNAALA	Uncharged trna ala	M_trnaala_c	4.80266666667e-05
 ALATRNA	Charged trna ala	M_alatrna_c	
 CTP	CTP	M_ctp_c	0.0005
 UMP	UMP	M_ump_c	
 CHEBI:58937	thiamine diphosphate	[MISSING]	
-COA	COA	M_coa_c	0.0003
+COA	Coenzyme A	M_coa_c	0.0003
 ATP	ATP	M_atp_c	0.003
 NADP	NADP	M_nadp_c	0.0009
 CHEBI:49883	[4Fe-4S] cluster	[MISSING]	
 FMETTRNA	Charged trna fmet	M_fmettrna_c	
 CHEBI:60342	dipyrromethane	[MISSING]	
-CHEBI:60344	heme b	[MISSING]	
-TRNATHR	Uncharged trna thr	M_trnathr_c	0.001779
+TRNATHR	Uncharged trna thr	M_trnathr_c	2.372e-05
 CHEBI:18420	Mg(2+)	[MISSING]	
 CHEBI:58349	NADP(+)	[MISSING]	
 ADP	ADP	M_adp_c	0.0026
@@ -68,32 +69,33 @@ SERTRNA	Charged trna ser	M_sertrna_c
 CHEBI:15361	pyruvate	[MISSING]	
 NADPH	NADPH	M_nadph_c	0.0002
 ASNTRNA	Charged trna asn	M_asntrna_c	
-TRNATYR	Uncharged trna tyr	M_trnatyr_c	0.000967
-TRNAHIS	Uncharged trna his	M_trnahis_c	0.000664
-TRNAASP	Uncharged trna asp	M_trnaasp_c	0.00169
+TRNATYR	Uncharged trna tyr	M_trnatyr_c	1.28933333333e-05
+TRNAHIS	Uncharged trna his	M_trnahis_c	8.85333333333e-06
+TRNAASP	Uncharged trna asp	M_trnaasp_c	2.25333333333e-05
 GMP	GMP	M_gmp_c	0.0005
 CHEBI:57618	FMNH2	[MISSING]	
 GDP	GDP	M_gdp_c	0.0002
-TRNAASN	Uncharged trna asn	M_trnaasp_c	0.00169
+TRNAASN	Uncharged trna asn	M_trnaasp_c	2.25333333333e-05
 dATP	dATP	M_datp_c	
 CHEBI:57692	FAD	[MISSING]	
+MET	Methionine	[MISSING]	
 H2O	H2O	M_h2o_c	
 CDP	CDP	M_cdp_c	0.0003
-TRNAPHE	Uncharged trna phe	M_trnaphe_c	0.001299
-PPi	PPi	M_ppi_c	
-TRNASER	Uncharged trna ser	M_trnaser_c	0.001513
+TRNAPHE	Uncharged trna phe	M_trnaphe_c	1.732e-05
+PPi	Pyrophosphate	M_ppi_c	0.0009
+TRNASER	Uncharged trna ser	M_trnaser_c	2.01733333333e-05
 THRTRNA	Charged trna thr	M_thrtrna_c	
 CHEBI:29036	Cu(2+)	[MISSING]	
 ASPTRNA	Charged trna asp	M_asptrna_c	
-TRPTRNA	Charged trna trp	M_trptrna_c	
+CHEBI:49601	[2Fe-2S] cluster	[MISSING]	
 GLUTRNA	Charged trna glu	M_glutrna_c	
-TRNATRP	Uncharged trna trp	M_trnatrp_c	0.000399
+TRNATRP	Uncharged trna trp	M_trnatrp_c	5.32e-06
 CHEBI:18408	adenosylcob(III)alamin	[MISSING]	
-TRNAGLN	Uncharged trna gln	M_trnagln_c	0.001845
+TRNAGLN	Uncharged trna gln	M_trnagln_c	2.46e-05
 METTRNA	Charged trna met	M_mettrna_c	
 UTP	UTP	M_utp_c	
-TRNAGLU	Uncharged trna glu	M_trnaglu_c	0.001845
-TRNAGLY	Uncharged trna gly	M_trnagly_c	0.004295
+TRNAGLU	Uncharged trna glu	M_trnaglu_c	2.46e-05
+TRNAGLY	Uncharged trna gly	M_trnagly_c	5.72666666667e-05
 GTP	GTP	M_gtp_c	0.0004
 UDP	UDP	M_udp_c	
 CYSTRNA	Charged trna cys	M_cystrna_c	
