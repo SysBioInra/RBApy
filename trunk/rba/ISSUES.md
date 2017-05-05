@@ -83,15 +83,8 @@ See if and how we should include this information for each helper file.
 RBA algorithm
 =============
 
-Bug: link enzymes with reactions properly (Stephan)
----------------------------------------------------
-
-In all test cases, reactions and enzymes are in the exact same order. Enzymes
-should be reordered according to reactions they catalyze.
-
 Do not allow 0 concentration substrates to enter the cell (Stephan)
 -------------------------------------------------------------------
-
 Historical example is 0 concentration trehalose entering periplasm (because 
 import fluxes into periplasm do not depend on substrate concentration). 
 Trehalose is then transformed to glucose (assumed to be at nonzero 
@@ -100,27 +93,32 @@ substrates to enter the cell.
 
 Apply scaling on subblocks? (Stephan)
 -------------------------------------
-
 Instead of applying column scaling before solving, we could apply it on 
 subblocks so we do it only once.
 
 Automatic scaling? (Stephan)
 ---------------------------
-
 Scaling is a fixed coefficient. If a user uses different units for enzyme
 concentrations, it will not work properly. Maybe we should develop a procedure
 that automatically scales colums?
 
-Remove empty rows and columns (Stephan)
----------------------------------------
+Actually, the current scaling seems to be very unstable, it would be urgent
+to think about it more thoroughly. Just removing a useless column or sligthly
+changing the scaling coefficient can change run times a lot.
 
-The algorithm should detect and remove empty rows and columns. Not sure 
-how much time we can win with this as CPLEX probably already does that.
-For enzymes, this means that we will lose the nice diagonal structure
-of the capacity subblock. I am not sure whether it is easier:
-
- - to build the whole diagonal subblock, then remove columns.
- - populate a matrix coefficient by coefficient.
+Remove useless columns and rows? (Stephan)
+-------------------------------
+Removing zero cost enzymes worked pretty well but removing empty reactions
+leads to higher solve times. How far should we go. Here is the list of
+things that could be removed:
+ - useless reactions: reactions that involve only boundary metabolites. It
+ seems to make solving worse, so maybe avoid it until we understant why.
+ - useless enzyme backward constraints: if an enzyme catalyzes an irreversible
+ reaction it does not need to define a backward constraint, it will already be
+ included in the lower bound.
+ - target reaction rows: setting lower bound and upper bound to the same value
+ works the same way as adding a useless equality constraint.
+ - process machinery columns: only include processes that have a machinery.
  
 
 Idea: fusing identical enzymes (Stephan)
