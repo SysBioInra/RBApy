@@ -1,7 +1,6 @@
-<?xml version="1.0" ?>
 <RBAParameters>
   <listOfMaximalDensities>
-    <maximalDensity compartment="Cytoplasm" value="4.8972"/>
+    <maximalDensity value="4.8972" compartment="Cytoplasm"/>
     <maximalDensity compartment="Cell_inner_membrane">
       <functionReference function="amino_acid_concentration"/>
       <functionReference function="fraction_protein_Cell_inner_membrane"/>

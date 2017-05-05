@@ -1,4 +1,3 @@
-<?xml version="1.0" ?>
 <RBADna>
   <listOfComponents>
     <component id="A" name="Adenosine residue" type="Nucleotide" weight="0"/>
@@ -7,7 +6,7 @@
     <component id="T" name="Thymine residue" type="Nucleotide" weight="0"/>
   </listOfComponents>
   <listOfMacromolecules>
-    <macromolecule compartment="Cytoplasm" id="dna">
+    <macromolecule id="dna" compartment="Cytoplasm">
       <composition>
         <componentReference component="A" stoichiometry="0.2818"/>
         <componentReference component="C" stoichiometry="0.2181"/>
