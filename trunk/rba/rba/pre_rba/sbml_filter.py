@@ -222,8 +222,6 @@ def read_gene_association(text):
         if len(enzyme_set) == 0: return []
         
         # field is not standard: we try to standardize a little.
-        # separator is not always the same: make it simple spaces
-        enzyme_set = enzyme_set.replace('_', ' ')
         # remove parentheses
         enzyme_set = enzyme_set.translate(None, '()')
         

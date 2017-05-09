@@ -5583,28 +5583,6 @@
         <componentReference component="Y" stoichiometry="42"/>
       </composition>
     </macromolecule>
-    <macromolecule id="BSU41050" compartment="c">
-      <composition>
-        <componentReference component="A" stoichiometry="5"/>
-        <componentReference component="E" stoichiometry="9"/>
-        <componentReference component="D" stoichiometry="4"/>
-        <componentReference component="G" stoichiometry="3"/>
-        <componentReference component="F" stoichiometry="5"/>
-        <componentReference component="I" stoichiometry="6"/>
-        <componentReference component="H" stoichiometry="2"/>
-        <componentReference component="K" stoichiometry="19"/>
-        <componentReference component="M" stoichiometry="2"/>
-        <componentReference component="L" stoichiometry="12"/>
-        <componentReference component="N" stoichiometry="6"/>
-        <componentReference component="Q" stoichiometry="6"/>
-        <componentReference component="P" stoichiometry="2"/>
-        <componentReference component="S" stoichiometry="10"/>
-        <componentReference component="R" stoichiometry="11"/>
-        <componentReference component="T" stoichiometry="4"/>
-        <componentReference component="V" stoichiometry="6"/>
-        <componentReference component="Y" stoichiometry="4"/>
-      </composition>
-    </macromolecule>
     <macromolecule id="BSU15790" compartment="c">
       <composition>
         <componentReference component="A" stoichiometry="20"/>
@@ -5651,55 +5629,6 @@
         <componentReference component="W" stoichiometry="3"/>
         <componentReference component="V" stoichiometry="36"/>
         <componentReference component="Y" stoichiometry="20"/>
-      </composition>
-    </macromolecule>
-    <macromolecule id="BSU28370" compartment="c">
-      <composition>
-        <componentReference component="A" stoichiometry="18"/>
-        <componentReference component="C" stoichiometry="2"/>
-        <componentReference component="E" stoichiometry="20"/>
-        <componentReference component="D" stoichiometry="17"/>
-        <componentReference component="G" stoichiometry="26"/>
-        <componentReference component="F" stoichiometry="7"/>
-        <componentReference component="I" stoichiometry="24"/>
-        <componentReference component="H" stoichiometry="3"/>
-        <componentReference component="K" stoichiometry="13"/>
-        <componentReference component="M" stoichiometry="6"/>
-        <componentReference component="L" stoichiometry="24"/>
-        <componentReference component="N" stoichiometry="7"/>
-        <componentReference component="Q" stoichiometry="8"/>
-        <componentReference component="P" stoichiometry="7"/>
-        <componentReference component="S" stoichiometry="14"/>
-        <componentReference component="R" stoichiometry="16"/>
-        <componentReference component="T" stoichiometry="17"/>
-        <componentReference component="W" stoichiometry="2"/>
-        <componentReference component="V" stoichiometry="12"/>
-        <componentReference component="Y" stoichiometry="2"/>
-      </composition>
-    </macromolecule>
-    <macromolecule id="BSU23840" compartment="c">
-      <composition>
-        <componentReference component="A" stoichiometry="25"/>
-        <componentReference component="C" stoichiometry="2"/>
-        <componentReference component="E" stoichiometry="26"/>
-        <componentReference component="D" stoichiometry="18"/>
-        <componentReference component="G" stoichiometry="24"/>
-        <componentReference component="F" stoichiometry="13"/>
-        <componentReference component="I" stoichiometry="19"/>
-        <componentReference component="H" stoichiometry="10"/>
-        <componentReference component="K" stoichiometry="23"/>
-        <componentReference component="M" stoichiometry="3"/>
-        <componentReference component="L" stoichiometry="28"/>
-        <componentReference component="N" stoichiometry="6"/>
-        <componentReference component="Q" stoichiometry="11"/>
-        <componentReference component="P" stoichiometry="13"/>
-        <componentReference component="S" stoichiometry="14"/>
-        <componentReference component="R" stoichiometry="14"/>
-        <componentReference component="T" stoichiometry="20"/>
-        <componentReference component="W" stoichiometry="1"/>
-        <componentReference component="V" stoichiometry="27"/>
-        <componentReference component="Y" stoichiometry="10"/>
-        <componentReference component="CHEBI:29105" stoichiometry="2"/>
       </composition>
     </macromolecule>
     <macromolecule id="BSU03210" compartment="c">
@@ -8471,31 +8400,6 @@
         <componentReference component="V" stoichiometry="68"/>
         <componentReference component="Y" stoichiometry="29"/>
         <componentReference component="CHEBI:18420" stoichiometry="4.0"/>
-      </composition>
-    </macromolecule>
-    <macromolecule id="BSU22450" compartment="c">
-      <composition>
-        <componentReference component="A" stoichiometry="31"/>
-        <componentReference component="C" stoichiometry="1"/>
-        <componentReference component="E" stoichiometry="34"/>
-        <componentReference component="D" stoichiometry="25"/>
-        <componentReference component="G" stoichiometry="21"/>
-        <componentReference component="F" stoichiometry="17"/>
-        <componentReference component="I" stoichiometry="26"/>
-        <componentReference component="H" stoichiometry="7"/>
-        <componentReference component="K" stoichiometry="35"/>
-        <componentReference component="M" stoichiometry="8"/>
-        <componentReference component="L" stoichiometry="46"/>
-        <componentReference component="N" stoichiometry="7"/>
-        <componentReference component="Q" stoichiometry="20"/>
-        <componentReference component="P" stoichiometry="11"/>
-        <componentReference component="S" stoichiometry="21"/>
-        <componentReference component="R" stoichiometry="25"/>
-        <componentReference component="T" stoichiometry="23"/>
-        <componentReference component="W" stoichiometry="6"/>
-        <componentReference component="V" stoichiometry="23"/>
-        <componentReference component="Y" stoichiometry="10"/>
-        <componentReference component="CHEBI:18420" stoichiometry="1"/>
       </composition>
     </macromolecule>
     <macromolecule id="BSU15700" compartment="c">

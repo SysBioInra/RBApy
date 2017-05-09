@@ -185,6 +185,7 @@
           <targetSpecies value="3.208e-05" species="M_trnalys_c"/>
           <targetSpecies value="4.212e-05" species="M_trnaleu_c"/>
           <targetSpecies value="1.43733333333e-05" species="M_trnamet_c"/>
+          <targetSpecies value="2.25333333333e-05" species="M_trnaasp_c"/>
           <targetSpecies value="2.06666666667e-05" species="M_trnapro_c"/>
           <targetSpecies value="2.46e-05" species="M_trnagln_c"/>
           <targetSpecies value="2.76533333333e-05" species="M_trnaarg_c"/>
@@ -227,10 +228,10 @@
       <targets>
         <listOfConcentrations>
           <targetSpecies value="0.0162" species="M_nad_c"/>
+          <targetSpecies value="0.0047" species="M_amp_c"/>
           <targetSpecies value="0.007" species="M_spmd_c"/>
           <targetSpecies value="0.0144" species="M_pi_c"/>
           <targetSpecies value="0.001" species="M_cmp_c"/>
-          <targetSpecies value="0.0047" species="M_amp_c"/>
           <targetSpecies value="0.0004" species="M_10fthf_c"/>
           <targetSpecies value="0.7063" species="M_k_c"/>
           <targetSpecies value="0.0005" species="M_ctp_c"/>
@@ -425,6 +426,7 @@
             <speciesReference species="M_h2o_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="M_trnaasp_c" stoichiometry="1"/>
             <speciesReference species="M_gdp_c" stoichiometry="2"/>
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
