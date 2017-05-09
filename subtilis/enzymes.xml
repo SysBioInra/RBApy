@@ -1227,7 +1227,7 @@
     <enzyme id="Tpyr_1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tpyr_1">
@@ -1558,7 +1558,7 @@
     <enzyme id="Takg_1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Takg_1">
@@ -1753,7 +1753,7 @@
     <enzyme id="Tack_1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tack_1">
@@ -1818,7 +1818,7 @@
     <enzyme id="Tact_1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tact_1">
@@ -1948,7 +1948,7 @@
     <enzyme id="Tform_1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tform_1">
@@ -2204,7 +2204,7 @@
     <enzyme id="Tasn_1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tasn_1">
@@ -2650,7 +2650,7 @@
     <enzyme id="Tgly_1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tgly_1">
@@ -2910,7 +2910,7 @@
     <enzyme id="Tlys_1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tlys_1">
@@ -3101,7 +3101,7 @@
     <enzyme id="Tphe_1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tphe_1">
@@ -3231,7 +3231,7 @@
     <enzyme id="Tser_1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tser_1">
@@ -3296,7 +3296,7 @@
     <enzyme id="Tthr_1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tthr_1">
@@ -3426,7 +3426,7 @@
     <enzyme id="Ttyr_1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Ttyr_1">
@@ -3556,7 +3556,7 @@
     <enzyme id="Tade_1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tade_1">
@@ -4785,7 +4785,7 @@
     <enzyme id="Tfol_1" zeroCost="true">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tfol_1">
@@ -4850,7 +4850,7 @@
     <enzyme id="Tpan_1" zeroCost="true">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tpan_1">
@@ -4915,7 +4915,7 @@
     <enzyme id="Tnia_1" zeroCost="true">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tnia_1">
@@ -6187,7 +6187,7 @@
     <enzyme id="Tcu2_1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tcu2_1">
@@ -6561,7 +6561,7 @@
     <enzyme id="Th_1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_m" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Th_1">
@@ -12564,111 +12564,6 @@
           <enzymeEfficiency function="medium_5">
             <listOfParameters>
               <parameter id="CONSTANT" value="3798.4915"/>
-            </listOfParameters>
-          </enzymeEfficiency>
-        </listOfEnzymeEfficiencies>
-      </enzymaticActivity>
-    </enzyme>
-    <enzyme id="Etrna_1" zeroCost="false">
-      <machineryComposition>
-        <listOfReactants>
-          <speciesReference species="BSU28370" stoichiometry="1"/>
-          <speciesReference species="BSU41050" stoichiometry="1.0"/>
-        </listOfReactants>
-      </machineryComposition>
-      <enzymaticActivity reaction="Etrna_1">
-        <listOfEnzymeEfficiencies>
-          <enzymeEfficiency function="default">
-            <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
-            </listOfParameters>
-          </enzymeEfficiency>
-          <enzymeEfficiency function="linearModel">
-            <listOfParameters>
-              <parameter id="Y_MIN" value="511.6565"/>
-              <parameter id="LINEAR_CONSTANT" value="2141.7028"/>
-              <parameter id="Y_MAX" value="2838989.867"/>
-              <parameter id="LINEAR_COEF" value="7133.8954"/>
-              <parameter id="X_MAX" value="1.6"/>
-              <parameter id="X_MIN" value="0.25"/>
-            </listOfParameters>
-          </enzymeEfficiency>
-          <enzymeEfficiency function="medium_1">
-            <listOfParameters>
-              <parameter id="CONSTANT" value="2514.7921"/>
-            </listOfParameters>
-          </enzymeEfficiency>
-          <enzymeEfficiency function="medium_2">
-            <listOfParameters>
-              <parameter id="CONSTANT" value="5551.2549"/>
-            </listOfParameters>
-          </enzymeEfficiency>
-          <enzymeEfficiency function="medium_3">
-            <listOfParameters>
-              <parameter id="CONSTANT" value="12771.529"/>
-            </listOfParameters>
-          </enzymeEfficiency>
-          <enzymeEfficiency function="medium_4">
-            <listOfParameters>
-              <parameter id="CONSTANT" value="15564.6829"/>
-            </listOfParameters>
-          </enzymeEfficiency>
-          <enzymeEfficiency function="medium_5">
-            <listOfParameters>
-              <parameter id="CONSTANT" value="11219.6166"/>
-            </listOfParameters>
-          </enzymeEfficiency>
-        </listOfEnzymeEfficiencies>
-      </enzymaticActivity>
-    </enzyme>
-    <enzyme id="Etrna2_1" zeroCost="false">
-      <machineryComposition>
-        <listOfReactants>
-          <speciesReference species="BSU23840" stoichiometry="2"/>
-          <speciesReference species="BSU41050" stoichiometry="1.0"/>
-          <speciesReference species="BSU22450" stoichiometry="2"/>
-        </listOfReactants>
-      </machineryComposition>
-      <enzymaticActivity reaction="Etrna2_1">
-        <listOfEnzymeEfficiencies>
-          <enzymeEfficiency function="default">
-            <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
-            </listOfParameters>
-          </enzymeEfficiency>
-          <enzymeEfficiency function="linearModel">
-            <listOfParameters>
-              <parameter id="Y_MIN" value="511.6565"/>
-              <parameter id="LINEAR_CONSTANT" value="26609.2672"/>
-              <parameter id="Y_MAX" value="2838989.867"/>
-              <parameter id="LINEAR_COEF" value="-3837.2838"/>
-              <parameter id="X_MAX" value="1.6"/>
-              <parameter id="X_MIN" value="0.25"/>
-            </listOfParameters>
-          </enzymeEfficiency>
-          <enzymeEfficiency function="medium_1">
-            <listOfParameters>
-              <parameter id="CONSTANT" value="35479.0677"/>
-            </listOfParameters>
-          </enzymeEfficiency>
-          <enzymeEfficiency function="medium_2">
-            <listOfParameters>
-              <parameter id="CONSTANT" value="12007.2894"/>
-            </listOfParameters>
-          </enzymeEfficiency>
-          <enzymeEfficiency function="medium_3">
-            <listOfParameters>
-              <parameter id="CONSTANT" value="22508.26"/>
-            </listOfParameters>
-          </enzymeEfficiency>
-          <enzymeEfficiency function="medium_4">
-            <listOfParameters>
-              <parameter id="CONSTANT" value="28565.8102"/>
-            </listOfParameters>
-          </enzymeEfficiency>
-          <enzymeEfficiency function="medium_5">
-            <listOfParameters>
-              <parameter id="CONSTANT" value="23806.2608"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>

@@ -96,12 +96,7 @@ class PreRba(object):
                 f.write(raw_data)
         # parse data
         uniprot_data = UniprotFilter(protein_ids, self._input_dir)
-        if len(uniprot_data.not_found) > 0:
-            with open(self._input('missing_genes.txt'), 'w') as f:
-                f.write('Following genes could not be retrieved in uniprot:\n')
-                f.write(', '.join(uniprot_data.not_found) + '\n')
-                f.write('Please check identifiers and remove notes if reaction '
-                        ' is actually a spontaneous reaction.\n')
+
         # store data
         self._compartment_ids = uniprot_data.compartment_ids
         self.model.metabolism.compartments = ListOfCompartments()
@@ -115,6 +110,7 @@ class PreRba(object):
         self._cytoplasm_id = uniprot_data.cytoplasm_compartment
         self._external_id = uniprot_data.secreted_compartment
         self._average_protein_length = uniprot_data.average_protein_length
+        self._sbml_to_uniprot = uniprot_data.unknown_map
 
     def _read_trnas(self):
         # read all real trnas (as described in fasta files)
@@ -230,6 +226,11 @@ class PreRba(object):
         Gather uniprot info for given protein. If no info is found, info
         for an average protein is returned.
         """
+        # check in protein name has been overriden
+        try:
+            protein = self._sbml_to_uniprot[protein]
+        except KeyError:
+            pass
         # check if reaction is spontaneous
         if protein == '': return [protein, 0]
         # check if protein is known

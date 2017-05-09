@@ -88,10 +88,10 @@
     </macromolecule>
     <macromolecule id="M_trnaasp_c" compartment="Cytoplasm">
       <composition>
-        <componentReference component="A" stoichiometry="11.0"/>
-        <componentReference component="C" stoichiometry="22.0"/>
-        <componentReference component="U" stoichiometry="17.0"/>
-        <componentReference component="G" stoichiometry="27.0"/>
+        <componentReference component="A" stoichiometry="13.5"/>
+        <componentReference component="C" stoichiometry="20.0"/>
+        <componentReference component="U" stoichiometry="18.5"/>
+        <componentReference component="G" stoichiometry="24.5"/>
       </composition>
     </macromolecule>
     <macromolecule id="M_trnapro_c" compartment="Cytoplasm">

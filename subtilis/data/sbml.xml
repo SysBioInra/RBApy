@@ -3971,44 +3971,6 @@
           <speciesReference species="M_nadp_c" stoichiometry="1"/>
         </listOfProducts>
       </reaction>
-      <reaction id="Etrna" reversible="false">
-        <notes>
-          <body xmlns="http://www.w3.org/1999/xhtml">
-            <p>GENE_ASSOCIATION: (BSU28370 and BSU41050)</p>
-          </body>
-        </notes>
-        <listOfReactants>
-          <speciesReference species="M_h2o_c" stoichiometry="1"/>
-          <speciesReference species="M_atp_c" stoichiometry="0.2818"/>
-          <speciesReference species="M_gtp_c" stoichiometry="0.2171"/>
-          <speciesReference species="M_utp_c" stoichiometry="0.283"/>
-          <speciesReference species="M_ctp_c" stoichiometry="0.2181"/>
-        </listOfReactants>
-        <listOfProducts>
-          <speciesReference species="M_trna_c" stoichiometry="1"/>
-          <speciesReference species="M_h_c" stoichiometry="1"/>
-          <speciesReference species="M_pp_c" stoichiometry="1"/>
-        </listOfProducts>
-      </reaction>
-      <reaction id="Etrna2" reversible="false">
-        <notes>
-          <body xmlns="http://www.w3.org/1999/xhtml">
-            <p>GENE_ASSOCIATION: (BSU23840 and BSU41050 and BSU22450)</p>
-          </body>
-        </notes>
-        <listOfReactants>
-          <speciesReference species="M_h2o_c" stoichiometry="1"/>
-          <speciesReference species="M_atp_c" stoichiometry="0.2818"/>
-          <speciesReference species="M_gtp_c" stoichiometry="0.2171"/>
-          <speciesReference species="M_utp_c" stoichiometry="0.283"/>
-          <speciesReference species="M_ctp_c" stoichiometry="0.2181"/>
-        </listOfReactants>
-        <listOfProducts>
-          <speciesReference species="M_trna2_c" stoichiometry="1"/>
-          <speciesReference species="M_h_c" stoichiometry="1"/>
-          <speciesReference species="M_pp_c" stoichiometry="1"/>
-        </listOfProducts>
-      </reaction>
       <reaction id="Endh" reversible="false">
         <notes>
           <body xmlns="http://www.w3.org/1999/xhtml">

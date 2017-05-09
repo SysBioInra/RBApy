@@ -48,29 +48,34 @@ in the input directory *after* the script has been run for the first time.
  - `uniprot.csv`: protein data downloaded from uniprot. Users can modify
    this file (but it is usually not necessary) or replace it with a uniprot
    file of their own (at their own risk if important columns are missing!).
- - `cofactors.csv`: for every protein, lists name, chebi identifier and
+ - `unknown_proteins.tsv`: proteins used to define enzymes in the SBML file
+   that could not be retrieved in uniprot. User should replace values tagged
+   as `[MISSING]` with a uniprot identifier, an average protein (ids of the
+   type `average_protein_xxx` as defined in `proteins.xml`) or leave empty
+   for spontaneous reactions.
+ - `cofactors.tsv`: for every protein, lists name, chebi identifier and
    stoichiometry of cofactors. Based on the last column (containing uniprot
    annotation), user should check inferred values and fill in fields tagged
    as `[MISSING]`. Important: if annotation says that there is *no* cofactor,
    *do not* remove line from csv file. Ignore name and chebi fields and set
    stoichiometry to 0.
- - `subunits.csv`: this file is used to retrieve the stoichiometry of a
+ - `subunits.tsv`: this file is used to retrieve the stoichiometry of a
    protein within its enzymatic complex. For every ambiguous entry, gene
    name and protein name are provided for proper identification. User
    should read annotation field and provide `[MISSING]` stoichiometry.
- - `location_mapping.csv`: this file is used to link uniprot location ids
+ - `location_mapping.tsv`: this file is used to link uniprot location ids
    with user-defined compartment ids. For every
    uniprot location, user may fill in a name compartment. These may or
    may not be the compartments defined in the SBML. The idea behind this
    file is that it can be used to fuse compartments or ignore them.
    If the field is left empty (or `[MISSING]`), a compartment named after
    uniprot location is created.
- - `locations.csv`: this file lists proteins for which uniprot has no
+ - `locations.tsv`: this file lists proteins for which uniprot has no
    location data. Protein and gene names are given to help fill in missing
    locations. Note that locations *must* correspond to names defined in
-   `location_mapping.csv`. If fields are left empty or `[MISSING]`,
+   `location_mapping.tsv`. If fields are left empty or `[MISSING]`,
    proteins are assumed to be located in `Cytoplasm` (or user-defined
-   couterpart as defined in `location_mapping.csv`.
+   couterpart as defined in `location_mapping.tsv`.
 
 In order for the RBA results to be relevant, please fill in as much
 information as possible. Every time you provide new information, please

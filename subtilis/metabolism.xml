@@ -2864,34 +2864,6 @@
         <speciesReference species="M_nadp_c" stoichiometry="1.0"/>
       </listOfProducts>
     </reaction>
-    <reaction id="Etrna_1" reversible="false">
-      <listOfReactants>
-        <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
-        <speciesReference species="M_atp_c" stoichiometry="0.2818"/>
-        <speciesReference species="M_gtp_c" stoichiometry="0.2171"/>
-        <speciesReference species="M_utp_c" stoichiometry="0.283"/>
-        <speciesReference species="M_ctp_c" stoichiometry="0.2181"/>
-      </listOfReactants>
-      <listOfProducts>
-        <speciesReference species="M_trna_c" stoichiometry="1.0"/>
-        <speciesReference species="M_h_c" stoichiometry="1.0"/>
-        <speciesReference species="M_pp_c" stoichiometry="1.0"/>
-      </listOfProducts>
-    </reaction>
-    <reaction id="Etrna2_1" reversible="false">
-      <listOfReactants>
-        <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
-        <speciesReference species="M_atp_c" stoichiometry="0.2818"/>
-        <speciesReference species="M_gtp_c" stoichiometry="0.2171"/>
-        <speciesReference species="M_utp_c" stoichiometry="0.283"/>
-        <speciesReference species="M_ctp_c" stoichiometry="0.2181"/>
-      </listOfReactants>
-      <listOfProducts>
-        <speciesReference species="M_trna2_c" stoichiometry="1.0"/>
-        <speciesReference species="M_h_c" stoichiometry="1.0"/>
-        <speciesReference species="M_pp_c" stoichiometry="1.0"/>
-      </listOfProducts>
-    </reaction>
     <reaction id="Endh_1" reversible="false">
       <listOfReactants>
         <speciesReference species="M_nadh_c" stoichiometry="1.0"/>

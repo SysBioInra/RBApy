@@ -6,6 +6,7 @@ from ..rba_xml import *
 from cofactor import *
 from subunit import *
 from location import *
+from unknown_proteins import *
 
 class UniprotFilter:
     """
@@ -33,27 +34,29 @@ class UniprotFilter:
         # open uniprot data
         input_file = os.path.join(input_dir, 'uniprot.csv')
         data = pandas.read_csv(input_file, sep = '\t')
-
+        # open helper file for unknown proteins
+        unknown_proteins = UnknownProteins(input_dir)
+        self.unknown_map = unknown_proteins.data
+        # replace ids marked as unknown by user-define counterpart
+        for i, gene in enumerate(gene_ids):
+            try:
+                gene_ids[i] = self.unknown_map[gene]
+            except KeyError: pass
+            
         # transform gene data into list
         self._gene_reader = re.compile(r'([^\s]+)')
         data['SBML name'] = data['Gene names'].apply(self._genes_as_list)
         
-        # keep only known ids
+        # keep only ids that appear in the SBML file or helper file
         data['SBML name'] = data['SBML name'].apply(self._filter_genes)
 
-        # check that every id has been found
-        self.not_found = []
+        # update helper file for unknown proteins
+        not_found = []
         for gene_id, found in zip(self._gene_ids, self._gene_id_found):
             if not(found):
-                self.not_found.append(gene_id)
-        if len(self.not_found) > 0:
-            print('WARNING: Uniprot does not have information for the '
-                  + 'following genes: ' + ', '.join(self.not_found))
-            print('Please check your SBML file and replace gene ids with ids '
-                  + 'found in the uniprot file. For the time being, unknown '
-                  + 'proteins will be replaced with average enzymatic '
-                  + 'proteins.\n')
-            
+                not_found.append(gene_id)
+        unknown_proteins.add(not_found)
+
         # remove entries for which there is no known id
         drop_rows = []
         gene_data = data['SBML name']
