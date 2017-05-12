@@ -8,7 +8,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -19,7 +19,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -30,7 +30,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -41,7 +41,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -52,7 +52,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -63,7 +63,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -74,7 +74,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -85,7 +85,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -96,7 +96,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -107,7 +107,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -118,7 +118,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -129,7 +129,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -140,7 +140,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -151,7 +151,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -162,7 +162,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -173,7 +173,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -184,7 +184,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -195,7 +195,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -206,7 +206,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -217,7 +217,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -228,7 +228,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -239,7 +239,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -250,7 +250,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -261,7 +261,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -272,7 +272,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -283,7 +283,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -294,7 +294,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -305,7 +305,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -316,7 +316,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -327,7 +327,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -338,7 +338,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -349,7 +349,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -360,7 +360,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -371,7 +371,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -382,7 +382,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -393,7 +393,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -404,7 +404,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -415,7 +415,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -426,7 +426,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -437,7 +437,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -448,7 +448,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -459,7 +459,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -470,7 +470,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -481,7 +481,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -492,7 +492,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -503,7 +503,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -514,10 +514,60 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_Sucrose_biomass">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+          <function id="" type="michaelisMenten" variable="S_Glucose_biomass">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+          <function id="" type="michaelisMenten" variable="S_beta_45_D_45_Fructose_biomass">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+          <function id="" type="michaelisMenten" variable="S_L_45_Alanine_biomass">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+          <function id="" type="michaelisMenten" variable="S_L_45_Aspartate_biomass">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+          <function id="" type="michaelisMenten" variable="S_L_45_Glutamate_biomass">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+          <function id="" type="michaelisMenten" variable="S_L_45_Glutamine_biomass">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+          <function id="" type="michaelisMenten" variable="S_L_45_Serine_biomass">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex1_1" zeroCost="false">
@@ -525,10 +575,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_CO2_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex2_1" zeroCost="false">
@@ -541,10 +599,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_H2O_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex3_1" zeroCost="false">
@@ -552,10 +618,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_Oxygen_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex4_1" zeroCost="false">
@@ -568,10 +642,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_Nitrate_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex5_1" zeroCost="false">
@@ -584,10 +666,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_NH3_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex6_1" zeroCost="false">
@@ -595,10 +685,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_L_45_Glutamate_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex7_1" zeroCost="false">
@@ -606,10 +704,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_L_45_Glutamine_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex8_1" zeroCost="false">
@@ -617,10 +723,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_L_45_Aspartate_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex9_1" zeroCost="false">
@@ -628,10 +742,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_L_45_Alanine_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex10_1" zeroCost="false">
@@ -639,10 +761,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_L_45_Serine_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex11_1" zeroCost="false">
@@ -650,10 +780,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_Hydrogen_sulfide_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex12_1" zeroCost="false">
@@ -666,10 +804,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_Sulfate_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex12_2" zeroCost="false">
@@ -682,10 +828,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_Sulfate_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex13_1" zeroCost="false">
@@ -698,10 +852,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_Glucose_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex14_1" zeroCost="false">
@@ -709,10 +871,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_beta_45_D_45_Fructose_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex15_1" zeroCost="false">
@@ -720,10 +890,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_Maltose_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex16_1" zeroCost="false">
@@ -731,7 +909,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -747,10 +925,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_Sucrose_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_Ex18_1" zeroCost="false">
@@ -758,10 +944,18 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
+        <transporterEfficiency>
+          <function id="" type="michaelisMenten" variable="S_Orthophosphate_ext">
+            <listOfParameters>
+              <parameter id="kmax" value="1"/>
+              <parameter id="Km" value="0.8"/>
+            </listOfParameters>
+          </function>
+        </transporterEfficiency>
       </enzymaticActivity>
     </enzyme>
     <enzyme id="R_TCM1_1" zeroCost="false">
@@ -769,7 +963,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -785,7 +979,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -801,7 +995,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -817,7 +1011,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -828,7 +1022,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -844,7 +1038,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -855,7 +1049,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -871,7 +1065,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -882,7 +1076,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -893,7 +1087,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -904,7 +1098,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -915,7 +1109,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -926,7 +1120,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -937,7 +1131,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -948,7 +1142,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -959,7 +1153,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -975,7 +1169,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -986,7 +1180,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -997,7 +1191,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1008,7 +1202,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1019,7 +1213,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1030,7 +1224,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1046,7 +1240,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1057,7 +1251,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1068,7 +1262,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1079,7 +1273,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1090,7 +1284,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1101,7 +1295,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1112,7 +1306,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1128,7 +1322,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1144,7 +1338,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1160,7 +1354,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1176,7 +1370,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1192,7 +1386,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1208,7 +1402,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1224,7 +1418,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1240,7 +1434,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1256,7 +1450,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1272,7 +1466,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1288,7 +1482,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1299,7 +1493,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1310,7 +1504,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1326,7 +1520,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1337,7 +1531,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1353,7 +1547,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1364,7 +1558,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1380,7 +1574,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1391,7 +1585,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1402,7 +1596,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1413,7 +1607,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1424,7 +1618,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1440,7 +1634,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1451,7 +1645,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1462,7 +1656,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1478,7 +1672,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1489,7 +1683,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1500,7 +1694,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1511,7 +1705,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1522,7 +1716,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1533,7 +1727,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1544,7 +1738,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1560,7 +1754,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1576,7 +1770,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1592,7 +1786,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1603,7 +1797,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1614,7 +1808,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1625,7 +1819,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1636,7 +1830,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1647,7 +1841,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1658,7 +1852,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1674,7 +1868,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1690,7 +1884,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1706,7 +1900,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1717,7 +1911,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1733,7 +1927,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1744,7 +1938,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1755,7 +1949,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1766,7 +1960,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1782,7 +1976,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1793,7 +1987,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1804,7 +1998,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1815,7 +2009,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1826,7 +2020,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1837,7 +2031,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1853,7 +2047,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
@@ -1869,7 +2063,7 @@
         <listOfEnzymeEfficiencies>
           <enzymeEfficiency function="default">
             <listOfParameters>
-              <parameter id="CONSTANT" value="200000"/>
+              <parameter id="CONSTANT" value="2000000.0"/>
             </listOfParameters>
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>

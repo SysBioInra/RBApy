@@ -1,24 +1,4 @@
 
-Removing useless reactions (05/05/17)
-==========================
-
-In the E. coli model, there are a lot of reactions that are useless.
-I tried removing them: solving time becomes terrible (nearly a 2x increase).
-It is not clear to me why the problem would get harder to solve for CPLEX.
-I checked that all columns removed where only zeros and the solution found was
-the same as the original. Maybe column preprocessing in some form is necessary.
-But even if that is true, removing useless reactions mainly improves the
-sparsity structure so I'm not sure what puts the solver off.
-
-After further study it appears that removing useless reactions sometimes also
-removed useless enzymes. The composition of these enzymes (although useless
-in the theoretical problem and solution) seemed to balance the problem from
-a numerical point of view... In the end it all breaks down to a problem of
-column preprocessing. With a different scaling coefficient (1500 instead
-of 1000), everything is fine again. But the system is extremely sensitive to
-scaling, which is not good...
-
-
 Removing zero_cost enzymes (04/05/17)
 =========================
 
@@ -72,3 +52,26 @@ Results
 -------
 
 I implemented idea 2, leading to a small time improvement (a couple of seconds).
+Idea did not work out that well, so I dropped it for the moment. Cplex seems to
+handle things decently well. We really need to worry about the stability of the
+algorithm.
+
+Removing useless reactions (05/05/17)
+==========================
+
+In the E. coli model, there are a lot of reactions that are useless.
+I tried removing them: solving time becomes terrible (nearly a 2x increase).
+It is not clear to me why the problem would get harder to solve for CPLEX.
+I checked that all columns removed where only zeros and the solution found was
+the same as the original. Maybe column preprocessing in some form is necessary.
+But even if that is true, removing useless reactions mainly improves the
+sparsity structure so I'm not sure what puts the solver off.
+
+After further study it appears that removing useless reactions sometimes also
+removed useless enzymes. The composition of these enzymes (although useless
+in the theoretical problem and solution) seemed to balance the problem from
+a numerical point of view... In the end it all breaks down to a problem of
+column preprocessing. With a different scaling coefficient (1500 instead
+of 1000), everything is fine again. But the system is extremely sensitive to
+scaling, which is not good...
+

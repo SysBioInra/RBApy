@@ -84,12 +84,12 @@ class Candidate(object):
         model = rba.RbaModel.from_xml(input_dir)
         solver = model.solve(medium)
         solver.build_matrices(mu)
-        self.reactions = solver._model.reactions
-        self.metabolites = solver._model.metabolites
+        self.reactions = solver._blocks.reactions
+        self.metabolites = solver._blocks.metabolites
         
         # metadata
         nb_R = len(self.reactions)
-        nb_P = len(solver._model.processes.ids)
+        nb_P = len(solver._blocks.processes.ids)
         nb_M = len(self.metabolites)
         R_mask = numpy.ones(nb_R, dtype='bool')
         R_mask[-3:] = False

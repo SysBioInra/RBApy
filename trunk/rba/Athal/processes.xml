@@ -76,6 +76,8 @@
           </listOfReactants>
           <listOfProducts>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </machineryComposition>
         <capacity>
@@ -286,6 +288,26 @@
       <targets>
         <listOfConcentrations>
           <targetSpecies value="0.01" species="mrna"/>
+          <targetSpecies value="4.80266666667e-05" species="S_tRNA_40_Ala_41__c"/>
+          <targetSpecies value="8.56e-06" species="S_tRNA_40_Cys_41__c"/>
+          <targetSpecies value="2.25333333333e-05" species="S_tRNA_40_Asp_41__c"/>
+          <targetSpecies value="2.46e-05" species="S_tRNA_40_Glu_41__c"/>
+          <targetSpecies value="1.732e-05" species="S_tRNA_40_Phe_41__c"/>
+          <targetSpecies value="5.72666666667e-05" species="S_tRNA_40_Gly_41__c"/>
+          <targetSpecies value="8.85333333333e-06" species="S_tRNA_40_His_41__c"/>
+          <targetSpecies value="2.716e-05" species="S_tRNA_40_Ile_41__c"/>
+          <targetSpecies value="3.208e-05" species="S_tRNA_40_Lys_41__c"/>
+          <targetSpecies value="4.212e-05" species="S_tRNA_40_Leu_41__c"/>
+          <targetSpecies value="1.43733333333e-05" species="S_tRNA_40_Met_41__c"/>
+          <targetSpecies value="2.25333333333e-05" species="S_tRNA_40_Asn_41__c"/>
+          <targetSpecies value="2.06666666667e-05" species="S_tRNA_40_Pro_41__c"/>
+          <targetSpecies value="2.46e-05" species="S_tRNA_40_Gln_41__c"/>
+          <targetSpecies value="2.76533333333e-05" species="S_tRNA_40_Arg_41__c"/>
+          <targetSpecies value="2.01733333333e-05" species="S_tRNA_40_Ser_41__c"/>
+          <targetSpecies value="2.372e-05" species="S_tRNA_40_Thr_41__c"/>
+          <targetSpecies value="3.956e-05" species="S_tRNA_40_Val_41__c"/>
+          <targetSpecies value="5.32e-06" species="S_tRNA_40_Trp_41__c"/>
+          <targetSpecies value="1.28933333333e-05" species="S_tRNA_40_Tyr_41__c"/>
         </listOfConcentrations>
         <listOfProductionFluxes>
           <targetSpecies value="0.15996" species="mrna"/>
@@ -319,16 +341,21 @@
     <process id="P_MET_PROD" name="Metabolite production">
       <targets>
         <listOfConcentrations>
+          <targetSpecies value="0.0162" species="S_NAD_43__c"/>
           <targetSpecies value="0.0047" species="S_AMP_c"/>
+          <targetSpecies value="0.0144" species="S_Orthophosphate_c"/>
           <targetSpecies value="0.001" species="S_CMP_c"/>
+          <targetSpecies value="0.0004" species="S_10_45_Formyltetrahydrofolate_c"/>
           <targetSpecies value="0.0005" species="S_CTP_c"/>
           <targetSpecies value="0.0003" species="S_CoA_c"/>
           <targetSpecies value="0.003" species="S_ATP_c"/>
+          <targetSpecies value="0.0009" species="S_NADP_43__c"/>
           <targetSpecies value="0.0026" species="S_ADP_c"/>
           <targetSpecies value="0.0002" species="S_NADPH_c"/>
           <targetSpecies value="0.0005" species="S_GMP_c"/>
           <targetSpecies value="0.0002" species="S_GDP_c"/>
           <targetSpecies value="0.0003" species="S_CDP_c"/>
+          <targetSpecies value="0.0009" species="S_Pyrophosphate_c"/>
           <targetSpecies value="0.0004" species="S_GTP_c"/>
         </listOfConcentrations>
       </targets>
@@ -348,129 +375,187 @@
     <componentMap id="translation">
       <constantCost>
         <listOfReactants>
+          <speciesReference species="S_N_45_Formylmethionyl_45_tRNA_c" stoichiometry="1"/>
           <speciesReference species="S_GTP_c" stoichiometry="1"/>
           <speciesReference species="S_H2O_c" stoichiometry="2"/>
         </listOfReactants>
         <listOfProducts>
+          <speciesReference species="S_tRNA_40_Met_41__c" stoichiometry="1"/>
+          <speciesReference species="S_L_45_Methionine_c" stoichiometry="1"/>
+          <speciesReference species="S_Formate_c" stoichiometry="1"/>
           <speciesReference species="S_GDP_c" stoichiometry="1"/>
+          <speciesReference species="S_Orthophosphate_c" stoichiometry="1"/>
+          <speciesReference species="S_H_43__c" stoichiometry="1"/>
         </listOfProducts>
       </constantCost>
       <listOfCosts>
         <cost component="A" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Alanyl_45_tRNA_c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Ala_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="C" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Cysteinyl_45_tRNA_40_Cys_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Cys_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="D" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Aspartyl_45_tRNA_40_Asp_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Asp_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="E" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Glutamyl_45_tRNA_40_Glu_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Glu_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="F" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Phenylalanyl_45_tRNA_40_Phe_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Phe_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="G" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_Glycyl_45_tRNA_40_Gly_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Gly_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="H" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Histidyl_45_tRNA_40_His_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_His_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="I" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Isoleucyl_45_tRNA_40_Ile_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Ile_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="K" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Lysyl_45_tRNA_40_Lys_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Lys_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="L" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Leucyl_45_tRNA_40_Leu_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Leu_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="M" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Methionyl_45_tRNA_40_Met_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Met_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="N" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Asparaginyl_45_tRNA_40_Asn_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Asn_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="P" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Prolyl_45_tRNA_40_Pro_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Pro_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="Q" processingCost="1">
@@ -479,61 +564,88 @@
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Gln_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="R" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Arginyl_45_tRNA_40_Arg_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Arg_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="S" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Seryl_45_tRNA_40_Ser_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Ser_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="T" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Threonyl_45_tRNA_40_Thr_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Thr_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="V" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Valyl_45_tRNA_40_Val_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Val_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="W" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Tryptophanyl_45_tRNA_40_Trp_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Trp_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="Y" processingCost="1">
           <listOfReactants>
+            <speciesReference species="S_L_45_Tyrosyl_45_tRNA_40_Tyr_41__c" stoichiometry="1"/>
             <speciesReference species="S_GTP_c" stoichiometry="2"/>
             <speciesReference species="S_H2O_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="S_tRNA_40_Tyr_41__c" stoichiometry="1"/>
             <speciesReference species="S_GDP_c" stoichiometry="2"/>
+            <speciesReference species="S_Orthophosphate_c" stoichiometry="2"/>
+            <speciesReference species="S_H_43__c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
         <cost component="CHEBI:29033" processingCost="0"/>
@@ -545,7 +657,11 @@
         <cost component="CHEBI:16810" processingCost="0"/>
         <cost component="CHEBI:29105" processingCost="0"/>
         <cost component="CHEBI:58349" processingCost="0"/>
-        <cost component="CHEBI:57540" processingCost="0"/>
+        <cost component="CHEBI:57540" processingCost="0">
+          <listOfReactants>
+            <speciesReference species="S_NAD_43__c" stoichiometry="1"/>
+          </listOfReactants>
+        </cost>
         <cost component="CHEBI:21137" processingCost="0"/>
         <cost component="CHEBI:58210" processingCost="0"/>
         <cost component="CHEBI:60342" processingCost="0"/>
@@ -603,24 +719,40 @@
             <speciesReference species="S_ATP_c" stoichiometry="1"/>
             <speciesReference species="S_H2O_c" stoichiometry="1"/>
           </listOfReactants>
+          <listOfProducts>
+            <speciesReference species="S_Pyrophosphate_c" stoichiometry="1"/>
+            <speciesReference species="S_H_43__c" stoichiometry="1"/>
+          </listOfProducts>
         </cost>
         <cost component="C" processingCost="0">
           <listOfReactants>
             <speciesReference species="S_CTP_c" stoichiometry="1"/>
             <speciesReference species="S_H2O_c" stoichiometry="1"/>
           </listOfReactants>
+          <listOfProducts>
+            <speciesReference species="S_Pyrophosphate_c" stoichiometry="1"/>
+            <speciesReference species="S_H_43__c" stoichiometry="1"/>
+          </listOfProducts>
         </cost>
         <cost component="G" processingCost="0">
           <listOfReactants>
             <speciesReference species="S_GTP_c" stoichiometry="1"/>
             <speciesReference species="S_H2O_c" stoichiometry="1"/>
           </listOfReactants>
+          <listOfProducts>
+            <speciesReference species="S_Pyrophosphate_c" stoichiometry="1"/>
+            <speciesReference species="S_H_43__c" stoichiometry="1"/>
+          </listOfProducts>
         </cost>
         <cost component="U" processingCost="0">
           <listOfReactants>
             <speciesReference species="S_UTP_c" stoichiometry="1"/>
             <speciesReference species="S_H2O_c" stoichiometry="1"/>
           </listOfReactants>
+          <listOfProducts>
+            <speciesReference species="S_Pyrophosphate_c" stoichiometry="1"/>
+            <speciesReference species="S_H_43__c" stoichiometry="1"/>
+          </listOfProducts>
         </cost>
       </listOfCosts>
     </componentMap>
@@ -633,6 +765,7 @@
           </listOfReactants>
           <listOfProducts>
             <speciesReference species="S_AMP_c" stoichiometry="1"/>
+            <speciesReference species="S_H_43__c" stoichiometry="1"/>
           </listOfProducts>
         </cost>
         <cost component="C" processingCost="0">
@@ -641,6 +774,7 @@
           </listOfReactants>
           <listOfProducts>
             <speciesReference species="S_CMP_c" stoichiometry="1"/>
+            <speciesReference species="S_H_43__c" stoichiometry="1"/>
           </listOfProducts>
         </cost>
         <cost component="G" processingCost="0">
@@ -649,6 +783,7 @@
           </listOfReactants>
           <listOfProducts>
             <speciesReference species="S_GMP_c" stoichiometry="1"/>
+            <speciesReference species="S_H_43__c" stoichiometry="1"/>
           </listOfProducts>
         </cost>
         <cost component="U" processingCost="0">
@@ -657,6 +792,7 @@
           </listOfReactants>
           <listOfProducts>
             <speciesReference species="S_UMP_c" stoichiometry="1"/>
+            <speciesReference species="S_H_43__c" stoichiometry="1"/>
           </listOfProducts>
         </cost>
       </listOfCosts>
@@ -669,24 +805,40 @@
             <speciesReference species="S_dATP_c" stoichiometry="1"/>
             <speciesReference species="S_H2O_c" stoichiometry="1"/>
           </listOfReactants>
+          <listOfProducts>
+            <speciesReference species="S_Pyrophosphate_c" stoichiometry="1"/>
+            <speciesReference species="S_H_43__c" stoichiometry="1"/>
+          </listOfProducts>
         </cost>
         <cost component="C" processingCost="0">
           <listOfReactants>
             <speciesReference species="S_dCTP_c" stoichiometry="1"/>
             <speciesReference species="S_H2O_c" stoichiometry="1"/>
           </listOfReactants>
+          <listOfProducts>
+            <speciesReference species="S_Pyrophosphate_c" stoichiometry="1"/>
+            <speciesReference species="S_H_43__c" stoichiometry="1"/>
+          </listOfProducts>
         </cost>
         <cost component="G" processingCost="0">
           <listOfReactants>
             <speciesReference species="S_dGTP_c" stoichiometry="1"/>
             <speciesReference species="S_H2O_c" stoichiometry="1"/>
           </listOfReactants>
+          <listOfProducts>
+            <speciesReference species="S_Pyrophosphate_c" stoichiometry="1"/>
+            <speciesReference species="S_H_43__c" stoichiometry="1"/>
+          </listOfProducts>
         </cost>
         <cost component="T" processingCost="0">
           <listOfReactants>
             <speciesReference species="S_dTTP_c" stoichiometry="1"/>
             <speciesReference species="S_H2O_c" stoichiometry="1"/>
           </listOfReactants>
+          <listOfProducts>
+            <speciesReference species="S_Pyrophosphate_c" stoichiometry="1"/>
+            <speciesReference species="S_H_43__c" stoichiometry="1"/>
+          </listOfProducts>
         </cost>
       </listOfCosts>
     </componentMap>

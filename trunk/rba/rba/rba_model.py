@@ -42,12 +42,12 @@ class RbaModel(object):
                 concentrations[met] = float(conc)
         return concentrations
 
-    def solve(self, catalytic_function = None, scaling_factor = 1000):
+    def solve(self, catalytic_function = None):
         matrices = RbaMatrices(self)
         if catalytic_function is not None:
             matrices.enzymes.efficiency.set_function(catalytic_function)
         solver = RbaSolver(matrices)
-        solver.solve(scaling_factor)
+        solver.solve()
         return solver
 
     def write_files(self, output_dir = None):

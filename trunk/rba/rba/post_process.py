@@ -2,8 +2,8 @@
 import numpy
 
 def nonzero_imports(solver):
-    import_indices = [i for i in solver.reaction_cols
-                      if 'tex' in solver.col_names[i]]
+    S = solver._blocks.S.tocsc()
+    import_indices = [i for i in range(S.shape[1]) if S[:,i].nnz == 1]
     import_reactions = [solver.col_names[i] for i in import_indices]
     import_fluxes = solver.X[import_indices]
     nz = numpy.nonzero(import_fluxes)[0]
@@ -13,7 +13,17 @@ def nonzero_imports(solver):
     return imports
 
 def saturating_constraints(solver):
-    # find density constraints
+    # find saturating lb or ub
+    for c in solver.reaction_cols:
+        nu = solver.X[c]
+        ub = solver.UB[c]
+        lb = solver.LB[c]
+        if lb != 0 and abs((nu-lb)/lb) < 0.1:
+            print('{}: {} vs LB {}'.format(solver.col_names[c], nu, lb))
+        if ub != 0 and abs((nu-ub)/ub) < 0.1:
+            print('{}: {} vs LB {}'.format(solver.col_names[c], nu, ub))
+    
+    # find saturating density constraints
     density_rows = numpy.where(solver.b != 0)[0]
     b_opt = solver.A.dot(solver.X)
     for r in density_rows:

@@ -1,6 +1,4 @@
 
-import re
-
 class PipelineParameters:
     """
     Class storing pipeline parameters.
@@ -14,7 +12,7 @@ class PipelineParameters:
         """
         self.obligatory_tags = ['INPUT_DIR', 'OUTPUT_DIR', 'SBML_FILE',
                                 'ORGANISM_ID']
-        self.optional_tags = []
+        self.optional_tags = ['EXTERNAL_COMPARTMENTS']
         self.parameters = {}
         
         try:
@@ -24,23 +22,19 @@ class PipelineParameters:
             raise UserWarning('Invalid parameter file.')
 
         # parse file
-        empty_line = re.compile(r'[\s]*\n')
-        comment_line = re.compile(r'[\s]*#.*\n')
-        parameter_line = re.compile(r'[\s]*([^\s]+)[\s]*=[\s]*([^\s]+)[\s]*\n')
         for line in f:
-            if empty_line.match(line) or comment_line.match(line): continue
-            match = parameter_line.match(line)
-            if match:
-                tag = match.group(1)
-                value = match.group(2)
-                if (tag in self.obligatory_tags) \
-                   or (tag in self.optional_tags):
-                    self.parameters[tag] = value
-                else:
-                    print('Warning: ignoring unknown parameter ' + tag + '.')
-            else:
+            line = line.strip()
+            if line == '' or line.startswith('#'): continue
+            try:
+                tag, value = map(str.strip, line.split('='))
+            except ValueError:
                 print ('Invalid parameter format:\n' + line)
                 raise UserWarning('Invalid parameter file.')
+            if (tag in self.obligatory_tags) \
+               or (tag in self.optional_tags):
+                self.parameters[tag] = value
+            else:
+                print('Warning: ignoring unknown parameter ' + tag + '.')
             
         # check that all obligatory tags have been found
         missing_parameters = [tag for tag in self.obligatory_tags

@@ -9,7 +9,7 @@ class SBMLFilter:
     """
     Class used to filter RBA-relevant SBML data.
     """
-    def __init__(self, input):
+    def __init__(self, input_file, cytosol_id = 'c', external_ids = []):
         """
         Constructor from file path.
 
@@ -17,18 +17,18 @@ class SBMLFilter:
         :type input: String.
         """
         # load SBML file
-        input_document = libsbml.readSBML(input)
+        input_document = libsbml.readSBML(input_file)
         if input_document.getNumErrors() > 0:
             input_document.printErrors()
             raise UserWarning('Invalid SBML.')
 
-        # identify cytosol
-        self._cytosol_id = self._find_cytosol(input_document)
-
         # store metabolite info
         self.species = ListOfSpecies()
         for s in input_document.getModel().species:
-            self.species.append(Species(s.getId(), s.getBoundaryCondition()))
+            boundary_condition = s.getBoundaryCondition()
+            if s.getCompartment() in external_ids:
+                boundary_condition = True
+            self.species.append(Species(s.getId(), boundary_condition))
 
         # extract enzymes associated to reactions
         self.enzymes = []
@@ -42,12 +42,9 @@ class SBMLFilter:
 
         # identify membrane and transport reactions
         self.imported_metabolites = []
-        self._find_transport_reactions()
+        self._find_transport_reactions(cytosol_id)
         self._find_membrane_reactions()
-        
-    def _find_cytosol(self, input_document):
-        return 'c'
-            
+                    
     def _extract_enzymes_and_reactions(self, input_document):
         """
         Parse annotation containing enzyme components.
@@ -127,7 +124,7 @@ class SBMLFilter:
             self.has_membrane_enzyme[r.id] \
                 = any(c != compartments[0] for c in compartments[1:])
 
-    def _find_transport_reactions(self):
+    def _find_transport_reactions(self, cytosol_id):
         """
         Identify all transport reactions in the SBML file. They meet the
         following conditions:
@@ -142,13 +139,13 @@ class SBMLFilter:
             transported = []
             # check that one of the products is in the cytosol
             comps = [p.species.rsplit('_',1)[1] for p in r.products]
-            if all(comp != self._cytosol_id for comp in comps): continue
+            if all(comp != cytosol_id for comp in comps): continue
             # look if one of the reactant has the prefix of an external
             # metabolite and is NOT in the cytosol
             transported = []
             for m in r.reactants:
                 [prefix, comp] = m.species.rsplit('_',1)
-                if comp != self._cytosol_id and prefix in external_prefixes:
+                if comp != cytosol_id and prefix in external_prefixes:
                     transported.append(m.species)
             if transported:
                 self.imported_metabolites[r.id] = transported

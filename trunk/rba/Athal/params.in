@@ -20,6 +20,16 @@ INPUT_DIR = Athal/data
 SBML_FILE = model.xml
 
 ##############################################################################
+# EXTERNAL_COMPARTMENTS
+# Identifier of SBML compartments that contain boundary metabolites. If
+# metabolites are already tagged as 'boundaryCondition', you do not need
+# to specify this parameter. If several compartments contain boundary
+# metabolites, write them down separated by a comma.
+##############################################################################
+
+EXTERNAL_COMPARTMENTS = C_ext
+
+##############################################################################
 # ORGANISM_ID                                                                  
 # Taxonomy ID of target organism as established by the NCBI. Please retrieve
 # id of your organism on:
