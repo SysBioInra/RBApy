@@ -690,7 +690,7 @@
     <species id="S_CMP_45_3_45_deoxy_45_D_45_manno_45_octulosonate_c" boundaryCondition="false"/>
     <species id="S_CMP_c" boundaryCondition="false"/>
     <species id="S_CO2_c" boundaryCondition="false"/>
-    <species id="S_CO2_ext" boundaryCondition="false"/>
+    <species id="S_CO2_ext" boundaryCondition="true"/>
     <species id="S_CO2_m" boundaryCondition="false"/>
     <species id="S_CO2_p" boundaryCondition="false"/>
     <species id="S_CO2_x" boundaryCondition="false"/>
@@ -983,7 +983,7 @@
     <species id="S_Glucobrassicin_c" boundaryCondition="false"/>
     <species id="S_Glucose_biomass" boundaryCondition="false"/>
     <species id="S_Glucose_c" boundaryCondition="false"/>
-    <species id="S_Glucose_ext" boundaryCondition="false"/>
+    <species id="S_Glucose_ext" boundaryCondition="true"/>
     <species id="S_Glucose_p" boundaryCondition="false"/>
     <species id="S_Glucosylceramide_c" boundaryCondition="false"/>
     <species id="S_Glutaconyl_45_1_45_CoA_c" boundaryCondition="false"/>
@@ -1017,7 +1017,7 @@
     <species id="S_H2O2_c" boundaryCondition="false"/>
     <species id="S_H2O2_x" boundaryCondition="false"/>
     <species id="S_H2O_c" boundaryCondition="false"/>
-    <species id="S_H2O_ext" boundaryCondition="false"/>
+    <species id="S_H2O_ext" boundaryCondition="true"/>
     <species id="S_H2O_m" boundaryCondition="false"/>
     <species id="S_H2O_p" boundaryCondition="false"/>
     <species id="S_H2O_x" boundaryCondition="false"/>
@@ -1051,7 +1051,7 @@
     <species id="S_Hydrogen_32_cyanide_c" boundaryCondition="false"/>
     <species id="S_Hydrogen_c" boundaryCondition="false"/>
     <species id="S_Hydrogen_sulfide_c" boundaryCondition="false"/>
-    <species id="S_Hydrogen_sulfide_ext" boundaryCondition="false"/>
+    <species id="S_Hydrogen_sulfide_ext" boundaryCondition="true"/>
     <species id="S_Hydrogen_sulfide_p" boundaryCondition="false"/>
     <species id="S_Hydroxymethylbilane_c" boundaryCondition="false"/>
     <species id="S_Hydroxypyruvate_x" boundaryCondition="false"/>
@@ -1098,7 +1098,7 @@
     <species id="S_L_45_2_45_Aminoadipate_32_6_45_semialdehyde_c" boundaryCondition="false"/>
     <species id="S_L_45_Alanine_biomass" boundaryCondition="false"/>
     <species id="S_L_45_Alanine_c" boundaryCondition="false"/>
-    <species id="S_L_45_Alanine_ext" boundaryCondition="false"/>
+    <species id="S_L_45_Alanine_ext" boundaryCondition="true"/>
     <species id="S_L_45_Alanine_p" boundaryCondition="false"/>
     <species id="S_L_45_Alanyl_45_tRNA_c" boundaryCondition="false"/>
     <species id="S_L_45_Amino_32_acid_c" boundaryCondition="false"/>
@@ -1113,7 +1113,7 @@
     <species id="S_L_45_Aspartate_32_4_45_semialdehyde_c" boundaryCondition="false"/>
     <species id="S_L_45_Aspartate_biomass" boundaryCondition="false"/>
     <species id="S_L_45_Aspartate_c" boundaryCondition="false"/>
-    <species id="S_L_45_Aspartate_ext" boundaryCondition="false"/>
+    <species id="S_L_45_Aspartate_ext" boundaryCondition="true"/>
     <species id="S_L_45_Aspartate_m" boundaryCondition="false"/>
     <species id="S_L_45_Aspartate_p" boundaryCondition="false"/>
     <species id="S_L_45_Aspartyl_45_tRNA_40_Asn_41__c" boundaryCondition="false"/>
@@ -1135,13 +1135,13 @@
     <species id="S_L_45_Glutamate_32_5_45_semialdehyde_c" boundaryCondition="false"/>
     <species id="S_L_45_Glutamate_biomass" boundaryCondition="false"/>
     <species id="S_L_45_Glutamate_c" boundaryCondition="false"/>
-    <species id="S_L_45_Glutamate_ext" boundaryCondition="false"/>
+    <species id="S_L_45_Glutamate_ext" boundaryCondition="true"/>
     <species id="S_L_45_Glutamate_m" boundaryCondition="false"/>
     <species id="S_L_45_Glutamate_p" boundaryCondition="false"/>
     <species id="S_L_45_Glutamate_x" boundaryCondition="false"/>
     <species id="S_L_45_Glutamine_biomass" boundaryCondition="false"/>
     <species id="S_L_45_Glutamine_c" boundaryCondition="false"/>
-    <species id="S_L_45_Glutamine_ext" boundaryCondition="false"/>
+    <species id="S_L_45_Glutamine_ext" boundaryCondition="true"/>
     <species id="S_L_45_Glutamine_m" boundaryCondition="false"/>
     <species id="S_L_45_Glutamine_p" boundaryCondition="false"/>
     <species id="S_L_45_Glutamyl_32_5_45_phosphate_c" boundaryCondition="false"/>
@@ -1179,7 +1179,7 @@
     <species id="S_L_45_Prolyl_45_tRNA_40_Pro_41__c" boundaryCondition="false"/>
     <species id="S_L_45_Serine_biomass" boundaryCondition="false"/>
     <species id="S_L_45_Serine_c" boundaryCondition="false"/>
-    <species id="S_L_45_Serine_ext" boundaryCondition="false"/>
+    <species id="S_L_45_Serine_ext" boundaryCondition="true"/>
     <species id="S_L_45_Serine_m" boundaryCondition="false"/>
     <species id="S_L_45_Serine_x" boundaryCondition="false"/>
     <species id="S_L_45_Seryl_45_tRNA_40_Ser_41__c" boundaryCondition="false"/>
@@ -1231,7 +1231,7 @@
     <species id="S_Malonyl_45__91_acyl_45_carrier_32_protein_93__c" boundaryCondition="false"/>
     <species id="S_Malonyl_45__91_acyl_45_carrier_32_protein_93__p" boundaryCondition="false"/>
     <species id="S_Maltose_c" boundaryCondition="false"/>
-    <species id="S_Maltose_ext" boundaryCondition="false"/>
+    <species id="S_Maltose_ext" boundaryCondition="true"/>
     <species id="S_Maltose_p" boundaryCondition="false"/>
     <species id="S_Mannan_c" boundaryCondition="false"/>
     <species id="S_Melibiitol_c" boundaryCondition="false"/>
@@ -1297,7 +1297,7 @@
     <species id="S_NADPH_p" boundaryCondition="false"/>
     <species id="S_NDP_c" boundaryCondition="false"/>
     <species id="S_NH3_c" boundaryCondition="false"/>
-    <species id="S_NH3_ext" boundaryCondition="false"/>
+    <species id="S_NH3_ext" boundaryCondition="true"/>
     <species id="S_NH3_m" boundaryCondition="false"/>
     <species id="S_NH3_p" boundaryCondition="false"/>
     <species id="S_Naphthyl_45_2_45_hydroxymethyl_45_succinyl_32_CoA_c" boundaryCondition="false"/>
@@ -1313,7 +1313,7 @@
     <species id="S_Nicotinate_32_D_45_ribonucleotide_c" boundaryCondition="false"/>
     <species id="S_Nicotinate_c" boundaryCondition="false"/>
     <species id="S_Nitrate_c" boundaryCondition="false"/>
-    <species id="S_Nitrate_ext" boundaryCondition="false"/>
+    <species id="S_Nitrate_ext" boundaryCondition="true"/>
     <species id="S_Nitrate_v" boundaryCondition="false"/>
     <species id="S_Nitrile_c" boundaryCondition="false"/>
     <species id="S_Nitrite_c" boundaryCondition="false"/>
@@ -1344,7 +1344,7 @@
     <species id="S_Orotate_c" boundaryCondition="false"/>
     <species id="S_Orotidine_32_5_39__45_phosphate_c" boundaryCondition="false"/>
     <species id="S_Orthophosphate_c" boundaryCondition="false"/>
-    <species id="S_Orthophosphate_ext" boundaryCondition="false"/>
+    <species id="S_Orthophosphate_ext" boundaryCondition="true"/>
     <species id="S_Orthophosphate_m" boundaryCondition="false"/>
     <species id="S_Orthophosphate_p" boundaryCondition="false"/>
     <species id="S_Oxaloacetate_c" boundaryCondition="false"/>
@@ -1360,7 +1360,7 @@
     <species id="S_Oxidized_32_thioredoxin_c" boundaryCondition="false"/>
     <species id="S_Oxidized_32_thioredoxin_p" boundaryCondition="false"/>
     <species id="S_Oxygen_c" boundaryCondition="false"/>
-    <species id="S_Oxygen_ext" boundaryCondition="false"/>
+    <species id="S_Oxygen_ext" boundaryCondition="true"/>
     <species id="S_Oxygen_m" boundaryCondition="false"/>
     <species id="S_Oxygen_p" boundaryCondition="false"/>
     <species id="S_Oxygen_x" boundaryCondition="false"/>
@@ -1554,10 +1554,10 @@
     <species id="S_Sucrose_32_6_45_phosphate_c" boundaryCondition="false"/>
     <species id="S_Sucrose_biomass" boundaryCondition="false"/>
     <species id="S_Sucrose_c" boundaryCondition="false"/>
-    <species id="S_Sucrose_ext" boundaryCondition="false"/>
+    <species id="S_Sucrose_ext" boundaryCondition="true"/>
     <species id="S_Sucrose_v" boundaryCondition="false"/>
     <species id="S_Sulfate_c" boundaryCondition="false"/>
-    <species id="S_Sulfate_ext" boundaryCondition="false"/>
+    <species id="S_Sulfate_ext" boundaryCondition="true"/>
     <species id="S_Sulfate_p" boundaryCondition="false"/>
     <species id="S_Sulfate_v" boundaryCondition="false"/>
     <species id="S_Sulfate_x" boundaryCondition="false"/>
@@ -1687,7 +1687,7 @@
     <species id="S_beta_45_D_45_Fructose_32_6_45_phosphate_p" boundaryCondition="false"/>
     <species id="S_beta_45_D_45_Fructose_biomass" boundaryCondition="false"/>
     <species id="S_beta_45_D_45_Fructose_c" boundaryCondition="false"/>
-    <species id="S_beta_45_D_45_Fructose_ext" boundaryCondition="false"/>
+    <species id="S_beta_45_D_45_Fructose_ext" boundaryCondition="true"/>
     <species id="S_beta_45_D_45_Galactose_c" boundaryCondition="false"/>
     <species id="S_beta_45_D_45_Galactosyl_45_1_44_4_45_beta_45_D_45_glucosylceramide_c" boundaryCondition="false"/>
     <species id="S_beta_45_D_45_Glucose_32_6_45_phosphate_c" boundaryCondition="false"/>
@@ -1745,7 +1745,7 @@
     <species id="S_gamma_45_L_45_Glutamyl_45_L_45_cysteine_c" boundaryCondition="false"/>
     <species id="S_gamma_45_Linolenoyl_45_CoA_c" boundaryCondition="false"/>
     <species id="S_gamma_45_Tocopherol_c" boundaryCondition="false"/>
-    <species id="S_hv_ext" boundaryCondition="false"/>
+    <species id="S_hv_ext" boundaryCondition="true"/>
     <species id="S_hv_p" boundaryCondition="false"/>
     <species id="S_iso_45_nLc8Cer_c" boundaryCondition="false"/>
     <species id="S_meso_45_2_44_6_45_Diaminoheptanedioate_c" boundaryCondition="false"/>
@@ -55564,6 +55564,8 @@
       </listOfReactants>
       <listOfProducts>
         <speciesReference species="S_ADP_c" stoichiometry="1"/>
+        <speciesReference species="S_H_43__c" stoichiometry="1"/>
+        <speciesReference species="S_Orthophosphate_c" stoichiometry="1"/>
       </listOfProducts>
     </reaction>
   </listOfReactions>

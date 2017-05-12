@@ -56,7 +56,12 @@ class MetaboliteData(object):
             for line in input_stream:
                 line = line.rstrip('\n')
                 [id_, name, sbml_id, conc] = line.split('\t')
-                if sbml_id == self._missing_tag or sbml_id not in known_species:
+                if sbml_id == self._missing_tag: 
+                    self._missing_information = True
+                    sbml_id = self._missing_string
+                elif sbml_id not in known_species:
+                    print('ERROR: ' + sbml_id +
+                          ' is not a valid metabolite id.')
                     self._missing_information = True
                     sbml_id = self._missing_string
                 try:

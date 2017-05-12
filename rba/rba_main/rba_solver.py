@@ -90,24 +90,18 @@ class RbaSolver(object):
         self.LB[self.reaction_cols[self._target_reactions]] = r_fluxes
         self.UB[self.reaction_cols[self._target_reactions]] = r_fluxes
 
-    def solve(self, scaling_factor = 1000):
+    def solve(self):
         """
-        Solve the RBA model.
-        :param scaling_factor: scaling factor for concentrations vs fluxes
-        (used for matrix reconditionning).
-        """        
-        # cplex exit flags
-        OPTIMAL = 1
-        INFEASIBLE = 3
-        OPTIMAL_UNSCALED_INFEASIBILITIES = 5
-        
+        Find maximal growth rate.
+        """ 
+        self._sol_basis = None
+
         # check that mu=0 is solution
         self.build_matrices(0)
-        lp_problem = self._setup_lp(scaling_factor)
-        lp_problem.solve()
-        if lp_problem.solution.get_status() == INFEASIBLE:
+        lp = self.setup_lp()
+        lp.solve()
+        if lp.solution.get_status() == lp.solution.status.infeasible:
             print('Mu = 0 is infeasible, check matrix consistency')
-            return self
 
         # bissection
         mu_min = 0
@@ -115,39 +109,39 @@ class RbaSolver(object):
         mu_test = mu_max
         while (mu_max - mu_min) > 1e-4:
             self.build_matrices(mu_test)
-            lp_problem = self._setup_lp(scaling_factor)
-            lp_problem.solve()
-            exit_flag = lp_problem.solution.get_status()
-            print(mu_test, lp_problem.solution.get_status_string())
-            if (exit_flag == OPTIMAL):
+            lp = self.setup_lp()
+            lp.solve()
+            exit_flag = lp.solution.get_status()
+            print(mu_test, lp.solution.get_status_string())
+            if (exit_flag == lp.solution.status.optimal):
                 mu_min = mu_test
-                self.X = numpy.array(lp_problem.solution.get_values())
-                self.X[self.enzyme_cols] /= scaling_factor
-                self.X[self.process_cols] /= scaling_factor
-                self.lambda_ = lp_problem.solution.get_dual_values()
+                self.X = numpy.array(lp.solution.get_values())
+                self.lambda_ = lp.solution.get_dual_values()
                 self.mu_opt = mu_min
-            elif exit_flag == INFEASIBLE \
-                 or (exit_flag == OPTIMAL_UNSCALED_INFEASIBILITIES):
+                self._sol_basis = lp.solution.basis.get_basis()
+            elif exit_flag == lp.solution.status.infeasible \
+                 or (exit_flag == lp.solution.status.optimal_infeasible):
                 mu_max = mu_test
             else:
                 print('At mu = ' + str(mu_test) + ': Unknown exit flag '
                       + str(exit_flag) + ' corresponding to status '
-                      + lp_problem.solution.get_status_string() + '. '
+                      + lp.solution.get_status_string() + '. '
                       'Interrupting execution')
                 return
             # next mu to be tested
             mu_test = (mu_min+mu_max)/2
         print(mu_min)
-        return self
 
-    def _setup_lp(self, scaling_factor):
+    def setup_lp(self):
+        """
+        Setup CPLEX problem based on current matrices.
+        """        
         ## preprocess matrices
-        # rescale concentration columns
+        # rescale concentration columns?
         lhs = vstack([self.A, self.Aeq])
-        scaling = numpy.ones(len(self.col_names))
-        scaling[numpy.concatenate([self.enzyme_cols, self.process_cols])] \
-            = 1.0/scaling_factor
-        lhs *= diags(scaling)
+        #scaling[numpy.concatenate([self.enzyme_cols, self.process_cols])] \
+            #= 1.0/scaling_factor
+        #lhs *= diags(1.0/scaling)
         
         # transform inequality and equality constraints in CPLEX row format
         lhs = lhs.tolil()
@@ -167,6 +161,8 @@ class RbaSolver(object):
         lp_problem.parameters.simplex.tolerances.optimality.set(1e-9);
         lp_problem.parameters.simplex.tolerances.markowitz.set(0.1);
         lp_problem.parameters.barrier.convergetol.set(1e-9);
+        # agressive scaling
+        lp_problem.parameters.read.scale.set(1)
         # Threads: the default (0) means that Cplex decides automatically
         # how many threads to use
         # lp_problem.parameters.threads.set(0)
@@ -176,5 +172,11 @@ class RbaSolver(object):
                                  names = self.col_names)
         lp_problem.linear_constraints.add(lin_expr = rows, rhs = rhs,
                                           senses = senses, names = names)
+        # set starting point (not sure how this works)
+        if self._sol_basis is not None:
+            lp_problem.start.set_basis(self._sol_basis[0], self._sol_basis[1])
+            #lp_problem.start.set_start(self._sol_basis[0], self._sol_basis[1],
+            #self.X, [], [], self.lambda_)
+                                       
         return lp_problem
 

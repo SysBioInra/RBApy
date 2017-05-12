@@ -25,9 +25,13 @@ class PreRba(object):
         sbml_file = parameters['SBML_FILE']
         self._input_dir = parameters['INPUT_DIR']
         self.model.output_dir = parameters['OUTPUT_DIR']
+        try:
+            external_compartments = map(str.strip, parameters['EXTERNAL_COMPARTMENTS'].split(','))
+        except KeyError:
+            external_compartments = []
 
         ## read input data
-        self._read_sbml(sbml_file)
+        self._read_sbml(sbml_file, external_compartments)
         proteins_to_retrieve = [p for e in self._enzyme_comp for p in e if p != '']
         self._read_uniprot(proteins_to_retrieve)
         self.metabolite_map \
@@ -67,9 +71,10 @@ class PreRba(object):
             self.model.medium[m.rsplit('_',1)[0]] \
                 = rba_data.default_medium_concentration
             
-    def _read_sbml(self, file_name):
+    def _read_sbml(self, file_name, external_ids = []):
         # parse data
-        sbml_data = SBMLFilter(self._input(file_name))
+        sbml_data = SBMLFilter(self._input(file_name),
+                               external_ids = external_ids)
         # store data
         self.model.metabolism.species = sbml_data.species
         self.model.metabolism.reactions = sbml_data.reactions

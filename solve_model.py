@@ -1,6 +1,7 @@
 import sys
 
 import rba
+from rba.post_process import saturating_constraints
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
@@ -10,10 +11,8 @@ if __name__ == '__main__':
         if len(sys.argv) >= 3:
             medium = sys.argv[2]
         else:
-            medium = None
-            
+            medium = 'default'
+
         model = rba.RbaModel.from_xml(xml_dir)
-        if medium:
-            model.solve(medium)
-        else:
-            model.solve()
+        solver = model.solve(medium)
+        #saturating_constraints(solver)

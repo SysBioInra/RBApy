@@ -1,5 +1,7 @@
 import os.path
 import sys
+import math
+
 sys.path.append(os.path.join(sys.path[0],'..'))
 import rba
 from rba import rba_xml
@@ -37,6 +39,19 @@ def old_name(new_name):
     else:
         return new_name.rsplit('_',1)[0]
 
+def apply_old_stoichiometries(enzymes):
+    with open('subtilis/old_data/stoichiometry.csv', 'r') as f:
+        data = {}
+        for line in f:
+            [species, sto] = line.rstrip('\n').split('\t')
+            data[species] = float(sto)
+    for enzyme in enzymes.enzymes:
+        for sr in enzyme.machinery_composition.reactants:
+            try:
+                sr.stoichiometry = data[sr.species]
+            except KeyError:
+                print sr.species
+            
 if __name__ == "__main__":
     ## generate base XML files with pipeline
     subtilis = rba.PreRba('subtilis/data/params.in')
@@ -68,6 +83,9 @@ if __name__ == "__main__":
         if id_ in zero_cost:
             enzyme.zero_cost = True
             zero_cost.remove(id_)
+
+    ## apply old stoichiometries
+    #apply_old_stoichiometries(enzymes)
 
     ## set medium to original medium
     with open('subtilis/old_data/medium.csv', 'r') as f:

@@ -15,6 +15,10 @@ Stoichiometric coefficients in subtilis are different from original model (Steph
 --------------------------------------
 Growth rate loss is 0.66 -> 0.33
 
+Metabolic model of Arabidopsis is incomplete (Stephan)
+------------------------------------------------------
+It is impossible to synthesize NAD for example.
+
 PreRBA
 ======
 
@@ -68,17 +72,28 @@ concentration. We need to divide them by the length of tRNAs. A quick fix
 has been implemented (division by an arbitrary number), it might be good to 
 go through it again.
 
-Create a table for unknown proteins from the SBML (Stephan)
------------------------------------------------------------
-It might be nice to have a table that lists all the proteins from SBML 
-that could not be retrieved in Uniprot. The user may then choose by which
-protein from uniprot to replace them *or* replace it with a spontaneous
-protein or an average protein in the compartment of their choice (!!!).
-
 Include information retrieved automatically in helper files (Stephan)
 --------------------------------------------------------------------
 See if and how we should include this information for each helper file.
 
+IDEA: use same composition for every enzyme (Stephan)
+-----------------------------------------------------
+This would reduce the number of parameters, thus enabling higher quantitative
+stability. The idea is that the enzyme "efficiency" would become a compound
+parameter reflecting both the weight of the enzyme and its catalytic activity.
+Biggest shortcoming would be the necessity for cofactors, but they could be
+included in some form. Even if their stoichiometry is messed up it does not
+matter that much. Essential is rather can we produce them in the current medium.
+
+The pipeline could propose two branches: one generating the model with full
+parameters, one generating the simpler model where the concentrations of all
+enzymes are the same.
+
+Automatic rule to remove multiple enzymes catalyzing same reaction? (Stephan)
+-----------------------------------------------------------------------------
+Duplicating reactions is really annoying and increasing matrix size a lot.
+Is there a way to simplify the problem mathematically or can we find a rule
+to eliminate some of the enzymes (maybe depending on size and cofactors)?
 
 RBA algorithm
 =============
@@ -91,12 +106,7 @@ Trehalose is then transformed to glucose (assumed to be at nonzero
 concentration) and imported into cytoplasm. We should somehow forbid theses
 substrates to enter the cell.
 
-Apply scaling on subblocks? (Stephan)
--------------------------------------
-Instead of applying column scaling before solving, we could apply it on 
-subblocks so we do it only once.
-
-Automatic scaling? (Stephan)
+Automatic/intelligent preconditionning? (Stephan)
 ---------------------------
 Scaling is a fixed coefficient. If a user uses different units for enzyme
 concentrations, it will not work properly. Maybe we should develop a procedure
@@ -105,6 +115,16 @@ that automatically scales colums?
 Actually, the current scaling seems to be very unstable, it would be urgent
 to think about it more thoroughly. Just removing a useless column or sligthly
 changing the scaling coefficient can change run times a lot.
+
+Matrix sparsity structure is stable except for mu = 0. We could
+also swap rows and columns to improve sparsity as we would only have to
+compute row and column order once at the very beginning.
+
+Question: do numerical instabilities come from column scaling, sparsity
+structure or some interaction between the two?
+
+For the moment, I put CPLEX's scaling to agressive. This seems sufficient for 
+now.
 
 Remove useless columns and rows? (Stephan)
 -------------------------------
@@ -116,10 +136,9 @@ things that could be removed:
  - useless enzyme backward constraints: if an enzyme catalyzes an irreversible
  reaction it does not need to define a backward constraint, it will already be
  included in the lower bound.
- - target reaction rows: setting lower bound and upper bound to the same value
- works the same way as adding a useless equality constraint.
  - process machinery columns: only include processes that have a machinery.
- 
+However, as long as run times are unstable because of matrix conditionning, it
+does not seem to make sense to worry too much about those issues.
 
 Idea: fusing identical enzymes (Stephan)
 ----------------------------------
