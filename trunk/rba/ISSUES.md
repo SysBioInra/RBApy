@@ -154,3 +154,19 @@ $$\sum \nu_i / k_{E_i} \leq \sum E_i = E$$
 In my opinion, CPLEX should be able to renormalize the line properly. If not,
 multiplying all rows by an average k~E~ should do the trick.
 
+Actually, this works only if reactions are irreversible. So we may apply it
+only on irreversible reactions or duplicate reversible reactions.
+
+Stop duplicating reactions? (Stephan)
+-------------------------------------
+Similar to the idea above, we could imagine expressing capacity reactions by
+focusing on every reaction. If a reaction a can be catalyzed by $N$ enzymes
+$E_1$ to $E_N$, the constraint would read:
+
+$$\nu -k_{E_1}E_1 - ... - k_{E_N}E_N \leq 0$$
+
+It is possible to combine this approach with the approach above. It is
+sufficient to list all constraints in the two form described. One set of
+constraints would be centered on reactions (as described here), the other
+set would be centered on enzymes (as described above).
+
