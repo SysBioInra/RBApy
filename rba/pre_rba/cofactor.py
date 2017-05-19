@@ -96,24 +96,25 @@ class CofactorData:
         Read file containing hand-curated cofactor information.
         """
         try:
-            input_stream = open(self._cofactor_file, 'r')
-            print('Found file with cofactor data. This file will be used to solve ambiguous uniprot annotation...')
-            # skip header
-            next(input_stream)
-            # read lines
-            for line in input_stream:
-                [entry, chebi, name, stoichiometry, uniprot_note] = line.split('\t')
-                if chebi == self._missing_tag:
-                    self._missing_information = True
-                    chebi = self._missing_string
-                if stoichiometry == self._missing_tag:
-                    self._missing_information = True
-                    stoichiometry = self._missing_num
-                else:
-                    stoichiometry = float(stoichiometry)
-                self._add_curated_cofactor(entry, chebi, name,
-                                           stoichiometry, uniprot_note)
-            input_stream.close()
+            with open(self._cofactor_file, 'rU') as input_stream:
+                print('Found file with cofactor data. This file will be used'
+                      ' to solve ambiguous uniprot annotation...')
+                # skip header
+                next(input_stream)
+                # read lines
+                for line in input_stream:
+                    [entry, chebi, name, stoichiometry, uniprot_note] \
+                        = line.split('\t')
+                    if chebi == self._missing_tag:
+                        self._missing_information = True
+                        chebi = self._missing_string
+                    if stoichiometry == self._missing_tag:
+                        self._missing_information = True
+                        stoichiometry = self._missing_num
+                    else:
+                        stoichiometry = float(stoichiometry)
+                    self._add_curated_cofactor(entry, chebi, name,
+                                               stoichiometry, uniprot_note)
         except IOError:
             print 'Could not find file with cofactor data...'
 
@@ -121,24 +122,23 @@ class CofactorData:
         """
         Write file containing hand-curated cofactor information.
         """
-        output_stream = open(self._cofactor_file, 'w')
-        output_stream.write('\t'.join(['ENTRY', 'CHEBI', 'NAME', \
-                                       'STOICHIOMETRY', 'UNIPROT ANNOTATION']) \
-                            + '\n')
-        for entry in self._curated_cofactors:
-            for cofactor in self._curated_cofactors[entry]:
-                if cofactor.name == self._missing_string:
-                    name = chebi = self._missing_tag
-                else:
-                    name = cofactor.name
-                    chebi = cofactor.chebi
-                if cofactor.stoichiometry == self._missing_num:
-                    sto = self._missing_tag
-                else:
-                    sto = str(cofactor.stoichiometry)
-                output_stream.write('\t'.join([entry, chebi, name, sto, \
-                                               cofactor.uniprot_note]) + '\n')
-        output_stream.close()
+        with open(self._cofactor_file, 'w') as output_stream:
+            cols = ['ENTRY', 'CHEBI', 'NAME',
+                    'STOICHIOMETRY', 'UNIPROT ANNOTATION']
+            output_stream.write('\t'.join(cols) + '\n')
+            for entry in self._curated_cofactors:
+                for cofactor in self._curated_cofactors[entry]:
+                    if cofactor.name == self._missing_string:
+                        name = chebi = self._missing_tag
+                    else:
+                        name = cofactor.name
+                        chebi = cofactor.chebi
+                    if cofactor.stoichiometry == self._missing_num:
+                        sto = self._missing_tag
+                    else:
+                        sto = str(cofactor.stoichiometry)
+                    data = [entry, chebi, name, sto, cofactor.uniprot_note]
+                    output_stream.write('\t'.join(data) + '\n')
         
     def _extract_uniprot_cofactors(self, uniprot_data):
         """

@@ -34,7 +34,7 @@ class RbaModel(object):
                                        
     def read_medium(self, file_name):
         concentrations = {}
-        with open(file_name, 'r') as f:
+        with open(file_name, 'rU') as f:
             # skip header
             next(f)
             for line in f:

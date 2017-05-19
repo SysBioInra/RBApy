@@ -48,28 +48,28 @@ class MetaboliteData(object):
         Read file containing hand-curated information.
         """
         try:
-            input_stream = open(self._data_file, 'r')
-            print('Found file with metabolite data. This file will be used to identify key metabolites...')
-            # skip header
-            next(input_stream)
-            # read lines
-            for line in input_stream:
-                line = line.rstrip('\n')
-                [id_, name, sbml_id, conc] = line.split('\t')
-                if sbml_id == self._missing_tag: 
-                    self._missing_information = True
-                    sbml_id = self._missing_string
-                elif sbml_id not in known_species:
-                    print('ERROR: ' + sbml_id +
-                          ' is not a valid metabolite id.')
-                    self._missing_information = True
-                    sbml_id = self._missing_string
-                try:
-                    conc = float(conc)
-                except ValueError:
-                    conc = 0
-                self.metabolites[id_] = Metabolite(name, sbml_id, conc)
-            input_stream.close()
+            with open(self._data_file, 'rU') as input_stream:
+                print('Found file with metabolite data. This file will be used '
+                      'to identify key metabolites...')
+                # skip header
+                next(input_stream)
+                # read lines
+                for line in input_stream:
+                    line = line.rstrip('\n')
+                    [id_, name, sbml_id, conc] = line.split('\t')
+                    if sbml_id == self._missing_tag: 
+                        self._missing_information = True
+                        sbml_id = self._missing_string
+                    elif sbml_id not in known_species:
+                        print('ERROR: ' + sbml_id +
+                              ' is not a valid metabolite id.')
+                        self._missing_information = True
+                        sbml_id = self._missing_string
+                    try:
+                        conc = float(conc)
+                    except ValueError:
+                        conc = 0
+                    self.metabolites[id_] = Metabolite(name, sbml_id, conc)
         except IOError:
             print('Could not find file with metabolite data...')
 
@@ -77,21 +77,20 @@ class MetaboliteData(object):
         """
         Write file containing hand-curated metabolite information.
         """
-        output_stream = open(self._data_file, 'w')
-        output_stream.write('\t'.join(['ID', 'NAME', 'SBML ID',
-                                       'CONCENTRATION']) + '\n')
-        for id_, metab in self.metabolites.iteritems():
-            if metab.sbml_id == self._missing_string:
-                sbml_id = self._missing_tag
-            else:
-                sbml_id = metab.sbml_id
-            if metab.concentration != 0:
-                conc = str(metab.concentration)
-            else:
-                conc = ''
-            output_stream.write('\t'.join([id_, metab.name,
-                                           sbml_id, conc]) + '\n')
-        output_stream.close()
+        with open(self._data_file, 'w') as output_stream:
+            output_stream.write('\t'.join(['ID', 'NAME', 'SBML ID',
+                                           'CONCENTRATION']) + '\n')
+            for id_, metab in self.metabolites.iteritems():
+                if metab.sbml_id == self._missing_string:
+                    sbml_id = self._missing_tag
+                else:
+                    sbml_id = metab.sbml_id
+                if metab.concentration != 0:
+                    conc = str(metab.concentration)
+                else:
+                    conc = ''
+                output_stream.write('\t'.join([id_, metab.name,
+                                               sbml_id, conc]) + '\n')
         
     def _extract_metabolite_information(self, known_species, cofactors):
         curated_data_added = False
