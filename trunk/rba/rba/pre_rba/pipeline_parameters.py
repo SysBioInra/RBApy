@@ -16,25 +16,25 @@ class PipelineParameters:
         self.parameters = {}
         
         try:
-            f = open(parameter_file)
+            with open(parameter_file, 'rU') as f:
+                # parse file
+                for line in f:
+                    line = line.strip()
+                    if line == '' or line.startswith('#'): continue
+                    try:
+                        tag, value = map(str.strip, line.split('='))
+                    except ValueError:
+                        print ('Invalid parameter format:\n' + line)
+                        raise UserWarning('Invalid parameter file.')
+                    if (tag in self.obligatory_tags) \
+                       or (tag in self.optional_tags):
+                        self.parameters[tag] = value
+                    else:
+                        print('Warning: ignoring unknown parameter '
+                              + tag + '.')
         except IOError:
             print('Could not find parameter file ' + parameter_file + '.')
             raise UserWarning('Invalid parameter file.')
-
-        # parse file
-        for line in f:
-            line = line.strip()
-            if line == '' or line.startswith('#'): continue
-            try:
-                tag, value = map(str.strip, line.split('='))
-            except ValueError:
-                print ('Invalid parameter format:\n' + line)
-                raise UserWarning('Invalid parameter file.')
-            if (tag in self.obligatory_tags) \
-               or (tag in self.optional_tags):
-                self.parameters[tag] = value
-            else:
-                print('Warning: ignoring unknown parameter ' + tag + '.')
             
         # check that all obligatory tags have been found
         missing_parameters = [tag for tag in self.obligatory_tags

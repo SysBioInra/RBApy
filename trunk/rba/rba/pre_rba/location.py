@@ -101,59 +101,60 @@ class LocationData:
         Read file containing location id mapping.
         """
         try:
-            input_stream = open(self._mapping_file, 'r')
-            print('Found file with location mapping data. This file will be '
-                  'used to map uniprot locations to user-defined locations...')
-            # skip header
-            next(input_stream)
-            # read lines
-            for line in input_stream:
-                line = line.rstrip('\n')
-                [location, user_location] = line.split('\t')
-                # check for missing values
-                if (user_location == self._missing_tag) \
-                   or (user_location == ''):
-                    self._missing_mapping = True
-                    user_location = self._missing_string
-                self._location_map[location] = user_location
-            input_stream.close()
-            # update default location (if possible)
-            user_default = self._location_map[self.default_location]
-            if user_default != self._missing_string:
-                self.default_location = user_default
+            with open(self._mapping_file, 'rU') as input_stream:
+                print('Found file with location mapping data. '
+                      'This file will be used to map uniprot locations '
+                      'to user-defined locations...')
+                # skip header
+                next(input_stream)
+                # read lines
+                for line in input_stream:
+                    line = line.rstrip('\n')
+                    [location, user_location] = line.split('\t')
+                    # check for missing values
+                    if (user_location == self._missing_tag) \
+                       or (user_location == ''):
+                        self._missing_mapping = True
+                        user_location = self._missing_string
+                    self._location_map[location] = user_location
         except IOError:
             print 'Could not find file with location mapping...'
+                
+        # update default location (if possible)
+        user_default = self._location_map[self.default_location]
+        if user_default != self._missing_string:
+            self.default_location = user_default
 
     def _read_curated_data(self):
         """
         Read files containing hand-curated information.
         """
         try:
-            input_stream = open(self._curation_file, 'r')
-            print('Found file with location data. This file will be used to '
-                  + 'solve ambiguous uniprot annotation...')
-            # skip header
-            next(input_stream)
-            # read lines
-            for line in input_stream:
-                line = line.rstrip('\n')
-                [entry, gene_names, name, user_location] = line.split('\t')
-                # check for missing values
-                if (user_location == self._missing_tag) \
-                   or (user_location == ''):
-                    self._missing_information = True
-                else:
-                    # check that user_location is consistent
-                    # with known locations
-                    if not user_location in self._location_map.values():
-                        print('Warning: unknown location ' + user_location
-                              + ' will be replaced by ' + self.default_location
-                              + '. Please check that data given in '
-                              + self._curation_file + ' and '
-                              + self._mapping_file + ' is consistent.')
-                self._curated_locations[entry] \
-                    = Location(user_location, gene_names, name)
-            input_stream.close()
+            with open(self._curation_file, 'rU') as input_stream:
+                print('Found file with location data. This file will be used '
+                      'to solve ambiguous uniprot annotation...')
+                # skip header
+                next(input_stream)
+                # read lines
+                for line in input_stream:
+                    line = line.rstrip('\n')
+                    [entry, gene_names, name, user_location] = line.split('\t')
+                    # check for missing values
+                    if (user_location == self._missing_tag) \
+                       or (user_location == ''):
+                        self._missing_information = True
+                    else:
+                        # check that user_location is consistent
+                        # with known locations
+                        if not user_location in self._location_map.values():
+                            print('Warning: unknown location ' + user_location
+                                  + ' will be replaced by '
+                                  + self.default_location
+                                  + '. Please check that data given in '
+                                  + self._curation_file + ' and '
+                                  + self._mapping_file + ' is consistent.')
+                        self._curated_locations[entry] \
+                            = Location(user_location, gene_names, name)
         except IOError:
             print 'Could not find file with location data...'
             
@@ -161,30 +162,28 @@ class LocationData:
         """
         Write file containing mapping information.
         """
-        output_stream = open(self._mapping_file, 'w')
-        output_stream.write('\t'.join(['UNIPROT NAME', 'USER ID']) + '\n')
-        for location, user_location in self._location_map.iteritems():
-            if user_location == self._missing_string:
-                user_location = self._missing_tag
-            output_stream.write('\t'.join([location, user_location]) + '\n')
-        output_stream.close()
+        with open(self._mapping_file, 'w') as output_stream:
+            output_stream.write('\t'.join(['UNIPROT NAME', 'USER ID']) + '\n')
+            for location, user_location in self._location_map.iteritems():
+                if user_location == self._missing_string:
+                    user_location = self._missing_tag
+                output_stream.write('\t'.join([location, user_location]) + '\n')
 
     def _write_curated_data(self):
         """
         Write file containing hand-curated information.
         """
-        output_stream = open(self._curation_file, 'w')
-        output_stream.write('\t'.join(['ENTRY', 'GENE NAME', 'NAME',
-                                       'LOCATION']) + '\n')
-        for entry in self._curated_locations:
-            location = self._curated_locations[entry]
-            if location.location == self._missing_string:
-                loc = self._missing_tag
-            else:
-                loc = location.location
-            output_stream.write('\t'.join([entry, location.gene_names,
-                                           location.name, loc]) + '\n')
-        output_stream.close()
+        with open(self._curation_file, 'w') as output_stream:
+            output_stream.write('\t'.join(['ENTRY', 'GENE NAME', 'NAME',
+                                           'LOCATION']) + '\n')
+            for entry in self._curated_locations:
+                location = self._curated_locations[entry]
+                if location.location == self._missing_string:
+                    loc = self._missing_tag
+                else:
+                    loc = location.location
+                output_stream.write('\t'.join([entry, location.gene_names,
+                                               location.name, loc]) + '\n')
         
     def _extract_uniprot_data(self, uniprot_data):
         """

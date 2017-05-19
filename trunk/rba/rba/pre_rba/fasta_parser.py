@@ -12,22 +12,21 @@ class FastaParser:
         self._input_file = input_file
         self.entries = []
         try:
-            f = open(input_file, 'r')
+            with open(input_file, 'rU') as f:
+                self._header = ''
+                self._sequence = ''
+                for line in f:
+                    if line.strip() == '':
+                        self._store_current_data()
+                        continue
+                    if self._read_header(line): continue
+                    if self._read_sequence(line): continue
+                    print(input_file + ': invalid line\n\t' + line)
+                    raise UserWarning('Invalid input file')
+                self._store_current_data()
         except IOError:
             print('Could not open file ' + input_file)
             raise UserWarning('Please provide file ' + input_file)
-
-        self._header = ''
-        self._sequence = ''
-        for line in f:
-            if line.strip() == '':
-                self._store_current_data()
-                continue
-            if self._read_header(line): continue
-            if self._read_sequence(line): continue
-            print(input_file + ': invalid line\n\t' + line)
-            raise UserWarning('Invalid input file')
-        self._store_current_data()
 
     def _read_header(self, line):
         if line[0] != '>': return False

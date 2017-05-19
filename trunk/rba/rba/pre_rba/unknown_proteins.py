@@ -35,18 +35,17 @@ class UnknownProteins:
         Read file containing hand-curated cofactor information.
         """
         try:
-            input_stream = open(self._data_file, 'r')
-            print('Found file with unknown protein data. This file will be '
-                  'used to match ambiguous enzymatic sbml annotations...')
-            # skip header
-            next(input_stream)
-            # read lines
-            for line in input_stream:
-                [sbml, uniprot] = line.rstrip('\n').split('\t')
-                if uniprot == self._missing_tag:
-                    self._missing_information = True
-                self.data[sbml] = uniprot
-            input_stream.close()
+            with open(self._data_file, 'rU') as input_stream:
+                print('Found file with unknown protein data. This file will be '
+                      'used to match ambiguous enzymatic sbml annotations...')
+                # skip header
+                next(input_stream)
+                # read lines
+                for line in input_stream:
+                    [sbml, uniprot] = line.rstrip('\n').split('\t')
+                    if uniprot == self._missing_tag:
+                        self._missing_information = True
+                    self.data[sbml] = uniprot
         except IOError:
             print 'Could not find file with unknown protein data...'
 
@@ -54,11 +53,10 @@ class UnknownProteins:
         """
         Write file containing hand-curated cofactor information.
         """
-        output_stream = open(self._data_file, 'w')
-        output_stream.write('\t'.join(['SBML ID', 'UNIPROT GENE']) + '\n')
-        for sbml, uniprot in self.data.iteritems():
-            output_stream.write('\t'.join([sbml, uniprot]) + '\n')
-        output_stream.close()
+        with open(self._data_file, 'w') as output_stream:
+            output_stream.write('\t'.join(['SBML ID', 'UNIPROT GENE']) + '\n')
+            for sbml, uniprot in self.data.iteritems():
+                output_stream.write('\t'.join([sbml, uniprot]) + '\n')
         
     def add(self, sbml_list):
         """

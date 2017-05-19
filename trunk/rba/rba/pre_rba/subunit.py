@@ -70,22 +70,22 @@ class SubunitData:
         Read file containing hand-curated information.
         """
         try:
-            input_stream = open(self._subunit_file, 'r')
-            print('Found file with subunit data. This file will be used to solve ambiguous uniprot annotation...')
-            # skip header
-            next(input_stream)
-            # read lines
-            for line in input_stream:
-                [entry, stoichiometry,
-                 gene_names, name, uniprot_note] = line.split('\t')
-                if stoichiometry == self._missing_tag:
-                    self._missing_information = True
-                    stoichiometry = self._missing_num
-                else:
-                    stoichiometry = float(stoichiometry)
-                self._curated_subunits[entry] \
-                    = Subunit(stoichiometry, gene_names, name, uniprot_note)
-            input_stream.close()
+            with open(self._subunit_file, 'rU') as input_stream:
+                print('Found file with subunit data. This file will be used '
+                      'to solve ambiguous uniprot annotation...')
+                # skip header
+                next(input_stream)
+                # read lines
+                for line in input_stream:
+                    [entry, stoichiometry,
+                     gene_names, name, uniprot_note] = line.split('\t')
+                    if stoichiometry == self._missing_tag:
+                        self._missing_information = True
+                        stoichiometry = self._missing_num
+                    else:
+                        stoichiometry = float(stoichiometry)
+                    self._curated_subunits[entry] \
+                        = Subunit(stoichiometry, gene_names, name, uniprot_note)
         except IOError:
             print('Could not find file with subunit data...')
 
@@ -93,19 +93,19 @@ class SubunitData:
         """
         Write file containing hand-curated information.
         """
-        output_stream = open(self._subunit_file, 'w')
-        output_stream.write('\t'.join(['ENTRY','STOICHIOMETRY', 'GENE NAMES',
-                                       'PROTEIN NAME', 'UNIPROT NOTE']) + '\n')
-        for entry in self._curated_subunits:
-            subunit = self._curated_subunits[entry]
-            if subunit.stoichiometry == self._missing_num:
-                sto = self._missing_tag
-            else:
-                sto = str(subunit.stoichiometry)
-            output_stream.write('\t'.join([entry, sto, subunit.gene_names,
-                                           subunit.name, subunit.uniprot_note])
-                                + '\n')
-        output_stream.close()
+        with open(self._subunit_file, 'w') as output_stream:
+            cols = ['ENTRY','STOICHIOMETRY', 'GENE NAMES',
+                    'PROTEIN NAME', 'UNIPROT NOTE']
+            output_stream.write('\t'.join(cols) + '\n')
+            for entry in self._curated_subunits:
+                subunit = self._curated_subunits[entry]
+                if subunit.stoichiometry == self._missing_num:
+                    sto = self._missing_tag
+                else:
+                    sto = str(subunit.stoichiometry)
+                data = [entry, sto, subunit.gene_names,
+                        subunit.name, subunit.uniprot_note]
+                output_stream.write('\t'.join(data) + '\n')
             
     def _extract_uniprot_subunits(self, uniprot_data):
         """
