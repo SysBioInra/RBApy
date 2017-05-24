@@ -102,6 +102,7 @@ class RbaSolver(object):
         lp.solve()
         if lp.solution.get_status() == lp.solution.status.infeasible:
             print('Mu = 0 is infeasible, check matrix consistency')
+            return
 
         # bissection
         mu_min = 0

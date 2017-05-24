@@ -176,11 +176,12 @@ class Function(object):
     tag = 'function'
     
     def __init__(self, id_, type_, parameters = {}, variable = ''):
-        self.id = id_
+        if id_ is not None: self.id = id_
+        else: self.id = ''
         self.type = type_
         self.variable = variable
         self.parameters = ListOfParameters()
-        for key, value in parameters.iteritems():
+        for key, value in parameters.items():
             self.parameters.append(Parameter(key, value))
 
     def to_xml_node(self):
@@ -407,7 +408,7 @@ class Macromolecule(object):
         self.id = id_
         self.compartment = compartment
         self.composition = Composition()
-        for comp, sto in composition.iteritems():
+        for comp, sto in composition.items():
             self.composition.append(ComponentReference(comp, sto))
 
     def to_xml_node(self):
@@ -774,7 +775,7 @@ class Cost(object):
     def from_xml_node(cls, node):
         try:
             proc_cost = float(node.get('processingCost'))
-        except ValueError:
+        except TypeError:
             proc_cost = 0
         result = cls(node.get('component'), proc_cost)
         n = get_unique_child(node, ListOfReactants.tag, False)
@@ -882,7 +883,7 @@ class EnzymeEfficiency(object):
     def __init__(self, function, parameters = {}):
         self.function = function
         self.parameters = ListOfParameters()
-        for key,value in parameters.iteritems():
+        for key,value in parameters.items():
             self.parameters.append(Parameter(key, value))
 
     def to_xml_node(self):

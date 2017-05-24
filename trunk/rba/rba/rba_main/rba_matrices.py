@@ -3,11 +3,11 @@
 from scipy.sparse import lil_matrix, hstack
 
 # local imports
-from functions import *
-from species import *
-from density import *
-from enzymes import *
-from processes import *
+from .functions import *
+from .species import *
+from .density import *
+from .enzymes import *
+from .processes import *
             
 class RbaMatrices(object):
     """
@@ -47,8 +47,19 @@ class RbaMatrices(object):
                                    self.species, self.functions)
         
         ## setup medium
-        self.enzymes.efficiency.update_import(data.medium)
+        self.set_medium(data.medium)
 
+    def set_catalytic_function(self, function_id):
+        """
+        Change set of catalytic functions to use.
+        """
+        self.enzymes.efficiency.set_function(function_id)
+
+    def set_medium(self, medium):
+        """
+        Change medium composition.
+        """
+        self.enzymes.efficiency.update_import(medium)
     
     def _extract_S(self, metabolites, reactions):
         S = lil_matrix((len(metabolites),len(reactions)))

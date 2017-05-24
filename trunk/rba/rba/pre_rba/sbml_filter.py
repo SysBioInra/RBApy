@@ -210,7 +210,7 @@ def read_gene_association(text):
     """
     tags = text.split(':',1)
     if len(tags) != 2:
-        print "Invalid note field: " + text
+        print('Invalid note field: ' + text)
         return None
     if tags[0] != "GENE_ASSOCIATION":
         return None

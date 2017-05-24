@@ -1,4 +1,8 @@
-import urllib,urllib2
+import urllib
+try:
+    from urllib.request import Request, urlopen
+except ImportError:
+    from urllib2 import Request, urlopen
 
 class UniprotImporter:
     """
@@ -21,10 +25,10 @@ class UniprotImporter:
             'columns': self._url_columns()
         }
         url_data = urllib.urlencode(params)
-        request = urllib2.Request(url, url_data)
+        request = Request(url, url_data)
         contact = "anne.goelzer@inra.fr"
         request.add_header('User-Agent', 'Python %s' % contact)
-        response = urllib2.urlopen(request)
+        response = urlopen(request)
         self.data = response.read()
 
     def _reformat(self, keyword, fields):

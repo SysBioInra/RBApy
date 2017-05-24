@@ -118,7 +118,7 @@ class LocationData:
                         user_location = self._missing_string
                     self._location_map[location] = user_location
         except IOError:
-            print 'Could not find file with location mapping...'
+            print('Could not find file with location mapping...')
                 
         # update default location (if possible)
         user_default = self._location_map[self.default_location]
@@ -156,7 +156,7 @@ class LocationData:
                         self._curated_locations[entry] \
                             = Location(user_location, gene_names, name)
         except IOError:
-            print 'Could not find file with location data...'
+            print('Could not find file with location data...')
             
     def _write_mapping_data(self):
         """
@@ -227,7 +227,7 @@ class LocationData:
             try:
                 location_name = location_reader.match(location_note).group(1)
             except AttributeError:
-                print location_note
+                print(location_note)
                 raise
             
             # if location is not in mapping file yet, add it

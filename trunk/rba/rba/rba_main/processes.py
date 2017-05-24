@@ -1,7 +1,7 @@
 
 from scipy.sparse import hstack, csr_matrix, lil_matrix
 
-from target_vector import TargetVector
+from .target_vector import TargetVector
 
 class Processes(object):
     def __init__(self, processes, species, functions):

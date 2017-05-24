@@ -3,7 +3,7 @@ import os.path
 import re
 import pandas
 
-import rba_data
+from . import rba_data
 
 class Metabolite(object):
     def __init__(self, name, sbml_id, concentration):
