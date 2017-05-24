@@ -1,7 +1,7 @@
 
 import numpy
 
-from functions import *
+from .functions import *
 
 class Enzymes(object):
     def __init__(self, enzymes, species, reactions):

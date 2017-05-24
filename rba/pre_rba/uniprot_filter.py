@@ -3,10 +3,10 @@ import pandas, os.path
 import re
 
 from ..rba_xml import *
-from cofactor import *
-from subunit import *
-from location import *
-from unknown_proteins import *
+from .cofactor import *
+from .subunit import *
+from .location import *
+from .unknown_proteins import *
 
 class UniprotFilter:
     """

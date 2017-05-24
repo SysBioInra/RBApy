@@ -47,7 +47,7 @@ class UnknownProteins:
                         self._missing_information = True
                     self.data[sbml] = uniprot
         except IOError:
-            print 'Could not find file with unknown protein data...'
+            print('Could not find file with unknown protein data...')
 
     def _write_curated_data(self):
         """

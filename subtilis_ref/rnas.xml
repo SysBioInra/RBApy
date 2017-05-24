@@ -1,0 +1,42 @@
+<RBARnas>
+  <listOfComponents>
+    <component id="A" name="Adenosine residue" type="Nucleotide" weight="2.9036"/>
+    <component id="C" name="Cytosine residue" type="Nucleotide" weight="2.7017"/>
+    <component id="G" name="Guanine residue" type="Nucleotide" weight="3.0382"/>
+    <component id="U" name="Uramine residue" type="Nucleotide" weight="2.7102"/>
+  </listOfComponents>
+  <listOfMacromolecules>
+    <macromolecule id="rrnO-16S" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="382.0"/>
+        <componentReference component="C" stoichiometry="365.0"/>
+        <componentReference component="G" stoichiometry="491.0"/>
+        <componentReference component="U" stoichiometry="315.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="rrnO-23S" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="779.0"/>
+        <componentReference component="C" stoichiometry="658.0"/>
+        <componentReference component="G" stoichiometry="920.0"/>
+        <componentReference component="U" stoichiometry="571.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="rrnO-5S" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="23.0"/>
+        <componentReference component="C" stoichiometry="31.0"/>
+        <componentReference component="G" stoichiometry="35.0"/>
+        <componentReference component="U" stoichiometry="23.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="mrna" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="0.2818"/>
+        <componentReference component="C" stoichiometry="0.2181"/>
+        <componentReference component="G" stoichiometry="0.2171"/>
+        <componentReference component="U" stoichiometry="0.283"/>
+      </composition>
+    </macromolecule>
+  </listOfMacromolecules>
+</RBARnas>

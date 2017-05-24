@@ -1,9 +1,9 @@
 
 import os.path
 
-from rba_xml import *
-from rba_main.rba_matrices import RbaMatrices
-from rba_main.rba_solver import RbaSolver
+from .rba_xml import *
+from .rba_main.rba_matrices import RbaMatrices
+from .rba_main.rba_solver import RbaSolver
 
 class RbaModel(object):
     def __init__(self):
@@ -42,10 +42,28 @@ class RbaModel(object):
                 concentrations[met] = float(conc)
         return concentrations
 
+    def get_matrices(self):
+        """
+        Transform data into matrix blocks used to solve the optimization
+        problem.
+        """
+        return RbaMatrices(self)
+
     def solve(self, catalytic_function = None):
+        """
+        Solve current model.
+
+        Args:
+            catalytic_function: identifier of functions to use for catalytic
+                efficiencies of enzymes ('default' if no argument given).
+
+        Returns:
+            RbaSolver object that contains solution (if one was found) and
+            matrices next to solution
+        """
         matrices = RbaMatrices(self)
         if catalytic_function is not None:
-            matrices.enzymes.efficiency.set_function(catalytic_function)
+            matrices.set_catalytic_function(catalytic_function)
         solver = RbaSolver(matrices)
         solver.solve()
         return solver

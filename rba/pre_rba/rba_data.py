@@ -125,7 +125,7 @@ trna_concentration \
         'G': 0.004295, 'E': 0.001845, 'L': 0.003159, 'R': 0.002074,
         'W': 0.000399, 'N': 0.001690, 'Y': 0.000967, 'V': 0.002967 }
 av_trna_length = 75
-for trna, conc in trna_concentration.iteritems():
+for trna, conc in trna_concentration.items():
     default_concentration[uncharged_trna_key(trna)] = conc / av_trna_length
 
 ## default catalytic activity

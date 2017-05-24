@@ -3,7 +3,7 @@ import xml.dom.minidom
 import copy
 
 from ..rba_xml import *
-import rba_data
+from . import rba_data
 
 class DefaultProcesses(object):
     """

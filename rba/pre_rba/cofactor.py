@@ -116,7 +116,7 @@ class CofactorData:
                     self._add_curated_cofactor(entry, chebi, name,
                                                stoichiometry, uniprot_note)
         except IOError:
-            print 'Could not find file with cofactor data...'
+            print('Could not find file with cofactor data...')
 
     def _write_curated_data(self):
         """

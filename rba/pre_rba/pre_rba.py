@@ -1,18 +1,18 @@
 # global imports
 import os.path
 
-from pipeline_parameters import *
-from sbml_filter import *
-from uniprot_filter import *
-from uniprot_importer import *
-from metabolite_data import *
-from macrocomponents import *
-from fasta_parser import *
+from .pipeline_parameters import *
+from .sbml_filter import *
+from .uniprot_filter import *
+from .uniprot_importer import *
+from .metabolite_data import *
+from .macrocomponents import *
+from .fasta_parser import *
 
-import rba_data
-from default_processes import *
+from . import rba_data
+from .default_processes import *
 from ..rba_xml import *
-from ..rba_model import *
+from ..rba_model import RbaModel
 
 class PreRba(object):
     def __init__(self, parameter_file):

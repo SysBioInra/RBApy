@@ -1,5 +1,5 @@
 
-from target_vector import TargetVector
+from .target_vector import TargetVector
 
 class Density(object):
     def __init__(self, max_densities, functions, known_compartments):
