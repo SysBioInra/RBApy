@@ -1,11 +1,15 @@
 
+#########################
+# Sample parameter file #
+#########################
+
 ##############################################################################
 # INPUT_DIR                                                                  
 # Directory where input files can be found and where helper files will be    
 # stored. Can be asolute path or path relative to where program is RUN (!).  
 ##############################################################################
 
-INPUT_DIR = iJO1366_test/data
+INPUT_DIR = data/subtilis/data
 
 ##############################################################################
 # SBML_FILE
@@ -13,7 +17,7 @@ INPUT_DIR = iJO1366_test/data
 # located in INPUT_DIR (or provide a path relative to INPUT_DIR).
 ##############################################################################
 
-SBML_FILE = iJO1366.xml
+SBML_FILE = sbml.xml
 
 ##############################################################################
 # ORGANISM_ID                                                                  
@@ -24,7 +28,7 @@ SBML_FILE = iJO1366.xml
 #   www.uniprot.org/taxonomy/
 ##############################################################################
 
-ORGANISM_ID = 83333
+ORGANISM_ID = 224308
 
 ##############################################################################
 # OUTPUT_DIR                                                                  
@@ -32,4 +36,5 @@ ORGANISM_ID = 83333
 # relative to where program is RUN (!).
 ##############################################################################
 
-OUTPUT_DIR = iJO1366_test
+OUTPUT_DIR = data/subtilis
+

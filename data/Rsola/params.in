@@ -1,15 +1,11 @@
 
-#########################
-# Sample parameter file #
-#########################
-
 ##############################################################################
 # INPUT_DIR                                                                  
 # Directory where input files can be found and where helper files will be    
 # stored. Can be asolute path or path relative to where program is RUN (!).  
 ##############################################################################
 
-INPUT_DIR = subtilis/data
+INPUT_DIR = data/Rsola/data
 
 ##############################################################################
 # SBML_FILE
@@ -28,7 +24,7 @@ SBML_FILE = sbml.xml
 #   www.uniprot.org/taxonomy/
 ##############################################################################
 
-ORGANISM_ID = 224308
+ORGANISM_ID = 267608
 
 ##############################################################################
 # OUTPUT_DIR                                                                  
@@ -36,5 +32,5 @@ ORGANISM_ID = 224308
 # relative to where program is RUN (!).
 ##############################################################################
 
-OUTPUT_DIR = subtilis
+OUTPUT_DIR = data/Rsola
 
