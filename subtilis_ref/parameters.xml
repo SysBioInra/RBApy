@@ -1,11 +1,11 @@
 <RBAParameters>
   <listOfMaximalDensities>
     <maximalDensity value="4.8972" compartment="c"/>
-    <!--maximalDensity compartment="mp">
+    <maximalDensity compartment="mp">
       <functionReference function="protein_concentration"/>
       <functionReference function="average_protein_weight"/>
       <functionReference function="fraction_membrane_protein"/>
-    </maximalDensity-->
+    </maximalDensity>
   </listOfMaximalDensities>
   <listOfFunctions>
     <function id="protein_concentration" type="linear">

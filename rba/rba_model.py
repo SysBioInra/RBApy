@@ -83,7 +83,7 @@ class RbaModel(object):
         # initial conditions (medium concentrations)
         with open(self._output('medium.tsv'), 'w') as output:
             output.write('Metabolite\tConcentration\n')
-            for m, conc in self.medium.iteritems():
+            for m, conc in self.medium.items():
                 output.write(m + '\t' + str(conc) + '\n')
 
     def _input(self, file_name):

@@ -77,7 +77,7 @@ class CofactorData:
         # ignore cofactors with zero stoichiometry
         if (stoichiometry <= 0): return
             
-        if not(self.cofactors.has_key(entry)):
+        if entry not in self.cofactors:
             self.cofactors[entry] = []
         new_cofactor = Cofactor(chebi, name, stoichiometry);
         self.cofactors[entry].append(new_cofactor)
@@ -86,7 +86,7 @@ class CofactorData:
         """
         Add curated cofactor to dictionary of curated cofactors.
         """
-        if not(self._curated_cofactors.has_key(entry)):
+        if entry not in self._curated_cofactors:
             self._curated_cofactors[entry] = []
         new_cofactor = Cofactor(chebi, name, stoichiometry, uniprot_note);
         self._curated_cofactors[entry].append(new_cofactor)
@@ -155,7 +155,7 @@ class CofactorData:
         curated_data_added = False
         for entry, cofactor_field in zip(entry_data, cofactor_data):
             # check whether entry belongs to curated set
-            if self._curated_cofactors.has_key(entry):
+            if entry in self._curated_cofactors:
                 self.cofactors[entry] = []
                 for c in self._curated_cofactors[entry]:
                     self._add_cofactor(entry, c.chebi, c.name, c.stoichiometry)

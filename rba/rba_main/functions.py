@@ -71,7 +71,7 @@ class MichaelisMentenFunction(RBAFunction):
         self.kmax = float(parameters['kmax'])
         self.Km = float(parameters['Km'])
         self.Y_MIN = None
-        if parameters.has_key('Y_MIN'):
+        if 'Y_MIN' in parameters:
             self.Y_MIN = parameters['Y_MIN']
         
     def evaluate(self, x):

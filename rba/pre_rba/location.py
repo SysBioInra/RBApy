@@ -89,7 +89,7 @@ class LocationData:
 
     def compartment_ids(self):
         ids = []
-        for uniprot_id, user_id in self._location_map.iteritems():
+        for uniprot_id, user_id in self._location_map.items():
             if user_id != self._missing_string:
                 ids.append(user_id)
             else:
@@ -202,7 +202,7 @@ class LocationData:
         for entry, gene_names, name, location_note \
             in zip(entry_data, gene_data, name_data, location_data):
             # if entry is in curated file simply add it
-            if self._curated_locations.has_key(entry):
+            if entry in self._curated_locations:
                 location = self._curated_locations[entry].location
                 # check that the 'curated' data is valid
                 if location in self._location_map.values():
@@ -231,7 +231,7 @@ class LocationData:
                 raise
             
             # if location is not in mapping file yet, add it
-            if not(self._location_map.has_key(location_name)):
+            if location_name not in self._location_map:
                 mapping_data_added = True
                 self._missing_mapping = True
                 self._location_map[location_name] = self._missing_string

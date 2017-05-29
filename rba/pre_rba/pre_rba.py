@@ -26,7 +26,7 @@ class PreRba(object):
         self._input_dir = parameters['INPUT_DIR']
         self.model.output_dir = parameters['OUTPUT_DIR']
         try:
-            external_compartments = map(str.strip, parameters['EXTERNAL_COMPARTMENTS'].split(','))
+            external_compartments = list(map(str.strip, parameters['EXTERNAL_COMPARTMENTS'].split(',')))
         except KeyError:
             external_compartments = []
 
@@ -138,12 +138,12 @@ class PreRba(object):
             except KeyError:
                 continue
             if not(id_): continue
-            if not(user_rnas.has_key(id_)): user_rnas[id_] = []
+            if id_ not in user_rnas: user_rnas[id_] = []
             user_rnas[id_].append(rna.sequence)
         # write user rnas to xml structure
-        for id_, seq in user_rnas.iteritems():
+        for id_, seq in user_rnas.items():
             comp = self._rna_composition(''.join(seq))
-            average_comp = { k: float(v)/len(seq) for k, v in comp.iteritems() }
+            average_comp = { k: float(v)/len(seq) for k, v in comp.items() }
             self.model.rnas.macromolecules.append \
                 (Macromolecule(id_, self._cytoplasm_id, average_comp))
 
@@ -213,7 +213,7 @@ class PreRba(object):
                                          .append(def_efficiency)
 
             # transport activity
-            if self._imported_metabolites.has_key(reaction):
+            if reaction in self._imported_metabolites:
                 for m in self._imported_metabolites[reaction]:
                     enzyme.enzymatic_activity.transporter_efficiency.append\
                         (Function('', 'michaelisMenten', MM_parameters, m))
