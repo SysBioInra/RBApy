@@ -220,12 +220,12 @@ def read_gene_association(text):
         
         # field is not standard: we try to standardize a little.
         # remove parentheses
-        enzyme_set = enzyme_set.translate(None, '()')
+        enzyme_set = ''.join(c for c in enzyme_set if c not in '()')
         
         enzymes = enzyme_set.split(' or ')
         compositions = []
         for enzyme in enzymes:
-            compositions.append(map(str.strip, enzyme.split(' and ')))
+            compositions.append(list(map(str.strip, enzyme.split(' and '))))
         return compositions
 
 def read_fbc_association(gp_association, gene_names = None):

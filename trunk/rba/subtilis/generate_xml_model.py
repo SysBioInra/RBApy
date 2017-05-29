@@ -6,6 +6,8 @@ sys.path.append(os.path.join(sys.path[0],'..'))
 import rba
 from rba import rba_xml
 
+old_data = 'subtilis_ref/old_data/'
+
 def flagella_activation():
     process = rba_xml.Process('P_FLAGELLA', 'Flagella activation')
     target = rba_xml.TargetReaction('Th_1')
@@ -28,7 +30,7 @@ def read_activities(f):
             reaction = token[0]
             fn = token[1]
             params = iter(token[2:])
-            if not(activity.has_key(reaction)): activity[reaction] = {}
+            if reaction not in activity: activity[reaction] = {}
             activity[reaction][fn] \
                 = {id_: value for id_, value in zip(params,params)}
     return (fns, activity)
@@ -40,7 +42,7 @@ def old_name(new_name):
         return new_name.rsplit('_',1)[0]
 
 def apply_old_stoichiometries(enzymes):
-    with open('subtilis/old_data/stoichiometry.csv', 'r') as f:
+    with open(old_data + 'stoichiometry.csv', 'r') as f:
         data = {}
         for line in f:
             [species, sto] = line.rstrip('\n').split('\t')
@@ -50,7 +52,7 @@ def apply_old_stoichiometries(enzymes):
             try:
                 sr.stoichiometry = data[sr.species]
             except KeyError:
-                print sr.species
+                print(sr.species)
             
 if __name__ == "__main__":
     ## generate base XML files with pipeline
@@ -61,7 +63,7 @@ if __name__ == "__main__":
 
     ## add enzymatic activities
     enzymes = subtilis.model.enzymes
-    with open('subtilis/old_data/catalytic_activity.csv', 'r') as f:
+    with open(old_data + 'catalytic_activity.csv', 'r') as f:
         fns, activity = read_activities(f)
     for fn in fns:
         enzymes.efficiency_functions \
@@ -74,7 +76,7 @@ if __name__ == "__main__":
             enzyme.enzymatic_activity.enzyme_efficiencies.append(new_eff)
 
     ## add zero_cost flags
-    with open('subtilis/old_data/zero_cost.csv', 'r') as f:
+    with open(old_data + 'zero_cost.csv', 'r') as f:
         zero_cost = []
         for line in f:
             zero_cost += line.rstrip('\n').split('\t')
@@ -88,13 +90,13 @@ if __name__ == "__main__":
     #apply_old_stoichiometries(enzymes)
 
     ## set medium to original medium
-    with open('subtilis/old_data/medium.csv', 'r') as f:
+    with open(old_data + 'medium.csv', 'r') as f:
         old_medium = {}
         for line in f:
             met, conc = line.rstrip('\n').split('\t')
             old_medium[met[:-2]] = conc
     subtilis.model.medium = dict.fromkeys(subtilis.model.medium, 0)
-    for met, conc in old_medium.iteritems():
+    for met, conc in old_medium.items():
         subtilis.model.medium[met] = conc
             
     ## write xml files

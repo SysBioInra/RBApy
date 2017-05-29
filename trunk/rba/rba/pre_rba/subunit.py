@@ -123,7 +123,7 @@ class SubunitData:
         for entry, gene_names, name, subunit_field \
             in zip(entry_data, gene_data, name_data, subunit_data):
             # if entry is in curated file, simply add it
-            if self._curated_subunits.has_key(entry):
+            if entry in self._curated_subunits:
                 stoichiometry = self._curated_subunits[entry].stoichiometry
                 if stoichiometry == self._missing_num:
                     self.subunits[entry] = self._default_stoichiometry

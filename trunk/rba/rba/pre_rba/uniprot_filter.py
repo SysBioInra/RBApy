@@ -28,7 +28,7 @@ class UniprotFilter:
         :type input_dir: string
         """
         self._gene_ids = list(set(gene_ids))
-        self._upper_gene_ids = map(str.upper, self._gene_ids)
+        self._upper_gene_ids = list(map(str.upper, self._gene_ids))
         self._gene_id_found = [False] * len(self._gene_ids)
         
         # open uniprot data
@@ -84,7 +84,7 @@ class UniprotFilter:
         self.protein_stoichiometry = {}
         # add amino acids to component set
         amino_acids = set()
-        for comp in aa_data.itervalues():
+        for comp in aa_data.values():
             for aa in comp:
                 amino_acids.add(aa)
         for aa in amino_acids:
@@ -98,7 +98,7 @@ class UniprotFilter:
             composition = aa_data[entry].copy()
             # add cofactors to composition
             cofactors = []
-            if cofactor_data.has_key(entry):
+            if entry in cofactor_data:
                 cofactors = cofactor_data[entry]
             for c in cofactors:
                 composition[c.chebi] = c.stoichiometry
@@ -118,9 +118,9 @@ class UniprotFilter:
 
         # compute average protein
         average_protein = dict.fromkeys(amino_acids, 0)
-        for composition in aa_data.itervalues():
+        for composition in aa_data.values():
             for aa in composition:
-                if average_protein.has_key(aa):
+                if aa in average_protein:
                     average_protein[aa] += composition[aa]
         for aa in average_protein:
             average_protein[aa] /= len(aa_data)
@@ -163,7 +163,7 @@ class UniprotFilter:
         for entry, sequence in zip(entry_data, sequence_data):
             new_data = {}
             for c in sequence:
-                if not(new_data.has_key(c)):
+                if c not in new_data:
                     new_data[c] = 0
                 new_data[c] += 1
             aa_data[entry] = new_data

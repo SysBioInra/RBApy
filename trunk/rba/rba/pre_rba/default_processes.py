@@ -41,7 +41,7 @@ class DefaultProcesses(object):
         process = Process('P_TA', 'Translation')
         # machinery
         machine = process.machinery.machinery_composition
-        for id_, sto in ribosome_composition.iteritems():
+        for id_, sto in ribosome_composition.items():
             machine.reactants.append(SpeciesReference(id_, sto))
         self._append_metabolite(machine.reactants, 'GTP', 2)
         self._append_metabolite(machine.reactants, 'H2O', 2)
@@ -68,7 +68,7 @@ class DefaultProcesses(object):
         process = Process('P_CHP', 'Folding')
         # capacity constraint
         machine = process.machinery.machinery_composition
-        for id_, sto in chaperone_composition.iteritems():
+        for id_, sto in chaperone_composition.items():
             machine.reactants.append(SpeciesReference(id_, sto))
         capacity = process.machinery.capacity
         capacity.function_references.append('chaperone_efficiency_LM')
@@ -140,7 +140,7 @@ class DefaultProcesses(object):
 
     def _macrocomponents(self):
         process = Process('P_MACRO_PROD', 'Macrocomponent production')
-        for id_, flux in self._macro_flux.iteritems():
+        for id_, flux in self._macro_flux.items():
             target = TargetSpecies(id_)
             target.value = flux
             process.targets.concentrations.append(target)

@@ -80,7 +80,7 @@ class MetaboliteData(object):
         with open(self._data_file, 'w') as output_stream:
             output_stream.write('\t'.join(['ID', 'NAME', 'SBML ID',
                                            'CONCENTRATION']) + '\n')
-            for id_, metab in self.metabolites.iteritems():
+            for id_, metab in self.metabolites.items():
                 if metab.sbml_id == self._missing_string:
                     sbml_id = self._missing_tag
                 else:
@@ -125,7 +125,7 @@ class MetaboliteData(object):
             keys.append(rba_data.dntp_key(n))
             names.append(rba_data.dntp_key(n))        
         # key metabolites
-        for m, name in rba_data.key_metabolites.iteritems():
+        for m, name in rba_data.key_metabolites.items():
             keys.append(m)
             names.append(name)
         # cofactors
@@ -136,7 +136,7 @@ class MetaboliteData(object):
         # retrieve items
         for key, name in zip(keys, names):
             # curated data available: nothing to do
-            if self.metabolites.has_key(key): continue
+            if key in self.metabolites: continue
 
             # no curated data: find metabolite id
             curated_data_added = True
