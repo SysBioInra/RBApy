@@ -1,15 +1,11 @@
 
-#########################
-# Sample parameter file #
-#########################
-
 ##############################################################################
 # INPUT_DIR                                                                  
 # Directory where input files can be found and where helper files will be    
 # stored. Can be asolute path or path relative to where program is RUN (!).  
 ##############################################################################
 
-INPUT_DIR = Athal/data
+INPUT_DIR = data/iJO1366_test/data
 
 ##############################################################################
 # SBML_FILE
@@ -17,17 +13,7 @@ INPUT_DIR = Athal/data
 # located in INPUT_DIR (or provide a path relative to INPUT_DIR).
 ##############################################################################
 
-SBML_FILE = model.xml
-
-##############################################################################
-# EXTERNAL_COMPARTMENTS
-# Identifier of SBML compartments that contain boundary metabolites. If
-# metabolites are already tagged as 'boundaryCondition', you do not need
-# to specify this parameter. If several compartments contain boundary
-# metabolites, write them down separated by a comma.
-##############################################################################
-
-EXTERNAL_COMPARTMENTS = C_ext
+SBML_FILE = iJO1366.xml
 
 ##############################################################################
 # ORGANISM_ID                                                                  
@@ -38,7 +24,7 @@ EXTERNAL_COMPARTMENTS = C_ext
 #   www.uniprot.org/taxonomy/
 ##############################################################################
 
-ORGANISM_ID = 3702
+ORGANISM_ID = 83333
 
 ##############################################################################
 # OUTPUT_DIR                                                                  
@@ -46,5 +32,4 @@ ORGANISM_ID = 3702
 # relative to where program is RUN (!).
 ##############################################################################
 
-OUTPUT_DIR = Athal
-
+OUTPUT_DIR = data/iJO1366_test

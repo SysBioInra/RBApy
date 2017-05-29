@@ -2,11 +2,11 @@ import os.path
 import sys
 import math
 
-sys.path.append(os.path.join(sys.path[0],'..'))
+sys.path.append(os.path.join(sys.path[0],'../..'))
 import rba
 from rba import rba_xml
 
-old_data = 'subtilis_ref/old_data/'
+old_data = 'data/subtilis_ref/old_data/'
 
 def flagella_activation():
     process = rba_xml.Process('P_FLAGELLA', 'Flagella activation')
@@ -56,7 +56,7 @@ def apply_old_stoichiometries(enzymes):
             
 if __name__ == "__main__":
     ## generate base XML files with pipeline
-    subtilis = rba.PreRba('subtilis/data/params.in')
+    subtilis = rba.PreRba('data/subtilis/params.in')
 
     ## add flagella constraint
     subtilis.model.processes.processes.append(flagella_activation())

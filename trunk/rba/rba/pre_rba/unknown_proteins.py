@@ -55,7 +55,7 @@ class UnknownProteins:
         """
         with open(self._data_file, 'w') as output_stream:
             output_stream.write('\t'.join(['SBML ID', 'UNIPROT GENE']) + '\n')
-            for sbml, uniprot in self.data.iteritems():
+            for sbml, uniprot in self.data.items():
                 output_stream.write('\t'.join([sbml, uniprot]) + '\n')
         
     def add(self, sbml_list):
