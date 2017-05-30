@@ -513,7 +513,7 @@
       <species id="m_form_xt" name="form_xt" compartment="e" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="true" constant="false"/>
       <species id="m_ade_xt" name="ade_xt" compartment="e" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="true" constant="false"/>
       <species id="m_gua_xt" name="gua_xt" compartment="e" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="true" constant="false"/>
-      <species id="m_hxtx_xt" name="hxtx_xt" compartment="e" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="true" constant="false"/>
+      <species id="m_hxth_xt" name="hxth_xt" compartment="e" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="true" constant="false"/>
       <species id="m_xth_xt" name="xth_xt" compartment="e" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="true" constant="false"/>
       <species id="m_ura_xt" name="ura_xt" compartment="e" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="true" constant="false"/>
       <species id="m_ado_xt" name="ado_xt" compartment="e" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="true" constant="false"/>
@@ -1151,7 +1151,7 @@
       <reaction id="TpbuO" reversible="false">
         <listOfReactants>
           <speciesReference species="m_hex_xt" stoichiometry="1"/>
-          <speciesReference species="m_hxtx_xt" stoichiometry="1"/>
+          <speciesReference species="m_hxth_xt" stoichiometry="1"/>
         </listOfReactants>
         <listOfProducts>
           <speciesReference species="m_hxth" stoichiometry="1"/>

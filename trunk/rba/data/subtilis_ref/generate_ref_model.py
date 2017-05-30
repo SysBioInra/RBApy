@@ -4,7 +4,7 @@ import libsbml
 from itertools import chain
 import sys
 
-sys.path.append('../rba')
+sys.path.append('../..')
 
 import rba
 from rba import rba_xml
@@ -146,8 +146,8 @@ def read_processes(filename):
     return result
 
 if __name__ == "__main__":
-    output = 'subtilis/ref_model'
-    input_ = 'subtilis/old_data/'
+    output = '.'
+    input_ = 'old_data/'
     model = rba.RbaModel()
     
     ## convert old files
@@ -176,7 +176,7 @@ if __name__ == "__main__":
     p_atpm.targets.lower_bounds.append(target)
     model.processes.processes.append(p_atpm)
     # medium
-    model.medium = model.read_medium('subtilis_ref/medium.tsv')
+    model.medium = model.read_medium('medium.tsv')
 
     ## adapt metabolite names
     # metabolism
