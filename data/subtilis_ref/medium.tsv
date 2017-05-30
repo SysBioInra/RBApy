@@ -8,7 +8,7 @@ M_xth	0.0
 M_ino	0.0
 M_ca2	10.0
 M_cys	0.0
-M_ura	0.0
+M_cu2	10.0
 M_cell	0.0
 M_inos	0.0
 M_rib	0.0
@@ -29,9 +29,9 @@ M_p	10.0
 M_ade	0.0
 M_ribf	0.0
 M_ile	0.0
-M_dguo	0.0
+M_aaacp	0.0
 M_naglcn	0.0
-M_guo	0.0
+M_this	0.0
 M_nh3	10.0
 M_dado	0.0
 M_lct	0.0
@@ -39,13 +39,13 @@ M_phe	0.0
 M_uri	0.0
 M_trp	0.0
 M_glcn	0.0
-M_cu2	10.0
+M_ura	0.0
 M_tre	0.0
 M_cti	0.0
 M_cto	0.0
-M_aaacp	0.0
+M_dguo	0.0
 M_urt	0.0
-M_this	0.0
+M_guo	0.0
 M_pyr	0.0
 M_glc	10.0
 M_gln	0.0

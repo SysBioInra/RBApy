@@ -900,13 +900,13 @@
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
         <transporterEfficiency>
-          <function id="" type="indicator" variable="M_gly_e">
+          <function id="" type="indicator" variable="M_glo_e">
             <listOfParameters>
               <parameter id="X_MIN" value="1e-05"/>
               <parameter id="X_MAX" value="inf"/>
             </listOfParameters>
           </function>
-          <function id="" type="michaelisMenten" variable="M_gly_e">
+          <function id="" type="michaelisMenten" variable="M_glo_e">
             <listOfParameters>
               <parameter id="Km" value="0.8"/>
               <parameter id="kmax" value="1.0"/>
@@ -1083,13 +1083,13 @@
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
         <transporterEfficiency>
-          <function id="" type="indicator" variable="M_glo_e">
+          <function id="" type="indicator" variable="M_gnt_e">
             <listOfParameters>
               <parameter id="X_MIN" value="1e-05"/>
               <parameter id="X_MAX" value="inf"/>
             </listOfParameters>
           </function>
-          <function id="" type="michaelisMenten" variable="M_glo_e">
+          <function id="" type="michaelisMenten" variable="M_gnt_e">
             <listOfParameters>
               <parameter id="Km" value="0.8"/>
               <parameter id="kmax" value="1.0"/>
@@ -1756,13 +1756,13 @@
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
         <transporterEfficiency>
-          <function id="" type="indicator" variable="M_act_e">
+          <function id="" type="indicator" variable="M_ac_e">
             <listOfParameters>
               <parameter id="X_MIN" value="1e-05"/>
               <parameter id="X_MAX" value="inf"/>
             </listOfParameters>
           </function>
-          <function id="" type="michaelisMenten" variable="M_act_e">
+          <function id="" type="michaelisMenten" variable="M_ac_e">
             <listOfParameters>
               <parameter id="Km" value="0.8"/>
               <parameter id="kmax" value="1.0"/>
@@ -1816,13 +1816,13 @@
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
         <transporterEfficiency>
-          <function id="" type="indicator" variable="M_ac_e">
+          <function id="" type="indicator" variable="M_act_e">
             <listOfParameters>
               <parameter id="X_MIN" value="1e-05"/>
               <parameter id="X_MAX" value="inf"/>
             </listOfParameters>
           </function>
-          <function id="" type="michaelisMenten" variable="M_ac_e">
+          <function id="" type="michaelisMenten" variable="M_act_e">
             <listOfParameters>
               <parameter id="Km" value="0.8"/>
               <parameter id="kmax" value="1.0"/>
@@ -3587,13 +3587,13 @@
           </enzymeEfficiency>
         </listOfEnzymeEfficiencies>
         <transporterEfficiency>
-          <function id="" type="indicator" variable="M_hxtx_e">
+          <function id="" type="indicator" variable="M_hxth_e">
             <listOfParameters>
               <parameter id="X_MIN" value="1e-05"/>
               <parameter id="X_MAX" value="inf"/>
             </listOfParameters>
           </function>
-          <function id="" type="michaelisMenten" variable="M_hxtx_e">
+          <function id="" type="michaelisMenten" variable="M_hxth_e">
             <listOfParameters>
               <parameter id="Km" value="0.8"/>
               <parameter id="kmax" value="1.0"/>
