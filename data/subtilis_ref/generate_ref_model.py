@@ -3,8 +3,9 @@ from lxml import etree
 import libsbml
 from itertools import chain
 import sys
+from os.path import join
 
-sys.path.append('../..')
+sys.path.append(join(sys.path[0],'../..'))
 
 import rba
 from rba import rba_xml

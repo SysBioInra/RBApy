@@ -70,6 +70,7 @@
             <speciesReference species="BSU24450" stoichiometry="0.8"/>
             <speciesReference species="BSU37010" stoichiometry="0.25"/>
             <speciesReference species="BSU35290" stoichiometry="0.25"/>
+            <speciesReference species="M_zn2_c" stoichiometry="2.0"/>
           </listOfReactants>
           <listOfProducts>
             <speciesReference species="M_gdp_c" stoichiometry="2.0"/>
