@@ -26,7 +26,8 @@ class RbaMatrices(object):
         self.reversibility = [r.reversible for r in reactions]
         self.S = self._extract_S(self.metabolites, reactions)
         # extract functions
-        self.functions = Functions(data.parameters.functions)
+        self.functions = Functions(data.parameters.functions,
+                                   data.parameters.aggregates)
         # extract density constraints
         compartments = [c.id for c in data.metabolism.compartments]
         self.density = Density(data.parameters.maximal_densities,
