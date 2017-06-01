@@ -80,10 +80,7 @@
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
         </machineryComposition>
-        <capacity>
-          <functionReference function="ribosome_efficiency_MM"/>
-          <functionReference function="fraction_active_ribosomes"/>
-        </capacity>
+        <capacity value="ribosome_capacity"/>
       </machinery>
       <operations>
         <listOfProductions>
@@ -92,48 +89,13 @@
       </operations>
       <targets>
         <listOfConcentrations>
-          <targetSpecies species="average_protein_Secreted">
-            <functionReference function="amino_acid_concentration"/>
-            <functionReference function="inverse_average_protein_length"/>
-            <functionReference function="fraction_protein_Secreted"/>
-            <functionReference function="fraction_non_enzymatic_protein_Secreted"/>
-          </targetSpecies>
-          <targetSpecies species="average_protein_Cell_inner_membrane">
-            <functionReference function="amino_acid_concentration"/>
-            <functionReference function="inverse_average_protein_length"/>
-            <functionReference function="fraction_protein_Cell_inner_membrane"/>
-            <functionReference function="fraction_non_enzymatic_protein_Cell_inner_membrane"/>
-          </targetSpecies>
-          <targetSpecies species="average_protein_Cytoplasm">
-            <functionReference function="amino_acid_concentration"/>
-            <functionReference function="inverse_average_protein_length"/>
-            <functionReference function="fraction_protein_Cytoplasm"/>
-            <functionReference function="fraction_non_enzymatic_protein_Cytoplasm"/>
-          </targetSpecies>
-          <targetSpecies species="average_protein_Cell_membrane">
-            <functionReference function="amino_acid_concentration"/>
-            <functionReference function="inverse_average_protein_length"/>
-            <functionReference function="fraction_protein_Cell_membrane"/>
-            <functionReference function="fraction_non_enzymatic_protein_Cell_membrane"/>
-          </targetSpecies>
-          <targetSpecies species="average_protein_Periplasm">
-            <functionReference function="amino_acid_concentration"/>
-            <functionReference function="inverse_average_protein_length"/>
-            <functionReference function="fraction_protein_Periplasm"/>
-            <functionReference function="fraction_non_enzymatic_protein_Periplasm"/>
-          </targetSpecies>
-          <targetSpecies species="average_protein_Membrane">
-            <functionReference function="amino_acid_concentration"/>
-            <functionReference function="inverse_average_protein_length"/>
-            <functionReference function="fraction_protein_Membrane"/>
-            <functionReference function="fraction_non_enzymatic_protein_Membrane"/>
-          </targetSpecies>
-          <targetSpecies species="average_protein_Cell_outer_membrane">
-            <functionReference function="amino_acid_concentration"/>
-            <functionReference function="inverse_average_protein_length"/>
-            <functionReference function="fraction_protein_Cell_outer_membrane"/>
-            <functionReference function="fraction_non_enzymatic_protein_Cell_outer_membrane"/>
-          </targetSpecies>
+          <targetSpecies value="nonenzymatic_proteins_Secreted" species="average_protein_Secreted"/>
+          <targetSpecies value="nonenzymatic_proteins_Cell_inner_membrane" species="average_protein_Cell_inner_membrane"/>
+          <targetSpecies value="nonenzymatic_proteins_Cytoplasm" species="average_protein_Cytoplasm"/>
+          <targetSpecies value="nonenzymatic_proteins_Cell_membrane" species="average_protein_Cell_membrane"/>
+          <targetSpecies value="nonenzymatic_proteins_Periplasm" species="average_protein_Periplasm"/>
+          <targetSpecies value="nonenzymatic_proteins_Membrane" species="average_protein_Membrane"/>
+          <targetSpecies value="nonenzymatic_proteins_Cell_outer_membrane" species="average_protein_Cell_outer_membrane"/>
         </listOfConcentrations>
       </targets>
     </process>
@@ -149,9 +111,7 @@
             <speciesReference species="P0A850" stoichiometry="1.0"/>
           </listOfReactants>
         </machineryComposition>
-        <capacity>
-          <functionReference function="chaperone_efficiency_LM"/>
-        </capacity>
+        <capacity value="chaperone_efficiency_LM"/>
       </machinery>
       <operations>
         <listOfProductions>
@@ -245,11 +205,9 @@
     <process id="P_MACRO_PROD" name="Macrocomponent production"/>
     <process id="P_maintenance_atp" name="Maintenance ATP">
       <targets>
-        <listOfLowerBounds>
-          <targetReaction reaction="R_maintenance_atp">
-            <functionReference function="maintenance_atp"/>
-          </targetReaction>
-        </listOfLowerBounds>
+        <listOfReactionFluxes>
+          <targetReaction lowerBound="maintenance_atp" reaction="R_maintenance_atp"/>
+        </listOfReactionFluxes>
       </targets>
     </process>
   </listOfProcesses>

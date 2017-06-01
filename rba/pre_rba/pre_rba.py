@@ -246,21 +246,29 @@ class PreRba(object):
             return [rba_data.average_protein_id(self._cytoplasm_id), 1]
 
     def _initialize_parameters(self):
-        ## maximal densities
+        ## target densities
         other_compartments = self._compartment_ids[:]
         other_compartments.remove(self._cytoplasm_id)
         other_compartments.remove(self._external_id)
-        constraints = self.model.parameters.maximal_densities
+        constraints = self.model.parameters.target_densities
+        aggregates = self.model.parameters.aggregates
         # always start with cytoplasm
-        c_density = MaximalDensity(self._cytoplasm_id)
-        c_density.value = rba_data.cytoplasm_density
+        c_density = TargetDensity(self._cytoplasm_id)
+        c_density.upper_bound = rba_data.cytoplasm_density
         constraints.append(c_density)
         # now treat the rest
         for user_id in other_compartments:
-            new_density = MaximalDensity(user_id)
-            new_density.function_references.append('amino_acid_concentration')
-            new_density.function_references.append(rba_data.protein_fraction_id(user_id))
-            constraints.append(new_density)
+            # create aggregated function for density
+            id_ = user_id + '_density'
+            new_aggregate = Aggregate(id_, 'multiplication')
+            for ref in ['amino_acid_concentration',
+                        rba_data.protein_fraction_id(user_id)]:
+                new_aggregate.function_references.append(FunctionReference(ref))
+            aggregates.append(new_aggregate)
+            # create constraint
+            new_density = TargetDensity(user_id)
+            new_density.upper_bound = id_
+            constraints.append(new_density)            
 
         ## functions
         fns = self.model.parameters.functions
@@ -284,12 +292,15 @@ class PreRba(object):
 
     def _initialize_processes(self):
         ## create processes
-        self.model.processes = DefaultProcesses \
-                         (self._ribosome_composition,
-                          self._chaperone_composition,
-                          self._compartment_ids, self._cofactors,
-                          self.metabolite_map, self._macro_fluxes) \
-                          .rba_processes
+        processes = DefaultProcesses \
+                    (self._ribosome_composition, self._chaperone_composition,
+                     self._compartment_ids, self._cofactors,
+                     self.metabolite_map, self._macro_fluxes)
+        # add processes to model
+        self.model.processes = processes.rba_processes
+        # add aggregated functions to model
+        for agg in processes.aggregates:
+            self.model.parameters.aggregates.append(agg)
         ## add atpm reaction
         reaction = Reaction(rba_data.atpm_reaction, False)
         for m in ['ATP', 'H2O']:

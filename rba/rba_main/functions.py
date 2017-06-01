@@ -125,7 +125,7 @@ def build_function(type_, params, variable = None):
         print('Missing parameter: ' + error.message)
         raise UserWarning('Invalid function.')
 
-def build_aggregate(self, agg, known_functions):
+def build_aggregate(agg, known_functions):
     try:
         # retrieve class implementing aggregate
         agg_class = valid_aggs[agg.type]

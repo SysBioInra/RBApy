@@ -17,6 +17,7 @@ class DefaultProcesses(object):
         self._missing_id = ''
         
         self.rba_processes = RbaProcesses()
+        self.aggregates = ListOfAggregates()
 
         # create default processes
         processes = self.rba_processes.processes
@@ -48,19 +49,22 @@ class DefaultProcesses(object):
         self._append_metabolite(machine.products, 'GDP', 2)
         self._append_metabolite(machine.products, 'Pi', 2)
         self._append_metabolite(machine.products, 'H', 2)
-        capacity = process.machinery.capacity
-        capacity.function_references.append('ribosome_efficiency_MM')
-        capacity.function_references.append('fraction_active_ribosomes')
+        id_ = 'ribosome_capacity'
+        self._add_aggregate(id_, ['ribosome_efficiency_MM',
+                                  'fraction_active_ribosomes'])
+        process.machinery.capacity.value = id_
         # operating costs
         process.operations.productions\
                                .append(Operation('translation', 'protein'))
         # targets
         for c in compartments:
             target = TargetSpecies(rba_data.average_protein_id(c))
-            target.function_references.append('amino_acid_concentration')
-            target.function_references.append('inverse_average_protein_length')
-            target.function_references.append(rba_data.protein_fraction_id(c))
-            target.function_references.append(rba_data.non_enzymatic_fraction_id(c))
+            id_ = 'nonenzymatic_proteins_' + c
+            self._add_aggregate(id_, ['amino_acid_concentration',
+                                      'inverse_average_protein_length',
+                                      rba_data.protein_fraction_id(c),
+                                      rba_data.non_enzymatic_fraction_id(c)])
+            target.value = id_
             process.targets.concentrations.append(target)
         return process
 
@@ -70,8 +74,7 @@ class DefaultProcesses(object):
         machine = process.machinery.machinery_composition
         for id_, sto in chaperone_composition.items():
             machine.reactants.append(SpeciesReference(id_, sto))
-        capacity = process.machinery.capacity
-        capacity.function_references.append('chaperone_efficiency_LM')
+        process.machinery.capacity.value = 'chaperone_efficiency_LM'
         # operating costs
         process.operations.productions\
                                .append(Operation('folding', 'protein'))
@@ -149,8 +152,8 @@ class DefaultProcesses(object):
     def _maintenance_atp(self):
         process = Process('P_maintenance_atp', 'Maintenance ATP')
         target = TargetReaction(rba_data.atpm_reaction)
-        target.function_references.append('maintenance_atp')
-        process.targets.lower_bounds.append(target)
+        target.lower_bound = 'maintenance_atp'
+        process.targets.reaction_fluxes.append(target)
         return process
 
     def _translation_map(self):
@@ -234,3 +237,10 @@ class DefaultProcesses(object):
         sbml_id = self._metabolites[key].sbml_id
         if sbml_id != self._missing_id:
             SR_list.append(SpeciesReference(sbml_id, sto))
+
+    def _add_aggregate(self, id_, fn_refs):
+        result = Aggregate(id_, 'multiplication')
+        for ref in fn_refs:
+            result.function_references.append(FunctionReference(ref))
+        self.aggregates.append(result)
+

@@ -24,17 +24,31 @@ def saturating_constraints(solver):
             print('{}: {} vs LB {}'.format(solver.col_names[c], nu, ub))
     
     # find saturating density constraints
-    density_rows = numpy.where(solver.b != 0)[0]
+    density_rows = [i for i, r_name in enumerate(solver.row_names)
+                    if 'density' in r_name]
     b_opt = solver.A.dot(solver.X)
     for r in density_rows:
         # only display info if constraint is saturated > 95%
         if solver.b[r] == 0 or (b_opt[r] / solver.b[r] < 0.95): continue
         # find critical enzymes along this constraint
         keep = 10
-        print('\n' + solver.ineq_row_names[r]
+        print('\n' + solver.row_names[r]
               + ' (%g vs %g)' %(solver.b[r], b_opt[r])
               + '. Top {}:'.format(keep))
         enzyme_density = (solver.A.toarray()[r,:] * solver.X) / solver.b[r]
         order = numpy.argsort(enzyme_density)[::-1][:keep]
         for i in order:
             print('{} {}%'.format(solver.col_names[i], 100*enzyme_density[i]))
+
+    # find non saturated enzymes
+    output = []
+    for c in solver.enzyme_cols:
+        # find rows containing forward and backward capacity
+        enzyme = solver.col_names[c]
+        f = solver.row_names.index(enzyme + '_forward_capacity')
+        b = solver.row_names.index(enzyme + '_backward_capacity')
+        if (b_opt[f] < -1e-10) and (b_opt[b] < -1e-10):
+            output.append(enzyme + ': (%g, %g)' %(b_opt[f], b_opt[b]))
+    if len(output) > 0:
+        print('\nNon saturated enzymes (forward, backward):\n'
+              + '\n'.join(output))

@@ -15,4 +15,4 @@ if __name__ == '__main__':
 
         model = rba.RbaModel.from_xml(xml_dir)
         solver = model.solve(medium)
-        #saturating_constraints(solver)
+        saturating_constraints(solver)

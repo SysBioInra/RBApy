@@ -1,12 +1,8 @@
 <RBAParameters>
-  <listOfMaximalDensities>
-    <maximalDensity value="4.8972" compartment="c"/>
-    <maximalDensity compartment="mp">
-      <functionReference function="protein_concentration"/>
-      <functionReference function="average_protein_weight"/>
-      <functionReference function="fraction_membrane_protein"/>
-    </maximalDensity>
-  </listOfMaximalDensities>
+  <listOfTargetDensities>
+    <targetDensity upperBound="4.8972" compartment="c"/>
+    <targetDensity value="mp_density" compartment="mp"/>
+  </listOfTargetDensities>
   <listOfFunctions>
     <function id="protein_concentration" type="linear">
       <listOfParameters>
@@ -152,4 +148,47 @@
       </listOfParameters>
     </function>
   </listOfFunctions>
+  <listOfAggregates>
+    <aggregate id="mp_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="protein_concentration"/>
+        <functionReference function="average_protein_weight"/>
+        <functionReference function="fraction_membrane_protein"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="P_TA_capacity" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="ribosomeEfficiencyMM"/>
+        <functionReference function="fractionActiveRibosomes"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Pg_c_concentration" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="protein_concentration"/>
+        <functionReference function="fraction_cytosol_protein"/>
+        <functionReference function="fraction_nonenzymatic_cytosol_protein"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Pg_e_concentration" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="protein_concentration"/>
+        <functionReference function="fraction_external_protein"/>
+        <functionReference function="fraction_nonenzymatic_external_protein"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Pg_mp_concentration" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="protein_concentration"/>
+        <functionReference function="fraction_membrane_protein"/>
+        <functionReference function="fraction_nonenzymatic_membrane_protein"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Th_flux" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="number_flagella"/>
+        <functionReference function="flagella_speed"/>
+        <functionReference function="flagella_H_consumption"/>
+      </listOfFunctionReferences>
+    </aggregate>
+  </listOfAggregates>
 </RBAParameters>
