@@ -60,10 +60,10 @@ fns.append(Function('maintenance_atp', 'linear',
                      'X_MIN': 1, 'X_MAX': float('Inf'),
                      'Y_MIN': float('-Inf'), 'Y_MAX': float('Inf')}))
 
-# additional reactions
+## additional reactions
 atpm_reaction = 'R_maintenance_atp'
 
-# key metabolites and components
+## key metabolites and components
 aas_3L = {'A':'ala', 'C':'cys', 'D':'asp', 'E':'glu', 'F':'phe', 'G':'gly',
           'H':'his', 'I':'ile', 'K':'lys', 'L':'leu', 'fM': 'fmet','M':'met',
           'N':'asn', 'P':'pro', 'Q':'gln', 'R':'arg', 'S':'ser', 'T':'thr',

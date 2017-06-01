@@ -9,24 +9,31 @@ class RbaSolver(object):
         reactions = blocks.reactions
         enzymes = blocks.enzymes.ids
         processes = blocks.processes.ids
+        undetermined_fluxes = blocks.processes.undetermined_values.names
         compartments = blocks.density.compartments
         nb_reactions = len(reactions)
         nb_enzymes = len(enzymes)
         nb_processes = len(processes)
+        nb_undetermined = len(undetermined_fluxes)
         nb_compartments = len(compartments)
         # column information
         self.col_names = reactions + enzymes \
-                         + [p + '_machinery' for p in processes]
+                         + [p + '_machinery' for p in processes] \
+                         + [m + '_flux' for m in undetermined_fluxes]
         self.reaction_cols = numpy.arange(nb_reactions)
-        self.enzyme_cols = nb_reactions + numpy.arange(nb_enzymes)
-        self.process_cols = nb_reactions+nb_enzymes+numpy.arange(nb_processes)
-        # equality row information
-        self.eq_row_names = blocks.metabolites \
-                            + [p + '_capacity' for p in processes] \
-        # inequality row information
-        self.ineq_row_names = [e + '_forward_capacity' for e in enzymes] \
-                              + [e + '_backward_capacity' for e in enzymes]\
-                              + [c + '_density' for c in compartments]
+        self.enzyme_cols = self.reaction_cols[-1]+1+numpy.arange(nb_enzymes)
+        self.process_cols = self.enzyme_cols[-1]+1+numpy.arange(nb_processes)
+        self.species_cols = self.process_cols[-1]+1+numpy.arange(nb_undetermined)
+        # row information
+        self.row_names = blocks.metabolites \
+                         + [p + '_capacity' for p in processes] \
+                         + [e + '_forward_capacity' for e in enzymes] \
+                         + [e + '_backward_capacity' for e in enzymes]\
+                         + [c + '_density' for c in compartments]
+        self.row_signs = ['E'] * len(blocks.metabolites) \
+                         + blocks.processes.capacity_signs \
+                         + ['L'] * 2 * nb_enzymes \
+                         + blocks.density.signs
         # upper bound, lower bound, objective function
         nb_cols = len(self.col_names)
         self.UB = 1e5 * numpy.ones(nb_cols)
@@ -35,7 +42,7 @@ class RbaSolver(object):
         self.LB[self.reaction_cols] = -1e3*numpy.array(blocks.reversibility)
         self.f[self.enzyme_cols] = 1
         # constant building blocks
-        self._empty_ExP = coo_matrix((nb_enzymes, nb_processes))
+        self._empty_ExPU = coo_matrix((nb_enzymes, nb_processes+nb_undetermined))
         self._empty_PxR = coo_matrix((nb_processes, nb_reactions))
         self._empty_CxR = coo_matrix((nb_compartments, nb_reactions))
         self._empty_2E = numpy.zeros(2*nb_enzymes)
@@ -50,38 +57,53 @@ class RbaSolver(object):
         self._ub_reactions \
             = [reactions.index(r) for r in blocks.processes.ub_reaction]
 
-    def build_matrices(self, mu):
+    def build_matrices(self, mu):        
         ## build A
+        # mu-dependent data
+        u_composition, u_proc_cost, u_weight \
+            = self._blocks.processes.undetermined_values.matrices(mu)
+        capacity = self._blocks.processes.capacity.compute(mu)
         (forward, backward) = self._blocks.enzymes.efficiency.compute(mu)
-        forward_rows = hstack([self._R_to_E, -diags(forward), self._empty_ExP])
-        backward_rows = hstack([-self._R_to_E,
-                                -diags(backward), self._empty_ExP])
-        c_indices = self._blocks.density.compartment_indices
-        density_rows = hstack([self._empty_CxR,
-                               self._blocks.enzymes.machinery.weight[c_indices],
-                               self._blocks.processes.machinery.weight[c_indices]])
-        self.A = vstack([forward_rows, backward_rows, density_rows])
-        
-        ## build Aeq
+        # stoichiometry constraints
         metab_rows = hstack([self._blocks.S,
                              mu*self._blocks.enzymes.machinery.composition,
-                             mu*self._blocks.processes.machinery.composition])
-        capacity = self._blocks.processes.capacity.compute(mu)
+                             mu*self._blocks.processes.machinery.composition,
+                             u_composition])
+        # capacity constraints
         process_rows = hstack([self._empty_PxR,
                                mu*self._blocks.enzymes.machinery.processing_cost,
                                mu*self._blocks.processes.machinery.processing_cost
-                               -diags(capacity)])
-        self.Aeq = vstack([metab_rows, process_rows])
+                               -diags(capacity),
+                               u_proc_cost])
+        forward_rows = hstack([self._R_to_E, -diags(forward), self._empty_ExPU])
+        backward_rows = hstack([-self._R_to_E,
+                                -diags(backward), self._empty_ExPU])
+        # density constraints
+        c_indices = self._blocks.density.compartment_indices
+        density_rows = hstack([self._empty_CxR,
+                               self._blocks.enzymes.machinery.weight[c_indices],
+                               self._blocks.processes.machinery.weight[c_indices],
+                               u_weight[c_indices]])
+        self.A = vstack([metab_rows, process_rows,
+                         forward_rows, backward_rows, density_rows])
 
-        ## build b and beq
+        ## build b
+        # gather mu-dependent data
         (fluxes, processing, weight) \
             = self._blocks.processes.target_values.compute(mu)
-        density_rows = self._blocks.density.maximum.compute(mu) \
+        density_rows = self._blocks.density.values.compute(mu) \
                        - weight[c_indices].T
-        self.b = numpy.concatenate([self._empty_2E, density_rows])
-        self.beq = numpy.concatenate([-fluxes, -processing])
+        # build vector
+        self.b = numpy.concatenate([-fluxes, -processing,
+                                    self._empty_2E, density_rows])
 
         ## update lower bounds and upper bounds
+        # undetermined metabolites
+        self.LB[self.species_cols] \
+            = self._blocks.processes.undetermined_values.lb(mu)
+        self.UB[self.species_cols] \
+            = self._blocks.processes.undetermined_values.ub(mu)
+        # target reactions
         self.LB[self.reaction_cols[self._lb_reactions]] \
             = self._blocks.processes.lb.compute(mu)
         self.UB[self.reaction_cols[self._ub_reactions]] \
@@ -100,8 +122,21 @@ class RbaSolver(object):
         self.build_matrices(0)
         lp = self.setup_lp()
         lp.solve()
-        if lp.solution.get_status() == lp.solution.status.infeasible:
+        exit_flag = lp.solution.get_status()
+        if (exit_flag == lp.solution.status.optimal):
+            self.X = numpy.array(lp.solution.get_values())
+            self.lambda_ = lp.solution.get_dual_values()
+            self.mu_opt = 0
+            self._sol_basis = lp.solution.basis.get_basis()
+        elif exit_flag == lp.solution.status.infeasible \
+             or (exit_flag == lp.solution.status.optimal_infeasible):
             print('Mu = 0 is infeasible, check matrix consistency')
+            return
+        else:
+            print('At mu = 0: Unknown exit flag '
+                  + str(exit_flag) + ' corresponding to status '
+                  + lp.solution.get_status_string() + '. '
+                  'Interrupting execution')
             return
 
         # bissection
@@ -139,19 +174,19 @@ class RbaSolver(object):
         """        
         ## preprocess matrices
         # rescale concentration columns?
-        lhs = vstack([self.A, self.Aeq])
-        #scaling[numpy.concatenate([self.enzyme_cols, self.process_cols])] \
-            #= 1.0/scaling_factor
-        #lhs *= diags(1.0/scaling)
+        lhs = self.A
+        #scaling_factor = 1000
+        #scaling = numpy.ones(lhs.shape[1])
+        #scaling[numpy.concatenate([self.enzyme_cols, self.process_cols,
+        #self.species_cols])] \
+        #= 1.0/scaling_factor
+        #lhs *= diags(scaling)
         
         # transform inequality and equality constraints in CPLEX row format
         lhs = lhs.tolil()
         rows = []
         for nz_ind, data in zip(lhs.rows, lhs.data):
             rows.append(cplex.SparsePair(nz_ind, data))
-        senses = ['L'] * len(self.b) + ['E'] * len(self.beq)
-        names = self.ineq_row_names + self.eq_row_names
-        rhs = numpy.append(self.b, self.beq)
 
         ## define problem
         lp_problem = cplex.Cplex()
@@ -171,8 +206,10 @@ class RbaSolver(object):
         # define columns and add rows
         lp_problem.variables.add(obj = self.f, ub = self.UB, lb = self.LB,
                                  names = self.col_names)
-        lp_problem.linear_constraints.add(lin_expr = rows, rhs = rhs,
-                                          senses = senses, names = names)
+        lp_problem.linear_constraints.add(lin_expr = rows,
+                                          rhs = self.b,
+                                          senses = self.row_signs,
+                                          names = self.row_names)
         # set starting point (not sure how this works)
         if self._sol_basis is not None:
             lp_problem.start.set_basis(self._sol_basis[0], self._sol_basis[1])

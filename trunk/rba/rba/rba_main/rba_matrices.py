@@ -30,7 +30,7 @@ class RbaMatrices(object):
                                    data.parameters.aggregates)
         # extract density constraints
         compartments = [c.id for c in data.metabolism.compartments]
-        self.density = Density(data.parameters.maximal_densities,
+        self.density = Density(data.parameters.target_densities,
                                self.functions, compartments)
         # extract base species composition (metabolites + polymers)
         self.species = Species(data, self.metabolites)

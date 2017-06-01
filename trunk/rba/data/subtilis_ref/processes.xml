@@ -78,10 +78,7 @@
             <speciesReference species="M_h_c" stoichiometry="2.0"/>
           </listOfProducts>
         </machineryComposition>
-        <capacity>
-          <functionReference function="ribosomeEfficiencyMM"/>
-          <functionReference function="fractionActiveRibosomes"/>
-        </capacity>
+        <capacity value="P_TA_capacity"/>
       </machinery>
       <operations>
         <listOfProductions>
@@ -90,21 +87,9 @@
       </operations>
       <targets>
         <listOfConcentrations>
-          <targetSpecies species="Pg_c">
-            <functionReference function="protein_concentration"/>
-            <functionReference function="fraction_cytosol_protein"/>
-            <functionReference function="fraction_nonenzymatic_cytosol_protein"/>
-          </targetSpecies>
-          <targetSpecies species="Pg_e">
-            <functionReference function="protein_concentration"/>
-            <functionReference function="fraction_external_protein"/>
-            <functionReference function="fraction_nonenzymatic_external_protein"/>
-          </targetSpecies>
-          <targetSpecies species="Pg_mp">
-            <functionReference function="protein_concentration"/>
-            <functionReference function="fraction_membrane_protein"/>
-            <functionReference function="fraction_nonenzymatic_membrane_protein"/>
-          </targetSpecies>
+          <targetSpecies value="Pg_c_concentration" species="Pg_c"/>
+          <targetSpecies value="Pg_e_concentration" species="Pg_e"/>
+          <targetSpecies species="Pg_mp"/>
         </listOfConcentrations>
       </targets>
     </process>
@@ -118,9 +103,7 @@
             <speciesReference species="BSU25470" stoichiometry="1.0"/>
           </listOfReactants>
         </machineryComposition>
-        <capacity>
-          <functionReference function="chaperoneEfficiencyLM"/>
-        </capacity>
+        <capacity value="chaperoneEfficiencyLM"/>
       </machinery>
       <operations>
         <listOfProductions>
@@ -183,17 +166,17 @@
           <targetSpecies value="0.007" species="M_sprm_c"/>
           <targetSpecies value="0.0026" species="M_adp_c"/>
           <targetSpecies value="0.0003" species="M_cdp_c"/>
-          <targetSpecies value="0.0" species="M_udp_c"/>
+          <targetSpecies value="0" species="M_udp_c"/>
           <targetSpecies value="0.0047" species="M_amp_c"/>
           <targetSpecies value="0.0005" species="M_gmp_c"/>
           <targetSpecies value="0.001" species="M_cmp_c"/>
-          <targetSpecies value="0.0" species="M_ump_c"/>
+          <targetSpecies value="0" species="M_ump_c"/>
           <targetSpecies value="0.0002" species="M_gdp_c"/>
           <targetSpecies value="0.0144" species="M_p_c"/>
           <targetSpecies value="0.0009" species="M_pp_c"/>
           <targetSpecies value="0.003" species="M_atp_c"/>
           <targetSpecies value="0.0004" species="M_gtp_c"/>
-          <targetSpecies value="0.0" species="M_utp_c"/>
+          <targetSpecies value="0" species="M_utp_c"/>
           <targetSpecies value="0.0005" species="M_ctp_c"/>
         </listOfConcentrations>
       </targets>
@@ -216,21 +199,15 @@
     <process id="P_flagella" name="Flagella activation">
       <targets>
         <listOfReactionFluxes>
-          <targetReaction reaction="Th">
-            <functionReference function="number_flagella"/>
-            <functionReference function="flagella_speed"/>
-            <functionReference function="flagella_H_consumption"/>
-          </targetReaction>
+          <targetReaction value="Th_flux" reaction="Th"/>
         </listOfReactionFluxes>
       </targets>
     </process>
     <process id="P_maintenance_atp" name="Maintenance ATP">
       <targets>
-        <listOfLowerBounds>
-          <targetReaction reaction="Eatpm">
-            <functionReference function="maintenanceATP"/>
-          </targetReaction>
-        </listOfLowerBounds>
+        <listOfReactionFluxes>
+          <targetReaction lowerBound="maintenanceATP" reaction="Eatpm"/>
+        </listOfReactionFluxes>
       </targets>
     </process>
   </listOfProcesses>

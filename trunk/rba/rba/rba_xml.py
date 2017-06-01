@@ -140,38 +140,6 @@ class ListOfParameters(ListOf):
     tag = 'listOfParameters'
     list_element = Parameter
 
-class ValueNode(object):
-    def __init__(self):
-        self.value = 0
-        self.function_references = []
-
-    def is_empty(self):
-        return self.value == 0 and len(self.function_references) == 0
-
-    def to_xml_node(self):
-        result = etree.Element(self.tag)
-        if self.value != 0 or len(self.function_references) == 0:
-            result.set('value', str(self.value))
-        for fn_id in self.function_references:
-            fn_node = etree.SubElement(result, 'functionReference')
-            fn_node.set('function', fn_id)
-        return result
-
-    def _init_from_xml_node(self, node):
-        self.value = node.get('value')
-        if self.value:
-            self.value = float(self.value)
-        else:
-            self.value = 0
-        for n in node.iterfind('functionReference'):
-            self.function_references.append(n.get('function'))
-
-    @classmethod
-    def from_xml_node(cls, node):
-        result = cls()
-        result._init_from_xml_node(node)
-        return result
-
 class Function(object):
     tag = 'function'
     
@@ -204,6 +172,39 @@ class Function(object):
 class ListOfFunctions(ListOf):
     tag = 'listOfFunctions'
     list_element = Function
+
+class TargetValue(object):
+    tag = 'targetValue'
+    
+    def __init__(self):
+        self.value = None
+        self.lower_bound = None
+        self.upper_bound = None
+
+    def is_empty(self):
+        return self.value is None and self.lower_bound is None \
+            and self.upper_bound is None
+
+    def to_xml_node(self):
+        result = etree.Element(self.tag)
+        if self.value is not None:
+            result.set('value', str(self.value))
+        if self.lower_bound is not None:
+            result.set('lowerBound', str(self.lower_bound))
+        if self.upper_bound is not None:
+            result.set('upperBound', str(self.upper_bound))
+        return result
+    
+    @classmethod
+    def from_xml_node(cls, node):
+        result = cls()
+        result._init_from_xml_node(node)
+        return result
+
+    def _init_from_xml_node(self, node):
+        self.value = node.get('value')
+        self.lower_bound = node.get('lowerBound')
+        self.upper_bound = node.get('upperBound')
 
 ################################################################################
 #                                  METABOLISM                                  #
@@ -309,13 +310,13 @@ class ListOfReactions(ListOf):
 
 class RbaParameters(object):
     def __init__(self):
-        self.maximal_densities = ListOfMaximalDensities()
+        self.target_densities = ListOfTargetDensities()
         self.functions = ListOfFunctions()
         self.aggregates = ListOfAggregates()
 
     def write(self, output_stream, doc_name = 'RBAParameters'):
         root = etree.Element(doc_name)
-        root.extend([self.maximal_densities.to_xml_node(),
+        root.extend([self.target_densities.to_xml_node(),
                      self.functions.to_xml_node(),
                      self.aggregates.to_xml_node()])
         etree.ElementTree(root).write(output_stream, pretty_print=True)
@@ -324,23 +325,23 @@ class RbaParameters(object):
     def from_file(cls, input_stream):
         node = etree.ElementTree(file=input_stream).getroot()
         result = cls()
-        n = get_unique_child(node, ListOfMaximalDensities.tag)
-        result.maximal_densities = ListOfMaximalDensities.from_xml_node(n)
+        n = get_unique_child(node, ListOfTargetDensities.tag)
+        result.target_densities = ListOfTargetDensities.from_xml_node(n)
         n = get_unique_child(node, ListOfFunctions.tag)
         result.functions = ListOfFunctions.from_xml_node(n)
         n = get_unique_child(node, ListOfAggregates.tag)
         result.aggregates = ListOfAggregates.from_xml_node(n)
         return result
     
-class MaximalDensity(ValueNode):
-    tag = 'maximalDensity'
+class TargetDensity(TargetValue):
+    tag = 'targetDensity'
     
     def __init__(self, compartment):
-        super(MaximalDensity, self).__init__()
+        super(TargetDensity, self).__init__()
         self.compartment = compartment
 
     def to_xml_node(self):
-        result = super(MaximalDensity,self).to_xml_node()
+        result = super(TargetDensity,self).to_xml_node()
         result.set('compartment', self.compartment)
         return result
     
@@ -350,9 +351,9 @@ class MaximalDensity(ValueNode):
         result._init_from_xml_node(node)
         return result
 
-class ListOfMaximalDensities(ListOf):
-    tag = 'listOfMaximalDensities'
-    list_element = MaximalDensity
+class ListOfTargetDensities(ListOf):
+    tag = 'listOfTargetDensities'
+    list_element = TargetDensity
 
 class FunctionReference(object):
     tag = 'functionReference'
@@ -392,8 +393,8 @@ class Aggregate(object):
     @classmethod
     def from_xml_node(cls, node):
         result = cls(node.get('id'), node.get('type'))
-        n = get_unique_child(node, listOfFunctionReferences.tag)
-        result.parameters = ListOfFunctionReferences.from_xml_node(n)
+        n = get_unique_child(node, ListOfFunctionReferences.tag)
+        result.function_references = ListOfFunctionReferences.from_xml_node(n)
         return result
 
 class ListOfAggregates(ListOf):
@@ -587,7 +588,7 @@ class Machinery(object):
         result.capacity = Capacity.from_xml_node(capacity_node)
         return result
 
-class Capacity(ValueNode):
+class Capacity(TargetValue):
     tag = 'capacity'
 
 class Operations(object):
@@ -654,18 +655,15 @@ class Targets(object):
         self.production_fluxes = ListOfProductionFluxes()
         self.degradation_fluxes = ListOfDegradationFluxes()
         self.reaction_fluxes = ListOfReactionFluxes()
-        self.lower_bounds = ListOfLowerBounds()
-        self.upper_bounds = ListOfUpperBounds()
 
     def is_empty(self):
-        return all((l.is_empty() for l in [self.concentrations, self.production_fluxes, self.degradation_fluxes, self.reaction_fluxes, self.lower_bounds, self.upper_bounds]))
+        return all((l.is_empty() for l in [self.concentrations, self.production_fluxes, self.degradation_fluxes, self.reaction_fluxes]))
 
     def to_xml_node(self):
         result = etree.Element(self.tag)
         # optional subelements
         opt = [self.concentrations, self.production_fluxes,
-               self.degradation_fluxes, self.reaction_fluxes,
-               self.lower_bounds, self.upper_bounds]
+               self.degradation_fluxes, self.reaction_fluxes]
         result.extend([e.to_xml_node() for e in opt if not(e.is_empty())])
         return result
 
@@ -684,15 +682,9 @@ class Targets(object):
         n = get_unique_child(node, result.reaction_fluxes.tag, False)
         if n is not None:
             result.reaction_fluxes = result.reaction_fluxes.from_xml_node(n)
-        n = get_unique_child(node, result.lower_bounds.tag, False)
-        if n is not None:
-            result.lower_bounds = result.lower_bounds.from_xml_node(n)
-        n = get_unique_child(node, result.upper_bounds.tag, False)
-        if n is not None:
-            result.upper_bounds = result.upper_bounds.from_xml_node(n)
         return result
     
-class TargetSpecies(ValueNode):
+class TargetSpecies(TargetValue):
     tag = 'targetSpecies'
     
     def __init__(self, species):
@@ -710,7 +702,7 @@ class TargetSpecies(ValueNode):
         result._init_from_xml_node(node)
         return result
 
-class TargetReaction(ValueNode):
+class TargetReaction(TargetValue):
     tag = 'targetReaction'
     
     def __init__(self, reaction):
@@ -742,14 +734,6 @@ class ListOfDegradationFluxes(ListOf):
 
 class ListOfReactionFluxes(ListOf):
     tag = 'listOfReactionFluxes'
-    list_element = TargetReaction
-
-class ListOfLowerBounds(ListOf):
-    tag = 'listOfLowerBounds'
-    list_element = TargetReaction
-
-class ListOfUpperBounds(ListOf):
-    tag = 'listOfUpperBounds'
     list_element = TargetReaction
 
 class ComponentMap(object):
