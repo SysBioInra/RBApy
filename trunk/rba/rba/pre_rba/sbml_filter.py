@@ -181,7 +181,7 @@ class SBMLFilter:
 
         # get gene id - gene name association
         gene_names = {}
-        for gene_product in fbc.gene_products:
+        for gene_product in fbc.getListOfGeneProducts():
             gene_names[gene_product.getId()] = gene_product.getLabel()
 
         # gather enzyme composition

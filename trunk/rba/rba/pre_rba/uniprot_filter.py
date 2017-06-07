@@ -1,4 +1,7 @@
 
+# make division python3 style (float division), i.e. 3 / 2 = 1.5
+from __future__ import division
+
 import pandas, os.path
 import re
 
