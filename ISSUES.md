@@ -8,12 +8,44 @@ Document the code (Stephan)
 Write unit/integration tests (Stephan)
 --------------------------------------
 
+IDEA: use same composition for every enzyme (Stephan)
+-----------------------------------------------------
+This would reduce the number of parameters, thus enabling higher quantitative
+stability. The idea is that the enzyme "efficiency" would become a compound
+parameter reflecting both the weight of the enzyme and its catalytic activity.
+Biggest shortcoming would be the necessity for cofactors, but they could be
+included in some form. Even if their stoichiometry is messed up it does not
+matter that much. Essential is rather can we produce them in the current medium.
+
+The pipeline could propose two branches: one generating the model with full
+parameters, one generating the simpler model where the concentrations of all
+enzymes are the same.
+
+Automatic rule to remove multiple enzymes catalyzing same reaction? (Stephan)
+-----------------------------------------------------------------------------
+Duplicating reactions is really annoying and increasing matrix size a lot.
+Is there a way to simplify the problem mathematically or can we find a rule
+to eliminate some of the enzymes (maybe depending on size and cofactors)?
+
 Data
 ====
 
 Stoichiometric coefficients in subtilis are different from original model (Stephan)
 --------------------------------------
-Growth rate loss is 0.66 -> 0.33
+Growth rate loss is 0.66 -> 0.33. We need to renormalize kE by a factor that
+reflects new vs old stoichiometry.
+kE was originally computed by counting monomers. When available, it was 
+multiplied by np, the number of monomers composing enzyme. We should use a
+similar procedure.
+
+Transporters vary considerably in subtilis (Stephan)
+-------------------------------------------------
+examples:
+Tnh3b: nh3 -> nh2,hex, 14% variation in Km
+Tno2b: . -> hex, 7%
+Tqox, Tcta: o2 -> ., 8%
+new transporters: Tco2, Ethis, EacpA
+
 
 Metabolic model of Arabidopsis is incomplete (Stephan)
 ------------------------------------------------------
@@ -76,24 +108,18 @@ Include information retrieved automatically in helper files (Stephan)
 --------------------------------------------------------------------
 See if and how we should include this information for each helper file.
 
-IDEA: use same composition for every enzyme (Stephan)
------------------------------------------------------
-This would reduce the number of parameters, thus enabling higher quantitative
-stability. The idea is that the enzyme "efficiency" would become a compound
-parameter reflecting both the weight of the enzyme and its catalytic activity.
-Biggest shortcoming would be the necessity for cofactors, but they could be
-included in some form. Even if their stoichiometry is messed up it does not
-matter that much. Essential is rather can we produce them in the current medium.
+Readme unclear about how fasta files are working (Caroline)
+-----------------------------------------------------------
 
-The pipeline could propose two branches: one generating the model with full
-parameters, one generating the simpler model where the concentrations of all
-enzymes are the same.
+Protein cofactors like nad/atp/nadp/coA should be removed (Caroline)
+--------------------------------------------------------------------
+They are not permanent cofactors, they are just used during reaction catalysis.
 
-Automatic rule to remove multiple enzymes catalyzing same reaction? (Stephan)
------------------------------------------------------------------------------
-Duplicating reactions is really annoying and increasing matrix size a lot.
-Is there a way to simplify the problem mathematically or can we find a rule
-to eliminate some of the enzymes (maybe depending on size and cofactors)?
+Remove '_1' for reactions that were not duplicated (Caroline)
+-------------------------------------------------------------
+
+Add a fasta file for proteins to complement uniprot (Caroline)
+--------------------------------------------------------------
 
 RBA algorithm
 =============
@@ -140,33 +166,11 @@ things that could be removed:
 However, as long as run times are unstable because of matrix conditionning, it
 does not seem to make sense to worry too much about those issues.
 
-Idea: fusing identical enzymes (Stephan)
+Change enzyme-reaction constraints (Stephan)
 ----------------------------------
+See working note for further detail.
 
-The idea is to go back to $\nu / k_E \leq E$ instead of $\nu \leq k_EE$. 
-Thanks to
-this change, we can put all reactions related to a single enzyme (*e.g.*
-average enzyme, nonspecific transporter) on the same matrix row. 
-The row would then read
-
-$$\sum \nu_i / k_{E_i} \leq \sum E_i = E$$
-
-In my opinion, CPLEX should be able to renormalize the line properly. If not,
-multiplying all rows by an average k~E~ should do the trick.
-
-Actually, this works only if reactions are irreversible. So we may apply it
-only on irreversible reactions or duplicate reversible reactions.
-
-Stop duplicating reactions? (Stephan)
--------------------------------------
-Similar to the idea above, we could imagine expressing capacity reactions by
-focusing on every reaction. If a reaction a can be catalyzed by $N$ enzymes
-$E_1$ to $E_N$, the constraint would read:
-
-$$\nu -k_{E_1}E_1 - ... - k_{E_N}E_N \leq 0$$
-
-It is possible to combine this approach with the approach above. It is
-sufficient to list all constraints in the two form described. One set of
-constraints would be centered on reactions (as described here), the other
-set would be centered on enzymes (as described above).
-
+Standardize output (Caroline)
+----------------------------
+As a first attempt, we should at least separate fluxes, enzyme concentrations,
+machinery concentrations, etc.
