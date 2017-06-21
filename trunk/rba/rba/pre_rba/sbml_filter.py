@@ -1,10 +1,9 @@
-
-
 """
 Module defining SBMLFilter class.
 """
+
 # python 2/3 compatibility
-from __future__ import print_function
+from __future__ import division, print_function
 
 # global imports
 import copy
