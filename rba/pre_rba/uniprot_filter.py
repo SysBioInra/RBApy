@@ -3,7 +3,7 @@ Module defining UniprotFilter class.
 """
 
 # python 2/3 compatibility
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 
 # global imports
 import os.path
