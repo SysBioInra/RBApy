@@ -1,5 +1,5 @@
 """
-Module defining Subunit, SubunitParser and SubunitData classes.
+Module defining SubunitParser and SubunitData classes.
 """
 
 # python 2/3 compatibility
@@ -8,14 +8,10 @@ from __future__ import division, print_function
 # global imports
 import os.path
 import re
-from collections import namedtuple
 import pandas
 
 # local imports
 from rba.pre_rba.curation_data import CurationData
-
-# Class used to store curated subunit information.
-Subunit = namedtuple('Subunit', 'stoichiometry gene_names name uniprot_note')
 
 class SubunitData(object):
     """
@@ -43,8 +39,7 @@ class SubunitData(object):
             print('Helper file found.')
         except IOError:
             print('Helper file not found.')
-        curated_subunits = {row[0]: Subunit(*row[1:])
-                            for row in curation_data.data.values}
+        curated_subunits = {row[0]: row[1] for row in curation_data.data.values}
 
         # read uniprot data
         # store new data that needs curation (if applicable)
@@ -79,11 +74,9 @@ class SubunitData(object):
             in zip(entry_data, gene_data, name_data, subunit_data):
             # if entry is in curated file, add it, otherwise parse field
             if entry in curated_subunits:
-                stoichiometry = curated_subunits[entry].stoichiometry
-                if pandas.isnull(stoichiometry):
-                    subunits[entry] = self.default_stoichiometry
-                else:
-                    subunits[entry] = stoichiometry
+                sto = curated_subunits[entry]
+                subunits[entry] = (sto if not pandas.isnull(sto)
+                                   else self.default_stoichiometry)
             else:
                 stoichiometry = parser.parse(subunit_field)
                 if stoichiometry is not None:

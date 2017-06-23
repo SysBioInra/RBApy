@@ -1,104 +1,88 @@
+"""
+Module defining Metabolite and MetaboliteData classes.
+"""
 
+# python 2/3 compatibility
+from __future__ import division, print_function
+
+# global imports
 import os.path
-import re
+from collections import namedtuple
 import pandas
 
-from . import rba_data
+# local imports
+from rba.pre_rba.curation_data import CurationData
 
-class Metabolite(object):
-    def __init__(self, name, sbml_id, concentration):
-        self.name = name
-        self.sbml_id = sbml_id
-        self.concentration = concentration
+# Class used to store metabolite information
+Metabolite = namedtuple('Metabolite', 'name sbml_id concentration')
 
 class MetaboliteData(object):
     """
     Class used to parse/store metabolite information.
+
+    Attributes:
+        metabolites: dict matching internal metabolite keys, 
+            with existing SBML identifiers.
     """
-    def __init__(self, known_species, cofactors, input_dir = '.'):
+
+    _helper_file = 'metabolites.tsv'
+
+    def __init__(self, known_species, default_metabolites,
+                 cofactors, input_dir='.'):
         """
         Constructor.
-        :param input_dir: path to folder containing metabolite files.
-        :type input_dir: string
+
+        Args:
+            known_species: identifiers of species defined in SBML file.
+            default_metabolites: default metabolites as defined in 
+                default_data.DefaultData.
+            cofactors: list of known Cofactors.
+            input_dir: path to folder containing metabolite files.
         """
-        # constant values
-        self._missing_string = ''
-        self._missing_tag = '[MISSING]'
-        self._data_file = os.path.join(input_dir, 'metabolites.tsv')
-        
-        # read curated data
-        self._missing_information = False
-        self.metabolites = {}
-        self._read_curated_data(known_species)
+        print('\nParsing metabolite information'
+              '\n------------------------------')
+
+        # read curation data
+        curation_file = os.path.join(input_dir, self._helper_file)
+        curation_data = CurationData(['ID', 'NAME', 'SBML ID', 'CONCENTRATION'])
+        try:
+            curation_data.read(curation_file)
+            print('Helper file found.')
+        except IOError:
+            print('Helper file not found.')
+        curated_metabolites = {}
+        for id_, name, sbml_id, conc in curation_data.data.values:
+            if pandas.isnull(sbml_id) or sbml_id in known_species:
+                if pandas.isnull(sbml_id):
+                    sbml_id = None
+                if pandas.isnull(conc) or conc=='':
+                    conc = 0
+                curated_metabolites[id_] = Metabolite(name, sbml_id,
+                                                      float(conc))
+            else:
+                print('ERROR: {} is not a valid metabolite id.'.format(sbml_id))
 
         # extract metabolite information
-        self._extract_metabolite_information(known_species, cofactors)
-        
+        self.metabolites, data_to_cure \
+            = self._find_mapping(known_species, default_metabolites,
+                                 cofactors, curated_metabolites)
+        if data_to_cure:
+            curation_data.add(data_to_cure)
+            curation_data.write(curation_file)
+
         # raise warning if data was missing
-        if self._missing_information:
-            print('\nWARNING: Several key metabolites could not be identified. '
-                  'Please read file ' + self._data_file
-                  + ', check data and specify all information tagged as '
-                  + self._missing_tag + '. Unknown metabolites will be removed '
-                  'from production targets for this run. Make sure to update '
-                  'helper file for next execution.\n')
+        if curation_data.has_missing_information():
+            print('WARNING: Several key metabolites could not be identified. '
+                  'Please read file {}, check data and specify all missing '
+                  'information. Unknown metabolites will be removed '
+                  'from production targets for this run.'
+                  .format(curation_file))
 
-    def _read_curated_data(self, known_species):
+    @staticmethod
+    def _ids_and_names(default_metabolites, cofactors):
         """
-        Read file containing hand-curated information.
+        Return internal ids and names of metabolites to retrieve.
         """
-        try:
-            with open(self._data_file, 'rU') as input_stream:
-                print('Found file with metabolite data. This file will be used '
-                      'to identify key metabolites...')
-                # skip header
-                next(input_stream)
-                # read lines
-                for line in input_stream:
-                    line = line.rstrip('\n')
-                    [id_, name, sbml_id, conc] = line.split('\t')
-                    if sbml_id == self._missing_tag: 
-                        self._missing_information = True
-                        sbml_id = self._missing_string
-                    elif sbml_id not in known_species:
-                        print('ERROR: ' + sbml_id +
-                              ' is not a valid metabolite id.')
-                        self._missing_information = True
-                        sbml_id = self._missing_string
-                    try:
-                        conc = float(conc)
-                    except ValueError:
-                        conc = 0
-                    self.metabolites[id_] = Metabolite(name, sbml_id, conc)
-        except IOError:
-            print('Could not find file with metabolite data...')
-
-    def _write_curated_data(self):
-        """
-        Write file containing hand-curated metabolite information.
-        """
-        with open(self._data_file, 'w') as output_stream:
-            output_stream.write('\t'.join(['ID', 'NAME', 'SBML ID',
-                                           'CONCENTRATION']) + '\n')
-            for id_, metab in self.metabolites.items():
-                if metab.sbml_id == self._missing_string:
-                    sbml_id = self._missing_tag
-                else:
-                    sbml_id = metab.sbml_id
-                if metab.concentration != 0:
-                    conc = str(metab.concentration)
-                else:
-                    conc = ''
-                output_stream.write('\t'.join([id_, metab.name,
-                                               sbml_id, conc]) + '\n')
-        
-    def _extract_metabolite_information(self, known_species, cofactors):
-        curated_data_added = False
-
-        # extract metabolite prefix
-        met_prefix = known_species[0].split('_',1)[0] + '_'
-        assert(all((m.startswith(met_prefix) for m in known_species)))
-
         # metabolites to retrieve
         keys = [] # internal id of metabolite
         names = [] # name of metabolite
@@ -106,55 +90,60 @@ class MetaboliteData(object):
         keys.append('MET')
         names.append('Methionine')
         # charged + uncharged trnas
-        for aa in rba_data.aas:
-            keys.append(rba_data.charged_trna_key(aa))
-            names.append(rba_data.charged_trna_name(aa))
-            keys.append(rba_data.uncharged_trna_key(aa))
-            names.append(rba_data.uncharged_trna_name(aa))
-        keys.append(rba_data.charged_trna_key(rba_data.aa_fM))
-        names.append(rba_data.charged_trna_name(rba_data.aa_fM))
+        for aa in default_metabolites.aas:
+            keys.append(default_metabolites.charged_trna_key(aa))
+            names.append(default_metabolites.charged_trna_name(aa))
+            keys.append(default_metabolites.uncharged_trna_key(aa))
+            names.append(default_metabolites.uncharged_trna_name(aa))
+        keys.append(default_metabolites.charged_trna_key
+                    (default_metabolites.aa_fM))
+        names.append(default_metabolites.charged_trna_name
+                     (default_metabolites.aa_fM))
         # nucleotides
-        for n in rba_data.nucleotides:
-            keys.append(rba_data.ntp_key(n))
-            names.append(rba_data.ntp_key(n))
-            keys.append(rba_data.ndp_key(n))
-            names.append(rba_data.ndp_key(n))
-            keys.append(rba_data.nmp_key(n))
-            names.append(rba_data.nmp_key(n))
-        for n in rba_data.d_nucleotides:
-            keys.append(rba_data.dntp_key(n))
-            names.append(rba_data.dntp_key(n))        
+        for nucleotide in default_metabolites.nucleotides:
+            keys.append(default_metabolites.ntp_key(nucleotide))
+            names.append(default_metabolites.ntp_key(nucleotide))
+            keys.append(default_metabolites.ndp_key(nucleotide))
+            names.append(default_metabolites.ndp_key(nucleotide))
+            keys.append(default_metabolites.nmp_key(nucleotide))
+            names.append(default_metabolites.nmp_key(nucleotide))
+        for nucleotide in default_metabolites.d_nucleotides:
+            keys.append(default_metabolites.dntp_key(nucleotide))
+            names.append(default_metabolites.dntp_key(nucleotide))
         # key metabolites
-        for m, name in rba_data.key_metabolites.items():
-            keys.append(m)
+        for met_id, name in default_metabolites.key_metabolites.items():
+            keys.append(met_id)
             names.append(name)
         # cofactors
-        for c in cofactors:
-            keys.append(c.id)
-            names.append(c.name)
-        
+        cofactor_info = {}
+        for cofactor in cofactors:
+            cofactor_info.setdefault(cofactor.id, cofactor.name)
+        return keys + list(cofactor_info), names + list(cofactor_info.values())
+
+    def _find_mapping(self, known_species, default_metabolites,
+                      cofactors, curated_metabolites):
+        """
+        Map internal keys for metabolites with user-defined SBML ids.
+        """
+        # extract metabolite prefix
+        met_prefix = known_species[0].split('_', 1)[0] + '_'
+        assert all((m.startswith(met_prefix) for m in known_species))
+
         # retrieve items
+        metabolites = {}
+        data_to_cure = []
+        keys, names = self._ids_and_names(default_metabolites, cofactors)
+        sbml_lookup = {s.split('_', 1)[1].lower(): s for s in known_species}
         for key, name in zip(keys, names):
-            # curated data available: nothing to do
-            if key in self.metabolites: continue
-
-            # no curated data: find metabolite id
-            curated_data_added = True
-            sbml_id = self._find(met_prefix + key + '_c', known_species)
-            # use default concentration
-            try:
-                conc = rba_data.default_concentration[key]
-            except KeyError:
-                conc = 0
-            self.metabolites[key] = Metabolite(name, sbml_id, conc)
-
-        # write curated data to file (if necessary)
-        if curated_data_added: self._write_curated_data()
-
-    def _find(self, to_find, known_species):
-        for s in known_species:
-            if to_find.lower() == s.lower(): return s
-        # not found:
-        self._missing_information = True
-        return self._missing_string
-
+            # if curated data is available use it,
+            # otherwise try to find sbml id using standard name
+            met = curated_metabolites.get(key, None)
+            if met:
+                metabolites[key] = met
+            else:
+                # try simple standard name as sbml id
+                sbml_id = sbml_lookup.get((key + '_c').lower(), None)
+                conc = default_metabolites.concentration.get(key, 0)
+                data_to_cure.append((key, name, sbml_id, conc))
+                metabolites[key] = Metabolite(name, sbml_id, conc)
+        return metabolites, data_to_cure
