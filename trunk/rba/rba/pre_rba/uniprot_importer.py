@@ -1,20 +1,31 @@
+"""
+Module defining UniprotImporter class.
+"""
+
+# python 2/3 compatibility
+from __future__ import division, print_function
+
+# global imports
 import urllib
 try:
     from urllib.request import Request, urlopen
 except ImportError:
     from urllib2 import Request, urlopen
 
-class UniprotImporter:
+class UniprotImporter(object):
     """
     Class retrieving uniprot data for specified organism.
+
+    Attributes:
+        data:
     """
     def __init__(self, organism_id):
         """
         Constructor.
-        
-        :param organism_id: Information used to retrieve organism. It can be
-          a uniprot identifier, a species name, etc.
-        :type organism_id: string
+
+        Args:
+            organism_id: Information used to retrieve organism. It can be
+                a uniprot identifier, a species name, etc.
         """
         # code adapted from
         # http://www.uniprot.org/help/programmatic_access
@@ -31,16 +42,16 @@ class UniprotImporter:
         response = urlopen(request)
         self.data = response.read()
 
-    def _reformat(self, keyword, fields):
+    @staticmethod
+    def _reformat(keyword, fields):
         """
         Reformat field name to url format using specific keyword.
 
-        :example: _reformat('comment', ['a','b']) returns
-         ['comment(A)', 'comment(B)']
+        Example:
+            _reformat('comment', ['a','b']) returns
+            ['comment(A)', 'comment(B)']
         """
-        result = []
-        for f in fields:
-            result.append(keyword + '(' + f.upper() + ')')
+        result = ['{}({})'.format(keyword, f.upper()) for f in fields]
         return result
 
     def _url_columns(self):

@@ -31,7 +31,8 @@ class CurationData(object):
             input_file: path to file or buffer.
         """
         self.data = pandas.read_csv(input_file, sep='\t',
-                                    na_values=[self.missing_tag])
+                                    na_values=[self.missing_tag],
+                                    keep_default_na=False)
 
     def write(self, output_file):
         """

@@ -1,83 +1,84 @@
+"""
+Module defining UnknownProteins class.
+"""
 
+# python 2/3 compatibility
+from __future__ import division, print_function
+
+# global imports
 import os.path
+import pandas
 
-class UnknownProteins:
+# local imports
+from rba.pre_rba.curation_data import CurationData
+
+class UnknownProteins(object):
     """
-    Class used to parse uniprot cofactor field.
+    Class used to parse unknown protein file.
     """
-    def __init__(self, input_dir = '.'):
+
+    _helper_file = 'unknown_proteins.tsv'
+
+    def __init__(self, input_dir='.'):
         """
         Constructor.
 
-        :param input_dir: path to folder containing helper files.
+        Attributes:
+            input_dir: path to folder containing helper files.
         """
-        # constant values
-        self._missing_tag = '[MISSING]'
-        self._data_file = os.path.join(input_dir, 'unknown_proteins.tsv')
-        
-        # read curated cofactors
-        self._missing_information = False
+        print('\nParsing unknown proteins'
+              '\n------------------------')
+
+        self._curated_data = CurationData(['SBML ID', 'UNIPROT GENE'])
+        self._data_file = os.path.join(input_dir, self._helper_file)
+        try:
+            self._curated_data.read(self._data_file)
+            print('Helper file found.')
+        except IOError:
+            print('Helper file not found.')
         self.data = {}
-        self._read_curated_data()
+        for sbml, uniprot in self._curated_data.data.values:
+            if pandas.isnull(uniprot):
+                uniprot = None
+            self.data[sbml] = uniprot
 
     def _print_missing_warning(self):
-        print('\nWARNING: Several enzymatic proteins defined in your SBML '
+        print('WARNING: Several enzymatic proteins defined in your SBML '
               'could not be retrieved. '
-              'Please read file ' + self._data_file +
-              ', check data and specify all information tagged as ' +
-              self._missing_tag + '. Execution will continue with default '
+              'Please read file {}, check data and specify all missing '
+              'information. Execution will continue with default '
               'values (unknown proteins replaced by average enzymatic '
-              'protein in the cytosol). Make sure to update '
-              'helper file for next execution.')
+              'protein in the cytosol).'.format(self._data_file))
 
-    def _read_curated_data(self):
-        """
-        Read file containing hand-curated cofactor information.
-        """
-        try:
-            with open(self._data_file, 'rU') as input_stream:
-                print('Found file with unknown protein data. This file will be '
-                      'used to match ambiguous enzymatic sbml annotations...')
-                # skip header
-                next(input_stream)
-                # read lines
-                for line in input_stream:
-                    [sbml, uniprot] = line.rstrip('\n').split('\t')
-                    if uniprot == self._missing_tag:
-                        self._missing_information = True
-                    self.data[sbml] = uniprot
-        except IOError:
-            print('Could not find file with unknown protein data...')
-
-    def _write_curated_data(self):
-        """
-        Write file containing hand-curated cofactor information.
-        """
-        with open(self._data_file, 'w') as output_stream:
-            output_stream.write('\t'.join(['SBML ID', 'UNIPROT GENE']) + '\n')
-            for sbml, uniprot in self.data.items():
-                output_stream.write('\t'.join([sbml, uniprot]) + '\n')
-        
     def add(self, sbml_list):
         """
-        Add identifiers that could not be retrieved to hepler file.
+        Add identifiers that could not be retrieved to helper file.
+
+        Args:
+            sbml_list: list of sbml proteins that could not be retrieved in
+                uniprot.
         """
-        missing_information = False
         invalid_data = []
+        data_to_cure = []
         for sbml in sbml_list:
             try:
                 uniprot = self.data[sbml]
-                if uniprot != '' and uniprot != self._missing_tag \
-                   and not(uniprot.startswith('average_protein_')):
+                if (uniprot != '' and not pandas.isnull(uniprot)
+                    and not uniprot.startswith('average_protein_')):
                     invalid_data.append([sbml, self.data[sbml]])
             except KeyError:
-                self.data[sbml] = self._missing_tag
-                missing_information = True
-        if len(invalid_data) > 0:
-            print('\nWARNING: unknown_proteins.tsv, following lines do not map '
+                self.data[sbml] = None
+                data_to_cure.append((sbml, None))
+
+        if data_to_cure:
+            self._curated_data.add(data_to_cure)
+            self._curated_data.write(self._data_file)
+
+        if invalid_data:
+            print('WARNING: in {}, following lines do not map '
                   'to a valid uniprot gene, average or null protein:\n'
-                  + '\n'.join(map('\t'.join, invalid_data)))
-        if missing_information:
-            self._write_curated_data()
+                  .format(self._data_file)
+                  + '\n'.join(['\t'.join(d) for d in invalid_data]))
+
+        if self._curated_data.has_missing_information():
             self._print_missing_warning()
-        

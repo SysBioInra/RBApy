@@ -1,54 +1,55 @@
+"""
+Module defining Macrocomponents class.
+"""
 
+# python 2/3 compatibility
+from __future__ import division, print_function
+
+# global imports
 import os.path
+
+# local imports
+from rba.pre_rba.curation_data import CurationData
 
 class Macrocomponents(object):
     """
     Class used to parse/store target fluxes for macrocomponents.
+
+    Attributes:
+        target_flux: dict mapping sbml species id to target production flux.
     """
-    def __init__(self, known_species, input_dir = '.'):
+
+    _helper_file = 'macrocomponents.tsv'
+
+    def __init__(self, known_species, input_dir='.'):
         """
         Constructor.
-        :param input_dir: path to folder containing concentration file.
-        :type input_dir: string
+
+        Args:
+            known_species: list of sbml species ids.
+            input_dir: path to folder containing concentration file.
         """
-        # constant values
-        self._data_file = os.path.join(input_dir, 'macrocomponents.tsv')
-        
+        print('\nParsing macrocomponent information'
+              '\n----------------------------------')
+
+        # read curation data
+        curation_file = os.path.join(input_dir, self._helper_file)
+        curation_data = CurationData(['TARGET_METABOLITE', 'TARGET_FLUX'])
+        try:
+            curation_data.read(curation_file)
+            print('Helper file found.')
+        except IOError:
+            print('WARNING: Could not find file with macrocomponents '
+                  'data... Run is going to continue without macrocomponent '
+                  'synthesis. Use helper file {} in future runs.'
+                  .format(curation_file))
+            curation_data.write(curation_file)
+
         # read data
         self.target_flux = {}
-        self._read_curated_data(known_species)
-        
-    def _read_curated_data(self, known_species):
-        """
-        Read file containing hand-curated information.
-        """
-        try:
-            with open(self._data_file, 'rU') as input_stream:
-                print('Found file with macrocomponent data. This file will be '
-                      'used to setup macrocomponent production fluxes...')
-                # skip header
-                try:
-                    next(input_stream)
-                except StopIteration:
-                    pass
-                # read lines
-                for line in input_stream:
-                    line = line.rstrip('\n')
-                    [id_, flux] = line.split('\t')
-                    if id_ in known_species:
-                        self.target_flux[id_] = float(flux)
-                    else:
-                        print('\nWARNING: in file ' + self._data_file + ': '
-                              + id_ + ' does not correspond to a valid SBML '
-                              'species. Line will be ignored.\n')
-        except IOError:
-            print('\nWARNING: Could not find file with macrocomponents '
-                  'data... Run is going to continue without macrocomponent '
-                  'synthesis. '
-                  'Update helper file ' + self._data_file + ' with your own '
-                  'values in future runs.\n')
-            with open(self._data_file, 'w') as output_stream:
-                # write header
-                output_stream.write('\t'.join(['TARGET_METABOLITE',
-                                               'TARGET_FLUX']) + '\n')
-            
+        for metabolite, flux in curation_data.data.values:
+            if metabolite in known_species:
+                self.target_flux[metabolite] = float(flux)
+            else:
+                print('WARNING: in file {}: {} is not a valid SBML species. '
+                      'Line will be ignored.'.format(curation_file, metabolite))

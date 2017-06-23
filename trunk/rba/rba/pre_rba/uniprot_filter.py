@@ -138,7 +138,7 @@ class UniprotFilter(object):
     @staticmethod
     def _lookup_names(uniprot_names, gene_ids, unknown_map):
         """
-        Append a column to data containing lookup name of protein.
+        Create column containing lookup name of proteins.
 
         Args:
             uniprot_names: column containing raw uniprot 'Gene names' fields.
