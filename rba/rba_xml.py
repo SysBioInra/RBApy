@@ -1,4 +1,11 @@
+"""
+Module defining classes used for RBA XML structures.
+"""
 
+# python 2/3 compatiblity
+from __future__ import division, print_function
+
+# global imports
 from lxml import etree
 #import xml.etree.cElementTree as etree
 
@@ -9,45 +16,78 @@ from lxml import etree
 def is_true(attribute):
     """
     Determine whether an XML attribute evaluates as the logical true value.
+
+    Args:
+        attribute: attribute value.
+
+    Returns:
+        True if attribute value is considered to represent the 'true' boolean
+        state, False otherwise.
     """
     return attribute.lower() == 'true' or attribute == '1'
 
-def get_unique_child(parent, child_name, strict = True):
+def get_unique_child(parent, child_name, strict=True):
     """
-    Function looking for a children node matching a given name.
-    :param parent: Parent node.
-    :param child_name: Name of the node to look for.
-    :param strict: Boolean flag telling whether there should be strictly one
-     child. If set to True, an error is raised if no child was found.
-    :return: Element if exactly one node is found. If no child is found,
-     a UserWarning exception is raised if strict is set to True, 
-     otherwise None is returned.
-     A UserWarning exception is raised if more than one node is found.
+    Get children node matching given name.
+
+    Args:
+        parent: Parent node.
+        child_name: Name of the node to look for.
+        strict: Boolean flag telling whether there should be strictly one
+            child. If set to True, an error is raised if no child was found.
+
+    Returns:
+        Child if exactly one node is found. If no child is found,
+        None is returned if strict was set to False.
+
+    Raises:
+        If no child is found, a UserWarning exception is raised if strict 
+        is set to True.
+        A UserWarning exception is raised if more than one node is found.
     """
     children = parent.findall(child_name)
     if len(children) == 1:
         return children[0]
-    elif (len(children) == 0) and not(strict):
+    elif not children and not strict:
         return None
     else:
         if strict:
-            raise UserWarning('A ' + parent.tag + ' should have exactly '
-                              'one ' + child_name + ' node child.')
+            raise UserWarning('A {} should have exactly one {} node child.'
+                              .format(parent.tag, child_name))
         else:
-            raise UserWarning('A ' + parent.tag + ' should not have more '
-                              'than one ' + child_name + ' node children.')
+            raise UserWarning('A {} should not have more than one {} node '
+                              'children.'.format(parent.tag, child_name))
 
 class MachineryComposition(object):
+    """
+    Class storing machinery composition information.
+
+    Attributes:
+        reactants (ListOfReactants): list of reactants used to assemble
+            machinery.
+        products (ListOfProducts): list of byproducts generated while
+            assembling machinery.
+    """
+    
     tag = 'machineryComposition'
     
     def __init__(self):
+        """
+        Default constructor.
+        """
         self.reactants = ListOfReactants()
         self.products = ListOfProducts()
 
     def is_empty(self):
+        """
+        Return whether composition is fully empty.
+        """
         return self.reactants.is_empty() and self.products.is_empty()
 
     def to_xml_node(self):
+        """
+        Convert to xml node.
+        """
         result = etree.Element(self.tag)
         # optional subelements
         opt = [self.reactants, self.products]
@@ -56,6 +96,9 @@ class MachineryComposition(object):
 
     @classmethod
     def from_xml_node(cls, node):
+        """
+        Constructor from xml node.
+        """
         result = cls()
         n = get_unique_child(node, ListOfReactants.tag, False)
         if n is not None:
@@ -66,42 +109,90 @@ class MachineryComposition(object):
         return result
     
 class ListOf(object):
+    """
+    Abstract class used to store list of XML objects of same type.
+    
+    Attributes:
+        list_element: type of elements stored by list.
+    """
+    
+    list_element = None
+    
     def __init__(self):
+        """
+        Default constructor.
+        """
         self._elements = []
 
     def __getitem__(self, i):
+        """
+        Return item with given index.
+        """
         return self._elements[i]
 
     def __len__(self):
+        """
+        Return length of list.
+        """
         return len(self._elements)
 
     def append(self, element):
+        """
+        Append element to list.
+        """
         assert(isinstance(element, self.list_element))
         self._elements.append(element)
 
     def is_empty(self):
+        """
+        Return whether list is empty.
+        """
         return len(self._elements) == 0
 
     def to_xml_node(self):
+        """
+        Convert to xml node.
+        """
         result = etree.Element(self.tag)
         result.extend([e.to_xml_node() for e in self._elements])
         return result
 
     @classmethod
     def from_xml_node(cls, node):
+        """
+        Constructor from xml node.
+        """
         result = cls()
         for n in node.iterfind(cls.list_element.tag):
             result.append(cls.list_element.from_xml_node(n))
         return result
 
 class SpeciesReference(object):
+    """
+    Class storing reference to a species and its stoichiometry.
+
+    Attributes:
+        species (str): identifier of species.
+        stoichiometry (float): stoichiometry of species.
+    """
+    
     tag = 'speciesReference'
     
     def __init__(self, species, stoichiometry):
+        """
+        Constructor.
+
+        Args:
+            species (str): identifier of species.
+            stoichiometry (float): stoichiometry of species.        
+        """
         self.species = species
         self.stoichiometry = stoichiometry
 
     def to_xml_node(self):
+        """
+        Convert to xml node.
+        """
         result = etree.Element(self.tag)
         result.set('species', self.species)
         result.set('stoichiometry', str(self.stoichiometry))
@@ -109,24 +200,53 @@ class SpeciesReference(object):
 
     @classmethod
     def from_xml_node(cls, node):
+        """
+        Constructor from xml node.
+        """
         return cls(node.get('species'), float(node.get('stoichiometry')))
 
 class ListOfReactants(ListOf):
+    """
+    Class storing a list of SpeciesReference representing reactants.
+    """
+    
     tag = 'listOfReactants'
     list_element = SpeciesReference
         
 class ListOfProducts(ListOf):
+    """
+    Class storing a list of SpeciesReference representing products.
+    """
+    
     tag = 'listOfProducts'
     list_element = SpeciesReference
 
 class Parameter(object):
+    """
+    Class storing parameter values.
+
+    Attributes:
+        id: identifier of parameter.
+        value: value of parameter.
+    """
+    
     tag = 'parameter'
     
     def __init__(self, id_, value):
+        """
+        Constructor.
+        
+        Args:
+            id_: identifier of parameter.
+            value: value of parameter.
+        """
         self.id = id_
         self.value = value
 
     def to_xml_node(self):
+        """
+        Convert to xml node.
+        """
         result = etree.Element(self.tag)
         result.set('id', self.id)
         result.set('value', str(self.value))
@@ -134,25 +254,55 @@ class Parameter(object):
 
     @classmethod
     def from_xml_node(cls, node):
+        """
+        Constructor from xml node.
+        """
         return cls(node.get('id'), float(node.get('value')))
 
 class ListOfParameters(ListOf):
+    """
+    Class storing a list of Parameters.
+    """
+    
     tag = 'listOfParameters'
     list_element = Parameter
 
 class Function(object):
+    """
+    Class storing a Function.
+
+    Attributes:
+        id: identifier of function (if applicable).
+        type: type of function.
+        parameters (ListOfParameters): list of parameters used by function.
+        variable: name of variable (if applicable).
+    """
+    
     tag = 'function'
     
-    def __init__(self, id_, type_, parameters = {}, variable = ''):
+    def __init__(self, id_, type_, parameters=None, variable=''):
+        """
+        Constructor.
+        
+        Attributes:
+            id: identifier of function (if applicable).
+            type: type of function.
+            parameters (ListOfParameters): list of parameters used by function.
+            variable: name of variable (if applicable).
+        """
         if id_ is not None: self.id = id_
         else: self.id = ''
         self.type = type_
         self.variable = variable
         self.parameters = ListOfParameters()
-        for key, value in parameters.items():
-            self.parameters.append(Parameter(key, value))
+        if parameters:
+            for key, value in parameters.items():
+                self.parameters.append(Parameter(key, value))
 
     def to_xml_node(self):
+        """
+        Convert to xml node.
+        """
         result = etree.Element(self.tag)
         result.set('id', self.id)
         result.set('type', self.type)
@@ -163,6 +313,9 @@ class Function(object):
 
     @classmethod
     def from_xml_node(cls, node):
+        """
+        Constructor from xml node.
+        """
         result = cls(node.get('id'), node.get('type'), {}, node.get('variable'))
         n = get_unique_child(node, 'listOfParameters', False)
         if n is not None:
@@ -170,22 +323,43 @@ class Function(object):
         return result
 
 class ListOfFunctions(ListOf):
+    """
+    Class storing a list of Functions.
+    """
+    
     tag = 'listOfFunctions'
     list_element = Function
 
 class TargetValue(object):
+    """
+    Class storing a target value.
+
+    Attributes:
+        value: exact target value (None if no exact value to match).
+        lower_bound: lower bound on target value (None if no lower bound).
+        upper_bound: upper bound on target value (None if no upper bound).
+    """
     tag = 'targetValue'
     
     def __init__(self):
+        """
+        Default constructor.
+        """
         self.value = None
         self.lower_bound = None
         self.upper_bound = None
 
     def is_empty(self):
+        """
+        Return whether all attributes are unspecified.
+        """
         return self.value is None and self.lower_bound is None \
             and self.upper_bound is None
 
     def to_xml_node(self):
+        """
+        Convert to xml node.
+        """
         result = etree.Element(self.tag)
         if self.value is not None:
             result.set('value', str(self.value))
@@ -197,11 +371,17 @@ class TargetValue(object):
     
     @classmethod
     def from_xml_node(cls, node):
+        """
+        Constructor from xml node.
+        """
         result = cls()
         result._init_from_xml_node(node)
         return result
 
     def _init_from_xml_node(self, node):
+        """
+        Match attributes with given node.
+        """
         self.value = node.get('value')
         self.lower_bound = node.get('lowerBound')
         self.upper_bound = node.get('upperBound')
@@ -211,12 +391,30 @@ class TargetValue(object):
 ################################################################################
 
 class RbaMetabolism(object):
+    """
+    Class containing all metabolism-related structures.
+
+    Attributes:
+        compartments (ListOfCompartments): list of cell compartments.
+        species (ListOfSpecies): list of metabolites.
+        reactions (ListOfReactions): list of reactions.
+    """
     def __init__(self):
+        """
+        Default constructor.
+        """
         self.compartments = ListOfCompartments()
         self.species = ListOfSpecies()
         self.reactions = ListOfReactions()
 
     def write(self, output_stream, doc_name = 'RBAMetabolism'):
+        """
+        Write information as an XML structure.
+
+        Args:
+            output_stream: file or buffer where XML structure should be written.
+            doc_name: name of XML document.
+        """
         root = etree.Element(doc_name)
         root.extend([self.compartments.to_xml_node(),
                      self.species.to_xml_node(), self.reactions.to_xml_node()])
@@ -224,6 +422,12 @@ class RbaMetabolism(object):
 
     @classmethod
     def from_file(cls, input_stream):
+        """
+        Constructor from XML structure.
+
+        Args:
+            input_stream: file or buffer containing XML structure.
+        """
         node = etree.ElementTree(file=input_stream).getroot()
         result = cls()
         n = get_unique_child(node, ListOfCompartments.tag)
@@ -235,18 +439,37 @@ class RbaMetabolism(object):
         return result
 
 class Compartment(object):
+    """
+    Class storing compartment information.
+    
+    Attributes:
+        id: identifier of compartment.
+    """
+    
     tag = 'compartment'
     
     def __init__(self, id_):
+        """
+        Constructor.
+
+        Args:
+            id: identifier of compartment.
+        """
         self.id = id_
 
     def to_xml_node(self):
+        """
+        Convert to xml node
+        """
         result = etree.Element(self.tag)
         result.set('id', self.id)
         return result
 
     @classmethod
     def from_xml_node(cls, node):
+        """
+        Constructor from xml node.
+        """
         return cls(node.get('id'))
     
 class ListOfCompartments(ListOf):
@@ -455,12 +678,13 @@ class ListOfComponents(ListOf):
 class Macromolecule(object):
     tag = 'macromolecule'
     
-    def __init__(self, id_, compartment, composition = {}):
+    def __init__(self, id_, compartment, composition=None):
         self.id = id_
         self.compartment = compartment
         self.composition = Composition()
-        for comp, sto in composition.items():
-            self.composition.append(ComponentReference(comp, sto))
+        if composition:
+            for comp, sto in composition.items():
+                self.composition.append(ComponentReference(comp, sto))
 
     def to_xml_node(self):
         result = etree.Element(self.tag)
@@ -790,7 +1014,7 @@ class ConstantCost(object):
 class Cost(object):
     tag = 'cost'
     
-    def __init__(self, component, processing_cost = 0):
+    def __init__(self, component, processing_cost=0):
         self.component = component
         self.processing_cost = processing_cost
         self.reactants = ListOfReactants()
@@ -854,7 +1078,7 @@ class ListOfEfficiencyFunctions(ListOf):
 class Enzyme(object):
     tag = 'enzyme'
     
-    def __init__(self, reaction, zero_cost = False):
+    def __init__(self, reaction, zero_cost=False):
         if zero_cost is None: zero_cost = False
         self.id = reaction
         self.zero_cost = zero_cost
@@ -914,11 +1138,12 @@ class EnzymaticActivity(object):
 class EnzymeEfficiency(object):
     tag = 'enzymeEfficiency'
     
-    def __init__(self, function, parameters = {}):
+    def __init__(self, function, parameters=None):
         self.function = function
         self.parameters = ListOfParameters()
-        for key,value in parameters.items():
-            self.parameters.append(Parameter(key, value))
+        if parameters:
+            for key,value in parameters.items():
+                self.parameters.append(Parameter(key, value))
 
     def to_xml_node(self):
         result = etree.Element(self.tag)

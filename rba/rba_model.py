@@ -1,55 +1,105 @@
+"""
+Module defining RbaModel class.
+"""
 
-import os.path
+# python 2/3 compatibility
+from __future__ import division, print_function
 
-from .rba_xml import *
-from .rba_main.rba_matrices import RbaMatrices
-from .rba_main.rba_solver import RbaSolver
+# global imports
+from os.path import join
+
+# local imports
+from rba import rba_xml
+from rba.rba_main.rba_matrices import RbaMatrices
+from rba.rba_main.rba_solver import RbaSolver
 
 class RbaModel(object):
+    """
+    Class holding RBA model.
+
+    Attributes:
+        metabolism: xml structure with metabolism data.
+        parameters: xml structure with parameter data.
+        proteins: xml structure with protein data.
+        enzymes: xml structure with enzyme data.
+        rnas: xml structure with rna data.
+        dna: xml structure with dna data.
+        processes: xml structure with process data.
+        medium: dictionary mapping metabolite prefixes with their medium
+            concentration.
+        output_dir: path to directory where model files should be written.
+    """
+
     def __init__(self):
-        self.metabolism = RbaMetabolism()
-        self.parameters = RbaParameters()
-        self.proteins = RbaMacromolecules()
-        self.enzymes = RbaEnzymes()
-        self.rnas = RbaMacromolecules()
-        self.dna = RbaMacromolecules()
-        self.processes = RbaProcesses()
+        """
+        Default constructor.
+        """
+        self.metabolism = rba_xml.RbaMetabolism()
+        self.parameters = rba_xml.RbaParameters()
+        self.proteins = rba_xml.RbaMacromolecules()
+        self.enzymes = rba_xml.RbaEnzymes()
+        self.rnas = rba_xml.RbaMacromolecules()
+        self.dna = rba_xml.RbaMacromolecules()
+        self.processes = rba_xml.RbaProcesses()
         self.medium = {}
         self.output_dir = ''
 
     @classmethod
     def from_xml(cls, input_dir):
+        """
+        Constructor from xml files.
+
+        Args:
+            input_dir: path to directory containing RBA XML files.
+        """
         obj = cls()
-        obj._input_dir = input_dir
         obj.output_dir = input_dir
-        obj.parameters = RbaParameters().from_file(obj._input('parameters.xml'))
-        obj.metabolism = RbaMetabolism().from_file(obj._input('metabolism.xml'))
-        obj.proteins = RbaMacromolecules().from_file(obj._input('proteins.xml'))
-        obj.rnas = RbaMacromolecules().from_file(obj._input('rnas.xml'))
-        obj.dna = RbaMacromolecules().from_file(obj._input('dna.xml'))
-        obj.processes = RbaProcesses().from_file(obj._input('processes.xml'))
-        obj.enzymes = RbaEnzymes().from_file(obj._input('enzymes.xml'))
-        obj.medium = obj.read_medium(obj._input('medium.tsv'))
+        obj.parameters = (rba_xml.RbaParameters()
+                          .from_file(join(input_dir, 'parameters.xml')))
+        obj.metabolism = (rba_xml.RbaMetabolism()
+                          .from_file(join(input_dir, 'metabolism.xml')))
+        obj.proteins = (rba_xml.RbaMacromolecules()
+                        .from_file(join(input_dir, 'proteins.xml')))
+        obj.rnas = (rba_xml.RbaMacromolecules()
+                    .from_file(join(input_dir, 'rnas.xml')))
+        obj.dna = (rba_xml.RbaMacromolecules()
+                   .from_file(join(input_dir, 'dna.xml')))
+        obj.processes = (rba_xml.RbaProcesses()
+                         .from_file(join(input_dir, 'processes.xml')))
+        obj.enzymes = (rba_xml.RbaEnzymes()
+                       .from_file(join(input_dir, 'enzymes.xml')))
+        obj.set_medium(join(input_dir, 'medium.tsv'))
         return obj
-                                       
-    def read_medium(self, file_name):
+
+    def set_medium(self, file_name):
+        """
+        Set medium concentrations according to file.
+
+        Args:
+            file_name: path to file containing medium concentrations in a tab
+                separated format. File is supposed to contain a header, one
+                column with metabolite prefixes and one column with
+                concentrations values.
+        """
         concentrations = {}
-        with open(file_name, 'rU') as f:
+        with open(file_name, 'rU') as input_stream:
             # skip header
-            next(f)
-            for line in f:
+            next(input_stream)
+            for line in input_stream:
                 [met, conc] = line.rstrip().split('\t')
                 concentrations[met] = float(conc)
-        return concentrations
+        self.medium = concentrations
 
     def get_matrices(self):
         """
-        Transform data into matrix blocks used to solve the optimization
-        problem.
+        Return matrix blocks used to solve the optimization problem.
+
+        Returns:
+            rba.rba_main.RbaMatrices object containing matrix blocks.
         """
         return RbaMatrices(self)
 
-    def solve(self, catalytic_function = None):
+    def solve(self, catalytic_function=None):
         """
         Solve current model.
 
@@ -58,8 +108,8 @@ class RbaModel(object):
                 efficiencies of enzymes ('default' if no argument given).
 
         Returns:
-            RbaSolver object that contains solution (if one was found) and
-            matrices next to solution
+            rba.rba_main.RbaSolver object that contains solution (if one
+            was found) and matrices next to solution.
         """
         matrices = RbaMatrices(self)
         if catalytic_function is not None:
@@ -68,11 +118,17 @@ class RbaModel(object):
         solver.solve()
         return solver
 
-    def write_files(self, output_dir = None):
+    def write_files(self, output_dir=None):
         """
-        Write rba files.
+        Write rba files in XML format.
+
+        Args:
+            output_dir: path to directory where files should be written. If
+                specified, output_dir attribute is overriden, otherwise value
+                currently stored in output_dir attribute is used.
         """
-        if output_dir: self.output_dir = output_dir
+        if output_dir:
+            self.output_dir = output_dir
         self.metabolism.write(self._output('metabolism.xml'), 'RBAMetabolism')
         self.proteins.write(self._output('proteins.xml'), 'RBAProteins')
         self.rnas.write(self._output('rnas.xml'), 'RBARnas')
@@ -83,11 +139,11 @@ class RbaModel(object):
         # initial conditions (medium concentrations)
         with open(self._output('medium.tsv'), 'w') as output:
             output.write('Metabolite\tConcentration\n')
-            for m, conc in self.medium.items():
-                output.write(m + '\t' + str(conc) + '\n')
+            for met, conc in self.medium.items():
+                output.write('{}\t{}\n'.format(met, conc))
 
-    def _input(self, file_name):
-        return os.path.join(self._input_dir, file_name)
-        
     def _output(self, file_name):
-        return os.path.join(self.output_dir, file_name)
+        """
+        Return full path to file contained in output direcotry.
+        """
+        return join(self.output_dir, file_name)
