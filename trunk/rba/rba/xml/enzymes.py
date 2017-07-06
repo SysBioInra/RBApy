@@ -13,6 +13,10 @@ from rba.xml.common import (get_unique_child, is_true, ListOf,
                             Function, MachineryComposition,
                             Parameter, ListOfParameters)
 
+__all__ = ['RbaEnzymes', 'ListOfEfficiencyFunctions', 'Enzyme', 'ListOfEnzymes',
+           'EnzymaticActivity', 'TransporterEfficiency',
+           'EnzymeEfficiency', 'ListOfEnzymeEfficiencies']
+
 
 class RbaEnzymes(object):
     def __init__(self):

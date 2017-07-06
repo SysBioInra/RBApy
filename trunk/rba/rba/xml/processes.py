@@ -13,6 +13,15 @@ from rba.xml.common import (get_unique_child, ListOf,
                             TargetValue, MachineryComposition,
                             ListOfReactants, ListOfProducts)
 
+__all__ = ['RbaProcesses', 'Process', 'ListOfProcesses',
+           'Machinery', 'Capacity', 'Operations', 'Operation',
+           'ListOfProductions', 'ListOfDegradations',
+           'Targets', 'TargetSpecies', 'TargetReaction',
+           'ListOfConcentrations', 'ListOfProductionFluxes',
+           'ListOfDegradationFluxes', 'ListOfReactionFluxes',
+           'ComponentMap', 'ListOfComponentMaps',
+           'ConstantCost', 'Cost', 'ListOfCosts']
+
 
 class RbaProcesses(object):
     def __init__(self):

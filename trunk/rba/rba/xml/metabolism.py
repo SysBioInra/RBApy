@@ -1,5 +1,5 @@
 """
-Module defining metabolism-specific classes used for RBA XML structures.
+Metabolism-specific classes used for RBA XML structures.
 """
 
 # python 2/3 compatiblity
@@ -12,15 +12,22 @@ from lxml import etree
 from rba.xml.common import (is_true, get_unique_child,
                             ListOf, ListOfProducts, ListOfReactants)
 
+__all__ = ['RbaMetabolism', 'Compartment', 'ListOfCompartments',
+           'Species', 'ListOfSpecies', 'Reaction', 'ListOfReactions']
+
 
 class RbaMetabolism(object):
     """
-    Class containing all metabolism-related structures.
+    Metabolism-related structures.
 
-    Attributes:
-        compartments (ListOfCompartments): list of cell compartments.
-        species (ListOfSpecies): list of metabolites.
-        reactions (ListOfReactions): list of reactions.
+    Attributes
+    ----------
+    compartments : ListOfCompartments
+        List of cell compartments.
+    species : ListOfSpecies
+        List of metabolites.
+    reactions : ListOfReactions
+        List of reactions.
     """
     def __init__(self):
         """
@@ -34,9 +41,12 @@ class RbaMetabolism(object):
         """
         Write information as an XML structure.
 
-        Args:
-            output_stream: file or buffer where XML structure should be written.
-            doc_name: name of XML document.
+        Parameters
+        ----------
+        output_stream : file or buffer 
+            Location where XML structure should be written.
+        doc_name : str
+            Name of XML document.
         """
         root = etree.Element(doc_name)
         root.extend([self.compartments.to_xml_node(),
@@ -48,8 +58,10 @@ class RbaMetabolism(object):
         """
         Constructor from XML structure.
 
-        Args:
-            input_stream: file or buffer containing XML structure.
+        Parameters
+        ----------
+        input_stream : file or buffer
+            Location containing XML structure.
         """
         node = etree.ElementTree(file=input_stream).getroot()
         result = cls()
@@ -64,10 +76,12 @@ class RbaMetabolism(object):
 
 class Compartment(object):
     """
-    Class storing compartment information.
+    Compartment information.
 
-    Attributes:
-        id: identifier of compartment.
+    Attributes
+    ----------
+    id : str
+        identifier of compartment.
     """
 
     tag = 'compartment'
@@ -76,8 +90,10 @@ class Compartment(object):
         """
         Constructor.
 
-        Args:
-            id: identifier of compartment.
+        Parameters
+        ----------
+        id : str
+            identifier of compartment.
         """
         self.id = id_
 
@@ -98,18 +114,46 @@ class Compartment(object):
     
 
 class ListOfCompartments(ListOf):
+    """
+    List of Compartment elements
+    """
+    
     tag = 'listOfCompartments'
     list_element = Compartment
 
 
 class Species(object):
+    """
+    Chemical species.
+
+    Attributes
+    ----------
+    id : str
+        Identifier of species.
+    boundary_condition : bool
+        Whether the species belongs to the boundary of the system.
+    """
+
     tag = 'species'
     
     def __init__(self, id_, boundary_condition):
+        """
+        Constructor.
+
+        Parameters
+        ----------
+        id_ : str
+            Identifier of species.
+        boundary_condition: bool
+            Whether the species belongs to the boundary of the system.
+        """
         self.id = id_
         self.boundary_condition = boundary_condition
 
     def to_xml_node(self):
+        """
+        Convert to xml node.
+        """
         result = etree.Element(self.tag)
         result.set('id', self.id)
         result.set('boundaryCondition', str(self.boundary_condition).lower())
@@ -117,6 +161,9 @@ class Species(object):
 
     @classmethod
     def from_xml_node(cls, node):
+        """
+        Constructor from xml node.
+        """
         return cls(node.get('id'), is_true(node.get('boundaryCondition')))
 
 

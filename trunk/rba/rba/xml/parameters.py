@@ -12,6 +12,10 @@ from lxml import etree
 from rba.xml.common import (get_unique_child, ListOf,
                             TargetValue, ListOfFunctions, Parameter)
 
+__all__ = ['RbaParameters', 'FunctionReference', 'ListOfFunctionReferences',
+           'TargetDensity', 'ListOfTargetDensities', 'Aggregate',
+           'ListOfAggregates']
+
 
 class RbaParameters(object):
     def __init__(self):
