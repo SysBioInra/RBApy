@@ -1,5 +1,5 @@
 """
-Module defining common function and classes used for RBA XML structures.
+Common function and classes used for RBA XML structures.
 """
 
 # python 2/3 compatiblity
@@ -8,15 +8,22 @@ from __future__ import division, print_function
 # global imports
 from lxml import etree
 
+__all__ = ['MachineryComposition', 'SpeciesReference', 'ListOfReactants',
+           'ListOfProducts', 'Parameter', 'ListOfParameters', 'Function',
+           'ListOfFunctions', 'TargetValue']
 
 def is_true(attribute):
     """
     Determine whether an XML attribute evaluates as the logical true value.
 
-    Args:
-        attribute: attribute value.
+    Parameters
+    ----------
+    attribute : str
+        attribute value.
 
-    Returns:
+    Returns
+    -------
+    out : bool
         True if attribute value is considered to represent the 'true' boolean
         state, False otherwise.
     """
@@ -27,20 +34,27 @@ def get_unique_child(parent, child_name, strict=True):
     """
     Get children node matching given name.
 
-    Args:
-        parent: Parent node.
-        child_name: Name of the node to look for.
-        strict: Boolean flag telling whether there should be strictly one
-            child. If set to True, an error is raised if no child was found.
+    Parameters
+    ----------
+    parent : xml element
+        Parent node.
+    child_name : str
+        Name of the node to look for.
+    strict : bool, optional
+        Flag telling whether there should be strictly one
+        child. If set to True, an error is raised if no child was found.
 
-    Returns:
+    Returns
+    -------
+    out : xml element or None
         Child if exactly one node is found. If no child is found,
         None is returned if strict was set to False.
 
-    Raises:
-        If no child is found, a UserWarning exception is raised if strict 
-        is set to True.
-        A UserWarning exception is raised if more than one node is found.
+    Raises
+    ------
+    UserWarning
+        When no child is found and strict is set to True or
+        when more than one node is found.
     """
     children = parent.findall(child_name)
     if len(children) == 1:
@@ -58,10 +72,12 @@ def get_unique_child(parent, child_name, strict=True):
 
 class ListOf(object):
     """
-    Abstract class used to store list of XML objects of same type.
+    List of objects of same type.
     
-    Attributes:
-        list_element: type of elements stored by list.
+    Attributes
+    ----------
+    list_element : class
+        type of elements stored by list.
     """
     
     list_element = None
@@ -118,13 +134,14 @@ class ListOf(object):
 
 class MachineryComposition(object):
     """
-    Class storing machinery composition information.
+    Machinery composition information.
 
-    Attributes:
-        reactants (ListOfReactants): list of reactants used to assemble
-            machinery.
-        products (ListOfProducts): list of byproducts generated while
-            assembling machinery.
+    Attributes
+    ----------
+    reactants : ListOfReactants
+        List of reactants used to assemble machinery.
+    products :ListOfProducts
+        List of byproducts generated while assembling machinery.
     """
     
     tag = 'machineryComposition'
@@ -169,11 +186,14 @@ class MachineryComposition(object):
 
 class SpeciesReference(object):
     """
-    Class storing reference to a species and its stoichiometry.
+    Reference to a species and its stoichiometry.
 
-    Attributes:
-        species (str): identifier of species.
-        stoichiometry (float): stoichiometry of species.
+    Attributes
+    ----------
+    species : str
+        Identifier of species.
+    stoichiometry : float
+        Stoichiometry of species.
     """
     
     tag = 'speciesReference'
@@ -182,9 +202,12 @@ class SpeciesReference(object):
         """
         Constructor.
 
-        Args:
-            species (str): identifier of species.
-            stoichiometry (float): stoichiometry of species.        
+        Parameters
+        ----------
+        species : str
+            Identifier of species.
+        stoichiometry : float
+            Stoichiometry of species.        
         """
         self.species = species
         self.stoichiometry = stoichiometry
@@ -208,7 +231,7 @@ class SpeciesReference(object):
 
 class ListOfReactants(ListOf):
     """
-    Class storing a list of SpeciesReference representing reactants.
+    List of SpeciesReference representing reactants.
     """
     
     tag = 'listOfReactants'
@@ -217,7 +240,7 @@ class ListOfReactants(ListOf):
 
 class ListOfProducts(ListOf):
     """
-    Class storing a list of SpeciesReference representing products.
+    List of SpeciesReference representing products.
     """
     
     tag = 'listOfProducts'
@@ -226,11 +249,14 @@ class ListOfProducts(ListOf):
 
 class Parameter(object):
     """
-    Class storing parameter values.
+    Parameter represented with an id, value couple.
 
-    Attributes:
-        id: identifier of parameter.
-        value: value of parameter.
+    Attributes
+    ----------
+    id : str
+        Identifier of parameter.
+    value : float
+        Value of parameter.
     """
     
     tag = 'parameter'
@@ -239,9 +265,12 @@ class Parameter(object):
         """
         Constructor.
         
-        Args:
-            id_: identifier of parameter.
-            value: value of parameter.
+        Parameters
+        ----------
+        id_ : str
+            Identifier of parameter.
+        value : float
+            Value of parameter.
         """
         self.id = id_
         self.value = value
@@ -265,7 +294,7 @@ class Parameter(object):
 
 class ListOfParameters(ListOf):
     """
-    Class storing a list of Parameters.
+    List of Parameter elements.
     """
     
     tag = 'listOfParameters'
@@ -274,13 +303,18 @@ class ListOfParameters(ListOf):
 
 class Function(object):
     """
-    Class storing a Function.
+    Function defined by a type and parameters.
 
-    Attributes:
-        id: identifier of function (if applicable).
-        type: type of function.
-        parameters (ListOfParameters): list of parameters used by function.
-        variable: name of variable (if applicable).
+    Attributes
+    ----------
+    id : str or None
+        Identifier of function (if applicable).
+    type : str
+        Type of function.
+    parameters : ListOfParameters
+        List of parameters used by function.
+    variable : str
+        Name of variable (if applicable).
     """
     
     tag = 'function'
@@ -289,11 +323,16 @@ class Function(object):
         """
         Constructor.
         
-        Attributes:
-            id: identifier of function (if applicable).
-            type: type of function.
-            parameters (ListOfParameters): list of parameters used by function.
-            variable: name of variable (if applicable).
+        Parameters
+        ----------
+        id_ : str or None
+            identifier of function (if applicable).
+        type_: str
+            type of function.
+        parameters : ListOfParameters, optional
+            list of parameters used by function.
+        variable : str, optional
+            name of variable (if applicable).
         """
         if id_ is not None: self.id = id_
         else: self.id = ''
@@ -330,7 +369,7 @@ class Function(object):
 
 class ListOfFunctions(ListOf):
     """
-    Class storing a list of Functions.
+    List of Function elements.
     """
     
     tag = 'listOfFunctions'
@@ -339,12 +378,16 @@ class ListOfFunctions(ListOf):
 
 class TargetValue(object):
     """
-    Class storing a target value.
+    Target specifying value, lower bound and/or upper bound of a variable.
 
-    Attributes:
-        value: exact target value (None if no exact value to match).
-        lower_bound: lower bound on target value (None if no lower bound).
-        upper_bound: upper bound on target value (None if no upper bound).
+    Attributes
+    ----------
+    value : float or None
+        exact target value (None if no exact value to match).
+    lower_bound : float or None
+        lower bound on target value (None if no lower bound).
+    upper_bound : float or None
+        upper bound on target value (None if no upper bound).
     """
     tag = 'targetValue'
     

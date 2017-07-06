@@ -1,2 +1,7 @@
+"""
+Defines pipeline used to generate RBA model from standard data.
+"""
 
-from rba.prerba.pre_rba import PreRba
+from .pre_rba import PreRba
+
+__all__ = ['PreRba']

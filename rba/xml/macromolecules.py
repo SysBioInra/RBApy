@@ -11,6 +11,10 @@ from lxml import etree
 # local imports
 from rba.xml.common import get_unique_child, ListOf
 
+__all__ = ['RbaMacromolecules', 'Component', 'ListOfComponents',
+           'Macromolecule', 'ListOfMacromolecules', 'ComponentReference',
+           'Composition']
+
 
 class RbaMacromolecules(object):
     def __init__(self):

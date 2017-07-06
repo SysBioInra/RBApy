@@ -1,5 +1,15 @@
+"""
+RBA package
+===========
 
-from rba.prerba import PreRba
-from rba.rba_model import RbaModel
-from rba.core.rba_matrices import RbaMatrices
-from rba.core.rba_solver import RbaSolver
+Package computing Resource Balance Analysis.
+"""
+
+from .rba_model import RbaModel
+from . import prerba, core
+from .prerba import *
+from .core import *
+
+__all__ = ['RbaModel']
+__all__ += prerba.__all__
+__all__ += core.__all__
