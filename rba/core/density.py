@@ -6,7 +6,7 @@ Module defining Density class.
 from __future__ import division, print_function
 
 # local imports
-from rba.rba_main.target_vector import TargetVector
+from rba.core.target_vector import TargetVector
 
 class Density(object):
     """

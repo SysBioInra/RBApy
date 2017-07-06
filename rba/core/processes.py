@@ -11,7 +11,7 @@ from collections import namedtuple
 from scipy.sparse import hstack
 
 # local imports
-from rba.rba_main.target_vector import TargetVector
+from rba.core.target_vector import TargetVector
 
 # class used to communicate target information
 TargetSet = namedtuple('TargetSet', 'names values lb ub composition '

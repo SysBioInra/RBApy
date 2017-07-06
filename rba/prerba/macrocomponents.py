@@ -9,7 +9,7 @@ from __future__ import division, print_function
 import os.path
 
 # local imports
-from rba.pre_rba.curation_data import CurationData
+from rba.prerba.curation_data import CurationData
 
 class Macrocomponents(object):
     """

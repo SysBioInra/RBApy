@@ -8,10 +8,10 @@
   <listOfMacromolecules>
     <macromolecule id="dna" compartment="Cytoplasm">
       <composition>
-        <componentReference component="A" stoichiometry="0.2818"/>
         <componentReference component="C" stoichiometry="0.2181"/>
         <componentReference component="T" stoichiometry="0.283"/>
         <componentReference component="G" stoichiometry="0.2171"/>
+        <componentReference component="A" stoichiometry="0.2818"/>
       </composition>
     </macromolecule>
   </listOfMacromolecules>

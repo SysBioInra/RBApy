@@ -9,9 +9,9 @@ from __future__ import division, print_function
 from os.path import join
 
 # local imports
-from rba import rba_xml
-from rba.rba_main.rba_matrices import RbaMatrices
-from rba.rba_main.rba_solver import RbaSolver
+import rba.xml
+from rba.core.rba_matrices import RbaMatrices
+from rba.core.rba_solver import RbaSolver
 
 class RbaModel(object):
     """
@@ -34,13 +34,13 @@ class RbaModel(object):
         """
         Default constructor.
         """
-        self.metabolism = rba_xml.RbaMetabolism()
-        self.parameters = rba_xml.RbaParameters()
-        self.proteins = rba_xml.RbaMacromolecules()
-        self.enzymes = rba_xml.RbaEnzymes()
-        self.rnas = rba_xml.RbaMacromolecules()
-        self.dna = rba_xml.RbaMacromolecules()
-        self.processes = rba_xml.RbaProcesses()
+        self.metabolism = rba.xml.RbaMetabolism()
+        self.parameters = rba.xml.RbaParameters()
+        self.proteins = rba.xml.RbaMacromolecules()
+        self.enzymes = rba.xml.RbaEnzymes()
+        self.rnas = rba.xml.RbaMacromolecules()
+        self.dna = rba.xml.RbaMacromolecules()
+        self.processes = rba.xml.RbaProcesses()
         self.medium = {}
         self.output_dir = ''
 
@@ -54,19 +54,19 @@ class RbaModel(object):
         """
         obj = cls()
         obj.output_dir = input_dir
-        obj.parameters = (rba_xml.RbaParameters()
+        obj.parameters = (rba.xml.RbaParameters()
                           .from_file(join(input_dir, 'parameters.xml')))
-        obj.metabolism = (rba_xml.RbaMetabolism()
+        obj.metabolism = (rba.xml.RbaMetabolism()
                           .from_file(join(input_dir, 'metabolism.xml')))
-        obj.proteins = (rba_xml.RbaMacromolecules()
+        obj.proteins = (rba.xml.RbaMacromolecules()
                         .from_file(join(input_dir, 'proteins.xml')))
-        obj.rnas = (rba_xml.RbaMacromolecules()
+        obj.rnas = (rba.xml.RbaMacromolecules()
                     .from_file(join(input_dir, 'rnas.xml')))
-        obj.dna = (rba_xml.RbaMacromolecules()
+        obj.dna = (rba.xml.RbaMacromolecules()
                    .from_file(join(input_dir, 'dna.xml')))
-        obj.processes = (rba_xml.RbaProcesses()
+        obj.processes = (rba.xml.RbaProcesses()
                          .from_file(join(input_dir, 'processes.xml')))
-        obj.enzymes = (rba_xml.RbaEnzymes()
+        obj.enzymes = (rba.xml.RbaEnzymes()
                        .from_file(join(input_dir, 'enzymes.xml')))
         obj.set_medium(join(input_dir, 'medium.tsv'))
         return obj
@@ -95,7 +95,7 @@ class RbaModel(object):
         Return matrix blocks used to solve the optimization problem.
 
         Returns:
-            rba.rba_main.RbaMatrices object containing matrix blocks.
+            rba.core.RbaMatrices object containing matrix blocks.
         """
         return RbaMatrices(self)
 
@@ -108,7 +108,7 @@ class RbaModel(object):
                 efficiencies of enzymes ('default' if no argument given).
 
         Returns:
-            rba.rba_main.RbaSolver object that contains solution (if one
+            rba.core.RbaSolver object that contains solution (if one
             was found) and matrices next to solution.
         """
         matrices = RbaMatrices(self)

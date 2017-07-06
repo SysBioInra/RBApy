@@ -11,17 +11,17 @@ import itertools
 import libsbml
 
 # local imports
-from rba import rba_xml
+import rba.xml
 
 class SBMLFilter(object):
     """
     Class used to filter RBA-relevant SBML data.
 
     Attributes:
-        species: rba_xml.ListOfSpecies containing SBML species.
+        species: rba.xml.ListOfSpecies containing SBML species.
         enzymes: list where each element represents an enzyme as a list of
             protein identifiers.
-        reactions: rba_xml.ListOfReaction containing SBML reactions.
+        reactions: rba.xml.ListOfReaction containing SBML reactions.
         external_metabolites: list of SBML identifiers of external metabolites.
         imported_metabolites: list of SBML identifiers of imported metabolites.
         has_membrane_enzyme: dict mapping reaction id to boolean value
@@ -46,12 +46,12 @@ class SBMLFilter(object):
         # store metabolite info
         if external_ids is None:
             external_ids = []
-        self.species = rba_xml.ListOfSpecies()
+        self.species = rba.xml.ListOfSpecies()
         for spec in input_document.getModel().species:
             boundary = spec.getBoundaryCondition()
             if spec.getCompartment() in external_ids:
                 boundary = True
-            self.species.append(rba_xml.Species(spec.getId(), boundary))
+            self.species.append(rba.xml.Species(spec.getId(), boundary))
 
         # extract enzymes associated to reactions
         self.enzymes, self.reactions \
@@ -71,7 +71,7 @@ class SBMLFilter(object):
         Parse annotation containing enzyme components.
         """
         enzymes = []
-        reactions = rba_xml.ListOfReactions()
+        reactions = rba.xml.ListOfReactions()
         # try to read fbc notes, else read old-fashioned notes
         enzyme_list = self._read_fbc_annotation(input_document)
         if not enzyme_list:
@@ -80,14 +80,14 @@ class SBMLFilter(object):
             sbml_reactions = input_document.getModel().reactions
             for index, reaction in enumerate(sbml_reactions):
                 # create reaction in RBA objects
-                new_reaction = rba_xml.Reaction(reaction.getId(),
+                new_reaction = rba.xml.Reaction(reaction.getId(),
                                                 reaction.getReversible())
                 for reactant in reaction.reactants:
-                    sr = rba_xml.SpeciesReference(reactant.getSpecies(),
+                    sr = rba.xml.SpeciesReference(reactant.getSpecies(),
                                                   reactant.getStoichiometry())
                     new_reaction.reactants.append(sr)
                 for product in reaction.products:
-                    sr = rba_xml.SpeciesReference(product.getSpecies(),
+                    sr = rba.xml.SpeciesReference(product.getSpecies(),
                                                   product.getStoichiometry())
                     new_reaction.products.append(sr)
                 # duplicate reactions having multiple enzymes

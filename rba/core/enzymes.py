@@ -9,7 +9,7 @@ from __future__ import division, print_function
 import numpy
 
 # local imports
-from rba.rba_main.functions import build_function
+from rba.core.functions import build_function
 
 class Enzymes(object):
     """
