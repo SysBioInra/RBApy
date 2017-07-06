@@ -82,10 +82,10 @@ setup(
     install_requires=[
         'pandas',
         'lxml',
-        'pandas',
         'libsbml',
         'scipy',
-        'cplex'
+        'biopython',
+        'cplex',
     ],
 
     # List additional groups of dependencies here (e.g. development

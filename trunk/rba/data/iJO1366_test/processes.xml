@@ -4,73 +4,73 @@
       <machinery>
         <machineryComposition>
           <listOfReactants>
-            <speciesReference species="P0CE47" stoichiometry="5.4"/>
-            <speciesReference species="P0A7L3" stoichiometry="1.0"/>
-            <speciesReference species="P0A7L0" stoichiometry="1.0"/>
-            <speciesReference species="P0A6N4" stoichiometry="0.8"/>
-            <speciesReference species="P0A7N9" stoichiometry="1.0"/>
-            <speciesReference species="P0AG55" stoichiometry="1.0"/>
-            <speciesReference species="rrnO-23S" stoichiometry="1.0"/>
-            <speciesReference species="P68919" stoichiometry="1.0"/>
-            <speciesReference species="P0A7P6" stoichiometry="1.0"/>
-            <speciesReference species="P0A7R9" stoichiometry="1.0"/>
-            <speciesReference species="P0AG48" stoichiometry="1.0"/>
-            <speciesReference species="P0A7R5" stoichiometry="1.0"/>
-            <speciesReference species="P0AG44" stoichiometry="1.0"/>
-            <speciesReference species="P0AG63" stoichiometry="1.0"/>
-            <speciesReference species="C8U8F3" stoichiometry="1.0"/>
             <speciesReference species="P0AG67" stoichiometry="1.0"/>
-            <speciesReference species="P0A7V8" stoichiometry="1.0"/>
-            <speciesReference species="P02413" stoichiometry="1.0"/>
-            <speciesReference species="P0A7K2" stoichiometry="4.0"/>
-            <speciesReference species="P0A7V0" stoichiometry="1.0"/>
-            <speciesReference species="P0A7T7" stoichiometry="1.0"/>
-            <speciesReference species="P0A7V3" stoichiometry="1.0"/>
-            <speciesReference species="P0A7T3" stoichiometry="1.0"/>
-            <speciesReference species="P0A7R1" stoichiometry="1.0"/>
-            <speciesReference species="P02358" stoichiometry="1.0"/>
-            <speciesReference species="P02359" stoichiometry="1.0"/>
-            <speciesReference species="P60624" stoichiometry="1.0"/>
-            <speciesReference species="P69222" stoichiometry="0.25"/>
-            <speciesReference species="P60723" stoichiometry="1.0"/>
-            <speciesReference species="C4ZS29" stoichiometry="1.0"/>
-            <speciesReference species="P60422" stoichiometry="1.0"/>
-            <speciesReference species="P0A7X3" stoichiometry="1.0"/>
-            <speciesReference species="P0A7M6" stoichiometry="1.0"/>
-            <speciesReference species="P0A7M0" stoichiometry="1.0"/>
-            <speciesReference species="P0A7M2" stoichiometry="1.0"/>
-            <speciesReference species="P0A6M8" stoichiometry="0.8"/>
-            <speciesReference species="P0A7I0" stoichiometry="0.25"/>
-            <speciesReference species="P0A705" stoichiometry="0.3"/>
-            <speciesReference species="P0A7M9" stoichiometry="1.0"/>
-            <speciesReference species="P61175" stoichiometry="1.0"/>
-            <speciesReference species="P0A7W7" stoichiometry="1.0"/>
-            <speciesReference species="rrnO-5S" stoichiometry="1.0"/>
-            <speciesReference species="P0A7S9" stoichiometry="1.0"/>
-            <speciesReference species="P0AA10" stoichiometry="1.0"/>
-            <speciesReference species="P0AG59" stoichiometry="1.0"/>
-            <speciesReference species="P0A7W1" stoichiometry="1.0"/>
-            <speciesReference species="P68681" stoichiometry="1.0"/>
-            <speciesReference species="P0A7S3" stoichiometry="1.0"/>
-            <speciesReference species="P0A7Q2" stoichiometry="1.0"/>
-            <speciesReference species="P0ADZ0" stoichiometry="1.0"/>
-            <speciesReference species="P0AG51" stoichiometry="1.0"/>
-            <speciesReference species="P07012" stoichiometry="0.25"/>
-            <speciesReference species="P0ADZ4" stoichiometry="1.0"/>
-            <speciesReference species="P0A6P1" stoichiometry="0.18"/>
-            <speciesReference species="P0ADY3" stoichiometry="1.0"/>
-            <speciesReference species="P0ADY7" stoichiometry="1.0"/>
-            <speciesReference species="P0A7U7" stoichiometry="1.0"/>
             <speciesReference species="P0A7U3" stoichiometry="1.0"/>
-            <speciesReference species="P0C018" stoichiometry="1.0"/>
-            <speciesReference species="P60438" stoichiometry="1.0"/>
-            <speciesReference species="P0A7Q7" stoichiometry="1.0"/>
-            <speciesReference species="P0A7J7" stoichiometry="1.0"/>
-            <speciesReference species="P0A707" stoichiometry="0.2"/>
+            <speciesReference species="rrnO-23S" stoichiometry="1.0"/>
+            <speciesReference species="P0A7R5" stoichiometry="1.0"/>
             <speciesReference species="rrnO-16S" stoichiometry="1.0"/>
-            <speciesReference species="P0A7J3" stoichiometry="1.0"/>
+            <speciesReference species="P0A7V3" stoichiometry="1.0"/>
+            <speciesReference species="P0A7I0" stoichiometry="0.25"/>
+            <speciesReference species="P0A7Q7" stoichiometry="1.0"/>
+            <speciesReference species="P0A707" stoichiometry="0.2"/>
+            <speciesReference species="P0ADZ0" stoichiometry="1.0"/>
+            <speciesReference species="P0A7M0" stoichiometry="1.0"/>
+            <speciesReference species="P0C018" stoichiometry="1.0"/>
+            <speciesReference species="C8U8F3" stoichiometry="1.0"/>
+            <speciesReference species="P0A7X3" stoichiometry="1.0"/>
+            <speciesReference species="P0A7T7" stoichiometry="1.0"/>
             <speciesReference species="B1LPB3" stoichiometry="1.0"/>
+            <speciesReference species="P68681" stoichiometry="1.0"/>
+            <speciesReference species="P0A7J7" stoichiometry="1.0"/>
+            <speciesReference species="P02358" stoichiometry="1.0"/>
+            <speciesReference species="P0A7N9" stoichiometry="1.0"/>
+            <speciesReference species="P0A6P1" stoichiometry="0.18"/>
+            <speciesReference species="P0A7R9" stoichiometry="1.0"/>
+            <speciesReference species="P0ADZ4" stoichiometry="1.0"/>
+            <speciesReference species="P0AG44" stoichiometry="1.0"/>
+            <speciesReference species="P0A7W1" stoichiometry="1.0"/>
+            <speciesReference species="P0A7U7" stoichiometry="1.0"/>
+            <speciesReference species="P07012" stoichiometry="0.25"/>
             <speciesReference species="P62399" stoichiometry="1.0"/>
+            <speciesReference species="P0A7L3" stoichiometry="1.0"/>
+            <speciesReference species="P0A7Q2" stoichiometry="1.0"/>
+            <speciesReference species="P0CE47" stoichiometry="5.4"/>
+            <speciesReference species="P0AA10" stoichiometry="1.0"/>
+            <speciesReference species="C4ZS29" stoichiometry="1.0"/>
+            <speciesReference species="P0A7P6" stoichiometry="1.0"/>
+            <speciesReference species="P61175" stoichiometry="1.0"/>
+            <speciesReference species="P0A7K2" stoichiometry="4.0"/>
+            <speciesReference species="P0AG51" stoichiometry="1.0"/>
+            <speciesReference species="P0ADY3" stoichiometry="1.0"/>
+            <speciesReference species="P0A7T3" stoichiometry="1.0"/>
+            <speciesReference species="P0A7M9" stoichiometry="1.0"/>
+            <speciesReference species="P0A705" stoichiometry="0.3"/>
+            <speciesReference species="P0A7V8" stoichiometry="1.0"/>
+            <speciesReference species="P02359" stoichiometry="1.0"/>
+            <speciesReference species="P60438" stoichiometry="1.0"/>
+            <speciesReference species="P0AG63" stoichiometry="1.0"/>
+            <speciesReference species="P0A7J3" stoichiometry="1.0"/>
+            <speciesReference species="P0AG59" stoichiometry="1.0"/>
+            <speciesReference species="P0A7V0" stoichiometry="1.0"/>
+            <speciesReference species="P0AG48" stoichiometry="1.0"/>
+            <speciesReference species="P0A6N4" stoichiometry="0.8"/>
+            <speciesReference species="P0ADY7" stoichiometry="1.0"/>
+            <speciesReference species="P60624" stoichiometry="1.0"/>
+            <speciesReference species="P0A7L0" stoichiometry="1.0"/>
+            <speciesReference species="P0AG55" stoichiometry="1.0"/>
+            <speciesReference species="rrnO-5S" stoichiometry="1.0"/>
+            <speciesReference species="P0A7M2" stoichiometry="1.0"/>
+            <speciesReference species="P0A7S3" stoichiometry="1.0"/>
+            <speciesReference species="P69222" stoichiometry="0.25"/>
+            <speciesReference species="P02413" stoichiometry="1.0"/>
+            <speciesReference species="P0A7S9" stoichiometry="1.0"/>
+            <speciesReference species="P60723" stoichiometry="1.0"/>
+            <speciesReference species="P0A6M8" stoichiometry="0.8"/>
+            <speciesReference species="P0A7R1" stoichiometry="1.0"/>
+            <speciesReference species="P0A7W7" stoichiometry="1.0"/>
+            <speciesReference species="P68919" stoichiometry="1.0"/>
+            <speciesReference species="P0A7M6" stoichiometry="1.0"/>
+            <speciesReference species="P60422" stoichiometry="1.0"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
             <speciesReference species="M_h2o_c" stoichiometry="2"/>
           </listOfReactants>
@@ -89,12 +89,12 @@
       </operations>
       <targets>
         <listOfConcentrations>
-          <targetSpecies value="nonenzymatic_proteins_Secreted" species="average_protein_Secreted"/>
-          <targetSpecies value="nonenzymatic_proteins_Cell_inner_membrane" species="average_protein_Cell_inner_membrane"/>
-          <targetSpecies value="nonenzymatic_proteins_Cytoplasm" species="average_protein_Cytoplasm"/>
-          <targetSpecies value="nonenzymatic_proteins_Cell_membrane" species="average_protein_Cell_membrane"/>
-          <targetSpecies value="nonenzymatic_proteins_Periplasm" species="average_protein_Periplasm"/>
           <targetSpecies value="nonenzymatic_proteins_Membrane" species="average_protein_Membrane"/>
+          <targetSpecies value="nonenzymatic_proteins_Cell_membrane" species="average_protein_Cell_membrane"/>
+          <targetSpecies value="nonenzymatic_proteins_Cytoplasm" species="average_protein_Cytoplasm"/>
+          <targetSpecies value="nonenzymatic_proteins_Periplasm" species="average_protein_Periplasm"/>
+          <targetSpecies value="nonenzymatic_proteins_Cell_inner_membrane" species="average_protein_Cell_inner_membrane"/>
+          <targetSpecies value="nonenzymatic_proteins_Secreted" species="average_protein_Secreted"/>
           <targetSpecies value="nonenzymatic_proteins_Cell_outer_membrane" species="average_protein_Cell_outer_membrane"/>
         </listOfConcentrations>
       </targets>
@@ -103,12 +103,12 @@
       <machinery>
         <machineryComposition>
           <listOfReactants>
-            <speciesReference species="P08622" stoichiometry="2.0"/>
-            <speciesReference species="P0A6Y8" stoichiometry="1.0"/>
-            <speciesReference species="P0A6F9" stoichiometry="7.0"/>
-            <speciesReference species="P09372" stoichiometry="2.0"/>
-            <speciesReference species="P0A6F5" stoichiometry="14.0"/>
             <speciesReference species="P0A850" stoichiometry="1.0"/>
+            <speciesReference species="P0A6F5" stoichiometry="14.0"/>
+            <speciesReference species="P09372" stoichiometry="2.0"/>
+            <speciesReference species="P0A6F9" stoichiometry="7.0"/>
+            <speciesReference species="P0A6Y8" stoichiometry="1.0"/>
+            <speciesReference species="P08622" stoichiometry="2.0"/>
           </listOfReactants>
         </machineryComposition>
         <capacity value="chaperone_efficiency_LM"/>
@@ -181,24 +181,24 @@
     <process id="P_MET_PROD" name="Metabolite production">
       <targets>
         <listOfConcentrations>
-          <targetSpecies value="0.0162" species="M_nad_c"/>
-          <targetSpecies value="0.0047" species="M_amp_c"/>
-          <targetSpecies value="0.007" species="M_spmd_c"/>
-          <targetSpecies value="0.0144" species="M_pi_c"/>
-          <targetSpecies value="0.001" species="M_cmp_c"/>
-          <targetSpecies value="0.0004" species="M_10fthf_c"/>
-          <targetSpecies value="0.7063" species="M_k_c"/>
-          <targetSpecies value="0.0005" species="M_ctp_c"/>
-          <targetSpecies value="0.0003" species="M_coa_c"/>
-          <targetSpecies value="0.003" species="M_atp_c"/>
-          <targetSpecies value="0.0009" species="M_nadp_c"/>
-          <targetSpecies value="0.0026" species="M_adp_c"/>
-          <targetSpecies value="0.0002" species="M_nadph_c"/>
-          <targetSpecies value="0.0005" species="M_gmp_c"/>
           <targetSpecies value="0.0002" species="M_gdp_c"/>
+          <targetSpecies value="0.001" species="M_cmp_c"/>
+          <targetSpecies value="0.003" species="M_atp_c"/>
+          <targetSpecies value="0.0005" species="M_gmp_c"/>
+          <targetSpecies value="0.0003" species="M_coa_c"/>
+          <targetSpecies value="0.0005" species="M_ctp_c"/>
+          <targetSpecies value="0.0026" species="M_adp_c"/>
+          <targetSpecies value="0.7063" species="M_k_c"/>
+          <targetSpecies value="0.0002" species="M_nadph_c"/>
           <targetSpecies value="0.0003" species="M_cdp_c"/>
-          <targetSpecies value="0.0009" species="M_ppi_c"/>
+          <targetSpecies value="0.0144" species="M_pi_c"/>
+          <targetSpecies value="0.0004" species="M_10fthf_c"/>
+          <targetSpecies value="0.0162" species="M_nad_c"/>
+          <targetSpecies value="0.0009" species="M_nadp_c"/>
+          <targetSpecies value="0.0047" species="M_amp_c"/>
           <targetSpecies value="0.0004" species="M_gtp_c"/>
+          <targetSpecies value="0.0009" species="M_ppi_c"/>
+          <targetSpecies value="0.006999999999999999" species="M_spmd_c"/>
         </listOfConcentrations>
       </targets>
     </process>

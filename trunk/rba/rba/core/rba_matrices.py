@@ -9,11 +9,11 @@ from __future__ import division, print_function
 from scipy.sparse import lil_matrix, hstack
 
 # local imports
-from rba.rba_main.functions import Functions
-from rba.rba_main.species import Species
-from rba.rba_main.density import Density
-from rba.rba_main.enzymes import Enzymes
-from rba.rba_main.processes import Processes
+from rba.core.functions import Functions
+from rba.core.species import Species
+from rba.core.density import Density
+from rba.core.enzymes import Enzymes
+from rba.core.processes import Processes
 
 class RbaMatrices(object):
     """

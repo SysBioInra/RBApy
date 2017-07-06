@@ -1,11 +1,11 @@
 <RBAMetabolism>
   <listOfCompartments>
-    <compartment id="Secreted"/>
-    <compartment id="Cell_inner_membrane"/>
-    <compartment id="Cytoplasm"/>
-    <compartment id="Cell_membrane"/>
-    <compartment id="Periplasm"/>
     <compartment id="Membrane"/>
+    <compartment id="Cell_membrane"/>
+    <compartment id="Cytoplasm"/>
+    <compartment id="Periplasm"/>
+    <compartment id="Cell_inner_membrane"/>
+    <compartment id="Secreted"/>
     <compartment id="Cell_outer_membrane"/>
   </listOfCompartments>
   <listOfSpecies>

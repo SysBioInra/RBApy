@@ -1,5 +1,14 @@
+"""
+Module containing script solving a standard RBA problem.
+"""
+
+# python 2/3 compatibility
+from __future__ import division, print_function
+
+# global imports
 import sys
 
+# package imports
 import rba
 from rba.post_process import saturating_constraints
 
@@ -15,4 +24,4 @@ if __name__ == '__main__':
 
         model = rba.RbaModel.from_xml(xml_dir)
         solver = model.solve(medium)
-        saturating_constraints(solver)
+        #saturating_constraints(solver)

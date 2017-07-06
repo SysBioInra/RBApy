@@ -6,7 +6,7 @@ Module storing data and data-related functions.
 from __future__ import division, print_function
 
 # local imports
-from rba.rba_xml import Function
+from rba.xml import Function
 
 class DefaultData(object):
     """

@@ -11,7 +11,7 @@ from collections import namedtuple
 import pandas
 
 # local imports
-from rba.pre_rba.curation_data import CurationData
+from rba.prerba.curation_data import CurationData
 
 # Class used to store metabolite information
 Metabolite = namedtuple('Metabolite', 'name sbml_id concentration')

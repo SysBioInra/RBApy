@@ -11,11 +11,11 @@ import re
 import pandas
 
 # local imports
-from rba import rba_xml
-from rba.pre_rba.cofactor import CofactorData
-from rba.pre_rba.subunit import SubunitData
-from rba.pre_rba.location import LocationData
-from rba.pre_rba.unknown_proteins import UnknownProteins
+import rba.xml
+from rba.prerba.cofactor import CofactorData
+from rba.prerba.subunit import SubunitData
+from rba.prerba.location import LocationData
+from rba.prerba.unknown_proteins import UnknownProteins
 
 class UniprotFilter(object):
     """
@@ -28,9 +28,9 @@ class UniprotFilter(object):
         cytoplasm_compartment: name of cytoplasm.
         secreted_compartment: name of external compartment.
         compartment_ids: list of names of all compartments.
-        components: rba_xml.ListOfComponents containing all elements that are
+        components: rba.xml.ListOfComponents containing all elements that are
             used to build proteins (amino acids, vitamins, cofactors).
-        proteins: rba_xml.ListOfMacromolecules containing all proteins that
+        proteins: rba.xml.ListOfMacromolecules containing all proteins that
             have been filtered.
         protein_stoichiometry: dict mapping protein identifiers with their
             stoichiometry within their enzymatic complex.
@@ -78,8 +78,8 @@ class UniprotFilter(object):
         aa_data = self._aa_data(data)
 
         # store data
-        self.components = rba_xml.ListOfComponents()
-        self.proteins = rba_xml.ListOfMacromolecules()
+        self.components = rba.xml.ListOfComponents()
+        self.proteins = rba.xml.ListOfMacromolecules()
         self.protein_stoichiometry = {}
         # add amino acids to component set
         amino_acids = set()
@@ -87,7 +87,7 @@ class UniprotFilter(object):
             for aa in comp:
                 amino_acids.add(aa)
         for aa in amino_acids:
-            self.components.append(rba_xml.Component(aa, '', 'amino_acid', 1))
+            self.components.append(rba.xml.Component(aa, '', 'amino_acid', 1))
         # store protein data
         entry_data = reduced_data['Entry']
         gene_data = reduced_data['Lookup names']
@@ -102,7 +102,7 @@ class UniprotFilter(object):
             for cofactor in cofactors:
                 composition[cofactor.chebi] = cofactor.stoichiometry
                 if cofactor.chebi not in known_cofactors:
-                    new_cofactor = rba_xml.Component(cofactor.chebi,
+                    new_cofactor = rba.xml.Component(cofactor.chebi,
                                                      cofactor.name,
                                                      'cofactor', 0)
                     self.components.append(new_cofactor)
@@ -114,7 +114,7 @@ class UniprotFilter(object):
                       + 'duplicated for now. Check your SBML for future runs.')
             # add protein(s) to list
             for gene_name in gene_names:
-                protein = rba_xml.Macromolecule(gene_name, location_data[entry],
+                protein = rba.xml.Macromolecule(gene_name, location_data[entry],
                                                 composition)
                 self.proteins.append(protein)
                 self.protein_stoichiometry[gene_name] = subunit_data[entry]
@@ -131,7 +131,7 @@ class UniprotFilter(object):
         # add one average protein for every compartment
         for location in self.compartment_ids:
             name = 'average_protein_' + location
-            protein = rba_xml.Macromolecule(name, location, average_protein)
+            protein = rba.xml.Macromolecule(name, location, average_protein)
             self.proteins.append(protein)
             self.protein_stoichiometry[name] = 1
 

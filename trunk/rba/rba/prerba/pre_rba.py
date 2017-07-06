@@ -9,20 +9,20 @@ from __future__ import division, print_function
 import os.path
 
 # data processing imports
-from rba.pre_rba.pipeline_parameters import PipelineParameters
-from rba.pre_rba.sbml_filter import SBMLFilter
-from rba.pre_rba.uniprot_filter import UniprotFilter
-from rba.pre_rba.uniprot_importer import UniprotImporter
-from rba.pre_rba.metabolite_data import MetaboliteData
-from rba.pre_rba.macrocomponents import Macrocomponents
-from rba.pre_rba.fasta_parser import FastaParser
+from rba.prerba.pipeline_parameters import PipelineParameters
+from rba.prerba.sbml_filter import SBMLFilter
+from rba.prerba.uniprot_filter import UniprotFilter
+from rba.prerba.uniprot_importer import UniprotImporter
+from rba.prerba.metabolite_data import MetaboliteData
+from rba.prerba.macrocomponents import Macrocomponents
+from rba.prerba.fasta_parser import FastaParser
 
 # default data imports
-from rba.pre_rba.default_data import DefaultData
-from rba.pre_rba.default_processes import DefaultProcesses
+from rba.prerba.default_data import DefaultData
+from rba.prerba.default_processes import DefaultProcesses
 
 # model imports
-from rba import rba_xml
+import rba.xml
 from rba.rba_model import RbaModel
 
 class PreRba(object):
@@ -87,18 +87,18 @@ class PreRba(object):
         # add average RNA
         rna_id = default_data.metabolites.mrna
         rna_comp = {'A': 0.2818, 'C': 0.2181, 'G': 0.2171, 'U': 0.283}
-        rna = rba_xml.Macromolecule(rna_id, self._cytoplasm_id, rna_comp)
+        rna = rba.xml.Macromolecule(rna_id, self._cytoplasm_id, rna_comp)
         self.model.rnas.macromolecules.append(rna)
         # add average DNA
         dna_comp = {'A': 0.2818, 'C': 0.2181, 'G': 0.2171, 'T': 0.283}
-        comp_a = rba_xml.Component('A', 'Adenosine residue', 'Nucleotide', 0)
-        comp_c = rba_xml.Component('C', 'Cytosine residue', 'Nucleotide', 0)
-        comp_g = rba_xml.Component('G', 'Guanine residue', 'Nucleotide', 0)
-        comp_t = rba_xml.Component('T', 'Thymine residue', 'Nucleotide', 0)
+        comp_a = rba.xml.Component('A', 'Adenosine residue', 'Nucleotide', 0)
+        comp_c = rba.xml.Component('C', 'Cytosine residue', 'Nucleotide', 0)
+        comp_g = rba.xml.Component('G', 'Guanine residue', 'Nucleotide', 0)
+        comp_t = rba.xml.Component('T', 'Thymine residue', 'Nucleotide', 0)
         for comp in [comp_a, comp_c, comp_g, comp_t]:
             self.model.dna.components.append(comp)
         dna_id = default_data.metabolites.dna
-        dna = rba_xml.Macromolecule(dna_id, self._cytoplasm_id, dna_comp)
+        dna = rba.xml.Macromolecule(dna_id, self._cytoplasm_id, dna_comp)
         self.model.dna.macromolecules.append(dna)
         
         ## medium concentrations
@@ -157,9 +157,9 @@ class PreRba(object):
 
         # store data
         self._compartment_ids = uniprot_data.compartment_ids
-        self.model.metabolism.compartments = rba_xml.ListOfCompartments()
+        self.model.metabolism.compartments = rba.xml.ListOfCompartments()
         for c in uniprot_data.compartment_ids:
-            self.model.metabolism.compartments.append(rba_xml.Compartment(c))
+            self.model.metabolism.compartments.append(rba.xml.Compartment(c))
         self.model.proteins.components = uniprot_data.components
         self._cofactors = [c for c in uniprot_data.components
                            if c.type == 'cofactor']
@@ -176,10 +176,10 @@ class PreRba(object):
         """
         # read all real trnas (as described in fasta files)
         trna_data = FastaParser(self._input('trnas.fasta')).entries
-        A = rba_xml.Component('A', 'Adenosine residue', 'Nucleotide', 2.9036)
-        C = rba_xml.Component('C', 'Cytosine residue', 'Nucleotide', 2.7017)
-        G = rba_xml.Component('G', 'Guanine residue', 'Nucleotide', 3.0382)
-        U = rba_xml.Component('U', 'Uramine residue', 'Nucleotide', 2.7102)
+        A = rba.xml.Component('A', 'Adenosine residue', 'Nucleotide', 2.9036)
+        C = rba.xml.Component('C', 'Cytosine residue', 'Nucleotide', 2.7017)
+        G = rba.xml.Component('G', 'Guanine residue', 'Nucleotide', 3.0382)
+        U = rba.xml.Component('U', 'Uramine residue', 'Nucleotide', 2.7102)
         for comp in [A, C, G, U]:
             self.model.rnas.components.append(comp)
         # map real trnas to user trnas
@@ -198,7 +198,7 @@ class PreRba(object):
             comp = self._composition(''.join(seq), 'ACGTU')
             comp['U'] += comp.pop('T')            
             average_comp = {k: v/len(seq) for k, v in comp.items()}
-            rna = rba_xml.Macromolecule(id_, self._cytoplasm_id, average_comp)
+            rna = rba.xml.Macromolecule(id_, self._cytoplasm_id, average_comp)
             self.model.rnas.macromolecules.append(rna)
 
     def _read_machinery(self, file_name, default_metabolites):
@@ -216,12 +216,12 @@ class PreRba(object):
             if molecule.set_name == 'rna':
                 comp = self._composition(molecule.sequence, 'ACGTU')
                 comp['U'] += comp.pop('T')
-                rna = rba_xml.Macromolecule(id_, self._cytoplasm_id, comp)
+                rna = rba.xml.Macromolecule(id_, self._cytoplasm_id, comp)
                 self.model.rnas.macromolecules.append(rna)
             elif molecule.set_name == 'protein':
                 comp = self._composition(molecule.sequence,
                                          default_metabolites.aas)
-                prot = rba_xml.Macromolecule(id_, self._cytoplasm_id, comp)
+                prot = rba.xml.Macromolecule(id_, self._cytoplasm_id, comp)
                 self.model.proteins.macromolecules.append(prot)
             else:
                 UserWarning(file_name + ': Unknown set ' + molecule.set_name)
@@ -249,27 +249,27 @@ class PreRba(object):
         """
         ## efficiency functions
         # for the moment simply put default value
-        default_function = rba_xml.Function('default', 'constant', {})
+        default_function = rba.xml.Function('default', 'constant', {})
         self.model.enzymes.efficiency_functions.append(default_function)
 
         ## enzymes
         enzyme_list = self.model.enzymes.enzymes
         def_param = {'CONSTANT': default_activity.catalytic_activity}
-        def_efficiency = rba_xml.EnzymeEfficiency('default', def_param)
+        def_efficiency = rba.xml.EnzymeEfficiency('default', def_param)
         tra_param = {'CONSTANT': default_activity.transporter_activity}
-        tra_efficiency = rba_xml.EnzymeEfficiency('default', tra_param)
+        tra_efficiency = rba.xml.EnzymeEfficiency('default', tra_param)
         mm_parameters = {'Km': default_activity.import_Km,
                          'kmax': default_activity.import_kmax}
         for reaction, comp in zip(self._reaction_ids, self._enzyme_comp):
             # base information
-            enzyme = rba_xml.Enzyme(reaction)
+            enzyme = rba.xml.Enzyme(reaction)
             enzyme_list.append(enzyme)
             # machinery composition
             reactants = enzyme.machinery_composition.reactants
             for protein in comp:
                 [name, sto] = self._protein_info(protein, default_protein)
                 if sto > 0:
-                    reactants.append(rba_xml.SpeciesReference(name, sto))
+                    reactants.append(rba.xml.SpeciesReference(name, sto))
             # base enzymatic activity
             efficiencies = enzyme.enzymatic_activity.enzyme_efficiencies
             if self._has_membrane_enzyme[reaction]:
@@ -280,7 +280,7 @@ class PreRba(object):
             transport = enzyme.enzymatic_activity.transporter_efficiency
             if reaction in self._imported_metabolites:
                 for m in self._imported_metabolites[reaction]:
-                    transport.append(rba_xml.Function('', 'michaelisMenten',
+                    transport.append(rba.xml.Function('', 'michaelisMenten',
                                                       mm_parameters, m))
         return enzyme_list
 
@@ -320,21 +320,21 @@ class PreRba(object):
         constraints = self.model.parameters.target_densities
         aggregates = self.model.parameters.aggregates
         # always start with cytoplasm
-        c_density = rba_xml.TargetDensity(self._cytoplasm_id)
+        c_density = rba.xml.TargetDensity(self._cytoplasm_id)
         c_density.upper_bound = default.cytoplasm_density
         constraints.append(c_density)
         # now treat the rest
         for user_id in other_compartments:
             # create aggregated function for density
             id_ = user_id + '_density'
-            new_aggregate = rba_xml.Aggregate(id_, 'multiplication')
+            new_aggregate = rba.xml.Aggregate(id_, 'multiplication')
             for ref in ['amino_acid_concentration',
                         default.protein_fraction_id(user_id)]:
                 new_aggregate.function_references \
-                             .append(rba_xml.FunctionReference(ref))
+                             .append(rba.xml.FunctionReference(ref))
             aggregates.append(new_aggregate)
             # create constraint
-            new_density = rba_xml.TargetDensity(user_id)
+            new_density = rba.xml.TargetDensity(user_id)
             new_density.upper_bound = id_
             constraints.append(new_density)
 
@@ -375,18 +375,18 @@ class PreRba(object):
         for agg in processes.aggregates:
             self.model.parameters.aggregates.append(agg)
         ## add atpm reaction
-        reaction = rba_xml.Reaction(default_data.atpm_reaction, False)
+        reaction = rba.xml.Reaction(default_data.atpm_reaction, False)
         for m in ['ATP', 'H2O']:
             id_ = self.metabolite_map[m].sbml_id
             if id_:
-                reaction.reactants.append(rba_xml.SpeciesReference(id_, 1))
+                reaction.reactants.append(rba.xml.SpeciesReference(id_, 1))
         for m in ['ADP', 'H', 'Pi']:
             id_ = self.metabolite_map[m].sbml_id
             if id_:
-                reaction.products.append(rba_xml.SpeciesReference(id_, 1))
+                reaction.products.append(rba.xml.SpeciesReference(id_, 1))
         self.model.metabolism.reactions.append(reaction)
-        enzyme = rba_xml.Enzyme(default_data.atpm_reaction)
+        enzyme = rba.xml.Enzyme(default_data.atpm_reaction)
         activity = {'CONSTANT': default_data.activity.catalytic_activity}
-        efficiency = rba_xml.EnzymeEfficiency('default', activity)
+        efficiency = rba.xml.EnzymeEfficiency('default', activity)
         enzyme.enzymatic_activity.enzyme_efficiencies.append(efficiency)
         self.model.enzymes.enzymes.append(enzyme)

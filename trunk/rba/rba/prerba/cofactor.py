@@ -13,7 +13,7 @@ from collections import namedtuple
 import pandas
 
 # local imports
-from rba.pre_rba.curation_data import CurationData
+from rba.prerba.curation_data import CurationData
 
 # Class storing cofactor information.
 Cofactor = namedtuple('Cofactor', 'chebi name stoichiometry uniprot_note')

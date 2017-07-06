@@ -6,7 +6,7 @@ Module defining DefaultProcesses class.
 from __future__ import division, print_function
 
 # local imports
-from rba import rba_xml
+import rba.xml
 
 class DefaultProcesses(object):
     """
@@ -42,8 +42,8 @@ class DefaultProcesses(object):
         self._macro_flux = macro_flux
         self._target_already_treated = []
 
-        self.rba_processes = rba_xml.RbaProcesses()
-        self.aggregates = rba_xml.ListOfAggregates()
+        self.rba_processes = rba.xml.RbaProcesses()
+        self.aggregates = rba.xml.ListOfAggregates()
 
         # create default processes
         default_metabolites = default_data.metabolites
@@ -71,11 +71,11 @@ class DefaultProcesses(object):
 
     def _translation(self, default_metabolites, default_parameters,
                      ribosome_composition, compartments):
-        process = rba_xml.Process('P_TA', 'Translation')
+        process = rba.xml.Process('P_TA', 'Translation')
         # machinery
         machine = process.machinery.machinery_composition
         for id_, sto in ribosome_composition.items():
-            machine.reactants.append(rba_xml.SpeciesReference(id_, sto))
+            machine.reactants.append(rba.xml.SpeciesReference(id_, sto))
         self._append_metabolite(machine.reactants, 'GTP', 2)
         self._append_metabolite(machine.reactants, 'H2O', 2)
         self._append_metabolite(machine.products, 'GDP', 2)
@@ -86,14 +86,14 @@ class DefaultProcesses(object):
                                   'fraction_active_ribosomes'])
         process.machinery.capacity.value = id_
         # operating costs
-        operation = rba_xml.Operation('translation', 'protein')
+        operation = rba.xml.Operation('translation', 'protein')
         process.operations.productions.append(operation)
         # targets
         for cpt in compartments:
             prot_id = default_metabolites.average_protein_id(cpt)
             fraction_fn = default_parameters.protein_fraction_id(cpt)
             non_enzymatic_fn = default_parameters.non_enzymatic_fraction_id(cpt)
-            target = rba_xml.TargetSpecies(prot_id)
+            target = rba.xml.TargetSpecies(prot_id)
             id_ = 'nonenzymatic_proteins_' + cpt
             self._add_aggregate(id_, ['amino_acid_concentration',
                                       'inverse_average_protein_length',
@@ -104,28 +104,28 @@ class DefaultProcesses(object):
 
     @staticmethod
     def _folding(chaperone_composition):
-        process = rba_xml.Process('P_CHP', 'Folding')
+        process = rba.xml.Process('P_CHP', 'Folding')
         # capacity constraint
         machine = process.machinery.machinery_composition
         for id_, sto in chaperone_composition.items():
-            machine.reactants.append(rba_xml.SpeciesReference(id_, sto))
+            machine.reactants.append(rba.xml.SpeciesReference(id_, sto))
         process.machinery.capacity.value = 'chaperone_efficiency_LM'
         # operating costs
-        operation = rba_xml.Operation('folding', 'protein')
+        operation = rba.xml.Operation('folding', 'protein')
         process.operations.productions.append(operation)
         return process
 
     def _transcription(self, default_metabolites):
-        process = rba_xml.Process('P_TSC', 'Transcription')
+        process = rba.xml.Process('P_TSC', 'Transcription')
         # operating costs
-        operation = rba_xml.Operation('transcription', 'rna')
+        operation = rba.xml.Operation('transcription', 'rna')
         process.operations.productions.append(operation)
         # targets
         # mrna
-        target = rba_xml.TargetSpecies(default_metabolites.mrna)
+        target = rba.xml.TargetSpecies(default_metabolites.mrna)
         target.value = 0.01
         process.targets.concentrations.append(target)
-        target = rba_xml.TargetSpecies(default_metabolites.mrna)
+        target = rba.xml.TargetSpecies(default_metabolites.mrna)
         target.value = 0.15996
         process.targets.production_fluxes.append(target)
         # trnas
@@ -134,37 +134,37 @@ class DefaultProcesses(object):
             self._target_already_treated.append(key)
             metabolite = self._metabolites[key]
             if metabolite.sbml_id and metabolite.concentration:
-                target = rba_xml.TargetSpecies(metabolite.sbml_id)
+                target = rba.xml.TargetSpecies(metabolite.sbml_id)
                 target.value = metabolite.concentration
                 process.targets.concentrations.append(target)
         return process
 
     @staticmethod
     def _replication(default_metabolites):
-        process = rba_xml.Process('P_REP', 'Replication')
+        process = rba.xml.Process('P_REP', 'Replication')
         # operating costs
-        operation = rba_xml.Operation('replication', 'dna')
+        operation = rba.xml.Operation('replication', 'dna')
         process.operations.productions.append(operation)
         # targets
-        target = rba_xml.TargetSpecies(default_metabolites.dna)
+        target = rba.xml.TargetSpecies(default_metabolites.dna)
         target.value = 0.0807
         process.targets.concentrations.append(target)
         return process
 
     @staticmethod
     def _rna_degradation(default_metabolites):
-        process = rba_xml.Process('P_RNADEG', 'RNA degradation')
+        process = rba.xml.Process('P_RNADEG', 'RNA degradation')
         # operating costs
-        operation = rba_xml.Operation('rna_degradation', 'rna')
+        operation = rba.xml.Operation('rna_degradation', 'rna')
         process.operations.degradations.append(operation)
         # targets
-        target = rba_xml.TargetSpecies(default_metabolites.mrna)
+        target = rba.xml.TargetSpecies(default_metabolites.mrna)
         target.value = 0.15996
         process.targets.degradation_fluxes.append(target)
         return process
 
     def _metabolite_production(self):
-        process = rba_xml.Process('P_MET_PROD', 'Metabolite production')
+        process = rba.xml.Process('P_MET_PROD', 'Metabolite production')
         # targets
         for key in self._metabolites:
             if key in self._target_already_treated:
@@ -172,29 +172,29 @@ class DefaultProcesses(object):
             metabolite = self._metabolites[key]
             # if a metabolite could not be identified, ignore it
             if metabolite.sbml_id and metabolite.concentration:
-                target = rba_xml.TargetSpecies(metabolite.sbml_id)
+                target = rba.xml.TargetSpecies(metabolite.sbml_id)
                 target.value = metabolite.concentration
                 process.targets.concentrations.append(target)
         return process
 
     def _macrocomponents(self):
-        process = rba_xml.Process('P_MACRO_PROD', 'Macrocomponent production')
+        process = rba.xml.Process('P_MACRO_PROD', 'Macrocomponent production')
         for id_, flux in self._macro_flux.items():
-            target = rba_xml.TargetSpecies(id_)
+            target = rba.xml.TargetSpecies(id_)
             target.value = flux
             process.targets.concentrations.append(target)
         return process
 
     @staticmethod
     def _maintenance_atp(reaction_name):
-        process = rba_xml.Process('P_maintenance_atp', 'Maintenance ATP')
-        target = rba_xml.TargetReaction(reaction_name)
+        process = rba.xml.Process('P_maintenance_atp', 'Maintenance ATP')
+        target = rba.xml.TargetReaction(reaction_name)
         target.lower_bound = 'maintenance_atp'
         process.targets.reaction_fluxes.append(target)
         return process
 
     def _translation_map(self, default_metabolites):
-        map_ = rba_xml.ComponentMap('translation')
+        map_ = rba.xml.ComponentMap('translation')
 
         # constant costs
         reactants = map_.constant_cost.reactants
@@ -213,7 +213,7 @@ class DefaultProcesses(object):
 
         # amino acids
         for aa in default_metabolites.aas:
-            cost = rba_xml.Cost(aa, 1)
+            cost = rba.xml.Cost(aa, 1)
             self._append_metabolite(cost.reactants,
                                     default_metabolites.charged_trna_key(aa), 1)
             self._append_metabolite(cost.reactants, 'GTP', 2)
@@ -228,22 +228,22 @@ class DefaultProcesses(object):
 
         # cofactors
         for cofactor in self._cofactors:
-            cost = rba_xml.Cost(cofactor.id)
+            cost = rba.xml.Cost(cofactor.id)
             self._append_metabolite(cost.reactants, cofactor.id, 1)
             map_.costs.append(cost)
         return map_
 
     @staticmethod
     def _folding_map(default_metabolites):
-        map_ = rba_xml.ComponentMap('folding')
+        map_ = rba.xml.ComponentMap('folding')
         for aa in default_metabolites.aas:
-            map_.costs.append(rba_xml.Cost(aa, 0.1))
+            map_.costs.append(rba.xml.Cost(aa, 0.1))
         return map_
 
     def _transcription_map(self, default_metabolites):
-        map_ = rba_xml.ComponentMap('transcription')
+        map_ = rba.xml.ComponentMap('transcription')
         for n in default_metabolites.nucleotides:
-            cost = rba_xml.Cost(n)
+            cost = rba.xml.Cost(n)
             self._append_metabolite(cost.reactants,
                                     default_metabolites.ntp_key(n), 1)
             self._append_metabolite(cost.reactants, 'H2O', 1)
@@ -253,9 +253,9 @@ class DefaultProcesses(object):
         return map_
 
     def _rna_degradation_map(self, default_metabolites):
-        map_ = rba_xml.ComponentMap('rna_degradation')
+        map_ = rba.xml.ComponentMap('rna_degradation')
         for n in default_metabolites.nucleotides:
-            cost = rba_xml.Cost(n)
+            cost = rba.xml.Cost(n)
             self._append_metabolite(cost.reactants, 'H2O', 1)
             self._append_metabolite(cost.products,
                                     default_metabolites.nmp_key(n), 1)
@@ -264,9 +264,9 @@ class DefaultProcesses(object):
         return map_
 
     def _replication_map(self, default_metabolites):
-        map_ = rba_xml.ComponentMap('replication')
+        map_ = rba.xml.ComponentMap('replication')
         for n in default_metabolites.d_nucleotides:
-            cost = rba_xml.Cost(n)
+            cost = rba.xml.Cost(n)
             self._append_metabolite(cost.reactants,
                                     default_metabolites.dntp_key(n), 1)
             self._append_metabolite(cost.reactants, 'H2O', 1)
@@ -281,11 +281,11 @@ class DefaultProcesses(object):
         """
         sbml_id = self._metabolites[key].sbml_id
         if sbml_id:
-            sr_list.append(rba_xml.SpeciesReference(sbml_id, sto))
+            sr_list.append(rba.xml.SpeciesReference(sbml_id, sto))
 
     def _add_aggregate(self, id_, fn_refs):
-        result = rba_xml.Aggregate(id_, 'multiplication')
+        result = rba.xml.Aggregate(id_, 'multiplication')
         for ref in fn_refs:
-            result.function_references.append(rba_xml.FunctionReference(ref))
+            result.function_references.append(rba.xml.FunctionReference(ref))
         self.aggregates.append(result)
 
