@@ -29,6 +29,7 @@ class RbaMetabolism(object):
     reactions : ListOfReactions
         List of reactions.
     """
+
     def __init__(self):
         """
         Default constructor.
@@ -37,15 +38,15 @@ class RbaMetabolism(object):
         self.species = ListOfSpecies()
         self.reactions = ListOfReactions()
 
-    def write(self, output_stream, doc_name = 'RBAMetabolism'):
+    def write(self, output_stream, doc_name='RBAMetabolism'):
         """
         Write information as an XML structure.
 
         Parameters
         ----------
-        output_stream : file or buffer 
+        output_stream : file or buffer
             Location where XML structure should be written.
-        doc_name : str
+        doc_name : str, optional
             Name of XML document.
         """
         root = etree.Element(doc_name)
@@ -111,13 +112,13 @@ class Compartment(object):
         Constructor from xml node.
         """
         return cls(node.get('id'))
-    
+
 
 class ListOfCompartments(ListOf):
     """
     List of Compartment elements
     """
-    
+
     tag = 'listOfCompartments'
     list_element = Compartment
 
@@ -135,7 +136,7 @@ class Species(object):
     """
 
     tag = 'species'
-    
+
     def __init__(self, id_, boundary_condition):
         """
         Constructor.
@@ -168,20 +169,52 @@ class Species(object):
 
 
 class ListOfSpecies(ListOf):
+    """
+    List of Species elements.
+    """
+
     tag = 'listOfSpecies'
     list_element = Species
 
 
 class Reaction(object):
+    """
+    Reaction.
+
+    Attributes
+    ----------
+    id : str
+        Identifier.
+    reversible : bool
+        True if reaction is reversible.
+    reactants : ListOfReactants
+        List of chemicals consumed by reaction.
+    products : ListOfProducts
+        List of chemicals produced by reaction.
+    """
+
     tag = 'reaction'
-    
+
     def __init__(self, id_, reversible):
+        """
+        Constructor.
+
+        Parameters
+        ----------
+        id_ : str
+            Identifier.
+        reversible : bool
+            True if reaction is reversible.
+        """
         self.id = id_
         self.reversible = reversible
         self.reactants = ListOfReactants()
         self.products = ListOfProducts()
 
     def to_xml_node(self):
+        """
+        Convert to xml node.
+        """
         result = etree.Element(self.tag)
         result.set('id', self.id)
         result.set('reversible', str(self.reversible).lower())
@@ -191,14 +224,23 @@ class Reaction(object):
 
     @classmethod
     def from_xml_node(cls, node):
+        """
+        Constructor from xml node.
+        """
         result = cls(node.get('id'), is_true(node.get('reversible')))
         n = get_unique_child(node, ListOfReactants.tag, False)
-        if n is not None: result.reactants = ListOfReactants.from_xml_node(n)
+        if n is not None:
+            result.reactants = ListOfReactants.from_xml_node(n)
         n = get_unique_child(node, ListOfProducts.tag, False)
-        if n is not None: result.products = ListOfProducts.from_xml_node(n)
+        if n is not None:
+            result.products = ListOfProducts.from_xml_node(n)
         return result
 
 
 class ListOfReactions(ListOf):
+    """
+    List of Reaction elements.
+    """
+
     tag = 'listOfReactions'
     list_element = Reaction
