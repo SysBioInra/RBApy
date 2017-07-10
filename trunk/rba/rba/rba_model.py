@@ -1,6 +1,4 @@
-"""
-Module defining RbaModel class.
-"""
+"""Module defining RbaModel class."""
 
 # python 2/3 compatibility
 from __future__ import division, print_function
@@ -12,6 +10,7 @@ from os.path import join
 import rba.xml
 from rba.core.rba_matrices import RbaMatrices
 from rba.core.rba_solver import RbaSolver
+
 
 class RbaModel(object):
     """
@@ -28,12 +27,10 @@ class RbaModel(object):
         medium: dictionary mapping metabolite prefixes with their medium
             concentration.
         output_dir: path to directory where model files should be written.
+
     """
 
     def __init__(self):
-        """
-        Default constructor.
-        """
         self.metabolism = rba.xml.RbaMetabolism()
         self.parameters = rba.xml.RbaParameters()
         self.proteins = rba.xml.RbaMacromolecules()
@@ -47,7 +44,7 @@ class RbaModel(object):
     @classmethod
     def from_xml(cls, input_dir):
         """
-        Constructor from xml files.
+        Make object from xml files.
 
         Args:
             input_dir: path to directory containing RBA XML files.
@@ -96,6 +93,7 @@ class RbaModel(object):
 
         Returns:
             rba.core.RbaMatrices object containing matrix blocks.
+
         """
         return RbaMatrices(self)
 
@@ -110,6 +108,7 @@ class RbaModel(object):
         Returns:
             rba.core.RbaSolver object that contains solution (if one
             was found) and matrices next to solution.
+
         """
         matrices = RbaMatrices(self)
         if catalytic_function is not None:
@@ -143,7 +142,5 @@ class RbaModel(object):
                 output.write('{}\t{}\n'.format(met, conc))
 
     def _output(self, file_name):
-        """
-        Return full path to file contained in output direcotry.
-        """
+        """Return full path to file contained in output direcotry.""""
         return join(self.output_dir, file_name)

@@ -1,6 +1,4 @@
-"""
-Module containing script solving a standard RBA problem.
-"""
+"""Solve standard RBA problem."""
 
 # python 2/3 compatibility
 from __future__ import division, print_function
@@ -12,6 +10,7 @@ import sys
 import rba
 from rba.post_process import saturating_constraints
 
+
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print('Please provide path to directory containing xml files.')
@@ -21,7 +20,5 @@ if __name__ == '__main__':
             medium = sys.argv[2]
         else:
             medium = 'default'
-
-        model = rba.RbaModel.from_xml(xml_dir)
         solver = model.solve(medium)
-        #saturating_constraints(solver)
+        # saturating_constraints(solver)

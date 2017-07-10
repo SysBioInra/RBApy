@@ -12,6 +12,7 @@ __all__ = ['MachineryComposition', 'SpeciesReference', 'ListOfReactants',
            'ListOfProducts', 'Parameter', 'ListOfParameters', 'Function',
            'ListOfFunctions', 'TargetValue']
 
+
 def is_true(attribute):
     """
     Determine whether an XML attribute evaluates as the logical true value.
@@ -73,15 +74,15 @@ def get_unique_child(parent, child_name, strict=True):
 class ListOf(object):
     """
     List of objects of same type.
-    
+
     Attributes
     ----------
     list_element : class
         type of elements stored by list.
     """
-    
+
     list_element = None
-    
+
     def __init__(self):
         """
         Default constructor.
@@ -104,7 +105,7 @@ class ListOf(object):
         """
         Append element to list.
         """
-        assert(isinstance(element, self.list_element))
+        assert isinstance(element, self.list_element)
         self._elements.append(element)
 
     def is_empty(self):
@@ -143,9 +144,9 @@ class MachineryComposition(object):
     products :ListOfProducts
         List of byproducts generated while assembling machinery.
     """
-    
+
     tag = 'machineryComposition'
-    
+
     def __init__(self):
         """
         Default constructor.
@@ -166,7 +167,7 @@ class MachineryComposition(object):
         result = etree.Element(self.tag)
         # optional subelements
         opt = [self.reactants, self.products]
-        result.extend([e.to_xml_node() for e in opt if not(e.is_empty())])
+        result.extend([e.to_xml_node() for e in opt if not e.is_empty()])
         return result
 
     @classmethod
@@ -182,7 +183,7 @@ class MachineryComposition(object):
         if n is not None:
             result.products = ListOfProducts.from_xml_node(n)
         return result
-    
+
 
 class SpeciesReference(object):
     """
@@ -195,9 +196,9 @@ class SpeciesReference(object):
     stoichiometry : float
         Stoichiometry of species.
     """
-    
+
     tag = 'speciesReference'
-    
+
     def __init__(self, species, stoichiometry):
         """
         Constructor.
@@ -207,7 +208,7 @@ class SpeciesReference(object):
         species : str
             Identifier of species.
         stoichiometry : float
-            Stoichiometry of species.        
+            Stoichiometry of species.
         """
         self.species = species
         self.stoichiometry = stoichiometry
@@ -233,7 +234,7 @@ class ListOfReactants(ListOf):
     """
     List of SpeciesReference representing reactants.
     """
-    
+
     tag = 'listOfReactants'
     list_element = SpeciesReference
 
@@ -242,7 +243,7 @@ class ListOfProducts(ListOf):
     """
     List of SpeciesReference representing products.
     """
-    
+
     tag = 'listOfProducts'
     list_element = SpeciesReference
 
@@ -258,13 +259,13 @@ class Parameter(object):
     value : float
         Value of parameter.
     """
-    
+
     tag = 'parameter'
-    
+
     def __init__(self, id_, value):
         """
         Constructor.
-        
+
         Parameters
         ----------
         id_ : str
@@ -296,7 +297,7 @@ class ListOfParameters(ListOf):
     """
     List of Parameter elements.
     """
-    
+
     tag = 'listOfParameters'
     list_element = Parameter
 
@@ -316,13 +317,13 @@ class Function(object):
     variable : str
         Name of variable (if applicable).
     """
-    
+
     tag = 'function'
-    
+
     def __init__(self, id_, type_, parameters=None, variable=''):
         """
         Constructor.
-        
+
         Parameters
         ----------
         id_ : str or None
@@ -334,8 +335,7 @@ class Function(object):
         variable : str, optional
             name of variable (if applicable).
         """
-        if id_ is not None: self.id = id_
-        else: self.id = ''
+        self.id = id_ if id_ is not None else ''
         self.type = type_
         self.variable = variable
         self.parameters = ListOfParameters()
@@ -350,8 +350,9 @@ class Function(object):
         result = etree.Element(self.tag)
         result.set('id', self.id)
         result.set('type', self.type)
-        if self.variable: result.set('variable', self.variable)
-        if not(self.parameters.is_empty()):
+        if self.variable:
+            result.set('variable', self.variable)
+        if not self.parameters.is_empty():
             result.extend([self.parameters.to_xml_node()])
         return result
 
@@ -371,7 +372,7 @@ class ListOfFunctions(ListOf):
     """
     List of Function elements.
     """
-    
+
     tag = 'listOfFunctions'
     list_element = Function
 
@@ -390,7 +391,7 @@ class TargetValue(object):
         upper bound on target value (None if no upper bound).
     """
     tag = 'targetValue'
-    
+
     def __init__(self):
         """
         Default constructor.
@@ -418,7 +419,7 @@ class TargetValue(object):
         if self.upper_bound is not None:
             result.set('upperBound', str(self.upper_bound))
         return result
-    
+
     @classmethod
     def from_xml_node(cls, node):
         """
