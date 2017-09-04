@@ -142,5 +142,5 @@ class RbaModel(object):
                 output.write('{}\t{}\n'.format(met, conc))
 
     def _output(self, file_name):
-        """Return full path to file contained in output direcotry.""""
+        """Return full path to file contained in output direcotry."""
         return join(self.output_dir, file_name)
