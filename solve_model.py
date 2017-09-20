@@ -21,6 +21,6 @@ if __name__ == '__main__':
         else:
             medium = 'default'
 
-	model = rba.RbaModel.from_xml(xml_dir)
+        model = rba.RbaModel.from_xml(xml_dir)
         solver = model.solve(medium)
         # saturating_constraints(solver)

@@ -95,6 +95,10 @@ class ListOf(object):
         """
         return self._elements[i]
 
+    def __iter__(self):
+        """Return iterator over list."""
+        return iter(self._elements)
+
     def __len__(self):
         """
         Return length of list.
