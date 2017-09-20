@@ -1,17 +1,17 @@
-preRBA: Preprocessing Annotation for Resource Balance Analysis
-==============================================================
+rba: Resource Balance Analysis
+==============================
 
 A workflow that obtains various annotation info
 from the `UniProt database <https://www.uniprot.org>`_ for any organism.
-This module also exports various files that are used for  
+This module also exports various files that are used for
 initialization of a RBA problem as proposed by
 `MaiAGE <http://maiage.jouy.inra.fr>`_.
 
 Getting Started
 ---------------
 
-This workflow was designed with Python 2.7. Make sure you have
- - the full preRBA repository.
+This workflow was tested with Python 2.7 and 3.5. Make sure you have
+ - the full rba package.
  - a SBML file for your favorite organism (see requirements below).
 
 Running
@@ -22,13 +22,13 @@ parameter file `input/params.in`. Then open a console at the root
 of the repository and run:
 
 ```
-python preRBA.py input/params.in
+python generate_xml_file.py input/params.in
 ```
 
 or, more generally:
 
 ```
-python preRBA.py path/to/params.in
+python generate_xml_file.py path/to/params.in
 ```
 The script will generate several files used as an input for the RBA solver.
 By default, they will be written to the `output` directory.
@@ -39,6 +39,16 @@ are replaced with default values. The script will generate many helper files
 to replace these default values with hand-curated values. You should fill in
 these helper files and rerun the script to obtain more relevant output
 (see instructions below).
+
+Once the RBA model was generated, you can solve it using:
+
+```
+python solve_model.py path/to/model
+```
+
+where the path points to the directory containing the XML files defining
+the RBA model.
+
 
 Helper Files
 ------------
@@ -65,26 +75,29 @@ in the input directory *after* the script has been run for the first time.
    should read annotation field and provide `[MISSING]` stoichiometry.
  - `location_mapping.tsv`: this file is used to link uniprot location ids
    with user-defined compartment ids. For every
-   uniprot location, user may fill in a name compartment. These may or
-   may not be the compartments defined in the SBML. The idea behind this
+   uniprot location, user may fill in a name compartment
+   (e.g. SBML compartment names). The idea behind this
    file is that it can be used to fuse compartments or ignore them.
    If the field is left empty (or `[MISSING]`), a compartment named after
    uniprot location is created.
  - `locations.tsv`: this file lists proteins for which uniprot has no
    location data. Protein and gene names are given to help fill in missing
-   locations. Note that locations *must* correspond to names defined in
-   `location_mapping.tsv`. If fields are left empty or `[MISSING]`,
+   locations. Note that locations *must* correspond to names
+   defined in `location_mapping.tsv` (user name if one was defined,
+   else Uniprot name). If fields are left empty or `[MISSING]`,
    proteins are assumed to be located in `Cytoplasm` (or user-defined
-   couterpart as defined in `location_mapping.tsv`.
+   counterpart as defined in `location_mapping.tsv`.
 
 In order for the RBA results to be relevant, please fill in as much
 information as possible. Every time you provide new information, please
 rerun the pipeline to regenerate RBA input properly.
 
+
 SBML file requirements
 ----------------------
 
-TODO
+The SBML file must be a valid SBML file.
+
 
 Repository structure and files:
 -------------------------------
@@ -96,10 +109,11 @@ pipeline
   |
   +------ output (default output directory)
   |
-  +------ src (source files)
+  +------ rba (rba package)
   |
   |
-  + preRBA.py (main script)
+  + generate_xml_files.py (script generating RBA model)
+  + solve_model.py (script solving RBA model)
 
 Authors
 -------
