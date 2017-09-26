@@ -1,12 +1,12 @@
 <RBAMetabolism>
   <listOfCompartments>
+    <compartment id="Secreted"/>
     <compartment id="Cell_inner_membrane"/>
-    <compartment id="Cell_outer_membrane"/>
+    <compartment id="Cytoplasm"/>
     <compartment id="Cell_membrane"/>
     <compartment id="Periplasm"/>
-    <compartment id="Cytoplasm"/>
-    <compartment id="Secreted"/>
     <compartment id="Membrane"/>
+    <compartment id="Cell_outer_membrane"/>
   </listOfCompartments>
   <listOfSpecies>
     <species id="M_10fthf_c" boundaryCondition="false"/>

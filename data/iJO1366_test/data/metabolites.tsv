@@ -69,6 +69,7 @@ FOR	Formate	M_for_c	0.0
 H2O	H2O	M_h2o_c	0.0
 H	Proton	M_h_c	0.0
 PPi	Pyrophosphate	M_ppi_c	0.0009
+CHEBI:79027	L-topaquinone	[MISSING]	0.0
 CHEBI:18420	Mg(2+)	[MISSING]	0.0
 CHEBI:58349	NADP(+)	[MISSING]	0.0
 CHEBI:71302	Mo-molybdopterin	[MISSING]	0.0
@@ -81,7 +82,7 @@ CHEBI:60342	dipyrromethane	[MISSING]	0.0
 CHEBI:60344	heme b	[MISSING]	0.0
 CHEBI:17996	chloride	[MISSING]	0.0
 CHEBI:28115	methyl(III)cobalamin	[MISSING]	0.0
-CHEBI:21137	[3Fe-4S] cluster	[MISSING]	0.0
+CHEBI:57925	glutathione	[MISSING]	0.0
 CHEBI:30413	heme	[MISSING]	0.0
 CHEBI:60240	a divalent metal cation	[MISSING]	0.0
 CHEBI:60539	Mo-bis(molybdopterin guanine dinucleotide)	[MISSING]	0.0
@@ -108,4 +109,6 @@ CHEBI:36141	a quinone	[MISSING]	0.0
 CHEBI:57692	FAD	[MISSING]	0.0
 CHEBI:29108	Ca(2+)	[MISSING]	0.0
 CHEBI:29105	Zn(2+)	[MISSING]	0.0
+CHEBI:21137	[3Fe-4S] cluster	[MISSING]	0.0
+CHEBI:29101	Na(+)	[MISSING]	0.0
 CHEBI:29103	K(+)	[MISSING]	0.0
