@@ -1,12 +1,11 @@
-"""
-Module defining Density class.
-"""
+"""Module defining Density class."""
 
 # python 2/3 compatibility
 from __future__ import division, print_function
 
 # local imports
 from rba.core.target_vector import TargetVector
+
 
 class Density(object):
     """

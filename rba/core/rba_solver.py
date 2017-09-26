@@ -1,6 +1,4 @@
-"""
-Module defining RbaSolver class.
-"""
+"""Module defining RbaSolver class."""
 
 # python 2/3 compatibility
 from __future__ import division, print_function
@@ -9,6 +7,7 @@ from __future__ import division, print_function
 import numpy
 from scipy.sparse import coo_matrix, diags, hstack, vstack
 import cplex
+
 
 class RbaSolver(object):
     """
@@ -30,6 +29,7 @@ class RbaSolver(object):
         X: Solution to RBA problem (if one was found).
         lambda_: Dual solution to RBA problem (if one was found).
         mu_opt: Growth rate at solution (if one was found).
+
     """
 
     def __init__(self, blocks):
@@ -41,7 +41,7 @@ class RbaSolver(object):
         """
         self._blocks = blocks
         # convenience variables
-        reactions = blocks.reactions
+        reactions = blocks.metabolism.reactions
         enzymes = blocks.enzymes.ids
         processes = blocks.processes.ids
         undetermined_fluxes = blocks.processes.undetermined_values.names
@@ -56,18 +56,19 @@ class RbaSolver(object):
                           + [p + '_machinery' for p in processes]
                           + [m + '_flux' for m in undetermined_fluxes])
         self.reaction_cols = numpy.arange(nb_reactions)
-        self.enzyme_cols = self.reaction_cols[-1] + 1 + numpy.arange(nb_enzymes)
+        self.enzyme_cols = (self.reaction_cols[-1] + 1
+                            + numpy.arange(nb_enzymes))
         self.process_cols = (self.enzyme_cols[-1] + 1
                              + numpy.arange(nb_processes))
         self.species_cols = (self.process_cols[-1] + 1
                              + numpy.arange(nb_undetermined))
         # row information
-        self.row_names = (blocks.metabolites
+        self.row_names = (blocks.metabolism.internal
                           + [p + '_capacity' for p in processes]
                           + [e + '_forward_capacity' for e in enzymes]
                           + [e + '_backward_capacity' for e in enzymes]
                           + [c + '_density' for c in compartments])
-        self.row_signs = (['E'] * len(blocks.metabolites)
+        self.row_signs = (['E'] * len(blocks.metabolism.internal)
                           + blocks.processes.capacity_signs
                           + ['L'] * 2 * nb_enzymes
                           + blocks.density.signs)
@@ -76,7 +77,11 @@ class RbaSolver(object):
         self.UB = 1e5 * numpy.ones(nb_cols)
         self.LB = numpy.zeros(nb_cols)
         self.f = numpy.zeros(nb_cols)
-        self.LB[self.reaction_cols] = -1e3 * numpy.array(blocks.reversibility)
+        self.LB[self.reaction_cols] = (
+            -1e3 * numpy.array(blocks.metabolism.reversibility)
+            )
+        self.LB[self.reaction_cols[blocks.metabolism.zero_lb]] = 0
+        self.UB[self.reaction_cols[blocks.metabolism.zero_ub]] = 0
         self.f[self.enzyme_cols] = 1
         # constant building blocks
         self._empty_ExPU = coo_matrix((nb_enzymes,
@@ -109,7 +114,7 @@ class RbaSolver(object):
         Args:
             mu: growth_rate
         """
-        ## build A
+        # build A
         enzymes = self._blocks.enzymes
         processes = self._blocks.processes
         density = self._blocks.density
@@ -119,7 +124,7 @@ class RbaSolver(object):
         process_capacity = processes.capacity.compute(mu)
         (forward, backward) = enzymes.efficiency.compute(mu)
         # stoichiometry constraints
-        metab_rows = hstack([self._blocks.S,
+        metab_rows = hstack([self._blocks.metabolism.S,
                              mu * enzymes.machinery.composition,
                              mu * processes.machinery.composition,
                              u_composition])
@@ -127,12 +132,14 @@ class RbaSolver(object):
         process_rows = hstack([self._empty_PxR,
                                mu * enzymes.machinery.processing_cost,
                                mu * processes.machinery.processing_cost
-                               -diags(process_capacity),
+                               - diags(process_capacity),
                                u_proc_cost])
-        forward_rows = hstack([self._R_to_E, -diags(forward), self._empty_ExPU])
-        backward_rows = hstack([-self._R_to_E,
-                                -diags(backward),
-                                self._empty_ExPU])
+        forward_rows = hstack(
+            [self._R_to_E, -diags(forward), self._empty_ExPU]
+            )
+        backward_rows = hstack(
+            [-self._R_to_E, -diags(backward), self._empty_ExPU]
+            )
         # density constraints
         c_indices = density.compartment_indices
         density_rows = hstack([self._empty_CxR,
@@ -142,7 +149,7 @@ class RbaSolver(object):
         self.A = vstack([metab_rows, process_rows,
                          forward_rows, backward_rows, density_rows])
 
-        ## build b
+        # build b
         # gather mu-dependent data
         (fluxes, processing, weight) = processes.target_values.compute(mu)
         density_rows = density.values.compute(mu) - weight[c_indices].T
@@ -150,7 +157,7 @@ class RbaSolver(object):
         self.b = numpy.concatenate([-fluxes, -processing,
                                     self._empty_2E, density_rows])
 
-        ## update lower bounds and upper bounds
+        # update lower bounds and upper bounds
         # undetermined metabolites
         self.LB[self.species_cols] = processes.undetermined_values.lb(mu)
         self.UB[self.species_cols] = processes.undetermined_values.ub(mu)
@@ -162,9 +169,7 @@ class RbaSolver(object):
         self.UB[self._value_reaction_cols] = r_fluxes
 
     def solve(self):
-        """
-        Compute configuration corresponding to maximal growth rate.
-        """
+        """Compute configuration corresponding to maximal growth rate."""
         self._sol_basis = None
 
         # check that mu=0 is solution
@@ -223,16 +228,17 @@ class RbaSolver(object):
         Returns:
             cplex object with default parameters corresponding to current
             matrices.
+
         """
-        ## preprocess matrices
+        # preprocess matrices
         # rescale concentration columns?
         lhs = self.A
-        #scaling_factor = 1000
-        #scaling = numpy.ones(lhs.shape[1])
-        #scaling[numpy.concatenate([self.enzyme_cols, self.process_cols,
-        #self.species_cols])] \
-        #= 1.0/scaling_factor
-        #lhs *= diags(scaling)
+        # scaling_factor = 1000
+        # scaling = numpy.ones(lhs.shape[1])
+        # scaling[numpy.concatenate([self.enzyme_cols, self.process_cols,
+        # self.species_cols])] \
+        # = 1.0/scaling_factor
+        # lhs *= diags(scaling)
 
         # transform inequality and equality constraints to CPLEX row format
         lhs = lhs.tolil()
@@ -240,7 +246,7 @@ class RbaSolver(object):
         for nz_ind, data in zip(lhs.rows, lhs.data):
             rows.append(cplex.SparsePair(nz_ind, data))
 
-        ## define problem
+        # define problem
         lp_problem = cplex.Cplex()
         # set parameters
         lp_problem.objective.set_sense(lp_problem.objective.sense.minimize)
@@ -256,16 +262,17 @@ class RbaSolver(object):
         # lp_problem.parameters.threads.set(0)
         lp_problem.set_results_stream(None)
         # define columns and add rows
-        lp_problem.variables.add(obj=self.f, ub=self.UB, lb=self.LB,
-                                 names=self.col_names)
-        lp_problem.linear_constraints.add(lin_expr=rows,
-                                          rhs=self.b,
-                                          senses=self.row_signs,
-                                          names=self.row_names)
+        lp_problem.variables.add(
+            obj=self.f, ub=self.UB, lb=self.LB, names=self.col_names
+            )
+        lp_problem.linear_constraints.add(
+            lin_expr=rows, rhs=self.b, senses=self.row_signs,
+            names=self.row_names
+            )
         # set starting point (not exactly sure how this works)
         if self._sol_basis is not None:
             lp_problem.start.set_basis(self._sol_basis[0], self._sol_basis[1])
-            #lp_problem.start.set_start(self._sol_basis[0], self._sol_basis[1],
-            #self.X, [], [], self.lambda_)
+            # lp_problem.start.set_start(
+            # self._sol_basis[0], self._sol_basis[1], self.X, [], [],
+            # self.lambda_)
         return lp_problem
-
