@@ -34,6 +34,10 @@ class Species(object):
                     + [m.id for m in data.proteins.macromolecules]
                     + [m.id for m in data.rnas.macromolecules]
                     + [m.id for m in data.dna.macromolecules])
+        # polymers and metabolites are allowed to have the same identifier
+        # by looping on reversed list, we ensure that the index of the
+        # metabolite is returned
+        self._index = {m: i for i, m in reversed(list(enumerate(self.ids)))}
         # metabolites (weights and processing costs are zero)
         species_comp = -eye(len(metabolites))
         species_proc = csr_matrix((len(data.processes.processes),
@@ -66,9 +70,9 @@ class Species(object):
         species = lil_matrix((len(self.ids), len(machinery_set)))
         for col, machinery in enumerate(machinery_set):
             for reac in machinery.reactants:
-                species[self.ids.index(reac.species), col] += reac.stoichiometry
+                species[self._index[reac.species], col] += reac.stoichiometry
             for prod in machinery.products:
-                species[self.ids.index(prod.species), col] -= prod.stoichiometry
+                species[self._index[prod.species], col] -= prod.stoichiometry
         return Machinery(self.production*species,
                          self.prod_proc_cost*species,
                          self.weight*species)
@@ -87,17 +91,19 @@ class Species(object):
         """
         names = []
         reactions = []
-        for m in self._metabolites:
-            # if a metabolite is also a macromolecule, its id will appear
-            # twice in the species list
-            indices = [ind for ind, i in enumerate(self.ids) if i == m]
-            if len(indices) == 1:
-                continue
-            # create biosynthesis reaction
-            reaction = self.production[:, indices[1]].tolil()
-            reaction[indices[0], 0] = 1
-            reactions.append(reaction)
-            names.append(m + '_synthesis')
+        nb_met = len(self._metabolites)
+        macrometabolites = self.ids[nb_met:]
+        for index, macro in enumerate(macrometabolites):
+            # if a macromolecule is also a metabolite,
+            # it appears twice in the species list.
+            met_index = self._index[macro]
+            macro_index = nb_met + index
+            if met_index != macro_index:
+                # create biosynthesis reaction
+                reaction = self.production[:, macro_index].tolil()
+                reaction[met_index, 0] = 1
+                reactions.append(reaction)
+                names.append(macro + '_synthesis')
         return (reactions, names)
 
     def _component_maps(self, component_sets, processes):
@@ -185,6 +191,7 @@ class Species(object):
                 hstack(degradation_metabolites), hstack(degradation_cost),
                 hstack(weight))
 
+
 class ComponentMap(object):
     """
     Class storing component maps.
@@ -201,7 +208,7 @@ class ComponentMap(object):
         """
         nb_metabolites = len(metabolites)
         nb_components = len(components)
-        self._metabolites = metabolites
+        self._met_index = {m: i for i, m in enumerate(metabolites)}
         self._metabolite_constant = numpy.zeros(nb_metabolites)
         self._processing_constant = numpy.zeros(nb_processes)
         self._components = components
@@ -229,11 +236,11 @@ class ComponentMap(object):
         """
         Transform cost data into a metabolite vector.
         """
-        result = numpy.zeros(len(self._metabolites))
+        result = numpy.zeros(len(self._met_index))
         for reac in cost.reactants:
-            result[self._metabolites.index(reac.species)] -= reac.stoichiometry
+            result[self._met_index[reac.species]] -= reac.stoichiometry
         for prod in cost.products:
-            result[self._metabolites.index(prod.species)] += prod.stoichiometry
+            result[self._met_index[prod.species]] += prod.stoichiometry
         return result
 
     def apply_map(self, component_matrix):

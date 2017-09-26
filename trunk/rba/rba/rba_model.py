@@ -31,6 +31,7 @@ class RbaModel(object):
     """
 
     def __init__(self):
+        """Build object with empty structures."""
         self.metabolism = rba.xml.RbaMetabolism()
         self.parameters = rba.xml.RbaParameters()
         self.proteins = rba.xml.RbaMacromolecules()
@@ -51,20 +52,27 @@ class RbaModel(object):
         """
         obj = cls()
         obj.output_dir = input_dir
-        obj.parameters = (rba.xml.RbaParameters()
-                          .from_file(join(input_dir, 'parameters.xml')))
-        obj.metabolism = (rba.xml.RbaMetabolism()
-                          .from_file(join(input_dir, 'metabolism.xml')))
-        obj.proteins = (rba.xml.RbaMacromolecules()
-                        .from_file(join(input_dir, 'proteins.xml')))
-        obj.rnas = (rba.xml.RbaMacromolecules()
-                    .from_file(join(input_dir, 'rnas.xml')))
-        obj.dna = (rba.xml.RbaMacromolecules()
-                   .from_file(join(input_dir, 'dna.xml')))
-        obj.processes = (rba.xml.RbaProcesses()
-                         .from_file(join(input_dir, 'processes.xml')))
-        obj.enzymes = (rba.xml.RbaEnzymes()
-                       .from_file(join(input_dir, 'enzymes.xml')))
+        obj.parameters = rba.xml.RbaParameters().from_file(
+            join(input_dir, 'parameters.xml')
+            )
+        obj.metabolism = rba.xml.RbaMetabolism().from_file(
+            join(input_dir, 'metabolism.xml')
+            )
+        obj.proteins = rba.xml.RbaMacromolecules().from_file(
+            join(input_dir, 'proteins.xml')
+            )
+        obj.rnas = rba.xml.RbaMacromolecules().from_file(
+            join(input_dir, 'rnas.xml')
+            )
+        obj.dna = rba.xml.RbaMacromolecules().from_file(
+            join(input_dir, 'dna.xml')
+            )
+        obj.processes = rba.xml.RbaProcesses().from_file(
+            join(input_dir, 'processes.xml')
+            )
+        obj.enzymes = rba.xml.RbaEnzymes().from_file(
+            join(input_dir, 'enzymes.xml')
+            )
         obj.set_medium(join(input_dir, 'medium.tsv'))
         return obj
 

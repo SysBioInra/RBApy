@@ -1,19 +1,16 @@
-"""
-Module defining RbaMatrices class.
-"""
+"""Module defining RbaMatrices class."""
 
 # python 2/3 compatibility
 from __future__ import division, print_function
 
-# global imports
-from scipy.sparse import lil_matrix, hstack
-
 # local imports
+from rba.core.metabolism import Metabolism
 from rba.core.functions import Functions
 from rba.core.species import Species
 from rba.core.density import Density
 from rba.core.enzymes import Enzymes
 from rba.core.processes import Processes
+
 
 class RbaMatrices(object):
     """
@@ -32,6 +29,7 @@ class RbaMatrices(object):
         enzymes (enzymes.Enzymes): substructure storing enzyme-related
             information.
         processes (processes.Processes): substructure storing processes.
+
     """
 
     def __init__(self, data):
@@ -41,20 +39,9 @@ class RbaMatrices(object):
         Args:
             data (rba.RbaModel): RBA model containing raw data.
         """
-        ## extract information
-        # extract metabolites
-        self.metabolites = []
-        self.external_metabolites = []
-        for species in data.metabolism.species:
-            if species.boundary_condition:
-                self.external_metabolites.append(species.id)
-            else:
-                self.metabolites.append(species.id)
-        # extract reactions
-        reactions = data.metabolism.reactions
-        self.reactions = [r.id for r in reactions]
-        self.reversibility = [r.reversible for r in reactions]
-        self.S = build_stoichiometry_matrix(self.metabolites, reactions)
+        # extract metabolism
+        self.metabolism = Metabolism(data.metabolism.species,
+                                     data.metabolism.reactions)
         # extract functions
         self.functions = Functions(data.parameters.functions,
                                    data.parameters.aggregates)
@@ -63,21 +50,20 @@ class RbaMatrices(object):
         self.density = Density(data.parameters.target_densities,
                                self.functions, compartments)
         # extract base species composition (metabolites + polymers)
-        self.species = Species(data, self.metabolites)
+        self.species = Species(data, self.metabolism.internal)
         # extract enzyme information
-        self.enzymes = Enzymes(data.enzymes, self.species, self.reactions)
+        self.enzymes = Enzymes(data.enzymes, self.species,
+                               self.metabolism.reactions)
         # add synthesis reaction for metabolites that are also macromolecules
         (new_reactions, names) = self.species.metabolite_synthesis()
-        if len(new_reactions) > 0:
-            nb_reactions = len(new_reactions)
-            self.S = hstack([self.S] + new_reactions)
-            self.reactions += names
-            self.reversibility += [False] * nb_reactions
+        nb_reactions = len(new_reactions)
+        if nb_reactions > 0:
+            self.metabolism.add_reactions(new_reactions, names,
+                                          [False] * nb_reactions)
         # extract process information
         self.processes = Processes(data.processes.processes,
                                    self.species, self.functions)
-
-        ## setup medium
+        # setup medium
         self.set_medium(data.medium)
 
     def set_catalytic_function(self, function_id):
@@ -97,34 +83,5 @@ class RbaMatrices(object):
         Args:
             medium: dict mapping metabolite prefixes with their concentration.
         """
+        self.metabolism.set_boundary_fluxes(medium)
         self.enzymes.efficiency.update_import(medium)
-
-def build_stoichiometry_matrix(metabolites, reactions):
-    """
-    Build stoichiometry matrix from metabolites and reactions.
-
-    Args:
-        metabolites: list of internal metabolites.
-        reactions: RBA reaction data.
-    
-    Returns:
-        Stoichiometry matrix in sparse format (excluding external metabolites).
-    """
-    S = lil_matrix((len(metabolites), len(reactions)))
-    for r_index, reaction in enumerate(reactions):
-        # keep ONLY internal metabolites
-        for reactant in reaction.reactants:
-            try:
-                m_index = metabolites.index(reactant.species)
-                S[m_index, r_index] = -reactant.stoichiometry
-            except ValueError:
-                # external metabolite: ignore it
-                pass
-        for product in reaction.products:
-            try:
-                m_index = metabolites.index(product.species)
-                S[m_index, r_index] = product.stoichiometry
-            except ValueError:
-                # external metabolite: ignore it
-                pass
-    return S
