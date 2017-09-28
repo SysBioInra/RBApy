@@ -17,6 +17,7 @@ from rba.prerba.subunit import SubunitData
 from rba.prerba.location import LocationData
 from rba.prerba.unknown_proteins import UnknownProteins
 
+
 class UniprotFilter(object):
     """
     Class used to filter RBA-relevant data from a uniprot file.
@@ -35,6 +36,7 @@ class UniprotFilter(object):
         protein_stoichiometry: dict mapping protein identifiers with their
             stoichiometry within their enzymatic complex.
         average_protein_length: average protein length.
+
     """
 
     def __init__(self, gene_ids, input_dir='.'):
@@ -52,8 +54,9 @@ class UniprotFilter(object):
         # add column containing identifier of protein as found in gene_ids
         unknown_proteins = UnknownProteins(input_dir)
         self.unknown_map = unknown_proteins.data
-        data['Lookup names'], not_found \
-            = self._lookup_names(data['Gene names'], gene_ids, self.unknown_map)
+        data['Lookup names'], not_found = self._lookup_names(
+            data['Gene names'], gene_ids, self.unknown_map
+            )
         unknown_proteins.add(not_found)
 
         # remove entries for which there is no known id
@@ -143,7 +146,7 @@ class UniprotFilter(object):
         Args:
             uniprot_names: column containing raw uniprot 'Gene names' fields.
             gene_ids: name of genes to retrieve.
-            unknown_map: dict where keys are genes that could not be 
+            unknown_map: dict where keys are genes that could not be
                 retrieved in 'Gene names'. Values is an alternative identifier
                 which might be found in 'Gene names'.
 

@@ -1,6 +1,4 @@
-"""
-Module defining SBMLFilter class.
-"""
+"""Module defining SBMLFilter class."""
 
 # python 2/3 compatibility
 from __future__ import division, print_function
@@ -12,6 +10,7 @@ import libsbml
 
 # local imports
 import rba.xml
+
 
 class SBMLFilter(object):
     """
@@ -26,16 +25,18 @@ class SBMLFilter(object):
         imported_metabolites: list of SBML identifiers of imported metabolites.
         has_membrane_enzyme: dict mapping reaction id to boolean value
             indicating whether reaction occurs in the membrane.
+
     """
 
     def __init__(self, input_file, cytosol_id='c', external_ids=None):
         """
-        Constructor from file.
+        Build from file.
 
         Args:
             input: Path to input file.
             cytosol_id: identifier of cytosol in the SBML file.
             external_ids: identifiers of external compartments in SBML file.
+
         """
         # load SBML file
         input_document = libsbml.readSBML(input_file)
@@ -54,8 +55,10 @@ class SBMLFilter(object):
             self.species.append(rba.xml.Species(spec.getId(), boundary))
 
         # extract enzymes associated to reactions
-        self.enzymes, self.reactions \
-            = self._extract_enzymes_and_reactions(input_document)
+        reaction_list = extract_reactions(input_document)
+        enzyme_list = extract_enzymes(input_document)
+        self.reactions, self.enzymes \
+            = duplicate_reactions_and_enzymes(reaction_list, enzyme_list)
 
         # find external metabolites
         self._set_boundary_condition(input_document)
@@ -64,46 +67,7 @@ class SBMLFilter(object):
 
         # identify membrane and transport reactions
         self.imported_metabolites = self._find_transport_reactions(cytosol_id)
-        self.has_membrane_enzyme = self._find_membrane_reactions()
-
-    def _extract_enzymes_and_reactions(self, input_document):
-        """
-        Parse annotation containing enzyme components.
-        """
-        enzymes = []
-        reactions = rba.xml.ListOfReactions()
-        # try to read fbc notes, else read old-fashioned notes
-        enzyme_list = self._read_fbc_annotation(input_document)
-        if not enzyme_list:
-            enzyme_list = self._read_notes(input_document)
-        if enzyme_list:
-            sbml_reactions = input_document.getModel().reactions
-            for index, reaction in enumerate(sbml_reactions):
-                # create reaction in RBA objects
-                new_reaction = rba.xml.Reaction(reaction.getId(),
-                                                reaction.getReversible())
-                for reactant in reaction.reactants:
-                    sr = rba.xml.SpeciesReference(reactant.getSpecies(),
-                                                  reactant.getStoichiometry())
-                    new_reaction.reactants.append(sr)
-                for product in reaction.products:
-                    sr = rba.xml.SpeciesReference(product.getSpecies(),
-                                                  product.getStoichiometry())
-                    new_reaction.products.append(sr)
-                # duplicate reactions having multiple enzymes
-                suffix = 0
-                for enzyme in enzyme_list[index]:
-                    suffix += 1
-                    clone = copy.copy(new_reaction)
-                    clone.id += '_' + str(suffix)
-                    enzymes.append(enzyme)
-                    reactions.append(clone)
-        else:
-            print('Your SBML file does not contain fbc gene products nor uses '
-                  'notes to define enzyme composition. Please comply with SBML '
-                  'requirements defined in the README and rerun script.')
-            raise UserWarning('Invalid SBML.')
-        return enzymes, reactions
+        self.has_membrane_enzyme = find_membrane_reactions(self.reactions)
 
     def _set_boundary_condition(self, input_document):
         """
@@ -139,19 +103,6 @@ class SBMLFilter(object):
             if compartment in external_compartments:
                 metabolite.boundary_condition = True
 
-    def _find_membrane_reactions(self):
-        """
-        Identify all reactions whose enzyme is at least partly in the membrane.
-        """
-        result = {}
-        for reaction in self.reactions:
-            compartments = [m.species.rsplit('_', 1)[1]
-                            for m in itertools.chain(reaction.reactants,
-                                                     reaction.products)]
-            result[reaction.id] \
-                = any(c != compartments[0] for c in compartments[1:])
-        return result
-
     def _find_transport_reactions(self, cytosol_id):
         """
         Identify all transport reactions in the SBML file.
@@ -181,57 +132,272 @@ class SBMLFilter(object):
                 imported_metabolites[reaction.id] = transported
         return imported_metabolites
 
-    @staticmethod
-    def _read_notes(input_document):
-        """
-        Parse old-fashioned notes containing enzyme components.
-        """
-        reactions = input_document.getModel().reactions
-        enzymes = []
-        for reaction in reactions:
-            notes = reaction.getNotes()
-            # check that a note is indeed available
-            if not notes: return None
-            # fields may be encapsulated in a <html> tag (or equivalent)
-            if (notes.getNumChildren() == 1
+
+def extract_reactions(input_document):
+    """
+    Parse reactions.
+
+    Parameters
+    ----------
+    input_document: SBML document
+        Valid SBML document.
+
+    Returns
+    -------
+    rba.xml.ListOfReactions
+        Reactions in RBA format.
+
+    """
+    reactions = rba.xml.ListOfReactions()
+    for reaction in input_document.model.reactions:
+        # create reaction in RBA objects
+        new_reaction = rba.xml.Reaction(reaction.getId(),
+                                        reaction.getReversible())
+        for reactant in reaction.reactants:
+            sr = rba.xml.SpeciesReference(reactant.getSpecies(),
+                                          reactant.getStoichiometry())
+            new_reaction.reactants.append(sr)
+        for product in reaction.products:
+            sr = rba.xml.SpeciesReference(product.getSpecies(),
+                                          product.getStoichiometry())
+            new_reaction.products.append(sr)
+        reactions.append(new_reaction)
+    return reactions
+
+
+def duplicate_reactions_and_enzymes(reaction_list, enzyme_list):
+    """
+    Duplicate reactions catalyzed by several enzymes.
+
+    Parameters
+    ----------
+    reaction_list: rba.xml.ListOfReactions
+        List of reactions.
+
+    enzyme_list: list of lists of lists
+        List of same length as reactions. Every reaction should be represented
+        as the list of enzyme that catalyzes it. Every enzyme should be
+        reprensented as the list of proteins that compose it.
+
+    Returns
+    -------
+    (reactions, enzymes) couple with
+    reactions: rba.xml.ListOfReactions
+        Updated list of reactions where reactions with multiple enzymes have
+        been duplicated.
+    enzymes: list of lists
+        Updated list of enzymes. Now every reaction is represented by exactly
+        one enzyme.
+
+    """
+    enzymes = []
+    reactions = rba.xml.ListOfReactions()
+    for reaction, reaction_enzymes in zip(reaction_list, enzyme_list):
+        # duplicate reactions having multiple enzymes
+        suffix = 0
+        for enzyme in reaction_enzymes:
+            suffix += 1
+            clone = copy.copy(reaction)
+            if suffix > 1:
+                clone.id += '_' + str(suffix)
+            enzymes.append(enzyme)
+            reactions.append(clone)
+    return reactions, enzymes
+
+
+def find_reaction_location(reaction):
+    """
+    Find reactions with reactants and products in a single compartment.
+
+    Parameters
+    ----------
+    reactions: rba.xml.Reaction
+        Reaction.
+
+    Returns
+    -------
+    str
+        Compartment containing reaction or empty string if reactants and
+        products were in more than one compartment.
+
+    """
+    compartments = [m.species.rsplit('_', 1)[1]
+                    for m in itertools.chain(reaction.reactants,
+                                             reaction.products)]
+    return all(c == compartments[0] for c in compartments[1:])
+
+
+def enzymatic_protein_location(enzyme_comp, reactions):
+    """
+    Guess location of enzymatic proteins.
+
+    For every protein we record the location of the reactions it catalyzes.
+    If locations match, we assume that the protein is contained
+    in this compartment.
+
+    Parameters
+    ----------
+    enzyme_comp: list of lists
+        List of enzymes where an enzyme is a list of protein ids.
+    reactions: rba.xml.ListOfReactions
+        List of reactions.
+
+    Returns
+    -------
+    dict
+        Dictionary containing locations predicted. Key are protein ids and
+        values are compartment names.
+
+    """
+    protein_location_list = {}
+    for enzyme_composition, reaction in zip(enzyme_comp, reactions):
+        location = sbml_filter.find_reaction_location(reaction)
+        if location:
+            for prot in enzyme_comp:
+                protein_location_list.setdefault(prot, []).append(location)
+    result = {}
+    for protein, location_list in protein_location_list:
+        if (len(location_list) == 1 or
+                all(loc == location_list[0] for loc in location_list[1:])):
+            result[protein] = location_list[0]
+    return result
+
+
+def find_membrane_reactions(reactions):
+    """
+    Identify reactions with membrane enzymes.
+
+    Parameters
+    ----------
+    reactions: rba.xml.ListOfReactions
+        List of reactions.
+
+    Returns
+    -------
+    dict
+        Dictionary where keys are reactions. Value associated to key
+        is true if enzyme associated to reaction is a membrane enzyme,
+        false otherwise.
+
+    """
+    result = {}
+    for reaction in reactions:
+        compartments = [m.species.rsplit('_', 1)[1]
+                        for m in itertools.chain(reaction.reactants,
+                                                 reaction.products)]
+        result[reaction.id] \
+            = any(c != compartments[0] for c in compartments[1:])
+    return result
+
+
+def extract_enzymes(input_document):
+    """
+    Parse annotation containing enzyme components.
+
+    Parameters
+    ----------
+    input_document: SBML document
+        Valid SBML document.
+
+    Returns
+    -------
+    list of lists of lists
+        For every reaction in the model, return a list of enzymes that
+        catalyze this reaction. An enzyme is represented by a list of
+        proteins that composes it.
+
+    """
+    # try to read fbc notes, else read old-fashioned notes
+    enzymes = read_fbc_annotation(input_document)
+    if not enzymes:
+        enzymes = read_notes(input_document)
+    if not enzymes:
+        print('Your SBML file does not contain fbc gene products nor uses '
+              'notes to define enzyme composition. Please comply with SBML'
+              ' requirements defined in the README and rerun script.')
+        raise UserWarning('Invalid SBML.')
+    return enzymes
+
+
+def read_notes(input_document):
+    """
+    Parse old-fashioned notes containing enzyme components.
+
+    Parameters
+    ----------
+    input_document: SBML document
+        Valid SBML document.
+
+    Returns
+    -------
+    list of lists of lists
+        For every reaction in the model, return a list of enzymes that
+        catalyze this reaction. An enzyme is represented by a list of
+        proteins that composes it.
+
+    """
+    reactions = input_document.getModel().reactions
+    enzymes = []
+    for reaction in reactions:
+        notes = reaction.getNotes()
+        # check that a note is indeed available
+        if not notes:
+            return None
+        # fields may be encapsulated in a <html> tag (or equivalent)
+        if (notes.getNumChildren() == 1
                 and notes.getChild(0).getName() != "p"):
-                notes = notes.getChild(0)
-            for i in range(notes.getNumChildren()):
-                text = notes.getChild(i).getChild(0).toString()
-                enzyme_composition = read_gene_association(text)
-                if enzyme_composition:
-                    enzymes.append(enzyme_composition)
-        return enzymes
+            notes = notes.getChild(0)
+        for i in range(notes.getNumChildren()):
+            text = notes.getChild(i).getChild(0).toString()
+            enzyme_composition = read_gene_association(text)
+            if enzyme_composition:
+                enzymes.append(enzyme_composition)
+    return enzymes
 
-    @staticmethod
-    def _read_fbc_annotation(input_document):
-        """
-        Parse fbc annotation to gather enzyme compositions.
-        """
-        # get fbc annotation (if available)
-        fbc = input_document.getModel().getPlugin('fbc')
-        if not fbc: return None
 
-        # get gene id - gene name association
-        gene_names = {}
-        for gene_product in fbc.getListOfGeneProducts():
-            gene_names[gene_product.getId()] = gene_product.getLabel()
+def read_fbc_annotation(input_document):
+    """
+    Parse fbc annotation to gather enzyme compositions.
 
-        # gather enzyme composition
-        enzyme_list = []
-        reactions = input_document.getModel().reactions
-        for reaction in reactions:
-            # get fbc:geneProductAssociation
-            gp_association = reaction.getPlugin('fbc') \
-                                     .getGeneProductAssociation()
-            if gp_association:
-                enzymes = read_fbc_association(gp_association, gene_names)
-            else:
-                # no gene association: we assume this reaction is
-                # spontaneous
-                enzymes = [[]]
-            enzyme_list.append(enzymes)
-        return enzyme_list
+    Parameters
+    ----------
+    input_document: SBML document
+        Valid SBML document.
+
+    Returns
+    -------
+    list of lists of lists
+        For every reaction in the model, return a list of enzymes that
+        catalyze this reaction. An enzyme is represented by a list of
+        proteins that composes it.
+
+    """
+    # get fbc annotation (if available)
+    fbc = input_document.getModel().getPlugin('fbc')
+    if not fbc:
+        return None
+
+    # get gene id - gene name association
+    gene_names = {}
+    for gene_product in fbc.getListOfGeneProducts():
+        gene_names[gene_product.getId()] = gene_product.getLabel()
+
+    # gather enzyme composition
+    enzyme_list = []
+    reactions = input_document.getModel().reactions
+    for reaction in reactions:
+        # get fbc:geneProductAssociation
+        gp_association = reaction.getPlugin('fbc') \
+                                 .getGeneProductAssociation()
+        if gp_association:
+            enzymes = read_fbc_association(gp_association, gene_names)
+        else:
+            # no gene association: we assume this reaction is
+            # spontaneous
+            enzymes = [[]]
+        enzyme_list.append(enzymes)
+    return enzyme_list
+
 
 def read_gene_association(text):
     """
@@ -239,12 +405,17 @@ def read_gene_association(text):
 
     For this version, we assume that relations are always 'or's of 'and's.
 
-    Args:
-        text: Note field containing GENE_ASSOCIATION.
+    Parameters
+    ----------
+    text: string
+        Note field containing GENE_ASSOCIATION.
 
-    Returns:
+    Returns
+    -------
+    list of lists
         List of enzymes extracted. Every enzyme is represented as a list of
         protein identifiers.
+
     """
     tags = text.split(':', 1)
     if len(tags) != 2:
@@ -254,7 +425,8 @@ def read_gene_association(text):
         return None
     else:
         enzyme_set = tags[1]
-        if len(enzyme_set) == 0: return []
+        if len(enzyme_set) == 0:
+            return []
         # field is not standard: we try to standardize a little.
         # remove parentheses
         enzyme_set = ''.join(c for c in enzyme_set if c not in '()')
@@ -265,19 +437,26 @@ def read_gene_association(text):
             compositions.append([e.strip() for e in enzyme.split(' and ')])
         return compositions
 
+
 def read_fbc_association(gp_association, gene_names=None):
     """
     Parse fbc:geneProductAssociation.
 
     For this version, we assume that relations are always 'or's of 'and's.
 
-    Args:
-        gp_association: standard fbc gene product assocation object.
-        gene_names: dictionary used to replace gene ids by their name.
+    Parameters
+    ----------
+    gp_association: fbc:geneProductAssociation object
+        association to parse.
+    gene_names: dict
+        dictionary used to replace gene ids by their name.
 
-    Returns:
+    Returns
+    -------
+    list of lists
         List of enzymes extracted. Every enzyme is represented as a list of
         gene identifiers.
+
     """
     association = gp_association.getAssociation()
     if association.isGeneProductRef():
@@ -287,7 +466,7 @@ def read_fbc_association(gp_association, gene_names=None):
         else:
             return [[gene_id]]
     elif association.isFbcOr():
-        return [read_fbc_association_components(a, gene_names) \
+        return [read_fbc_association_components(a, gene_names)
                 for a in association.getListOfAssociations()]
     elif association.isFbcAnd():
         result = []
@@ -298,18 +477,25 @@ def read_fbc_association(gp_association, gene_names=None):
         print('Invalid association.')
         raise UserWarning('Invalid SBML.')
 
+
 def read_fbc_association_components(association, gene_names=None):
     """
     Parse fbc:Association and return the list of gene names it contains.
 
     For this version, we assume that relations are always 'and's.
 
-    Args:
-        association: fbc assocation object.
-        gene_names: dictionary used to replace gene ids by their name.
+    Parameters
+    ----------
+    association: fbc:Assocation object
+        association to parse.
+    gene_names: object
+        dictionary used to replace gene ids by their name.
 
-    Returns:
+    Returns
+    -------
+    list
         List of gene names.
+
     """
     if association.isGeneProductRef():
         gene_id = association.getGeneProduct()
@@ -323,6 +509,5 @@ def read_fbc_association_components(association, gene_names=None):
             result += read_fbc_association_components(assoc, gene_names)
         return result
     else:
-        print('Invalid association (well not really but I was hoping it would '
-              'be ors of ands :/')
+        print('Invalid association (we only support ors of ands)')
         raise UserWarning('Invalid SBML.')

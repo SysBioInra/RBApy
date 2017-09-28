@@ -1,6 +1,4 @@
-"""
-Module defining LocationData and LocationParser classes.
-"""
+"""Module defining LocationData and LocationParser classes."""
 
 # python 2/3 compatibility imports
 from __future__ import division, print_function
@@ -13,19 +11,22 @@ import pandas
 # local imports
 from rba.prerba.curation_data import CurationData
 
+
 class LocationData(object):
     """
     Class used to parse uniprot location field.
 
     Attributes:
         locations: dict mapping uniprot entries with their compartment.
+
     """
 
     _mapping_file = 'location_map.tsv'
     _helper_file = 'locations.tsv'
+
     def __init__(self, uniprot_data, input_dir='.'):
         """
-        Constructor from pandas.DataFrame.
+        Build object from pandas.DataFrame.
 
         Args:
             uniprot_data: uniprot data as a pandas.DataFrame.
@@ -64,8 +65,9 @@ class LocationData(object):
             location = row[3]
             curated_locations[row[0]] = location
             if not pandas.isnull(location) and location not in known_locations:
-                print('Warning: unknown location {} will be replaced by {}.'
-                      'Please check that data given in {} and {} is consistent.'
+                print('Warning: unknown location {} will be replaced by {}. '
+                      'Please check that data given in '
+                      '{} and {} is consistent.'
                       .format(location, self.default_location,
                               curation_file, mapping_file))
 
@@ -84,7 +86,7 @@ class LocationData(object):
         # print warning if information is missing
         if mapping_data.has_missing_information():
             print('WARNING: Some uniprot locations had no user-defined '
-                  'counterpart. Uniprot names will be used.'
+                  'counterpart. Uniprot names will be used. '
                   'If you wish to change the compartment names, please '
                   'read file {} and specify all information tagged as {}.'
                   .format(mapping_file, CurationData.missing_tag))
@@ -96,30 +98,33 @@ class LocationData(object):
 
     def cytoplasm_id(self):
         """
-        Accessor to compartment representing cytoplasm.
+        Access to compartment representing cytoplasm.
 
         Returns:
             Identifier of cytoplasm.
+
         """
         user_id = self._location_map['Cytoplasm']
         return 'Cytoplasm' if pandas.isnull(user_id) else user_id
 
     def secreted_id(self):
         """
-        Accessor to compartment representing extracellular space.
+        Access to compartment representing extracellular space.
 
         Returns:
             Identifier of extracellular space.
+
         """
         user_id = self._location_map['Secreted']
         return 'Secreted' if pandas.isnull(user_id) else user_id
 
     def compartment_ids(self):
         """
-        Accessor to all compartment identifiers.
+        Access to all compartment identifiers.
 
         Returns:
             List of compartment identifiers.
+
         """
         ids = set()
         for uniprot_id, user_id in self._location_map.items():
@@ -130,9 +135,7 @@ class LocationData(object):
         return list(ids)
 
     def _extract_data(self, uniprot_data, curated_locations, location_map):
-        """
-        Extract location information from uniprot file.
-        """
+        """Extract location information from uniprot file."""
         entry_data = uniprot_data['Entry']
         gene_data = uniprot_data['Gene names']
         name_data = uniprot_data['Protein names']
@@ -144,7 +147,7 @@ class LocationData(object):
         mapping_to_cure = {}
         known_locations = list(location_map.values())
         for entry, gene_names, name, location_note \
-            in zip(entry_data, gene_data, name_data, location_data):
+                in zip(entry_data, gene_data, name_data, location_data):
             # if entry is in curated file add it, otherwise parse field
             if entry in curated_locations:
                 location = curated_locations[entry]
@@ -175,9 +178,7 @@ class LocationData(object):
 
 
 class LocationParser(object):
-    """
-    Class parsing 'Subcellular location' field of uniprot.
-    """
+    """Class parsing 'Subcellular location' field of uniprot."""
 
     _location_reader = re.compile(r'SUBCELLULAR LOCATION:\s([\w\s]+\w)')
 
@@ -187,6 +188,7 @@ class LocationParser(object):
 
         Returns:
             Compartment read.
+
         """
         try:
             return self._location_reader.match(field).group(1)

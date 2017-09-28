@@ -1,8 +1,10 @@
-"""
-Module defining CurationData class.
-"""
+"""Module defining CurationData class."""
+
+# python 2/3 compatibility
+from __future__ import division, print_function
 
 import pandas
+
 
 class CurationData(object):
     """
@@ -11,7 +13,9 @@ class CurationData(object):
     Attributes:
         missing_tag: tag used when some piece of information is missing.
         data: pandas.DataFrame holding current information.
+
     """
+
     missing_tag = '[MISSING]'
 
     def __init__(self, columns):
@@ -61,5 +65,6 @@ class CurationData(object):
 
         Returns:
             True if any field has missing information.
+
         """
-        return any(pandas.isnull(self.data))
+        return pandas.isnull(self.data).values.any()
