@@ -98,7 +98,7 @@ class Species(object):
             # it appears twice in the species list.
             met_index = self._index[macro]
             macro_index = nb_met + index
-            if met_index != macro_index:
+            if met_index < nb_met:
                 # create biosynthesis reaction
                 reaction = self.production[:, macro_index].tolil()
                 reaction[met_index, 0] = 1

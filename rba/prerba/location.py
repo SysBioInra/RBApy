@@ -121,13 +121,13 @@ class LocationData(object):
         Returns:
             List of compartment identifiers.
         """
-        ids = []
+        ids = set()
         for uniprot_id, user_id in self._location_map.items():
             if not pandas.isnull(user_id):
-                ids.append(user_id)
+                ids.add(user_id)
             else:
-                ids.append(uniprot_id.replace(' ', '_'))
-        return ids
+                ids.add(uniprot_id.replace(' ', '_'))
+        return list(ids)
 
     def _extract_data(self, uniprot_data, curated_locations, location_map):
         """
