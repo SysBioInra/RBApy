@@ -117,7 +117,8 @@ class SubunitParser(object):
             Stoichiometry parsed (None if field was ambiguous).
         """
         # if field is empty, stoichiometry is one
-        if pandas.isnull(field): return 1
+        if pandas.isnull(field):
+            return 1
 
         prefixes = self._subunit_reader.findall(field)
         # if there is only one word of the form [prefix]mer,
