@@ -2,10 +2,10 @@
   <listOfTargetDensities>
     <targetDensity upperBound="4.8972" compartment="Cytoplasm"/>
     <targetDensity upperBound="Cell_inner_membrane_density" compartment="Cell_inner_membrane"/>
-    <targetDensity upperBound="Cell_membrane_density" compartment="Cell_membrane"/>
     <targetDensity upperBound="Periplasm_density" compartment="Periplasm"/>
     <targetDensity upperBound="Membrane_density" compartment="Membrane"/>
     <targetDensity upperBound="Cell_outer_membrane_density" compartment="Cell_outer_membrane"/>
+    <targetDensity upperBound="Cell_membrane_density" compartment="Cell_membrane"/>
   </listOfTargetDensities>
   <listOfFunctions>
     <function id="fraction_protein_Cytoplasm" type="constant">
@@ -23,11 +23,6 @@
         <parameter id="CONSTANT" value="0.04"/>
       </listOfParameters>
     </function>
-    <function id="fraction_protein_Cell_membrane" type="constant">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.04"/>
-      </listOfParameters>
-    </function>
     <function id="fraction_protein_Periplasm" type="constant">
       <listOfParameters>
         <parameter id="CONSTANT" value="0.04"/>
@@ -39,6 +34,11 @@
       </listOfParameters>
     </function>
     <function id="fraction_protein_Cell_outer_membrane" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.04"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Cell_membrane" type="constant">
       <listOfParameters>
         <parameter id="CONSTANT" value="0.04"/>
       </listOfParameters>
@@ -59,16 +59,6 @@
       </listOfParameters>
     </function>
     <function id="fraction_non_enzymatic_protein_Cell_inner_membrane" type="linear">
-      <listOfParameters>
-        <parameter id="Y_MIN" value="0"/>
-        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
-        <parameter id="Y_MAX" value="1"/>
-        <parameter id="LINEAR_COEF" value="-0.0496"/>
-        <parameter id="X_MAX" value="1.6"/>
-        <parameter id="X_MIN" value="0.25"/>
-      </listOfParameters>
-    </function>
-    <function id="fraction_non_enzymatic_protein_Cell_membrane" type="linear">
       <listOfParameters>
         <parameter id="Y_MIN" value="0"/>
         <parameter id="LINEAR_CONSTANT" value="0.8965"/>
@@ -108,9 +98,19 @@
         <parameter id="X_MIN" value="0.25"/>
       </listOfParameters>
     </function>
+    <function id="fraction_non_enzymatic_protein_Cell_membrane" type="linear">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
     <function id="inverse_average_protein_length" type="constant">
       <listOfParameters>
-        <parameter id="CONSTANT" value="0.0031981504672"/>
+        <parameter id="CONSTANT" value="0.0031981915447"/>
       </listOfParameters>
     </function>
     <function id="amino_acid_concentration" type="linear">
@@ -188,12 +188,6 @@
         <functionReference function="fraction_protein_Cell_inner_membrane"/>
       </listOfFunctionReferences>
     </aggregate>
-    <aggregate id="Cell_membrane_density" type="multiplication">
-      <listOfFunctionReferences>
-        <functionReference function="amino_acid_concentration"/>
-        <functionReference function="fraction_protein_Cell_membrane"/>
-      </listOfFunctionReferences>
-    </aggregate>
     <aggregate id="Periplasm_density" type="multiplication">
       <listOfFunctionReferences>
         <functionReference function="amino_acid_concentration"/>
@@ -210,6 +204,12 @@
       <listOfFunctionReferences>
         <functionReference function="amino_acid_concentration"/>
         <functionReference function="fraction_protein_Cell_outer_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Cell_membrane_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Cell_membrane"/>
       </listOfFunctionReferences>
     </aggregate>
     <aggregate id="ribosome_capacity" type="multiplication">
@@ -242,14 +242,6 @@
         <functionReference function="fraction_non_enzymatic_protein_Cytoplasm"/>
       </listOfFunctionReferences>
     </aggregate>
-    <aggregate id="nonenzymatic_proteins_Cell_membrane" type="multiplication">
-      <listOfFunctionReferences>
-        <functionReference function="amino_acid_concentration"/>
-        <functionReference function="inverse_average_protein_length"/>
-        <functionReference function="fraction_protein_Cell_membrane"/>
-        <functionReference function="fraction_non_enzymatic_protein_Cell_membrane"/>
-      </listOfFunctionReferences>
-    </aggregate>
     <aggregate id="nonenzymatic_proteins_Periplasm" type="multiplication">
       <listOfFunctionReferences>
         <functionReference function="amino_acid_concentration"/>
@@ -272,6 +264,14 @@
         <functionReference function="inverse_average_protein_length"/>
         <functionReference function="fraction_protein_Cell_outer_membrane"/>
         <functionReference function="fraction_non_enzymatic_protein_Cell_outer_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Cell_membrane" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Cell_membrane"/>
+        <functionReference function="fraction_non_enzymatic_protein_Cell_membrane"/>
       </listOfFunctionReferences>
     </aggregate>
   </listOfAggregates>
