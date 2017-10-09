@@ -1,8 +1,8 @@
 UNIPROT NAME	USER ID
-Secreted	[MISSING]
-Cell inner membrane	[MISSING]
-Cytoplasm	[MISSING]
-Cell membrane	[MISSING]
-Periplasm	[MISSING]
-Membrane	[MISSING]
-Cell outer membrane	[MISSING]
+Cell outer membrane	Cell_outer_membrane
+Cell inner membrane	Cell_inner_membrane
+Cytoplasm	Cytoplasm
+Cell membrane	Cell_membrane
+Periplasm	Periplasm
+Membrane	Membrane
+Secreted	Secreted

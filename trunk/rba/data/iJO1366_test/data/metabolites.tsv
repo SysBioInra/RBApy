@@ -1,57 +1,57 @@
 ID	NAME	SBML ID	CONCENTRATION
 MET	Methionine	[MISSING]	0.0
 ALATRNA	Charged trna ala	M_alatrna_c	0.0
-TRNAALA	Uncharged trna ala	M_trnaala_c	4.80266666667e-05
 CYSTRNA	Charged trna cys	M_cystrna_c	0.0
-TRNACYS	Uncharged trna cys	M_trnacys_c	8.56e-06
 ASPTRNA	Charged trna asp	M_asptrna_c	0.0
-TRNAASP	Uncharged trna asp	M_trnaasp_c	2.25333333333e-05
 GLUTRNA	Charged trna glu	M_glutrna_c	0.0
-TRNAGLU	Uncharged trna glu	M_trnaglu_c	2.46e-05
 PHETRNA	Charged trna phe	M_phetrna_c	0.0
-TRNAPHE	Uncharged trna phe	M_trnaphe_c	1.732e-05
 GLYTRNA	Charged trna gly	M_glytrna_c	0.0
-TRNAGLY	Uncharged trna gly	M_trnagly_c	5.72666666667e-05
 HISTRNA	Charged trna his	M_histrna_c	0.0
-TRNAHIS	Uncharged trna his	M_trnahis_c	8.85333333333e-06
 ILETRNA	Charged trna ile	M_iletrna_c	0.0
-TRNAILE	Uncharged trna ile	M_trnaile_c	2.716e-05
 LYSTRNA	Charged trna lys	M_lystrna_c	0.0
-TRNALYS	Uncharged trna lys	M_trnalys_c	3.208e-05
 LEUTRNA	Charged trna leu	M_leutrna_c	0.0
-TRNALEU	Uncharged trna leu	M_trnaleu_c	4.212e-05
 METTRNA	Charged trna met	M_mettrna_c	0.0
-TRNAMET	Uncharged trna met	M_trnamet_c	1.43733333333e-05
 ASNTRNA	Charged trna asn	M_asntrna_c	0.0
-TRNAASN	Uncharged trna asn	M_trnaasn_c	2.25333333333e-05
 PROTRNA	Charged trna pro	M_protrna_c	0.0
-TRNAPRO	Uncharged trna pro	M_trnapro_c	2.06666666667e-05
 GLNTRNA	Charged trna gln	M_glntrna_c	0.0
-TRNAGLN	Uncharged trna gln	M_trnagln_c	2.46e-05
 ARGTRNA	Charged trna arg	M_argtrna_c	0.0
-TRNAARG	Uncharged trna arg	M_trnaarg_c	2.76533333333e-05
 SERTRNA	Charged trna ser	M_sertrna_c	0.0
-TRNASER	Uncharged trna ser	M_trnaser_c	2.01733333333e-05
 THRTRNA	Charged trna thr	M_thrtrna_c	0.0
-TRNATHR	Uncharged trna thr	M_trnathr_c	2.372e-05
 VALTRNA	Charged trna val	M_valtrna_c	0.0
-TRNAVAL	Uncharged trna val	M_trnaval_c	3.956e-05
 TRPTRNA	Charged trna trp	M_trptrna_c	0.0
-TRNATRP	Uncharged trna trp	M_trnatrp_c	5.32e-06
 TYRTRNA	Charged trna tyr	M_tyrtrna_c	0.0
+TRNAALA	Uncharged trna ala	M_trnaala_c	4.80266666667e-05
+TRNACYS	Uncharged trna cys	M_trnacys_c	8.56e-06
+TRNAASP	Uncharged trna asp	M_trnaasp_c	2.25333333333e-05
+TRNAGLU	Uncharged trna glu	M_trnaglu_c	2.46e-05
+TRNAPHE	Uncharged trna phe	M_trnaphe_c	1.732e-05
+TRNAGLY	Uncharged trna gly	M_trnagly_c	5.72666666667e-05
+TRNAHIS	Uncharged trna his	M_trnahis_c	8.85333333333e-06
+TRNAILE	Uncharged trna ile	M_trnaile_c	2.716e-05
+TRNALYS	Uncharged trna lys	M_trnalys_c	3.208e-05
+TRNALEU	Uncharged trna leu	M_trnaleu_c	4.212e-05
+TRNAMET	Uncharged trna met	M_trnamet_c	1.43733333333e-05
+TRNAASN	Uncharged trna asn	M_trnaasn_c	2.25333333333e-05
+TRNAPRO	Uncharged trna pro	M_trnapro_c	2.06666666667e-05
+TRNAGLN	Uncharged trna gln	M_trnagln_c	2.46e-05
+TRNAARG	Uncharged trna arg	M_trnaarg_c	2.76533333333e-05
+TRNASER	Uncharged trna ser	M_trnaser_c	2.01733333333e-05
+TRNATHR	Uncharged trna thr	M_trnathr_c	2.372e-05
+TRNAVAL	Uncharged trna val	M_trnaval_c	3.956e-05
+TRNATRP	Uncharged trna trp	M_trnatrp_c	5.32e-06
 TRNATYR	Uncharged trna tyr	M_trnatyr_c	1.28933333333e-05
 FMETTRNA	Charged trna fmet	M_fmettrna_c	0.0
 ATP	ATP	M_atp_c	0.003
-ADP	ADP	M_adp_c	0.0026
-AMP	AMP	M_amp_c	0.0047
 CTP	CTP	M_ctp_c	0.0005
-CDP	CDP	M_cdp_c	0.0003
-CMP	CMP	M_cmp_c	0.001
 GTP	GTP	M_gtp_c	0.0004
-GDP	GDP	M_gdp_c	0.0002
-GMP	GMP	M_gmp_c	0.0005
 UTP	UTP	M_utp_c	0.0
+ADP	ADP	M_adp_c	0.0026
+CDP	CDP	M_cdp_c	0.0003
+GDP	GDP	M_gdp_c	0.0002
 UDP	UDP	M_udp_c	0.0
+AMP	AMP	M_amp_c	0.0047
+CMP	CMP	M_cmp_c	0.001
+GMP	GMP	M_gmp_c	0.0005
 UMP	UMP	M_ump_c	0.0
 dATP	dATP	M_datp_c	0.0
 dCTP	dCTP	M_dctp_c	0.0
@@ -75,12 +75,13 @@ CHEBI:58349	NADP(+)	[MISSING]	0.0
 CHEBI:71302	Mo-molybdopterin	[MISSING]	0.0
 CHEBI:58937	thiamine diphosphate	[MISSING]	0.0
 CHEBI:60052	siroheme	[MISSING]	0.0
-CHEBI:57540	NAD(+)	[MISSING]	0.0
+CHEBI:21137	[3Fe-4S] cluster	[MISSING]	0.0
 CHEBI:49883	[4Fe-4S] cluster	[MISSING]	0.0
 CHEBI:24875	Fe cation	[MISSING]	0.0
 CHEBI:60342	dipyrromethane	[MISSING]	0.0
 CHEBI:60344	heme b	[MISSING]	0.0
 CHEBI:17996	chloride	[MISSING]	0.0
+CHEBI:57540	NAD(+)	[MISSING]	0.0
 CHEBI:28115	methyl(III)cobalamin	[MISSING]	0.0
 CHEBI:57925	glutathione	[MISSING]	0.0
 CHEBI:30413	heme	[MISSING]	0.0
@@ -98,17 +99,16 @@ CHEBI:58442	pyrroloquinoline quinone	[MISSING]	0.0
 CHEBI:49601	[2Fe-2S] cluster	[MISSING]	0.0
 CHEBI:83088	(R)-lipoate	[MISSING]	0.0
 CHEBI:24480	heme o	[MISSING]	0.0
-CHEBI:57618	FMNH2	[MISSING]	0.0
+CHEBI:36141	a quinone	[MISSING]	0.0
 CHEBI:49786	Ni(2+)	[MISSING]	0.0
 CHEBI:15361	pyruvate	[MISSING]	0.0
+CHEBI:57618	FMNH2	[MISSING]	0.0
 CHEBI:30408	iron-sulfur cluster	[MISSING]	0.0
 CHEBI:23378	Cu cation	[MISSING]	0.0
 CHEBI:62814	heme d cis-diol	[MISSING]	0.0
 CHEBI:17544	hydrogencarbonate	[MISSING]	0.0
-CHEBI:36141	a quinone	[MISSING]	0.0
 CHEBI:57692	FAD	[MISSING]	0.0
 CHEBI:29108	Ca(2+)	[MISSING]	0.0
 CHEBI:29105	Zn(2+)	[MISSING]	0.0
-CHEBI:21137	[3Fe-4S] cluster	[MISSING]	0.0
 CHEBI:29101	Na(+)	[MISSING]	0.0
 CHEBI:29103	K(+)	[MISSING]	0.0
