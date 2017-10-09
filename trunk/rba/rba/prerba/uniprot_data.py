@@ -1,0 +1,272 @@
+"""Module defining UniprotData class."""
+
+# python 2/3 compatibility
+from __future__ import division, print_function
+
+# global imports
+from collections import Counter, namedtuple
+import os.path
+import re
+import pandas
+
+# local imports
+from rba.prerba.curation_data import CurationData
+import rba.xml
+
+Cofactor = namedtuple('Cofactor', 'chebi name stoichiometry uniprot_note')
+
+
+class UniprotData(object):
+    """
+    Class parsing RBA-relevant Uniprot data.
+
+    Attributes:
+        unknown_map: dict mapping sbml genes not retrieved in uniprot with
+            a corresponding user-defined gene theoretically found in uniprot.
+        default_location: name of default compartment.
+        cytoplasm_compartment: name of cytoplasm.
+        secreted_compartment: name of external compartment.
+        compartment_ids: list of names of all compartments.
+        components: rba.xml.ListOfComponents containing all elements that are
+            used to build proteins (amino acids, vitamins, cofactors).
+        proteins: rba.xml.ListOfMacromolecules containing all proteins that
+            have been filtered.
+        protein_stoichiometry: dict mapping protein identifiers with their
+            stoichiometry within their enzymatic complex.
+        average_protein_length: average protein length.
+
+    """
+
+    def __init__(self, input_file):
+        """
+        Build from input directory.
+
+        Parameters
+        ----------
+        input_dir: Directory containing uniprot file.
+
+        """
+        # open uniprot data
+        self.data = pandas.read_csv(input_file, sep='\t')
+        self.data.set_index('Entry', inplace=True)
+        # create mapping from gene ids to uniprot ids
+        self._gene_to_entry = {}
+        gene_reader = re.compile(r'([^\s]+)')
+        for entry, genes in zip(self.data.index, self.data['Gene names']):
+            # transform raw uniprot field into standardized list
+            if pandas.isnull(genes):
+                continue
+            gene_ids = set(g.upper() for g in gene_reader.findall(genes))
+            for gene in gene_ids:
+                self._gene_to_entry[gene] = entry
+        # create parsers
+        self._location_parser = LocationParser()
+        self._cofactor_parser = CofactorParser()
+        self._subunit_parser = SubunitParser()
+
+    def line(self, uniprot_id):
+        return self.data.loc[uniprot_id]
+
+    def find_location(self, uniprot_line):
+        return self._location_parser.parse(
+            uniprot_line['Subcellular location [CC]']
+            )
+
+    def find_cofactors(self, uniprot_line):
+        return self._cofactor_parser.parse(uniprot_line['Cofactor'])
+
+    def find_subunits(self, uniprot_line):
+        return self._subunit_parser.parse(
+            uniprot_line['Subunit structure [CC]']
+            )
+
+    def entry(self, gene):
+        """
+        Find uniprot entries from gene identifiers.
+
+        Parameters
+        ----------
+        gene_ids : list
+            Name of genes to retrieve.
+
+        Returns
+        -------
+        result : dict
+            Dictionary where keys are gene ids and values are
+            corresponding uniprot entries.
+        not_found : list
+            Gene ids that could not be retrieved.
+
+        """
+        return self._gene_to_entry.get(gene.upper(), None)
+
+    def average_protein_composition(self):
+        """
+        Compute average protein composition.
+
+        Returns
+        -------
+        dict
+            Dictionary where keys are amino acids (one letter format) and
+            values their average number in a protein.
+        """
+        composition = Counter()
+        for sequence in self.data['Sequence']:
+            composition.update(sequence)
+        nb_proteins = len(self.data.index)
+        for aa in composition:
+            composition[aa] /= nb_proteins
+        return dict(composition)
+
+
+class LocationParser(object):
+    """Class parsing 'Subcellular location' field of uniprot."""
+
+    _location_reader = re.compile(r'SUBCELLULAR LOCATION:\s([\w\s]+\w)')
+
+    def parse(self, field):
+        """
+        Parse 'Subcellular location' field in uniprot.
+
+        Parameters
+        ----------
+        field : str
+            Subcellular location field from uniprot.
+
+        Returns
+        -------
+        str
+            Compartment read.
+
+        """
+        if pandas.isnull(field):
+            return None
+        try:
+            return self._location_reader.match(field).group(1)
+        except AttributeError:
+            print(field)
+            raise
+
+
+class SubunitParser(object):
+    """
+    Class parsing 'Subunit' uniprot field.
+
+    Attributes
+    ----------
+    prefix_rule : dict
+        Dictionary determining rule used to infer stoichiometry.
+        Keys are all caps prefixes preceding 'mer' in words found
+        in uniprot field,
+        values are stoichiometries associated with them. For example,
+        prefix_rule[MONO] = 1.
+
+    """
+
+    prefix_rule = {'MONO': 1, 'HETERODI': 1, 'HOMODI': 2, 'HOMOTRI': 3,
+                   'HOMOTETRA': 4, 'HOMOPENTA': 5, 'HOMOHEXA': 6,
+                   'HEPTA': 7, 'HOMOOCTA': 8, 'HOMODECA': 10, 'HOMODODECA': 12}
+    _subunit_reader = re.compile(r'([a-zA-Z]+)mer[^a-z]')
+
+    def parse(self, field):
+        """
+        Parse uniprot field.
+
+        Parameters
+        ----------
+        field : str
+            field to parse.
+
+        Returns
+        -------
+        int
+            Stoichiometry parsed (None if field was ambiguous).
+
+        """
+        # if field is empty, stoichiometry is one
+        if pandas.isnull(field):
+            return None
+
+        prefixes = self._subunit_reader.findall(field)
+        # if there is only one word of the form [prefix]mer,
+        if len(prefixes) == 1:
+            prefix = prefixes[0].upper()
+            # check for prefix in prefix rule
+            return self.prefix_rule.get(prefix, None)
+        else:
+            return None
+
+
+class CofactorParser(object):
+    """Class parsing Cofactor uniprot field."""
+
+    _name_reader = re.compile(r'Name=([^;]+); Xref=ChEBI:([^;]+);')
+    _note_reader = re.compile(r'Note=(.*)')
+    _stoichiometry_reader = re.compile(r'Binds ([\w]+)')
+
+    def parse(self, field):
+        """
+        Parse uniprot field.
+
+        Parameters
+        ----------
+        field : str
+            Uniprot field containing cofactor information.
+
+        Returns
+        -------
+        cofactors: list
+            Cofactor objects containing information retrieved,
+            where info was unambiguous.
+        cofactors_to_cure : list
+            Cofactor objects where some info was
+            ambiguous. If some information could not be retrieved,
+            its field is set to None
+
+        """
+        if pandas.isnull(field):
+            return [], []
+        cofactor_notes = field.split('COFACTOR:')[1:]
+        cofactors = []
+        cofactors_to_cure = []
+        for note in cofactor_notes:
+            # read name(s) and chebi identifier(s) of cofactor(s)
+            # if no name was found, indicate chebi and name as missing
+            full_name = self._name_reader.findall(note)
+            if not full_name:
+                full_name.append([None, None])
+            # extract subnote if possible
+            subnotes = self._note_reader.findall(note)
+            if len(subnotes) == 1:
+                subnote = subnotes[0]
+            else:
+                subnote = note
+            # infer stoichiometry:
+            #  - nothing read: stoichiometry is implicitly 1
+            #  - one value read: use value if can be cast to integer, else
+            #    tag as missing information.
+            #  - multiple values read: tag as missing information.
+            stoichiometry = self._stoichiometry_reader.findall(note)
+            if not stoichiometry:
+                stoichiometry = 1
+            elif len(stoichiometry) == 1:
+                try:
+                    stoichiometry = int(stoichiometry[0])
+                except ValueError:
+                    stoichiometry = None
+            else:
+                stoichiometry = None
+            # if there are several names, assume stoichiometry
+            # is number found earlier for first element of the list
+            # and 0 for the rest
+            is_ambiguous = (stoichiometry is None
+                            or len(full_name) > 1
+                            or full_name[0][0] is None)
+            for name, chebi in full_name:
+                new_cofactor = Cofactor(chebi, name, stoichiometry, subnote)
+                if is_ambiguous:
+                    cofactors_to_cure.append(new_cofactor)
+                else:
+                    cofactors.append(new_cofactor)
+                stoichiometry = 0
+        return cofactors, cofactors_to_cure

@@ -1,12 +1,11 @@
-"""
-Module storing data and data-related functions.
-"""
+"""Module storing data and data-related functions."""
 
 # python 2/3 compatibility
 from __future__ import division, print_function
 
 # local imports
 from rba.xml import Function
+
 
 class DefaultData(object):
     """
@@ -16,8 +15,8 @@ class DefaultData(object):
         self.parameters = DefaultParameters()
         self.metabolites = DefaultMetabolites()
         self.activity = DefaultActivity()
-        ## additional reactions
         self.atpm_reaction = 'R_maintenance_atp'
+
 
 class DefaultParameters(object):
     """
@@ -25,7 +24,6 @@ class DefaultParameters(object):
     """
 
     def __init__(self):
-        ## base information
         self.cytoplasm_density = 4.8972
         self.cytoplasm_fraction = 0.7
         self.secreted_fraction = 0.1
@@ -54,7 +52,8 @@ class DefaultParameters(object):
                              'X_MIN': 0.25, 'X_MAX': 1.6,
                              'Y_MIN': float('-Inf'), 'Y_MAX': float('Inf')}))
         fns.append(Function('maintenance_atp', 'linear',
-                            {'LINEAR_COEF': 12.1595, 'LINEAR_CONSTANT': -3.1595,
+                            {'LINEAR_COEF': 12.1595,
+                             'LINEAR_CONSTANT': -3.1595,
                              'X_MIN': 1, 'X_MAX': float('Inf'),
                              'Y_MIN': float('-Inf'), 'Y_MAX': float('Inf')}))
         self.functions = fns
@@ -113,52 +112,56 @@ class DefaultParameters(object):
         return Function(self.non_enzymatic_fraction_id(compartment_id),
                         'linear', params)
 
+
 class DefaultMetabolites(object):
     """
     Class holding default metabolite data.
     """
 
     def __init__(self):
-        ## key metabolites and components
-        self.aas_3L = {'A':'ala', 'C':'cys', 'D':'asp', 'E':'glu', 'F':'phe',
-                       'G':'gly', 'H':'his', 'I':'ile', 'K':'lys', 'L':'leu',
-                       'fM': 'fmet', 'M':'met', 'N':'asn', 'P':'pro', 'Q':'gln',
-                       'R':'arg', 'S':'ser', 'T':'thr', 'V':'val', 'W':'trp',
-                       'Y':'tyr'}
+        # key metabolites and components
+        self.aas_3L = {
+            'A': 'ala', 'C': 'cys', 'D': 'asp', 'E': 'glu', 'F': 'phe',
+            'G': 'gly', 'H': 'his', 'I': 'ile', 'K': 'lys', 'L': 'leu',
+            'fM': 'fmet', 'M': 'met', 'N': 'asn', 'P': 'pro', 'Q': 'gln',
+            'R': 'arg', 'S': 'ser', 'T': 'thr', 'V': 'val', 'W': 'trp',
+            'Y': 'tyr'
+            }
         self.aas = ['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M',
                     'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y']
         self.aa_fM = 'fM'
         self.nucleotides = ['A', 'C', 'G', 'U']
         self.d_nucleotides = ['A', 'C', 'G', 'T']
-        self.key_metabolites \
-            = {'Pi': 'Phosphate', 'COA': 'Coenzyme A', 'NAD': 'NAD',
-               'NADP': 'NADP', 'NADPH': 'NADPH', 'K': 'Potassium',
-               'SPMD': 'SPMD', 'H2O': 'H2O', 'H': 'Proton',
-               'PPi': 'Pyrophosphate',
-               '10FTHF': '10-Formyltetrahydrofolate', 'FOR': 'Formate'}
+        self.key_metabolites = {
+            'Pi': 'Phosphate', 'COA': 'Coenzyme A', 'NAD': 'NAD',
+            'NADP': 'NADP', 'NADPH': 'NADPH', 'K': 'Potassium',
+            'SPMD': 'SPMD', 'H2O': 'H2O', 'H': 'Proton',
+            'PPi': 'Pyrophosphate',
+            '10FTHF': '10-Formyltetrahydrofolate', 'FOR': 'Formate'
+            }
         self.mrna = 'mrna'
         self.dna = 'dna'
-
-        ## default concentrations
-        self.concentration \
-            = {'COA': 0.0003, 'NAD': 0.0162, 'NADP':0.0009, 'NADPH': 0.0002,
-               '10FTHF': 0.0004, 'K': 0.7063, 'SPMD': 0.007,
-               'Pi': 0.0144, 'PPi': 0.0009,
-               'AMP': 0.0047, 'CMP': 0.001, 'GMP': 0.0005, 'UMP': 0,
-               'ADP': 0.0026, 'CDP': 0.0003, 'GDP': 0.0002, 'UDP': 0,
-               'ATP': 0.003, 'CTP': 0.0005, 'GTP': 0.0004, 'UTP': 0}
+        # default concentrations
+        self.concentration = {
+            'COA': 0.0003, 'NAD': 0.0162, 'NADP': 0.0009, 'NADPH': 0.0002,
+            '10FTHF': 0.0004, 'K': 0.7063, 'SPMD': 0.007,
+            'Pi': 0.0144, 'PPi': 0.0009,
+            'AMP': 0.0047, 'CMP': 0.001, 'GMP': 0.0005, 'UMP': 0,
+            'ADP': 0.0026, 'CDP': 0.0003, 'GDP': 0.0002, 'UDP': 0,
+            'ATP': 0.003, 'CTP': 0.0005, 'GTP': 0.0004, 'UTP': 0
+            }
         # trna concentration is actually a nucleotide concentration
-        trna_concentration \
-            = {'C': 0.000642, 'P': 0.001550, 'H': 0.000664, 'D': 0.001690,
-               'S': 0.001513, 'Q': 0.001845, 'I': 0.002037, 'M': 0.001078,
-               'K': 0.002406, 'T': 0.001779, 'F': 0.001299, 'A': 0.003602,
-               'G': 0.004295, 'E': 0.001845, 'L': 0.003159, 'R': 0.002074,
-               'W': 0.000399, 'N': 0.001690, 'Y': 0.000967, 'V': 0.002967}
+        trna_concentration = {
+            'C': 0.000642, 'P': 0.001550, 'H': 0.000664, 'D': 0.001690,
+            'S': 0.001513, 'Q': 0.001845, 'I': 0.002037, 'M': 0.001078,
+            'K': 0.002406, 'T': 0.001779, 'F': 0.001299, 'A': 0.003602,
+            'G': 0.004295, 'E': 0.001845, 'L': 0.003159, 'R': 0.002074,
+            'W': 0.000399, 'N': 0.001690, 'Y': 0.000967, 'V': 0.002967
+            }
         av_trna_length = 75
         for trna, conc in trna_concentration.items():
             self.concentration[self.uncharged_trna_key(trna)] \
                 = conc / av_trna_length
-
 
     def charged_trna_key(self, aa):
         """
@@ -219,6 +222,39 @@ class DefaultMetabolites(object):
         """
         return 'average_protein_' + compartment_id
 
+    def process_metabolites(self):
+        """
+        Return internal ids and names of metabolites involved in processes.
+        """
+        # metabolites to retrieve
+        keys = []  # internal id of metabolite
+        names = []  # name of metabolite
+        # methionine
+        keys.append('MET')
+        names.append('Methionine')
+        # charged + uncharged trnas
+        keys += [self.charged_trna_key(aa) for aa in self.aas]
+        names += [self.charged_trna_name(aa) for aa in self.aas]
+        keys += [self.uncharged_trna_key(aa) for aa in self.aas]
+        names += [self.uncharged_trna_name(aa) for aa in self.aas]
+        keys.append(self.charged_trna_key(self.aa_fM))
+        names.append(self.charged_trna_name(self.aa_fM))
+        # nucleotides
+        keys += [self.ntp_key(n) for n in self.nucleotides]
+        names += [self.ntp_key(n) for n in self.nucleotides]
+        keys += [self.ndp_key(n) for n in self.nucleotides]
+        names += [self.ndp_key(n) for n in self.nucleotides]
+        keys += [self.nmp_key(n) for n in self.nucleotides]
+        names += [self.nmp_key(n) for n in self.nucleotides]
+        keys += [self.dntp_key(n) for n in self.d_nucleotides]
+        names += [self.dntp_key(n) for n in self.d_nucleotides]
+        # key metabolites
+        for met_id, name in self.key_metabolites.items():
+            keys.append(met_id)
+            names.append(name)
+        return keys, names
+
+
 class DefaultActivity(object):
     """
     Class holding default RBA enzyme activity data.
@@ -228,11 +264,10 @@ class DefaultActivity(object):
         """
         Default constructor.
         """
-        ## default catalytic activity
+        # default catalytic activity
         self.catalytic_activity = 200000
         self.transporter_activity = 2e6
         self.import_Km = 0.8
         self.import_kmax = 1
-
-        ## default medium
+        # default medium
         self.medium_concentration = 10
