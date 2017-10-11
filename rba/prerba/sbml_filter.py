@@ -1,7 +1,7 @@
 """Module defining SBMLFilter class."""
 
 # python 2/3 compatibility
-from __future__ import division, print_function
+from __future__ import division, print_function, absolute_import
 
 # global imports
 import copy
@@ -16,15 +16,21 @@ class SBMLFilter(object):
     """
     Class used to filter RBA-relevant SBML data.
 
-    Attributes:
-        species: rba.xml.ListOfSpecies containing SBML species.
-        enzymes: list where each element represents an enzyme as a list of
-            protein identifiers.
-        reactions: rba.xml.ListOfReaction containing SBML reactions.
-        external_metabolites: list of SBML identifiers of external metabolites.
-        imported_metabolites: list of SBML identifiers of imported metabolites.
-        has_membrane_enzyme: dict mapping reaction id to boolean value
-            indicating whether reaction occurs in the membrane.
+    Attributes
+    ----------
+    species: rba.xml.ListOfSpecies
+        SBML species.
+    enzymes: list
+        Enzymes as a list of protein identifiers.
+    reactions: rba.xml.ListOfReaction
+        SBML reactions.
+    external_metabolites: list
+        SBML identifiers of external metabolites.
+    imported_metabolites: list
+        SBML identifiers of imported metabolites.
+    has_membrane_enzyme: dict
+        Keys are reaction ids and values booleans
+        indicating whether reaction occurs in the membrane.
 
     """
 
@@ -32,10 +38,14 @@ class SBMLFilter(object):
         """
         Build from file.
 
-        Args:
-            input: Path to input file.
-            cytosol_id: identifier of cytosol in the SBML file.
-            external_ids: identifiers of external compartments in SBML file.
+        Parameters
+        ----------
+        input: str
+            Path to input file.
+        cytosol_id: str
+            identifier of cytosol in the SBML file.
+        external_ids: list of str
+            identifiers of external compartments in SBML file.
 
         """
         # load SBML file

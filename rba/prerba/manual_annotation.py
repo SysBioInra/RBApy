@@ -8,8 +8,33 @@ from collections import namedtuple
 
 from rba.prerba.curation_data import CurationData
 
+
 class CurationFile(object):
+    """
+    Wrapper for curation files.
+
+    Attributes
+    ----------
+    filename : str
+        Location of curation file.
+    data : rba.prerba.CurationData
+        Curation data.
+
+    """
+
     def __init__(self, filename, columns):
+        """
+        Build object from existing curation file or create one.
+
+        Parameters
+        ----------
+        filename : str
+            Location of curation file.
+        columns : list of str
+            Names of columns of curation file. Names will be overridden if
+            a curation file already exists.
+
+        """
         self.filename = filename
         self.data = CurationData(columns)
         try:
@@ -21,9 +46,36 @@ class CurationFile(object):
 class ManualAnnotation(object):
     """
     Interface to manual annotaton.
+
+    Attributes
+    ----------
+    subunits : rba.prerba.CurationFile
+        Curated protein stoichiometries.
+    cofactors : rba.prerba.CurationFile
+        Curated protein cofactors.
+    locations : rba.prerba.CurationFile
+        Curated protein locations.
+    location_map : rba.prerba.CurationFile
+        Curated map from uniprot locations to user locations.
+    unknown_proteins : rba.prerba.CurationFile
+        Curated map from sbml genes to uniprot genes.
+    metabolites : rba.prerba.CurationFile
+        Curated metabolite information.
+    macrocomponents : rba.prerba.CurationFile
+        Curated macrocomponent information.
+
     """
 
     def __init__(self, input_dir):
+        """
+        Build from input director.
+
+        Parameters
+        ----------
+        input_dir : str
+            Path to directory containing curation files.
+
+        """
         self.subunits = CurationFile(
             os.path.join(input_dir, 'subunits.tsv'),
             ['ENTRY', 'STOICHIOMETRY', 'GENE NAMES',
@@ -55,12 +107,8 @@ class ManualAnnotation(object):
             ['TARGET_METABOLITE', 'TARGET_FLUX']
             )
 
-    def write_files(self):
-        for curation in [self.subunits, self.location_map,
-                         self.cofactors, self.locations]:
-            curation.data.write(curation.filename)
-
     def print_warnings(self):
+        """Print warning for curation files missing information."""
         if self.subunits.data.has_missing_information():
             print('WARNING: Several uniprot notes were ambiguous. '
                   'Please read file {}, check data and specify all '

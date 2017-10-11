@@ -1,17 +1,13 @@
 """Module defining UniprotData class."""
 
 # python 2/3 compatibility
-from __future__ import division, print_function
+from __future__ import division, print_function, absolute_import
 
 # global imports
 from collections import Counter, namedtuple
 import os.path
 import re
 import pandas
-
-# local imports
-from rba.prerba.curation_data import CurationData
-import rba.xml
 
 Cofactor = namedtuple('Cofactor', 'chebi name stoichiometry uniprot_note')
 
@@ -20,20 +16,10 @@ class UniprotData(object):
     """
     Class parsing RBA-relevant Uniprot data.
 
-    Attributes:
-        unknown_map: dict mapping sbml genes not retrieved in uniprot with
-            a corresponding user-defined gene theoretically found in uniprot.
-        default_location: name of default compartment.
-        cytoplasm_compartment: name of cytoplasm.
-        secreted_compartment: name of external compartment.
-        compartment_ids: list of names of all compartments.
-        components: rba.xml.ListOfComponents containing all elements that are
-            used to build proteins (amino acids, vitamins, cofactors).
-        proteins: rba.xml.ListOfMacromolecules containing all proteins that
-            have been filtered.
-        protein_stoichiometry: dict mapping protein identifiers with their
-            stoichiometry within their enzymatic complex.
-        average_protein_length: average protein length.
+    Parameters
+    ----------
+    data: pandas.DataFrame
+        raw uniprot data
 
     """
 
@@ -43,7 +29,7 @@ class UniprotData(object):
 
         Parameters
         ----------
-        input_dir: Directory containing uniprot file.
+        input_file: path to uniprot file.
 
         """
         # open uniprot data
@@ -65,17 +51,73 @@ class UniprotData(object):
         self._subunit_parser = SubunitParser()
 
     def line(self, uniprot_id):
+        """
+        Return data line corresponding to uniprot identifier.
+
+        Parameters
+        ----------
+        uniprot_id : str
+            Uniprot identifier of a protein.
+
+        Returns
+        -------
+        pandas.Series
+            Data associated with protein.
+
+        """
         return self.data.loc[uniprot_id]
 
     def find_location(self, uniprot_line):
+        """
+        Parse location of protein.
+
+        Parameters
+        ----------
+        uniprot_line : pandas.Series
+            Protein data.
+
+        Returns
+        -------
+        str
+            Standardized location of protein.
+
+        """
         return self._location_parser.parse(
             uniprot_line['Subcellular location [CC]']
             )
 
     def find_cofactors(self, uniprot_line):
+        """
+        Parse cofactors of protein.
+
+        Parameters
+        ----------
+        uniprot_line : pandas.Series
+            Protein data.
+
+        Returns
+        -------
+        str
+            Standardized cofactors of protein.
+
+        """
         return self._cofactor_parser.parse(uniprot_line['Cofactor'])
 
     def find_subunits(self, uniprot_line):
+        """
+        Parse stoichiometry of protein.
+
+        Parameters
+        ----------
+        uniprot_line : pandas.Series
+            Protein data.
+
+        Returns
+        -------
+        str
+            Standardized stoichiometry of protein.
+
+        """
         return self._subunit_parser.parse(
             uniprot_line['Subunit structure [CC]']
             )
@@ -109,6 +151,7 @@ class UniprotData(object):
         dict
             Dictionary where keys are amino acids (one letter format) and
             values their average number in a protein.
+
         """
         composition = Counter()
         for sequence in self.data['Sequence']:

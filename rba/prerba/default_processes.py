@@ -1,6 +1,4 @@
-"""
-Module defining DefaultProcesses class.
-"""
+"""Module defining DefaultProcesses class."""
 
 # python 2/3 compatibility
 from __future__ import division, print_function
@@ -13,33 +11,46 @@ class DefaultProcesses(object):
     """
     Class initializing default process structure used by RBA.
 
-    Attributes:
-        rba_process: RBA process structure containing default processes.
-        aggregates: xml structure containing a list of aggregates used by the
-            default processes.
+    Attributes
+    ----------
+    default : rba.prerba.default_data.DefaultData
+        Default data.
+
     """
 
     def __init__(self, default_data, metabolite_map):
         """
-        Constructor.
+        Build object from default data and metabolite map.
 
-        Args:
-            default_data (default_data.DefaultData): object containing default
-                data used to initialize processes.
-            ribosome_composition: dict mapping protein or rna identifiers to
-                their stoichiometry within a ribosome unit.
-            chaperone_composition: dict mapping protein or rna identifiers to
-                their stoichiometry within an average chaperone.
-            compartments: list of compartments in the model.
-            cofactors (list of cofactors.Cofactor): cofactors in the model.
-            metabolite_map: dict linking internal names of metabolites with
-                user-defined SBML identifiers.
-            macro_flux: dict mapping metabolite names with a production flux.
+        Parameters
+        ----------
+        default_data : rba.prerba.default_data.DefaultData)
+            Default data used to initialize processes.
+        metabolite_map: dict
+            Map from internal metabolite ids to user-defined ids.
+
         """
         self.default = default_data
         self._metabolites = metabolite_map
 
     def translation(self, ribosome_composition, compartments):
+        """
+        Build translation process.
+
+        Parameters
+        ----------
+        ribosome_composition : dict
+            Map from molecule identifiers to
+            their stoichiometry within a ribosome unit.
+        compartments : list
+            Compartment identifiers.
+
+        Returns
+        -------
+        rba.xml.Process
+            Translation process.
+
+        """
         process = rba.xml.Process('P_TA', 'Translation')
         # machinery
         for id_, sto in ribosome_composition.items():
@@ -62,8 +73,22 @@ class DefaultProcesses(object):
             process.targets.concentrations.append(target)
         return process
 
-    @staticmethod
-    def folding(chaperone_composition):
+    def folding(self, chaperone_composition):
+        """
+        Build folding process.
+
+        Parameters
+        ----------
+        chaperone_composition : dict
+            Map from molecule identifiers to
+            their stoichiometry within an average chaperone.
+
+        Returns
+        -------
+        rba.xml.Process
+            Folding process.
+
+        """
         process = rba.xml.Process('P_CHP', 'Folding')
         # capacity constraint
         machine = process.machinery.machinery_composition
@@ -76,6 +101,15 @@ class DefaultProcesses(object):
         return process
 
     def transcription(self):
+        """
+        Build transcription process.
+
+        Returns
+        -------
+        rba.xml.Process
+            Transcription process.
+
+        """
         process = rba.xml.Process('P_TSC', 'Transcription')
         default_metabolites = self.default.metabolites
         # operating costs
@@ -100,6 +134,15 @@ class DefaultProcesses(object):
         return process
 
     def replication(self):
+        """
+        Build replication process.
+
+        Returns
+        -------
+        rba.xml.Process
+            Replication process.
+
+        """
         process = rba.xml.Process('P_REP', 'Replication')
         # operating costs
         operation = rba.xml.Operation('replication', 'dna')
@@ -111,6 +154,15 @@ class DefaultProcesses(object):
         return process
 
     def rna_degradation(self):
+        """
+        Build RNA degradation process.
+
+        Returns
+        -------
+        rba.xml.Process
+            RNA degradation process.
+
+        """
         process = rba.xml.Process('P_RNADEG', 'RNA degradation')
         # operating costs
         operation = rba.xml.Operation('rna_degradation', 'rna')
@@ -122,6 +174,15 @@ class DefaultProcesses(object):
         return process
 
     def metabolite_production(self):
+        """
+        Build metabolite production process.
+
+        Returns
+        -------
+        rba.xml.Process
+            Metabolite production process.
+
+        """
         process = rba.xml.Process('P_MET_PROD', 'Metabolite production')
         # targets
         def_metab = self.default.metabolites
@@ -137,8 +198,21 @@ class DefaultProcesses(object):
                 process.targets.concentrations.append(target)
         return process
 
-    @staticmethod
-    def macrocomponents(macro_fluxes):
+    def macrocomponents(self, macro_fluxes):
+        """
+        Build macrocomponent production process.
+
+        Parameters
+        ----------
+        macro_flux : dict
+            Map from molecule name to production flux.
+
+        Returns
+        -------
+        rba.xml.Process
+            Macrocomponent production process.
+
+        """
         process = rba.xml.Process('P_MACRO_PROD', 'Macrocomponent production')
         for id_, flux in macro_fluxes.items():
             target = rba.xml.TargetSpecies(id_)
@@ -146,8 +220,21 @@ class DefaultProcesses(object):
             process.targets.concentrations.append(target)
         return process
 
-    @staticmethod
-    def maintenance_atp(reaction_name):
+    def maintenance_atp(self, reaction_name):
+        """
+        Build maintenance ATP process.
+
+        Parameters
+        ----------
+        reaction_name : str
+            Name of maintenance ATP reaction.
+
+        Returns
+        -------
+        rba.xml.Process
+            Maintenance ATP process.
+
+        """
         process = rba.xml.Process('P_maintenance_atp', 'Maintenance ATP')
         target = rba.xml.TargetReaction(reaction_name)
         target.lower_bound = 'maintenance_atp'
@@ -155,6 +242,20 @@ class DefaultProcesses(object):
         return process
 
     def translation_map(self, cofactors):
+        """
+        Build translation map.
+
+        Parameters
+        ----------
+        cofactors : list of rba.prerba.uniprot_data.Cofactor
+            Cofactors in the model.
+
+        Returns
+        -------
+        rba.xml.ComponentMap
+            Translation map.
+
+        """
         map_ = rba.xml.ComponentMap('translation')
         def_metabolites = self.default.metabolites
         # constant costs
@@ -195,12 +296,30 @@ class DefaultProcesses(object):
         return map_
 
     def folding_map(self):
+        """
+        Build folding map.
+
+        Returns
+        -------
+        rba.xml.ComponentMap
+            Folding map.
+
+        """
         map_ = rba.xml.ComponentMap('folding')
         for aa in self.default.metabolites.aas:
             map_.costs.append(rba.xml.Cost(aa, 0.1))
         return map_
 
     def transcription_map(self):
+        """
+        Build transcription map.
+
+        Returns
+        -------
+        rba.xml.ComponentMap
+            Transcription map.
+
+        """
         map_ = rba.xml.ComponentMap('transcription')
         for n in self.default.metabolites.nucleotides:
             cost = rba.xml.Cost(n)
@@ -214,6 +333,15 @@ class DefaultProcesses(object):
         return map_
 
     def rna_degradation_map(self):
+        """
+        Build RNA degradation map.
+
+        Returns
+        -------
+        rba.xml.ComponentMap
+            RNA degradation map.
+
+        """
         map_ = rba.xml.ComponentMap('rna_degradation')
         for n in self.default.metabolites.nucleotides:
             cost = rba.xml.Cost(n)
@@ -226,6 +354,15 @@ class DefaultProcesses(object):
         return map_
 
     def replication_map(self):
+        """
+        Build replication map.
+
+        Returns
+        -------
+        rba.xml.ComponentMap
+            Replication map.
+
+        """
         map_ = rba.xml.ComponentMap('replication')
         for n in self.default.metabolites.d_nucleotides:
             cost = rba.xml.Cost(n)
@@ -239,15 +376,29 @@ class DefaultProcesses(object):
         return map_
 
     def _append_metabolite(self, sr_list, key, sto):
-        """
-        Append species reference only if it was mapped to an SBML id.
-        """
+        """Append species reference only if it was mapped to an SBML id."""
         sbml_id = self._metabolites[key].sbml_id
         if sbml_id:
             sr_list.append(rba.xml.SpeciesReference(sbml_id, sto))
 
 
 def aggregates(default_params, compartments):
+    """
+    Build aggregates used by default processes.
+
+    Parameters
+    ----------
+    default_params : rba.prerba.default_data.DefaultParameters
+        Default parameters.
+    compartments : list of str
+        Compartment identifiers.
+
+    Returns
+    -------
+    list of rba.xml.Aggregate
+        Aggregates used by default processes.
+
+    """
     result = []
     result.append(build_aggregate(
         'ribosome_capacity',
@@ -265,6 +416,7 @@ def aggregates(default_params, compartments):
 
 
 def build_aggregate(id_, fn_refs):
+    """Build aggregate with given identifiers and function references."""
     result = rba.xml.Aggregate(id_, 'multiplication')
     for ref in fn_refs:
         result.function_references.append(rba.xml.FunctionReference(ref))
