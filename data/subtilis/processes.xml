@@ -80,10 +80,7 @@
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
         </machineryComposition>
-        <capacity>
-          <functionReference function="ribosome_efficiency_MM"/>
-          <functionReference function="fraction_active_ribosomes"/>
-        </capacity>
+        <capacity value="ribosome_capacity"/>
       </machinery>
       <operations>
         <listOfProductions>
@@ -92,24 +89,9 @@
       </operations>
       <targets>
         <listOfConcentrations>
-          <targetSpecies species="average_protein_c">
-            <functionReference function="amino_acid_concentration"/>
-            <functionReference function="inverse_average_protein_length"/>
-            <functionReference function="fraction_protein_c"/>
-            <functionReference function="fraction_non_enzymatic_protein_c"/>
-          </targetSpecies>
-          <targetSpecies species="average_protein_m">
-            <functionReference function="amino_acid_concentration"/>
-            <functionReference function="inverse_average_protein_length"/>
-            <functionReference function="fraction_protein_m"/>
-            <functionReference function="fraction_non_enzymatic_protein_m"/>
-          </targetSpecies>
-          <targetSpecies species="average_protein_e">
-            <functionReference function="amino_acid_concentration"/>
-            <functionReference function="inverse_average_protein_length"/>
-            <functionReference function="fraction_protein_e"/>
-            <functionReference function="fraction_non_enzymatic_protein_e"/>
-          </targetSpecies>
+          <targetSpecies value="nonenzymatic_proteins_e" species="average_protein_e"/>
+          <targetSpecies value="nonenzymatic_proteins_c" species="average_protein_c"/>
+          <targetSpecies value="nonenzymatic_proteins_m" species="average_protein_m"/>
         </listOfConcentrations>
       </targets>
     </process>
@@ -125,9 +107,7 @@
             <speciesReference species="P0A850" stoichiometry="1.0"/>
           </listOfReactants>
         </machineryComposition>
-        <capacity>
-          <functionReference function="chaperone_efficiency_LM"/>
-        </capacity>
+        <capacity value="chaperone_efficiency_LM"/>
       </machinery>
       <operations>
         <listOfProductions>
@@ -198,10 +178,10 @@
       <targets>
         <listOfConcentrations>
           <targetSpecies value="0.0162" species="M_nad_c"/>
-          <targetSpecies value="0.0047" species="M_amp_c"/>
           <targetSpecies value="0.007" species="M_sprm_c"/>
           <targetSpecies value="0.0144" species="M_p_c"/>
           <targetSpecies value="0.001" species="M_cmp_c"/>
+          <targetSpecies value="0.0047" species="M_amp_c"/>
           <targetSpecies value="0.0004" species="M_fthf_c"/>
           <targetSpecies value="0.7063" species="M_k_c"/>
           <targetSpecies value="0.0005" species="M_ctp_c"/>
@@ -221,21 +201,8 @@
     <process id="P_MACRO_PROD" name="Macrocomponent production"/>
     <process id="P_maintenance_atp" name="Maintenance ATP">
       <targets>
-        <listOfLowerBounds>
-          <targetReaction reaction="R_maintenance_atp">
-            <functionReference function="maintenance_atp"/>
-          </targetReaction>
-        </listOfLowerBounds>
-      </targets>
-    </process>
-    <process id="P_FLAGELLA" name="Flagella activation">
-      <targets>
         <listOfReactionFluxes>
-          <targetReaction reaction="Th_1">
-            <functionReference function="number_flagella"/>
-            <functionReference function="flagella_speed"/>
-            <functionReference function="flagella_h_consumption"/>
-          </targetReaction>
+          <targetReaction lowerBound="maintenance_atp" reaction="R_maintenance_atp"/>
         </listOfReactionFluxes>
       </targets>
     </process>
@@ -518,43 +485,43 @@
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
         </cost>
-        <cost component="CHEBI:57692" processingCost="0"/>
-        <cost component="CHEBI:29035" processingCost="0"/>
-        <cost component="CHEBI:597326" processingCost="0"/>
-        <cost component="CHEBI:18420" processingCost="0"/>
-        <cost component="CHEBI:21137" processingCost="0"/>
-        <cost component="CHEBI:58210" processingCost="0"/>
-        <cost component="CHEBI:29105" processingCost="0"/>
-        <cost component="CHEBI:60342" processingCost="0"/>
-        <cost component="CHEBI:49883" processingCost="0"/>
-        <cost component="CHEBI:57540" processingCost="0"/>
-        <cost component="CHEBI:58937" processingCost="0"/>
-        <cost component="CHEBI:29103" processingCost="0"/>
-        <cost component="CHEBI:48828" processingCost="0"/>
-        <cost component="CHEBI:57783" processingCost="0"/>
-        <cost component="CHEBI:60240" processingCost="0"/>
-        <cost component="CHEBI:17544" processingCost="0"/>
-        <cost component="CHEBI:24875" processingCost="0"/>
-        <cost component="CHEBI:49786" processingCost="0"/>
-        <cost component="CHEBI:60539" processingCost="0"/>
-        <cost component="CHEBI:30413" processingCost="0"/>
-        <cost component="CHEBI:49601" processingCost="0"/>
-        <cost component="CHEBI:15361" processingCost="0"/>
-        <cost component="CHEBI:23378" processingCost="0"/>
-        <cost component="CHEBI:24479" processingCost="0"/>
-        <cost component="CHEBI:25516" processingCost="0"/>
-        <cost component="CHEBI:83088" processingCost="0"/>
-        <cost component="CHEBI:57618" processingCost="0"/>
-        <cost component="CHEBI:28938" processingCost="0"/>
-        <cost component="CHEBI:29036" processingCost="0"/>
-        <cost component="CHEBI:60344" processingCost="0"/>
-        <cost component="CHEBI:62814" processingCost="0"/>
-        <cost component="CHEBI:47942" processingCost="0"/>
-        <cost component="CHEBI:29033" processingCost="0"/>
-        <cost component="CHEBI:60052" processingCost="0"/>
-        <cost component="CHEBI:29108" processingCost="0"/>
-        <cost component="CHEBI:57586" processingCost="0"/>
-        <cost component="CHEBI:71302" processingCost="0"/>
+        <cost component="CHEBI:57540" processingCost="0.0"/>
+        <cost component="CHEBI:29035" processingCost="0.0"/>
+        <cost component="CHEBI:48828" processingCost="0.0"/>
+        <cost component="CHEBI:18420" processingCost="0.0"/>
+        <cost component="CHEBI:597326" processingCost="0.0"/>
+        <cost component="CHEBI:29103" processingCost="0.0"/>
+        <cost component="CHEBI:49883" processingCost="0.0"/>
+        <cost component="CHEBI:29105" processingCost="0.0"/>
+        <cost component="CHEBI:30413" processingCost="0.0"/>
+        <cost component="CHEBI:58937" processingCost="0.0"/>
+        <cost component="CHEBI:28938" processingCost="0.0"/>
+        <cost component="CHEBI:25516" processingCost="0.0"/>
+        <cost component="CHEBI:57692" processingCost="0.0"/>
+        <cost component="CHEBI:60539" processingCost="0.0"/>
+        <cost component="CHEBI:49601" processingCost="0.0"/>
+        <cost component="CHEBI:58210" processingCost="0.0"/>
+        <cost component="CHEBI:57783" processingCost="0.0"/>
+        <cost component="CHEBI:24875" processingCost="0.0"/>
+        <cost component="CHEBI:29033" processingCost="0.0"/>
+        <cost component="CHEBI:29036" processingCost="0.0"/>
+        <cost component="CHEBI:60240" processingCost="0.0"/>
+        <cost component="CHEBI:47942" processingCost="0.0"/>
+        <cost component="CHEBI:49786" processingCost="0.0"/>
+        <cost component="CHEBI:21137" processingCost="0.0"/>
+        <cost component="CHEBI:23378" processingCost="0.0"/>
+        <cost component="CHEBI:83088" processingCost="0.0"/>
+        <cost component="CHEBI:29108" processingCost="0.0"/>
+        <cost component="CHEBI:17544" processingCost="0.0"/>
+        <cost component="CHEBI:24479" processingCost="0.0"/>
+        <cost component="CHEBI:15361" processingCost="0.0"/>
+        <cost component="CHEBI:60342" processingCost="0.0"/>
+        <cost component="CHEBI:60344" processingCost="0.0"/>
+        <cost component="CHEBI:57586" processingCost="0.0"/>
+        <cost component="CHEBI:57618" processingCost="0.0"/>
+        <cost component="CHEBI:71302" processingCost="0.0"/>
+        <cost component="CHEBI:62814" processingCost="0.0"/>
+        <cost component="CHEBI:60052" processingCost="0.0"/>
       </listOfCosts>
     </componentMap>
     <componentMap id="folding">
@@ -585,7 +552,7 @@
     <componentMap id="transcription">
       <constantCost/>
       <listOfCosts>
-        <cost component="A" processingCost="0">
+        <cost component="A" processingCost="0.0">
           <listOfReactants>
             <speciesReference species="M_atp_c" stoichiometry="1"/>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
@@ -595,7 +562,7 @@
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
         </cost>
-        <cost component="C" processingCost="0">
+        <cost component="C" processingCost="0.0">
           <listOfReactants>
             <speciesReference species="M_ctp_c" stoichiometry="1"/>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
@@ -605,7 +572,7 @@
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
         </cost>
-        <cost component="G" processingCost="0">
+        <cost component="G" processingCost="0.0">
           <listOfReactants>
             <speciesReference species="M_gtp_c" stoichiometry="1"/>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
@@ -615,7 +582,7 @@
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
         </cost>
-        <cost component="U" processingCost="0">
+        <cost component="U" processingCost="0.0">
           <listOfReactants>
             <speciesReference species="M_utp_c" stoichiometry="1"/>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
@@ -630,7 +597,7 @@
     <componentMap id="rna_degradation">
       <constantCost/>
       <listOfCosts>
-        <cost component="A" processingCost="0">
+        <cost component="A" processingCost="0.0">
           <listOfReactants>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
           </listOfReactants>
@@ -639,7 +606,7 @@
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
         </cost>
-        <cost component="C" processingCost="0">
+        <cost component="C" processingCost="0.0">
           <listOfReactants>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
           </listOfReactants>
@@ -648,7 +615,7 @@
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
         </cost>
-        <cost component="G" processingCost="0">
+        <cost component="G" processingCost="0.0">
           <listOfReactants>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
           </listOfReactants>
@@ -657,7 +624,7 @@
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
         </cost>
-        <cost component="U" processingCost="0">
+        <cost component="U" processingCost="0.0">
           <listOfReactants>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
           </listOfReactants>
@@ -671,7 +638,7 @@
     <componentMap id="replication">
       <constantCost/>
       <listOfCosts>
-        <cost component="A" processingCost="0">
+        <cost component="A" processingCost="0.0">
           <listOfReactants>
             <speciesReference species="M_datp_c" stoichiometry="1"/>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
@@ -681,7 +648,7 @@
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
         </cost>
-        <cost component="C" processingCost="0">
+        <cost component="C" processingCost="0.0">
           <listOfReactants>
             <speciesReference species="M_dctp_c" stoichiometry="1"/>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
@@ -691,7 +658,7 @@
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
         </cost>
-        <cost component="G" processingCost="0">
+        <cost component="G" processingCost="0.0">
           <listOfReactants>
             <speciesReference species="M_dgtp_c" stoichiometry="1"/>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
@@ -701,7 +668,7 @@
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
         </cost>
-        <cost component="T" processingCost="0">
+        <cost component="T" processingCost="0.0">
           <listOfReactants>
             <speciesReference species="M_dttp_c" stoichiometry="1"/>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>

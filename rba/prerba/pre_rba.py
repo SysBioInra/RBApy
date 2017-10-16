@@ -673,6 +673,7 @@ def protein_data(uniprot, manual, sbml_ids):
         corresponding user locations.
 
     """
+    sbml_ids = [s for s in sbml_ids if s != '']
     sbml_to_user = {}
     for sbml_id, user_id in manual.unknown_proteins.data.data.values:
         sbml_to_user[sbml_id] = sbml_id if pandas.isnull(user_id) else user_id

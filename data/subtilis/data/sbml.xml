@@ -548,8 +548,6 @@
       <species id="M_ca2_e" name="ca2_xt" compartment="e" initialConcentration="10" hasOnlySubstanceUnits="false" boundaryCondition="true" constant="false"/>
       <species id="M_k_e" name="k_xt" compartment="e" initialConcentration="10" hasOnlySubstanceUnits="false" boundaryCondition="true" constant="false"/>
       <species id="M_h2o_e" name="h2o_xt" compartment="e" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="true" constant="false"/>
-      <species id="M_this_e" name="thiS_xt" compartment="e" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="true" constant="false"/>
-      <species id="M_aaacp_e" name="aaacp_xt" compartment="e" initialConcentration="0" hasOnlySubstanceUnits="false" boundaryCondition="true" constant="false"/>
     </listOfSpecies>
     <listOfReactions>
       <reaction id="TptsG" reversible="false">
@@ -8566,9 +8564,6 @@
             <p>GENE_ASSOCIATION: (BSU11680)</p>
           </body>
         </notes>
-        <listOfReactants>
-          <speciesReference species="M_this_e" stoichiometry="1"/>
-        </listOfReactants>
         <listOfProducts>
           <speciesReference species="M_thiscooh_c" stoichiometry="1"/>
         </listOfProducts>
@@ -9671,9 +9666,6 @@
             <p>GENE_ASSOCIATION: (BSU15920)</p>
           </body>
         </notes>
-        <listOfReactants>
-          <speciesReference species="M_aaacp_e" stoichiometry="1"/>
-        </listOfReactants>
         <listOfProducts>
           <speciesReference species="M_aaacp_c" stoichiometry="1"/>
         </listOfProducts>

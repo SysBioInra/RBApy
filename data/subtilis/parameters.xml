@@ -1,11 +1,8 @@
 <RBAParameters>
-  <listOfMaximalDensities>
-    <maximalDensity value="4.8972" compartment="c"/>
-    <maximalDensity compartment="m">
-      <functionReference function="amino_acid_concentration"/>
-      <functionReference function="fraction_protein_m"/>
-    </maximalDensity>
-  </listOfMaximalDensities>
+  <listOfTargetDensities>
+    <targetDensity upperBound="4.8972" compartment="c"/>
+    <targetDensity upperBound="m_density" compartment="m"/>
+  </listOfTargetDensities>
   <listOfFunctions>
     <function id="fraction_protein_c" type="constant">
       <listOfParameters>
@@ -49,7 +46,7 @@
     </function>
     <function id="inverse_average_protein_length" type="constant">
       <listOfParameters>
-        <parameter id="CONSTANT" value="0.00352112676056"/>
+        <parameter id="CONSTANT" value="0.00341790858464"/>
       </listOfParameters>
     </function>
     <function id="amino_acid_concentration" type="linear">
@@ -120,5 +117,42 @@
       </listOfParameters>
     </function>
   </listOfFunctions>
-  <listOfAggregates/>
+  <listOfAggregates>
+    <aggregate id="m_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_m"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="ribosome_capacity" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="ribosome_efficiency_MM"/>
+        <functionReference function="fraction_active_ribosomes"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_e" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_e"/>
+        <functionReference function="fraction_non_enzymatic_protein_e"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_c" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_c"/>
+        <functionReference function="fraction_non_enzymatic_protein_c"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_m" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_m"/>
+        <functionReference function="fraction_non_enzymatic_protein_m"/>
+      </listOfFunctionReferences>
+    </aggregate>
+  </listOfAggregates>
 </RBAParameters>

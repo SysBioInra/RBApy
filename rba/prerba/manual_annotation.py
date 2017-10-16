@@ -110,12 +110,10 @@ class ManualAnnotation(object):
     def print_warnings(self):
         """Print warning for curation files missing information."""
         if self.subunits.data.has_missing_information():
-            print('WARNING: Several uniprot notes were ambiguous. '
-                  'Please read file {}, check data and specify all '
-                  'information tagged as {}. Execution will continue with '
+            print('WARNING: Several uniprot subunit notes were ambiguous. '
+                  'Please read file {}. Execution will continue with '
                   'default values.'
-                  .format(self.subunits.filename,
-                          CurationData.missing_tag))
+                  .format(self.subunits.filename))
         if self.cofactors.data.has_missing_information():
             print('WARNING: Several uniprot notes were ambiguous. '
                   'Please read file {}, check data and specify all '
@@ -128,9 +126,8 @@ class ManualAnnotation(object):
             print('WARNING: Some uniprot locations had no user-defined '
                   'counterpart. Uniprot names will be used. '
                   'If you wish to change the compartment names, please '
-                  'read file {} and specify all information tagged as {}.'
-                  .format(self.location_map.filename,
-                          CurationData.missing_tag))
+                  'modify {}.'
+                  .format(self.location_map.filename))
         if self.locations.data.has_missing_information():
             print('WARNING: Some uniprot locations were missing. '
                   'Execution will continue with default value. '

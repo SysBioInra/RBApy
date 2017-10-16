@@ -505,17 +505,18 @@
         <cost component="CHEBI:49601" processingCost="0.0"/>
         <cost component="CHEBI:58937" processingCost="0.0"/>
         <cost component="CHEBI:57540" processingCost="0.0"/>
+        <cost component="CHEBI:48828" processingCost="0.0"/>
         <cost component="CHEBI:57925" processingCost="0.0"/>
         <cost component="CHEBI:60344" processingCost="0.0"/>
         <cost component="CHEBI:29101" processingCost="0.0"/>
         <cost component="CHEBI:58442" processingCost="0.0"/>
         <cost component="CHEBI:29103" processingCost="0.0"/>
+        <cost component="CHEBI:29033" processingCost="0.0"/>
         <cost component="CHEBI:62814" processingCost="0.0"/>
         <cost component="CHEBI:60052" processingCost="0.0"/>
         <cost component="CHEBI:18408" processingCost="0.0"/>
         <cost component="CHEBI:15361" processingCost="0.0"/>
         <cost component="CHEBI:17544" processingCost="0.0"/>
-        <cost component="CHEBI:29033" processingCost="0.0"/>
         <cost component="CHEBI:23378" processingCost="0.0"/>
         <cost component="CHEBI:71302" processingCost="0.0"/>
         <cost component="CHEBI:79027" processingCost="0.0"/>
@@ -526,7 +527,6 @@
         <cost component="CHEBI:28115" processingCost="0.0"/>
         <cost component="CHEBI:58349" processingCost="0.0"/>
         <cost component="CHEBI:60342" processingCost="0.0"/>
-        <cost component="CHEBI:48828" processingCost="0.0"/>
         <cost component="CHEBI:47942" processingCost="0.0"/>
         <cost component="CHEBI:17996" processingCost="0.0"/>
         <cost component="CHEBI:30408" processingCost="0.0"/>
