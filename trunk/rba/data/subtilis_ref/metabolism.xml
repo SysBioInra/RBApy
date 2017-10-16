@@ -6022,9 +6022,6 @@
       </listOfProducts>
     </reaction>
     <reaction id="EthiS" reversible="false">
-      <listOfReactants>
-        <speciesReference species="M_this_e" stoichiometry="1.0"/>
-      </listOfReactants>
       <listOfProducts>
         <speciesReference species="M_thiscooh_c" stoichiometry="1.0"/>
       </listOfProducts>
@@ -6782,9 +6779,6 @@
       </listOfProducts>
     </reaction>
     <reaction id="EacpA" reversible="false">
-      <listOfReactants>
-        <speciesReference species="M_aaacp_e" stoichiometry="1.0"/>
-      </listOfReactants>
       <listOfProducts>
         <speciesReference species="M_aaacp_c" stoichiometry="1.0"/>
       </listOfProducts>

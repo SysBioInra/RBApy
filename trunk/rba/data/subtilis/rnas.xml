@@ -6,20 +6,172 @@
     <component id="U" name="Uramine residue" type="Nucleotide" weight="2.7102"/>
   </listOfComponents>
   <listOfMacromolecules>
-    <macromolecule id="M_trna2_c" compartment="c">
+    <macromolecule id="M_trna_c" compartment="c">
       <composition>
-        <componentReference component="A" stoichiometry="18.2"/>
-        <componentReference component="C" stoichiometry="22.0"/>
-        <componentReference component="U" stoichiometry="16.4"/>
-        <componentReference component="G" stoichiometry="20.8"/>
+        <componentReference component="A" stoichiometry="17.0"/>
+        <componentReference component="C" stoichiometry="23.0"/>
+        <componentReference component="U" stoichiometry="14.0"/>
+        <componentReference component="G" stoichiometry="23.0"/>
       </composition>
     </macromolecule>
     <macromolecule id="M_trna_c" compartment="c">
       <composition>
-        <componentReference component="A" stoichiometry="15.6"/>
-        <componentReference component="C" stoichiometry="21.6"/>
-        <componentReference component="U" stoichiometry="16.8666666667"/>
-        <componentReference component="G" stoichiometry="23.7333333333"/>
+        <componentReference component="A" stoichiometry="15.0"/>
+        <componentReference component="C" stoichiometry="26.0"/>
+        <componentReference component="U" stoichiometry="12.0"/>
+        <componentReference component="G" stoichiometry="24.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="15.0"/>
+        <componentReference component="C" stoichiometry="21.0"/>
+        <componentReference component="U" stoichiometry="16.0"/>
+        <componentReference component="G" stoichiometry="24.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna2_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="23.0"/>
+        <componentReference component="C" stoichiometry="17.0"/>
+        <componentReference component="U" stoichiometry="21.0"/>
+        <componentReference component="G" stoichiometry="16.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="15.0"/>
+        <componentReference component="C" stoichiometry="21.0"/>
+        <componentReference component="U" stoichiometry="15.0"/>
+        <componentReference component="G" stoichiometry="25.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="16.0"/>
+        <componentReference component="C" stoichiometry="18.0"/>
+        <componentReference component="U" stoichiometry="20.0"/>
+        <componentReference component="G" stoichiometry="22.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna2_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="16.0"/>
+        <componentReference component="C" stoichiometry="21.0"/>
+        <componentReference component="U" stoichiometry="16.0"/>
+        <componentReference component="G" stoichiometry="21.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna2_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="15.0"/>
+        <componentReference component="C" stoichiometry="23.0"/>
+        <componentReference component="U" stoichiometry="16.0"/>
+        <componentReference component="G" stoichiometry="21.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="14.0"/>
+        <componentReference component="C" stoichiometry="21.0"/>
+        <componentReference component="U" stoichiometry="16.0"/>
+        <componentReference component="G" stoichiometry="26.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="16.0"/>
+        <componentReference component="C" stoichiometry="19.0"/>
+        <componentReference component="U" stoichiometry="17.0"/>
+        <componentReference component="G" stoichiometry="25.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="14.0"/>
+        <componentReference component="C" stoichiometry="19.0"/>
+        <componentReference component="U" stoichiometry="22.0"/>
+        <componentReference component="G" stoichiometry="21.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="11.0"/>
+        <componentReference component="C" stoichiometry="22.0"/>
+        <componentReference component="U" stoichiometry="17.0"/>
+        <componentReference component="G" stoichiometry="27.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna2_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="23.0"/>
+        <componentReference component="C" stoichiometry="22.0"/>
+        <componentReference component="U" stoichiometry="16.0"/>
+        <componentReference component="G" stoichiometry="24.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="14.0"/>
+        <componentReference component="C" stoichiometry="21.0"/>
+        <componentReference component="U" stoichiometry="17.0"/>
+        <componentReference component="G" stoichiometry="24.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna2_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="14.0"/>
+        <componentReference component="C" stoichiometry="27.0"/>
+        <componentReference component="U" stoichiometry="13.0"/>
+        <componentReference component="G" stoichiometry="22.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="15.0"/>
+        <componentReference component="C" stoichiometry="22.0"/>
+        <componentReference component="U" stoichiometry="17.0"/>
+        <componentReference component="G" stoichiometry="20.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="17.0"/>
+        <componentReference component="C" stoichiometry="18.0"/>
+        <componentReference component="U" stoichiometry="21.0"/>
+        <componentReference component="G" stoichiometry="20.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="16.0"/>
+        <componentReference component="C" stoichiometry="18.0"/>
+        <componentReference component="U" stoichiometry="20.0"/>
+        <componentReference component="G" stoichiometry="23.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="20.0"/>
+        <componentReference component="C" stoichiometry="28.0"/>
+        <componentReference component="U" stoichiometry="13.0"/>
+        <componentReference component="G" stoichiometry="29.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_trna_c" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="19.0"/>
+        <componentReference component="C" stoichiometry="27.0"/>
+        <componentReference component="U" stoichiometry="16.0"/>
+        <componentReference component="G" stoichiometry="23.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="mrna" compartment="c">
+      <composition>
+        <componentReference component="A" stoichiometry="0.2818"/>
+        <componentReference component="C" stoichiometry="0.2181"/>
+        <componentReference component="U" stoichiometry="0.283"/>
+        <componentReference component="G" stoichiometry="0.2171"/>
       </composition>
     </macromolecule>
     <macromolecule id="rrnO-16S" compartment="c">
@@ -44,14 +196,6 @@
         <componentReference component="C" stoichiometry="31"/>
         <componentReference component="U" stoichiometry="23"/>
         <componentReference component="G" stoichiometry="35"/>
-      </composition>
-    </macromolecule>
-    <macromolecule id="mrna" compartment="c">
-      <composition>
-        <componentReference component="A" stoichiometry="0.2818"/>
-        <componentReference component="C" stoichiometry="0.2181"/>
-        <componentReference component="U" stoichiometry="0.283"/>
-        <componentReference component="G" stoichiometry="0.2171"/>
       </composition>
     </macromolecule>
   </listOfMacromolecules>

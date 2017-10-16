@@ -1,7 +1,7 @@
 """Interface to manual data."""
 
 # python 2/3 compatibility
-from __future__ import division, print_function
+from __future__ import division, print_function, absolute_import
 
 from collections import namedtuple
 import pandas
@@ -173,7 +173,7 @@ class ProteinData(object):
         # update default location (if possible)
         user_default = self.location_map.get(self.default_location, None)
         if not pandas.isnull(user_default):
-            self._default_location = user_default
+            self.default_location = user_default
         # check that all locations are valid
         known_locations = set(self.location_map.values())
         for loc in set(self._locations.values()):
@@ -226,9 +226,11 @@ class ProteinData(object):
         # cofactors
         cofactors = self._cofactors.get(uniprot_id, None)
         if not cofactors:
-            cofactors, to_cure = self._uniprot.find_cofactors(uniprot_line)
+            cofactors, curation_needed \
+                = self._uniprot.find_cofactors(uniprot_line)
             self._cofactors[uniprot_id] = cofactors
-            self._ambiguous.add_cofactors(uniprot_id, to_cure)
+            if curation_needed:
+                self._ambiguous.add_cofactors(uniprot_id, cofactors)
         protein.cofactors = cofactors
         # subunits
         subunits = self._subunits.get(uniprot_id, None)

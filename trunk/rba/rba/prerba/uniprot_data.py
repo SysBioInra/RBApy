@@ -271,7 +271,7 @@ class CofactorParser(object):
             return [], []
         cofactor_notes = field.split('COFACTOR:')[1:]
         cofactors = []
-        cofactors_to_cure = []
+        needs_curation = False
         for note in cofactor_notes:
             # read name(s) and chebi identifier(s) of cofactor(s)
             # if no name was found, indicate chebi and name as missing
@@ -280,10 +280,7 @@ class CofactorParser(object):
                 full_name.append([None, None])
             # extract subnote if possible
             subnotes = self._note_reader.findall(note)
-            if len(subnotes) == 1:
-                subnote = subnotes[0]
-            else:
-                subnote = note
+            subnote = subnotes[0] if len(subnotes) == 1 else note
             # infer stoichiometry:
             #  - nothing read: stoichiometry is implicitly 1
             #  - one value read: use value if can be cast to integer, else
@@ -299,17 +296,16 @@ class CofactorParser(object):
                     stoichiometry = None
             else:
                 stoichiometry = None
+            needs_curation = (
+                needs_curation or
+                (stoichiometry is None
+                 or len(full_name) > 1
+                 or full_name[0][0] is None)
+                )
             # if there are several names, assume stoichiometry
             # is number found earlier for first element of the list
             # and 0 for the rest
-            is_ambiguous = (stoichiometry is None
-                            or len(full_name) > 1
-                            or full_name[0][0] is None)
             for name, chebi in full_name:
-                new_cofactor = Cofactor(chebi, name, stoichiometry, subnote)
-                if is_ambiguous:
-                    cofactors_to_cure.append(new_cofactor)
-                else:
-                    cofactors.append(new_cofactor)
+                cofactors.append(Cofactor(chebi, name, stoichiometry, subnote))
                 stoichiometry = 0
-        return cofactors, cofactors_to_cure
+        return cofactors, needs_curation

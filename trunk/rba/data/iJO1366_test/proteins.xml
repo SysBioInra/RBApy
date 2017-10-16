@@ -37,17 +37,18 @@
     <component id="CHEBI:49601" name="[2Fe-2S] cluster" type="cofactor" weight="0"/>
     <component id="CHEBI:58937" name="thiamine diphosphate" type="cofactor" weight="0"/>
     <component id="CHEBI:57540" name="NAD(+)" type="cofactor" weight="0"/>
+    <component id="CHEBI:48828" name="Co(2+)" type="cofactor" weight="0"/>
     <component id="CHEBI:57925" name="glutathione" type="cofactor" weight="0"/>
     <component id="CHEBI:60344" name="heme b" type="cofactor" weight="0"/>
     <component id="CHEBI:29101" name="Na(+)" type="cofactor" weight="0"/>
     <component id="CHEBI:58442" name="pyrroloquinoline quinone" type="cofactor" weight="0"/>
     <component id="CHEBI:29103" name="K(+)" type="cofactor" weight="0"/>
+    <component id="CHEBI:29033" name="Fe(2+)" type="cofactor" weight="0"/>
     <component id="CHEBI:62814" name="heme d cis-diol" type="cofactor" weight="0"/>
     <component id="CHEBI:60052" name="siroheme" type="cofactor" weight="0"/>
     <component id="CHEBI:18408" name="adenosylcob(III)alamin" type="cofactor" weight="0"/>
     <component id="CHEBI:15361" name="pyruvate" type="cofactor" weight="0"/>
     <component id="CHEBI:17544" name="hydrogencarbonate" type="cofactor" weight="0"/>
-    <component id="CHEBI:29033" name="Fe(2+)" type="cofactor" weight="0"/>
     <component id="CHEBI:23378" name="Cu cation" type="cofactor" weight="0"/>
     <component id="CHEBI:71302" name="Mo-molybdopterin" type="cofactor" weight="0"/>
     <component id="CHEBI:79027" name="L-topaquinone" type="cofactor" weight="0"/>
@@ -58,7 +59,6 @@
     <component id="CHEBI:28115" name="methyl(III)cobalamin" type="cofactor" weight="0"/>
     <component id="CHEBI:58349" name="NADP(+)" type="cofactor" weight="0"/>
     <component id="CHEBI:60342" name="dipyrromethane" type="cofactor" weight="0"/>
-    <component id="CHEBI:48828" name="Co(2+)" type="cofactor" weight="0"/>
     <component id="CHEBI:47942" name="pantetheine 4'-phosphate" type="cofactor" weight="0"/>
     <component id="CHEBI:17996" name="chloride" type="cofactor" weight="0"/>
     <component id="CHEBI:30408" name="iron-sulfur cluster" type="cofactor" weight="0"/>
@@ -735,6 +735,7 @@
         <componentReference component="K" stoichiometry="12"/>
         <componentReference component="M" stoichiometry="9"/>
         <componentReference component="L" stoichiometry="30"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="13"/>
         <componentReference component="Q" stoichiometry="6"/>
         <componentReference component="P" stoichiometry="9"/>
@@ -1000,6 +1001,7 @@
         <componentReference component="K" stoichiometry="25"/>
         <componentReference component="M" stoichiometry="9"/>
         <componentReference component="L" stoichiometry="45"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="24"/>
         <componentReference component="Q" stoichiometry="20"/>
         <componentReference component="P" stoichiometry="13"/>
@@ -1388,6 +1390,7 @@
         <componentReference component="K" stoichiometry="4"/>
         <componentReference component="M" stoichiometry="2"/>
         <componentReference component="L" stoichiometry="10"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="5"/>
         <componentReference component="Q" stoichiometry="6"/>
         <componentReference component="P" stoichiometry="8"/>
@@ -1682,6 +1685,7 @@
         <componentReference component="K" stoichiometry="10"/>
         <componentReference component="M" stoichiometry="8"/>
         <componentReference component="L" stoichiometry="26"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="5"/>
         <componentReference component="Q" stoichiometry="16"/>
         <componentReference component="P" stoichiometry="15"/>
@@ -1973,6 +1977,7 @@
         <componentReference component="K" stoichiometry="40"/>
         <componentReference component="M" stoichiometry="26"/>
         <componentReference component="L" stoichiometry="65"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="30"/>
         <componentReference component="Q" stoichiometry="24"/>
         <componentReference component="P" stoichiometry="46"/>
@@ -2193,6 +2198,7 @@
         <componentReference component="K" stoichiometry="5"/>
         <componentReference component="M" stoichiometry="10"/>
         <componentReference component="L" stoichiometry="18"/>
+        <componentReference component="CHEBI:18420" stoichiometry="2"/>
         <componentReference component="N" stoichiometry="9"/>
         <componentReference component="Q" stoichiometry="5"/>
         <componentReference component="P" stoichiometry="8"/>
@@ -2654,6 +2660,7 @@
         <componentReference component="K" stoichiometry="12"/>
         <componentReference component="M" stoichiometry="12"/>
         <componentReference component="L" stoichiometry="25"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="13"/>
         <componentReference component="Q" stoichiometry="12"/>
         <componentReference component="P" stoichiometry="24"/>
@@ -4128,6 +4135,7 @@
         <componentReference component="W" stoichiometry="4"/>
         <componentReference component="V" stoichiometry="38"/>
         <componentReference component="Y" stoichiometry="9"/>
+        <componentReference component="CHEBI:29105" stoichiometry="2"/>
       </composition>
     </macromolecule>
     <macromolecule id="b2927" compartment="Cytoplasm">
@@ -4215,6 +4223,7 @@
         <componentReference component="K" stoichiometry="24"/>
         <componentReference component="M" stoichiometry="17"/>
         <componentReference component="L" stoichiometry="52"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="30"/>
         <componentReference component="Q" stoichiometry="32"/>
         <componentReference component="P" stoichiometry="29"/>
@@ -4597,6 +4606,7 @@
     </macromolecule>
     <macromolecule id="b3389" compartment="Cytoplasm">
       <composition>
+        <componentReference component="CHEBI:57540" stoichiometry="1"/>
         <componentReference component="A" stoichiometry="39"/>
         <componentReference component="C" stoichiometry="5"/>
         <componentReference component="E" stoichiometry="24"/>
@@ -4617,7 +4627,7 @@
         <componentReference component="W" stoichiometry="2"/>
         <componentReference component="V" stoichiometry="32"/>
         <componentReference component="Y" stoichiometry="9"/>
-        <componentReference component="CHEBI:57540" stoichiometry="1"/>
+        <componentReference component="CHEBI:48828" stoichiometry="1"/>
       </composition>
     </macromolecule>
     <macromolecule id="b2251" compartment="Cytoplasm">
@@ -4883,6 +4893,7 @@
         <componentReference component="W" stoichiometry="1"/>
         <componentReference component="V" stoichiometry="30"/>
         <componentReference component="Y" stoichiometry="10"/>
+        <componentReference component="CHEBI:29105" stoichiometry="1"/>
       </composition>
     </macromolecule>
     <macromolecule id="b0179" compartment="Cytoplasm">
@@ -5278,6 +5289,7 @@
     </macromolecule>
     <macromolecule id="b3957" compartment="Cytoplasm">
       <composition>
+        <componentReference component="CHEBI:57925" stoichiometry="1"/>
         <componentReference component="A" stoichiometry="32"/>
         <componentReference component="C" stoichiometry="8"/>
         <componentReference component="E" stoichiometry="24"/>
@@ -5289,7 +5301,6 @@
         <componentReference component="K" stoichiometry="14"/>
         <componentReference component="M" stoichiometry="7"/>
         <componentReference component="L" stoichiometry="44"/>
-        <componentReference component="CHEBI:57925" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="16"/>
         <componentReference component="Q" stoichiometry="12"/>
         <componentReference component="P" stoichiometry="28"/>
@@ -5299,6 +5310,7 @@
         <componentReference component="W" stoichiometry="4"/>
         <componentReference component="V" stoichiometry="18"/>
         <componentReference component="Y" stoichiometry="10"/>
+        <componentReference component="CHEBI:29105" stoichiometry="2"/>
       </composition>
     </macromolecule>
     <macromolecule id="b3958" compartment="Cytoplasm">
@@ -5628,6 +5640,7 @@
         <componentReference component="K" stoichiometry="23"/>
         <componentReference component="M" stoichiometry="13"/>
         <componentReference component="L" stoichiometry="33"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="12"/>
         <componentReference component="Q" stoichiometry="12"/>
         <componentReference component="P" stoichiometry="20"/>
@@ -5686,6 +5699,7 @@
         <componentReference component="W" stoichiometry="1"/>
         <componentReference component="V" stoichiometry="11"/>
         <componentReference component="Y" stoichiometry="6"/>
+        <componentReference component="CHEBI:48828" stoichiometry="1"/>
       </composition>
     </macromolecule>
     <macromolecule id="b0444" compartment="Cytoplasm">
@@ -5832,6 +5846,7 @@
         <componentReference component="W" stoichiometry="1"/>
         <componentReference component="V" stoichiometry="27"/>
         <componentReference component="Y" stoichiometry="5"/>
+        <componentReference component="CHEBI:29105" stoichiometry="1"/>
       </composition>
     </macromolecule>
     <macromolecule id="b2954" compartment="Cytoplasm">
@@ -5847,6 +5862,7 @@
         <componentReference component="K" stoichiometry="10"/>
         <componentReference component="M" stoichiometry="2"/>
         <componentReference component="L" stoichiometry="23"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="4"/>
         <componentReference component="Q" stoichiometry="7"/>
         <componentReference component="P" stoichiometry="9"/>
@@ -6579,6 +6595,7 @@
         <componentReference component="K" stoichiometry="10"/>
         <componentReference component="M" stoichiometry="8"/>
         <componentReference component="L" stoichiometry="26"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="11"/>
         <componentReference component="Q" stoichiometry="13"/>
         <componentReference component="P" stoichiometry="11"/>
@@ -6734,6 +6751,7 @@
         <componentReference component="W" stoichiometry="3"/>
         <componentReference component="V" stoichiometry="23"/>
         <componentReference component="Y" stoichiometry="5"/>
+        <componentReference component="CHEBI:29035" stoichiometry="1"/>
       </composition>
     </macromolecule>
     <macromolecule id="b2240" compartment="Cell_inner_membrane">
@@ -6797,6 +6815,7 @@
         <componentReference component="K" stoichiometry="23"/>
         <componentReference component="M" stoichiometry="10"/>
         <componentReference component="L" stoichiometry="42"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="18"/>
         <componentReference component="Q" stoichiometry="8"/>
         <componentReference component="P" stoichiometry="12"/>
@@ -7172,6 +7191,7 @@
     </macromolecule>
     <macromolecule id="b0344" compartment="Cytoplasm">
       <composition>
+        <componentReference component="CHEBI:18420" stoichiometry="2"/>
         <componentReference component="A" stoichiometry="77"/>
         <componentReference component="C" stoichiometry="16"/>
         <componentReference component="E" stoichiometry="62"/>
@@ -7994,6 +8014,7 @@
         <componentReference component="W" stoichiometry="6"/>
         <componentReference component="V" stoichiometry="35"/>
         <componentReference component="Y" stoichiometry="10"/>
+        <componentReference component="CHEBI:29105" stoichiometry="2"/>
       </composition>
     </macromolecule>
     <macromolecule id="b4227" compartment="Periplasm">
@@ -8915,6 +8936,7 @@
         <componentReference component="W" stoichiometry="3"/>
         <componentReference component="V" stoichiometry="26"/>
         <componentReference component="Y" stoichiometry="9"/>
+        <componentReference component="CHEBI:29105" stoichiometry="1"/>
       </composition>
     </macromolecule>
     <macromolecule id="b2036" compartment="Cytoplasm">
@@ -9042,6 +9064,7 @@
       <composition>
         <componentReference component="A" stoichiometry="45"/>
         <componentReference component="C" stoichiometry="9"/>
+        <componentReference component="CHEBI:29033" stoichiometry="1"/>
         <componentReference component="E" stoichiometry="29"/>
         <componentReference component="D" stoichiometry="33"/>
         <componentReference component="G" stoichiometry="47"/>
@@ -9976,6 +9999,7 @@
         <componentReference component="K" stoichiometry="7"/>
         <componentReference component="M" stoichiometry="8"/>
         <componentReference component="L" stoichiometry="22"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="8"/>
         <componentReference component="Q" stoichiometry="9"/>
         <componentReference component="P" stoichiometry="11"/>
@@ -10049,6 +10073,7 @@
         <componentReference component="K" stoichiometry="14"/>
         <componentReference component="M" stoichiometry="7"/>
         <componentReference component="L" stoichiometry="57"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="15"/>
         <componentReference component="Q" stoichiometry="32"/>
         <componentReference component="P" stoichiometry="20"/>
@@ -10062,6 +10087,8 @@
     </macromolecule>
     <macromolecule id="b2264" compartment="Cytoplasm">
       <composition>
+        <componentReference component="CHEBI:58937" stoichiometry="1"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="A" stoichiometry="64"/>
         <componentReference component="C" stoichiometry="7"/>
         <componentReference component="E" stoichiometry="31"/>
@@ -10073,7 +10100,6 @@
         <componentReference component="K" stoichiometry="13"/>
         <componentReference component="M" stoichiometry="8"/>
         <componentReference component="L" stoichiometry="68"/>
-        <componentReference component="CHEBI:58937" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="16"/>
         <componentReference component="Q" stoichiometry="36"/>
         <componentReference component="P" stoichiometry="33"/>
@@ -10591,6 +10617,7 @@
         <componentReference component="K" stoichiometry="5"/>
         <componentReference component="M" stoichiometry="7"/>
         <componentReference component="L" stoichiometry="20"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="2"/>
         <componentReference component="Q" stoichiometry="8"/>
         <componentReference component="P" stoichiometry="9"/>
@@ -10865,6 +10892,7 @@
         <componentReference component="W" stoichiometry="10"/>
         <componentReference component="V" stoichiometry="38"/>
         <componentReference component="Y" stoichiometry="16"/>
+        <componentReference component="CHEBI:29035" stoichiometry="1"/>
       </composition>
     </macromolecule>
     <macromolecule id="b0063" compartment="Cytoplasm">
@@ -11282,6 +11310,7 @@
     </macromolecule>
     <macromolecule id="b3996" compartment="Cytoplasm">
       <composition>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="A" stoichiometry="18"/>
         <componentReference component="C" stoichiometry="6"/>
         <componentReference component="E" stoichiometry="22"/>
@@ -11481,6 +11510,8 @@
     </macromolecule>
     <macromolecule id="b2465" compartment="Cytoplasm">
       <composition>
+        <componentReference component="CHEBI:58937" stoichiometry="1"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="A" stoichiometry="76"/>
         <componentReference component="C" stoichiometry="4"/>
         <componentReference component="E" stoichiometry="49"/>
@@ -11492,7 +11523,6 @@
         <componentReference component="K" stoichiometry="38"/>
         <componentReference component="M" stoichiometry="16"/>
         <componentReference component="L" stoichiometry="57"/>
-        <componentReference component="CHEBI:58937" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="25"/>
         <componentReference component="Q" stoichiometry="23"/>
         <componentReference component="P" stoichiometry="35"/>
@@ -12287,6 +12317,7 @@
         <componentReference component="W" stoichiometry="17"/>
         <componentReference component="V" stoichiometry="62"/>
         <componentReference component="Y" stoichiometry="27"/>
+        <componentReference component="CHEBI:23378" stoichiometry="1"/>
         <componentReference component="CHEBI:29108" stoichiometry="2"/>
       </composition>
     </macromolecule>
@@ -12938,6 +12969,7 @@
         <componentReference component="K" stoichiometry="31"/>
         <componentReference component="M" stoichiometry="13"/>
         <componentReference component="L" stoichiometry="31"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="15"/>
         <componentReference component="Q" stoichiometry="11"/>
         <componentReference component="P" stoichiometry="20"/>
@@ -13097,6 +13129,7 @@
         <componentReference component="W" stoichiometry="6"/>
         <componentReference component="V" stoichiometry="12"/>
         <componentReference component="Y" stoichiometry="5"/>
+        <componentReference component="CHEBI:29035" stoichiometry="1"/>
       </composition>
     </macromolecule>
     <macromolecule id="b1528" compartment="Cell_inner_membrane">
@@ -13952,6 +13985,7 @@
         <componentReference component="W" stoichiometry="2"/>
         <componentReference component="V" stoichiometry="12"/>
         <componentReference component="Y" stoichiometry="6"/>
+        <componentReference component="CHEBI:48828" stoichiometry="1"/>
       </composition>
     </macromolecule>
     <macromolecule id="b0112" compartment="Cell_inner_membrane">
@@ -13991,6 +14025,7 @@
         <componentReference component="K" stoichiometry="15"/>
         <componentReference component="M" stoichiometry="19"/>
         <componentReference component="L" stoichiometry="43"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="15"/>
         <componentReference component="Q" stoichiometry="24"/>
         <componentReference component="P" stoichiometry="18"/>
@@ -14919,6 +14954,7 @@
         <componentReference component="K" stoichiometry="18"/>
         <componentReference component="M" stoichiometry="10"/>
         <componentReference component="L" stoichiometry="33"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="12"/>
         <componentReference component="Q" stoichiometry="11"/>
         <componentReference component="P" stoichiometry="17"/>
@@ -14982,6 +15018,7 @@
     </macromolecule>
     <macromolecule id="b2942" compartment="Cytoplasm">
       <composition>
+        <componentReference component="CHEBI:18420" stoichiometry="2"/>
         <componentReference component="A" stoichiometry="38"/>
         <componentReference component="C" stoichiometry="4"/>
         <componentReference component="E" stoichiometry="26"/>
@@ -16296,6 +16333,7 @@
       <composition>
         <componentReference component="A" stoichiometry="39"/>
         <componentReference component="C" stoichiometry="3"/>
+        <componentReference component="CHEBI:29033" stoichiometry="1"/>
         <componentReference component="E" stoichiometry="26"/>
         <componentReference component="D" stoichiometry="23"/>
         <componentReference component="G" stoichiometry="32"/>
@@ -16898,6 +16936,7 @@
         <componentReference component="W" stoichiometry="4"/>
         <componentReference component="V" stoichiometry="8"/>
         <componentReference component="Y" stoichiometry="4"/>
+        <componentReference component="CHEBI:48828" stoichiometry="1"/>
       </composition>
     </macromolecule>
     <macromolecule id="b0151" compartment="Cell_inner_membrane">
@@ -17131,6 +17170,7 @@
         <componentReference component="K" stoichiometry="10"/>
         <componentReference component="M" stoichiometry="3"/>
         <componentReference component="L" stoichiometry="24"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="6"/>
         <componentReference component="Q" stoichiometry="4"/>
         <componentReference component="P" stoichiometry="5"/>
@@ -17660,6 +17700,7 @@
         <componentReference component="I" stoichiometry="17"/>
         <componentReference component="H" stoichiometry="5"/>
         <componentReference component="K" stoichiometry="18"/>
+        <componentReference component="CHEBI:58349" stoichiometry="1"/>
         <componentReference component="M" stoichiometry="7"/>
         <componentReference component="L" stoichiometry="24"/>
         <componentReference component="N" stoichiometry="19"/>
@@ -17889,6 +17930,7 @@
         <componentReference component="W" stoichiometry="6"/>
         <componentReference component="V" stoichiometry="29"/>
         <componentReference component="Y" stoichiometry="6"/>
+        <componentReference component="CHEBI:29105" stoichiometry="2"/>
       </composition>
     </macromolecule>
     <macromolecule id="b1709" compartment="Cell_inner_membrane">
@@ -19074,6 +19116,7 @@
         <componentReference component="K" stoichiometry="16"/>
         <componentReference component="M" stoichiometry="11"/>
         <componentReference component="L" stoichiometry="43"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="8"/>
         <componentReference component="Q" stoichiometry="13"/>
         <componentReference component="P" stoichiometry="13"/>
@@ -19565,6 +19608,7 @@
         <componentReference component="K" stoichiometry="9"/>
         <componentReference component="M" stoichiometry="3"/>
         <componentReference component="L" stoichiometry="26"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="17"/>
         <componentReference component="Q" stoichiometry="14"/>
         <componentReference component="P" stoichiometry="14"/>
@@ -19785,6 +19829,7 @@
         <componentReference component="K" stoichiometry="14"/>
         <componentReference component="M" stoichiometry="11"/>
         <componentReference component="L" stoichiometry="41"/>
+        <componentReference component="CHEBI:18420" stoichiometry="2"/>
         <componentReference component="N" stoichiometry="4"/>
         <componentReference component="Q" stoichiometry="14"/>
         <componentReference component="P" stoichiometry="13"/>
@@ -19890,6 +19935,7 @@
         <componentReference component="W" stoichiometry="2"/>
         <componentReference component="V" stoichiometry="22"/>
         <componentReference component="Y" stoichiometry="8"/>
+        <componentReference component="CHEBI:29105" stoichiometry="1"/>
       </composition>
     </macromolecule>
     <macromolecule id="b2374" compartment="Cytoplasm">
@@ -19977,6 +20023,7 @@
         <componentReference component="K" stoichiometry="6"/>
         <componentReference component="M" stoichiometry="8"/>
         <componentReference component="L" stoichiometry="18"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="10"/>
         <componentReference component="Q" stoichiometry="9"/>
         <componentReference component="P" stoichiometry="10"/>
@@ -20316,6 +20363,7 @@
         <componentReference component="K" stoichiometry="13"/>
         <componentReference component="M" stoichiometry="9"/>
         <componentReference component="L" stoichiometry="35"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="13"/>
         <componentReference component="Q" stoichiometry="13"/>
         <componentReference component="P" stoichiometry="19"/>
@@ -21181,6 +21229,7 @@
     </macromolecule>
     <macromolecule id="b0200" compartment="Cytoplasm">
       <composition>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="A" stoichiometry="20"/>
         <componentReference component="C" stoichiometry="3"/>
         <componentReference component="E" stoichiometry="11"/>
@@ -23096,6 +23145,7 @@
         <componentReference component="K" stoichiometry="13"/>
         <componentReference component="M" stoichiometry="8"/>
         <componentReference component="L" stoichiometry="32"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="10"/>
         <componentReference component="Q" stoichiometry="7"/>
         <componentReference component="P" stoichiometry="13"/>
@@ -23120,6 +23170,7 @@
         <componentReference component="K" stoichiometry="3"/>
         <componentReference component="M" stoichiometry="3"/>
         <componentReference component="L" stoichiometry="14"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="0"/>
         <componentReference component="Q" stoichiometry="9"/>
         <componentReference component="P" stoichiometry="8"/>
@@ -23918,6 +23969,7 @@
         <componentReference component="K" stoichiometry="18"/>
         <componentReference component="M" stoichiometry="6"/>
         <componentReference component="L" stoichiometry="35"/>
+        <componentReference component="CHEBI:18420" stoichiometry="2"/>
         <componentReference component="N" stoichiometry="17"/>
         <componentReference component="Q" stoichiometry="15"/>
         <componentReference component="P" stoichiometry="16"/>
@@ -24029,6 +24081,8 @@
     </macromolecule>
     <macromolecule id="b2935" compartment="Cytoplasm">
       <composition>
+        <componentReference component="CHEBI:58937" stoichiometry="1"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="A" stoichiometry="89"/>
         <componentReference component="C" stoichiometry="5"/>
         <componentReference component="E" stoichiometry="48"/>
@@ -24040,7 +24094,6 @@
         <componentReference component="K" stoichiometry="35"/>
         <componentReference component="M" stoichiometry="22"/>
         <componentReference component="L" stoichiometry="50"/>
-        <componentReference component="CHEBI:58937" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="22"/>
         <componentReference component="Q" stoichiometry="23"/>
         <componentReference component="P" stoichiometry="30"/>
@@ -25258,6 +25311,7 @@
         <componentReference component="K" stoichiometry="6"/>
         <componentReference component="M" stoichiometry="3"/>
         <componentReference component="L" stoichiometry="27"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="7"/>
         <componentReference component="Q" stoichiometry="10"/>
         <componentReference component="P" stoichiometry="13"/>
@@ -26042,6 +26096,7 @@
         <componentReference component="K" stoichiometry="13"/>
         <componentReference component="M" stoichiometry="11"/>
         <componentReference component="L" stoichiometry="32"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="19"/>
         <componentReference component="Q" stoichiometry="16"/>
         <componentReference component="P" stoichiometry="15"/>
@@ -26804,6 +26859,7 @@
         <componentReference component="W" stoichiometry="3"/>
         <componentReference component="V" stoichiometry="19"/>
         <componentReference component="Y" stoichiometry="8"/>
+        <componentReference component="CHEBI:49883" stoichiometry="1"/>
       </composition>
     </macromolecule>
     <macromolecule id="b1244" compartment="Cell_inner_membrane">
@@ -28272,6 +28328,7 @@
         <componentReference component="K" stoichiometry="12"/>
         <componentReference component="M" stoichiometry="13"/>
         <componentReference component="L" stoichiometry="49"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="8"/>
         <componentReference component="Q" stoichiometry="8"/>
         <componentReference component="P" stoichiometry="14"/>
@@ -28329,6 +28386,7 @@
         <componentReference component="W" stoichiometry="0"/>
         <componentReference component="V" stoichiometry="21"/>
         <componentReference component="Y" stoichiometry="6"/>
+        <componentReference component="CHEBI:48828" stoichiometry="1"/>
       </composition>
     </macromolecule>
     <macromolecule id="b2243" compartment="Cell_inner_membrane">
@@ -29764,6 +29822,7 @@
         <componentReference component="K" stoichiometry="6"/>
         <componentReference component="M" stoichiometry="11"/>
         <componentReference component="L" stoichiometry="41"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="6"/>
         <componentReference component="Q" stoichiometry="10"/>
         <componentReference component="P" stoichiometry="11"/>
@@ -30385,6 +30444,8 @@
     </macromolecule>
     <macromolecule id="b1734" compartment="Cytoplasm">
       <composition>
+        <componentReference component="CHEBI:57540" stoichiometry="1"/>
+        <componentReference component="CHEBI:29035" stoichiometry="1"/>
         <componentReference component="A" stoichiometry="33"/>
         <componentReference component="C" stoichiometry="7"/>
         <componentReference component="E" stoichiometry="31"/>
@@ -30405,7 +30466,6 @@
         <componentReference component="W" stoichiometry="4"/>
         <componentReference component="V" stoichiometry="30"/>
         <componentReference component="Y" stoichiometry="15"/>
-        <componentReference component="CHEBI:57540" stoichiometry="1"/>
       </composition>
     </macromolecule>
     <macromolecule id="b0751" compartment="Cell_inner_membrane">
@@ -30994,6 +31054,7 @@
       <composition>
         <componentReference component="A" stoichiometry="35"/>
         <componentReference component="C" stoichiometry="3"/>
+        <componentReference component="CHEBI:29033" stoichiometry="1"/>
         <componentReference component="E" stoichiometry="34"/>
         <componentReference component="D" stoichiometry="28"/>
         <componentReference component="G" stoichiometry="25"/>
@@ -31222,6 +31283,7 @@
         <componentReference component="K" stoichiometry="8"/>
         <componentReference component="M" stoichiometry="10"/>
         <componentReference component="L" stoichiometry="26"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="17"/>
         <componentReference component="Q" stoichiometry="8"/>
         <componentReference component="P" stoichiometry="13"/>
@@ -31564,6 +31626,7 @@
         <componentReference component="K" stoichiometry="19"/>
         <componentReference component="M" stoichiometry="8"/>
         <componentReference component="L" stoichiometry="27"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="17"/>
         <componentReference component="Q" stoichiometry="13"/>
         <componentReference component="P" stoichiometry="10"/>
@@ -32536,6 +32599,7 @@
         <componentReference component="K" stoichiometry="11"/>
         <componentReference component="M" stoichiometry="9"/>
         <componentReference component="L" stoichiometry="26"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="7"/>
         <componentReference component="Q" stoichiometry="11"/>
         <componentReference component="P" stoichiometry="11"/>
@@ -32827,6 +32891,7 @@
         <componentReference component="K" stoichiometry="12"/>
         <componentReference component="M" stoichiometry="3"/>
         <componentReference component="L" stoichiometry="20"/>
+        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="13"/>
         <componentReference component="Q" stoichiometry="10"/>
         <componentReference component="P" stoichiometry="14"/>
