@@ -25,6 +25,7 @@ from rba.prerba import default_processes
 # model imports
 import rba.xml
 from rba.rba_model import RbaModel
+from rba.prerba import protein_export
 
 Metabolite = namedtuple('Metabolite', 'name sbml_id concentration')
 
@@ -58,6 +59,10 @@ class PreRba(object):
         self.default = DefaultData()
         print('Importing user data...')
         self._read_data(parameters)
+        protein_export.export_proteins(
+            os.path.join(parameters['INPUT_DIR'], 'protein_summary.tsv'),
+            self.protein_data
+            )
         print('Building model...')
         self.model = self.build_model()
         self.model.output_dir = parameters['OUTPUT_DIR']
