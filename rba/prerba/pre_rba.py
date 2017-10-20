@@ -13,7 +13,9 @@ import pandas
 from rba.prerba.pipeline_parameters import PipelineParameters
 from rba.prerba import sbml_filter
 from rba.prerba.uniprot_data import UniprotData
-from rba.prerba.manual_annotation import ManualAnnotation
+from rba.prerba.manual_annotation import (
+    CuratedMetabolites, CuratedMacrocomponents
+    )
 from rba.prerba.protein_data import ProteinData
 from rba.prerba.uniprot_importer import UniprotImporter
 from rba.prerba.fasta_parser import FastaParser
@@ -26,8 +28,6 @@ from rba.prerba import default_processes
 import rba.xml
 from rba.rba_model import RbaModel
 from rba.prerba import protein_export
-
-Metabolite = namedtuple('Metabolite', 'name sbml_id concentration')
 
 
 class PreRba(object):
@@ -57,11 +57,10 @@ class PreRba(object):
         parameters = PipelineParameters(parameter_file).parameters
         print('Importing default data...')
         self.default = DefaultData()
-        print('Importing user data...')
         self._read_data(parameters)
         protein_export.export_proteins(
             os.path.join(parameters['INPUT_DIR'], 'protein_summary.tsv'),
-            self.protein_data
+            self.enzymatic_proteins
             )
         print('Building model...')
         self.model = self.build_model()
@@ -83,20 +82,29 @@ class PreRba(object):
         self.sbml_data = sbml_filter.SBMLFilter(
             os.path.join(input_dir, sbml_file), external_ids=external_ids
             )
+        print('Importing Uniprot data and manual annotation...')
+        create_uniprot(os.path.join(input_dir, 'uniprot.csv'), organism_id)
         genes_to_retrieve = []
         for enzyme in self.sbml_data.enzymes:
-            genes_to_retrieve += [g for g in enzyme]
+            genes_to_retrieve += [g for g in enzyme if g != '']
         genes_to_retrieve = list(set(genes_to_retrieve))
-        print('Importing Uniprot data and manual annotation...')
-        uniprot = open_uniprot(os.path.join(input_dir, 'uniprot.csv'),
-                               organism_id)
-        manual = ManualAnnotation(input_dir)
-        self.protein_data, self.protein_stoichiometry, self.location_map \
-            = protein_data(uniprot, manual, genes_to_retrieve)
-        average_protein = uniprot.average_protein_composition()
-        # remove non-standard amino acids
+        self.protein_data = ProteinData(input_dir)
+        self.enzymatic_proteins = {}
+        self.protein_reference = {}
+        for g in genes_to_retrieve:
+            protein, reference = self.protein_data.protein_and_reference(g)
+            if protein:
+                self.enzymatic_proteins[g] = protein
+                self.protein_reference[g] = reference
+            else:
+                # spontaneous reaction or unknown protein
+                if reference:
+                    self.protein_reference[g] = reference
+        # we remove non-standard amino acids from the average composition
+        average_protein = self.protein_data.average_composition()
         self.average_protein = {aa: sto for aa, sto in average_protein.items()
                                 if aa in self.default.metabolites.aas}
+        self.protein_data.update_helper_files()
         self.rna_data = read_trnas(
             os.path.join(input_dir, 'trnas.fasta'),
             )
@@ -107,17 +115,11 @@ class PreRba(object):
             os.path.join(input_dir, 'chaperones.fasta')
             ).entries
         known_species = set([s.id for s in self.sbml_data.species])
+        self.macrocomponents = CuratedMacrocomponents(input_dir,
+                                                      known_species).data
         self.metabolite_map = self.build_metabolite_map(
-            known_species, manual.metabolites, self.cofactors()
+            input_dir, known_species, self.cofactors()
             )
-        self.macrocomponents = {}
-        for met, flux in manual.macrocomponents.data.data.values:
-            if met in known_species:
-                self.macrocomponents[met] = float(flux)
-            else:
-                print('WARNING: in file {}: {} is not a valid SBML species. '
-                      'Line will be ignored.'
-                      .format(manual.macrocomponents.filename, met))
 
     def build_model(self):
         """
@@ -169,48 +171,9 @@ class PreRba(object):
             if id_:
                 reaction.products.append(rba.xml.SpeciesReference(id_, 1))
         metabolism.reactions.append(reaction)
-        for c in self.compartments():
+        for c in self.protein_data.compartments():
             metabolism.compartments.append(rba.xml.Compartment(c))
         return metabolism
-
-    def compartments(self):
-        """
-        Return list of compartment identifiers.
-
-        Returns
-        -------
-        list
-            List of compartment identifiers.
-
-        """
-        compartment_ids = []
-        for uniprot_id, user_id in self.location_map.items():
-            if not pandas.isnull(user_id):
-                compartment_ids.append(user_id)
-            else:
-                compartment_ids.append(uniprot_id.replace(' ', '_'))
-        return list(set(compartment_ids))
-
-    def compartment(self, uniprot_id):
-        """
-        Return compartment corresponding to a given uniprot identifier.
-
-        Parameters
-        ----------
-        uniprot_id: str
-            Valid uniprot compartment identifier (e.g. Cytoplasm, Secreted).
-
-        Returns
-        -------
-        str
-            Model identifier associated with compartment.
-
-        """
-        user_id = self.location_map[uniprot_id]
-        if pandas.isnull(user_id):
-            return uniprot_id.replace(' ', '_')
-        else:
-            return user_id
 
     def build_parameters(self):
         """
@@ -225,9 +188,9 @@ class PreRba(object):
         parameters = rba.xml.RbaParameters()
         def_params = self.default.parameters
         # target densities
-        cytoplasm = self.compartment('Cytoplasm')
-        external = self.compartment('Secreted')
-        other_compartments = self.compartments()
+        cytoplasm = self.protein_data.compartment('Cytoplasm')
+        external = self.protein_data.compartment('Secreted')
+        other_compartments = self.protein_data.compartments()
         other_compartments.remove(cytoplasm)
         other_compartments.remove(external)
         constraints = parameters.target_densities
@@ -277,48 +240,11 @@ class PreRba(object):
         for function in def_params.functions:
             fns.append(function)
         # add aggregates
-        for agg in default_processes.aggregates(def_params,
-                                                self.compartments()):
+        for agg in default_processes.aggregates(
+                def_params, self.protein_data.compartments()
+                ):
             aggregates.append(agg)
         return parameters
-
-    def cofactors(self):
-        """
-        Extract protein cofactors.
-
-        Returns
-        -------
-        list
-            List of cofactors associated with protein in the model. Each
-            cofactor is represented only once.
-
-        """
-        cofactors = []
-        known_ids = set()
-        for protein in self.protein_data.values():
-            for c in protein.cofactors:
-                if c.chebi not in known_ids:
-                    cofactors.append(c)
-                    known_ids.add(c.chebi)
-        return cofactors
-
-    def aa_composition(self, sequence):
-        """
-        Translate sequence into amino acid composition.
-
-        Parameters
-        ----------
-        sequence : str
-            Protein sequence in one-letter format.
-
-        Returns
-        -------
-        dict
-            Dictionary where keys are amino acid identifiers and values the
-            number of times the amino acid appeared in the sequence.
-
-        """
-        return composition(sequence, self.default.metabolites.aas)
 
     def build_proteins(self):
         """
@@ -340,8 +266,8 @@ class PreRba(object):
             proteins.components.append(
                 rba.xml.Component(c.chebi, c.name, 'cofactor', 0)
                 )
-        # user proteins
-        for gene_name, protein in self.protein_data.items():
+        # enzymatic proteins
+        for gene_name, protein in self.enzymatic_proteins.items():
             comp = self.aa_composition(protein.sequence)
             for cofactor in protein.cofactors:
                 comp[cofactor.chebi] = cofactor.stoichiometry
@@ -349,13 +275,13 @@ class PreRba(object):
                 rba.xml.Macromolecule(gene_name, protein.location, comp)
                 )
         # average proteins
-        for compartment in self.compartments():
+        for compartment in self.protein_data.compartments():
+            id_ = self.protein_data.average_protein_id(compartment)
             proteins.macromolecules.append(
-                rba.xml.Macromolecule('average_protein_' + compartment,
-                                      compartment, self.average_protein)
+                rba.xml.Macromolecule(id_, compartment, self.average_protein)
                 )
         # machinery proteins
-        cytoplasm = self.compartment('Cytoplasm')
+        cytoplasm = self.protein_data.compartment('Cytoplasm')
         for molecule in itertools.chain(self.ribosome, self.chaperone):
             if molecule.set_name == 'protein':
                 proteins.macromolecules.append(
@@ -365,27 +291,6 @@ class PreRba(object):
                     )
                 )
         return proteins
-
-    def ntp_composition(self, sequence):
-        """
-        Translate sequence into ntp composition.
-
-        Parameters
-        ----------
-        sequence : str
-            DNA or RNA sequence. If a DNA sequence is provided, all T will
-            be converted to U.
-
-        Returns
-        -------
-        dict
-            Dictionary where keys are ntp identifiers and values the
-            number of times the ntps appeared in the sequence.
-
-        """
-        comp = composition(sequence, 'ACGTU')
-        comp['U'] += comp.pop('T')
-        return comp
 
     def build_rnas(self):
         """
@@ -412,7 +317,7 @@ class PreRba(object):
             rba.xml.Component('U', 'Uramine residue', 'Nucleotide', 2.7102)
             )
         # user rnas
-        cytoplasm = self.compartment('Cytoplasm')
+        cytoplasm = self.protein_data.compartment('Cytoplasm')
         for rna_id, composition in self.rna_data.items():
             user_rna = self.metabolite_map.get(rna_id.upper(), None)
             if user_rna and user_rna.sbml_id:
@@ -429,7 +334,7 @@ class PreRba(object):
             if molecule.set_name == 'rna':
                 rnas.macromolecules.append(rba.xml.Macromolecule(
                     molecule.id, cytoplasm,
-                    self.ntp_composition(molecule.sequence)
+                    ntp_composition(molecule.sequence)
                     ))
         return rnas
 
@@ -454,7 +359,8 @@ class PreRba(object):
         # average DNA
         dna.macromolecules.append(
             rba.xml.Macromolecule(
-                self.default.metabolites.dna, self.compartment('Cytoplasm'),
+                self.default.metabolites.dna,
+                self.protein_data.compartment('Cytoplasm'),
                 {'A': 0.2818, 'C': 0.2181, 'G': 0.2171, 'T': 0.283}
                 )
             )
@@ -471,7 +377,7 @@ class PreRba(object):
 
         """
         enzymes = rba.xml.RbaEnzymes()
-        cytoplasm = self.compartment('Cytoplasm')
+        cytoplasm = self.protein_data.compartment('Cytoplasm')
         # efficiency functions
         # for the moment simply put default value
         default_function = rba.xml.Function('default', 'constant', {})
@@ -493,9 +399,9 @@ class PreRba(object):
             # machinery composition
             reactants = enzyme.machinery_composition.reactants
             for gene in comp:
-                name_sto = self.protein_stoichiometry.get(gene, None)
-                if name_sto:
-                    reactants.append(rba.xml.SpeciesReference(*name_sto))
+                ref = self.protein_reference.get(gene, None)
+                if ref:
+                    reactants.append(rba.xml.SpeciesReference(*ref))
             # base enzymatic activity
             efficiencies = enzyme.enzymatic_activity.enzyme_efficiencies
             if self.sbml_data.has_membrane_enzyme[reaction]:
@@ -532,7 +438,7 @@ class PreRba(object):
         processes = rba.xml.RbaProcesses()
         def_proc = default_processes.DefaultProcesses(self.default,
                                                       self.metabolite_map)
-        compartments = self.compartments()
+        compartments = self.protein_data.compartments()
         # processes
         proc_list = processes.processes
         proc_list.append(def_proc.translation(
@@ -556,16 +462,16 @@ class PreRba(object):
         map_list.append(def_proc.replication_map())
         return processes
 
-    def build_metabolite_map(self, known_species, curated_data, cofactors):
+    def build_metabolite_map(self, input_dir, known_species, cofactors):
         """
         Map internal keys for metabolites with user-defined SBML ids.
 
         Parameters
         ----------
+        input_dir : str
+            Path to directory containing helper files.
         known_species : list of str
             List of valid metabolite identifiers.
-        curated_data : rba.xml.manual_annotation.CurationFile
-            Manual annotation file containing metabolite information.
         cofactors : list of rba.xml.uniprot_data.Cofactor
             List of cofactors.
 
@@ -576,54 +482,68 @@ class PreRba(object):
             values are corresponding user identifiers.
 
         """
-        # build dictionary with curated metabolites
-        curated_metabolites = {}
-        for id_, name, sbml_id, conc in curated_data.data.data.values:
-            if pandas.isnull(sbml_id) or sbml_id in known_species:
-                if pandas.isnull(sbml_id):
-                    sbml_id = None
-                if pandas.isnull(conc) or conc == '':
-                    conc = 0
-                curated_metabolites[id_] = Metabolite(
-                    name, sbml_id, float(conc)
-                    )
-            else:
-                print('ERROR: {} is not a valid metabolite id.'
-                      .format(sbml_id))
-
-        # retrieve items
-        metabolites = {}
-        data_to_cure = []
+        # metabolites to retrieve
         keys, names = self.default.metabolites.process_metabolites()
         cofactor_info = {}
         for cofactor in cofactors:
             cofactor_info.setdefault(cofactor.chebi, cofactor.name)
         keys += list(cofactor_info)
         names += list(cofactor_info.values())
-
+        # look for metabolites
+        curated_data = CuratedMetabolites(input_dir, known_species)
         sbml_lookup = {s.split('_', 1)[1].lower(): s for s in known_species}
         for key, name in zip(keys, names):
             # if curated data is available use it,
             # otherwise try to find sbml id using standard name
-            met = curated_metabolites.get(key, None)
-            if met:
-                metabolites[key] = met
-            else:
+            if key not in curated_data.data:
                 sbml_id = sbml_lookup.get((key + '_c').lower(), None)
                 conc = self.default.metabolites.concentration.get(key, 0)
-                data_to_cure.append((key, name, sbml_id, conc))
-                metabolites[key] = Metabolite(name, sbml_id, conc)
+                curated_data.append(key, name, sbml_id, conc)
+        curated_data.update_file()
+        return curated_data.data
 
-        # store data to cure
-        if data_to_cure:
-            curated_data.data.add(data_to_cure)
-            curated_data.data.write(curated_data.filename)
-        return metabolites
+    def cofactors(self):
+        """
+        Extract protein cofactors.
+
+        Returns
+        -------
+        list
+            List of cofactors associated with protein in the model. Each
+            cofactor is represented only once.
+
+        """
+        cofactors = []
+        known_ids = set()
+        for protein in self.enzymatic_proteins.values():
+            for c in protein.cofactors:
+                if c.chebi not in known_ids:
+                    cofactors.append(c)
+                    known_ids.add(c.chebi)
+        return cofactors
+
+    def aa_composition(self, sequence):
+        """
+        Translate sequence into amino acid composition.
+
+        Parameters
+        ----------
+        sequence : str
+            Protein sequence in one-letter format.
+
+        Returns
+        -------
+        dict
+            Dictionary where keys are amino acid identifiers and values the
+            number of times the amino acid appeared in the sequence.
+
+        """
+        return composition(sequence, self.default.metabolites.aas)
 
 
-def open_uniprot(input_file, organism_id):
+def create_uniprot(input_file, organism_id):
     """
-    Open uniprot file (create it if necessary).
+    Create uniprot file if necessary.
 
     Parameters
     ----------
@@ -631,11 +551,6 @@ def open_uniprot(input_file, organism_id):
         File containing Uniprot data (or where it should be created).
     organism_id : int
         Uniprot organism id to fetch.
-
-    Returns
-    -------
-    rba.xml.uniprot_data.UniprotData
-        Uniprot data.
 
     """
     if not os.path.isfile(input_file):
@@ -645,82 +560,9 @@ def open_uniprot(input_file, organism_id):
         if len(raw_data) == 0:
             raise UserWarning(
                 'Invalid organism, could not retrieve Uniprot data. '
-                'Interrupting execution.'
                 )
         with open(input_file, 'w') as f:
             f.write(raw_data)
-    return UniprotData(input_file)
-
-
-def protein_data(uniprot, manual, sbml_ids):
-    """
-    Retrieve protein information.
-
-    Parameters
-    ----------
-    uniprot : rba.xml.uniprot_data.UniprotData
-        Uniprot data.
-    manual : rba.xml.manual_annotation.ManualAnnotation
-        Manual annotation.
-    sbml_ids : list of str
-        List of genes to retrieve
-
-    Returns
-    -------
-    dict
-        Base protein info. Keys are genes id provided as input, values are
-        rba.xml.protein_data.Protein structures.
-    dict
-        Stoichiometry info. Keys are genes id provided as input, values are
-        tuples (protein_id, stoichiometry).
-    dict
-        Location map. Keys are uniprot ids for locations, values are
-        corresponding user locations.
-
-    """
-    sbml_ids = [s for s in sbml_ids if s != '']
-    sbml_to_user = {}
-    for sbml_id, user_id in manual.unknown_proteins.data.data.values:
-        sbml_to_user[sbml_id] = sbml_id if pandas.isnull(user_id) else user_id
-    protein_data = ProteinData(uniprot, manual)
-    prot_info = {}
-    stoichiometry = {}
-    not_found = []
-    invalid_user_ids = []
-    average_protein = 'average_protein_' + protein_data.default_location
-    for sbml_id in sbml_ids:
-        user_id = sbml_to_user.get(sbml_id, 0)
-        uniprot_id = None
-        if user_id == 0:
-            uniprot_id = uniprot.entry(sbml_id)
-            if not uniprot_id:
-                stoichiometry[sbml_id] = (average_protein, 1)
-                not_found.append((sbml_id, average_protein))
-        else:
-            # check whether id was mapped to a spontaneous reaction,
-            # an average protein or a new gene id
-            if user_id == '' or pandas.isnull(user_id):
-                pass
-            elif user_id.startswith('average_protein_'):
-                stoichiometry[sbml_id] = (user_id, 1)
-            else:
-                uniprot_id = uniprot.entry(user_id)
-                if not uniprot_id:
-                    invalid_user_ids.append(user_id)
-        if uniprot_id:
-            prot = protein_data.find_protein(uniprot_id)
-            prot_info[sbml_id] = prot
-            stoichiometry[sbml_id] = (sbml_id, prot.stoichiometry)
-    protein_data.update_manual_annotation(manual)
-    if not_found:
-        manual.unknown_proteins.data.add(not_found)
-        manual.unknown_proteins.data.write(manual.unknown_proteins.filename)
-    if invalid_user_ids:
-        print('WARNING: {} are invalid protein identifiers. '
-              'Check data provided provided in {}.'
-              .format(', '.join(invalid_user_ids),
-                      manual.unknown_proteins.filename))
-    return prot_info, stoichiometry, protein_data.location_map
 
 
 def composition(sequence, alphabet):
@@ -748,6 +590,28 @@ def composition(sequence, alphabet):
             comp[n] += 1
         except KeyError:
             pass
+    return comp
+
+
+def ntp_composition(sequence):
+    """
+    Translate sequence into ntp composition.
+
+    Parameters
+    ----------
+    sequence : str
+        DNA or RNA sequence. If a DNA sequence is provided, all T will
+        be converted to U.
+
+    Returns
+    -------
+    dict
+        Dictionary where keys are ntp identifiers and values the
+        number of times the ntps appeared in the sequence.
+
+    """
+    comp = composition(sequence, 'ACGTU')
+    comp['U'] += comp.pop('T')
     return comp
 
 

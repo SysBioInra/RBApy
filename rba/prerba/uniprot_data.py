@@ -23,7 +23,7 @@ class UniprotData(object):
 
     """
 
-    def __init__(self, input_file):
+    def __init__(self, input_dir):
         """
         Build from input directory.
 
@@ -33,7 +33,8 @@ class UniprotData(object):
 
         """
         # open uniprot data
-        self.data = pandas.read_csv(input_file, sep='\t')
+        self.data = pandas.read_csv(os.path.join(input_dir, 'uniprot.csv'),
+                                    sep='\t')
         self.data.set_index('Entry', inplace=True)
         # create mapping from gene ids to uniprot ids
         self._gene_to_entry = {}
