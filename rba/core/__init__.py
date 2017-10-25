@@ -2,7 +2,7 @@
 Defines core classes used to solve RBA problem.
 """
 
-from .rba_matrices import RbaMatrices
-from .rba_solver import RbaSolver
+from .constraint_matrix import ConstraintMatrix
+from .solver import Solver
 
-__all__ = ['RbaMatrices', 'RbaSolver']
+__all__ = ['ConstraintMatrix', 'Solver']

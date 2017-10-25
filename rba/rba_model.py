@@ -8,8 +8,9 @@ from os.path import join
 
 # local imports
 import rba.xml
-from rba.core.rba_matrices import RbaMatrices
-from rba.core.rba_solver import RbaSolver
+from rba.core.constraint_matrix import ConstraintMatrix
+from rba.core.solver import Solver
+from rba.results import Results
 
 
 class RbaModel(object):
@@ -118,12 +119,17 @@ class RbaModel(object):
             was found) and matrices next to solution.
 
         """
-        matrices = RbaMatrices(self)
+        matrices = ConstraintMatrix(self)
         if catalytic_function is not None:
-            matrices.set_catalytic_function(catalytic_function)
-        solver = RbaSolver(matrices)
+            matrices._blocks.set_catalytic_function(catalytic_function)
+        solver = Solver(matrices)
         solver.solve()
-        return solver
+        variables = {name: value for name, value in zip(matrices.col_names,
+                                                        solver.X)}
+        dual = {name: value for name, value in zip(matrices.row_names,
+                                                   solver.lambda_)}
+        results = Results(variables, dual, self)
+        return results
 
     def write_files(self, output_dir=None):
         """
