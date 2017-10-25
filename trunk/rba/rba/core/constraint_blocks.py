@@ -1,4 +1,4 @@
-"""Module defining RbaMatrices class."""
+"""Module defining ConstraintBlocks class."""
 
 # python 2/3 compatibility
 from __future__ import division, print_function
@@ -12,7 +12,7 @@ from rba.core.enzymes import Enzymes
 from rba.core.processes import Processes
 
 
-class RbaMatrices(object):
+class ConstraintBlocks(object):
     """
     Class converting RBA data into computing substructures.
 

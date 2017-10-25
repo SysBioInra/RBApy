@@ -13,5 +13,6 @@ if __name__ == '__main__':
         try:
             pre_rba = PreRba(sys.argv[1])
             pre_rba.model.write_files()
-        except UserWarning:
+        except UserWarning as error:
+            print(error.message)
             print('Interrupting Execution')

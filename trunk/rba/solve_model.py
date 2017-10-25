@@ -8,7 +8,6 @@ import sys
 
 # package imports
 import rba
-from rba.post_process import saturating_constraints
 
 
 if __name__ == '__main__':
@@ -22,5 +21,4 @@ if __name__ == '__main__':
             medium = 'default'
 
         model = rba.RbaModel.from_xml(xml_dir)
-        solver = model.solve(medium)
-        # saturating_constraints(solver)
+        results = model.solve(medium)
