@@ -58,7 +58,8 @@ class ConstraintMatrix(object):
         nb_undetermined = len(undetermined_fluxes)
         nb_compartments = len(compartments)
         # column information
-        self.col_names = (reactions + enzymes
+        self.col_names = (reactions
+                          + [e + '_enzyme' for e in enzymes]
                           + [p + '_machinery' for p in processes]
                           + [m + '_flux' for m in undetermined_fluxes])
         self.reaction_cols = numpy.arange(nb_reactions)

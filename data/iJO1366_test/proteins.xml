@@ -10073,7 +10073,6 @@
         <componentReference component="K" stoichiometry="14"/>
         <componentReference component="M" stoichiometry="7"/>
         <componentReference component="L" stoichiometry="57"/>
-        <componentReference component="CHEBI:18420" stoichiometry="1"/>
         <componentReference component="N" stoichiometry="15"/>
         <componentReference component="Q" stoichiometry="32"/>
         <componentReference component="P" stoichiometry="20"/>
@@ -26859,7 +26858,6 @@
         <componentReference component="W" stoichiometry="3"/>
         <componentReference component="V" stoichiometry="19"/>
         <componentReference component="Y" stoichiometry="8"/>
-        <componentReference component="CHEBI:49883" stoichiometry="1"/>
       </composition>
     </macromolecule>
     <macromolecule id="b1244" compartment="Cell_inner_membrane">

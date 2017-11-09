@@ -64,7 +64,6 @@ class Solver(object):
             self.matrix.build_matrices(mu_test)
             lp = self.build_lp()
             lp.solve()
-            print(mu_test, lp.solution.get_status_string())
             if is_feasible(lp):
                 mu_min = mu_test
                 self._store_results(mu_test, lp)

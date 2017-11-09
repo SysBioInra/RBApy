@@ -124,6 +124,7 @@ class RbaModel(object):
             matrices._blocks.set_catalytic_function(catalytic_function)
         solver = Solver(matrices)
         solver.solve()
+        print('Optimal growth rate is {}.'.format(solver.mu_opt))
         variables = {name: value for name, value in zip(matrices.col_names,
                                                         solver.X)}
         dual = {name: value for name, value in zip(matrices.row_names,
