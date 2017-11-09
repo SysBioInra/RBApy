@@ -7,17 +7,26 @@ class Results(object):
     def __init__(self, variables, dual_values, model):
         self.variables = variables
         self.dual_values = dual_values
-        self.reactions = {r.id: r for r in model.metabolism.reactions}
+        self.reactions = {r.id: reaction_string(r)
+                          for r in model.metabolism.reactions}
+        self.enzymes = [e.id for e in model.enzymes.enzymes]
+        self.processes = [p.id for p in model.processes.processes]
         boundary_metabolites = set(m.id for m in model.metabolism.species
                                    if m.boundary_condition)
         self.boundary_reactions = []
-        for id_, r in self.reactions.items():
+        for r in model.metabolism.reactions:
             if any(m.species in boundary_metabolites
                    for m in itertools.chain(r.reactants, r.products)):
-                self.boundary_reactions.append(id_)
+                self.boundary_reactions.append(r.id)
 
     def reaction_fluxes(self):
         return {i: self.variables[i] for i in self.reactions}
+
+    def enzyme_concentrations(self):
+        return {i: self.variables.get(i + '_enzyme', 0) for i in self.enzymes}
+
+    def process_machinery_concentrations(self):
+        return {i: self.variables[i + '_machinery'] for i in self.processes}
 
     def sorted_boundary_fluxes(self):
         """
@@ -43,8 +52,7 @@ class Results(object):
         for reaction in ids:
             flux = self.variables[reaction]
             if flux != 0:
-                result.append((reaction_string(self.reactions[reaction]),
-                               flux))
+                result.append(self.reactions[reaction], flux)
         result.sort(key=lambda x: abs(x[1]), reverse=True)
         return result
 
