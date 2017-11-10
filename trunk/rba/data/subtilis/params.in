@@ -9,7 +9,7 @@
 # stored. Can be asolute path or path relative to where program is RUN (!).  
 ##############################################################################
 
-INPUT_DIR = data/subtilis/data
+INPUT_DIR = data/subtilis_test/data
 
 ##############################################################################
 # SBML_FILE
@@ -36,5 +36,5 @@ ORGANISM_ID = 224308
 # relative to where program is RUN (!).
 ##############################################################################
 
-OUTPUT_DIR = data/subtilis
+OUTPUT_DIR = data/subtilis_test
 

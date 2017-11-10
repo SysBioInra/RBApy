@@ -6,7 +6,7 @@
     <enzyme id="TptsG" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU13890" stoichiometry="1"/>
+          <speciesReference species="BSU13890" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TptsG">
@@ -30,7 +30,7 @@
     <enzyme id="TfruA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU14400" stoichiometry="1"/>
+          <speciesReference species="BSU14400" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TfruA">
@@ -54,10 +54,10 @@
     <enzyme id="TfruLev" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU27070" stoichiometry="1"/>
-          <speciesReference species="BSU27060" stoichiometry="1"/>
-          <speciesReference species="BSU27050" stoichiometry="1"/>
-          <speciesReference species="BSU27040" stoichiometry="1"/>
+          <speciesReference species="BSU27070" stoichiometry="1.0"/>
+          <speciesReference species="BSU27060" stoichiometry="1.0"/>
+          <speciesReference species="BSU27050" stoichiometry="1.0"/>
+          <speciesReference species="BSU27040" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TfruLev">
@@ -81,7 +81,7 @@
     <enzyme id="TmalP" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU08200" stoichiometry="1"/>
+          <speciesReference species="BSU08200" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TmalP">
@@ -105,7 +105,7 @@
     <enzyme id="TsacP" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU38050" stoichiometry="1"/>
+          <speciesReference species="BSU38050" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TsacP">
@@ -129,7 +129,7 @@
     <enzyme id="TmanP" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU12010" stoichiometry="1"/>
+          <speciesReference species="BSU12010" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TmanP">
@@ -177,7 +177,7 @@
     <enzyme id="TtreP" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU07800" stoichiometry="1"/>
+          <speciesReference species="BSU07800" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TtreP">
@@ -201,9 +201,9 @@
     <enzyme id="Tlic" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU38570" stoichiometry="1"/>
-          <speciesReference species="BSU38590" stoichiometry="1"/>
-          <speciesReference species="BSU38580" stoichiometry="1"/>
+          <speciesReference species="BSU38570" stoichiometry="1.0"/>
+          <speciesReference species="BSU38590" stoichiometry="1.0"/>
+          <speciesReference species="BSU38580" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tlic">
@@ -227,9 +227,9 @@
     <enzyme id="Tgmu" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU05820" stoichiometry="1"/>
-          <speciesReference species="BSU05810" stoichiometry="1"/>
-          <speciesReference species="BSU05830" stoichiometry="1"/>
+          <speciesReference species="BSU05820" stoichiometry="1.0"/>
+          <speciesReference species="BSU05810" stoichiometry="1.0"/>
+          <speciesReference species="BSU05830" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tgmu">
@@ -253,7 +253,7 @@
     <enzyme id="TgamP" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU02350" stoichiometry="1"/>
+          <speciesReference species="BSU02350" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TgamP">
@@ -277,7 +277,7 @@
     <enzyme id="TnagP" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU07700" stoichiometry="1"/>
+          <speciesReference species="BSU07700" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TnagP">
@@ -301,7 +301,7 @@
     <enzyme id="TmurP" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU01680" stoichiometry="1"/>
+          <speciesReference species="BSU01680" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TmurP">
@@ -325,7 +325,7 @@
     <enzyme id="TgutP" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU06160" stoichiometry="1"/>
+          <speciesReference species="BSU06160" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TgutP">
@@ -355,7 +355,7 @@
     <enzyme id="TglpF" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU09280" stoichiometry="1"/>
+          <speciesReference species="BSU09280" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TglpF">
@@ -379,7 +379,7 @@
     <enzyme id="TiolF" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU39710" stoichiometry="1"/>
+          <speciesReference species="BSU39710" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TiolF">
@@ -409,10 +409,10 @@
     <enzyme id="Trbs" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU35940" stoichiometry="1"/>
-          <speciesReference species="BSU35960" stoichiometry="1"/>
-          <speciesReference species="BSU35950" stoichiometry="2"/>
-          <speciesReference species="BSU35930" stoichiometry="10"/>
+          <speciesReference species="BSU35940" stoichiometry="1.0"/>
+          <speciesReference species="BSU35960" stoichiometry="1.0"/>
+          <speciesReference species="BSU35950" stoichiometry="1.0"/>
+          <speciesReference species="BSU35930" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Trbs">
@@ -436,7 +436,7 @@
     <enzyme id="TgntP" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU40070" stoichiometry="1"/>
+          <speciesReference species="BSU40070" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TgntP">
@@ -466,7 +466,7 @@
     <enzyme id="TaraE" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU33960" stoichiometry="1"/>
+          <speciesReference species="BSU33960" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TaraE">
@@ -496,8 +496,8 @@
     <enzyme id="TaraPQ" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU28740" stoichiometry="1"/>
-          <speciesReference species="BSU28730" stoichiometry="1"/>
+          <speciesReference species="BSU28740" stoichiometry="1.0"/>
+          <speciesReference species="BSU28730" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TaraPQ">
@@ -521,7 +521,7 @@
     <enzyme id="Tpyr" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tpyr">
@@ -551,7 +551,7 @@
     <enzyme id="TdctP1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU04470" stoichiometry="1"/>
+          <speciesReference species="BSU04470" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TdctP1">
@@ -581,7 +581,7 @@
     <enzyme id="TdctP2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU04470" stoichiometry="1"/>
+          <speciesReference species="BSU04470" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TdctP2">
@@ -611,7 +611,7 @@
     <enzyme id="TcitM" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU07610" stoichiometry="1"/>
+          <speciesReference species="BSU07610" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TcitM">
@@ -647,7 +647,7 @@
     <enzyme id="TcimH1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU38770" stoichiometry="1"/>
+          <speciesReference species="BSU38770" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TcimH1">
@@ -677,7 +677,7 @@
     <enzyme id="Takg" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Takg">
@@ -707,7 +707,7 @@
     <enzyme id="TmaeN" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU31580" stoichiometry="1"/>
+          <speciesReference species="BSU31580" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TmaeN">
@@ -737,7 +737,7 @@
     <enzyme id="TcimH2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU38770" stoichiometry="1"/>
+          <speciesReference species="BSU38770" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TcimH2">
@@ -767,7 +767,7 @@
     <enzyme id="Tack" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tack">
@@ -797,7 +797,7 @@
     <enzyme id="Tact" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tact">
@@ -827,7 +827,7 @@
     <enzyme id="TlctP" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU03060" stoichiometry="1"/>
+          <speciesReference species="BSU03060" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TlctP">
@@ -857,7 +857,7 @@
     <enzyme id="Tform" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tform">
@@ -887,7 +887,7 @@
     <enzyme id="Tala" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU27810" stoichiometry="1"/>
+          <speciesReference species="BSU27810" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tala">
@@ -917,7 +917,7 @@
     <enzyme id="Targ" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU37760" stoichiometry="1"/>
+          <speciesReference species="BSU37760" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Targ">
@@ -947,9 +947,9 @@
     <enzyme id="Targ2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU23960" stoichiometry="1"/>
-          <speciesReference species="BSU23980" stoichiometry="1"/>
-          <speciesReference species="BSU23970" stoichiometry="1"/>
+          <speciesReference species="BSU23960" stoichiometry="1.0"/>
+          <speciesReference species="BSU23980" stoichiometry="1.0"/>
+          <speciesReference species="BSU23970" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Targ2">
@@ -973,7 +973,7 @@
     <enzyme id="Tasn" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tasn">
@@ -1003,7 +1003,7 @@
     <enzyme id="Tasp" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU02340" stoichiometry="1"/>
+          <speciesReference species="BSU02340" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tasp">
@@ -1033,9 +1033,9 @@
     <enzyme id="Tcys" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU03610" stoichiometry="1"/>
-          <speciesReference species="BSU03600" stoichiometry="2"/>
-          <speciesReference species="BSU03590" stoichiometry="2"/>
+          <speciesReference species="BSU03610" stoichiometry="1.0"/>
+          <speciesReference species="BSU03600" stoichiometry="1.0"/>
+          <speciesReference species="BSU03590" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tcys">
@@ -1059,11 +1059,11 @@
     <enzyme id="Tcys2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU29380" stoichiometry="1"/>
-          <speciesReference species="BSU29370" stoichiometry="1"/>
-          <speciesReference species="BSU29360" stoichiometry="1"/>
-          <speciesReference species="BSU29350" stoichiometry="1"/>
-          <speciesReference species="BSU29340" stoichiometry="2"/>
+          <speciesReference species="BSU29380" stoichiometry="1.0"/>
+          <speciesReference species="BSU29370" stoichiometry="1.0"/>
+          <speciesReference species="BSU29360" stoichiometry="1.0"/>
+          <speciesReference species="BSU29350" stoichiometry="1.0"/>
+          <speciesReference species="BSU29340" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tcys2">
@@ -1087,7 +1087,7 @@
     <enzyme id="TglnT" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU02420" stoichiometry="1"/>
+          <speciesReference species="BSU02420" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TglnT">
@@ -1117,10 +1117,10 @@
     <enzyme id="Tgln2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU27460" stoichiometry="1"/>
-          <speciesReference species="BSU27450" stoichiometry="1"/>
-          <speciesReference species="BSU27440" stoichiometry="1"/>
-          <speciesReference species="BSU27430" stoichiometry="2"/>
+          <speciesReference species="BSU27460" stoichiometry="1.0"/>
+          <speciesReference species="BSU27450" stoichiometry="1.0"/>
+          <speciesReference species="BSU27440" stoichiometry="1.0"/>
+          <speciesReference species="BSU27430" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tgln2">
@@ -1174,7 +1174,7 @@
     <enzyme id="Tgly" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tgly">
@@ -1204,7 +1204,7 @@
     <enzyme id="This" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU39390" stoichiometry="1"/>
+          <speciesReference species="BSU39390" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="This">
@@ -1234,7 +1234,7 @@
     <enzyme id="Tile" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU09460" stoichiometry="1"/>
+          <speciesReference species="BSU09460" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tile">
@@ -1264,7 +1264,7 @@
     <enzyme id="Tleu" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU09460" stoichiometry="1"/>
+          <speciesReference species="BSU09460" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tleu">
@@ -1294,7 +1294,7 @@
     <enzyme id="Tlys" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tlys">
@@ -1324,7 +1324,7 @@
     <enzyme id="Tmet" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU09460" stoichiometry="1"/>
+          <speciesReference species="BSU09460" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tmet">
@@ -1354,9 +1354,9 @@
     <enzyme id="Tmet2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU32730" stoichiometry="1"/>
-          <speciesReference species="BSU32740" stoichiometry="2"/>
-          <speciesReference species="BSU32750" stoichiometry="2"/>
+          <speciesReference species="BSU32730" stoichiometry="1.0"/>
+          <speciesReference species="BSU32740" stoichiometry="1.0"/>
+          <speciesReference species="BSU32750" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tmet2">
@@ -1380,7 +1380,7 @@
     <enzyme id="Tphe" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tphe">
@@ -1410,7 +1410,7 @@
     <enzyme id="Tpro" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU03220" stoichiometry="1"/>
+          <speciesReference species="BSU03220" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tpro">
@@ -1440,7 +1440,7 @@
     <enzyme id="Tser" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tser">
@@ -1470,7 +1470,7 @@
     <enzyme id="Tthr" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tthr">
@@ -1500,7 +1500,7 @@
     <enzyme id="Ttrp" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU10010" stoichiometry="1"/>
+          <speciesReference species="BSU10010" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Ttrp">
@@ -1530,7 +1530,7 @@
     <enzyme id="Ttyr" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Ttyr">
@@ -1560,7 +1560,7 @@
     <enzyme id="Tval" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU09460" stoichiometry="1"/>
+          <speciesReference species="BSU09460" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tval">
@@ -1590,7 +1590,7 @@
     <enzyme id="Tade" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tade">
@@ -1620,7 +1620,7 @@
     <enzyme id="TpbuG" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU06370" stoichiometry="1"/>
+          <speciesReference species="BSU06370" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TpbuG">
@@ -1650,7 +1650,7 @@
     <enzyme id="TpbuO" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU29990" stoichiometry="1"/>
+          <speciesReference species="BSU29990" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TpbuO">
@@ -1668,7 +1668,7 @@
               <parameter id="Km" value="0.8"/>
             </listOfParameters>
           </function>
-          <function id="" type="michaelisMenten" variable="M_hxtx_e">
+          <function id="" type="michaelisMenten" variable="M_hxth_e">
             <listOfParameters>
               <parameter id="kmax" value="1"/>
               <parameter id="Km" value="0.8"/>
@@ -1680,7 +1680,7 @@
     <enzyme id="TpbuX" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22060" stoichiometry="1"/>
+          <speciesReference species="BSU22060" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TpbuX">
@@ -1710,7 +1710,7 @@
     <enzyme id="TpyrP" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15480" stoichiometry="1"/>
+          <speciesReference species="BSU15480" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TpyrP">
@@ -1740,7 +1740,7 @@
     <enzyme id="Tado" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU38710" stoichiometry="1"/>
+          <speciesReference species="BSU38710" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tado">
@@ -1770,7 +1770,7 @@
     <enzyme id="Tguo" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU06370" stoichiometry="1"/>
+          <speciesReference species="BSU06370" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tguo">
@@ -1800,7 +1800,7 @@
     <enzyme id="Tino" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU38710" stoichiometry="1"/>
+          <speciesReference species="BSU38710" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tino">
@@ -1830,7 +1830,7 @@
     <enzyme id="Tcto" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU38710" stoichiometry="1"/>
+          <speciesReference species="BSU38710" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tcto">
@@ -1860,7 +1860,7 @@
     <enzyme id="Tdado" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU38710" stoichiometry="1"/>
+          <speciesReference species="BSU38710" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tdado">
@@ -1890,7 +1890,7 @@
     <enzyme id="Turi" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU39410" stoichiometry="1"/>
+          <speciesReference species="BSU39410" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Turi">
@@ -1920,7 +1920,7 @@
     <enzyme id="Tcti" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU39410" stoichiometry="1"/>
+          <speciesReference species="BSU39410" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tcti">
@@ -1950,7 +1950,7 @@
     <enzyme id="Tthy" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU39410" stoichiometry="1"/>
+          <speciesReference species="BSU39410" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tthy">
@@ -1980,7 +1980,7 @@
     <enzyme id="Tdguo" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU39410" stoichiometry="1"/>
+          <speciesReference species="BSU39410" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tdguo">
@@ -2010,7 +2010,7 @@
     <enzyme id="Turt" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU32430" stoichiometry="1"/>
+          <speciesReference species="BSU32430" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Turt">
@@ -2040,7 +2040,7 @@
     <enzyme id="Taloi" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU36470" stoichiometry="1"/>
+          <speciesReference species="BSU36470" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Taloi">
@@ -2070,9 +2070,9 @@
     <enzyme id="Tthi" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU13210" stoichiometry="1"/>
-          <speciesReference species="BSU13220" stoichiometry="2"/>
-          <speciesReference species="BSU13230" stoichiometry="1"/>
+          <speciesReference species="BSU13210" stoichiometry="1.0"/>
+          <speciesReference species="BSU13220" stoichiometry="1.0"/>
+          <speciesReference species="BSU13230" stoichiometry="1.0"/>
           <speciesReference species="BSU13240" stoichiometry="2"/>
         </listOfReactants>
       </machineryComposition>
@@ -2097,10 +2097,10 @@
     <enzyme id="Theme" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU07520" stoichiometry="1"/>
-          <speciesReference species="BSU07510" stoichiometry="1"/>
-          <speciesReference species="BSU07500" stoichiometry="1"/>
-          <speciesReference species="BSU07490" stoichiometry="1"/>
+          <speciesReference species="BSU07520" stoichiometry="1.0"/>
+          <speciesReference species="BSU07510" stoichiometry="1.0"/>
+          <speciesReference species="BSU07500" stoichiometry="1.0"/>
+          <speciesReference species="BSU07490" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Theme">
@@ -2124,7 +2124,7 @@
     <enzyme id="TribU" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU23050" stoichiometry="2"/>
+          <speciesReference species="BSU23050" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TribU">
@@ -2154,7 +2154,7 @@
     <enzyme id="Tfol" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tfol">
@@ -2184,7 +2184,7 @@
     <enzyme id="Tpan" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tpan">
@@ -2214,7 +2214,7 @@
     <enzyme id="Tnia" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tnia">
@@ -2244,7 +2244,7 @@
     <enzyme id="TbioY" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU10370" stoichiometry="1"/>
+          <speciesReference species="BSU10370" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TbioY">
@@ -2287,7 +2287,7 @@
     <enzyme id="Tnh3b" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU36510" stoichiometry="1"/>
+          <speciesReference species="BSU36510" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tnh3b">
@@ -2317,7 +2317,7 @@
     <enzyme id="Tno3" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU03330" stoichiometry="1"/>
+          <speciesReference species="BSU03330" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tno3">
@@ -2347,7 +2347,7 @@
     <enzyme id="Tno2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU38060" stoichiometry="1"/>
+          <speciesReference species="BSU38060" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tno2">
@@ -2377,7 +2377,7 @@
     <enzyme id="Tno2b" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU37320" stoichiometry="1"/>
+          <speciesReference species="BSU37320" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tno2b">
@@ -2420,10 +2420,10 @@
     <enzyme id="Tqox" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU38170" stoichiometry="1"/>
-          <speciesReference species="BSU38160" stoichiometry="1"/>
-          <speciesReference species="BSU38150" stoichiometry="1"/>
-          <speciesReference species="BSU38140" stoichiometry="1"/>
+          <speciesReference species="BSU38170" stoichiometry="1.0"/>
+          <speciesReference species="BSU38160" stoichiometry="1.0"/>
+          <speciesReference species="BSU38150" stoichiometry="1.0"/>
+          <speciesReference species="BSU38140" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tqox">
@@ -2441,8 +2441,8 @@
         <listOfReactants>
           <speciesReference species="BSU38760" stoichiometry="1"/>
           <speciesReference species="BSU38750" stoichiometry="1"/>
-          <speciesReference species="BSU38740" stoichiometry="1"/>
-          <speciesReference species="BSU38730" stoichiometry="1"/>
+          <speciesReference species="BSU38740" stoichiometry="1.0"/>
+          <speciesReference species="BSU38730" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tcyd">
@@ -2458,11 +2458,11 @@
     <enzyme id="Tcta" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU14890" stoichiometry="1"/>
-          <speciesReference species="BSU14900" stoichiometry="1"/>
-          <speciesReference species="BSU14910" stoichiometry="1"/>
-          <speciesReference species="BSU14920" stoichiometry="1"/>
-          <speciesReference species="BSU14930" stoichiometry="1"/>
+          <speciesReference species="BSU14890" stoichiometry="1.0"/>
+          <speciesReference species="BSU14900" stoichiometry="1.0"/>
+          <speciesReference species="BSU14910" stoichiometry="1.0"/>
+          <speciesReference species="BSU14920" stoichiometry="1.0"/>
+          <speciesReference species="BSU14930" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tcta">
@@ -2478,7 +2478,7 @@
     <enzyme id="Tsul" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15580" stoichiometry="1"/>
+          <speciesReference species="BSU15580" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tsul">
@@ -2508,7 +2508,7 @@
     <enzyme id="Tp" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU12840" stoichiometry="1"/>
+          <speciesReference species="BSU12840" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tp">
@@ -2538,11 +2538,11 @@
     <enzyme id="Tp2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU24970" stoichiometry="1"/>
-          <speciesReference species="BSU24960" stoichiometry="1"/>
-          <speciesReference species="BSU24950" stoichiometry="1"/>
-          <speciesReference species="BSU24980" stoichiometry="1"/>
-          <speciesReference species="BSU24990" stoichiometry="1"/>
+          <speciesReference species="BSU24970" stoichiometry="1.0"/>
+          <speciesReference species="BSU24960" stoichiometry="1.0"/>
+          <speciesReference species="BSU24950" stoichiometry="1.0"/>
+          <speciesReference species="BSU24980" stoichiometry="1.0"/>
+          <speciesReference species="BSU24990" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tp2">
@@ -2609,10 +2609,10 @@
     <enzyme id="TfeuABC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU01630" stoichiometry="1"/>
-          <speciesReference species="BSU01620" stoichiometry="1"/>
-          <speciesReference species="BSU01610" stoichiometry="2"/>
-          <speciesReference species="BSU32940" stoichiometry="1"/>
+          <speciesReference species="BSU01630" stoichiometry="1.0"/>
+          <speciesReference species="BSU01620" stoichiometry="1.0"/>
+          <speciesReference species="BSU01610" stoichiometry="1.0"/>
+          <speciesReference species="BSU32940" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TfeuABC">
@@ -2636,8 +2636,8 @@
     <enzyme id="TefeNU" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU38260" stoichiometry="1"/>
-          <speciesReference species="BSU38280" stoichiometry="1"/>
+          <speciesReference species="BSU38260" stoichiometry="1.0"/>
+          <speciesReference species="BSU38280" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TefeNU">
@@ -2661,10 +2661,10 @@
     <enzyme id="Tyfm" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU07520" stoichiometry="1"/>
-          <speciesReference species="BSU07510" stoichiometry="1"/>
-          <speciesReference species="BSU07500" stoichiometry="1"/>
-          <speciesReference species="BSU07490" stoichiometry="1"/>
+          <speciesReference species="BSU07520" stoichiometry="1.0"/>
+          <speciesReference species="BSU07510" stoichiometry="1.0"/>
+          <speciesReference species="BSU07500" stoichiometry="1.0"/>
+          <speciesReference species="BSU07490" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tyfm">
@@ -2694,10 +2694,10 @@
     <enzyme id="Tmnt" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU30770" stoichiometry="1"/>
-          <speciesReference species="BSU30760" stoichiometry="1"/>
-          <speciesReference species="BSU30750" stoichiometry="1"/>
-          <speciesReference species="BSU30740" stoichiometry="1"/>
+          <speciesReference species="BSU30770" stoichiometry="1.0"/>
+          <speciesReference species="BSU30760" stoichiometry="1.0"/>
+          <speciesReference species="BSU30750" stoichiometry="1.0"/>
+          <speciesReference species="BSU30740" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tmnt">
@@ -2721,7 +2721,7 @@
     <enzyme id="TmntH" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU04360" stoichiometry="1"/>
+          <speciesReference species="BSU04360" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TmntH">
@@ -2751,7 +2751,7 @@
     <enzyme id="Tcu2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tcu2">
@@ -2775,9 +2775,9 @@
     <enzyme id="Tadc" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU02850" stoichiometry="1"/>
-          <speciesReference species="BSU02870" stoichiometry="2"/>
-          <speciesReference species="BSU02860" stoichiometry="2"/>
+          <speciesReference species="BSU02850" stoichiometry="1.0"/>
+          <speciesReference species="BSU02870" stoichiometry="1.0"/>
+          <speciesReference species="BSU02860" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tadc">
@@ -2825,7 +2825,7 @@
     <enzyme id="TcitH" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU39060" stoichiometry="1"/>
+          <speciesReference species="BSU39060" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TcitH">
@@ -2861,7 +2861,7 @@
     <enzyme id="TykuT" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU14210" stoichiometry="1"/>
+          <speciesReference species="BSU14210" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="TykuT">
@@ -2885,13 +2885,13 @@
     <enzyme id="Tmrp" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU31600" stoichiometry="1"/>
-          <speciesReference species="BSU31610" stoichiometry="1"/>
-          <speciesReference species="BSU31620" stoichiometry="1"/>
-          <speciesReference species="BSU31630" stoichiometry="1"/>
-          <speciesReference species="BSU31640" stoichiometry="1"/>
-          <speciesReference species="BSU31650" stoichiometry="1"/>
-          <speciesReference species="BSU31660" stoichiometry="1"/>
+          <speciesReference species="BSU31600" stoichiometry="1.0"/>
+          <speciesReference species="BSU31610" stoichiometry="1.0"/>
+          <speciesReference species="BSU31620" stoichiometry="1.0"/>
+          <speciesReference species="BSU31630" stoichiometry="1.0"/>
+          <speciesReference species="BSU31640" stoichiometry="1.0"/>
+          <speciesReference species="BSU31650" stoichiometry="1.0"/>
+          <speciesReference species="BSU31660" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Tmrp">
@@ -2915,7 +2915,7 @@
     <enzyme id="Th" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_m" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Th">
@@ -2958,8 +2958,8 @@
     <enzyme id="EnasBC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU03320" stoichiometry="1"/>
-          <speciesReference species="BSU03310" stoichiometry="1"/>
+          <speciesReference species="BSU03320" stoichiometry="1.0"/>
+          <speciesReference species="BSU03310" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EnasBC">
@@ -2976,7 +2976,7 @@
       <machineryComposition>
         <listOfReactants>
           <speciesReference species="BSU03300" stoichiometry="2"/>
-          <speciesReference species="BSU03290" stoichiometry="1"/>
+          <speciesReference species="BSU03290" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EnasDE">
@@ -2992,7 +2992,7 @@
     <enzyme id="EptsH" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU13900" stoichiometry="1"/>
+          <speciesReference species="BSU13900" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EptsH">
@@ -3024,7 +3024,7 @@
     <enzyme id="EfruB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU14390" stoichiometry="1"/>
+          <speciesReference species="BSU14390" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EfruB">
@@ -3056,7 +3056,7 @@
     <enzyme id="EsacA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU38040" stoichiometry="1"/>
+          <speciesReference species="BSU38040" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EsacA">
@@ -3072,7 +3072,7 @@
     <enzyme id="EmanA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU12020" stoichiometry="1"/>
+          <speciesReference species="BSU12020" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmanA">
@@ -3088,7 +3088,7 @@
     <enzyme id="EmtlD" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU03990" stoichiometry="1"/>
+          <speciesReference species="BSU03990" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmtlD">
@@ -3104,7 +3104,7 @@
     <enzyme id="EtreA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU07810" stoichiometry="1"/>
+          <speciesReference species="BSU07810" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EtreA">
@@ -3120,7 +3120,7 @@
     <enzyme id="ElicH1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU38560" stoichiometry="1"/>
+          <speciesReference species="BSU38560" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="ElicH1">
@@ -3136,7 +3136,7 @@
     <enzyme id="ElicH2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU38560" stoichiometry="1"/>
+          <speciesReference species="BSU38560" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="ElicH2">
@@ -3152,7 +3152,7 @@
     <enzyme id="EglcK" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU24850" stoichiometry="1"/>
+          <speciesReference species="BSU24850" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EglcK">
@@ -3184,7 +3184,7 @@
     <enzyme id="EgmuE" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU05860" stoichiometry="1"/>
+          <speciesReference species="BSU05860" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EgmuE">
@@ -3216,7 +3216,7 @@
     <enzyme id="EglpK" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU09290" stoichiometry="2"/>
+          <speciesReference species="BSU09290" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EglpK">
@@ -3232,7 +3232,7 @@
     <enzyme id="EglpD" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU09300" stoichiometry="1"/>
+          <speciesReference species="BSU09300" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EglpD">
@@ -3264,7 +3264,7 @@
     <enzyme id="EiolE" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU39720" stoichiometry="1"/>
+          <speciesReference species="BSU39720" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EiolE">
@@ -3280,7 +3280,7 @@
     <enzyme id="EiolD" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU39730" stoichiometry="1"/>
+          <speciesReference species="BSU39730" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EiolD">
@@ -3296,7 +3296,7 @@
     <enzyme id="EiolC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU39740" stoichiometry="1"/>
+          <speciesReference species="BSU39740" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EiolC">
@@ -3312,7 +3312,7 @@
     <enzyme id="EiolJ" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU39670" stoichiometry="1"/>
+          <speciesReference species="BSU39670" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EiolJ">
@@ -3344,7 +3344,7 @@
     <enzyme id="EgntK" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU40060" stoichiometry="1"/>
+          <speciesReference species="BSU40060" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EgntK">
@@ -3360,7 +3360,7 @@
     <enzyme id="EaraA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU28800" stoichiometry="1"/>
+          <speciesReference species="BSU28800" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EaraA">
@@ -3376,7 +3376,7 @@
     <enzyme id="EaraB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU28790" stoichiometry="1"/>
+          <speciesReference species="BSU28790" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EaraB">
@@ -3392,7 +3392,7 @@
     <enzyme id="EaraD" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU28780" stoichiometry="1"/>
+          <speciesReference species="BSU28780" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EaraD">
@@ -3440,7 +3440,7 @@
     <enzyme id="Efbp" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU40190" stoichiometry="1"/>
+          <speciesReference species="BSU40190" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Efbp">
@@ -3456,7 +3456,7 @@
     <enzyme id="EglpX" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU37090" stoichiometry="1"/>
+          <speciesReference species="BSU37090" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EglpX">
@@ -3472,7 +3472,7 @@
     <enzyme id="Efba" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU37120" stoichiometry="1"/>
+          <speciesReference species="BSU37120" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Efba">
@@ -3602,7 +3602,7 @@
         <listOfReactants>
           <speciesReference species="BSU14580" stoichiometry="1"/>
           <speciesReference species="BSU14590" stoichiometry="1"/>
-          <speciesReference species="BSU14600" stoichiometry="24"/>
+          <speciesReference species="BSU14600" stoichiometry="1.0"/>
           <speciesReference species="BSU14610" stoichiometry="2"/>
         </listOfReactants>
       </machineryComposition>
@@ -3619,7 +3619,7 @@
     <enzyme id="Epta" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU37660" stoichiometry="1"/>
+          <speciesReference species="BSU37660" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Epta">
@@ -3651,7 +3651,7 @@
     <enzyme id="EacsA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU29680" stoichiometry="1"/>
+          <speciesReference species="BSU29680" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EacsA">
@@ -3667,7 +3667,7 @@
     <enzyme id="EdhaS" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU19310" stoichiometry="1"/>
+          <speciesReference species="BSU19310" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EdhaS">
@@ -3699,7 +3699,7 @@
     <enzyme id="EalsS" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU36010" stoichiometry="1"/>
+          <speciesReference species="BSU36010" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EalsS">
@@ -3715,7 +3715,7 @@
     <enzyme id="EalsD" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU36000" stoichiometry="1"/>
+          <speciesReference species="BSU36000" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EalsD">
@@ -3731,9 +3731,9 @@
     <enzyme id="Eaco" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU08060" stoichiometry="2"/>
-          <speciesReference species="BSU08070" stoichiometry="2"/>
-          <speciesReference species="BSU08080" stoichiometry="1"/>
+          <speciesReference species="BSU08060" stoichiometry="1.0"/>
+          <speciesReference species="BSU08070" stoichiometry="1.0"/>
+          <speciesReference species="BSU08080" stoichiometry="1.0"/>
           <speciesReference species="BSU08090" stoichiometry="2"/>
         </listOfReactants>
       </machineryComposition>
@@ -3750,7 +3750,7 @@
     <enzyme id="Ezwf" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU23850" stoichiometry="1"/>
+          <speciesReference species="BSU23850" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Ezwf">
@@ -3782,7 +3782,7 @@
     <enzyme id="EywlF" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU36920" stoichiometry="1"/>
+          <speciesReference species="BSU36920" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EywlF">
@@ -3798,7 +3798,7 @@
     <enzyme id="Erpe" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15790" stoichiometry="1"/>
+          <speciesReference species="BSU15790" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Erpe">
@@ -3830,7 +3830,7 @@
     <enzyme id="EywjH" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU37110" stoichiometry="1"/>
+          <speciesReference species="BSU37110" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EywjH">
@@ -3927,7 +3927,7 @@
       <machineryComposition>
         <listOfReactants>
           <speciesReference species="BSU19370" stoichiometry="2"/>
-          <speciesReference species="BSU19360" stoichiometry="24"/>
+          <speciesReference species="BSU19360" stoichiometry="1.0"/>
           <speciesReference species="BSU14610" stoichiometry="2"/>
         </listOfReactants>
       </machineryComposition>
@@ -3944,8 +3944,8 @@
     <enzyme id="Esuc" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU16090" stoichiometry="2"/>
-          <speciesReference species="BSU16100" stoichiometry="2"/>
+          <speciesReference species="BSU16090" stoichiometry="1.0"/>
+          <speciesReference species="BSU16100" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Esuc">
@@ -3961,9 +3961,9 @@
     <enzyme id="Esdh" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU28440" stoichiometry="1"/>
-          <speciesReference species="BSU28430" stoichiometry="1"/>
-          <speciesReference species="BSU28450" stoichiometry="1"/>
+          <speciesReference species="BSU28440" stoichiometry="1.0"/>
+          <speciesReference species="BSU28430" stoichiometry="1.0"/>
+          <speciesReference species="BSU28450" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Esdh">
@@ -4003,7 +4003,7 @@
     <enzyme id="Emdh" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU29120" stoichiometry="1"/>
+          <speciesReference species="BSU29120" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Emdh">
@@ -4019,7 +4019,7 @@
     <enzyme id="Epck" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU30560" stoichiometry="1"/>
+          <speciesReference species="BSU30560" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Epck">
@@ -4035,7 +4035,7 @@
     <enzyme id="EmalS" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU29880" stoichiometry="1"/>
+          <speciesReference species="BSU29880" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmalS">
@@ -4051,7 +4051,7 @@
     <enzyme id="EmaeA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU37050" stoichiometry="1"/>
+          <speciesReference species="BSU37050" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmaeA">
@@ -4067,7 +4067,7 @@
     <enzyme id="EmleA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU23550" stoichiometry="1"/>
+          <speciesReference species="BSU23550" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmleA">
@@ -4083,7 +4083,7 @@
     <enzyme id="EytsJ" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU29220" stoichiometry="1"/>
+          <speciesReference species="BSU29220" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EytsJ">
@@ -4099,7 +4099,7 @@
     <enzyme id="Eprs" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU00510" stoichiometry="6"/>
+          <speciesReference species="BSU00510" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Eprs">
@@ -4131,7 +4131,7 @@
     <enzyme id="EpurD" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU06530" stoichiometry="1"/>
+          <speciesReference species="BSU06530" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpurD">
@@ -4147,7 +4147,7 @@
     <enzyme id="EpurN" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU06510" stoichiometry="1"/>
+          <speciesReference species="BSU06510" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpurN">
@@ -4164,7 +4164,7 @@
       <machineryComposition>
         <listOfReactants>
           <speciesReference species="BSU06480" stoichiometry="1"/>
-          <speciesReference species="BSU06470" stoichiometry="1"/>
+          <speciesReference species="BSU06470" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpurLQ">
@@ -4180,7 +4180,7 @@
     <enzyme id="EpurM" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU06500" stoichiometry="1"/>
+          <speciesReference species="BSU06500" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpurM">
@@ -4196,7 +4196,7 @@
     <enzyme id="EpurEK" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU06420" stoichiometry="1"/>
+          <speciesReference species="BSU06420" stoichiometry="1.0"/>
           <speciesReference species="BSU06430" stoichiometry="2"/>
         </listOfReactants>
       </machineryComposition>
@@ -4213,7 +4213,7 @@
     <enzyme id="EpurC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU06450" stoichiometry="1"/>
+          <speciesReference species="BSU06450" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpurC">
@@ -4245,7 +4245,7 @@
     <enzyme id="EpurH" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU06520" stoichiometry="1"/>
+          <speciesReference species="BSU06520" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpurH">
@@ -4341,7 +4341,7 @@
     <enzyme id="EguaC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU32130" stoichiometry="1"/>
+          <speciesReference species="BSU32130" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EguaC">
@@ -4357,7 +4357,7 @@
     <enzyme id="Egdp" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15680" stoichiometry="1"/>
+          <speciesReference species="BSU15680" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Egdp">
@@ -4389,8 +4389,8 @@
     <enzyme id="EpyrAB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15510" stoichiometry="1"/>
-          <speciesReference species="BSU15520" stoichiometry="1"/>
+          <speciesReference species="BSU15510" stoichiometry="1.0"/>
+          <speciesReference species="BSU15520" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpyrAB">
@@ -4438,8 +4438,8 @@
     <enzyme id="EpyrKD" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15530" stoichiometry="2"/>
-          <speciesReference species="BSU15540" stoichiometry="2"/>
+          <speciesReference species="BSU15530" stoichiometry="1.0"/>
+          <speciesReference species="BSU15540" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpyrKD">
@@ -4503,7 +4503,7 @@
     <enzyme id="Ecmk2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22890" stoichiometry="1"/>
+          <speciesReference species="BSU22890" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Ecmk2">
@@ -4567,9 +4567,9 @@
     <enzyme id="Enrd1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU17380" stoichiometry="2"/>
-          <speciesReference species="BSU17390" stoichiometry="2"/>
-          <speciesReference species="BSU17370" stoichiometry="1"/>
+          <speciesReference species="BSU17380" stoichiometry="1.0"/>
+          <speciesReference species="BSU17390" stoichiometry="1.0"/>
+          <speciesReference species="BSU17370" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Enrd1">
@@ -4585,9 +4585,9 @@
     <enzyme id="Enrd2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU17380" stoichiometry="2"/>
-          <speciesReference species="BSU17390" stoichiometry="2"/>
-          <speciesReference species="BSU17370" stoichiometry="1"/>
+          <speciesReference species="BSU17380" stoichiometry="1.0"/>
+          <speciesReference species="BSU17390" stoichiometry="1.0"/>
+          <speciesReference species="BSU17370" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Enrd2">
@@ -4603,9 +4603,9 @@
     <enzyme id="Enrd3" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU17380" stoichiometry="2"/>
-          <speciesReference species="BSU17390" stoichiometry="2"/>
-          <speciesReference species="BSU17370" stoichiometry="1"/>
+          <speciesReference species="BSU17380" stoichiometry="1.0"/>
+          <speciesReference species="BSU17390" stoichiometry="1.0"/>
+          <speciesReference species="BSU17370" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Enrd3">
@@ -4621,9 +4621,9 @@
     <enzyme id="Enrd4" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU17380" stoichiometry="2"/>
-          <speciesReference species="BSU17390" stoichiometry="2"/>
-          <speciesReference species="BSU17370" stoichiometry="1"/>
+          <speciesReference species="BSU17380" stoichiometry="1.0"/>
+          <speciesReference species="BSU17390" stoichiometry="1.0"/>
+          <speciesReference species="BSU17370" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Enrd4">
@@ -4639,7 +4639,7 @@
     <enzyme id="Egmk2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15680" stoichiometry="1"/>
+          <speciesReference species="BSU15680" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Egmk2">
@@ -4671,7 +4671,7 @@
     <enzyme id="Ecmk3" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22890" stoichiometry="1"/>
+          <speciesReference species="BSU22890" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Ecmk3">
@@ -4687,7 +4687,7 @@
     <enzyme id="Ecmk4" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22890" stoichiometry="1"/>
+          <speciesReference species="BSU22890" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Ecmk4">
@@ -4719,7 +4719,7 @@
     <enzyme id="EcomEB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU25580" stoichiometry="1"/>
+          <speciesReference species="BSU25580" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EcomEB">
@@ -4735,7 +4735,7 @@
     <enzyme id="Etmk" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU00280" stoichiometry="1"/>
+          <speciesReference species="BSU00280" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Etmk">
@@ -4831,7 +4831,7 @@
     <enzyme id="Endh" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU12290" stoichiometry="1"/>
+          <speciesReference species="BSU12290" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Endh">
@@ -4847,7 +4847,7 @@
     <enzyme id="EyutJ" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU32200" stoichiometry="1"/>
+          <speciesReference species="BSU32200" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EyutJ">
@@ -4863,9 +4863,9 @@
     <enzyme id="Eqcr" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22560" stoichiometry="1"/>
-          <speciesReference species="BSU22550" stoichiometry="1"/>
-          <speciesReference species="BSU22540" stoichiometry="1"/>
+          <speciesReference species="BSU22560" stoichiometry="1.0"/>
+          <speciesReference species="BSU22550" stoichiometry="1.0"/>
+          <speciesReference species="BSU22540" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Eqcr">
@@ -4881,10 +4881,10 @@
     <enzyme id="Enar" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU37280" stoichiometry="1"/>
-          <speciesReference species="BSU37270" stoichiometry="1"/>
-          <speciesReference species="BSU37260" stoichiometry="1"/>
-          <speciesReference species="BSU37250" stoichiometry="1"/>
+          <speciesReference species="BSU37280" stoichiometry="1.0"/>
+          <speciesReference species="BSU37270" stoichiometry="1.0"/>
+          <speciesReference species="BSU37260" stoichiometry="1.0"/>
+          <speciesReference species="BSU37250" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Enar">
@@ -4900,14 +4900,14 @@
     <enzyme id="Eatp" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU36870" stoichiometry="1"/>
-          <speciesReference species="BSU36860" stoichiometry="1"/>
-          <speciesReference species="BSU36850" stoichiometry="1"/>
-          <speciesReference species="BSU36840" stoichiometry="1"/>
-          <speciesReference species="BSU36830" stoichiometry="1"/>
-          <speciesReference species="BSU36820" stoichiometry="1"/>
-          <speciesReference species="BSU36810" stoichiometry="1"/>
-          <speciesReference species="BSU36800" stoichiometry="1"/>
+          <speciesReference species="BSU36870" stoichiometry="1.0"/>
+          <speciesReference species="BSU36860" stoichiometry="1.0"/>
+          <speciesReference species="BSU36850" stoichiometry="1.0"/>
+          <speciesReference species="BSU36840" stoichiometry="1.0"/>
+          <speciesReference species="BSU36830" stoichiometry="1.0"/>
+          <speciesReference species="BSU36820" stoichiometry="1.0"/>
+          <speciesReference species="BSU36810" stoichiometry="1.0"/>
+          <speciesReference species="BSU36800" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Eatp">
@@ -4947,7 +4947,7 @@
     <enzyme id="EytiB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU30690" stoichiometry="1"/>
+          <speciesReference species="BSU30690" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EytiB">
@@ -4963,7 +4963,7 @@
     <enzyme id="EkatA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU08820" stoichiometry="1"/>
+          <speciesReference species="BSU08820" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EkatA">
@@ -4995,7 +4995,7 @@
     <enzyme id="EalaT" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU31400" stoichiometry="1"/>
+          <speciesReference species="BSU31400" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EalaT">
@@ -5011,7 +5011,7 @@
     <enzyme id="EalaS" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU27410" stoichiometry="1"/>
+          <speciesReference species="BSU27410" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EalaS">
@@ -5027,7 +5027,7 @@
     <enzyme id="Ealr" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU04640" stoichiometry="1"/>
+          <speciesReference species="BSU04640" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Ealr">
@@ -5043,7 +5043,7 @@
     <enzyme id="Eddl" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU04560" stoichiometry="1"/>
+          <speciesReference species="BSU04560" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Eddl">
@@ -5059,7 +5059,7 @@
     <enzyme id="EargJ" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU11200" stoichiometry="2"/>
+          <speciesReference species="BSU11200" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EargJ">
@@ -5075,7 +5075,7 @@
     <enzyme id="EargB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU11210" stoichiometry="1"/>
+          <speciesReference species="BSU11210" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EargB">
@@ -5091,7 +5091,7 @@
     <enzyme id="EargC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU11190" stoichiometry="1"/>
+          <speciesReference species="BSU11190" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EargC">
@@ -5123,7 +5123,7 @@
     <enzyme id="EargJ2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU11200" stoichiometry="2"/>
+          <speciesReference species="BSU11200" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EargJ2">
@@ -5139,8 +5139,8 @@
     <enzyme id="EcarAB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU11230" stoichiometry="1"/>
-          <speciesReference species="BSU11240" stoichiometry="1"/>
+          <speciesReference species="BSU11230" stoichiometry="1.0"/>
+          <speciesReference species="BSU11240" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EcarAB">
@@ -5156,7 +5156,7 @@
     <enzyme id="EargF" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU11250" stoichiometry="1"/>
+          <speciesReference species="BSU11250" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EargF">
@@ -5188,7 +5188,7 @@
     <enzyme id="EargH" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU29440" stoichiometry="1"/>
+          <speciesReference species="BSU29440" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EargH">
@@ -5220,7 +5220,7 @@
     <enzyme id="EasnB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU30540" stoichiometry="1"/>
+          <speciesReference species="BSU30540" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EasnB">
@@ -5284,7 +5284,7 @@
     <enzyme id="Esat" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15590" stoichiometry="1"/>
+          <speciesReference species="BSU15590" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Esat">
@@ -5300,7 +5300,7 @@
     <enzyme id="EcysC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15600" stoichiometry="1"/>
+          <speciesReference species="BSU15600" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EcysC">
@@ -5316,7 +5316,7 @@
     <enzyme id="EcysH" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15570" stoichiometry="1"/>
+          <speciesReference species="BSU15570" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EcysH">
@@ -5332,7 +5332,7 @@
     <enzyme id="Ecxx" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Ecxx">
@@ -5348,8 +5348,8 @@
     <enzyme id="EcysJI" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU33440" stoichiometry="8"/>
-          <speciesReference species="BSU33430" stoichiometry="8"/>
+          <speciesReference species="BSU33440" stoichiometry="1.0"/>
+          <speciesReference species="BSU33430" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EcysJI">
@@ -5365,7 +5365,7 @@
     <enzyme id="Exxx" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Exxx">
@@ -5381,7 +5381,7 @@
     <enzyme id="EcysE" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU00930" stoichiometry="1"/>
+          <speciesReference species="BSU00930" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EcysE">
@@ -5413,7 +5413,7 @@
     <enzyme id="EyrrT" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU27280" stoichiometry="1"/>
+          <speciesReference species="BSU27280" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EyrrT">
@@ -5429,7 +5429,7 @@
     <enzyme id="EmtnN" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU27270" stoichiometry="1"/>
+          <speciesReference species="BSU27270" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmtnN">
@@ -5461,7 +5461,7 @@
     <enzyme id="EmccA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU27260" stoichiometry="1"/>
+          <speciesReference species="BSU27260" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmccA">
@@ -5477,7 +5477,7 @@
     <enzyme id="EmccB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU27250" stoichiometry="1"/>
+          <speciesReference species="BSU27250" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmccB">
@@ -5509,7 +5509,7 @@
     <enzyme id="Egln" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU17460" stoichiometry="12"/>
+          <speciesReference species="BSU17460" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Egln">
@@ -5525,9 +5525,9 @@
     <enzyme id="EglnS" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU06680" stoichiometry="1"/>
-          <speciesReference species="BSU06690" stoichiometry="1"/>
-          <speciesReference species="BSU06670" stoichiometry="1"/>
+          <speciesReference species="BSU06680" stoichiometry="1.0"/>
+          <speciesReference species="BSU06690" stoichiometry="1.0"/>
+          <speciesReference species="BSU06670" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EglnS">
@@ -5543,8 +5543,8 @@
     <enzyme id="Eglt" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU18450" stoichiometry="1"/>
-          <speciesReference species="BSU18440" stoichiometry="4"/>
+          <speciesReference species="BSU18450" stoichiometry="1.0"/>
+          <speciesReference species="BSU18440" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Eglt">
@@ -5576,7 +5576,7 @@
     <enzyme id="EracE" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU28390" stoichiometry="1"/>
+          <speciesReference species="BSU28390" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EracE">
@@ -5608,8 +5608,8 @@
     <enzyme id="EglyQS" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU25270" stoichiometry="2"/>
-          <speciesReference species="BSU25260" stoichiometry="2"/>
+          <speciesReference species="BSU25270" stoichiometry="1.0"/>
+          <speciesReference species="BSU25260" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EglyQS">
@@ -5625,7 +5625,7 @@
     <enzyme id="EhisG" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU34920" stoichiometry="2"/>
+          <speciesReference species="BSU34920" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EhisG">
@@ -5641,7 +5641,7 @@
     <enzyme id="EhisI" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU34860" stoichiometry="1"/>
+          <speciesReference species="BSU34860" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EhisI">
@@ -5657,7 +5657,7 @@
     <enzyme id="EhisA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU34880" stoichiometry="1"/>
+          <speciesReference species="BSU34880" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EhisA">
@@ -5690,7 +5690,7 @@
     <enzyme id="EhisB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU34900" stoichiometry="1"/>
+          <speciesReference species="BSU34900" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EhisB">
@@ -5722,7 +5722,7 @@
     <enzyme id="EhisJ" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU29620" stoichiometry="1"/>
+          <speciesReference species="BSU29620" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EhisJ">
@@ -5738,7 +5738,7 @@
     <enzyme id="EhisD1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU34910" stoichiometry="1"/>
+          <speciesReference species="BSU34910" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EhisD1">
@@ -5754,7 +5754,7 @@
     <enzyme id="EhisD2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU34910" stoichiometry="1"/>
+          <speciesReference species="BSU34910" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EhisD2">
@@ -5802,8 +5802,8 @@
     <enzyme id="EilvBH1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU28310" stoichiometry="1"/>
-          <speciesReference species="BSU28300" stoichiometry="1"/>
+          <speciesReference species="BSU28310" stoichiometry="1.0"/>
+          <speciesReference species="BSU28300" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EilvBH1">
@@ -5819,7 +5819,7 @@
     <enzyme id="EilvC1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU28290" stoichiometry="1"/>
+          <speciesReference species="BSU28290" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EilvC1">
@@ -5835,7 +5835,7 @@
     <enzyme id="EilvD1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU21870" stoichiometry="1"/>
+          <speciesReference species="BSU21870" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EilvD1">
@@ -5851,7 +5851,7 @@
     <enzyme id="EilvE1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU02390" stoichiometry="1"/>
+          <speciesReference species="BSU02390" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EilvE1">
@@ -5883,8 +5883,8 @@
     <enzyme id="EilvBH2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU28310" stoichiometry="1"/>
-          <speciesReference species="BSU28300" stoichiometry="1"/>
+          <speciesReference species="BSU28310" stoichiometry="1.0"/>
+          <speciesReference species="BSU28300" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EilvBH2">
@@ -5900,7 +5900,7 @@
     <enzyme id="EilvC2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU28290" stoichiometry="1"/>
+          <speciesReference species="BSU28290" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EilvC2">
@@ -5916,7 +5916,7 @@
     <enzyme id="EilvD2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU21870" stoichiometry="1"/>
+          <speciesReference species="BSU21870" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EilvD2">
@@ -5981,7 +5981,7 @@
     <enzyme id="EilvE3" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU02390" stoichiometry="1"/>
+          <speciesReference species="BSU02390" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EilvE3">
@@ -5997,7 +5997,7 @@
     <enzyme id="EleuS" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU30320" stoichiometry="1"/>
+          <speciesReference species="BSU30320" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EleuS">
@@ -6013,9 +6013,9 @@
     <enzyme id="Ebkd1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU24050" stoichiometry="2"/>
-          <speciesReference species="BSU24040" stoichiometry="2"/>
-          <speciesReference species="BSU24030" stoichiometry="24"/>
+          <speciesReference species="BSU24050" stoichiometry="1.0"/>
+          <speciesReference species="BSU24040" stoichiometry="1.0"/>
+          <speciesReference species="BSU24030" stoichiometry="1.0"/>
           <speciesReference species="BSU24060" stoichiometry="2"/>
         </listOfReactants>
       </machineryComposition>
@@ -6032,9 +6032,9 @@
     <enzyme id="Ebkd2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU24050" stoichiometry="2"/>
-          <speciesReference species="BSU24040" stoichiometry="2"/>
-          <speciesReference species="BSU24030" stoichiometry="24"/>
+          <speciesReference species="BSU24050" stoichiometry="1.0"/>
+          <speciesReference species="BSU24040" stoichiometry="1.0"/>
+          <speciesReference species="BSU24030" stoichiometry="1.0"/>
           <speciesReference species="BSU24060" stoichiometry="2"/>
         </listOfReactants>
       </machineryComposition>
@@ -6051,9 +6051,9 @@
     <enzyme id="Ebkd3" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU24050" stoichiometry="2"/>
-          <speciesReference species="BSU24040" stoichiometry="2"/>
-          <speciesReference species="BSU24030" stoichiometry="24"/>
+          <speciesReference species="BSU24050" stoichiometry="1.0"/>
+          <speciesReference species="BSU24040" stoichiometry="1.0"/>
+          <speciesReference species="BSU24030" stoichiometry="1.0"/>
           <speciesReference species="BSU24060" stoichiometry="2"/>
         </listOfReactants>
       </machineryComposition>
@@ -6070,7 +6070,7 @@
     <enzyme id="EdapG" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU16760" stoichiometry="2"/>
+          <speciesReference species="BSU16760" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EdapG">
@@ -6102,7 +6102,7 @@
     <enzyme id="Ehom" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU32260" stoichiometry="1"/>
+          <speciesReference species="BSU32260" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Ehom">
@@ -6118,7 +6118,7 @@
     <enzyme id="EdapA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU16770" stoichiometry="4"/>
+          <speciesReference species="BSU16770" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EdapA">
@@ -6134,7 +6134,7 @@
     <enzyme id="EdapB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22490" stoichiometry="1"/>
+          <speciesReference species="BSU22490" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EdapB">
@@ -6150,7 +6150,7 @@
     <enzyme id="EdapH" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU14180" stoichiometry="1"/>
+          <speciesReference species="BSU14180" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EdapH">
@@ -6182,7 +6182,7 @@
     <enzyme id="EdapL" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU14190" stoichiometry="1"/>
+          <speciesReference species="BSU14190" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EdapL">
@@ -6246,7 +6246,7 @@
     <enzyme id="EmetA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU21910" stoichiometry="1"/>
+          <speciesReference species="BSU21910" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmetA">
@@ -6294,7 +6294,7 @@
     <enzyme id="EmetE" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU13180" stoichiometry="1"/>
+          <speciesReference species="BSU13180" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmetE">
@@ -6310,7 +6310,7 @@
     <enzyme id="EmetK" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU30550" stoichiometry="4"/>
+          <speciesReference species="BSU30550" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmetK">
@@ -6342,7 +6342,7 @@
     <enzyme id="Efmt" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15730" stoichiometry="1"/>
+          <speciesReference species="BSU15730" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Efmt">
@@ -6358,7 +6358,7 @@
     <enzyme id="Edef" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15720" stoichiometry="1"/>
+          <speciesReference species="BSU15720" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Edef">
@@ -6374,7 +6374,7 @@
     <enzyme id="EspeD" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU29010" stoichiometry="2"/>
+          <speciesReference species="BSU29010" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EspeD">
@@ -6390,7 +6390,7 @@
     <enzyme id="EspeE" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU37500" stoichiometry="2"/>
+          <speciesReference species="BSU37500" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EspeE">
@@ -6406,7 +6406,7 @@
     <enzyme id="EmtnN2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU27270" stoichiometry="1"/>
+          <speciesReference species="BSU27270" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmtnN2">
@@ -6486,7 +6486,7 @@
     <enzyme id="EmtnX" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU13600" stoichiometry="1"/>
+          <speciesReference species="BSU13600" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmtnX">
@@ -6518,7 +6518,7 @@
     <enzyme id="EmtnE" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU13580" stoichiometry="1"/>
+          <speciesReference species="BSU13580" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmtnE">
@@ -6534,7 +6534,7 @@
     <enzyme id="EspeA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU14630" stoichiometry="1"/>
+          <speciesReference species="BSU14630" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EspeA">
@@ -6550,7 +6550,7 @@
     <enzyme id="EspeB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU37490" stoichiometry="1"/>
+          <speciesReference species="BSU37490" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EspeB">
@@ -6566,7 +6566,7 @@
     <enzyme id="EaroA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU29750" stoichiometry="1"/>
+          <speciesReference species="BSU29750" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EaroA">
@@ -6582,7 +6582,7 @@
     <enzyme id="EaroB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22700" stoichiometry="1"/>
+          <speciesReference species="BSU22700" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EaroB">
@@ -6694,7 +6694,7 @@
     <enzyme id="EpheA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU27900" stoichiometry="1"/>
+          <speciesReference species="BSU27900" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpheA">
@@ -6726,8 +6726,8 @@
     <enzyme id="EpheS" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU28640" stoichiometry="2"/>
-          <speciesReference species="BSU28630" stoichiometry="2"/>
+          <speciesReference species="BSU28640" stoichiometry="1.0"/>
+          <speciesReference species="BSU28630" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpheS">
@@ -6743,7 +6743,7 @@
     <enzyme id="EproB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU13120" stoichiometry="1"/>
+          <speciesReference species="BSU13120" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EproB">
@@ -6759,7 +6759,7 @@
     <enzyme id="EproA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU13130" stoichiometry="1"/>
+          <speciesReference species="BSU13130" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EproA">
@@ -6775,7 +6775,7 @@
     <enzyme id="EproI" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU23800" stoichiometry="1"/>
+          <speciesReference species="BSU23800" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EproI">
@@ -6807,7 +6807,7 @@
     <enzyme id="EserA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU23070" stoichiometry="1"/>
+          <speciesReference species="BSU23070" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EserA">
@@ -6839,7 +6839,7 @@
     <enzyme id="EserB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EserB">
@@ -6855,7 +6855,7 @@
     <enzyme id="EserS" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU00130" stoichiometry="2"/>
+          <speciesReference species="BSU00130" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EserS">
@@ -6871,7 +6871,7 @@
     <enzyme id="EthrB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU32240" stoichiometry="1"/>
+          <speciesReference species="BSU32240" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EthrB">
@@ -6887,7 +6887,7 @@
     <enzyme id="EthrC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU32250" stoichiometry="1"/>
+          <speciesReference species="BSU32250" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EthrC">
@@ -6919,8 +6919,8 @@
     <enzyme id="EtrpEG" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22680" stoichiometry="1"/>
-          <speciesReference species="BSU00750" stoichiometry="1"/>
+          <speciesReference species="BSU22680" stoichiometry="1.0"/>
+          <speciesReference species="BSU00750" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EtrpEG">
@@ -6952,7 +6952,7 @@
     <enzyme id="EtrpF" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22650" stoichiometry="1"/>
+          <speciesReference species="BSU22650" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EtrpF">
@@ -6968,7 +6968,7 @@
     <enzyme id="EtrpC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22660" stoichiometry="1"/>
+          <speciesReference species="BSU22660" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EtrpC">
@@ -6984,7 +6984,7 @@
     <enzyme id="EtrpA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22630" stoichiometry="2"/>
+          <speciesReference species="BSU22630" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EtrpA">
@@ -7000,7 +7000,7 @@
     <enzyme id="EtrpB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22640" stoichiometry="2"/>
+          <speciesReference species="BSU22640" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EtrpB">
@@ -7032,7 +7032,7 @@
     <enzyme id="EtyrA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22610" stoichiometry="1"/>
+          <speciesReference species="BSU22610" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EtyrA">
@@ -7080,7 +7080,7 @@
     <enzyme id="EilvE2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU02390" stoichiometry="1"/>
+          <speciesReference species="BSU02390" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EilvE2">
@@ -7112,7 +7112,7 @@
     <enzyme id="Eald" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU31930" stoichiometry="6"/>
+          <speciesReference species="BSU31930" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Eald">
@@ -7128,7 +7128,7 @@
     <enzyme id="EargI" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU40320" stoichiometry="1"/>
+          <speciesReference species="BSU40320" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EargI">
@@ -7144,7 +7144,7 @@
     <enzyme id="ErocD" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU40340" stoichiometry="1"/>
+          <speciesReference species="BSU40340" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="ErocD">
@@ -7160,7 +7160,7 @@
     <enzyme id="ErocA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU37780" stoichiometry="1"/>
+          <speciesReference species="BSU37780" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="ErocA">
@@ -7176,9 +7176,9 @@
     <enzyme id="Eure" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU36660" stoichiometry="1"/>
-          <speciesReference species="BSU36650" stoichiometry="1"/>
-          <speciesReference species="BSU36640" stoichiometry="1"/>
+          <speciesReference species="BSU36660" stoichiometry="1.0"/>
+          <speciesReference species="BSU36650" stoichiometry="1.0"/>
+          <speciesReference species="BSU36640" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Eure">
@@ -7258,7 +7258,7 @@
     <enzyme id="EgcvT" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU24570" stoichiometry="1"/>
+          <speciesReference species="BSU24570" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EgcvT">
@@ -7274,7 +7274,7 @@
     <enzyme id="EhutH" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU39350" stoichiometry="1"/>
+          <speciesReference species="BSU39350" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EhutH">
@@ -7290,7 +7290,7 @@
     <enzyme id="EhutU" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU39360" stoichiometry="1"/>
+          <speciesReference species="BSU39360" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EhutU">
@@ -7322,7 +7322,7 @@
     <enzyme id="EhutG" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU39380" stoichiometry="1"/>
+          <speciesReference species="BSU39380" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EhutG">
@@ -7338,7 +7338,7 @@
     <enzyme id="EputB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU03200" stoichiometry="1"/>
+          <speciesReference species="BSU03200" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EputB">
@@ -7354,7 +7354,7 @@
     <enzyme id="EputC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU03210" stoichiometry="1"/>
+          <speciesReference species="BSU03210" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EputC">
@@ -7435,7 +7435,7 @@
     <enzyme id="EhprT1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU00680" stoichiometry="1"/>
+          <speciesReference species="BSU00680" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EhprT1">
@@ -7451,7 +7451,7 @@
     <enzyme id="EhprT2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU00680" stoichiometry="1"/>
+          <speciesReference species="BSU00680" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EhprT2">
@@ -7483,7 +7483,7 @@
     <enzyme id="EadeC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU14520" stoichiometry="1"/>
+          <speciesReference species="BSU14520" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EadeC">
@@ -7499,7 +7499,7 @@
     <enzyme id="EguaD" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU13170" stoichiometry="1"/>
+          <speciesReference species="BSU13170" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EguaD">
@@ -7515,7 +7515,7 @@
     <enzyme id="EyfkN1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU07840" stoichiometry="1"/>
+          <speciesReference species="BSU07840" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EyfkN1">
@@ -7531,7 +7531,7 @@
     <enzyme id="EyfkN2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU07840" stoichiometry="1"/>
+          <speciesReference species="BSU07840" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EyfkN2">
@@ -7547,7 +7547,7 @@
     <enzyme id="EyfkN3" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU07840" stoichiometry="1"/>
+          <speciesReference species="BSU07840" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EyfkN3">
@@ -7563,7 +7563,7 @@
     <enzyme id="EyfkN4" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU07840" stoichiometry="1"/>
+          <speciesReference species="BSU07840" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EyfkN4">
@@ -7579,7 +7579,7 @@
     <enzyme id="EyfkN5" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU07840" stoichiometry="1"/>
+          <speciesReference species="BSU07840" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EyfkN5">
@@ -7595,11 +7595,11 @@
     <enzyme id="Epuc" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU32510" stoichiometry="1"/>
-          <speciesReference species="BSU32500" stoichiometry="1"/>
-          <speciesReference species="BSU32490" stoichiometry="1"/>
-          <speciesReference species="BSU32480" stoichiometry="1"/>
-          <speciesReference species="BSU32470" stoichiometry="1"/>
+          <speciesReference species="BSU32510" stoichiometry="1.0"/>
+          <speciesReference species="BSU32500" stoichiometry="1.0"/>
+          <speciesReference species="BSU32490" stoichiometry="1.0"/>
+          <speciesReference species="BSU32480" stoichiometry="1.0"/>
+          <speciesReference species="BSU32470" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Epuc">
@@ -7615,11 +7615,11 @@
     <enzyme id="Epuc2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU32510" stoichiometry="1"/>
-          <speciesReference species="BSU32500" stoichiometry="1"/>
-          <speciesReference species="BSU32490" stoichiometry="1"/>
-          <speciesReference species="BSU32480" stoichiometry="1"/>
-          <speciesReference species="BSU32470" stoichiometry="1"/>
+          <speciesReference species="BSU32510" stoichiometry="1.0"/>
+          <speciesReference species="BSU32500" stoichiometry="1.0"/>
+          <speciesReference species="BSU32490" stoichiometry="1.0"/>
+          <speciesReference species="BSU32480" stoichiometry="1.0"/>
+          <speciesReference species="BSU32470" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Epuc2">
@@ -7763,7 +7763,7 @@
     <enzyme id="Edrm1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU23500" stoichiometry="1"/>
+          <speciesReference species="BSU23500" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Edrm1">
@@ -7779,7 +7779,7 @@
     <enzyme id="Edrm2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU23500" stoichiometry="1"/>
+          <speciesReference species="BSU23500" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Edrm2">
@@ -7795,7 +7795,7 @@
     <enzyme id="Edra" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU39420" stoichiometry="1"/>
+          <speciesReference species="BSU39420" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Edra">
@@ -7811,7 +7811,7 @@
     <enzyme id="Eupp" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU36890" stoichiometry="1"/>
+          <speciesReference species="BSU36890" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Eupp">
@@ -7843,7 +7843,7 @@
     <enzyme id="Eudk1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU27330" stoichiometry="1"/>
+          <speciesReference species="BSU27330" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Eudk1">
@@ -7859,7 +7859,7 @@
     <enzyme id="Eudk2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU27330" stoichiometry="1"/>
+          <speciesReference species="BSU27330" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Eudk2">
@@ -8003,7 +8003,7 @@
     <enzyme id="EyfkN6" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU07840" stoichiometry="1"/>
+          <speciesReference species="BSU07840" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EyfkN6">
@@ -8019,7 +8019,7 @@
     <enzyme id="EyfkN7" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU07840" stoichiometry="1"/>
+          <speciesReference species="BSU07840" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EyfkN7">
@@ -8035,7 +8035,7 @@
     <enzyme id="EyfkN8" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU07840" stoichiometry="1"/>
+          <speciesReference species="BSU07840" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EyfkN8">
@@ -8051,7 +8051,7 @@
     <enzyme id="EyfkN9" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU07840" stoichiometry="1"/>
+          <speciesReference species="BSU07840" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EyfkN9">
@@ -8067,7 +8067,7 @@
     <enzyme id="EpucLM" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU32450" stoichiometry="1"/>
+          <speciesReference species="BSU32450" stoichiometry="1.0"/>
           <speciesReference species="BSU32460" stoichiometry="4"/>
         </listOfReactants>
       </machineryComposition>
@@ -8127,7 +8127,7 @@
     <enzyme id="EpucG" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU32520" stoichiometry="1"/>
+          <speciesReference species="BSU32520" stoichiometry="2"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpucG">
@@ -8143,7 +8143,7 @@
     <enzyme id="EaldX" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU39860" stoichiometry="1"/>
+          <speciesReference species="BSU39860" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EaldX">
@@ -8159,7 +8159,7 @@
     <enzyme id="EyoaN" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU18670" stoichiometry="1"/>
+          <speciesReference species="BSU18670" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EyoaN">
@@ -8207,7 +8207,7 @@
     <enzyme id="EfolB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU00780" stoichiometry="1"/>
+          <speciesReference species="BSU00780" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EfolB">
@@ -8223,7 +8223,7 @@
     <enzyme id="EfolK" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU00790" stoichiometry="1"/>
+          <speciesReference species="BSU00790" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EfolK">
@@ -8239,8 +8239,8 @@
     <enzyme id="EpabAB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU00750" stoichiometry="1"/>
-          <speciesReference species="BSU00740" stoichiometry="1"/>
+          <speciesReference species="BSU00750" stoichiometry="1.0"/>
+          <speciesReference species="BSU00740" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpabAB">
@@ -8272,7 +8272,7 @@
     <enzyme id="Esul1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU00770" stoichiometry="1"/>
+          <speciesReference species="BSU00770" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Esul1">
@@ -8288,7 +8288,7 @@
     <enzyme id="Esul2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU00770" stoichiometry="1"/>
+          <speciesReference species="BSU00770" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Esul2">
@@ -8320,7 +8320,7 @@
     <enzyme id="EfdhD" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU36710" stoichiometry="1"/>
+          <speciesReference species="BSU36710" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EfdhD">
@@ -8336,7 +8336,7 @@
     <enzyme id="EdfrA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU21810" stoichiometry="1"/>
+          <speciesReference species="BSU21810" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EdfrA">
@@ -8352,7 +8352,7 @@
     <enzyme id="EdfrA2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU21810" stoichiometry="1"/>
+          <speciesReference species="BSU21810" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EdfrA2">
@@ -8384,7 +8384,7 @@
     <enzyme id="EykkE" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU13110" stoichiometry="1"/>
+          <speciesReference species="BSU13110" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EykkE">
@@ -8432,7 +8432,7 @@
     <enzyme id="EyitJ" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU11010" stoichiometry="1"/>
+          <speciesReference species="BSU11010" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EyitJ">
@@ -8448,7 +8448,7 @@
     <enzyme id="EmenF" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU30830" stoichiometry="1"/>
+          <speciesReference species="BSU30830" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmenF">
@@ -8480,7 +8480,7 @@
     <enzyme id="EmenC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU30780" stoichiometry="1"/>
+          <speciesReference species="BSU30780" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmenC">
@@ -8496,7 +8496,7 @@
     <enzyme id="EmenE" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU30790" stoichiometry="1"/>
+          <speciesReference species="BSU30790" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmenE">
@@ -8512,7 +8512,7 @@
     <enzyme id="EmenB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU30800" stoichiometry="1"/>
+          <speciesReference species="BSU30800" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmenB">
@@ -8544,7 +8544,7 @@
     <enzyme id="EmenA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU38490" stoichiometry="1"/>
+          <speciesReference species="BSU38490" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmenA">
@@ -8560,7 +8560,7 @@
     <enzyme id="EmenH" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22750" stoichiometry="1"/>
+          <speciesReference species="BSU22750" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmenH">
@@ -8592,7 +8592,7 @@
     <enzyme id="Edxr" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU16550" stoichiometry="1"/>
+          <speciesReference species="BSU16550" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Edxr">
@@ -8608,7 +8608,7 @@
     <enzyme id="EispD" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU00900" stoichiometry="1"/>
+          <speciesReference species="BSU00900" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EispD">
@@ -8624,7 +8624,7 @@
     <enzyme id="EispE" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU00460" stoichiometry="1"/>
+          <speciesReference species="BSU00460" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EispE">
@@ -8656,7 +8656,7 @@
     <enzyme id="EispG" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU25070" stoichiometry="1"/>
+          <speciesReference species="BSU25070" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EispG">
@@ -8672,7 +8672,7 @@
     <enzyme id="EispH" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU25160" stoichiometry="1"/>
+          <speciesReference species="BSU25160" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EispH">
@@ -8688,7 +8688,7 @@
     <enzyme id="Efni" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22870" stoichiometry="8"/>
+          <speciesReference species="BSU22870" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Efni">
@@ -8704,7 +8704,7 @@
     <enzyme id="EispA1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU24280" stoichiometry="1"/>
+          <speciesReference species="BSU24280" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EispA1">
@@ -8720,7 +8720,7 @@
     <enzyme id="EispA2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU24280" stoichiometry="1"/>
+          <speciesReference species="BSU24280" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EispA2">
@@ -8820,7 +8820,7 @@
     <enzyme id="EyubB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU31150" stoichiometry="1"/>
+          <speciesReference species="BSU31150" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EyubB">
@@ -8836,7 +8836,7 @@
     <enzyme id="EpanB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22430" stoichiometry="10"/>
+          <speciesReference species="BSU22430" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpanB">
@@ -8852,7 +8852,7 @@
     <enzyme id="EpanE" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU14440" stoichiometry="1"/>
+          <speciesReference species="BSU14440" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpanE">
@@ -8868,7 +8868,7 @@
     <enzyme id="EpanD" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22410" stoichiometry="4"/>
+          <speciesReference species="BSU22410" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpanD">
@@ -8916,7 +8916,7 @@
     <enzyme id="EcoaBC1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15700" stoichiometry="1"/>
+          <speciesReference species="BSU15700" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EcoaBC1">
@@ -8932,7 +8932,7 @@
     <enzyme id="EcoaBC2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15700" stoichiometry="1"/>
+          <speciesReference species="BSU15700" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EcoaBC2">
@@ -8964,7 +8964,7 @@
     <enzyme id="EcoaE" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU29060" stoichiometry="1"/>
+          <speciesReference species="BSU29060" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EcoaE">
@@ -8980,7 +8980,7 @@
     <enzyme id="EnadB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU27870" stoichiometry="1"/>
+          <speciesReference species="BSU27870" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EnadB">
@@ -8996,7 +8996,7 @@
     <enzyme id="EnadA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU27850" stoichiometry="1"/>
+          <speciesReference species="BSU27850" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EnadA">
@@ -9012,7 +9012,7 @@
     <enzyme id="EnadC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU27860" stoichiometry="6"/>
+          <speciesReference species="BSU27860" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EnadC">
@@ -9076,7 +9076,7 @@
     <enzyme id="EpncB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU31750" stoichiometry="1"/>
+          <speciesReference species="BSU31750" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpncB">
@@ -9092,8 +9092,8 @@
     <enzyme id="Eplp" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU00110" stoichiometry="6"/>
-          <speciesReference species="BSU00120" stoichiometry="1"/>
+          <speciesReference species="BSU00110" stoichiometry="1.0"/>
+          <speciesReference species="BSU00120" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Eplp">
@@ -9109,7 +9109,7 @@
     <enzyme id="EribAB1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU23260" stoichiometry="1"/>
+          <speciesReference species="BSU23260" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EribAB1">
@@ -9125,7 +9125,7 @@
     <enzyme id="EribAB2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU23260" stoichiometry="1"/>
+          <speciesReference species="BSU23260" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EribAB2">
@@ -9173,7 +9173,7 @@
     <enzyme id="EribX" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EribX">
@@ -9189,7 +9189,7 @@
     <enzyme id="EribH" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU23250" stoichiometry="60"/>
+          <speciesReference species="BSU23250" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EribH">
@@ -9205,7 +9205,7 @@
     <enzyme id="EribE" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU23270" stoichiometry="1"/>
+          <speciesReference species="BSU23270" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EribE">
@@ -9221,7 +9221,7 @@
     <enzyme id="EribC1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU16670" stoichiometry="1"/>
+          <speciesReference species="BSU16670" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EribC1">
@@ -9237,7 +9237,7 @@
     <enzyme id="EribC2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU16670" stoichiometry="1"/>
+          <speciesReference species="BSU16670" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EribC2">
@@ -9333,10 +9333,10 @@
     <enzyme id="EhemE" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU07520" stoichiometry="1"/>
-          <speciesReference species="BSU07510" stoichiometry="1"/>
-          <speciesReference species="BSU07500" stoichiometry="1"/>
-          <speciesReference species="BSU07490" stoichiometry="1"/>
+          <speciesReference species="BSU07520" stoichiometry="1.0"/>
+          <speciesReference species="BSU07510" stoichiometry="1.0"/>
+          <speciesReference species="BSU07500" stoichiometry="1.0"/>
+          <speciesReference species="BSU07490" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EhemE">
@@ -9352,7 +9352,7 @@
     <enzyme id="EhemZ" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU09840" stoichiometry="1"/>
+          <speciesReference species="BSU09840" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EhemZ">
@@ -9368,7 +9368,7 @@
     <enzyme id="EhemN" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU25500" stoichiometry="1"/>
+          <speciesReference species="BSU25500" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EhemN">
@@ -9400,7 +9400,7 @@
     <enzyme id="EhemH" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU10130" stoichiometry="1"/>
+          <speciesReference species="BSU10130" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EhemH">
@@ -9416,7 +9416,7 @@
     <enzyme id="EctaB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU14880" stoichiometry="1"/>
+          <speciesReference species="BSU14880" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EctaB">
@@ -9432,7 +9432,7 @@
     <enzyme id="EctaA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU14870" stoichiometry="1"/>
+          <speciesReference species="BSU14870" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EctaA">
@@ -9448,7 +9448,7 @@
     <enzyme id="EctaX1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EctaX1">
@@ -9464,7 +9464,7 @@
     <enzyme id="EctaX2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EctaX2">
@@ -9480,10 +9480,10 @@
     <enzyme id="Ecyt" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU23150" stoichiometry="1"/>
-          <speciesReference species="BSU23140" stoichiometry="1"/>
-          <speciesReference species="BSU23130" stoichiometry="1"/>
-          <speciesReference species="BSU25190" stoichiometry="1"/>
+          <speciesReference species="BSU23150" stoichiometry="1.0"/>
+          <speciesReference species="BSU23140" stoichiometry="1.0"/>
+          <speciesReference species="BSU23130" stoichiometry="1.0"/>
+          <speciesReference species="BSU25190" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Ecyt">
@@ -9499,7 +9499,7 @@
     <enzyme id="EsumT" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15610" stoichiometry="1"/>
+          <speciesReference species="BSU15610" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EsumT">
@@ -9515,7 +9515,7 @@
     <enzyme id="EnasF" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU03280" stoichiometry="1"/>
+          <speciesReference species="BSU03280" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EnasF">
@@ -9531,7 +9531,7 @@
     <enzyme id="EsirB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15620" stoichiometry="1"/>
+          <speciesReference species="BSU15620" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EsirB">
@@ -9547,7 +9547,7 @@
     <enzyme id="EsirC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15630" stoichiometry="1"/>
+          <speciesReference species="BSU15630" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EsirC">
@@ -9563,7 +9563,7 @@
     <enzyme id="EthiS" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU11680" stoichiometry="1"/>
+          <speciesReference species="BSU11680" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EthiS">
@@ -9579,7 +9579,7 @@
     <enzyme id="EthiF" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU11700" stoichiometry="1"/>
+          <speciesReference species="BSU11700" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EthiF">
@@ -9698,7 +9698,7 @@
     <enzyme id="EthiC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU08790" stoichiometry="1"/>
+          <speciesReference species="BSU08790" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EthiC">
@@ -9714,7 +9714,7 @@
     <enzyme id="EthiD1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU11710" stoichiometry="1"/>
+          <speciesReference species="BSU11710" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EthiD1">
@@ -9730,7 +9730,7 @@
     <enzyme id="EthiD2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU11710" stoichiometry="1"/>
+          <speciesReference species="BSU11710" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EthiD2">
@@ -9762,7 +9762,7 @@
     <enzyme id="EthiL" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU05900" stoichiometry="1"/>
+          <speciesReference species="BSU05900" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EthiL">
@@ -9778,7 +9778,7 @@
     <enzyme id="EthiN" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15800" stoichiometry="1"/>
+          <speciesReference species="BSU15800" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EthiN">
@@ -9794,7 +9794,7 @@
     <enzyme id="EbioI" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU30190" stoichiometry="1"/>
+          <speciesReference species="BSU30190" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EbioI">
@@ -9858,7 +9858,7 @@
     <enzyme id="EbioD" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU30210" stoichiometry="1"/>
+          <speciesReference species="BSU30210" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EbioD">
@@ -9890,7 +9890,7 @@
     <enzyme id="EdhbC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU31990" stoichiometry="1"/>
+          <speciesReference species="BSU31990" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EdhbC">
@@ -9906,7 +9906,7 @@
     <enzyme id="EdhbB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU31970" stoichiometry="1"/>
+          <speciesReference species="BSU31970" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EdhbB">
@@ -9922,7 +9922,7 @@
     <enzyme id="EdhbA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU32000" stoichiometry="1"/>
+          <speciesReference species="BSU32000" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EdhbA">
@@ -9938,9 +9938,9 @@
     <enzyme id="EdhbEBF" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU31980" stoichiometry="1"/>
-          <speciesReference species="BSU31970" stoichiometry="1"/>
-          <speciesReference species="BSU31960" stoichiometry="1"/>
+          <speciesReference species="BSU31980" stoichiometry="1.0"/>
+          <speciesReference species="BSU31970" stoichiometry="1.0"/>
+          <speciesReference species="BSU31960" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EdhbEBF">
@@ -9956,7 +9956,7 @@
     <enzyme id="EbesA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU32010" stoichiometry="1"/>
+          <speciesReference species="BSU32010" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EbesA">
@@ -9972,7 +9972,7 @@
     <enzyme id="EsidX" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EsidX">
@@ -9988,7 +9988,7 @@
     <enzyme id="EefeM" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU38270" stoichiometry="1"/>
+          <speciesReference species="BSU38270" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EefeM">
@@ -10004,7 +10004,7 @@
     <enzyme id="EpgcA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU09310" stoichiometry="1"/>
+          <speciesReference species="BSU09310" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpgcA">
@@ -10020,7 +10020,7 @@
     <enzyme id="EgtaB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU35670" stoichiometry="1"/>
+          <speciesReference species="BSU35670" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EgtaB">
@@ -10084,7 +10084,7 @@
     <enzyme id="EnagB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU35020" stoichiometry="1"/>
+          <speciesReference species="BSU35020" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EnagB">
@@ -10148,7 +10148,7 @@
     <enzyme id="EmurA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU36760" stoichiometry="1"/>
+          <speciesReference species="BSU36760" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmurA">
@@ -10164,7 +10164,7 @@
     <enzyme id="EmurB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15230" stoichiometry="1"/>
+          <speciesReference species="BSU15230" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmurB">
@@ -10180,7 +10180,7 @@
     <enzyme id="EmurC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU29790" stoichiometry="1"/>
+          <speciesReference species="BSU29790" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmurC">
@@ -10196,7 +10196,7 @@
     <enzyme id="EmurD" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15200" stoichiometry="1"/>
+          <speciesReference species="BSU15200" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmurD">
@@ -10212,7 +10212,7 @@
     <enzyme id="EmurE" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15180" stoichiometry="1"/>
+          <speciesReference species="BSU15180" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmurE">
@@ -10228,7 +10228,7 @@
     <enzyme id="EmurF" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU04570" stoichiometry="1"/>
+          <speciesReference species="BSU04570" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmurF">
@@ -10244,7 +10244,7 @@
     <enzyme id="EmraY" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15190" stoichiometry="1"/>
+          <speciesReference species="BSU15190" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmraY">
@@ -10260,7 +10260,7 @@
     <enzyme id="EmurG" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15220" stoichiometry="1"/>
+          <speciesReference species="BSU15220" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmurG">
@@ -10287,7 +10287,7 @@
     <enzyme id="EgpsA1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22830" stoichiometry="1"/>
+          <speciesReference species="BSU22830" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EgpsA1">
@@ -10303,7 +10303,7 @@
     <enzyme id="EgpsA2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU22830" stoichiometry="1"/>
+          <speciesReference species="BSU22830" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EgpsA2">
@@ -10335,7 +10335,7 @@
     <enzyme id="EmnaA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU35660" stoichiometry="1"/>
+          <speciesReference species="BSU35660" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EmnaA">
@@ -10351,7 +10351,7 @@
     <enzyme id="EtagO" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU35530" stoichiometry="1"/>
+          <speciesReference species="BSU35530" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EtagO">
@@ -10367,7 +10367,7 @@
     <enzyme id="EtagA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU35750" stoichiometry="1"/>
+          <speciesReference species="BSU35750" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EtagA">
@@ -10383,7 +10383,7 @@
     <enzyme id="EtagB" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU35760" stoichiometry="1"/>
+          <speciesReference species="BSU35760" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EtagB">
@@ -10399,7 +10399,7 @@
     <enzyme id="EtagF" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU35720" stoichiometry="1"/>
+          <speciesReference species="BSU35720" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EtagF">
@@ -10415,7 +10415,7 @@
     <enzyme id="EtagE" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU35730" stoichiometry="1"/>
+          <speciesReference species="BSU35730" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EtagE">
@@ -10431,11 +10431,11 @@
     <enzyme id="Edlt" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU38500" stoichiometry="1"/>
-          <speciesReference species="BSU38510" stoichiometry="1"/>
-          <speciesReference species="BSU38520" stoichiometry="1"/>
-          <speciesReference species="BSU38530" stoichiometry="1"/>
-          <speciesReference species="BSU38540" stoichiometry="1"/>
+          <speciesReference species="BSU38500" stoichiometry="1.0"/>
+          <speciesReference species="BSU38510" stoichiometry="1.0"/>
+          <speciesReference species="BSU38520" stoichiometry="1.0"/>
+          <speciesReference species="BSU38530" stoichiometry="1.0"/>
+          <speciesReference species="BSU38540" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Edlt">
@@ -10451,8 +10451,8 @@
     <enzyme id="EtagGH" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU35710" stoichiometry="2"/>
-          <speciesReference species="BSU35700" stoichiometry="2"/>
+          <speciesReference species="BSU35710" stoichiometry="1.0"/>
+          <speciesReference species="BSU35700" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EtagGH">
@@ -10468,10 +10468,10 @@
     <enzyme id="Eacc" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU29200" stoichiometry="2"/>
+          <speciesReference species="BSU29200" stoichiometry="1.0"/>
           <speciesReference species="BSU24350" stoichiometry="2"/>
-          <speciesReference species="BSU24340" stoichiometry="1"/>
-          <speciesReference species="BSU29210" stoichiometry="2"/>
+          <speciesReference species="BSU24340" stoichiometry="1.0"/>
+          <speciesReference species="BSU29210" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Eacc">
@@ -10487,10 +10487,10 @@
     <enzyme id="Es14" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15900" stoichiometry="1"/>
-          <speciesReference species="BSU11340" stoichiometry="1"/>
+          <speciesReference species="BSU15900" stoichiometry="1.0"/>
+          <speciesReference species="BSU11340" stoichiometry="1.0"/>
           <speciesReference species="BSU15910" stoichiometry="4"/>
-          <speciesReference species="BSU36370" stoichiometry="1"/>
+          <speciesReference species="BSU36370" stoichiometry="1.0"/>
           <speciesReference species="BSU08650" stoichiometry="4"/>
           <speciesReference species="BSU10170" stoichiometry="2"/>
         </listOfReactants>
@@ -10508,10 +10508,10 @@
     <enzyme id="Es16" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15900" stoichiometry="1"/>
-          <speciesReference species="BSU11340" stoichiometry="1"/>
+          <speciesReference species="BSU15900" stoichiometry="1.0"/>
+          <speciesReference species="BSU11340" stoichiometry="1.0"/>
           <speciesReference species="BSU15910" stoichiometry="4"/>
-          <speciesReference species="BSU36370" stoichiometry="1"/>
+          <speciesReference species="BSU36370" stoichiometry="1.0"/>
           <speciesReference species="BSU08650" stoichiometry="4"/>
           <speciesReference species="BSU10170" stoichiometry="2"/>
         </listOfReactants>
@@ -10529,10 +10529,10 @@
     <enzyme id="Es18" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15900" stoichiometry="1"/>
-          <speciesReference species="BSU11340" stoichiometry="1"/>
+          <speciesReference species="BSU15900" stoichiometry="1.0"/>
+          <speciesReference species="BSU11340" stoichiometry="1.0"/>
           <speciesReference species="BSU15910" stoichiometry="4"/>
-          <speciesReference species="BSU36370" stoichiometry="1"/>
+          <speciesReference species="BSU36370" stoichiometry="1.0"/>
           <speciesReference species="BSU08650" stoichiometry="4"/>
           <speciesReference species="BSU10170" stoichiometry="2"/>
         </listOfReactants>
@@ -10550,10 +10550,10 @@
     <enzyme id="Ee14" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15900" stoichiometry="1"/>
-          <speciesReference species="BSU11340" stoichiometry="1"/>
+          <speciesReference species="BSU15900" stoichiometry="1.0"/>
+          <speciesReference species="BSU11340" stoichiometry="1.0"/>
           <speciesReference species="BSU15910" stoichiometry="4"/>
-          <speciesReference species="BSU36370" stoichiometry="1"/>
+          <speciesReference species="BSU36370" stoichiometry="1.0"/>
           <speciesReference species="BSU08650" stoichiometry="4"/>
           <speciesReference species="BSU10170" stoichiometry="2"/>
         </listOfReactants>
@@ -10571,10 +10571,10 @@
     <enzyme id="Ee16" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15900" stoichiometry="1"/>
-          <speciesReference species="BSU11340" stoichiometry="1"/>
+          <speciesReference species="BSU15900" stoichiometry="1.0"/>
+          <speciesReference species="BSU11340" stoichiometry="1.0"/>
           <speciesReference species="BSU15910" stoichiometry="4"/>
-          <speciesReference species="BSU36370" stoichiometry="1"/>
+          <speciesReference species="BSU36370" stoichiometry="1.0"/>
           <speciesReference species="BSU08650" stoichiometry="4"/>
           <speciesReference species="BSU10170" stoichiometry="2"/>
         </listOfReactants>
@@ -10592,10 +10592,10 @@
     <enzyme id="Eo15" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15900" stoichiometry="1"/>
-          <speciesReference species="BSU11340" stoichiometry="1"/>
+          <speciesReference species="BSU15900" stoichiometry="1.0"/>
+          <speciesReference species="BSU11340" stoichiometry="1.0"/>
           <speciesReference species="BSU15910" stoichiometry="4"/>
-          <speciesReference species="BSU36370" stoichiometry="1"/>
+          <speciesReference species="BSU36370" stoichiometry="1.0"/>
           <speciesReference species="BSU08650" stoichiometry="4"/>
           <speciesReference species="BSU10170" stoichiometry="2"/>
         </listOfReactants>
@@ -10613,10 +10613,10 @@
     <enzyme id="Eo17" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15900" stoichiometry="1"/>
-          <speciesReference species="BSU11340" stoichiometry="1"/>
+          <speciesReference species="BSU15900" stoichiometry="1.0"/>
+          <speciesReference species="BSU11340" stoichiometry="1.0"/>
           <speciesReference species="BSU15910" stoichiometry="4"/>
-          <speciesReference species="BSU36370" stoichiometry="1"/>
+          <speciesReference species="BSU36370" stoichiometry="1.0"/>
           <speciesReference species="BSU08650" stoichiometry="4"/>
           <speciesReference species="BSU10170" stoichiometry="2"/>
         </listOfReactants>
@@ -10634,10 +10634,10 @@
     <enzyme id="Ea15" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15900" stoichiometry="1"/>
-          <speciesReference species="BSU11340" stoichiometry="1"/>
+          <speciesReference species="BSU15900" stoichiometry="1.0"/>
+          <speciesReference species="BSU11340" stoichiometry="1.0"/>
           <speciesReference species="BSU15910" stoichiometry="4"/>
-          <speciesReference species="BSU36370" stoichiometry="1"/>
+          <speciesReference species="BSU36370" stoichiometry="1.0"/>
           <speciesReference species="BSU08650" stoichiometry="4"/>
           <speciesReference species="BSU11330" stoichiometry="2"/>
         </listOfReactants>
@@ -10655,10 +10655,10 @@
     <enzyme id="Ea17" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15900" stoichiometry="1"/>
-          <speciesReference species="BSU11340" stoichiometry="1"/>
+          <speciesReference species="BSU15900" stoichiometry="1.0"/>
+          <speciesReference species="BSU11340" stoichiometry="1.0"/>
           <speciesReference species="BSU15910" stoichiometry="4"/>
-          <speciesReference species="BSU36370" stoichiometry="1"/>
+          <speciesReference species="BSU36370" stoichiometry="1.0"/>
           <speciesReference species="BSU08650" stoichiometry="4"/>
           <speciesReference species="BSU11330" stoichiometry="2"/>
         </listOfReactants>
@@ -10687,7 +10687,7 @@
     <enzyme id="EacpA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU15920" stoichiometry="1"/>
+          <speciesReference species="BSU15920" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EacpA">
@@ -10735,7 +10735,7 @@
     <enzyme id="EplsY" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU18070" stoichiometry="1"/>
+          <speciesReference species="BSU18070" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EplsY">
@@ -10751,7 +10751,7 @@
     <enzyme id="EplsC" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU09540" stoichiometry="1"/>
+          <speciesReference species="BSU09540" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EplsC">
@@ -10767,7 +10767,7 @@
     <enzyme id="EcdsA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU16540" stoichiometry="1"/>
+          <speciesReference species="BSU16540" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EcdsA">
@@ -10783,7 +10783,7 @@
     <enzyme id="EpssA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU02270" stoichiometry="1"/>
+          <speciesReference species="BSU02270" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpssA">
@@ -10815,7 +10815,7 @@
     <enzyme id="EpgsA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU35880" stoichiometry="1"/>
+          <speciesReference species="BSU35880" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpgsA">
@@ -10831,7 +10831,7 @@
     <enzyme id="EpX" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EpX">
@@ -10847,7 +10847,7 @@
     <enzyme id="EclsA" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU36590" stoichiometry="1"/>
+          <speciesReference species="BSU36590" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EclsA">
@@ -10863,7 +10863,7 @@
     <enzyme id="Elpg" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Elpg">
@@ -10879,7 +10879,7 @@
     <enzyme id="Edg0" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="average_protein_c" stoichiometry="1"/>
+          <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="Edg0">
@@ -10895,7 +10895,7 @@
     <enzyme id="EdagK" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU06720" stoichiometry="1"/>
+          <speciesReference species="BSU06720" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EdagK">
@@ -10911,7 +10911,7 @@
     <enzyme id="EugtP1" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU21920" stoichiometry="1"/>
+          <speciesReference species="BSU21920" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EugtP1">
@@ -10927,7 +10927,7 @@
     <enzyme id="EugtP2" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU21920" stoichiometry="1"/>
+          <speciesReference species="BSU21920" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EugtP2">
@@ -10943,7 +10943,7 @@
     <enzyme id="EugtP3" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
-          <speciesReference species="BSU21920" stoichiometry="1"/>
+          <speciesReference species="BSU21920" stoichiometry="1.0"/>
         </listOfReactants>
       </machineryComposition>
       <enzymaticActivity reaction="EugtP3">

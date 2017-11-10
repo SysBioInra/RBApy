@@ -1,6 +1,8 @@
+import sys
+
 from lxml import etree
 
-if __name__ == "__main__":
+def dump_all_activities():
     enzymes = etree.ElementTree(file='enzymes.xml')
     with open('catalytic_activity.csv', 'w') as f:
         # dump functions
@@ -13,10 +15,31 @@ if __name__ == "__main__":
             reaction = activity.get('reaction')
             for efficiency in activity.iterfind('enzymeEfficiency'):
                 fn = efficiency.get('function')
-                params = {}
-                for p in efficiency.iterfind('listOfParameters/parameter'):
-                    params[p.get('id')] = p.get('value')
-                f.write('\t'.join([reaction, fn] +
-                                  [k + '\t' + v for k,v in params.iteritems()])
+                f.write('\t'.join([reaction, fn] + params_as_string(efficiency))
                         + '\n')
+
+                
+def dump_activities(medium):
+    enzymes = etree.ElementTree(file='enzymes.xml')
+    with open('catalytic_activity_' + medium + '.csv', 'w') as f:
+        xpath = 'listOfEnzymes/enzyme/enzymaticActivity'
+        for activity in enzymes.iterfind(xpath):
+            reaction = activity.get('reaction')
+            for efficiency in activity.iterfind('enzymeEfficiency'):
+                if efficiency.get('function') == medium:
+                     f.write(reaction + '\t' + params_as_string(efficiency)
+                             + '\n')
+
+                     
+def params_as_string(efficiency_node):
+    params = []
+    for p in efficiency_node.iterfind('listOfParameters/parameter'):
+        params += [p.get('id'), p.get('value')]
+    return '\t'.join(params)
     
+    
+if __name__ == "__main__":
+    if len(sys.argv) == 1:
+        dump_all_activities()
+    else:
+        dump_activities(sys.argv[1])

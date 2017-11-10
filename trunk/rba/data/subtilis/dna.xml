@@ -6,7 +6,7 @@
     <component id="T" name="Thymine residue" type="Nucleotide" weight="0"/>
   </listOfComponents>
   <listOfMacromolecules>
-    <macromolecule id="dna" compartment="c">
+    <macromolecule id="dna" compartment="Cytoplasm">
       <composition>
         <componentReference component="A" stoichiometry="0.2818"/>
         <componentReference component="C" stoichiometry="0.2181"/>

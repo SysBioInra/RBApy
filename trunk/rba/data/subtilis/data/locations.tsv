@@ -1,270 +1,270 @@
 ENTRY	GENE NAME	NAME	LOCATION
-P54575	ribC BSU16670	Riboflavin biosynthesis protein RibC [Includes: Riboflavin kinase (EC 2.7.1.26) (Flavokinase); FMN adenylyltransferase (EC 2.7.7.2) (FAD pyrophosphorylase) (FAD synthase)]	c
-P54572	yqkJ BSU23550	Probable NAD-dependent malic enzyme 1 (NAD-ME 1) (EC 1.1.1.38)	c
-O31669	mtnD ykrZ BSU13620	Acireductone dioxygenase (1,2-dihydroxy-3-keto-5-methylthiopentene dioxygenase) (DHK-MTPene dioxygenase) (Acireductone dioxygenase (Fe(2+)-requiring)) (ARD') (Fe-ARD) (EC 1.13.11.54) (Acireductone dioxygenase (Ni(2+)-requiring)) (ARD) (Ni-ARD) (EC 1.13.11.53)	c
-O31668	mtnB ykrY BSU13610	Methylthioribulose-1-phosphate dehydratase (MTRu-1-P dehydratase) (EC 4.2.1.109)	c
-O31667	mtnX ykrX BSU13600	2-hydroxy-3-keto-5-methylthiopentenyl-1-phosphate phosphatase (HK-MTPenyl-1-P phosphatase) (EC 3.1.3.87)	c
-O34399	gltB BSU18440	Glutamate synthase [NADPH] small chain (EC 1.4.1.13) (NADPH-GOGAT)	c
-O31665	mtnE mtnV ykrV BSU13580	Transaminase MtnE (EC 2.6.1.-)	c
-O31475	ycgT BSU03270	Ferredoxin--NADP reductase 1 (FNR 1) (Fd-NADP(+) reductase 1) (EC 1.18.1.2)	c
-O31663	mtnK ykrT BSU13560	Methylthioribose kinase (MTR kinase) (EC 2.7.1.100)	c
-O31662	mtnA ykrS BSU13550	Methylthioribose-1-phosphate isomerase (M1Pi) (MTR-1-P isomerase) (EC 5.3.1.23) (S-methyl-5-thioribose-1-phosphate isomerase)	c
-P70999	speB ywhG BSU37490	Agmatinase (EC 3.5.3.11) (Agmatine ureohydrolase) (AUH)	c
-P07600	trpB BSU22640	Tryptophan synthase beta chain (EC 4.2.1.20)	c
-P46354	punA deoD pnp yqkO BSU23490	Purine nucleoside phosphorylase 1 (PNP 1) (EC 2.4.2.1) (Inosine phosphorylase) (Inosine-guanosine phosphorylase) (Purine nucleoside phosphorylase I) (PNP I) (Pu-NPase I)	c
-O32090	pncB yueK BSU31750	Nicotinate phosphoribosyltransferase (NAPRTase) (EC 6.3.4.21)	c
-P71079	fabL yfhR ygaA BSU08650	Enoyl-[acyl-carrier-protein] reductase [NADPH] FabL (ENR) (EC 1.3.1.104) (Enoyl-acyl carrier protein reductase III) (NADPH-dependent enoyl-ACP reductase)	c
-Q04789	alsS BSU36010	Acetolactate synthase (EC 2.2.1.6) (ALS) (Acetohydroxy-acid synthase)	c
-P31112	hepS gerC1 gerCA hepA BSU22760	Heptaprenyl diphosphate synthase component 1 (HepPP synthase subunit 1) (EC 2.5.1.30) (Spore germination protein C1)	c
-P31113	menG gerC2 gerCB menH BSU22750	Demethylmenaquinone methyltransferase (EC 2.1.1.163)	c
-P31114	hepT gerC3 gerCC hepB BSU22740	Heptaprenyl diphosphate synthase component 2 (HepPP synthase subunit 2) (EC 2.5.1.30) (Spore germination protein C3)	c
-P54473	ispH yqfP BSU25160	4-hydroxy-3-methylbut-2-enyl diphosphate reductase (EC 1.17.7.4)	c
-P54374	aroE aroD BSU25660	Shikimate dehydrogenase (NADP(+)) (SDH) (EC 1.1.1.25)	c
-P10725	alr1 alr dal BSU04640	Alanine racemase 1 (EC 5.1.1.1)	c
-O31502	dagK dgkB yerQ BSU06720	Diacylglycerol kinase (DAG kinase) (DAGK) (EC 2.7.1.107)	c
-O34557	rpe yloR BSU15790	Ribulose-phosphate 3-epimerase (EC 5.1.3.1) (Pentose-5-phosphate 3-epimerase) (PPE) (R5P3E)	c
-P37537	tmk yaaP BSU00280	Thymidylate kinase (EC 2.7.4.9) (dTMP kinase)	c
-P37530	dgk yaaG BSU00150	Deoxyguanosine kinase (DGUO kinase) (dGK) (EC 2.7.1.113)	c
-P54378	gcvT yqhI BSU24570	Aminomethyltransferase (EC 2.1.2.10) (Glycine cleavage system T protein)	c
-P32393	comEB comE2 BSU25580	ComE operon protein 2 (EC 3.5.-.-)	c
-P39773	gpmI pgm BSU33910	2,3-bisphosphoglycerate-independent phosphoglycerate mutase (BPG-independent PGAM) (Phosphoglyceromutase) (iPGM) (EC 5.4.2.12) (Vegetative protein 107) (VEG107)	c
-O34651	hisD BSU34910	Histidinol dehydrogenase (HDH) (EC 1.1.1.23)	c
-O32164	sufS csd yurW BSU32690	Cysteine desulfurase SufS (EC 2.8.1.7)	c
-P39062	acsA BSU29680	Acetyl-coenzyme A synthetase (AcCoA synthetase) (Acs) (EC 6.2.1.1) (Acetate--CoA ligase) (Acyl-activating enzyme)	c
-O31666	mtnW ykrW BSU13590	2,3-diketo-5-methylthiopentyl-1-phosphate enolase (DK-MTP-1-P enolase) (EC 5.3.2.5) (RuBisCO-like protein) (RLP)	c
-P94523	araA BSU28800	L-arabinose isomerase (EC 5.3.1.4)	c
-P29252	folK BSU00790	2-amino-4-hydroxy-6-hydroxymethyldihydropteridine pyrophosphokinase (EC 2.7.6.3) (6-hydroxymethyl-7,8-dihydropterin pyrophosphokinase) (PPPK) (7,8-dihydro-6-hydroxymethylpterin-pyrophosphokinase) (HPPK)	c
-P94525	araD BSU28780	L-ribulose-5-phosphate 4-epimerase (EC 5.1.3.4) (Phosphoribulose isomerase)	c
-P30950	hemB BSU28130	Delta-aminolevulinic acid dehydratase (ALAD) (ALADH) (EC 4.2.1.24) (Porphobilinogen synthase)	c
-O32028	mtnN mtn pfs BSU27270	5'-methylthioadenosine/S-adenosylhomocysteine nucleosidase (MTA/SAH nucleosidase) (MTAN) (EC 3.2.2.9) (5'-methylthioadenosine nucleosidase) (MTA nucleosidase) (S-adenosylhomocysteine nucleosidase) (AdoHcy nucleosidase) (SAH nucleosidase) (SRH nucleosidase)	c
-P28822	sul BSU00770	Dihydropteroate synthase (DHPS) (EC 2.5.1.15) (Dihydropteroate pyrophosphorylase)	c
-O31619	thiF yjbU BSU11700	Sulfur carrier protein ThiS adenylyltransferase (EC 2.7.7.73)	c
-O34389	malS BSU29880	Probable NAD-dependent malic enzyme 3 (NAD-ME 3) (EC 1.1.1.38)	c
-P11045	dfrA BSU21810	Dihydrofolate reductase (EC 1.5.1.3)	c
-O31465	glsA1 glsA ybgJ BSU02430	Glutaminase 1 (EC 3.5.1.2)	c
-O05510	gmuE ydhR BSU05860	Putative fructokinase (EC 2.7.1.4) (Glucomannan utilization protein E)	c
-O31461	ilvE ybgE BSU02390	Branched-chain-amino-acid transaminase 1 (BCAT 1) (EC 2.6.1.42)	c
-O31617	thiS yjbS BSU11680	Sulfur carrier protein ThiS (Thiamine biosynthesis protein ThiS)	c
-P00497	purF BSU06490	Amidophosphoribosyltransferase (ATase) (EC 2.4.2.14) (Glutamine phosphoribosylpyrophosphate amidotransferase) (GPATase)	c
-P25994	pyrAB BSU15520	Carbamoyl-phosphate synthase pyrimidine-specific large chain (EC 6.3.5.5) (Carbamoyl-phosphate synthetase ammonia chain)	c
-O32143	pucE yurB BSU32470	Probable xanthine dehydrogenase subunit E (XDHase subunit E) (EC 1.17.1.4)	c
-P17620	ribBA ribA BSU23260	Riboflavin biosynthesis protein RibBA [Includes: 3,4-dihydroxy-2-butanone 4-phosphate synthase (DHBP synthase) (EC 4.1.99.12); GTP cyclohydrolase-2 (EC 3.5.4.25) (GTP cyclohydrolase II)]	c
-P46911	qcrA bfcA BSU22560	Menaquinol-cytochrome c reductase iron-sulfur subunit (Rieske iron-sulfur protein)	c
-P50618	nrdI ymaA BSU17370	Protein NrdI	c
-O32142	pucM yunM BSU32460	5-hydroxyisourate hydrolase (HIU hydrolase) (HIUHase) (EC 3.5.2.17) (Transthyretin-related protein) (TRP)	c
-Q04795	dapG lssD BSU16760	Aspartokinase 1 (EC 2.7.2.4) (Aspartate kinase 1) (Aspartokinase I)	c
-Q04797	asd BSU16750	Aspartate-semialdehyde dehydrogenase (ASA dehydrogenase) (ASADH) (EC 1.2.1.11) (Aspartate-beta-semialdehyde dehydrogenase)	c
-P19582	hom tdm BSU32260	Homoserine dehydrogenase (HDH) (EC 1.1.1.3)	c
-P20167	trpF BSU22650	N-(5'-phosphoribosyl)anthranilate isomerase (PRAI) (EC 5.3.1.24)	c
-O32141	pucL yunL BSU32450	Uric acid degradation bifunctional protein PucL [Includes: 2-oxo-4-hydroxy-4-carboxy-5-ureidoimidazoline decarboxylase (OHCU decarboxylase) (EC 4.1.1.97); Uricase (EC 1.7.3.3) (Urate oxidase)]	c
-P28823	folB folA yacE BSU00780	Dihydroneopterin aldolase (DHNA) (EC 4.1.2.25) (7,8-dihydroneopterin aldolase)	c
-P37529	dck dak yaaF BSU00140	Deoxyadenosine/deoxycytidine kinase (dAK/dCK) (EC 2.7.1.74) (EC 2.7.1.76)	c
-P37528	pdxT yaaE BSU00120	Pyridoxal 5'-phosphate synthase subunit PdxT (EC 4.3.3.6) (Pdx2) (Pyridoxal 5'-phosphate synthase glutaminase subunit) (EC 3.5.1.2)	c
-O32145	pucC yurD BSU32490	Probable xanthine dehydrogenase subunit C (XDHase subunit C) (EC 1.17.1.4)	c
-P39594	thiE thiC ywbK BSU38290 ipa-26d	Thiamine-phosphate synthase (TP synthase) (TPS) (EC 2.5.1.3) (Thiamine-phosphate pyrophosphorylase) (TMP pyrophosphorylase) (TMP-PPase)	c
-P21203	pheA BSU27900	Prephenate dehydratase (PDT) (EC 4.2.1.51)	c
-P26935	iolG idh BSU39700 E83G	Inositol 2-dehydrogenase/D-chiro-inositol 3-dehydrogenase (EC 1.1.1.18) (EC 1.1.1.369) (Myo-inositol 2-dehydrogenase/D-chiro-inositol 3-dehydrogenase) (MI 2-dehydrogenase/DCI 3-dehydrogenase)	c
-P37527	pdxS yaaD BSU00110	Pyridoxal 5'-phosphate synthase subunit PdxS (PLP synthase subunit PdxS) (EC 4.3.3.6) (Pdx1) (Superoxide-inducible protein 7) (SOI7)	c
-P51785	ilvD BSU21870	Dihydroxy-acid dehydratase (DAD) (EC 4.2.1.9) (Vegetative protein 110) (VEG110)	c
-P25983	pyrK pyrDB pyrDII pyrZ ylxD BSU15530	Dihydroorotate dehydrogenase B (NAD(+)), electron transfer subunit (Dihydroorotate oxidase B, electron transfer subunit)	c
-O34660	dhaS BSU19310	Putative aldehyde dehydrogenase DhaS (EC 1.2.1.3)	c
-P25972	pyrE pyrX BSU15560	Orotate phosphoribosyltransferase (OPRT) (OPRTase) (EC 2.4.2.10)	c
-P25971	pyrF BSU15550	Orotidine 5'-phosphate decarboxylase (EC 4.1.1.23) (OMP decarboxylase) (OMPDCase) (OMPdecase)	c
-O34664	thiN yloS BSU15800	Thiamine pyrophosphokinase (TPK) (EC 2.7.6.2) (Thiamine diphosphokinase)	c
-P49814	mdh citH BSU29120	Malate dehydrogenase (EC 1.1.1.37) (Vegetative protein 69) (VEG69)	c
-P39578	dltD BSU38530 ipa-2r	Protein DltD	c
-P39579	dltC BSU38520 ipa-3r	D-alanine--poly(phosphoribitol) ligase subunit 2 (EC 6.1.1.13) (D-alanyl carrier protein) (DCP)	c
-O32144	pucD yurC BSU32480	Probable xanthine dehydrogenase subunit D (XDHase subunit D) (EC 1.17.1.4)	c
-P23966	menB BSU30800	1,4-dihydroxy-2-naphthoyl-CoA synthase (DHNA-CoA synthase) (EC 4.1.3.36)	c
-P39761	adeC ade yzaD BSU14520	Adenine deaminase (Adenase) (Adenine aminase) (EC 3.5.4.2)	c
-O06492	gatC yedA yerL BSU06670	Glutamyl-tRNA(Gln) amidotransferase subunit C (Glu-ADT subunit C) (EC 6.3.5.-)	c
-O06491	gatA yedB yerM BSU06680	Glutamyl-tRNA(Gln) amidotransferase subunit A (Glu-ADT subunit A) (EC 6.3.5.7)	c
-P08164	nadE outB BSU03130	NH(3)-dependent NAD(+) synthetase (EC 6.3.1.5) (General stress protein 38) (GSP38) (Spore outgrowth factor B) (Sporulation protein OutB)	c
-P39156	ywlF BSU36920 ipc-32d	Putative sugar phosphate isomerase YwlF (EC 5.3.1.-)	c
-Q05852	gtaB BSU35670	UTP--glucose-1-phosphate uridylyltransferase (EC 2.7.7.9) (Alpha-D-glucosyl-1-phosphate uridylyltransferase) (General stress protein 33) (GSP33) (UDP-glucose pyrophosphorylase) (UDPGP) (Uridine diphosphoglucose pyrophosphorylase)	c
-O32137	allB pucH yunH BSU32410	Allantoinase (EC 3.5.2.5) (Allantoin-utilizing enzyme)	c
-P36838	carA cpaA BSU11230	Carbamoyl-phosphate synthase arginine-specific small chain (EC 6.3.5.5) (Carbamoyl-phosphate synthetase glutamine chain)	c
-P37887	cysK BSU00730	Cysteine synthase (CSase) (EC 2.5.1.47) (O-acetylserine (thiol)-lyase) (OAS-TL) (Superoxide-inducible protein 11) (SOI11)	c
-O30509	gatB yerN BSU06690	Aspartyl/glutamyl-tRNA(Asn/Gln) amidotransferase subunit B (Asp/Glu-ADT subunit B) (EC 6.3.5.-)	c
-P42435	nasD nasBC nirB BSU03300	Nitrite reductase [NAD(P)H] (EC 1.7.1.4)	c
-P71019	fabD ylpE BSU15900	Malonyl CoA-acyl carrier protein transacylase (MCT) (EC 2.3.1.39)	c
-P45744	dhbC BSU31990	Isochorismate synthase DhbC (EC 5.4.4.2) (Isochorismate mutase)	c
-P45868	maeA BSU37050	Probable NAD-dependent malic enzyme 2 (NAD-ME 2) (EC 1.1.1.38)	c
-P16616	hemC BSU28150	Porphobilinogen deaminase (PBG) (EC 2.5.1.61) (Hydroxymethylbilane synthase) (HMBS) (Pre-uroporphyrinogen synthase)	c
-P45740	thiC thiA BSU08790	Phosphomethylpyrimidine synthase (EC 4.1.99.17) (Hydroxymethylpyrimidine phosphate synthase) (HMP-P synthase) (HMP-phosphate synthase) (HMPP synthase) (Thiamine biosynthesis protein ThiC)	c
-P23129	odhA citK BSU19370	2-oxoglutarate dehydrogenase E1 component (EC 1.2.4.2) (Alpha-ketoglutarate dehydrogenase)	c
-P28821	pabC BSU00760	Aminodeoxychorismate lyase (EC 4.1.3.38) (4-amino-4-deoxychorismate lyase) (ADC lyase) (ADCL)	c
-P54455	nadD yqeJ BSU25640	Nicotinate-nucleotide adenylyltransferase (EC 2.7.7.18) (Deamido-NAD(+) diphosphorylase) (Deamido-NAD(+) pyrophosphorylase) (Nicotinate mononucleotide adenylyltransferase) (NaMN adenylyltransferase)	c
-O05394	mccB yrhB BSU27250	Cystathionine gamma-lyase (EC 4.4.1.1) (Gamma-cystathionase) (Homocysteine gamma-lyase) (EC 4.4.1.2)	c
-P49786	accB fabE yqhW BSU24350	Biotin carboxyl carrier protein of acetyl-CoA carboxylase (BCCP)	c
-O35000	nagB BSU35020	Glucosamine-6-phosphate deaminase 1 (EC 3.5.99.6) (GlcN6P deaminase 1) (GNPDA 1) (Glucosamine-6-phosphate isomerase 1)	c
-O05393	mccA yrhA BSU27260	O-acetylserine dependent cystathionine beta-synthase (EC 2.5.1.134)	c
-O34925	deoD punB BSU19630	Purine nucleoside phosphorylase DeoD-type (PNP) (EC 2.4.2.1) (Purine nucleoside phosphorylase II) (PU-NPase II)	c
-P18157	glpK BSU09290	Glycerol kinase (EC 2.7.1.30) (ATP:glycerol 3-phosphotransferase) (Glycerokinase) (GK)	c
-P39812	gltA BSU18450	Glutamate synthase [NADPH] large chain (EC 1.4.1.13) (NADPH-GOGAT)	c
-P03964	trpC BSU22660	Indole-3-glycerol phosphate synthase (IGPS) (EC 4.1.1.48)	c
-O31751	uppS yluA BSU16530	Isoprenyl transferase (EC 2.5.1.-)	c
-O32148	pucG yurG BSU32520	Purine catabolism protein PucG (EC 2.-.-.-)	c
-P04990	thrC BSU32250	Threonine synthase (TS) (EC 4.2.3.1)	c
-Q9KWU4	pyc pycA ylaP BSU14860	Pyruvate carboxylase (EC 6.4.1.1) (Pyruvic carboxylase) (PYC)	c
-P03963	trpE BSU22680	Anthranilate synthase component 1 (AS) (ASI) (EC 4.1.3.27)	c
-P23971	menE BSU30790	2-succinylbenzoate--CoA ligase (EC 6.2.1.26) (o-succinylbenzoyl-CoA synthetase) (OSB-CoA synthetase)	c
-P23970	menD BSU30820	2-succinyl-5-enolpyruvyl-6-hydroxy-3-cyclohexene-1-carboxylate synthase (SEPHCHC synthase) (EC 2.2.1.9) (Menaquinone biosynthesis protein MenD)	c
-P23973	menF icsM BSU30830	Isochorismate synthase MenF (EC 5.4.4.2) (Isochorismate mutase)	c
-P20692	tyrA BSU22610	Prephenate dehydrogenase (PDH) (EC 1.3.1.12)	c
-O32147	pucA yurF BSU32510	Probable xanthine dehydrogenase subunit A (XDHase subunit A) (EC 1.17.1.4)	c
-P23974	menH ytfB ytxM BSU30810	Putative 2-succinyl-6-hydroxy-2,4-cyclohexadiene-1-carboxylate synthase (SHCHC synthase) (EC 4.2.99.20)	c
-P42420	iolJ fbaB yxdI BSU39670 B65C	6-phospho-5-dehydro-2-deoxy-D-gluconate aldolase (DKGP aldolase) (EC 4.1.2.29)	c
-P94390	putB ycgM BSU03200	Proline dehydrogenase 2 (PRODH 2) (EC 1.5.5.2) (Proline oxidase 2)	c
-O06745	yitJ BSU11010	Bifunctional homocysteine S-methyltransferase/5,10-methylenetetrahydrofolate reductase [Includes: Homocysteine S-methyltransferase (EC 2.1.1.10) (S-methylmethionine:homocysteine methyltransferase); 5,10-methylenetetrahydrofolate reductase (EC 1.5.1.20)]	c
-P13242	pyrG ctrA BSU37150	CTP synthase (EC 6.3.4.2) (Cytidine 5'-triphosphate synthase) (Cytidine triphosphate synthetase) (CTP synthetase) (CTPS) (UTP--ammonia ligase)	c
-P13243	fbaA fba fba1 tsr BSU37120	Probable fructose-bisphosphate aldolase (FBP aldolase) (FBPA) (EC 4.1.2.13) (Fructose-1,6-bisphosphate aldolase)	c
-Q05865	folC BSU28080	Dihydrofolate synthase/folylpolyglutamate synthase (DHFS / FPGS) (EC 6.3.2.12) (EC 6.3.2.17) (Folylpoly-gamma-glutamate synthetase-dihydrofolate synthetase) (Folylpolyglutamate synthetase) (Tetrahydrofolylpolyglutamate synthase)	c
-P19406	phoA phoAIV BSU09410	Alkaline phosphatase 4 (EC 3.1.3.1) (Alkaline phosphatase IV) (APase IV)	c
-O34667	luxS ytjB BSU30670	S-ribosylhomocysteine lyase (EC 4.4.1.21) (AI-2 synthesis protein) (Autoinducer-2 production protein LuxS)	c
-P53554	bioI CYP107H BSU30190	Biotin biosynthesis cytochrome P450 (EC 1.14.15.12)	c
-P54523	dxs yqiE BSU24270	1-deoxy-D-xylulose-5-phosphate synthase (EC 2.2.1.7) (1-deoxyxylulose-5-phosphate synthase) (DXP synthase) (DXPS)	c
-P46329	aldX yxaS yxbE BSU39860 VE7FR	Probable aldehyde dehydrogenase AldX (EC 1.2.1.3)	c
-P21883	pdhC aceC BSU14600	Dihydrolipoyllysine-residue acetyltransferase component of pyruvate dehydrogenase complex (EC 2.3.1.12) (Dihydrolipoamide acetyltransferase component of pyruvate dehydrogenase complex) (E2) (S complex, 48 kDa subunit)	c
-P53556	bioF BSU30220	8-amino-7-oxononanoate synthase 2 (AONS) (EC 2.3.1.47) (7-keto-8-amino-pelargonic acid synthase) (7-KAP synthase) (8-amino-7-ketopelargonate synthase)	c
-P53557	bioB BSU30200	Biotin synthase (EC 2.8.1.6)	c
-O31777	kbl BSU17000	8-amino-7-oxononanoate synthase 1 (AONS) (EC 2.3.1.47) (7-keto-8-amino-pelargonic acid synthase) (7-KAP synthase) (KAPA synthase) (8-amino-7-ketopelargonate synthase) (Alpha-oxoamine synthase)	c
-P21882	pdhB aceB BSU14590	Pyruvate dehydrogenase E1 component subunit beta (EC 1.2.4.1) (S complex, 36 kDa subunit)	c
-O34872	ytiB BSU30690	Putative carbonic anhydrase YtiB (EC 4.2.1.1) (Carbonate dehydratase)	c
-P46320	licH celD celF BSU38560	Probable 6-phospho-beta-glucosidase (EC 3.2.1.86)	c
-P53559	bioW BSU30240	6-carboxyhexanoate--CoA ligase (EC 6.2.1.14) (Pimeloyl-CoA synthase)	c
-P12046	purC BSU06450	Phosphoribosylaminoimidazole-succinocarboxamide synthase (EC 6.3.2.6) (SAICAR synthetase) (Vegetative protein 286A) (VEG286A)	c
-P80859	gndA yqjI BSU23860	6-phosphogluconate dehydrogenase, NADP(+)-dependent, decarboxylating (EC 1.1.1.44) (GNTZII)	c
-P80858	leuC BSU28260	3-isopropylmalate dehydratase large subunit (EC 4.2.1.33) (Alpha-IPM isomerase) (IPMI) (Isopropylmalate isomerase) (Superoxide-inducible protein 10) (SOI10)	c
-P11998	ribH BSU23250	6,7-dimethyl-8-ribityllumazine synthase (DMRL synthase) (LS) (Lumazine synthase) (EC 2.5.1.78) (Heavy riboflavin synthase beta subunit) (HRS beta subunit)	c
-O34744	sumT ylnD BSU15610	Uroporphyrinogen-III C-methyltransferase (Urogen III methylase) (EC 2.1.1.107) (SUMT) (Uroporphyrinogen III methylase) (UROM)	c
-P12045	purK BSU06430	N5-carboxyaminoimidazole ribonucleotide synthase (N5-CAIR synthase) (EC 6.3.4.18) (5-(carboxyamino)imidazole ribonucleotide synthetase)	c
-P12044	purE BSU06420	N5-carboxyaminoimidazole ribonucleotide mutase (N5-CAIR mutase) (EC 5.4.99.18) (5-(carboxyamino)imidazole ribonucleotide mutase)	c
-P12047	purB purE BSU06440	Adenylosuccinate lyase (ASL) (EC 4.3.2.2) (Adenylosuccinase) (ASase) (Glutamyl--tRNA ligase regulatory factor)	c
-P94556	racE glr murI BSU28390	Glutamate racemase 1 (EC 5.1.1.3)	c
-P12048	purH purHJ BSU06520	Bifunctional purine biosynthesis protein PurH [Includes: Phosphoribosylaminoimidazolecarboxamide formyltransferase (EC 2.1.2.3) (AICAR transformylase); IMP cyclohydrolase (EC 3.5.4.10) (ATIC) (IMP synthase) (Inosinicase)]	c
-O34577	cysC ylnC BSU15600	Probable adenylyl-sulfate kinase (EC 2.7.1.25) (APS kinase) (ATP adenosine-5'-phosphosulfate 3'-phosphotransferase) (Adenosine-5'-phosphosulfate kinase)	c
-P37251	ilvB BSU28310	Acetolactate synthase large subunit (AHAS) (EC 2.2.1.6) (Acetohydroxy-acid synthase large subunit) (ALS) (Vegetative protein 105) (VEG105)	c
-Q06756	ispF yacN BSU00910	2-C-methyl-D-erythritol 2,4-cyclodiphosphate synthase (MECDP-synthase) (MECPP-synthase) (MECPS) (EC 4.6.1.12)	c
-Q06755	ispD yacM BSU00900	2-C-methyl-D-erythritol 4-phosphate cytidylyltransferase (EC 2.7.7.60) (4-diphosphocytidyl-2C-methyl-D-erythritol synthase) (MEP cytidylyltransferase) (MCT)	c
-P37252	ilvH ilvN BSU28300	Acetolactate synthase small subunit (EC 2.2.1.6) (Acetohydroxy-acid synthase small subunit) (AHAS) (ALS)	c
-P25995	pyrC BSU15500	Dihydroorotase (DHOase) (EC 3.5.2.3)	c
-P42434	nasC narB nasBB BSU03310	Assimilatory nitrate reductase catalytic subunit (EC 1.7.99.4)	c
-P42437	nasF nasBE BSU03280	Uroporphyrinogen-III C-methyltransferase (Urogen III methylase) (EC 2.1.1.107) (SUMT) (Uroporphyrinogen III methylase) (UROM)	c
-O31620	thiD yjbV BSU11710	Hydroxymethylpyrimidine/phosphomethylpyrimidine kinase (EC 2.7.1.49) (EC 2.7.4.7) (Hydroxymethylpyrimidine kinase) (HMP kinase) (Hydroxymethylpyrimidine phosphate kinase) (HMP-P kinase) (HMP-phosphate kinase) (HMPP kinase)	c
-O34607	sdaAA ylpA BSU15860	Probable L-serine dehydratase, alpha chain (SDH) (EC 4.3.1.17) (L-serine deaminase) (L-SD)	c
-P25993	pyrAA BSU15510	Carbamoyl-phosphate synthase pyrimidine-specific small chain (EC 6.3.5.5) (Carbamoyl-phosphate synthetase glutamine chain)	c
-P37550	ispE ipk yabH BSU00460	4-diphosphocytidyl-2-C-methyl-D-erythritol kinase (CMK) (EC 2.7.1.148) (4-(cytidine-5'-diphospho)-2-C-methyl-D-erythritol kinase)	c
-P37941	bfmBAB bfmB1b BSU24040	2-oxoisovalerate dehydrogenase subunit beta (EC 1.2.4.4) (Branched-chain alpha-keto acid dehydrogenase E1 component beta chain) (BCKDH E1-beta)	c
-P37940	bfmBAA bfmB1a BSU24050	2-oxoisovalerate dehydrogenase subunit alpha (EC 1.2.4.4) (Branched-chain alpha-keto acid dehydrogenase E1 component alpha chain) (BCKDH E1-alpha)	c
-P37942	bfmBB bfmB bfmB2 BSU24030	Lipoamide acyltransferase component of branched-chain alpha-keto acid dehydrogenase complex (EC 2.3.1.168) (Branched-chain alpha-keto acid dehydrogenase complex component E2) (BCKAD-E2) (BCKADE2) (Dihydrolipoamide acetyltransferase component of branched-chain alpha-keto acid dehydrogenase complex) (Dihydrolipoamide branched chain transacylase) (Dihydrolipoyllysine-residue (2-methylpropanoyl)transferase)	c
-P12040	purN BSU06510	Phosphoribosylglycinamide formyltransferase (EC 2.1.2.2) (5'-phosphoribosylglycinamide transformylase) (GAR transformylase) (GART)	c
-P37946	ilvA BSU21770	L-threonine dehydratase biosynthetic IlvA (EC 4.3.1.19) (Threonine deaminase)	c
-P96738	capA pgsA ywtB BSU35880	PGA biosynthesis protein CapA	c
-P39138	rocF BSU40320	Arginase (EC 3.5.3.1)	c
-O32117	yutJ BSU32200	NADH dehydrogenase-like protein YutJ (EC 1.6.-.-)	c
-P80865	sucD BSU16100	Succinate--CoA ligase [ADP-forming] subunit alpha (EC 6.2.1.5) (Succinyl-CoA synthetase subunit alpha) (SCS-alpha)	c
-P17618	ribD ribG BSU23280	Riboflavin biosynthesis protein RibD [Includes: Diaminohydroxyphosphoribosylaminopyrimidine deaminase (DRAP deaminase) (EC 3.5.4.26) (Riboflavin-specific deaminase); 5-amino-6-(5-phosphoribosylamino)uracil reductase (EC 1.1.1.193) (HTP reductase)]	c
-P80861	yjlD BSU12290	NADH dehydrogenase-like protein YjlD (EC 1.6.99.-) (Glucose starvation-inducible protein 5) (GSI5)	c
-O34514	menC ytfD BSU30780	o-succinylbenzoate synthase (OSB synthase) (OSBS) (EC 4.2.1.113) (4-(2'-carboxyphenyl)-4-oxybutyric acid synthase) (o-succinylbenzoic acid synthase)	c
-O34411	hisK hisJ BSU29620	Histidinol-phosphatase (HolPase) (EC 3.1.3.15)	c
-O34450	nagA BSU35010	N-acetylglucosamine-6-phosphate deacetylase (GlcNAc 6-P deacetylase) (EC 3.5.1.25)	c
-P27620	tagA BSU35750	N-acetylglucosaminyldiphosphoundecaprenol N-acetyl-beta-D-mannosaminyltransferase (EC 2.4.1.187) (Major teichoic acid biosynthesis protein A) (N-acetylmannosaminyltransferase) (UDP-N-acetylmannosamine transferase) (UDP-N-acetylmannosamine:N-acetylglucosaminyl pyrophosphorylundecaprenol N-acetylmannosaminyltransferase)	c
-O32146	pucB yurE BSU32500	Purine catabolism protein PucB	c
-P94568	leuD BSU28250	3-isopropylmalate dehydratase small subunit (EC 4.2.1.33) (Alpha-IPM isomerase) (IPMI) (Isopropylmalate isomerase)	c
-P39634	rocA BSU37780 ipa-76d	1-pyrroline-5-carboxylate dehydrogenase (P5C dehydrogenase) (EC 1.2.1.88) (L-glutamate gamma-semialdehyde dehydrogenase)	c
-P94565	leuA BSU28280	2-isopropylmalate synthase (EC 2.3.3.13) (Alpha-IPM synthase) (Alpha-isopropylmalate synthase)	c
-P39142	pdp BSU39400	Pyrimidine-nucleoside phosphorylase (PYNP) (Py-NPase) (EC 2.4.2.2)	c
-O34598	guaD gde BSU13170	Guanine deaminase (GDEase) (Guanase) (Guanine aminase) (EC 3.5.4.3) (Guanine aminohydrolase) (GAH)	c
-P39633	rocG gudA yweB BSU37790 ipa-75d	Catabolic NAD-specific glutamate dehydrogenase RocG (NAD-GDH) (EC 1.4.1.2) (Glutamate dehydrogenase) (GlutDH) (Trigger enzyme RocG)	c
-P45694	tkt tktA BSU17890	Transketolase (TK) (EC 2.2.1.1)	c
-P39149	upp BSU36890 ipc-35d	Uracil phosphoribosyltransferase (EC 2.4.2.9) (UMP pyrophosphorylase) (UPRTase)	c
-O34591	acoB yfjJ BSU08070	Acetoin:2,6-dichlorophenolindophenol oxidoreductase subunit beta (Acetoin:DCPIP oxidoreductase-beta) (Ao:DCPIP OR) (EC 1.1.1.-) (TPP-dependent acetoin dehydrogenase E1 subunit beta)	c
-P54420	asnB asn BSU30540	Asparagine synthetase [glutamine-hydrolyzing] 1 (EC 6.3.5.4)	c
-P39126	icd citC BSU29130	Isocitrate dehydrogenase [NADP] (IDH) (EC 1.1.1.42) (IDP) (NADP(+)-specific ICDH) (Oxalosuccinate decarboxylase)	c
-P39120	citZ citA2 BSU29140	Citrate synthase 2 (EC 2.3.3.16) (Citrate synthase II)	c
-O05269	guaC yumD BSU32130	GMP reductase (EC 1.7.1.7) (Guanosine 5'-monophosphate oxidoreductase) (Guanosine monophosphate reductase)	c
-O34916	ykuR dapL BSU14190	N-acetyldiaminopimelate deacetylase (EC 3.5.1.47)	c
-P18185	carB cpaB BSU11240	Carbamoyl-phosphate synthase arginine-specific large chain (EC 6.3.5.5) (Carbamoyl-phosphate synthetase ammonia chain)	c
-O31714	fruK fruB BSU14390	1-phosphofructokinase (EC 2.7.1.56) (Fructose 1-phosphate kinase)	c
-P07819	sacA BSU38040 ipa-50d	Sucrose-6-phosphate hydrolase (Sucrase) (EC 3.2.1.26) (Invertase)	c
-P54382	folD yqiA BSU24310	Bifunctional protein FolD [Includes: Methylenetetrahydrofolate dehydrogenase (EC 1.5.1.5); Methenyltetrahydrofolate cyclohydrolase (EC 3.5.4.9)]	c
-O34911	ykoF BSU13240	Putative HMP/thiamine-binding protein YkoF	c
-P54304	hemN yqeR BSU25500	Oxygen-independent coproporphyrinogen-III oxidase-like protein YqeR (EC 1.3.99.-)	c
-P28819	pabA trpG BSU00750	Aminodeoxychorismate/anthranilate synthase component 2 (ADC synthase) (ADCS) (EC 2.6.1.85) (EC 4.1.3.27) (4-amino-4-deoxychorismate synthase component 2) (Aminodeoxychorismate synthase, glutamine amidotransferase component)	c
-P80877	metE metC BSU13180	5-methyltetrahydropteroyltriglutamate--homocysteine methyltransferase (EC 2.1.1.14) (Cobalamin-independent methionine synthase) (Methionine synthase, vitamin-B12 independent isozyme) (Superoxide-inducible protein 9) (SOI9)	c
-P12039	purD BSU06530	Phosphoribosylamine--glycine ligase (EC 6.3.4.13) (GARS) (Glycinamide ribonucleotide synthetase) (Phosphoribosylglycinamide synthetase)	c
-O34990	purU ykkE BSU13110	Formyltetrahydrofolate deformylase (EC 3.5.1.10) (Formyl-FH(4) hydrolase)	c
-P54547	zwf yqjJ BSU23850	Glucose-6-phosphate 1-dehydrogenase (G6PD) (EC 1.1.1.49) (Vegetative protein 11) (VEG11)	c
-P19465	folE mtrA BSU22780	GTP cyclohydrolase 1 (EC 3.5.4.16) (GTP cyclohydrolase I) (GTP-CH-I)	c
-P21879	guaB gnaB BSU00090	Inosine-5'-monophosphate dehydrogenase (IMP dehydrogenase) (IMPD) (IMPDH) (EC 1.1.1.205) (Superoxide-inducible protein 12) (SOI12)	c
-P16618	hemA BSU28170	Glutamyl-tRNA reductase (GluTR) (EC 1.2.1.70)	c
-P42416	iolE yxdE BSU39720 E83E	Inosose dehydratase (EC 4.2.1.44) (2-keto-myo-inositol dehydratase) (2KMI dehydratase)	c
-P42415	iolD yxdD BSU39730 E83D	3D-(3,5/4)-trihydroxycyclohexane-1,2-dione hydrolase (THcHDO hydrolase) (EC 3.7.1.22)	c
-P42414	iolC yxdC BSU39740 E83C	5-dehydro-2-deoxygluconokinase (EC 2.7.1.92) (2-deoxy-5-keto-D-gluconate kinase) (DKG kinase)	c
-P42412	iolA mmsA yxdA BSU39760 E83A	Methylmalonate semialdehyde dehydrogenase [acylating] (MMSA dehydrogenase) (MMSDH) (MSDH) (EC 1.2.1.27) (Malonate semialdehyde dehydrogenase [acetylating]) (MSA dehydrogenase) (EC 1.2.1.18)	c
-P16263	odhB citM BSU19360	Dihydrolipoyllysine-residue succinyltransferase component of 2-oxoglutarate dehydrogenase complex (EC 2.3.1.61) (2-oxoglutarate dehydrogenase complex component E2) (OGDC-E2) (Dihydrolipoamide succinyltransferase component of 2-oxoglutarate dehydrogenase complex)	c
-O34426	speH speD ytcF BSU29010	S-adenosylmethionine decarboxylase proenzyme (AdoMetDC) (SAMDC) (EC 4.1.1.50) [Cleaved into: S-adenosylmethionine decarboxylase beta chain; S-adenosylmethionine decarboxylase alpha chain]	c
-P94524	araB BSU28790	Ribulokinase (EC 2.7.1.16)	c
-P28820	pabB pab BSU00740	Aminodeoxychorismate synthase component 1 (ADC synthase) (ADCS) (EC 2.6.1.85) (4-amino-4-deoxychorismate synthase component 1)	c
-O31753	dxr yluB BSU16550	1-deoxy-D-xylulose 5-phosphate reductoisomerase (DXP reductoisomerase) (EC 1.1.1.267) (1-deoxyxylulose-5-phosphate reductoisomerase) (2-C-methyl-D-erythritol 4-phosphate synthase)	c
-P21248	hemD BSU28140	Uroporphyrinogen-III synthase (UROS) (EC 4.2.1.75) (Hydroxymethylbilane hydrolyase [cyclizing]) (Uroporphyrinogen-III cosynthase)	c
-P54716	glvA glv-1 glvG malA BSU08180	Maltose-6'-phosphate glucosidase (EC 3.2.1.122) (6-phospho-alpha-D-glucosidase) (6-phosphoryl-O-alpha-D-glucopyranosyl:phosphoglucohydrolase)	c
-P45745	dhbF BSU31960	Dimodular nonribosomal peptide synthase	c
-P16440	ribE ribB BSU23270	Riboflavin synthase (RS) (EC 2.5.1.9) (Heavy riboflavin synthase alpha subunit) (HRS alpha subunit) (Light riboflavin synthase)	c
-O32213	cysI yvgQ BSU33430	Sulfite reductase [NADPH] hemoprotein beta-component (SiR-HP) (SiRHP) (EC 1.8.1.2)	c
-O34962	ytsJ BSU29220	Probable NAD-dependent malic enzyme 4 (NAD-ME 4) (EC 1.1.1.38)	c
-P21881	pdhA aceA BSU14580	Pyruvate dehydrogenase E1 component subunit alpha (EC 1.2.4.1) (S complex, 42 kDa subunit) (Vegetative protein 220) (VEG220)	c
-O31404	acoA yfjK BSU08060	Acetoin:2,6-dichlorophenolindophenol oxidoreductase subunit alpha (Acetoin:DCPIP oxidoreductase-alpha) (Ao:DCPIP OR) (EC 1.1.1.-) (TPP-dependent acetoin dehydrogenase E1 subunit alpha)	c
-O32214	cysJ yvgR BSU33440	Sulfite reductase [NADPH] flavoprotein alpha-component (SiR-FP) (EC 1.8.1.2)	c
-O34813	sirC ylnF BSU15630	Precorrin-2 dehydrogenase (EC 1.3.1.76)	c
-P08066	sdhB BSU28430	Succinate dehydrogenase iron-sulfur subunit (EC 1.3.5.1)	c
-O31646	manA pmi yjdE BSU12020	Mannose-6-phosphate isomerase ManA (EC 5.3.1.8) (Phosphohexomutase) (Phosphomannose isomerase) (PMI)	c
-P42957	mtlD mtlB BSU03990	Mannitol-1-phosphate 5-dehydrogenase (EC 1.1.1.17)	c
-P42068	hutG BSU39380 EE57C	Formimidoylglutamase (EC 3.5.3.8) (Formiminoglutamase) (Formiminoglutamate hydrolase)	c
-O32029	yrrT BSU27280	Uncharacterized methyltransferase YrrT (EC 2.1.1.-)	c
-O31550	acoC yfjI BSU08080	Dihydrolipoyllysine-residue acetyltransferase component of acetoin cleaving system (EC 2.3.1.12) (Acetoin dehydrogenase E2 component) (Dihydrolipoamide acetyltransferase component of acetoin cleaving system)	c
-P09339	citB BSU18000	Aconitate hydratase A (ACN) (Aconitase) (EC 4.2.1.3) ((2R,3S)-2-methylisocitrate dehydratase) ((2S,3R)-3-hydroxybutane-1,2,3-tricarboxylate dehydratase) (Iron-responsive protein-like) (IRP-like) (Probable 2-methyl-cis-aconitate hydratase) (EC 4.2.1.99) (RNA-binding protein)	c
-P80886	sucC BSU16090	Succinate--CoA ligase [ADP-forming] subunit beta (EC 6.2.1.5) (Succinyl-CoA synthetase subunit beta) (SCS-beta)	c
-P31104	aroC aroF BSU22710	Chorismate synthase (CS) (EC 4.2.3.5) (5-enolpyruvylshikimate-3-phosphate phospholyase)	c
-O34981	dapH ykuQ BSU14180	2,3,4,5-tetrahydropyridine-2,6-dicarboxylate N-acetyltransferase (EC 2.3.1.89) (Tetrahydrodipicolinate N-acetyltransferase) (THP acetyltransferase) (Tetrahydropicolinate acetylase)	c
-P05654	pyrB BSU15490	Aspartate carbamoyltransferase (EC 2.1.3.2) (Aspartate transcarbamylase) (ATCase)	c
-P80885	pyk pykA BSU29180	Pyruvate kinase (PK) (EC 2.7.1.40) (Vegetative protein 17) (VEG17)	c
-O34824	glmM ybbT BSU01770	Phosphoglucosamine mutase (EC 5.4.2.10)	c
-O34632	sirB ylnE BSU15620	Sirohydrochlorin ferrochelatase (EC 4.99.1.4)	c
-P94463	fmt yloL BSU15730	Methionyl-tRNA formyltransferase (EC 2.1.2.9)	c
-P94462	defA def yloK BSU15720	Peptide deformylase 1 (PDF 1) (EC 3.5.1.88) (Polypeptide deformylase 1)	c
-O34635	sdaAB yloW BSU15850	Probable L-serine dehydratase, beta chain (SDH) (EC 4.3.1.17) (L-serine deaminase) (L-SD)	c
-O34764	sat ylnB BSU15590	Sulfate adenylyltransferase (EC 2.7.7.4) (ATP-sulfurylase) (Sulfate adenylate transferase) (SAT)	c
-O05514	thiL ydiA ydxA BSU05900	Thiamine-monophosphate kinase (TMP kinase) (Thiamine-phosphate kinase) (EC 2.7.4.16)	c
-O34340	fabF yjaY BSU11340	3-oxoacyl-[acyl-carrier-protein] synthase 2 (EC 2.3.1.179) (3-oxoacyl-[acyl-carrier-protein] synthase II) (Beta-ketoacyl-ACP synthase II) (KAS II)	c
-P07601	trpA BSU22630	Tryptophan synthase alpha chain (EC 4.2.1.20)	c
-P37253	ilvC BSU28290	Ketol-acid reductoisomerase (NADP(+)) (KARI) (EC 1.1.1.86) (Acetohydroxy-acid isomeroreductase) (AHIR) (Alpha-keto-beta-hydroxylacyl reductoisomerase) (Ketol-acid reductoisomerase type 1) (Ketol-acid reductoisomerase type I)	c
-P23630	lysA lys BSU23380	Diaminopimelate decarboxylase (DAP decarboxylase) (DAPDC) (EC 4.1.1.20)	c
-O31717	ykpB BSU14440	Uncharacterized oxidoreductase YkpB (EC 1.1.1.-)	c
-P49787	accC1 accC yqhX BSU24340	Biotin carboxylase 1 (EC 6.3.4.14) (Acetyl-CoA carboxylase subunit A 1) (ACC 1) (EC 6.4.1.2)	c
-P29727	guaA BSU06360	GMP synthase [glutamine-hydrolyzing] (EC 6.3.5.2) (GMP synthetase) (Glutamine amidotransferase)	c
-P19079	cdd BSU25300	Cytidine deaminase (CDA) (EC 3.5.4.5) (Cytidine aminohydrolase)	c
-P12011	gntK BSU40060	Gluconokinase (EC 2.7.1.12) (Gluconate kinase)	c
-P45743	dhbB BSU31970	Isochorismatase (EC 3.3.2.1) (2,3 dihydro-2,3 dihydroxybenzoate synthase) (Superoxide-inducible protein 1) (SOI1)	c
-P18159	pgcA gtaC gtaE yhxB BSU09310	Phosphoglucomutase (PGM) (EC 5.4.2.2) (Alpha-phosphoglucomutase) (Glucose phosphomutase)	c
-P35136	serA BSU23070	D-3-phosphoglycerate dehydrogenase (PGDH) (EC 1.1.1.95) (2-oxoglutarate reductase) (EC 1.1.1.399)	c
-Q45582	murQ ybbI BSU01700	N-acetylmuramic acid 6-phosphate etherase (MurNAc-6-P etherase) (EC 4.2.1.126) (N-acetylmuramic acid 6-phosphate hydrolase) (N-acetylmuramic acid 6-phosphate lyase)	c
-P03947	trpD BSU22670	Anthranilate phosphoribosyltransferase (EC 2.4.2.18)	c
-P50621	nrdF BSU17390	Ribonucleoside-diphosphate reductase subunit beta (EC 1.17.4.1) (Ribonucleotide reductase small subunit)	c
-P50620	nrdE nrdA BSU17380	Ribonucleoside-diphosphate reductase subunit alpha (EC 1.17.4.1) (Ribonucleotide reductase large subunit)	c
-P54482	ispG yqfY BSU25070	4-hydroxy-3-methylbut-2-en-1-yl diphosphate synthase (flavodoxin) (EC 1.17.7.3) (1-hydroxy-2-methyl-2-(E)-butenyl 4-diphosphate synthase)	c
-Q04777	alsD BSU36000	Alpha-acetolactate decarboxylase (EC 4.1.1.5)	c
-Q796V8	hemZ yhaV yhaW BSU09840	Oxygen-independent coproporphyrinogen-III oxidase-like protein HemZ (EC 1.3.99.-)	c
-P94391	putC ycgN BSU03210	1-pyrroline-5-carboxylate dehydrogenase 2 (P5C dehydrogenase 2) (EC 1.2.1.88) (L-glutamate gamma-semialdehyde dehydrogenase)	c
-P17731	hisC hisH BSU22620	Histidinol-phosphate aminotransferase (EC 2.6.1.9) (Imidazole acetol-phosphate transaminase)	c
-P51831	fabG ylpF BSU15910	3-oxoacyl-[acyl-carrier-protein] reductase FabG (EC 1.1.1.100) (3-ketoacyl-acyl carrier protein reductase) (Beta-Ketoacyl-acyl carrier protein reductase) (Beta-ketoacyl-ACP reductase)	c
-P26899	ansB BSU23570	Aspartate ammonia-lyase (Aspartase) (EC 4.3.1.1)	c
-P35146	aroD aroC BSU23080	3-dehydroquinate dehydratase (3-dehydroquinase) (EC 4.2.1.10) (Type I DHQase) (Type I dehydroquinase) (DHQ1)	c
-P39596	efeM ywbM BSU38270 ipa-28d	Probable iron uptake system component EfeM	c
-Q45597	fbp yydE BSU40190	Fructose-1,6-bisphosphatase class 3 (FBPase class 3) (EC 3.1.3.11) (D-fructose-1,6-bisphosphate 1-phosphohydrolase class 3)	c
-P42433	nasB nasBA BSU03320	Assimilatory nitrate reductase electron transfer subunit	c
-Q06004	gutB BSU06150	Sorbitol dehydrogenase (EC 1.1.1.14) (Glucitol dehydrogenase) (L-iditol 2-dehydrogenase)	c
-O35033	coaBC yloI BSU15700	Probable coenzyme A biosynthesis bifunctional protein CoaBC (DNA/pantothenate metabolism flavoprotein) [Includes: Phosphopantothenoylcysteine decarboxylase (PPCDC) (EC 4.1.1.36) (CoaC); Phosphopantothenate--cysteine ligase (EC 6.3.2.5) (CoaB) (PPC synthetase) (PPCS) (Phosphopantothenoylcysteine synthase)]	c
-P39666	nadC yrxB BSU27860	Probable nicotinate-nucleotide pyrophosphorylase [carboxylating] (EC 2.4.2.19) (General stress protein 70) (GSP70) (Quinolinate phosphoribosyltransferase [decarboxylating]) (QAPRTase)	c
-P39912	aroA BSU29750	Protein AroA(G) [Includes: Phospho-2-dehydro-3-deoxyheptonate aldolase (EC 2.5.1.54) (3-deoxy-D-arabino-heptulosonate 7-phosphate synthase) (DAHP synthase) (Phospho-2-keto-3-deoxyheptonate aldolase); Chorismate mutase (EC 5.4.99.5)]	c
+P16440	ribE ribB BSU23270	Riboflavin synthase (RS) (EC 2.5.1.9) (Heavy riboflavin synthase alpha subunit) (HRS alpha subunit) (Light riboflavin synthase)	Cytoplasm
+P37529	dck dak yaaF BSU00140	Deoxyadenosine/deoxycytidine kinase (dAK/dCK) (EC 2.7.1.74) (EC 2.7.1.76)	Cytoplasm
+P94523	araA BSU28800	L-arabinose isomerase (EC 5.3.1.4)	Cytoplasm
+P25993	pyrAA BSU15510	Carbamoyl-phosphate synthase pyrimidine-specific small chain (EC 6.3.5.5) (Carbamoyl-phosphate synthetase glutamine chain)	Cytoplasm
+P39138	rocF BSU40320	Arginase (EC 3.5.3.1)	Cytoplasm
+P23970	menD BSU30820	2-succinyl-5-enolpyruvyl-6-hydroxy-3-cyclohexene-1-carboxylate synthase (SEPHCHC synthase) (EC 2.2.1.9) (Menaquinone biosynthesis protein MenD)	Cytoplasm
+P26899	ansB BSU23570	Aspartate ammonia-lyase (Aspartase) (EC 4.3.1.1)	Cytoplasm
+P03963	trpE BSU22680	Anthranilate synthase component 1 (AS) (ASI) (EC 4.1.3.27)	Cytoplasm
+P39142	pdp BSU39400	Pyrimidine-nucleoside phosphorylase (PYNP) (Py-NPase) (EC 2.4.2.2)	Cytoplasm
+P13242	pyrG ctrA BSU37150	CTP synthase (EC 6.3.4.2) (Cytidine 5'-triphosphate synthase) (Cytidine triphosphate synthetase) (CTP synthetase) (CTPS) (UTP--ammonia ligase)	Cytoplasm
+P19406	phoA phoAIV BSU09410	Alkaline phosphatase 4 (EC 3.1.3.1) (Alkaline phosphatase IV) (APase IV)	Cytoplasm
+O31617	thiS yjbS BSU11680	Sulfur carrier protein ThiS (Thiamine biosynthesis protein ThiS)	Cytoplasm
+P37941	bfmBAB bfmB1b BSU24040	2-oxoisovalerate dehydrogenase subunit beta (EC 1.2.4.4) (Branched-chain alpha-keto acid dehydrogenase E1 component beta chain) (BCKDH E1-beta)	Cytoplasm
+O31777	kbl BSU17000	8-amino-7-oxononanoate synthase 1 (AONS) (EC 2.3.1.47) (7-keto-8-amino-pelargonic acid synthase) (7-KAP synthase) (KAPA synthase) (8-amino-7-ketopelargonate synthase) (Alpha-oxoamine synthase)	Cytoplasm
+O34635	sdaAB yloW BSU15850	Probable L-serine dehydratase, beta chain (SDH) (EC 4.3.1.17) (L-serine deaminase) (L-SD)	Cytoplasm
+O34962	ytsJ BSU29220	Probable NAD-dependent malic enzyme 4 (NAD-ME 4) (EC 1.1.1.38)	Cytoplasm
+P37550	ispE ipk yabH BSU00460	4-diphosphocytidyl-2-C-methyl-D-erythritol kinase (CMK) (EC 2.7.1.148) (4-(cytidine-5'-diphospho)-2-C-methyl-D-erythritol kinase)	Cytoplasm
+P29727	guaA BSU06360	GMP synthase [glutamine-hydrolyzing] (EC 6.3.5.2) (GMP synthetase) (Glutamine amidotransferase)	Cytoplasm
+O32146	pucB yurE BSU32500	Purine catabolism protein PucB	Cytoplasm
+P37946	ilvA BSU21770	L-threonine dehydratase biosynthetic IlvA (EC 4.3.1.19) (Threonine deaminase)	Cytoplasm
+P03947	trpD BSU22670	Anthranilate phosphoribosyltransferase (EC 2.4.2.18)	Cytoplasm
+P53556	bioF BSU30220	8-amino-7-oxononanoate synthase 2 (AONS) (EC 2.3.1.47) (7-keto-8-amino-pelargonic acid synthase) (7-KAP synthase) (8-amino-7-ketopelargonate synthase)	Cytoplasm
+O34607	sdaAA ylpA BSU15860	Probable L-serine dehydratase, alpha chain (SDH) (EC 4.3.1.17) (L-serine deaminase) (L-SD)	Cytoplasm
+P71019	fabD ylpE BSU15900	Malonyl CoA-acyl carrier protein transacylase (MCT) (EC 2.3.1.39)	Cytoplasm
+P11045	dfrA BSU21810	Dihydrofolate reductase (EC 1.5.1.3)	Cytoplasm
+O34911	ykoF BSU13240	Putative HMP/thiamine-binding protein YkoF	Cytoplasm
+O31717	ykpB BSU14440	Uncharacterized oxidoreductase YkpB (EC 1.1.1.-)	Cytoplasm
+P45743	dhbB BSU31970	Isochorismatase (EC 3.3.2.1) (2,3 dihydro-2,3 dihydroxybenzoate synthase) (Superoxide-inducible protein 1) (SOI1)	Cytoplasm
+O34340	fabF yjaY BSU11340	3-oxoacyl-[acyl-carrier-protein] synthase 2 (EC 2.3.1.179) (3-oxoacyl-[acyl-carrier-protein] synthase II) (Beta-ketoacyl-ACP synthase II) (KAS II)	Cytoplasm
+O32117	yutJ BSU32200	NADH dehydrogenase-like protein YutJ (EC 1.6.-.-)	Cytoplasm
+P49787	accC1 accC yqhX BSU24340	Biotin carboxylase 1 (EC 6.3.4.14) (Acetyl-CoA carboxylase subunit A 1) (ACC 1) (EC 6.4.1.2)	Cytoplasm
+Q04777	alsD BSU36000	Alpha-acetolactate decarboxylase (EC 4.1.1.5)	Cytoplasm
+O34591	acoB yfjJ BSU08070	Acetoin:2,6-dichlorophenolindophenol oxidoreductase subunit beta (Acetoin:DCPIP oxidoreductase-beta) (Ao:DCPIP OR) (EC 1.1.1.-) (TPP-dependent acetoin dehydrogenase E1 subunit beta)	Cytoplasm
+O35000	nagB BSU35020	Glucosamine-6-phosphate deaminase 1 (EC 3.5.99.6) (GlcN6P deaminase 1) (GNPDA 1) (Glucosamine-6-phosphate isomerase 1)	Cytoplasm
+P27620	tagA BSU35750	N-acetylglucosaminyldiphosphoundecaprenol N-acetyl-beta-D-mannosaminyltransferase (EC 2.4.1.187) (Major teichoic acid biosynthesis protein A) (N-acetylmannosaminyltransferase) (UDP-N-acetylmannosamine transferase) (UDP-N-acetylmannosamine:N-acetylglucosaminyl pyrophosphorylundecaprenol N-acetylmannosaminyltransferase)	Cytoplasm
+P80885	pyk pykA BSU29180	Pyruvate kinase (PK) (EC 2.7.1.40) (Vegetative protein 17) (VEG17)	Cytoplasm
+P45694	tkt tktA BSU17890	Transketolase (TK) (EC 2.2.1.1)	Cytoplasm
+P16618	hemA BSU28170	Glutamyl-tRNA reductase (GluTR) (EC 1.2.1.70)	Cytoplasm
+P42434	nasC narB nasBB BSU03310	Assimilatory nitrate reductase catalytic subunit (EC 1.7.99.4)	Cytoplasm
+O32143	pucE yurB BSU32470	Probable xanthine dehydrogenase subunit E (XDHase subunit E) (EC 1.17.1.4)	Cytoplasm
+P94524	araB BSU28790	Ribulokinase (EC 2.7.1.16)	Cytoplasm
+P39578	dltD BSU38530 ipa-2r	Protein DltD	Cytoplasm
+P05654	pyrB BSU15490	Aspartate carbamoyltransferase (EC 2.1.3.2) (Aspartate transcarbamylase) (ATCase)	Cytoplasm
+O31668	mtnB ykrY BSU13610	Methylthioribulose-1-phosphate dehydratase (MTRu-1-P dehydratase) (EC 4.2.1.109)	Cytoplasm
+P10725	alr1 alr dal BSU04640	Alanine racemase 1 (EC 5.1.1.1)	Cytoplasm
+P37527	pdxS yaaD BSU00110	Pyridoxal 5'-phosphate synthase subunit PdxS (PLP synthase subunit PdxS) (EC 4.3.3.6) (Pdx1) (Superoxide-inducible protein 7) (SOI7)	Cytoplasm
+P94568	leuD BSU28250	3-isopropylmalate dehydratase small subunit (EC 4.2.1.33) (Alpha-IPM isomerase) (IPMI) (Isopropylmalate isomerase)	Cytoplasm
+P17618	ribD ribG BSU23280	Riboflavin biosynthesis protein RibD [Includes: Diaminohydroxyphosphoribosylaminopyrimidine deaminase (DRAP deaminase) (EC 3.5.4.26) (Riboflavin-specific deaminase); 5-amino-6-(5-phosphoribosylamino)uracil reductase (EC 1.1.1.193) (HTP reductase)]	Cytoplasm
+O34557	rpe yloR BSU15790	Ribulose-phosphate 3-epimerase (EC 5.1.3.1) (Pentose-5-phosphate 3-epimerase) (PPE) (R5P3E)	Cytoplasm
+P07600	trpB BSU22640	Tryptophan synthase beta chain (EC 4.2.1.20)	Cytoplasm
+O32090	pncB yueK BSU31750	Nicotinate phosphoribosyltransferase (NAPRTase) (EC 6.3.4.21)	Cytoplasm
+P28820	pabB pab BSU00740	Aminodeoxychorismate synthase component 1 (ADC synthase) (ADCS) (EC 2.6.1.85) (4-amino-4-deoxychorismate synthase component 1)	Cytoplasm
+P54304	hemN yqeR BSU25500	Oxygen-independent coproporphyrinogen-III oxidase-like protein YqeR (EC 1.3.99.-)	Cytoplasm
+O34667	luxS ytjB BSU30670	S-ribosylhomocysteine lyase (EC 4.4.1.21) (AI-2 synthesis protein) (Autoinducer-2 production protein LuxS)	Cytoplasm
+O05510	gmuE ydhR BSU05860	Putative fructokinase (EC 2.7.1.4) (Glucomannan utilization protein E)	Cytoplasm
+P07601	trpA BSU22630	Tryptophan synthase alpha chain (EC 4.2.1.20)	Cytoplasm
+P53557	bioB BSU30200	Biotin synthase (EC 2.8.1.6)	Cytoplasm
+P12046	purC BSU06450	Phosphoribosylaminoimidazole-succinocarboxamide synthase (EC 6.3.2.6) (SAICAR synthetase) (Vegetative protein 286A) (VEG286A)	Cytoplasm
+P12040	purN BSU06510	Phosphoribosylglycinamide formyltransferase (EC 2.1.2.2) (5'-phosphoribosylglycinamide transformylase) (GAR transformylase) (GART)	Cytoplasm
+P54374	aroE aroD BSU25660	Shikimate dehydrogenase (NADP(+)) (SDH) (EC 1.1.1.25)	Cytoplasm
+O34872	ytiB BSU30690	Putative carbonic anhydrase YtiB (EC 4.2.1.1) (Carbonate dehydratase)	Cytoplasm
+P18157	glpK BSU09290	Glycerol kinase (EC 2.7.1.30) (ATP:glycerol 3-phosphotransferase) (Glycerokinase) (GK)	Cytoplasm
+P42068	hutG BSU39380 EE57C	Formimidoylglutamase (EC 3.5.3.8) (Formiminoglutamase) (Formiminoglutamate hydrolase) (N-formimino-L-glutamate formiminohydrolase)	Cytoplasm
+P51831	fabG ylpF BSU15910	3-oxoacyl-[acyl-carrier-protein] reductase FabG (EC 1.1.1.100) (3-ketoacyl-acyl carrier protein reductase) (Beta-Ketoacyl-acyl carrier protein reductase) (Beta-ketoacyl-ACP reductase)	Cytoplasm
+P42437	nasF nasBE BSU03280	Uroporphyrinogen-III C-methyltransferase (Urogen III methylase) (EC 2.1.1.107) (SUMT) (Uroporphyrinogen III methylase) (UROM)	Cytoplasm
+P94462	defA def yloK BSU15720	Peptide deformylase 1 (PDF 1) (EC 3.5.1.88) (Polypeptide deformylase 1)	Cytoplasm
+P42414	iolC yxdC BSU39740 E83C	5-dehydro-2-deoxygluconokinase (EC 2.7.1.92) (2-deoxy-5-keto-D-gluconate kinase) (DKG kinase)	Cytoplasm
+P30950	hemB BSU28130	Delta-aminolevulinic acid dehydratase (ALAD) (ALADH) (EC 4.2.1.24) (Porphobilinogen synthase)	Cytoplasm
+P94391	putC ycgN BSU03210	1-pyrroline-5-carboxylate dehydrogenase 2 (P5C dehydrogenase 2) (EC 1.2.1.88) (L-glutamate gamma-semialdehyde dehydrogenase)	Cytoplasm
+O34824	glmM ybbT BSU01770	Phosphoglucosamine mutase (EC 5.4.2.10)	Cytoplasm
+P36838	carA cpaA BSU11230	Carbamoyl-phosphate synthase arginine-specific small chain (EC 6.3.5.5) (Carbamoyl-phosphate synthetase glutamine chain)	Cytoplasm
+P54716	glvA glv-1 glvG malA BSU08180	Maltose-6'-phosphate glucosidase (EC 3.2.1.122) (6-phospho-alpha-D-glucosidase) (6-phosphoryl-O-alpha-D-glucopyranosyl:phosphoglucohydrolase)	Cytoplasm
+O34411	hisK hisJ BSU29620	Histidinol-phosphatase (HolPase) (EC 3.1.3.15)	Cytoplasm
+P35146	aroD aroC BSU23080	3-dehydroquinate dehydratase (3-dehydroquinase) (EC 4.2.1.10) (Type I DHQase) (Type I dehydroquinase) (DHQ1)	Cytoplasm
+O34764	sat ylnB BSU15590	Sulfate adenylyltransferase (EC 2.7.7.4) (ATP-sulfurylase) (Sulfate adenylate transferase) (SAT)	Cytoplasm
+P37253	ilvC BSU28290	Ketol-acid reductoisomerase (NADP(+)) (KARI) (EC 1.1.1.86) (Acetohydroxy-acid isomeroreductase) (AHIR) (Alpha-keto-beta-hydroxylacyl reductoisomerase) (Ketol-acid reductoisomerase type 1) (Ketol-acid reductoisomerase type I)	Cytoplasm
+O32137	allB pucH yunH BSU32410	Allantoinase (EC 3.5.2.5) (Allantoin-utilizing enzyme)	Cytoplasm
+P42957	mtlD mtlB BSU03990	Mannitol-1-phosphate 5-dehydrogenase (EC 1.1.1.17)	Cytoplasm
+P23129	odhA citK BSU19370	2-oxoglutarate dehydrogenase E1 component (EC 1.2.4.2) (Alpha-ketoglutarate dehydrogenase)	Cytoplasm
+O32214	cysJ yvgR BSU33440	Sulfite reductase [NADPH] flavoprotein alpha-component (SiR-FP) (EC 1.8.1.2)	Cytoplasm
+P21881	pdhA aceA BSU14580	Pyruvate dehydrogenase E1 component subunit alpha (EC 1.2.4.1) (S complex, 42 kDa subunit) (Vegetative protein 220) (VEG220)	Cytoplasm
+P17620	ribBA ribA BSU23260	Riboflavin biosynthesis protein RibBA [Includes: 3,4-dihydroxy-2-butanone 4-phosphate synthase (DHBP synthase) (EC 4.1.99.12); GTP cyclohydrolase-2 (EC 3.5.4.25) (GTP cyclohydrolase II)]	Cytoplasm
+P31112	hepS gerC1 gerCA hepA BSU22760	Heptaprenyl diphosphate synthase component 1 (HepPP synthase subunit 1) (EC 2.5.1.30) (Spore germination protein C1)	Cytoplasm
+O31461	ilvE ybgE BSU02390	Branched-chain-amino-acid transaminase 1 (BCAT 1) (EC 2.6.1.42)	Cytoplasm
+P70999	speB ywhG BSU37490	Agmatinase (EC 3.5.3.11) (Agmatine ureohydrolase) (AUH)	Cytoplasm
+P23974	menH ytfB ytxM BSU30810	Putative 2-succinyl-6-hydroxy-2,4-cyclohexadiene-1-carboxylate synthase (SHCHC synthase) (EC 4.2.99.20)	Cytoplasm
+P25995	pyrC BSU15500	Dihydroorotase (DHOase) (EC 3.5.2.3)	Cytoplasm
+O32029	yrrT BSU27280	Uncharacterized methyltransferase YrrT (EC 2.1.1.-)	Cytoplasm
+P80858	leuC BSU28260	3-isopropylmalate dehydratase large subunit (EC 4.2.1.33) (Alpha-IPM isomerase) (IPMI) (Isopropylmalate isomerase) (Superoxide-inducible protein 10) (SOI10)	Cytoplasm
+P80859	gndA yqjI BSU23860	6-phosphogluconate dehydrogenase, NADP(+)-dependent, decarboxylating (EC 1.1.1.44) (GNTZII)	Cytoplasm
+P39633	rocG gudA yweB BSU37790 ipa-75d	Catabolic NAD-specific glutamate dehydrogenase RocG (NAD-GDH) (EC 1.4.1.2) (Glutamate dehydrogenase) (GlutDH) (Trigger enzyme RocG)	Cytoplasm
+P53559	bioW BSU30240	6-carboxyhexanoate--CoA ligase (EC 6.2.1.14) (Pimeloyl-CoA synthase)	Cytoplasm
+P50621	nrdF BSU17390	Ribonucleoside-diphosphate reductase subunit beta (EC 1.17.4.1) (Ribonucleotide reductase small subunit)	Cytoplasm
+P37537	tmk yaaP BSU00280	Thymidylate kinase (EC 2.7.4.9) (dTMP kinase)	Cytoplasm
+P46354	punA deoD pnp yqkO BSU23490	Purine nucleoside phosphorylase 1 (PNP 1) (EC 2.4.2.1) (Inosine phosphorylase) (Inosine-guanosine phosphorylase) (Purine nucleoside phosphorylase I) (PNP I) (Pu-NPase I)	Cytoplasm
+P37940	bfmBAA bfmB1a BSU24050	2-oxoisovalerate dehydrogenase subunit alpha (EC 1.2.4.4) (Branched-chain alpha-keto acid dehydrogenase E1 component alpha chain) (BCKDH E1-alpha)	Cytoplasm
+P28822	sul BSU00770	Dihydropteroate synthase (DHPS) (EC 2.5.1.15) (Dihydropteroate pyrophosphorylase)	Cytoplasm
+O34514	menC ytfD BSU30780	o-succinylbenzoate synthase (OSB synthase) (OSBS) (EC 4.2.1.113) (4-(2'-carboxyphenyl)-4-oxybutyric acid synthase) (o-succinylbenzoic acid synthase)	Cytoplasm
+O32147	pucA yurF BSU32510	Probable xanthine dehydrogenase subunit A (XDHase subunit A) (EC 1.17.1.4)	Cytoplasm
+Q06756	ispF yacN BSU00910	2-C-methyl-D-erythritol 2,4-cyclodiphosphate synthase (MECDP-synthase) (MECPP-synthase) (MECPS) (EC 4.6.1.12)	Cytoplasm
+O31663	mtnK ykrT BSU13560	Methylthioribose kinase (MTR kinase) (EC 2.7.1.100)	Cytoplasm
+P19582	hom tdm BSU32260	Homoserine dehydrogenase (HDH) (EC 1.1.1.3)	Cytoplasm
+P12044	purE BSU06420	N5-carboxyaminoimidazole ribonucleotide mutase (N5-CAIR mutase) (EC 5.4.99.18) (5-(carboxyamino)imidazole ribonucleotide mutase)	Cytoplasm
+P26935	iolG idh BSU39700 E83G	Inositol 2-dehydrogenase/D-chiro-inositol 3-dehydrogenase (EC 1.1.1.18) (EC 1.1.1.369) (Myo-inositol 2-dehydrogenase/D-chiro-inositol 3-dehydrogenase) (MI 2-dehydrogenase/DCI 3-dehydrogenase)	Cytoplasm
+O34389	malS BSU29880	Probable NAD-dependent malic enzyme 3 (NAD-ME 3) (EC 1.1.1.38)	Cytoplasm
+P45745	dhbF BSU31960	Dimodular nonribosomal peptide synthase	Cytoplasm
+P00497	purF BSU06490	Amidophosphoribosyltransferase (ATase) (EC 2.4.2.14) (Glutamine phosphoribosylpyrophosphate amidotransferase) (GPATase)	Cytoplasm
+P39156	ywlF BSU36920 ipc-32d	Putative sugar phosphate isomerase YwlF (EC 5.3.1.-)	Cytoplasm
+P54378	gcvT yqhI BSU24570	Aminomethyltransferase (EC 2.1.2.10) (Glycine cleavage system T protein)	Cytoplasm
+O34664	thiN yloS BSU15800	Thiamine pyrophosphokinase (TPK) (EC 2.7.6.2) (Thiamine diphosphokinase)	Cytoplasm
+P94556	racE glr murI BSU28390	Glutamate racemase 1 (EC 5.1.1.3)	Cytoplasm
+P42420	iolJ fbaB yxdI BSU39670 B65C	6-phospho-5-dehydro-2-deoxy-D-gluconate aldolase (DKGP aldolase) (EC 4.1.2.29)	Cytoplasm
+O31666	mtnW ykrW BSU13590	2,3-diketo-5-methylthiopentyl-1-phosphate enolase (DK-MTP-1-P enolase) (EC 5.3.2.5) (RuBisCO-like protein) (RLP)	Cytoplasm
+P39120	citZ citA2 BSU29140	Citrate synthase 2 (EC 2.3.3.16) (Citrate synthase II)	Cytoplasm
+O34651	hisD BSU34910	Histidinol dehydrogenase (HDH) (EC 1.1.1.23)	Cytoplasm
+Q04797	asd BSU16750	Aspartate-semialdehyde dehydrogenase (ASA dehydrogenase) (ASADH) (EC 1.2.1.11) (Aspartate-beta-semialdehyde dehydrogenase)	Cytoplasm
+P42433	nasB nasBA BSU03320	Assimilatory nitrate reductase electron transfer subunit	Cytoplasm
+P50618	nrdI ymaA BSU17370	Protein NrdI	Cytoplasm
+O32142	pucM yunM BSU32460	5-hydroxyisourate hydrolase (HIU hydrolase) (HIUHase) (EC 3.5.2.17) (Transthyretin-related protein) (TRP)	Cytoplasm
+Q45582	murQ ybbI BSU01700	N-acetylmuramic acid 6-phosphate etherase (MurNAc-6-P etherase) (EC 4.2.1.126) (N-acetylmuramic acid 6-phosphate hydrolase) (N-acetylmuramic acid 6-phosphate lyase)	Cytoplasm
+O31714	fruK fruB BSU14390	1-phosphofructokinase (EC 2.7.1.56) (Fructose 1-phosphate kinase)	Cytoplasm
+P80877	metE metC BSU13180	5-methyltetrahydropteroyltriglutamate--homocysteine methyltransferase (EC 2.1.1.14) (Cobalamin-independent methionine synthase) (Methionine synthase, vitamin-B12 independent isozyme) (Superoxide-inducible protein 9) (SOI9)	Cytoplasm
+P39596	efeM ywbM BSU38270 ipa-28d	Probable iron uptake system component EfeM	Cytoplasm
+P31114	hepT gerC3 gerCC hepB BSU22740	Heptaprenyl diphosphate synthase component 2 (HepPP synthase subunit 2) (EC 2.5.1.30) (Spore germination protein C3)	Cytoplasm
+O31669	mtnD ykrZ BSU13620	Acireductone dioxygenase (1,2-dihydroxy-3-keto-5-methylthiopentene dioxygenase) (DHK-MTPene dioxygenase) (Acireductone dioxygenase (Fe(2+)-requiring)) (ARD') (Fe-ARD) (EC 1.13.11.54) (Acireductone dioxygenase (Ni(2+)-requiring)) (ARD) (Ni-ARD) (EC 1.13.11.53)	Cytoplasm
+P37252	ilvH ilvN BSU28300	Acetolactate synthase small subunit (EC 2.2.1.6) (Acetohydroxy-acid synthase small subunit) (AHAS) (ALS)	Cytoplasm
+O34925	deoD punB BSU19630	Purine nucleoside phosphorylase DeoD-type (PNP) (EC 2.4.2.1) (Purine nucleoside phosphorylase II) (PU-NPase II)	Cytoplasm
+P08066	sdhB BSU28430	Succinate dehydrogenase iron-sulfur subunit (EC 1.3.5.1)	Cytoplasm
+P20167	trpF BSU22650	N-(5'-phosphoribosyl)anthranilate isomerase (PRAI) (EC 5.3.1.24)	Cytoplasm
+P11998	ribH BSU23250	6,7-dimethyl-8-ribityllumazine synthase (DMRL synthase) (LS) (Lumazine synthase) (EC 2.5.1.78) (Heavy riboflavin synthase beta subunit) (HRS beta subunit)	Cytoplasm
+P53554	bioI CYP107H BSU30190	Biotin biosynthesis cytochrome P450 (EC 1.14.14.46)	Cytoplasm
+O06491	gatA yedB yerM BSU06680	Glutamyl-tRNA(Gln) amidotransferase subunit A (Glu-ADT subunit A) (EC 6.3.5.7)	Cytoplasm
+P19079	cdd BSU25300	Cytidine deaminase (CDA) (EC 3.5.4.5) (Cytidine aminohydrolase)	Cytoplasm
+O31502	dagK dgkB yerQ BSU06720	Diacylglycerol kinase (DAG kinase) (DAGK) (EC 2.7.1.107)	Cytoplasm
+O06745	yitJ BSU11010	Bifunctional homocysteine S-methyltransferase/5,10-methylenetetrahydrofolate reductase [Includes: Homocysteine S-methyltransferase (EC 2.1.1.10) (S-methylmethionine:homocysteine methyltransferase); 5,10-methylenetetrahydrofolate reductase (EC 1.5.1.20)]	Cytoplasm
+P25983	pyrK pyrDB pyrDII pyrZ ylxD BSU15530	Dihydroorotate dehydrogenase B (NAD(+)), electron transfer subunit (Dihydroorotate oxidase B, electron transfer subunit)	Cytoplasm
+P23630	lysA lys BSU23380	Diaminopimelate decarboxylase (DAP decarboxylase) (DAPDC) (EC 4.1.1.20)	Cytoplasm
+O32028	mtnN mtn pfs BSU27270	5'-methylthioadenosine/S-adenosylhomocysteine nucleosidase (MTA/SAH nucleosidase) (MTAN) (EC 3.2.2.9) (5'-methylthioadenosine nucleosidase) (MTA nucleosidase) (S-adenosylhomocysteine nucleosidase) (AdoHcy nucleosidase) (SAH nucleosidase) (SRH nucleosidase)	Cytoplasm
+P94525	araD BSU28780	L-ribulose-5-phosphate 4-epimerase (EC 5.1.3.4) (Phosphoribulose isomerase)	Cytoplasm
+P29252	folK BSU00790	2-amino-4-hydroxy-6-hydroxymethyldihydropteridine pyrophosphokinase (EC 2.7.6.3) (6-hydroxymethyl-7,8-dihydropterin pyrophosphokinase) (PPPK) (7,8-dihydro-6-hydroxymethylpterin-pyrophosphokinase) (HPPK)	Cytoplasm
+P54572	yqkJ BSU23550	Probable NAD-dependent malic enzyme 1 (NAD-ME 1) (EC 1.1.1.38)	Cytoplasm
+O05269	guaC yumD BSU32130	GMP reductase (EC 1.7.1.7) (Guanosine 5'-monophosphate oxidoreductase) (Guanosine monophosphate reductase)	Cytoplasm
+O31751	uppS yluA BSU16530	Isoprenyl transferase (EC 2.5.1.-)	Cytoplasm
+P21879	guaB gnaB BSU00090	Inosine-5'-monophosphate dehydrogenase (IMP dehydrogenase) (IMPD) (IMPDH) (EC 1.1.1.205) (Superoxide-inducible protein 12) (SOI12)	Cytoplasm
+O32148	pucG yurG BSU32520	(S)-ureidoglycine--glyoxylate transaminase (UGXT) (EC 2.6.1.112) ((S)-ureidoglycine--glyoxylate aminotransferase) (Purine catabolism protein PucG)	Cytoplasm
+O32141	pucL yunL BSU32450	Uric acid degradation bifunctional protein PucL [Includes: 2-oxo-4-hydroxy-4-carboxy-5-ureidoimidazoline decarboxylase (OHCU decarboxylase) (EC 4.1.1.97); Uricase (EC 1.7.3.3) (Urate oxidase)]	Cytoplasm
+O31550	acoC yfjI BSU08080	Dihydrolipoyllysine-residue acetyltransferase component of acetoin cleaving system (EC 2.3.1.12) (Acetoin dehydrogenase E2 component) (Dihydrolipoamide acetyltransferase component of acetoin cleaving system)	Cytoplasm
+P28823	folB folA yacE BSU00780	Dihydroneopterin aldolase (DHNA) (EC 4.1.2.25) (7,8-dihydroneopterin aldolase)	Cytoplasm
+O31662	mtnA ykrS BSU13550	Methylthioribose-1-phosphate isomerase (M1Pi) (MTR-1-P isomerase) (EC 5.3.1.23) (S-methyl-5-thioribose-1-phosphate isomerase)	Cytoplasm
+Q796V8	hemZ yhaV yhaW BSU09840	Oxygen-independent coproporphyrinogen-III oxidase-like protein HemZ (EC 1.3.99.-)	Cytoplasm
+P51785	ilvD BSU21870	Dihydroxy-acid dehydratase (DAD) (EC 4.2.1.9) (Vegetative protein 110) (VEG110)	Cytoplasm
+P42415	iolD yxdD BSU39730 E83D	3D-(3,5/4)-trihydroxycyclohexane-1,2-dione hydrolase (THcHDO hydrolase) (EC 3.7.1.22)	Cytoplasm
+O31646	manA pmi yjdE BSU12020	Mannose-6-phosphate isomerase ManA (EC 5.3.1.8) (Phosphohexomutase) (Phosphomannose isomerase) (PMI)	Cytoplasm
+P21203	pheA BSU27900	Prephenate dehydratase (PDT) (EC 4.2.1.51)	Cytoplasm
+P94390	putB ycgM BSU03200	Proline dehydrogenase 2 (PRODH 2) (EC 1.5.5.2) (Proline oxidase 2)	Cytoplasm
+P37887	cysK BSU00730	Cysteine synthase (CSase) (EC 2.5.1.47) (O-acetylserine (thiol)-lyase) (OAS-TL) (Superoxide-inducible protein 11) (SOI11)	Cytoplasm
+P54455	nadD yqeJ BSU25640	Nicotinate-nucleotide adenylyltransferase (EC 2.7.7.18) (Deamido-NAD(+) diphosphorylase) (Deamido-NAD(+) pyrophosphorylase) (Nicotinate mononucleotide adenylyltransferase) (NaMN adenylyltransferase)	Cytoplasm
+P35136	serA BSU23070	D-3-phosphoglycerate dehydrogenase (PGDH) (EC 1.1.1.95) (2-oxoglutarate reductase) (EC 1.1.1.399)	Cytoplasm
+O34632	sirB ylnE BSU15620	Sirohydrochlorin ferrochelatase (EC 4.99.1.4)	Cytoplasm
+P39912	aroA BSU29750	Protein AroA(G) [Includes: Phospho-2-dehydro-3-deoxyheptonate aldolase (EC 2.5.1.54) (3-deoxy-D-arabino-heptulosonate 7-phosphate synthase) (DAHP synthase) (Phospho-2-keto-3-deoxyheptonate aldolase); Chorismate mutase (EC 5.4.99.5)]	Cytoplasm
+Q05852	gtaB BSU35670	UTP--glucose-1-phosphate uridylyltransferase (EC 2.7.7.9) (Alpha-D-glucosyl-1-phosphate uridylyltransferase) (General stress protein 33) (GSP33) (UDP-glucose pyrophosphorylase) (UDPGP) (Uridine diphosphoglucose pyrophosphorylase)	Cytoplasm
+P16263	odhB citM BSU19360	Dihydrolipoyllysine-residue succinyltransferase component of 2-oxoglutarate dehydrogenase complex (EC 2.3.1.61) (2-oxoglutarate dehydrogenase complex component E2) (OGDC-E2) (Dihydrolipoamide succinyltransferase component of 2-oxoglutarate dehydrogenase complex)	Cytoplasm
+P39149	upp BSU36890 ipc-35d	Uracil phosphoribosyltransferase (EC 2.4.2.9) (UMP pyrophosphorylase) (UPRTase)	Cytoplasm
+P21882	pdhB aceB BSU14590	Pyruvate dehydrogenase E1 component subunit beta (EC 1.2.4.1) (S complex, 36 kDa subunit)	Cytoplasm
+Q04795	dapG lssD BSU16760	Aspartokinase 1 (EC 2.7.2.4) (Aspartate kinase 1) (Aspartokinase I)	Cytoplasm
+P80886	sucC BSU16090	Succinate--CoA ligase [ADP-forming] subunit beta (EC 6.2.1.5) (Succinyl-CoA synthetase subunit beta) (SCS-beta)	Cytoplasm
+O34981	dapH ykuQ BSU14180	2,3,4,5-tetrahydropyridine-2,6-dicarboxylate N-acetyltransferase (EC 2.3.1.89) (Tetrahydrodipicolinate N-acetyltransferase) (THP acetyltransferase) (Tetrahydropicolinate acetylase)	Cytoplasm
+P31113	menG gerC2 gerCB menH BSU22750	Demethylmenaquinone methyltransferase (EC 2.1.1.163)	Cytoplasm
+O34744	sumT ylnD BSU15610	Uroporphyrinogen-III C-methyltransferase (Urogen III methylase) (EC 2.1.1.107) (SUMT) (Uroporphyrinogen III methylase) (UROM)	Cytoplasm
+Q05865	folC BSU28080	Dihydrofolate synthase/folylpolyglutamate synthase (DHFS / FPGS) (EC 6.3.2.12) (EC 6.3.2.17) (Folylpoly-gamma-glutamate synthetase-dihydrofolate synthetase) (Folylpolyglutamate synthetase) (Tetrahydrofolylpolyglutamate synthase)	Cytoplasm
+O34598	guaD gde BSU13170	Guanine deaminase (GDEase) (Guanase) (Guanine aminase) (EC 3.5.4.3) (Guanine aminohydrolase) (GAH)	Cytoplasm
+P08164	nadE outB BSU03130	NH(3)-dependent NAD(+) synthetase (EC 6.3.1.5) (General stress protein 38) (GSP38) (Spore outgrowth factor B) (Sporulation protein OutB)	Cytoplasm
+P71079	fabL yfhR ygaA BSU08650	Enoyl-[acyl-carrier-protein] reductase [NADPH] FabL (ENR) (EC 1.3.1.104) (Enoyl-acyl carrier protein reductase III) (NADPH-dependent enoyl-ACP reductase)	Cytoplasm
+P23966	menB BSU30800	1,4-dihydroxy-2-naphthoyl-CoA synthase (DHNA-CoA synthase) (EC 4.1.3.36)	Cytoplasm
+P12011	gntK BSU40060	Gluconokinase (EC 2.7.1.12) (Gluconate kinase)	Cytoplasm
+P54547	zwf yqjJ BSU23850	Glucose-6-phosphate 1-dehydrogenase (G6PD) (EC 1.1.1.49) (Vegetative protein 11) (VEG11)	Cytoplasm
+P39634	rocA BSU37780 ipa-76d	1-pyrroline-5-carboxylate dehydrogenase (P5C dehydrogenase) (EC 1.2.1.88) (L-glutamate gamma-semialdehyde dehydrogenase)	Cytoplasm
+P37942	bfmBB bfmB bfmB2 BSU24030	Lipoamide acyltransferase component of branched-chain alpha-keto acid dehydrogenase complex (EC 2.3.1.168) (Branched-chain alpha-keto acid dehydrogenase complex component E2) (BCKAD-E2) (BCKADE2) (Dihydrolipoamide acetyltransferase component of branched-chain alpha-keto acid dehydrogenase complex) (Dihydrolipoamide branched chain transacylase) (Dihydrolipoyllysine-residue (2-methylpropanoyl)transferase)	Cytoplasm
+P50620	nrdE nrdA BSU17380	Ribonucleoside-diphosphate reductase subunit alpha (EC 1.17.4.1) (Ribonucleotide reductase large subunit)	Cytoplasm
+P23971	menE BSU30790	2-succinylbenzoate--CoA ligase (EC 6.2.1.26) (o-succinylbenzoyl-CoA synthetase) (OSB-CoA synthetase)	Cytoplasm
+P25972	pyrE pyrX BSU15560	Orotate phosphoribosyltransferase (OPRT) (OPRTase) (EC 2.4.2.10)	Cytoplasm
+P20692	tyrA BSU22610	Prephenate dehydrogenase (PDH) (EC 1.3.1.12)	Cytoplasm
+P12045	purK BSU06430	N5-carboxyaminoimidazole ribonucleotide synthase (N5-CAIR synthase) (EC 6.3.4.18) (5-(carboxyamino)imidazole ribonucleotide synthetase)	Cytoplasm
+O05514	thiL ydiA ydxA BSU05900	Thiamine-monophosphate kinase (TMP kinase) (Thiamine-phosphate kinase) (EC 2.7.4.16)	Cytoplasm
+Q06755	ispD yacM BSU00900	2-C-methyl-D-erythritol 4-phosphate cytidylyltransferase (EC 2.7.7.60) (4-diphosphocytidyl-2C-methyl-D-erythritol synthase) (MEP cytidylyltransferase) (MCT)	Cytoplasm
+P12039	purD BSU06530	Phosphoribosylamine--glycine ligase (EC 6.3.4.13) (GARS) (Glycinamide ribonucleotide synthetase) (Phosphoribosylglycinamide synthetase)	Cytoplasm
+P04990	thrC BSU32250	Threonine synthase (TS) (EC 4.2.3.1)	Cytoplasm
+P45744	dhbC BSU31990	Isochorismate synthase DhbC (EC 5.4.4.2) (Isochorismate mutase)	Cytoplasm
+P18185	carB cpaB BSU11240	Carbamoyl-phosphate synthase arginine-specific large chain (EC 6.3.5.5) (Carbamoyl-phosphate synthetase ammonia chain)	Cytoplasm
+P13243	fbaA fba fba1 tsr BSU37120	Probable fructose-bisphosphate aldolase (FBP aldolase) (FBPA) (EC 4.1.2.13) (Fructose-1,6-bisphosphate aldolase)	Cytoplasm
+P09339	citB BSU18000	Aconitate hydratase A (ACN) (Aconitase) (EC 4.2.1.3) ((2R,3S)-2-methylisocitrate dehydratase) ((2S,3R)-3-hydroxybutane-1,2,3-tricarboxylate dehydratase) (Iron-responsive protein-like) (IRP-like) (Probable 2-methyl-cis-aconitate hydratase) (EC 4.2.1.99) (RNA-binding protein)	Cytoplasm
+O35033	coaBC yloI BSU15700	Probable coenzyme A biosynthesis bifunctional protein CoaBC (DNA/pantothenate metabolism flavoprotein) [Includes: Phosphopantothenoylcysteine decarboxylase (PPCDC) (EC 4.1.1.36) (CoaC); Phosphopantothenate--cysteine ligase (EC 6.3.2.5) (CoaB) (PPC synthetase) (PPCS) (Phosphopantothenoylcysteine synthase)]	Cytoplasm
+O31665	mtnE mtnV ykrV BSU13580	Transaminase MtnE (EC 2.6.1.-)	Cytoplasm
+P42412	iolA mmsA yxdA BSU39760 E83A	Malonate-semialdehyde dehydrogenase (MSA dehydrogenase) (EC 1.2.1.-) (Methylmalonate-semialdehyde dehydrogenase) (MMSA dehydrogenase) (MMSDH) (MSDH) (EC 1.2.1.27)	Cytoplasm
+O32145	pucC yurD BSU32490	Probable xanthine dehydrogenase subunit C (XDHase subunit C) (EC 1.17.1.4)	Cytoplasm
+O34426	speH speD ytcF BSU29010	S-adenosylmethionine decarboxylase proenzyme (AdoMetDC) (SAMDC) (EC 4.1.1.50) [Cleaved into: S-adenosylmethionine decarboxylase beta chain; S-adenosylmethionine decarboxylase alpha chain]	Cytoplasm
+P16616	hemC BSU28150	Porphobilinogen deaminase (PBG) (EC 2.5.1.61) (Hydroxymethylbilane synthase) (HMBS) (Pre-uroporphyrinogen synthase)	Cytoplasm
+P39062	acsA BSU29680	Acetyl-coenzyme A synthetase (AcCoA synthetase) (Acs) (EC 6.2.1.1) (Acetate--CoA ligase) (Acyl-activating enzyme)	Cytoplasm
+P39812	gltA BSU18450	Glutamate synthase [NADPH] large chain (EC 1.4.1.13) (NADPH-GOGAT)	Cytoplasm
+P54382	folD yqiA BSU24310	Bifunctional protein FolD [Includes: Methylenetetrahydrofolate dehydrogenase (EC 1.5.1.5); Methenyltetrahydrofolate cyclohydrolase (EC 3.5.4.9)]	Cytoplasm
+P37528	pdxT yaaE BSU00120	Pyridoxal 5'-phosphate synthase subunit PdxT (EC 4.3.3.6) (Pdx2) (Pyridoxal 5'-phosphate synthase glutaminase subunit) (EC 3.5.1.2)	Cytoplasm
+P28821	pabC BSU00760	Aminodeoxychorismate lyase (EC 4.1.3.38) (4-amino-4-deoxychorismate lyase) (ADC lyase) (ADCL)	Cytoplasm
+O34813	sirC ylnF BSU15630	Precorrin-2 dehydrogenase (EC 1.3.1.76)	Cytoplasm
+Q9KWU4	pyc pycA ylaP BSU14860	Pyruvate carboxylase (EC 6.4.1.1) (Pyruvic carboxylase) (PYC)	Cytoplasm
+P49814	mdh citH BSU29120	Malate dehydrogenase (EC 1.1.1.37) (Vegetative protein 69) (VEG69)	Cytoplasm
+P03964	trpC BSU22660	Indole-3-glycerol phosphate synthase (IGPS) (EC 4.1.1.48)	Cytoplasm
+P19465	folE mtrA BSU22780	GTP cyclohydrolase 1 (EC 3.5.4.16) (GTP cyclohydrolase I) (GTP-CH-I)	Cytoplasm
+O31620	thiD yjbV BSU11710	Hydroxymethylpyrimidine/phosphomethylpyrimidine kinase (EC 2.7.1.49) (EC 2.7.4.7) (Hydroxymethylpyrimidine kinase) (HMP kinase) (Hydroxymethylpyrimidine phosphate kinase) (HMP-P kinase) (HMP-phosphate kinase) (HMPP kinase)	Cytoplasm
+P37530	dgk yaaG BSU00150	Deoxyguanosine kinase (DGUO kinase) (dGK) (EC 2.7.1.113)	Cytoplasm
+P39594	thiE thiC ywbK BSU38290 ipa-26d	Thiamine-phosphate synthase (TP synthase) (TPS) (EC 2.5.1.3) (Thiamine-phosphate pyrophosphorylase) (TMP pyrophosphorylase) (TMP-PPase)	Cytoplasm
+O30509	gatB yerN BSU06690	Aspartyl/glutamyl-tRNA(Asn/Gln) amidotransferase subunit B (Asp/Glu-ADT subunit B) (EC 6.3.5.-)	Cytoplasm
+P31104	aroC aroF BSU22710	Chorismate synthase (CS) (EC 4.2.3.5) (5-enolpyruvylshikimate-3-phosphate phospholyase)	Cytoplasm
+P23973	menF icsM BSU30830	Isochorismate synthase MenF (EC 5.4.4.2) (Isochorismate mutase)	Cytoplasm
+P25994	pyrAB BSU15520	Carbamoyl-phosphate synthase pyrimidine-specific large chain (EC 6.3.5.5) (Carbamoyl-phosphate synthetase ammonia chain)	Cytoplasm
+O05393	mccA yrhA BSU27260	O-acetylserine dependent cystathionine beta-synthase (EC 2.5.1.134)	Cytoplasm
+P46911	qcrA bfcA BSU22560	Menaquinol-cytochrome c reductase iron-sulfur subunit (Rieske iron-sulfur protein)	Cytoplasm
+O06492	gatC yedA yerL BSU06670	Glutamyl-tRNA(Gln) amidotransferase subunit C (Glu-ADT subunit C) (EC 6.3.5.-)	Cytoplasm
+P07819	sacA BSU38040 ipa-50d	Sucrose-6-phosphate hydrolase (Sucrase) (EC 3.2.1.26) (Invertase)	Cytoplasm
+P39666	nadC yrxB BSU27860	Probable nicotinate-nucleotide pyrophosphorylase [carboxylating] (EC 2.4.2.19) (General stress protein 70) (GSP70) (Quinolinate phosphoribosyltransferase [decarboxylating]) (QAPRTase)	Cytoplasm
+O32144	pucD yurC BSU32480	Probable xanthine dehydrogenase subunit D (XDHase subunit D) (EC 1.17.1.4)	Cytoplasm
+P39773	gpmI pgm BSU33910	2,3-bisphosphoglycerate-independent phosphoglycerate mutase (BPG-independent PGAM) (Phosphoglyceromutase) (iPGM) (EC 5.4.2.12) (Vegetative protein 107) (VEG107)	Cytoplasm
+P32393	comEB comE2 BSU25580	ComE operon protein 2 (EC 3.5.-.-)	Cytoplasm
+P54420	asnB asn BSU30540	Asparagine synthetase [glutamine-hydrolyzing] 1 (EC 6.3.5.4)	Cytoplasm
+O32164	sufS csd yurW BSU32690	Cysteine desulfurase SufS (EC 2.8.1.7)	Cytoplasm
+P42416	iolE yxdE BSU39720 E83E	Inosose dehydratase (EC 4.2.1.44) (2-keto-myo-inositol dehydratase) (2KMI dehydratase)	Cytoplasm
+O31475	ycgT BSU03270	Ferredoxin--NADP reductase 1 (FNR 1) (Fd-NADP(+) reductase 1) (EC 1.18.1.2)	Cytoplasm
+O31753	dxr yluB BSU16550	1-deoxy-D-xylulose 5-phosphate reductoisomerase (DXP reductoisomerase) (EC 1.1.1.267) (1-deoxyxylulose-5-phosphate reductoisomerase) (2-C-methyl-D-erythritol 4-phosphate synthase)	Cytoplasm
+O34450	nagA BSU35010	N-acetylglucosamine-6-phosphate deacetylase (GlcNAc 6-P deacetylase) (EC 3.5.1.25)	Cytoplasm
+P49786	accB fabE yqhW BSU24350	Biotin carboxyl carrier protein of acetyl-CoA carboxylase (BCCP)	Cytoplasm
+Q04789	alsS BSU36010	Acetolactate synthase (EC 2.2.1.6) (ALS) (Acetohydroxy-acid synthase)	Cytoplasm
+O31404	acoA yfjK BSU08060	Acetoin:2,6-dichlorophenolindophenol oxidoreductase subunit alpha (Acetoin:DCPIP oxidoreductase-alpha) (Ao:DCPIP OR) (EC 1.1.1.-) (TPP-dependent acetoin dehydrogenase E1 subunit alpha)	Cytoplasm
+P45740	thiC thiA BSU08790	Phosphomethylpyrimidine synthase (EC 4.1.99.17) (Hydroxymethylpyrimidine phosphate synthase) (HMP-P synthase) (HMP-phosphate synthase) (HMPP synthase) (Thiamine biosynthesis protein ThiC)	Cytoplasm
+O34660	dhaS BSU19310	Putative aldehyde dehydrogenase DhaS (EC 1.2.1.3)	Cytoplasm
+P21883	pdhC aceC BSU14600	Dihydrolipoyllysine-residue acetyltransferase component of pyruvate dehydrogenase complex (EC 2.3.1.12) (Dihydrolipoamide acetyltransferase component of pyruvate dehydrogenase complex) (E2) (S complex, 48 kDa subunit)	Cytoplasm
+P42435	nasD nasBC nirB BSU03300	Nitrite reductase [NAD(P)H] (EC 1.7.1.4)	Cytoplasm
+O34916	ykuR dapL BSU14190	N-acetyldiaminopimelate deacetylase (EC 3.5.1.47)	Cytoplasm
+P54575	ribC BSU16670	Riboflavin biosynthesis protein RibC [Includes: Riboflavin kinase (EC 2.7.1.26) (Flavokinase); FMN adenylyltransferase (EC 2.7.7.2) (FAD pyrophosphorylase) (FAD synthase)]	Cytoplasm
+O05394	mccB yrhB BSU27250	Cystathionine gamma-lyase (EC 4.4.1.1) (Gamma-cystathionase) (Homocysteine gamma-lyase) (EC 4.4.1.2)	Cytoplasm
+P80865	sucD BSU16100	Succinate--CoA ligase [ADP-forming] subunit alpha (EC 6.2.1.5) (Succinyl-CoA synthetase subunit alpha) (SCS-alpha)	Cytoplasm
+O31667	mtnX ykrX BSU13600	2-hydroxy-3-keto-5-methylthiopentenyl-1-phosphate phosphatase (HK-MTPenyl-1-P phosphatase) (EC 3.1.3.87)	Cytoplasm
+P39579	dltC BSU38520 ipa-3r	D-alanine--poly(phosphoribitol) ligase subunit 2 (EC 6.1.1.13) (D-alanyl carrier protein) (DCP)	Cytoplasm
+O31465	glsA1 glsA ybgJ BSU02430	Glutaminase 1 (EC 3.5.1.2)	Cytoplasm
+P54473	ispH yqfP BSU25160	4-hydroxy-3-methylbut-2-enyl diphosphate reductase (HMBPP reductase) (EC 1.17.7.4)	Cytoplasm
+P18159	pgcA gtaC gtaE yhxB BSU09310	Phosphoglucomutase (PGM) (EC 5.4.2.2) (Alpha-phosphoglucomutase) (Glucose phosphomutase)	Cytoplasm
+Q06004	gutB BSU06150	Sorbitol dehydrogenase (EC 1.1.1.14) (Glucitol dehydrogenase) (L-iditol 2-dehydrogenase)	Cytoplasm
+P96738	capA pgsA ywtB BSU35880	PGA biosynthesis protein CapA	Cytoplasm
+Q45597	fbp yydE BSU40190	Fructose-1,6-bisphosphatase class 3 (FBPase class 3) (EC 3.1.3.11) (D-fructose-1,6-bisphosphate 1-phosphohydrolase class 3)	Cytoplasm
+P28819	pabA trpG BSU00750	Aminodeoxychorismate/anthranilate synthase component 2 (ADC synthase) (ADCS) (EC 2.6.1.85) (EC 4.1.3.27) (4-amino-4-deoxychorismate synthase component 2) (Aminodeoxychorismate synthase, glutamine amidotransferase component)	Cytoplasm
+O34990	purU ykkE BSU13110	Formyltetrahydrofolate deformylase (EC 3.5.1.10) (Formyl-FH(4) hydrolase)	Cytoplasm
+P54523	dxs yqiE BSU24270	1-deoxy-D-xylulose-5-phosphate synthase (EC 2.2.1.7) (1-deoxyxylulose-5-phosphate synthase) (DXP synthase) (DXPS)	Cytoplasm
+P17731	hisC hisH BSU22620	Histidinol-phosphate aminotransferase (EC 2.6.1.9) (Imidazole acetol-phosphate transaminase)	Cytoplasm
+P37251	ilvB BSU28310	Acetolactate synthase large subunit (AHAS) (EC 2.2.1.6) (Acetohydroxy-acid synthase large subunit) (ALS) (Vegetative protein 105) (VEG105)	Cytoplasm
+O31619	thiF yjbU BSU11700	Sulfur carrier protein ThiS adenylyltransferase (EC 2.7.7.73)	Cytoplasm
+P25971	pyrF BSU15550	Orotidine 5'-phosphate decarboxylase (EC 4.1.1.23) (OMP decarboxylase) (OMPDCase) (OMPdecase)	Cytoplasm
+P54482	ispG yqfY BSU25070	4-hydroxy-3-methylbut-2-en-1-yl diphosphate synthase (flavodoxin) (EC 1.17.7.3) (1-hydroxy-2-methyl-2-(E)-butenyl 4-diphosphate synthase)	Cytoplasm
+P12047	purB purE BSU06440	Adenylosuccinate lyase (ASL) (EC 4.3.2.2) (Adenylosuccinase) (ASase) (Glutamyl--tRNA ligase regulatory factor)	Cytoplasm
+P12048	purH purHJ BSU06520	Bifunctional purine biosynthesis protein PurH [Includes: Phosphoribosylaminoimidazolecarboxamide formyltransferase (EC 2.1.2.3) (AICAR transformylase); IMP cyclohydrolase (EC 3.5.4.10) (ATIC) (IMP synthase) (Inosinicase)]	Cytoplasm
+P80861	yjlD BSU12290	NADH dehydrogenase-like protein YjlD (EC 1.6.99.-) (Glucose starvation-inducible protein 5) (GSI5)	Cytoplasm
+O34577	cysC ylnC BSU15600	Probable adenylyl-sulfate kinase (EC 2.7.1.25) (APS kinase) (ATP adenosine-5'-phosphosulfate 3'-phosphotransferase) (Adenosine-5'-phosphosulfate kinase)	Cytoplasm
+P45868	maeA BSU37050	Probable NAD-dependent malic enzyme 2 (NAD-ME 2) (EC 1.1.1.38)	Cytoplasm
+P46329	aldX yxaS yxbE BSU39860 VE7FR	Probable aldehyde dehydrogenase AldX (EC 1.2.1.3)	Cytoplasm
+P94463	fmt yloL BSU15730	Methionyl-tRNA formyltransferase (EC 2.1.2.9)	Cytoplasm
+P39761	adeC ade yzaD BSU14520	Adenine deaminase (Adenase) (Adenine aminase) (EC 3.5.4.2)	Cytoplasm
+P21248	hemD BSU28140	Uroporphyrinogen-III synthase (UROS) (EC 4.2.1.75) (Hydroxymethylbilane hydrolyase [cyclizing]) (Uroporphyrinogen-III cosynthase)	Cytoplasm
+O34399	gltB BSU18440	Glutamate synthase [NADPH] small chain (EC 1.4.1.13) (NADPH-GOGAT)	Cytoplasm
+P46320	licH celD celF BSU38560	Probable 6-phospho-beta-glucosidase (EC 3.2.1.86)	Cytoplasm
+P94565	leuA BSU28280	2-isopropylmalate synthase (EC 2.3.3.13) (Alpha-IPM synthase) (Alpha-isopropylmalate synthase)	Cytoplasm
+O32213	cysI yvgQ BSU33430	Sulfite reductase [NADPH] hemoprotein beta-component (SiR-HP) (SiRHP) (EC 1.8.1.2)	Cytoplasm
+P39126	icd citC BSU29130	Isocitrate dehydrogenase [NADP] (IDH) (EC 1.1.1.42) (IDP) (NADP(+)-specific ICDH) (Oxalosuccinate decarboxylase)	Cytoplasm

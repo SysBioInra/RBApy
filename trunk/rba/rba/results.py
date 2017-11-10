@@ -52,7 +52,7 @@ class Results(object):
         for reaction in ids:
             flux = self.variables[reaction]
             if flux != 0:
-                result.append(self.reactions[reaction], flux)
+                result.append((self.reactions[reaction], flux))
         result.sort(key=lambda x: abs(x[1]), reverse=True)
         return result
 

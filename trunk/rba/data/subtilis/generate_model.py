@@ -4,18 +4,54 @@ import math
 
 sys.path.append(os.path.join(sys.path[0],'../..'))
 import rba
-from rba import rba_xml
 
 old_data = 'data/subtilis_ref/old_data/'
 
 def flagella_activation():
-    process = rba_xml.Process('P_FLAGELLA', 'Flagella activation')
-    target = rba_xml.TargetReaction('Th_1')
-    target.function_references.append('number_flagella')
-    target.function_references.append('flagella_speed')
-    target.function_references.append('flagella_h_consumption')
+    process = rba.xml.Process('P_FLAGELLA', 'Flagella activation')
+    target = rba.xml.TargetReaction('Th')
+    target.value = 'flagella_proton_flux'
     process.targets.reaction_fluxes.append(target)
     return process
+
+def flagella_activation_aggregate():
+    aggregate = rba.xml.Aggregate('flagella_proton_flux', 'multiplication')
+    aggregate.function_references.append(
+        rba.xml.FunctionReference('number_flagella')
+    )
+    aggregate.function_references.append(
+        rba.xml.FunctionReference('flagella_speed')
+    )
+    aggregate.function_references.append(
+        rba.xml.FunctionReference('flagella_h_consumption')
+    )
+    return aggregate
+
+def add_enzymatic_activities(enzymes):
+    with open(old_data + 'catalytic_activity.csv', 'r') as f:
+        fns, activity = read_activities(f)
+    for fn in fns:
+        enzymes.efficiency_functions \
+               .append(rba.xml.Function(fn['id'], fn['type']))
+    for enzyme in enzymes.enzymes:
+        reaction = old_name(enzyme.enzymatic_activity.reaction)
+        for fn_id in activity[reaction]:
+            params = activity[reaction][fn_id]
+            new_eff = rba.xml.EnzymeEfficiency(fn_id, params)
+            enzyme.enzymatic_activity.enzyme_efficiencies.append(new_eff)
+
+
+def add_zero_cost_flags(enzymes):
+    with open(old_data + 'zero_cost.csv', 'r') as f:
+        zero_cost = []
+        for line in f:
+            zero_cost += line.rstrip('\n').split('\t')
+    for enzyme in enzymes.enzymes:
+        id_ = old_name(enzyme.id)
+        if id_ in zero_cost:
+            enzyme.zero_cost = True
+            zero_cost.remove(id_)
+
 
 def read_activities(f):
     fns = []
@@ -56,38 +92,20 @@ def apply_old_stoichiometries(enzymes):
             
 if __name__ == "__main__":
     ## generate base XML files with pipeline
-    subtilis = rba.PreRba('data/subtilis/params.in')
+    subtilis = rba.prerba.PreRba('data/subtilis_test/params.in')
 
     ## add flagella constraint
     subtilis.model.processes.processes.append(flagella_activation())
+    subtilis.model.parameters.aggregates.append(flagella_activation_aggregate())
 
     ## add enzymatic activities
-    enzymes = subtilis.model.enzymes
-    with open(old_data + 'catalytic_activity.csv', 'r') as f:
-        fns, activity = read_activities(f)
-    for fn in fns:
-        enzymes.efficiency_functions \
-               .append(rba_xml.Function(fn['id'], fn['type']))
-    for enzyme in enzymes.enzymes:
-        reaction = old_name(enzyme.enzymatic_activity.reaction)
-        for fn_id in activity[reaction]:
-            params = activity[reaction][fn_id]
-            new_eff = rba_xml.EnzymeEfficiency(fn_id, params)
-            enzyme.enzymatic_activity.enzyme_efficiencies.append(new_eff)
+    add_enzymatic_activities(subtilis.model.enzymes)
 
     ## add zero_cost flags
-    with open(old_data + 'zero_cost.csv', 'r') as f:
-        zero_cost = []
-        for line in f:
-            zero_cost += line.rstrip('\n').split('\t')
-    for enzyme in enzymes.enzymes:
-        id_ = old_name(enzyme.id)
-        if id_ in zero_cost:
-            enzyme.zero_cost = True
-            zero_cost.remove(id_)
+    #add_zero_cost_flags(subtilis.model.enzymes)
 
     ## apply old stoichiometries
-    #apply_old_stoichiometries(enzymes)
+    apply_old_stoichiometries(subtilis.model.enzymes)
 
     ## set medium to original medium
     with open(old_data + 'medium.csv', 'r') as f:
