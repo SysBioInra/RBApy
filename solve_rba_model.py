@@ -37,3 +37,8 @@ if __name__ == '__main__':
             for process, conc in \
                     results.process_machinery_concentrations().items():
                 f.write('{}\t{}\n'.format(process, conc))
+        # write main transport reactions
+        print('\nTop 10 boundary fluxes:')
+        b_fluxes = results.sorted_boundary_fluxes()
+        for flux in b_fluxes[:10]:
+            print('{} {}'.format(*flux))

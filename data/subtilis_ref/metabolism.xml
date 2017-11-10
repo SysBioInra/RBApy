@@ -546,8 +546,6 @@
     <species id="M_ca2_e" boundaryCondition="true"/>
     <species id="M_k_e" boundaryCondition="true"/>
     <species id="M_h2o_e" boundaryCondition="true"/>
-    <species id="M_this_e" boundaryCondition="true"/>
-    <species id="M_aaacp_e" boundaryCondition="true"/>
   </listOfSpecies>
   <listOfReactions>
     <reaction id="TptsG" reversible="false">

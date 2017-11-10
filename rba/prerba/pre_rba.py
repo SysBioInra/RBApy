@@ -105,8 +105,14 @@ class PreRba(object):
         self.average_protein = {aa: sto for aa, sto in average_protein.items()
                                 if aa in self.default.metabolites.aas}
         self.protein_data.update_helper_files()
+        known_species = set([s.id for s in self.sbml_data.species])
+        self.macrocomponents = CuratedMacrocomponents(input_dir,
+                                                      known_species).data
+        self.metabolite_map = self.build_metabolite_map(
+            input_dir, known_species, self.cofactors()
+            )
         self.rna_data = read_trnas(
-            os.path.join(input_dir, 'trnas.fasta'),
+            os.path.join(input_dir, 'trnas.fasta'), self.metabolite_map
             )
         self.ribosome = FastaParser(
             os.path.join(input_dir, 'ribosome.fasta')
@@ -114,12 +120,6 @@ class PreRba(object):
         self.chaperone = FastaParser(
             os.path.join(input_dir, 'chaperones.fasta')
             ).entries
-        known_species = set([s.id for s in self.sbml_data.species])
-        self.macrocomponents = CuratedMacrocomponents(input_dir,
-                                                      known_species).data
-        self.metabolite_map = self.build_metabolite_map(
-            input_dir, known_species, self.cofactors()
-            )
 
     def build_model(self):
         """
@@ -319,11 +319,9 @@ class PreRba(object):
         # user rnas
         cytoplasm = self.protein_data.compartment('Cytoplasm')
         for rna_id, composition in self.rna_data.items():
-            user_rna = self.metabolite_map.get(rna_id.upper(), None)
-            if user_rna and user_rna.sbml_id:
-                rnas.macromolecules.append(rba.xml.Macromolecule(
-                    user_rna.sbml_id, cytoplasm, composition
-                    ))
+            rnas.macromolecules.append(rba.xml.Macromolecule(
+                rna_id, cytoplasm, composition
+                ))
         # average RNA
         rnas.macromolecules.append(rba.xml.Macromolecule(
             self.default.metabolites.mrna, cytoplasm,
@@ -615,7 +613,7 @@ def ntp_composition(sequence):
     return comp
 
 
-def read_trnas(filename):
+def read_trnas(filename, metabolite_map):
     """
     Read trnas in fasta file.
 
@@ -639,7 +637,12 @@ def read_trnas(filename):
     # in this case, we take an average composition for a trna
     sequence_list = {}
     for rna in trna_data:
-        rna_list = sequence_list.setdefault(rna.id.upper(), [])
+        user_metabolite = metabolite_map.get(rna.id.upper(), None)
+        if user_metabolite and user_metabolite.sbml_id:
+            user_id = user_metabolite.sbml_id
+        else:
+            user_id = rna.id
+        rna_list = sequence_list.setdefault(user_id, [])
         rna_list.append(rna.sequence)
     average_comp = {}
     for id_, seq in sequence_list.items():

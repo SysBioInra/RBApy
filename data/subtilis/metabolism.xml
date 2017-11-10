@@ -1,8 +1,8 @@
 <RBAMetabolism>
   <listOfCompartments>
-    <compartment id="e"/>
-    <compartment id="c"/>
-    <compartment id="m"/>
+    <compartment id="Cytoplasm"/>
+    <compartment id="Secreted"/>
+    <compartment id="Cell_membrane"/>
   </listOfCompartments>
   <listOfSpecies>
     <species id="M_e1_c" boundaryCondition="false"/>
@@ -511,7 +511,7 @@
     <species id="M_form_e" boundaryCondition="true"/>
     <species id="M_ade_e" boundaryCondition="true"/>
     <species id="M_gua_e" boundaryCondition="true"/>
-    <species id="M_hxtx_e" boundaryCondition="true"/>
+    <species id="M_hxth_e" boundaryCondition="true"/>
     <species id="M_xth_e" boundaryCondition="true"/>
     <species id="M_ura_e" boundaryCondition="true"/>
     <species id="M_ado_e" boundaryCondition="true"/>
@@ -1147,7 +1147,7 @@
     <reaction id="TpbuO" reversible="false">
       <listOfReactants>
         <speciesReference species="M_hex_e" stoichiometry="1.0"/>
-        <speciesReference species="M_hxtx_e" stoichiometry="1.0"/>
+        <speciesReference species="M_hxth_e" stoichiometry="1.0"/>
       </listOfReactants>
       <listOfProducts>
         <speciesReference species="M_hxth_c" stoichiometry="1.0"/>
@@ -6931,7 +6931,6 @@
       <listOfProducts>
         <speciesReference species="M_adp_c" stoichiometry="1"/>
         <speciesReference species="M_h_c" stoichiometry="1"/>
-        <speciesReference species="M_p_c" stoichiometry="1"/>
       </listOfProducts>
     </reaction>
   </listOfReactions>

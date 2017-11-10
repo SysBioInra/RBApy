@@ -1,3 +1,0 @@
-Following genes could not be retrieved in uniprot:
-average protein mp, average protein c
-Please check identifiers and remove notes if reaction  is actually a spontaneous reaction.
