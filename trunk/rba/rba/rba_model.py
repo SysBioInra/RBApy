@@ -54,25 +54,25 @@ class RbaModel(object):
         obj = cls()
         obj.output_dir = input_dir
         obj.parameters = rba.xml.RbaParameters().from_file(
-            join(input_dir, 'parameters.xml')
+            open(join(input_dir, 'parameters.xml'))
             )
         obj.metabolism = rba.xml.RbaMetabolism().from_file(
-            join(input_dir, 'metabolism.xml')
+            open(join(input_dir, 'metabolism.xml'))
             )
         obj.proteins = rba.xml.RbaMacromolecules().from_file(
-            join(input_dir, 'proteins.xml')
+            open(join(input_dir, 'proteins.xml'))
             )
         obj.rnas = rba.xml.RbaMacromolecules().from_file(
-            join(input_dir, 'rnas.xml')
+            open(join(input_dir, 'rnas.xml'))
             )
         obj.dna = rba.xml.RbaMacromolecules().from_file(
-            join(input_dir, 'dna.xml')
+            open(join(input_dir, 'dna.xml'))
             )
         obj.processes = rba.xml.RbaProcesses().from_file(
-            join(input_dir, 'processes.xml')
+            open(join(input_dir, 'processes.xml'))
             )
         obj.enzymes = rba.xml.RbaEnzymes().from_file(
-            join(input_dir, 'enzymes.xml')
+            open(join(input_dir, 'enzymes.xml'))
             )
         obj.set_medium(join(input_dir, 'medium.tsv'))
         return obj
@@ -104,7 +104,7 @@ class RbaModel(object):
             rba.core.RbaMatrices object containing matrix blocks.
 
         """
-        return RbaMatrices(self)
+        return ConstraintMatrix(self)
 
     def solve(self, catalytic_function=None):
         """
