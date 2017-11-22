@@ -1,5 +1,8 @@
 """Module exporting protein to a flat file."""
 
+# python 2/3 compatibility
+from __future__ import division, print_function, absolute_import
+
 
 def export_proteins(filename, protein_data):
     with open(filename, 'w') as output_file:

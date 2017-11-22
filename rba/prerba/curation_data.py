@@ -1,7 +1,7 @@
 """Module defining CurationData class."""
 
 # python 2/3 compatibility
-from __future__ import division, print_function
+from __future__ import division, print_function, absolute_import
 
 import pandas
 

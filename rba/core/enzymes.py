@@ -11,6 +11,7 @@ import numpy
 # local imports
 from rba.core.functions import build_function
 
+
 class Enzymes(object):
     """
     Class computing enzyme-related substructures.
