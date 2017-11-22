@@ -1,7 +1,7 @@
 """Module defining FastaEntry and FastaParser classes."""
 
 # python 2/3 compatibility
-from __future__ import division, print_function
+from __future__ import division, print_function, absolute_import
 
 # global imports
 from collections import namedtuple

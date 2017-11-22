@@ -1,4 +1,4 @@
-"""Module defining PreRba class."""
+"""Module with main function importing data and building model."""
 
 # python 2/3 compatibility
 from __future__ import division, print_function, absolute_import
@@ -10,7 +10,7 @@ import pandas
 # local import
 from rba.prerba.pipeline_parameters import PipelineParameters
 from rba.rba_model import RbaModel
-from rba.prerba.export import ModelBuilder
+from rba.prerba.model_builder import ModelBuilder
 from rba.prerba.default_data import DefaultData
 from rba.prerba.user_data import UserData
 from rba.prerba import protein_export
