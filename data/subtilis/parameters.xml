@@ -1,9 +1,19 @@
 <RBAParameters>
   <listOfTargetDensities>
-    <targetDensity upperBound="4.8972" compartment="Cytoplasm"/>
+    <targetDensity upperBound="Cytoplasm_density" compartment="Cytoplasm"/>
     <targetDensity upperBound="Cell_membrane_density" compartment="Cell_membrane"/>
   </listOfTargetDensities>
   <listOfFunctions>
+    <function id="amino_acid_concentration" type="linear">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="-inf"/>
+        <parameter id="LINEAR_CONSTANT" value="6.3138"/>
+        <parameter id="Y_MAX" value="inf"/>
+        <parameter id="LINEAR_COEF" value="-0.9757"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
     <function id="fraction_protein_Cytoplasm" type="constant">
       <listOfParameters>
         <parameter id="CONSTANT" value="0.7"/>
@@ -44,39 +54,14 @@
         <parameter id="X_MIN" value="0.25"/>
       </listOfParameters>
     </function>
+    <function id="Cytoplasm_density" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="4.8972"/>
+      </listOfParameters>
+    </function>
     <function id="inverse_average_protein_length" type="constant">
       <listOfParameters>
         <parameter id="CONSTANT" value="0.00341794712168"/>
-      </listOfParameters>
-    </function>
-    <function id="amino_acid_concentration" type="linear">
-      <listOfParameters>
-        <parameter id="Y_MIN" value="-inf"/>
-        <parameter id="LINEAR_CONSTANT" value="6.3138"/>
-        <parameter id="Y_MAX" value="inf"/>
-        <parameter id="LINEAR_COEF" value="-0.9757"/>
-        <parameter id="X_MAX" value="1.6"/>
-        <parameter id="X_MIN" value="0.25"/>
-      </listOfParameters>
-    </function>
-    <function id="flagella_speed" type="constant">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="5.81"/>
-      </listOfParameters>
-    </function>
-    <function id="flagella_h_consumption" type="constant">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.9415"/>
-      </listOfParameters>
-    </function>
-    <function id="number_flagella" type="linear">
-      <listOfParameters>
-        <parameter id="Y_MIN" value="-inf"/>
-        <parameter id="LINEAR_CONSTANT" value="3.7991"/>
-        <parameter id="Y_MAX" value="inf"/>
-        <parameter id="LINEAR_COEF" value="4.5197"/>
-        <parameter id="X_MAX" value="1.6"/>
-        <parameter id="X_MIN" value="0.25"/>
       </listOfParameters>
     </function>
     <function id="ribosome_efficiency_MM" type="michaelisMenten">
@@ -106,6 +91,21 @@
         <parameter id="X_MIN" value="0.25"/>
       </listOfParameters>
     </function>
+    <function id="mrna_degradation_flux" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.15996"/>
+      </listOfParameters>
+    </function>
+    <function id="mrna_concentration" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.01"/>
+      </listOfParameters>
+    </function>
+    <function id="dna_concentration" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0807"/>
+      </listOfParameters>
+    </function>
     <function id="maintenance_atp" type="linear">
       <listOfParameters>
         <parameter id="Y_MIN" value="-inf"/>
@@ -116,18 +116,82 @@
         <parameter id="X_MIN" value="1"/>
       </listOfParameters>
     </function>
+    <function id="M_nad_c_concentration" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0162"/>
+      </listOfParameters>
+    </function>
+    <function id="M_cmp_c_concentration" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.001"/>
+      </listOfParameters>
+    </function>
+    <function id="M_amp_c_concentration" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0047"/>
+      </listOfParameters>
+    </function>
+    <function id="M_k_c_concentration" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.7063"/>
+      </listOfParameters>
+    </function>
+    <function id="M_ctp_c_concentration" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0005"/>
+      </listOfParameters>
+    </function>
+    <function id="M_coa_c_concentration" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0003"/>
+      </listOfParameters>
+    </function>
+    <function id="M_atp_c_concentration" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.003"/>
+      </listOfParameters>
+    </function>
+    <function id="M_nadp_c_concentration" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0009"/>
+      </listOfParameters>
+    </function>
+    <function id="M_adp_c_concentration" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0026"/>
+      </listOfParameters>
+    </function>
+    <function id="M_nadph_c_concentration" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0002"/>
+      </listOfParameters>
+    </function>
+    <function id="M_gmp_c_concentration" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0005"/>
+      </listOfParameters>
+    </function>
+    <function id="M_gdp_c_concentration" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0002"/>
+      </listOfParameters>
+    </function>
+    <function id="M_cdp_c_concentration" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0003"/>
+      </listOfParameters>
+    </function>
+    <function id="M_gtp_c_concentration" type="constant">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0004"/>
+      </listOfParameters>
+    </function>
   </listOfFunctions>
   <listOfAggregates>
     <aggregate id="Cell_membrane_density" type="multiplication">
       <listOfFunctionReferences>
         <functionReference function="amino_acid_concentration"/>
         <functionReference function="fraction_protein_Cell_membrane"/>
-      </listOfFunctionReferences>
-    </aggregate>
-    <aggregate id="ribosome_capacity" type="multiplication">
-      <listOfFunctionReferences>
-        <functionReference function="ribosome_efficiency_MM"/>
-        <functionReference function="fraction_active_ribosomes"/>
       </listOfFunctionReferences>
     </aggregate>
     <aggregate id="nonenzymatic_proteins_Cytoplasm" type="multiplication">
@@ -152,6 +216,12 @@
         <functionReference function="inverse_average_protein_length"/>
         <functionReference function="fraction_protein_Cell_membrane"/>
         <functionReference function="fraction_non_enzymatic_protein_Cell_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="ribosome_capacity" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="ribosome_efficiency_MM"/>
+        <functionReference function="fraction_active_ribosomes"/>
       </listOfFunctionReferences>
     </aggregate>
   </listOfAggregates>

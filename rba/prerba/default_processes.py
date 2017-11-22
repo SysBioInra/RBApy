@@ -1,7 +1,7 @@
 """Module defining DefaultProcesses class."""
 
 # python 2/3 compatibility
-from __future__ import division, print_function
+from __future__ import division, print_function, absolute_import
 
 # local imports
 import rba.xml
@@ -118,19 +118,11 @@ class DefaultProcesses(object):
         # targets
         # mrna
         target = rba.xml.TargetSpecies(default_metabolites.mrna)
-        target.value = 0.01
+        target.value = 'mrna_concentration'
         process.targets.concentrations.append(target)
         target = rba.xml.TargetSpecies(default_metabolites.mrna)
-        target.value = 0.15996
+        target.value = 'mrna_degradation_flux'
         process.targets.production_fluxes.append(target)
-        # trnas
-        for aa in default_metabolites.aas:
-            key = default_metabolites.uncharged_trna_key(aa)
-            metabolite = self._metabolites[key]
-            if metabolite.sbml_id and metabolite.concentration:
-                target = rba.xml.TargetSpecies(metabolite.sbml_id)
-                target.value = metabolite.concentration
-                process.targets.concentrations.append(target)
         return process
 
     def replication(self):
@@ -149,7 +141,7 @@ class DefaultProcesses(object):
         process.operations.productions.append(operation)
         # targets
         target = rba.xml.TargetSpecies(self.default.metabolites.dna)
-        target.value = 0.0807
+        target.value = 'dna_concentration'
         process.targets.concentrations.append(target)
         return process
 
@@ -169,7 +161,7 @@ class DefaultProcesses(object):
         process.operations.degradations.append(operation)
         # targets
         target = rba.xml.TargetSpecies(self.default.metabolites.mrna)
-        target.value = 0.15996
+        target.value = 'mrna_degradation_flux'
         process.targets.degradation_fluxes.append(target)
         return process
 
@@ -185,16 +177,11 @@ class DefaultProcesses(object):
         """
         process = rba.xml.Process('P_MET_PROD', 'Metabolite production')
         # targets
-        def_metab = self.default.metabolites
-        uncharged_trnas = [def_metab.uncharged_trna_key(aa)
-                           for aa in def_metab.aas]
-        for key, metabolite in self._metabolites.items():
-            if key in uncharged_trnas:
-                continue
-            # if a metabolite could not be identified, ignore it
+        for metabolite in self._metabolites.values():
             if metabolite.sbml_id and metabolite.concentration:
                 target = rba.xml.TargetSpecies(metabolite.sbml_id)
-                target.value = metabolite.concentration
+                target.value = (self.default.parameters
+                                .metabolite_concentration(metabolite.sbml_id))
                 process.targets.concentrations.append(target)
         return process
 
@@ -214,9 +201,10 @@ class DefaultProcesses(object):
 
         """
         process = rba.xml.Process('P_MACRO_PROD', 'Macrocomponent production')
-        for id_, flux in macro_fluxes.items():
+        for id_ in macro_fluxes:
             target = rba.xml.TargetSpecies(id_)
-            target.value = flux
+            target.value = (self.default.parameters
+                            .metabolite_concentration(id_))
             process.targets.concentrations.append(target)
         return process
 
@@ -380,44 +368,3 @@ class DefaultProcesses(object):
         sbml_id = self._metabolites[key].sbml_id
         if sbml_id:
             sr_list.append(rba.xml.SpeciesReference(sbml_id, sto))
-
-
-def aggregates(default_params, compartments):
-    """
-    Build aggregates used by default processes.
-
-    Parameters
-    ----------
-    default_params : rba.prerba.default_data.DefaultParameters
-        Default parameters.
-    compartments : list of str
-        Compartment identifiers.
-
-    Returns
-    -------
-    list of rba.xml.Aggregate
-        Aggregates used by default processes.
-
-    """
-    result = []
-    result.append(build_aggregate(
-        'ribosome_capacity',
-        ['ribosome_efficiency_MM', 'fraction_active_ribosomes']
-        ))
-    for cpt in compartments:
-        fraction_fn = default_params.protein_fraction_id(cpt)
-        non_enzymatic_fn = default_params.non_enzymatic_fraction_id(cpt)
-        result.append(build_aggregate(
-            'nonenzymatic_proteins_' + cpt,
-            ['amino_acid_concentration', 'inverse_average_protein_length',
-             fraction_fn, non_enzymatic_fn]
-            ))
-    return result
-
-
-def build_aggregate(id_, fn_refs):
-    """Build aggregate with given identifiers and function references."""
-    result = rba.xml.Aggregate(id_, 'multiplication')
-    for ref in fn_refs:
-        result.function_references.append(rba.xml.FunctionReference(ref))
-    return result

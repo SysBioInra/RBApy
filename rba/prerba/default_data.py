@@ -1,10 +1,19 @@
 """Module storing data and data-related functions."""
 
 # python 2/3 compatibility
-from __future__ import division, print_function
+from __future__ import division, print_function, absolute_import
 
 # local imports
+import rba.xml
 from rba.xml import Function
+
+
+def build_aggregate(id_, fn_refs):
+    """Build aggregate with given identifiers and function references."""
+    result = rba.xml.Aggregate(id_, 'multiplication')
+    for ref in fn_refs:
+        result.function_references.append(rba.xml.FunctionReference(ref))
+    return result
 
 
 class DefaultData(object):
@@ -22,24 +31,17 @@ class DefaultParameters(object):
     """
     Class holding default RBA parameter data.
     """
+    def metabolite_concentration(self, id_):
+        return id_ + '_concentration'
 
-    def __init__(self):
-        self.cytoplasm_density = 4.8972
-        self.cytoplasm_fraction = 0.7
-        self.secreted_fraction = 0.1
-        self.other_fraction = 0.2
+    def metabolite_concentration_function(self, id_, concentration):
+        return Function(self.metabolite_concentration(id_),
+                        'constant', {'CONSTANT': concentration})
+
+    def process_functions(self):
         fns = []
-        fns.append(Function('amino_acid_concentration', 'linear',
-                            {'LINEAR_COEF': -0.9757, 'LINEAR_CONSTANT': 6.3138,
-                             'X_MIN': 0.25, 'X_MAX': 1.6,
-                             'Y_MIN': float('-Inf'), 'Y_MAX': float('Inf')}))
-        fns.append(Function('flagella_speed', 'constant', {'CONSTANT': 5.81}))
-        fns.append(Function('flagella_h_consumption', 'constant',
-                            {'CONSTANT': 0.9415}))
-        fns.append(Function('number_flagella', 'linear',
-                            {'LINEAR_COEF': 4.5197, 'LINEAR_CONSTANT': 3.7991,
-                             'X_MIN': 0.25, 'X_MAX': 1.6,
-                             'Y_MIN': float('-Inf'), 'Y_MAX': float('Inf')}))
+        aggregates = []
+        # efficiencies
         fns.append(Function('ribosome_efficiency_MM', 'michaelisMenten',
                             {'kmax': 97200, 'Km': 0.5, 'Y_MIN': 32400}))
         fns.append(Function('ribosome_efficiency_CM', 'constant',
@@ -51,12 +53,67 @@ class DefaultParameters(object):
                              'LINEAR_CONSTANT': -2888.0051,
                              'X_MIN': 0.25, 'X_MAX': 1.6,
                              'Y_MIN': float('-Inf'), 'Y_MAX': float('Inf')}))
+        aggregates.append(build_aggregate(
+            'ribosome_capacity',
+            ['ribosome_efficiency_MM', 'fraction_active_ribosomes']
+            ))
+        # targets
+        fns.append(Function('mrna_degradation_flux', 'constant',
+                            {'CONSTANT': 0.15996}))
+        fns.append(Function('mrna_concentration', 'constant',
+                            {'CONSTANT': 0.01}))
+        fns.append(Function('dna_concentration', 'constant',
+                            {'CONSTANT': 0.0807}))
         fns.append(Function('maintenance_atp', 'linear',
                             {'LINEAR_COEF': 12.1595,
                              'LINEAR_CONSTANT': -3.1595,
                              'X_MIN': 1, 'X_MAX': float('Inf'),
                              'Y_MIN': float('-Inf'), 'Y_MAX': float('Inf')}))
-        self.functions = fns
+        # fns.append(Function('flagella_speed', 'constant', {'CONSTANT': 5.81}))
+        # fns.append(Function('flagella_h_consumption', 'constant',
+        #                     {'CONSTANT': 0.9415}))
+        # fns.append(Function('number_flagella', 'linear',
+        #                     {'LINEAR_COEF': 4.5197, 'LINEAR_CONSTANT': 3.7991,
+        #                      'X_MIN': 0.25, 'X_MAX': 1.6,
+        #                      'Y_MIN': float('-Inf'), 'Y_MAX': float('Inf')}))
+        return fns, aggregates
+
+    def density_functions(self, cytoplasm, external, other):
+        cytoplasm_density = 4.8972
+        cytoplasm_fraction = 0.7
+        external_fraction = 0.1
+        other_fraction = 0.2 / len(other)
+        fns = [Function('amino_acid_concentration', 'linear',
+                        {'LINEAR_COEF': -0.9757, 'LINEAR_CONSTANT': 6.3138,
+                         'X_MIN': 0.25, 'X_MAX': 1.6,
+                         'Y_MIN': float('-Inf'), 'Y_MAX': float('Inf')})]
+        aggregates = []
+        # protein fraction
+        fns.append(self.protein_fraction(cytoplasm, cytoplasm_fraction))
+        fns.append(self.protein_fraction(external, external_fraction))
+        fns += [self.protein_fraction(c, other_fraction) for c in other]
+        # non enzymatic fraction
+        fns.append(self.non_enzymatic_fraction_cytoplasm(cytoplasm))
+        fns.append(self.non_enzymatic_fraction_secreted(external))
+        fns += [self.non_enzymatic_fraction_other(c) for c in other]
+        # total density
+        fns.append(Function(cytoplasm + '_density',
+                            'constant', {'CONSTANT': cytoplasm_density}))
+        for cpt in other:
+            aggregates.append(build_aggregate(
+                cpt + '_density',
+                ['amino_acid_concentration', self.protein_fraction_id(cpt)]
+                ))
+        # non enzymatic density
+        for cpt in [cytoplasm, external] + other:
+            aggregates.append(build_aggregate(
+                'nonenzymatic_proteins_' + cpt,
+                ['amino_acid_concentration',
+                 'inverse_average_protein_length',
+                 self.protein_fraction_id(cpt),
+                 self.non_enzymatic_fraction_id(cpt)]
+                ))
+        return fns, aggregates
 
     @staticmethod
     def inverse_average_protein_length(length):
@@ -233,10 +290,10 @@ class DefaultMetabolites(object):
         keys.append('MET')
         names.append('Methionine')
         # charged + uncharged trnas
-        keys += [self.charged_trna_key(aa) for aa in self.aas]
         names += [self.charged_trna_name(aa) for aa in self.aas]
         keys += [self.uncharged_trna_key(aa) for aa in self.aas]
         names += [self.uncharged_trna_name(aa) for aa in self.aas]
+        keys += [self.charged_trna_key(aa) for aa in self.aas]
         keys.append(self.charged_trna_key(self.aa_fM))
         names.append(self.charged_trna_name(self.aa_fM))
         # nucleotides
