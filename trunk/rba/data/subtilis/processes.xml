@@ -122,10 +122,10 @@
       </operations>
       <targets>
         <listOfConcentrations>
-          <targetSpecies value="0.01" species="mrna"/>
+          <targetSpecies value="mrna_concentration" species="mrna"/>
         </listOfConcentrations>
         <listOfProductionFluxes>
-          <targetSpecies value="0.15996" species="mrna"/>
+          <targetSpecies value="mrna_degradation_flux" species="mrna"/>
         </listOfProductionFluxes>
       </targets>
     </process>
@@ -137,7 +137,7 @@
       </operations>
       <targets>
         <listOfConcentrations>
-          <targetSpecies value="0.0807" species="dna"/>
+          <targetSpecies value="dna_concentration" species="dna"/>
         </listOfConcentrations>
       </targets>
     </process>
@@ -149,27 +149,27 @@
       </operations>
       <targets>
         <listOfDegradationFluxes>
-          <targetSpecies value="0.15996" species="mrna"/>
+          <targetSpecies value="mrna_degradation_flux" species="mrna"/>
         </listOfDegradationFluxes>
       </targets>
     </process>
     <process id="P_MET_PROD" name="Metabolite production">
       <targets>
         <listOfConcentrations>
-          <targetSpecies value="0.0162" species="M_nad_c"/>
-          <targetSpecies value="0.001" species="M_cmp_c"/>
-          <targetSpecies value="0.0047" species="M_amp_c"/>
-          <targetSpecies value="0.7063" species="M_k_c"/>
-          <targetSpecies value="0.0005" species="M_ctp_c"/>
-          <targetSpecies value="0.0003" species="M_coa_c"/>
-          <targetSpecies value="0.003" species="M_atp_c"/>
-          <targetSpecies value="0.0009" species="M_nadp_c"/>
-          <targetSpecies value="0.0026" species="M_adp_c"/>
-          <targetSpecies value="0.0002" species="M_nadph_c"/>
-          <targetSpecies value="0.0005" species="M_gmp_c"/>
-          <targetSpecies value="0.0002" species="M_gdp_c"/>
-          <targetSpecies value="0.0003" species="M_cdp_c"/>
-          <targetSpecies value="0.0004" species="M_gtp_c"/>
+          <targetSpecies value="M_nad_c_concentration" species="M_nad_c"/>
+          <targetSpecies value="M_cmp_c_concentration" species="M_cmp_c"/>
+          <targetSpecies value="M_amp_c_concentration" species="M_amp_c"/>
+          <targetSpecies value="M_k_c_concentration" species="M_k_c"/>
+          <targetSpecies value="M_ctp_c_concentration" species="M_ctp_c"/>
+          <targetSpecies value="M_coa_c_concentration" species="M_coa_c"/>
+          <targetSpecies value="M_atp_c_concentration" species="M_atp_c"/>
+          <targetSpecies value="M_nadp_c_concentration" species="M_nadp_c"/>
+          <targetSpecies value="M_adp_c_concentration" species="M_adp_c"/>
+          <targetSpecies value="M_nadph_c_concentration" species="M_nadph_c"/>
+          <targetSpecies value="M_gmp_c_concentration" species="M_gmp_c"/>
+          <targetSpecies value="M_gdp_c_concentration" species="M_gdp_c"/>
+          <targetSpecies value="M_cdp_c_concentration" species="M_cdp_c"/>
+          <targetSpecies value="M_gtp_c_concentration" species="M_gtp_c"/>
         </listOfConcentrations>
       </targets>
     </process>
