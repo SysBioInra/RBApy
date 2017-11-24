@@ -1,7 +1,7 @@
 """Module defining RbaModel class."""
 
 # python 2/3 compatibility
-from __future__ import division, print_function
+from __future__ import division, print_function, absolute_import
 
 # global imports
 from os.path import join
@@ -106,7 +106,7 @@ class RbaModel(object):
         """
         return ConstraintMatrix(self)
 
-    def solve(self, catalytic_function=None):
+    def solve(self):
         """
         Solve current model.
 
@@ -120,8 +120,6 @@ class RbaModel(object):
 
         """
         matrices = ConstraintMatrix(self)
-        if catalytic_function is not None:
-            matrices._blocks.set_catalytic_function(catalytic_function)
         solver = Solver(matrices)
         solver.solve()
         print('Optimal growth rate is {}.'.format(solver.mu_opt))

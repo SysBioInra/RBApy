@@ -1,60 +1,48 @@
-"""
-Module defining TargetVector class.
-"""
+"""Module defining TargetVector class."""
 
 # python 2/3 compatibility
-from __future__ import division, print_function
+from __future__ import division, print_function, absolute_import
 
 # global imports
 import numpy
 
-class TargetVector(object):
-    """
-    Class computing vectors where coefficients depend on growth rate.
-    """
+# local imports
+from rba.core import functions
 
-    def __init__(self, values, known_functions, def_value=None):
+
+class TargetVector(object):
+    """Vectors with coefficients depending on growth rate."""
+
+    def __init__(self, parameter_list, known_parameters, def_value=None):
         """
         Constructor.
 
-        Args:
-            values: list of numeric values or function identifiers.
-            known_functions: object containing function-related information.
-            def_value: default value (if input value was None).
+        Parameters
+        ----------
+        parameter_list : list of str
+            Function identifiers used to compute the vector.
+        known_parameters : rba.core.functions.Parameters
+            Parameter information.
+        def_value : float
+            Default value (if some input paramater was set to None).
         """
         base_values = []
         self._functions = []
-        for value in values:
-            val = fct = None
-            if value is not None:
-                try:
-                    val = float(value)
-                except ValueError:
-                    fct = known_functions.functions.get(value, None)
-            else:
-                val = def_value
-            if val is not None:
-                base_values.append(val)
-                self._functions.append(None)
-            elif fct is not None:
+        for parameter in parameter_list:
+            if parameter:
                 base_values.append(0)
-                self._functions.append(fct)
+                self._functions.append(known_parameters[parameter])
+            elif def_value is not None:
+                base_values.append(def_value)
+                self._functions.append(None)
             else:
-                raise UserWarning('Invalid value: ' + value)
+                raise UserWarning('Default value is missing...')
         self._base_values = numpy.array(base_values, dtype='float')
 
-    def compute(self, mu):
-        """
-        Compute vector for given growth rate.
-
-        Args:
-            mu: growth_rate
-
-        Returns:
-            Vector with coefficients corresponding at given growth rate.
-        """
+    def compute(self):
+        """Compute vector with current parameter values."""
         result = self._base_values
         for i, function in enumerate(self._functions):
             if function is not None:
-                result[i] = function.evaluate(mu)
+                result[i] = function.value
         return result

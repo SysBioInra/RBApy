@@ -5,10 +5,11 @@ from itertools import chain
 import sys
 from os.path import join
 
-sys.path.append(join(sys.path[0],'../..'))
+sys.path.append(join(sys.path[0], '../..'))
 
-import rba
-from rba import rba_xml
+import rba  # noqa
+from rba import rba_xml  # noqa
+
 
 def metabolite_name(old_name):
     """
@@ -16,7 +17,8 @@ def metabolite_name(old_name):
     :param old_name: original metabolite name.
     """
     # if species is not a metabolite, ignore it
-    if not old_name.startswith('m_'): return old_name
+    if not old_name.startswith('m_'):
+        return old_name
     # 1. capitalize the 'm_'
     # 2. add suffix '_c' or change '_xt' to '_e'
     if old_name.endswith('_xt'):
@@ -24,18 +26,21 @@ def metabolite_name(old_name):
     else:
         return old_name.capitalize() + '_c'
 
+
 def read_value(node, aggregate_name, parameters):
     """
-    Read old-fashioned value node. Return value if it is a number or a 
+    Read old-fashioned value node. Return value if it is a number or a
     simple function reference. If it contains multiple function references,
     create aggregate and return its id.
     """
     value = node.get('value')
     # one number or function reference: return it
-    if value is not None: return value
+    if value is not None:
+        return value
     fn_refs = node.findall('functionReference')
     # one function reference: return it
-    if len(fn_refs) == 1: return fn_refs[0].get('function')
+    if len(fn_refs) == 1:
+        return fn_refs[0].get('function')
     # multiple function references: create aggregate
     new_agg = rba_xml.Aggregate(aggregate_name, 'multiplication')
     for ref in fn_refs:
@@ -44,7 +49,9 @@ def read_value(node, aggregate_name, parameters):
     parameters.aggregates.append(new_agg)
     return aggregate_name
 
+
 def read_metabolism(filename):
+    dump_met = ['m_aaacp', 'm_this']
     # read sbml
     sbml = libsbml.readSBML(filename)
     metabolism = rba_xml.RbaMetabolism()
@@ -59,12 +66,15 @@ def read_metabolism(filename):
         new_reaction = rba_xml.Reaction(r.id, r.reversible)
         metabolism.reactions.append(new_reaction)
         for sr in r.reactants:
-            new_reaction.reactants.append \
-                (rba_xml.SpeciesReference(sr.species, sr.stoichiometry))
+            new_reaction.reactants.append(
+                rba_xml.SpeciesReference(sr.species, sr.stoichiometry)
+                )
         for sr in r.products:
-            new_reaction.products.append \
-                (rba_xml.SpeciesReference(sr.species, sr.stoichiometry))
+            new_reaction.products.append(
+                rba_xml.SpeciesReference(sr.species, sr.stoichiometry)
+                )
     return metabolism
+
 
 def read_parameters(filename):
     root = etree.ElementTree(file=filename).getroot()
@@ -73,12 +83,15 @@ def read_parameters(filename):
     densities = root.findall('listOfMaximalDensities/maximalDensity')
     for d in densities:
         target = rba_xml.TargetDensity(d.get('compartment'))
-        target.upper_bound = read_value(d, target.compartment + '_density', result)
+        target.upper_bound = read_value(
+            d, target.compartment + '_density', result
+            )
         result.target_densities.append(target)
     # read functions
     func = rba_xml.get_unique_child(root, 'listOfFunctions')
     result.functions = rba_xml.ListOfFunctions.from_xml_node(func)
     return result
+
 
 def read_macromolecules(filename, tag):
     root = etree.ElementTree(file=filename).getroot()
@@ -92,6 +105,7 @@ def read_macromolecules(filename, tag):
         result.macromolecules.append(rba_xml.Macromolecule.from_xml_node(m))
     return result
 
+
 def read_enzymes(filename):
     root = etree.ElementTree(file=filename).getroot()
     result = rba_xml.RbaEnzymes()
@@ -102,17 +116,20 @@ def read_enzymes(filename):
     # read enzymes
     enzymes = root.findall('listOfEnzymes/enzyme')
     for e in enzymes:
-        new_e = rba_xml.Enzyme(e.get('id'), rba_xml.is_true(e.get('zero_cost')))
+        new_e = rba_xml.Enzyme(e.get('id'),
+                               rba_xml.is_true(e.get('zero_cost')))
         result.enzymes.append(new_e)
         # machinery
         n = rba_xml.get_unique_child(e, 'machineryComposition', False)
         if n is not None:
-            new_e.machinery_composition = rba_xml.MachineryComposition.from_xml_node(n)
+            new_e.machinery_composition \
+                = rba_xml.MachineryComposition.from_xml_node(n)
         # enzyme efficiencies
         effs = e.findall('enzymaticActivity/enzymeEfficiency')
         for eff in effs:
-            new_e.enzymatic_activity.enzyme_efficiencies.append \
-                (rba_xml.EnzymeEfficiency.from_xml_node(eff))
+            new_e.enzymatic_activity.enzyme_efficiencies.append(
+                rba_xml.EnzymeEfficiency.from_xml_node(eff)
+                )
         # transport efficiency
         n = e.find('enzymaticActivity/transporterEfficiency')
         if n is not None:
@@ -120,11 +137,12 @@ def read_enzymes(filename):
                 = rba_xml.TransporterEfficiency.from_xml_node(n)
     return result
 
+
 def read_processes(filename, parameters):
     root = etree.ElementTree(file=filename).getroot()
     result = rba_xml.RbaProcesses()
-    
-    ## processes
+
+    # processes
     processes = root.find('listOfProcesses')
     for p in processes:
         new_p = rba_xml.Process(p.get('id'), p.get('name'))
@@ -143,12 +161,14 @@ def read_processes(filename, parameters):
         # operations
         productions = p.findall('operatingCosts/production')
         for prod in productions:
-            new_p.operations.productions.append \
-                (rba_xml.Operation.from_xml_node(prod))
+            new_p.operations.productions.append(
+                rba_xml.Operation.from_xml_node(prod)
+                )
         degradations = p.findall('operatingCosts/degradation')
         for deg in degradations:
-            new_p.operations.degradations.append \
-                (rba_xml.Operation.from_xml_node(deg))
+            new_p.operations.degradations.append(
+                rba_xml.Operation.from_xml_node(deg)
+                )
         # targets
         targets = p.findall('targets/targetValue')
         for t in targets:
@@ -167,10 +187,12 @@ def read_processes(filename, parameters):
             new_t = rba_xml.TargetReaction(t.get('reaction'))
             # read value if possible or create aggregate
             # from function references
-            new_t.value = read_value(t, t.get('reaction') + '_flux', parameters)
+            new_t.value = read_value(
+                t, t.get('reaction') + '_flux', parameters
+                )
             new_p.targets.reaction_fluxes.append(new_t)
 
-    ## component maps
+    # component maps
     maps = root.findall('listOfComponentMaps/componentMap')
     for m in maps:
         new_m = rba_xml.ComponentMap(m.get('id'))
@@ -183,12 +205,13 @@ def read_processes(filename, parameters):
             new_m.costs.append(rba_xml.Cost.from_xml_node(c))
     return result
 
+
 if __name__ == "__main__":
     output = '.'
     input_ = 'old_data/'
     model = rba.RbaModel()
-    
-    ## convert old files
+
+    # convert old files
     # metabolism
     model.metabolism = read_metabolism(input_ + 'metabolism.xml')
     # parameters
@@ -202,15 +225,20 @@ if __name__ == "__main__":
     # change metabolite names where necessary
     for e in model.enzymes.enzymes:
         for sr in e.machinery_composition.reactants:
-            if sr.species == 'm_siroheme': sr.species = 'm_sheme'
-            elif sr.species == 'm_biotin': sr.species = 'm_bio'
-            elif sr.species == 'm_b6': sr.species = 'm_py5p'
+            if sr.species == 'm_siroheme':
+                sr.species = 'm_sheme'
+            elif sr.species == 'm_biotin':
+                sr.species = 'm_bio'
+            elif sr.species == 'm_b6':
+                sr.species = 'm_py5p'
     # processes
-    model.processes = read_processes(input_ + 'processes.xml', model.parameters)
+    model.processes = read_processes(
+        input_ + 'processes.xml', model.parameters
+        )
     # medium
     model.medium = model.read_medium('medium.tsv')
 
-    ## adapt metabolite names
+    # adapt metabolite names
     # metabolism
     for m in model.metabolism.species:
         m.id = metabolite_name(m.id)
@@ -238,12 +266,12 @@ if __name__ == "__main__":
             for s in chain(c.reactants, c.products):
                 s.species = metabolite_name(s.species)
 
-    ## add maintenance ATP
+    # add maintenance ATP
     p_atpm = rba_xml.Process('P_maintenance_atp', 'Maintenance ATP')
     target = rba_xml.TargetReaction('Eatpm')
     target.lower_bound = 'maintenanceATP'
     p_atpm.targets.reaction_fluxes.append(target)
     model.processes.processes.append(p_atpm)
-            
-    ## write model to file
+
+    # write model to file
     model.write_files(output)

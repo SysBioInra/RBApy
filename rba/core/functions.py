@@ -1,55 +1,41 @@
-"""
-Module containing valid RBA functions and Functions container class.
-"""
+"""Module containing valid RBA functions."""
 
 # python 2/3 compatibility
-from __future__ import division, print_function
+from __future__ import division, print_function, absolute_import
 
 # global imports
 import numpy
 
-class Functions(object):
-    """
-    Class building and storing RBA functions (including aggregates).
 
-    Attributes:
-        functions: dict mapping function or aggregate id with object used to
-            compute it.
-    """
-    def __init__(self, functions, aggregates):
-        """
-        Constructor.
+class BaseFunction(object):
+    """Mother of all functions."""
 
-        Args:
-            functions: xml structure containing function information.
-            aggregates: xml structure containing aggregate information.
-        """
-        self.functions = {}
-        for fn in functions:
-            params = {p.id: p.value for p in fn.parameters}
-            self.functions[fn.id] = build_function(fn.type, params, fn.variable)
-        for fn in aggregates:
-            self.functions[fn.id] = build_aggregate(fn, self.functions)
+    def __init__(self, variable):
+        """Build default object."""
+        self.variable = variable
 
-    def __getitem__(self, fn_id):
-        """
-        Get function or aggregate matching given id.
+    def is_growth_rate_dependent(self):
+        """Return whether function depends on growth rate."""
+        return self.variable == 'growth_rate'
 
-        Args:
-            fn_id: id of function to retrieve.
+    def is_medium_dependent(self):
+        """Return whether function depends on medium variable."""
+        return self.variable and self.variable != 'growth_rate'
 
-        Returns:
-            Function object.
-        """
-        return self.functions[fn_id]
 
-class ConstantFunction(object):
+class ConstantFunction(BaseFunction):
     """
     Class computing constant functions.
 
-    Attributes:
-        name: identifier of this class.
-        variable: variable used by function (if applicable).
+    Attributes
+    ----------
+    name : str
+        identifier of this class.
+    variable : str
+        variable used by function.
+    value : float
+        current function value.
+
     """
 
     name = 'constant'
@@ -58,119 +44,131 @@ class ConstantFunction(object):
         """
         Constructor.
 
-        Args:
-            parameters: dict used to initialize function. It must contain the
-                the following keys: CONSTANT.
-            variable: variable used by function (if applicable).
+        Parameters
+        ----------
+        parameters : dict
+            Dict that must contain the following keys: CONSTANT.
+        variable : str
+            Function variable.
+
         """
-        self.variable = variable
-        self._constant = parameters['CONSTANT']
+        super(ConstantFunction, self).__init__(None)
+        self.value = parameters['CONSTANT']
 
-    def evaluate(self, x):
-        """
-        Evaluate function at given point.
+    def update(self, x):
+        """Evaluate function."""
+        pass
 
-        Args:
-            x: point where function is to be computed.
 
-        Returns:
-            Value of the function at given point.
-        """
-        return self._constant
-
-class ExponentialFunction(object):
+class ExponentialFunction(BaseFunction):
     """
     Class computing exponential functions.
 
-    Attributes:
-        name: identifier of this class.
-        variable: variable used by function (if applicable).
+    Attributes
+    ----------
+    name : str
+        identifier of this class.
+    variable : str
+        variable used by function.
+    value : float
+        current function value.
+
     """
 
     name = 'exponential'
 
-    def __init__(self, parameters, variable=None):
+    def __init__(self, parameters, variable):
         """
         Constructor.
 
-        Args:
-            parameters: dict used to initialize function. It must contain the
-                the following keys: RATE.
-            variable: variable used by function (if applicable).
+        Parameters
+        ----------
+        parameters : dict
+            Dict that must contain the following keys: RATE.
+        variable : str
+            Function variable.
+
         """
-        self.variable = variable
+        super(ExponentialFunction, self).__init__(variable)
+        self.value = 1
         self._rate = parameters['RATE']
 
-    def evaluate(self, x):
-        """
-        Evaluate function at given point.
+    def update(self, x):
+        """Evaluate function."""
+        self.value = numpy.exp(self._rate * x)
 
-        Args:
-            x: point where function is to be computed.
 
-        Returns:
-            Value of the function at given point.
-        """
-        return numpy.exp(self._rate*x)
-
-class IndicatorFunction(object):
+class IndicatorFunction(BaseFunction):
     """
     Class computing indicator functions.
 
-    Attributes:
-        name: identifier of this class.
-        variable: variable used by function (if applicable).
+    Attributes
+    ----------
+    name : str
+        identifier of this class.
+    variable : str
+        variable used by function.
+    value : bool
+        current function value.
+
     """
 
     name = 'indicator'
 
-    def __init__(self, parameters, variable=None):
+    def __init__(self, parameters, variable):
         """
         Constructor.
 
-        Args:
-            parameters: dict used to initialize function. It must contain the
-                the following keys: X_MIN, X_MAX.
-            variable: variable used by function (if applicable).
+        Parameters
+        ----------
+        parameters : dict
+            Dict that must contain the following keys: X_MIN, X_MAX.
+        variable : str
+            Function variable.
+
         """
-        self.variable = variable
+        super(IndicatorFunction, self).__init__(variable)
+        self.value = 0
         self._x_min = parameters['X_MIN']
         self._x_max = parameters['X_MAX']
 
-    def evaluate(self, x):
-        """
-        Evaluate function at given point.
+    def update(self, x):
+        """Evaluate function."""
+        self.value = (x > self._x_min) and (x < self._x_max)
 
-        Args:
-            x: point where function is to be computed.
 
-        Returns:
-            Value of the function at given point.
-        """
-        return (x > self._x_min) and (x < self._x_max)
-
-class LinearFunction(object):
+class LinearFunction(BaseFunction):
     """
     Class computing linear functions.
 
-    Attributes:
-        name: identifier of this class.
-        variable: variable used by function (if applicable).
+    Attributes
+    ----------
+    name : str
+        identifier of this class.
+    variable : str
+        variable used by function.
+    value : float
+        current function value.
+
     """
 
     name = 'linear'
 
-    def __init__(self, parameters, variable=None):
+    def __init__(self, parameters, variable):
         """
         Constructor.
 
-        Args:
-            parameters: dict used to initialize function. It must contain the
-                the following keys: X_MIN, X_MAX, LINEAR_COEF, LINEAR_CONSTANT,
-                Y_MIN, Y_MAX.
-            variable: variable used by function (if applicable).
+        Parameters
+        ----------
+        parameters : dict
+            Dict that must contain the following keys: X_MIN, X_MAX,
+            LINEAR_COEF, LINEAR_CONSTANT, Y_MIN, Y_MAX.
+        variable : str
+            Function variable.
+
         """
-        self.variable = variable
+        super(LinearFunction, self).__init__(variable)
+        self.value = 0
         self._x_min = parameters['X_MIN']
         self._x_max = parameters['X_MAX']
         self._coef = parameters['LINEAR_COEF']
@@ -178,65 +176,66 @@ class LinearFunction(object):
         self._y_min = parameters['Y_MIN']
         self._y_max = parameters['Y_MAX']
 
-    def evaluate(self, x):
-        """
-        Evaluate function at given point.
-
-        Args:
-            x: point where function is to be computed.
-
-        Returns:
-            Value of the function at given point.
-        """
+    def update(self, x):
+        """Evaluate function."""
         x_eval = min(max(x, self._x_min), self._x_max)
         y = self._coef * x_eval + self._constant
-        return min(max(y, self._y_min), self._y_max)
+        self.value = min(max(y, self._y_min), self._y_max)
 
-class MichaelisMentenFunction(object):
+
+class MichaelisMentenFunction(BaseFunction):
     """
     Class computing michaelis menten functions.
 
-    Attributes:
-        name: identifier of this class.
-        variable: variable used by function (if applicable).
+    Attributes
+    ----------
+    name : str
+        identifier of this class.
+    variable : str
+        variable used by function.
+    value : float
+        current function value.
+
     """
 
     name = 'michaelisMenten'
 
-    def __init__(self, parameters, variable=None):
+    def __init__(self, parameters, variable):
         """
         Constructor.
 
-        Args:
-            parameters: dict used to initialize function. It must contain the
-                the following keys: kmax, Km. Optionally, it may contain Y_MIN.
-            variable: variable used by function (if applicable).
+        Parameters
+        ----------
+        parameters : dict
+            Dict that must contain the following keys: kmax, Km.
+            Optionally, it may contain Y_MIN.
+        variable : str
+            Function variable.
+
         """
-        self.variable = variable
+        super(MichaelisMentenFunction, self).__init__(variable)
         self._kmax = float(parameters['kmax'])
         self._km = float(parameters['Km'])
         self._y_min = parameters.get('Y_MIN', None)
+        self.value = 0
 
-    def evaluate(self, x):
-        """
-        Evaluate function at given point.
-
-        Args:
-            x: point where function is to be computed.
-
-        Returns:
-            Value of the function at given point.
-        """
+    def update(self, x):
+        """Evaluate function at given point."""
         y = self._kmax * x / (x + self._km)
-        return max(y, self._y_min) if self._y_min else y
+        self.value = max(y, self._y_min) if self._y_min else y
+
 
 class MultiplicationFunction(object):
     """
     Class computing multiplication functions.
 
-    Attributes:
-        name: identifier of this class.
-        variable: variable used by function (if applicable).
+    Attributes
+    ----------
+    name : str
+        identifier of this class.
+    value : int
+        current function value.
+
     """
 
     name = 'multiplication'
@@ -245,26 +244,31 @@ class MultiplicationFunction(object):
         """
         Constructor.
 
-        Args:
-            function_handles: list of functions that have to be multiplied.
+        Parameters
+        ----------
+        function_handles : list of function handles
+            Functions that have to be multiplied.
+
         """
-        self.variable = None
         self._operands = function_handles
+        self.value = 1
+        self.update()
 
-    def evaluate(self, x):
-        """
-        Evaluate function at given point.
+    def is_growth_rate_dependent(self):
+        """Return whether function depends on growth rate."""
+        return any(op.is_growth_rate_dependent() for op in self._operands)
 
-        Args:
-            x: point where function is to be computed.
+    def is_medium_dependent(self):
+        """Return whether function depends on medium variable."""
+        return any(op.is_medium_dependent() for op in self._operands)
 
-        Returns:
-            Value of the function at given point.
-        """
+    def update(self):
+        """Evaluate function."""
         y = 1
         for op in self._operands:
-            y *= op.evaluate(x)
-        return y
+            y *= op.value
+        self.value = y
+
 
 # list of accepted function names and classes implementing them
 SIMPLE = [ConstantFunction, LinearFunction, IndicatorFunction,
@@ -273,18 +277,24 @@ AGGREGATE = [MultiplicationFunction]
 VALID_FNS = {c.name: c for c in SIMPLE}
 VALID_AGGS = {c.name: c for c in AGGREGATE}
 
-def build_function(type_, params, variable=None):
+
+def build_function(type_, params, variable):
     """
     Create object function matching type and parameters given.
 
-    Args:
-        type_: string matching name attribute of one of the classes of this
-             module.
-        params: dict mapping parameter names with their values.
-        variable: name of variable used by function (if applicable).
+    Parameters
+    ----------
+    type_ : str
+        'name' attribute of one of the classes of this module.
+    params : dict
+        Dict mapping parameter names with their values.
+    variable : str
+        Function variable.
 
-    Returns:
-        Function object matching type and parameters provided.
+    Returns
+    -------
+    Function object matching type and parameters provided.
+
     """
     try:
         # retrieve class implementing function
@@ -299,17 +309,22 @@ def build_function(type_, params, variable=None):
         print('Missing parameter: ' + error.message)
         raise UserWarning('Invalid function.')
 
+
 def build_aggregate(agg, known_functions):
     """
     Create aggregate from xml_structure.
 
-    Args:
-        agg: xml structure describing aggregate.
-        known_functions: dict mapping known function ids with object used to
-            compute them. These functions are used to build the aggregate.
+    Parameters
+    ----------
+    agg : XML node
+        Structure describing aggregate.
+    known_functions : rba.core.parameters.Parameters
+        Known parameters.
 
-    Returns:
-        Aggregate object matching xml structure.
+    Returns
+    -------
+    Aggregate object matching xml structure.
+
     """
     try:
         # retrieve class implementing aggregate
@@ -320,7 +335,7 @@ def build_aggregate(agg, known_functions):
         raise UserWarning('Invalid aggregate.')
     try:
         # retrieve functions used in aggregate
-        fn_handles = [known_functions[ref.function] \
+        fn_handles = [known_functions[ref.function]
                       for ref in agg.function_references]
     except KeyError as error:
         print('Unknown function: ' + error.args[0])

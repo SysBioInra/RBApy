@@ -1,16 +1,13 @@
-"""
-Common function and classes used for RBA XML structures.
-"""
+"""Common function and classes used for RBA XML structures."""
 
 # python 2/3 compatiblity
-from __future__ import division, print_function
+from __future__ import division, print_function, absolute_import
 
 # global imports
 from lxml import etree
 
 __all__ = ['MachineryComposition', 'SpeciesReference', 'ListOfReactants',
-           'ListOfProducts', 'Parameter', 'ListOfParameters', 'Function',
-           'ListOfFunctions', 'TargetValue']
+           'ListOfProducts', 'TargetValue']
 
 
 def is_true(attribute):
@@ -27,6 +24,7 @@ def is_true(attribute):
     out : bool
         True if attribute value is considered to represent the 'true' boolean
         state, False otherwise.
+
     """
     return attribute.lower() == 'true' or attribute == '1'
 
@@ -250,135 +248,6 @@ class ListOfProducts(ListOf):
 
     tag = 'listOfProducts'
     list_element = SpeciesReference
-
-
-class Parameter(object):
-    """
-    Parameter represented with an id, value couple.
-
-    Attributes
-    ----------
-    id : str
-        Identifier of parameter.
-    value : float
-        Value of parameter.
-    """
-
-    tag = 'parameter'
-
-    def __init__(self, id_, value):
-        """
-        Constructor.
-
-        Parameters
-        ----------
-        id_ : str
-            Identifier of parameter.
-        value : float
-            Value of parameter.
-        """
-        self.id = id_
-        self.value = value
-
-    def to_xml_node(self):
-        """
-        Convert to xml node.
-        """
-        result = etree.Element(self.tag)
-        result.set('id', self.id)
-        result.set('value', str(self.value))
-        return result
-
-    @classmethod
-    def from_xml_node(cls, node):
-        """
-        Constructor from xml node.
-        """
-        return cls(node.get('id'), float(node.get('value')))
-
-
-class ListOfParameters(ListOf):
-    """
-    List of Parameter elements.
-    """
-
-    tag = 'listOfParameters'
-    list_element = Parameter
-
-
-class Function(object):
-    """
-    Function defined by a type and parameters.
-
-    Attributes
-    ----------
-    id : str or None
-        Identifier of function (if applicable).
-    type : str
-        Type of function.
-    parameters : ListOfParameters
-        List of parameters used by function.
-    variable : str
-        Name of variable (if applicable).
-    """
-
-    tag = 'function'
-
-    def __init__(self, id_, type_, parameters=None, variable=''):
-        """
-        Constructor.
-
-        Parameters
-        ----------
-        id_ : str or None
-            identifier of function (if applicable).
-        type_: str
-            type of function.
-        parameters : ListOfParameters, optional
-            list of parameters used by function.
-        variable : str, optional
-            name of variable (if applicable).
-        """
-        self.id = id_ if id_ is not None else ''
-        self.type = type_
-        self.variable = variable
-        self.parameters = ListOfParameters()
-        if parameters:
-            for key, value in parameters.items():
-                self.parameters.append(Parameter(key, value))
-
-    def to_xml_node(self):
-        """
-        Convert to xml node.
-        """
-        result = etree.Element(self.tag)
-        result.set('id', self.id)
-        result.set('type', self.type)
-        if self.variable:
-            result.set('variable', self.variable)
-        if not self.parameters.is_empty():
-            result.extend([self.parameters.to_xml_node()])
-        return result
-
-    @classmethod
-    def from_xml_node(cls, node):
-        """
-        Constructor from xml node.
-        """
-        result = cls(node.get('id'), node.get('type'), {}, node.get('variable'))
-        n = get_unique_child(node, 'listOfParameters', False)
-        if n is not None:
-            result.parameters = ListOfParameters.from_xml_node(n)
-        return result
-
-
-class ListOfFunctions(ListOf):
-    """
-    List of Function elements.
-    """
-
-    tag = 'listOfFunctions'
-    list_element = Function
 
 
 class TargetValue(object):
