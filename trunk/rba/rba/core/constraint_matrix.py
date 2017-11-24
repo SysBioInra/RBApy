@@ -1,7 +1,7 @@
 """Module defining ConstraintMatrixc class."""
 
 # python 2/3 compatibility
-from __future__ import division, print_function
+from __future__ import division, print_function, absolute_import
 
 # global imports
 import numpy
@@ -122,15 +122,18 @@ class ConstraintMatrix(object):
         Args:
             mu: growth_rate
         """
+        # update parameters
+        self._blocks.parameters.update_growth_rate(mu)
+
         # build A
         enzymes = self._blocks.enzymes
         processes = self._blocks.processes
         density = self._blocks.density
-        # mu-dependent data
+        # mu-dependent blocks
         u_composition, u_proc_cost, u_weight \
             = self._blocks.processes.undetermined_values.matrices(mu)
-        process_capacity = processes.capacity.compute(mu)
-        (forward, backward) = enzymes.efficiency.compute(mu)
+        process_capacity = processes.capacity.compute()
+        forward, backward = enzymes.efficiencies()
         # stoichiometry constraints
         metab_rows = hstack([self._blocks.metabolism.S,
                              mu * enzymes.machinery.composition,
@@ -158,20 +161,20 @@ class ConstraintMatrix(object):
                          forward_rows, backward_rows, density_rows])
 
         # build b
-        # gather mu-dependent data
-        (fluxes, processing, weight) = processes.target_values.compute(mu)
-        density_rows = density.values.compute(mu) - weight[c_indices].T
+        # gather mu-dependent blocks
+        fluxes, processing, weight = processes.target_values.compute(mu)
+        density_rows = density.values.compute() - weight[c_indices].T
         # build vector
         self.b = numpy.concatenate([-fluxes, -processing,
                                     self._empty_2E, density_rows])
 
         # update lower bounds and upper bounds
         # undetermined metabolites
-        self.LB[self.species_cols] = processes.undetermined_values.lb(mu)
-        self.UB[self.species_cols] = processes.undetermined_values.ub(mu)
+        self.LB[self.species_cols] = processes.undetermined_values.lb()
+        self.UB[self.species_cols] = processes.undetermined_values.ub()
         # target reactions
-        self.LB[self._lb_reaction_cols] = processes.target_reactions.lb(mu)
-        self.UB[self._ub_reaction_cols] = processes.target_reactions.ub(mu)
-        r_fluxes = self._blocks.processes.target_reactions.value(mu)
+        self.LB[self._lb_reaction_cols] = processes.target_reactions.lb()
+        self.UB[self._ub_reaction_cols] = processes.target_reactions.ub()
+        r_fluxes = self._blocks.processes.target_reactions.value()
         self.LB[self._value_reaction_cols] = r_fluxes
         self.UB[self._value_reaction_cols] = r_fluxes

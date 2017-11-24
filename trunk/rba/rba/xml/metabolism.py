@@ -3,7 +3,7 @@ Metabolism-specific classes used for RBA XML structures.
 """
 
 # python 2/3 compatiblity
-from __future__ import division, print_function
+from __future__ import division, print_function, absolute_import
 
 # global imports
 from lxml import etree

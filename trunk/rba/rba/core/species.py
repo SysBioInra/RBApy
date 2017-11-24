@@ -3,7 +3,7 @@ Module defining Machinery, Species and ComponentMap classes.
 """
 
 # python 2/3 compatibility
-from __future__ import division, print_function
+from __future__ import division, print_function, absolute_import
 
 # global imports
 from collections import namedtuple
@@ -12,6 +12,7 @@ import numpy
 
 # class storing machinery-related information
 Machinery = namedtuple('Machinery', 'composition processing_cost weight')
+
 
 class Species(object):
     """

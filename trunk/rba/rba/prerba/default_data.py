@@ -7,6 +7,8 @@ from __future__ import division, print_function, absolute_import
 import rba.xml
 from rba.xml import Function
 
+GROWTH_RATE = 'growth_rate'
+
 
 def build_aggregate(id_, fn_refs):
     """Build aggregate with given identifiers and function references."""
@@ -17,9 +19,8 @@ def build_aggregate(id_, fn_refs):
 
 
 class DefaultData(object):
-    """
-    Class holding default RBA data.
-    """
+    """Class holding default RBA data."""
+
     def __init__(self):
         self.parameters = DefaultParameters()
         self.metabolites = DefaultMetabolites()
@@ -28,9 +29,8 @@ class DefaultData(object):
 
 
 class DefaultParameters(object):
-    """
-    Class holding default RBA parameter data.
-    """
+    """Class holding default RBA parameter data."""
+
     def metabolite_concentration(self, id_):
         return id_ + '_concentration'
 
@@ -41,6 +41,8 @@ class DefaultParameters(object):
     def process_functions(self):
         fns = []
         aggregates = []
+        # zero function
+        fns.append(Function('zero', 'constant', {'CONSTANT': 0}))
         # efficiencies
         fns.append(Function('ribosome_efficiency_MM', 'michaelisMenten',
                             {'kmax': 97200, 'Km': 0.5, 'Y_MIN': 32400}))
@@ -69,13 +71,6 @@ class DefaultParameters(object):
                              'LINEAR_CONSTANT': -3.1595,
                              'X_MIN': 1, 'X_MAX': float('Inf'),
                              'Y_MIN': float('-Inf'), 'Y_MAX': float('Inf')}))
-        # fns.append(Function('flagella_speed', 'constant', {'CONSTANT': 5.81}))
-        # fns.append(Function('flagella_h_consumption', 'constant',
-        #                     {'CONSTANT': 0.9415}))
-        # fns.append(Function('number_flagella', 'linear',
-        #                     {'LINEAR_COEF': 4.5197, 'LINEAR_CONSTANT': 3.7991,
-        #                      'X_MIN': 0.25, 'X_MAX': 1.6,
-        #                      'Y_MIN': float('-Inf'), 'Y_MAX': float('Inf')}))
         return fns, aggregates
 
     def density_functions(self, cytoplasm, external, other):
@@ -313,18 +308,37 @@ class DefaultMetabolites(object):
 
 
 class DefaultActivity(object):
-    """
-    Class holding default RBA enzyme activity data.
-    """
+    """Class holding default RBA enzyme activity data."""
 
     def __init__(self):
         """
         Default constructor.
         """
-        # default catalytic activity
-        self.catalytic_activity = 200000
-        self.transporter_activity = 2e6
-        self.import_Km = 0.8
-        self.import_kmax = 1
+        # default ids
+        self.efficiency_id = 'default_efficiency'
+        self.transport_id = 'default_transporter_efficiency'
         # default medium
         self.medium_concentration = 10
+
+    def efficiency_function(self):
+        return Function(self.efficiency_id, 'constant',
+                        {'CONSTANT': 200000}, GROWTH_RATE)
+
+    def transport_function(self):
+        return Function(self.transport_id, 'constant',
+                        {'CONSTANT': 2e6}, GROWTH_RATE)
+
+    def transport_aggregate_id(self, reaction):
+        return '{}_efficiency'.format(reaction)
+
+    def transport_aggregate(self, reaction, metabolites):
+        fns = []
+        agg_fns = [self.transport_id]
+        for met in metabolites:
+            fn_id = '{}_{}_transport_factor'.format(reaction, met)
+            fns.append(
+                Function(fn_id, 'michaelisMenten', {'Km': 0.8, 'kmax': 1}, met)
+                )
+            agg_fns.append(fn_id)
+        agg = build_aggregate(self.transport_aggregate_id(reaction), agg_fns)
+        return fns, agg

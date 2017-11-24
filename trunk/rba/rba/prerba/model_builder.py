@@ -5,6 +5,7 @@ from __future__ import division, print_function, absolute_import
 
 # global imports
 import itertools
+import copy
 
 # local imports
 from rba.prerba.user_data import ntp_composition
@@ -29,8 +30,8 @@ class ModelBuilder(object):
         """
         metabolism = rba.xml.RbaMetabolism()
 
-        metabolism.species = self.data.sbml_species()
-        metabolism.reactions = self.data.sbml_reactions()
+        metabolism.species = copy.deepcopy(self.data.sbml_species())
+        metabolism.reactions = copy.deepcopy(self.data.sbml_reactions())
         # add atpm reaction
         reaction = rba.xml.Reaction(self.default.atpm_reaction, False)
         for m in ['ATP', 'H2O']:
@@ -79,9 +80,11 @@ class ModelBuilder(object):
         for agg in aggs:
             parameters.aggregates.append(agg)
         # protein length
-        parameters.functions.append(def_params.inverse_average_protein_length(
-            sum(self.data.average_protein.values())
-            ))
+        parameters.functions.append(
+            def_params.inverse_average_protein_length(
+                sum(self.data.average_protein.values())
+                )
+            )
         # process functions
         fns, aggs = def_params.process_functions()
         for fn in fns:
@@ -102,6 +105,24 @@ class ModelBuilder(object):
                         metabolite.sbml_id, metabolite.concentration
                         )
                     )
+        # enzyme efficiencies
+        # base enzymatic activity
+        parameters.functions.append(
+            self.default.activity.efficiency_function()
+            )
+        parameters.functions.append(
+            self.default.activity.transport_function()
+            )
+        # transport functions and aggregates
+        reaction_ids = [r.id for r in self.data.sbml_reactions()]
+        for reaction in reaction_ids:
+            if self.data.has_membrane_enzyme(reaction):
+                fns, agg = self.default.activity.transport_aggregate(
+                    reaction, self.data.imported_metabolites(reaction)
+                    )
+                for fn in fns:
+                    parameters.functions.append(fn)
+                parameters.aggregates.append(agg)
         return parameters
 
     def build_proteins(self):
@@ -236,25 +257,19 @@ class ModelBuilder(object):
 
         """
         enzymes = rba.xml.RbaEnzymes()
-        cytoplasm = self.data.compartment('Cytoplasm')
-        # efficiency functions
-        # for the moment simply put default value
-        default_function = rba.xml.Function('default', 'constant', {})
-        enzymes.efficiency_functions.append(default_function)
-
         # user enzymes
-        default_activity = self.default.activity
-        def_param = {'CONSTANT': default_activity.catalytic_activity}
-        def_efficiency = rba.xml.EnzymeEfficiency('default', def_param)
-        tra_param = {'CONSTANT': default_activity.transporter_activity}
-        tra_efficiency = rba.xml.EnzymeEfficiency('default', tra_param)
-        mm_parameters = {'Km': default_activity.import_Km,
-                         'kmax': default_activity.import_kmax}
+        def_act = self.default.activity
         reaction_ids = [r.id for r in self.data.sbml_reactions()]
         for reaction, comp in zip(reaction_ids,
                                   self.data.enzyme_composition()):
+            if self.data.has_membrane_enzyme(reaction):
+                forward = def_act.transport_aggregate_id(reaction)
+                backward = def_act.transport_id
+            else:
+                forward = backward = def_act.efficiency_id
             # base information
-            enzyme = rba.xml.Enzyme(reaction)
+            enzyme = rba.xml.Enzyme(reaction + '_enzyme', reaction,
+                                    forward, backward)
             enzymes.enzymes.append(enzyme)
             # machinery composition
             reactants = enzyme.machinery_composition.reactants
@@ -262,26 +277,11 @@ class ModelBuilder(object):
                 ref = self.data.protein_reference.get(gene, None)
                 if ref:
                     reactants.append(rba.xml.SpeciesReference(*ref))
-            # base enzymatic activity
-            efficiencies = enzyme.enzymatic_activity.enzyme_efficiencies
-            if self.data.has_membrane_enzyme(reaction):
-                efficiencies.append(tra_efficiency)
-            else:
-                efficiencies.append(def_efficiency)
-            # transport activity
-            transport = enzyme.enzymatic_activity.transporter_efficiency
-            imported = self.data.imported_metabolites(reaction)
-            for m in imported:
-                transport.append(
-                    rba.xml.Function('', 'michaelisMenten', mm_parameters, m)
-                    )
-
         # atpm enzyme
-        enzyme = rba.xml.Enzyme(self.default.atpm_reaction)
-        efficiency = rba.xml.EnzymeEfficiency(
-            'default', {'CONSTANT': self.default.activity.catalytic_activity}
-            )
-        enzyme.enzymatic_activity.enzyme_efficiencies.append(efficiency)
+        reaction = self.default.atpm_reaction
+        forward = backward = def_act.efficiency_id
+        enzyme = rba.xml.Enzyme(reaction + '_enzyme', reaction,
+                                forward, backward)
         enzymes.enzymes.append(enzyme)
         return enzymes
 

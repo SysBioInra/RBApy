@@ -1,10 +1,7 @@
-"""
-Module defining Processes, TargetValues, UndeterminedValues, 
-TargetReactions classes.
-"""
+"""Module defining Process-related classes."""
 
 # python 2/3 compatibility
-from __future__ import division, print_function
+from __future__ import division, print_function, absolute_import
 
 # global imports
 from collections import namedtuple
@@ -17,6 +14,7 @@ from rba.core.target_vector import TargetVector
 TargetSet = namedtuple('TargetSet', 'names values lb ub composition '
                        'processing_cost weight')
 
+
 class Processes(object):
     """
     Class computing process-related substructures.
@@ -27,8 +25,8 @@ class Processes(object):
             composition-related information of process machineries.
         capacity (target_vector.TargetVector): object containing right-hand
             side of process capacity constraints.
-        capacity_signs: list of signs of capacity constraints ('E' for equality,
-            'L' for inequality).
+        capacity_signs: list of signs of capacity constraints
+            ('E' for equality, 'L' for inequality).
         target_values (processes.TargetValues): object used to compute target
             fluxes for metabolites (only fixed values).
         undetermined_values (processes.UndeterminedValues): object storing
@@ -47,10 +45,10 @@ class Processes(object):
             functions: dict mapping known function ids with objects computing
                 them.
         """
-        ## extract ids
+        # extract ids
         self.ids = [p.id for p in processes]
 
-        ## extract machinery related information
+        # extract machinery related information
         # extract machinery
         machinery = [p.machinery.machinery_composition for p in processes]
         self.machinery = species.create_machinery(machinery)
@@ -66,11 +64,11 @@ class Processes(object):
                 values.append(process.machinery.capacity.value)
                 self.capacity_signs.append('L')
             else:
-                values.append(0)
+                values.append('zero')
                 self.capacity_signs.append('E')
         self.capacity = TargetVector(values, functions)
 
-        ## extract targets
+        # extract targets
         # extract target values (absolute + concentration related fluxes)
         self.target_values = TargetValues(processes, species, functions)
         self.undetermined_values = UndeterminedValues(processes, species,
@@ -116,21 +114,17 @@ class TargetValues(object):
         # extract absolute production and degradation fluxes
         prod_set = extract_targets(prod_targets, species)
         deg_set = extract_targets(deg_targets, species, degradation=True)
-        self._values = TargetVector(prod_set.values + deg_set.values, functions)
+        self._values = TargetVector(prod_set.values + deg_set.values,
+                                    functions)
         self._composition = hstack([prod_set.composition,
                                     deg_set.composition]).tocsr()
         self._proc_cost = hstack([prod_set.processing_cost,
                                   deg_set.processing_cost]).tocsr()
 
     def compute(self, mu):
-        """
-        Compute composition, processing cost and weight of targets.
-
-        Args:
-            mu: growth rate.
-        """
-        conc_values = self._conc_values.compute(mu)
-        abs_values = self._values.compute(mu)
+        """Compute composition, processing cost and weight of targets."""
+        conc_values = self._conc_values.compute()
+        abs_values = self._values.compute()
         return (self._conc_composition * (mu * conc_values)
                 + self._composition * abs_values,
                 self._conc_proc_cost * (mu * conc_values)
@@ -203,29 +197,27 @@ class UndeterminedValues(object):
                 hstack([self._conc_proc_cost * mu, self._proc_cost]),
                 self._weight)
 
-    def lb(self, mu):
+    def lb(self):
         """
         Return lower bound vector.
 
-        Args:
-            mu: growth rate.
+        Returns
+        -------
+        Vector containing lower bounds on target fluxes.
 
-        Returns:
-            Vector containing lower bounds on target fluxes.
         """
-        return self._lb.compute(mu)
+        return self._lb.compute()
 
-    def ub(self, mu):
+    def ub(self):
         """
         Return upper bound vector.
 
-        Args:
-            mu: growth rate.
+        Returns
+        -------
+        Vector containing upper bounds on target fluxes.
 
-        Returns:
-            Vector containing upper bounds on target fluxes.
         """
-        return self._ub.compute(mu)
+        return self._ub.compute()
 
 
 class TargetReactions(object):
@@ -245,12 +237,15 @@ class TargetReactions(object):
         """
         Constructor.
 
-        Args:
-            processes: xml structure containing process information.
-            species (species.Species): object containing information about
-                species in the system.
-            functions: dict mapping known function ids with objects computing
-                them.
+        Parameters
+        ----------
+        processes : XML node
+            Structure containing process information.
+        species : rba.core.species.Species
+            Species information.
+        functions : rba.core.parameters.Parameters
+            Parameters.
+
         """
         self.value_reactions = []
         self.lb_reactions = []
@@ -274,44 +269,42 @@ class TargetReactions(object):
         self._lb = TargetVector(lb, functions)
         self._ub = TargetVector(ub, functions)
 
-    def value(self, mu):
+    def value(self):
         """
         Return vector of reaction fluxes.
 
-        Args:
-            mu: growth rate
+        Returns
+        -------
+        Vector containing flux values for reactions whose flux is
+        determined by a process.
 
-        Returns:
-            Vector containing flux values for reactions whose flux is determined
-            by a process.
         """
-        return self._value.compute(mu)
+        return self._value.compute()
 
-    def lb(self, mu):
+    def lb(self):
         """
         Return vector of lower bounds.
 
-        Args:
-            mu: growth rate
+        Returns
+        -------
+        Vector containing lower boundvalues for reactions whose
+        lower bound is determined by a process.
 
-        Returns:
-            Vector containing lower boundvalues for reactions whose
-            lower bound is determined by a process.
         """
-        return self._lb.compute(mu)
+        return self._lb.compute()
 
-    def ub(self, mu):
+    def ub(self):
         """
         Return vector of upper bounds.
 
-        Args:
-            mu: growth rate
+        Returns
+        -------
+        Vector containing upper bound values for reactions whose
+        upper bound is determined by a process.
 
-        Returns:
-            Vector containing upper bound values for reactions whose
-            upper bound is determined by a process.
         """
-        return self._ub.compute(mu)
+        return self._ub.compute()
+
 
 def extract_targets(targets, species, degradation=False):
     """
