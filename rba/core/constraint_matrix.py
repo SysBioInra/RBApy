@@ -50,7 +50,7 @@ class ConstraintMatrix(object):
         reactions = self._blocks.metabolism.reactions
         enzymes = self._blocks.enzymes.ids
         processes = self._blocks.processes.ids
-        undetermined_fluxes = self._blocks.processes.undetermined_targets.names
+        undetermined_fluxes = self._blocks.targets.undetermined_targets.names
         compartments = self._blocks.density.compartments
         nb_reactions = len(reactions)
         nb_enzymes = len(enzymes)
@@ -90,7 +90,7 @@ class ConstraintMatrix(object):
                  for r in self._blocks.enzymes.reaction_catalyzed]
         self._R_to_E = coo_matrix(([1]*nb_enzymes, (range(nb_enzymes), R_ind)),
                                   shape=(nb_enzymes, nb_reactions))
-        target_reactions = self._blocks.processes.target_reactions
+        target_reactions = self._blocks.targets.target_reactions
         self._value_reaction_cols = self.reaction_cols[
             [reactions.index(r) for r in target_reactions.value_reactions]
             ]
@@ -117,10 +117,11 @@ class ConstraintMatrix(object):
         # build A
         enzymes = self._blocks.enzymes
         processes = self._blocks.processes
+        targets = self._blocks.targets
         density = self._blocks.density
         # mu-dependent blocks
         u_composition, u_proc_cost, u_weight \
-            = self._blocks.processes.undetermined_targets.matrices(mu)
+            = targets.undetermined_targets.matrices(mu)
         process_capacity = processes.capacity.compute()
         forward, backward = enzymes.efficiencies()
         # stoichiometry constraints
@@ -151,7 +152,7 @@ class ConstraintMatrix(object):
 
         # build b
         # gather mu-dependent blocks
-        fluxes, processing, weight = processes.determined_targets.compute(mu)
+        fluxes, processing, weight = targets.determined_targets.compute(mu)
         density_rows = density.values.compute() - weight[c_indices].T
         # build vector
         self.b = numpy.concatenate([-fluxes, -processing,
@@ -161,18 +162,18 @@ class ConstraintMatrix(object):
         self.LB = numpy.concatenate([self._blocks.metabolism.lb(),
                                      self._blocks.enzymes.lb,
                                      processes.lb,
-                                     processes.undetermined_targets.lb()])
+                                     targets.undetermined_targets.lb()])
         self.UB = numpy.concatenate([self._blocks.metabolism.ub(),
                                      self._blocks.enzymes.ub,
                                      processes.ub,
-                                     processes.undetermined_targets.ub()])
+                                     targets.undetermined_targets.ub()])
         self.f = numpy.concatenate([self._blocks.metabolism.f,
                                     self._blocks.enzymes.f,
                                     processes.f,
-                                    processes.undetermined_targets.f])
+                                    targets.undetermined_targets.f])
         # target reactions
-        self.LB[self._lb_reaction_cols] = processes.target_reactions.lb()
-        self.UB[self._ub_reaction_cols] = processes.target_reactions.ub()
-        r_fluxes = self._blocks.processes.target_reactions.value()
+        self.LB[self._lb_reaction_cols] = targets.target_reactions.lb()
+        self.UB[self._ub_reaction_cols] = targets.target_reactions.ub()
+        r_fluxes = targets.target_reactions.value()
         self.LB[self._value_reaction_cols] = r_fluxes
         self.UB[self._value_reaction_cols] = r_fluxes
