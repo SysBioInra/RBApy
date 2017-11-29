@@ -3,7 +3,7 @@ RBA XML classes.
 """
 
 from rba.xml import (common, model, metabolism, parameters,
-                     macromolecules, processes, enzymes)
+                     macromolecules, processes, targets, enzymes)
 from .model import RbaModel
 from .common import *
 from .metabolism import *
@@ -11,6 +11,7 @@ from .density import *
 from .parameters import *
 from .macromolecules import *
 from .processes import *
+from .targets import *
 from .enzymes import *
 
 __all__ = ['RbaModel']
@@ -20,4 +21,5 @@ __all__ += density.__all__
 __all__ += parameters.__all__
 __all__ += macromolecules.__all__
 __all__ += processes.__all__
+__all__ += targets.__all__
 __all__ += enzymes.__all__

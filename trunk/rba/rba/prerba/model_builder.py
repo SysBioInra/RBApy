@@ -10,6 +10,7 @@ import copy
 # local imports
 from rba.prerba.user_data import ntp_composition
 from rba.prerba.default_processes import DefaultProcesses
+from rba.prerba.default_targets import DefaultTargets
 import rba.xml
 
 
@@ -310,11 +311,10 @@ class ModelBuilder(object):
         """
         processes = rba.xml.RbaProcesses()
         def_proc = DefaultProcesses(self.default, self.data.metabolite_map)
-        compartments = self.data.compartments()
         # processes
         proc_list = processes.processes
         proc_list.append(def_proc.translation(
-            {m.id: m.stoichiometry for m in self.data.ribosome}, compartments
+            {m.id: m.stoichiometry for m in self.data.ribosome}
             ))
         proc_list.append(def_proc.folding(
             {m.id: m.stoichiometry for m in self.data.chaperone}
@@ -322,9 +322,9 @@ class ModelBuilder(object):
         proc_list.append(def_proc.transcription())
         proc_list.append(def_proc.replication())
         proc_list.append(def_proc.rna_degradation())
-        proc_list.append(def_proc.metabolite_production())
-        proc_list.append(def_proc.macrocomponents(self.data.macrocomponents))
-        proc_list.append(def_proc.maintenance_atp(self.default.atpm_reaction))
+        for i in range(3):
+            name = 'test_process_{}'.format(i)
+            proc_list.append(rba.xml.Process(name, name))
         # component maps
         map_list = processes.component_maps
         map_list.append(def_proc.translation_map(self.data.cofactors()))
@@ -333,3 +333,25 @@ class ModelBuilder(object):
         map_list.append(def_proc.rna_degradation_map())
         map_list.append(def_proc.replication_map())
         return processes
+
+    def build_targets(self):
+        """
+        Build target part of RBA model.
+
+        Returns
+        -------
+        rba.xml.RbaTargets
+            RBA targets in XML format.
+
+        """
+        targets = rba.xml.RbaTargets()
+        def_targ = DefaultTargets(self.default, self.data.metabolite_map)
+        targ_list = targets.target_groups
+        targ_list.append(def_targ.translation(self.data.compartments()))
+        targ_list.append(def_targ.transcription())
+        targ_list.append(def_targ.replication())
+        targ_list.append(def_targ.rna_degradation())
+        targ_list.append(def_targ.metabolite_production())
+        targ_list.append(def_targ.macrocomponents(self.data.macrocomponents))
+        targ_list.append(def_targ.maintenance_atp(self.default.atpm_reaction))
+        return targets

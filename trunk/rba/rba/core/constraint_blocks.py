@@ -70,7 +70,8 @@ class ConstraintBlocks(object):
         # extract process information
         self.processes = Processes(data.processes.processes,
                                    self.species, self.parameters)
-        self.targets = Targets(data.processes.processes,
+        # extract target information
+        self.targets = Targets(data.targets,
                                self.species, self.parameters)
         # setup medium
         self.set_medium(data.medium)

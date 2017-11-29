@@ -44,6 +44,7 @@ def build_model(parameter_file):
     model.rnas = builder.build_rnas()
     model.dna = builder.build_dna()
     model.processes = builder.build_processes()
+    model.targets = builder.build_targets()
     model.enzymes = builder.build_enzymes()
     concentration = default_data.activity.medium_concentration
     for metab in user_data.external_metabolites():

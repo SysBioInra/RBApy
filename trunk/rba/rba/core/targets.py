@@ -18,7 +18,7 @@ TargetSet = namedtuple('TargetSet', 'names values lb ub composition '
 
 class Targets(object):
     """
-    Class computing process-related substructures.
+    Class computing target-related substructures.
 
     Attributes
     ----------
@@ -30,57 +30,59 @@ class Targets(object):
 
     """
 
-    def __init__(self, processes, species, parameters):
+    def __init__(self, targets, species, parameters):
         """
         Constructor.
 
         Parameters
         ----------
-        processes : rba.xml.RbaProcesses
-            Structure containing process information.
+        targets : rba.xml.RbaTargets
+            Structure containing target information.
         species : rba.core.species.Species
             Species information.
         parameters : rba.core.parameters.Parameters
             Parameter information
 
         """
+        target_groups = targets.target_groups
         # extract target values (absolute + concentration related fluxes)
-        self.determined_targets = DeterminedTargets(processes, species,
-                                                    parameters)
-        self.undetermined_targets = UndeterminedTargets(processes, species,
-                                                        parameters)
+        self.determined_targets = DeterminedTargets(
+            target_groups, species, parameters
+            )
+        self.undetermined_targets = UndeterminedTargets(
+            target_groups, species, parameters
+            )
         # extract target reactions
-        self.target_reactions = TargetReactions(processes, parameters)
+        self.target_reactions = TargetReactions(target_groups, parameters)
 
 
 class DeterminedTargets(object):
-    """Class computing metabolite fluxes produced/consumed by processes."""
+    """Class computing metabolite target production/consumption."""
 
-    def __init__(self, processes, species, parameters):
+    def __init__(self, targets, species, parameters):
         """
         Constructor.
 
         Parameters
         ----------
-        processes : rba.xml.RbaProcesses
-            xml structure containing process information.
+        targets : rba.xml.ListOfTargetGroups
+            xml structure containing target information.
         species : rba.core.species.Species
             Species information.
         parameters : rba.core.parameters.Parameters
             Parameter information.
 
         """
-        targets = [p.targets for p in processes]
         # extract target substructures
         conc_targets = []
         prod_targets = []
         deg_targets = []
-        for target in targets:
-            conc_targets += [t for t in target.concentrations
+        for target_group in targets:
+            conc_targets += [t for t in target_group.concentrations
                              if t.value is not None]
-            prod_targets += [t for t in target.production_fluxes
+            prod_targets += [t for t in target_group.production_fluxes
                              if t.value is not None]
-            deg_targets += [t for t in target.degradation_fluxes
+            deg_targets += [t for t in target_group.degradation_fluxes
                             if t.value is not None]
         # extract fluxes used to maintain concentration
         conc_set = extract_targets(conc_targets, species)
@@ -120,31 +122,30 @@ class UndeterminedTargets(object):
 
     """
 
-    def __init__(self, processes, species, parameters):
+    def __init__(self, targets, species, parameters):
         """
         Constructor.
 
         Parameters
         ----------
-        processes : rba.xml.RbaProcesses
-            xml structure containing process information.
+        targets : rba.xml.ListOfTargetGroups
+            xml structure containing target information.
         species : rba.core.species.Species
             Species information.
         parameters : rba.core.parameters.Parameters
             Parameter information.
 
         """
-        targets = [p.targets for p in processes]
         # extract target substructures
         conc_targets = []
         prod_targets = []
         deg_targets = []
-        for target in targets:
-            conc_targets += [t for t in target.concentrations
+        for target_group in targets:
+            conc_targets += [t for t in target_group.concentrations
                              if t.value is None]
-            prod_targets += [t for t in target.production_fluxes
+            prod_targets += [t for t in target_group.production_fluxes
                              if t.value is None]
-            deg_targets += [t for t in target.degradation_fluxes
+            deg_targets += [t for t in target_group.degradation_fluxes
                             if t.value is None]
         # extract fluxes used to maintain concentration
         conc_set = extract_targets(conc_targets, species)
@@ -224,14 +225,14 @@ class TargetReactions(object):
 
     """
 
-    def __init__(self, processes, parameters):
+    def __init__(self, targets, parameters):
         """
         Constructor.
 
         Parameters
         ----------
-        processes : rba.xml.RbaProcesses
-            Structure containing process information.
+        targets : rba.xml.ListOfTargetGroups
+            xml structure containing target information.
         species : rba.core.species.Species
             Species information.
         parameters : rba.core.parameters.Parameters
@@ -244,8 +245,8 @@ class TargetReactions(object):
         val = []
         lb = []
         ub = []
-        for process in processes:
-            for target in process.targets.reaction_fluxes:
+        for target_group in targets:
+            for target in target_group.reaction_fluxes:
                 if target.value is not None:
                     val.append(target.value)
                     self.value_reactions.append(target.reaction)
@@ -303,7 +304,7 @@ def extract_targets(targets, species, degradation=False):
 
     Parameters
     ----------
-    targets : list of rba.xml.processes.TargetSpecies
+    targets : list of rba.xml.TargetSpecies
         Target species to extract.
     species : rba.core.species.Species
         Species information.

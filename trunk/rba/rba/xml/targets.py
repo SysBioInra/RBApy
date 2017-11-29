@@ -1,4 +1,4 @@
-"""Module defining process-specific classes used for RBA XML structures."""
+"""Module defining target-specific classes used for RBA XML structures."""
 
 # python 2/3 compatiblity
 from __future__ import division, print_function, absolute_import
@@ -7,36 +7,30 @@ from __future__ import division, print_function, absolute_import
 from lxml import etree
 
 # local imports
-from rba.xml.common import (get_unique_child, ListOf,
-                            TargetValue, MachineryComposition,
-                            ListOfReactants, ListOfProducts)
+from rba.xml.common import get_unique_child, ListOf, TargetValue
 
-__all__ = ['RbaProcesses', 'Process', 'ListOfProcesses',
-           'Machinery', 'Capacity', 'Operations', 'Operation',
-           'ListOfProductions', 'ListOfDegradations',
-           'ComponentMap', 'ListOfComponentMaps',
-           'ConstantCost', 'Cost', 'ListOfCosts']
+__all__ = ['RbaTargets', 'TargetGroup', 'ListOfTargetGroups',
+           'TargetSpecies', 'TargetReaction',
+           'ListOfConcentrations', 'ListOfProductionFluxes',
+           'ListOfDegradationFluxes', 'ListOfReactionFluxes']
 
 
-class RbaProcesses(object):
+class RbaTargets(object):
     """
-    Process-related structures.
+    Target-related structures.
 
     Attributes
     ----------
-    processes : ListOfProcesses
-        List of cell processes.
-    component_maps : ListOfFunctions
-        List of chemical reactions used for macromolecule synthesis.
+    targets : Targets
+        Metabolic or reaction fluxes maintained/induced by process.
 
     """
 
     def __init__(self):
         """Constructor."""
-        self.processes = ListOfProcesses()
-        self.component_maps = ListOfComponentMaps()
+        self.target_groups = ListOfTargetGroups()
 
-    def write(self, output_stream, doc_name='RBAProcesses'):
+    def write(self, output_stream, doc_name='RBATargets'):
         """
         Write information as an XML structure.
 
@@ -49,8 +43,7 @@ class RbaProcesses(object):
 
         """
         root = etree.Element(doc_name)
-        root.extend([self.processes.to_xml_node(),
-                     self.component_maps.to_xml_node()])
+        root.extend([self.target_groups.to_xml_node()])
         etree.ElementTree(root).write(output_stream, pretty_print=True)
 
     @classmethod
@@ -66,33 +59,33 @@ class RbaProcesses(object):
         """
         node = etree.ElementTree(file=input_stream).getroot()
         result = cls()
-        n = get_unique_child(node, ListOfProcesses.tag)
-        result.processes = ListOfProcesses.from_xml_node(n)
-        n = get_unique_child(node, ListOfComponentMaps.tag)
-        result.component_maps = ListOfComponentMaps.from_xml_node(n)
+        n = get_unique_child(node, ListOfTargetGroups.tag)
+        result.target_groups = ListOfTargetGroups.from_xml_node(n)
         return result
 
 
-class Process(object):
+class TargetGroup(object):
     """
-    Cell process.
+    Group of target fluxes.
 
     Attributes
     ----------
     id : str
         Identifier.
-    name : str
-        Usual name.
-    machinery : Machinery
-        Molecular machinery used by process (can be empty).
-    operations : Operations
-        Molecules produced / degraded by process (can be empty).
+    concentrations : ListOfConcentrations
+        Concentration of metabolites to keep at given level.
+    production_fluxes : ListOfProductionFluxes
+        Metabolite/macromolecule production fluxes.
+    degradation_fluxes : ListOfDegradationFluxes
+        Macromolecule degradation/metabolite consumption fluxes.
+    reaction_fluxes : ListOfReactionFluxes
+        Target fluxes for metabolic reactions.
 
     """
 
-    tag = 'process'
+    tag = 'targetGroup'
 
-    def __init__(self, id_, name):
+    def __init__(self, id_):
         """
         Constructor.
 
@@ -100,207 +93,164 @@ class Process(object):
         ----------
         id_ : str
             Identifier.
-        name : name
-            Usual name.
 
         """
         self.id = id_
-        self.name = name
-        self.machinery = Machinery()
-        self.operations = Operations()
-
-    def to_xml_node(self):
-        """Convert to xml node."""
-        process = etree.Element(self.tag)
-        process.set('id', self.id)
-        process.set('name', self.name)
-        # optional subelements
-        opt = [self.machinery, self.operations]
-        process.extend([e.to_xml_node() for e in opt if not e.is_empty()])
-        return process
-
-    @classmethod
-    def from_xml_node(cls, node):
-        """Build object from xml node."""
-        result = cls(node.get('id'), node.get('name'))
-        n = get_unique_child(node, Machinery.tag, False)
-        if n is not None:
-            result.machinery = Machinery.from_xml_node(n)
-        n = get_unique_child(node, Operations.tag, False)
-        if n is not None:
-            result.operations = Operations.from_xml_node(n)
-        return result
-
-
-class ListOfProcesses(ListOf):
-    """List of Process elements."""
-
-    tag = 'listOfProcesses'
-    list_element = Process
-
-
-class Machinery(object):
-    """
-    Molecular machinery.
-
-    Attributes
-    ----------
-    machinery_composition : MachineryComposition
-        Molecular composition.
-    capacity : Capacity
-        Processing capacity (number of units processed per unit of time).
-
-    """
-
-    tag = 'machinery'
-
-    def __init__(self):
-        """Constructor."""
-        self.machinery_composition = MachineryComposition()
-        self.capacity = Capacity()
+        self.concentrations = ListOfConcentrations()
+        self.production_fluxes = ListOfProductionFluxes()
+        self.degradation_fluxes = ListOfDegradationFluxes()
+        self.reaction_fluxes = ListOfReactionFluxes()
 
     def is_empty(self):
-        """Return whether moleculer composition is empty."""
-        return self.machinery_composition.is_empty() \
-            and self.capacity.is_empty()
+        """Return whether any target was specified."""
+        return all((l.is_empty()
+                    for l in [self.concentrations, self.production_fluxes,
+                              self.degradation_fluxes, self.reaction_fluxes]))
 
     def to_xml_node(self):
         """Convert to xml node."""
         result = etree.Element(self.tag)
-        result.extend([self.machinery_composition.to_xml_node(),
-                       self.capacity.to_xml_node()])
-        return result
-
-    @classmethod
-    def from_xml_node(cls, node):
-        """Build object from xml node."""
-        result = cls()
-        machinery_node = get_unique_child(node, MachineryComposition.tag)
-        result.machinery_composition \
-            = MachineryComposition.from_xml_node(machinery_node)
-        capacity_node = get_unique_child(node, Capacity.tag)
-        result.capacity = Capacity.from_xml_node(capacity_node)
-        return result
-
-
-class Capacity(TargetValue):
-    """
-    Machinery capacity.
-
-    Capacity is used to write constraints on process machineries.
-    If a value is specified, a strict constraint is implemented,
-    meaning that all machinery units must work at full capacity.
-    If an upper bound is specified, the constraint becomes an inequality.
-
-    """
-
-    tag = 'capacity'
-
-
-class Operations(object):
-    """
-    Set of production and degradation operations.
-
-    Attributes
-    ----------
-    productions : ListOfProductions
-        Production operations.
-    degradations : ListOfDegradations
-        Degradation operations.
-
-    """
-
-    tag = 'operations'
-
-    def __init__(self):
-        """Constructor."""
-        self.productions = ListOfProductions()
-        self.degradations = ListOfDegradations()
-
-    def is_empty(self):
-        """Return whether there are no operations."""
-        return self.productions.is_empty() and self.degradations.is_empty()
-
-    def to_xml_node(self):
-        """Convert to xml node."""
-        result = etree.Element(self.tag)
+        result.set('id', self.id)
         # optional subelements
-        opt = [self.productions, self.degradations]
+        opt = [self.concentrations, self.production_fluxes,
+               self.degradation_fluxes, self.reaction_fluxes]
         result.extend([e.to_xml_node() for e in opt if not e.is_empty()])
         return result
 
     @classmethod
     def from_xml_node(cls, node):
         """Build object from xml node."""
-        result = cls()
-        n = get_unique_child(node, ListOfProductions.tag, False)
+        result = cls(node.get('id'))
+        n = get_unique_child(node, result.concentrations.tag, False)
         if n is not None:
-            result.productions = ListOfProductions.from_xml_node(n)
-        n = get_unique_child(node, ListOfDegradations.tag, False)
+            result.concentrations = result.concentrations.from_xml_node(n)
+        n = get_unique_child(node, result.production_fluxes.tag, False)
         if n is not None:
-            result.degradations = ListOfDegradations.from_xml_node(n)
+            result.production_fluxes \
+                = result.production_fluxes.from_xml_node(n)
+        n = get_unique_child(node, result.degradation_fluxes.tag, False)
+        if n is not None:
+            result.degradation_fluxes \
+                = result.degradation_fluxes.from_xml_node(n)
+        n = get_unique_child(node, result.reaction_fluxes.tag, False)
+        if n is not None:
+            result.reaction_fluxes = result.reaction_fluxes.from_xml_node(n)
         return result
 
 
-class Operation(object):
+class ListOfTargetGroups(ListOf):
+    """Groups used to define target fluxes."""
+
+    tag = 'listOfTargetGroups'
+    list_element = TargetGroup
+
+
+class TargetSpecies(TargetValue):
     """
-    Reference to a production or degradation operation.
+    Association of a target value with a chemical species.
 
     Attributes
     ----------
-    component_map : str
-        Identifier of ComponentMap defining metabolites involved in operation.
-    set : str
-        Identifier of Macromolecule set being operated on.
+    species : str
+        Identifier of species targetted.
 
     """
 
-    tag = 'operation'
+    tag = 'targetSpecies'
 
-    def __init__(self, map_, set_):
+    def __init__(self, species):
         """
         Constructor.
 
         Parameters
         ----------
-        map_ :  str
-            Identifier of ComponentMap defining metabolites involved in
-            operation.
-        set_ : str
-            Identifier of Macromolecule set being operated on.
+        species : str
+            Identifier of species.
 
         """
-        self.component_map = map_
-        self.set = set_
+        super(TargetSpecies, self).__init__()
+        self.species = species
 
     def to_xml_node(self):
         """Convert to xml node."""
-        result = etree.Element(self.tag)
-        result.set('componentMap', self.component_map)
-        result.set('set', self.set)
+        result = super(TargetSpecies, self).to_xml_node()
+        result.set('species', self.species)
         return result
 
     @classmethod
     def from_xml_node(cls, node):
         """Build object from xml node."""
-        result = cls('', '')
-        result.component_map = node.get('componentMap')
-        result.set = node.get('set')
+        result = cls(node.get('species'))
+        result._init_from_xml_node(node)
         return result
 
 
-class ListOfProductions(ListOf):
-    """List of Operation elements representing productions."""
+class TargetReaction(TargetValue):
+    """
+    Association of a target value with a chemical reaction.
 
-    tag = 'listOfProductions'
-    list_element = Operation
+    Attributes
+    ----------
+    reaction : str
+        Identifier of reaction targetted.
+
+    """
+
+    tag = 'targetReaction'
+
+    def __init__(self, reaction):
+        """
+        Constructor.
+
+        Parameters
+        ----------
+        reaction : str
+            Reaction identifier.
+
+        """
+        super(TargetReaction, self).__init__()
+        self.reaction = reaction
+
+    def to_xml_node(self):
+        """Convert to xml node."""
+        result = super(TargetReaction, self).to_xml_node()
+        result.set('reaction', self.reaction)
+        return result
+
+    @classmethod
+    def from_xml_node(cls, node):
+        """Build object from xml node."""
+        result = cls(node.get('reaction'))
+        result._init_from_xml_node(node)
+        return result
 
 
-class ListOfDegradations(ListOf):
-    """List of Operation elements representiong degradations."""
+class ListOfConcentrations(ListOf):
+    """Metabolic concentrations to maintain at a given level."""
 
-    tag = 'listOfDegradations'
-    list_element = Operation
+    tag = 'listOfConcentrations'
+    list_element = TargetSpecies
+
+
+class ListOfProductionFluxes(ListOf):
+    """Production fluxes of metabolites/macromolecules."""
+
+    tag = 'listOfProductionFluxes'
+    list_element = TargetSpecies
+
+
+class ListOfDegradationFluxes(ListOf):
+    """Fluxes of metabolite cosumption/macromolecule degradation."""
+
+    tag = 'listOfDegradationFluxes'
+    list_element = TargetSpecies
+
+
+class ListOfReactionFluxes(ListOf):
+    """Fluxes of metabolic reactions to maintain at given level."""
+
+    tag = 'listOfReactionFluxes'
+    list_element = TargetReaction
 
 
 class ComponentMap(object):
@@ -378,7 +328,6 @@ class ConstantCost(object):
     tag = 'constantCost'
 
     def __init__(self):
-        """Constructor."""
         self.reactants = ListOfReactants()
         self.products = ListOfProducts()
 

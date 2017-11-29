@@ -1,6 +1,4 @@
-"""
-Module defining Machinery, Species and ComponentMap classes.
-"""
+"""Module defining Machinery, Species and ComponentMap classes."""
 
 # python 2/3 compatibility
 from __future__ import division, print_function, absolute_import
@@ -16,18 +14,27 @@ Machinery = namedtuple('Machinery', 'composition processing_cost weight')
 
 class Species(object):
     """
-    Class storing species-related information.
+    Species-related information.
 
-    Attributes:
-        ids: identifiers of species stored (metabolites/macromolecules).
-        production: production matrix (in terms of metabolites).
-        prod_proc_cost: production processing cost matrix.
-        degradation: degradation matrix (in terms of metabolites).
-        deg_proc_cost: degradation processing cost matrix.
-        weight: weight matrix.
+    Parameters
+    ----------
+    ids : list of str
+        Identifiers of species stored (metabolites/macromolecules).
+    production : sparse matrix
+        Production matrix (in terms of metabolites).
+    prod_proc_cost : sparse matrix
+        Production processing cost matrix.
+    degradation : sparse matrix
+        Degradation matrix (in terms of metabolites).
+    deg_proc_cost : sparsematrix
+        Degradation processing cost matrix.
+    weight : sparse matrix
+        Weight matrix (in terms of compartments).
+
     """
 
     def __init__(self, data, metabolites):
+        """Constructor."""
         self._metabolites = metabolites
         self._compartments = [c.id for c in data.metabolism.compartments]
         # extract composition of base species
@@ -59,14 +66,19 @@ class Species(object):
 
     def create_machinery(self, machinery_set):
         """
-        Create machinery from list of RBA machinery composition structures.
+        Create machineries from a list of RBA machinery composition structures.
 
-        Args:
-            machinery_set: list of RBA machinery composition structures.
+        Parameters
+        ----------
+        machinery_set : list of rba.xml.MachineryComposition
+            Machinery compositions.
 
-        Returns:
-            Machinery object containing composition, processing cost and
-            weight matrices.
+        Returns
+        -------
+        Machinery object
+            Contains the composition, processing cost and weight matrices of
+            machineries provided as input.
+
         """
         species = lil_matrix((len(self.ids), len(machinery_set)))
         for col, machinery in enumerate(machinery_set):
@@ -85,10 +97,13 @@ class Species(object):
         Macrometabolites are species that are both a metabolite and a
         macromolecule (typically tRNAs).
 
-        Returns:
-            Tuple where first element is a list of stoichiometries vectors,
+        Returns
+        -------
+        Tuple of 2 elements
+            First element is a list of stoichiometries vectors,
             each vector representing a reaction. The second element are the
             ids of the metabolites being synthesized by these reactions.
+
         """
         names = []
         reactions = []
@@ -108,9 +123,7 @@ class Species(object):
         return (reactions, names)
 
     def _component_maps(self, component_sets, processes):
-        """
-        Convert component map data to ComponentMap objects.
-        """
+        """Convert component map data to ComponentMap objects."""
         component_map = {m.id: m for m in processes.component_maps}
         production_map = {}
         degradation_map = {}
@@ -137,6 +150,7 @@ class Species(object):
         of components (e.g. amino acids). Compare composition matrix, the
         description  in terms of metabolites consumed and
         produced for synthesizing one macromolecule.
+
         """
         # useful information
         components = [c.id for c in macro_set.components]
@@ -159,8 +173,13 @@ class Species(object):
 
     def _macromolecule_composition(self, data):
         """
-        Compute production, degradation, processing_costs and weight of
-        macromolecules.
+        Compute base information of macromolecules.
+
+        Returns
+        -------
+        (production, production_processing_cost, degradation,
+         degradation_processing_cost, weight) tuple
+
         """
         # get base matrices
         components = {}
@@ -194,18 +213,21 @@ class Species(object):
 
 
 class ComponentMap(object):
-    """
-    Class storing component maps.
-    """
+    """Class storing component maps."""
 
     def __init__(self, components, metabolites, nb_processes):
         """
         Constructor.
 
-        Args:
-            components: list of components handled by component map.
-            metabolites: list of existing metabolites.
-            nb_processes: number of processes.
+        Parameters
+        ----------
+        components : list of rba.xml.Components
+            Components handled by component map.
+        metabolites : list of str
+            Metabolites.
+        nb_processes : int
+            Number of processes.
+
         """
         nb_metabolites = len(metabolites)
         nb_components = len(components)
@@ -220,9 +242,13 @@ class ComponentMap(object):
         """
         Add item to component map.
 
-        Args:
-            map_: component map as stored in RBA data.
-            process_index: index of process using this component map.
+        Parameters
+        ----------
+        map_ : rba.xml.ComponentMap
+            Structure containing component map.
+        process_index : int
+            index of process using this component map.
+
         """
         # store constant costs
         self._metabolite_constant += self._cost_vector(map_.constant_cost)
@@ -234,9 +260,7 @@ class ComponentMap(object):
             self._metabolite_table[:, c_index] += self._cost_vector(cost)
 
     def _cost_vector(self, cost):
-        """
-        Transform cost data into a metabolite vector.
-        """
+        """Transform cost data into a metabolite vector."""
         result = numpy.zeros(len(self._met_index))
         for reac in cost.reactants:
             result[self._met_index[reac.species]] -= reac.stoichiometry
@@ -248,12 +272,15 @@ class ComponentMap(object):
         """
         Transform component matrix to metabolite matrix.
 
-        Args:
-            component_matrix: description of macromolecules in terms of
-                components (columns are macromolecules, rows are components).
+        Parameters
+        ----------
+        component_matrix: matrix
+            Description of macromolecules in terms of components
+            (columns are macromolecules, rows are components).
 
-        Returns:
-            Tuple (composition, processing_cost) where:
+        Returns
+        -------
+        (composition, processing_cost) tuple
             composition is a metabolite matrix
             describing metabolites consumed/produced during macromolecule
             synthesis/degradation (depending on definition of the map).
@@ -263,6 +290,7 @@ class ComponentMap(object):
             processing_cost is a matrix where columns are macromolecules and
             lines are processes. It describes how many resources of a process
             are used during macromolecule synthesis/degradation.
+
         """
         # column selector used to duplicate vectors to match final matrix size
         cols = numpy.zeros(component_matrix.shape[1])

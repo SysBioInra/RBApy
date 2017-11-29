@@ -33,7 +33,7 @@ class DefaultProcesses(object):
         self.default = default_data
         self._metabolites = metabolite_map
 
-    def translation(self, ribosome_composition, compartments):
+    def translation(self, ribosome_composition):
         """
         Build translation process.
 
@@ -42,8 +42,6 @@ class DefaultProcesses(object):
         ribosome_composition : dict
             Map from molecule identifiers to
             their stoichiometry within a ribosome unit.
-        compartments : list
-            Compartment identifiers.
 
         Returns
         -------
@@ -65,12 +63,6 @@ class DefaultProcesses(object):
         # operating costs
         operation = rba.xml.Operation('translation', 'protein')
         process.operations.productions.append(operation)
-        # targets
-        for cpt in compartments:
-            prot_id = self.default.metabolites.average_protein_id(cpt)
-            target = rba.xml.TargetSpecies(prot_id)
-            target.value = 'nonenzymatic_proteins_' + cpt
-            process.targets.concentrations.append(target)
         return process
 
     def folding(self, chaperone_composition):
@@ -115,14 +107,6 @@ class DefaultProcesses(object):
         # operating costs
         operation = rba.xml.Operation('transcription', 'rna')
         process.operations.productions.append(operation)
-        # targets
-        # mrna
-        target = rba.xml.TargetSpecies(default_metabolites.mrna)
-        target.value = 'mrna_concentration'
-        process.targets.concentrations.append(target)
-        target = rba.xml.TargetSpecies(default_metabolites.mrna)
-        target.value = 'mrna_degradation_flux'
-        process.targets.production_fluxes.append(target)
         return process
 
     def replication(self):
@@ -139,10 +123,6 @@ class DefaultProcesses(object):
         # operating costs
         operation = rba.xml.Operation('replication', 'dna')
         process.operations.productions.append(operation)
-        # targets
-        target = rba.xml.TargetSpecies(self.default.metabolites.dna)
-        target.value = 'dna_concentration'
-        process.targets.concentrations.append(target)
         return process
 
     def rna_degradation(self):
@@ -159,74 +139,6 @@ class DefaultProcesses(object):
         # operating costs
         operation = rba.xml.Operation('rna_degradation', 'rna')
         process.operations.degradations.append(operation)
-        # targets
-        target = rba.xml.TargetSpecies(self.default.metabolites.mrna)
-        target.value = 'mrna_degradation_flux'
-        process.targets.degradation_fluxes.append(target)
-        return process
-
-    def metabolite_production(self):
-        """
-        Build metabolite production process.
-
-        Returns
-        -------
-        rba.xml.Process
-            Metabolite production process.
-
-        """
-        process = rba.xml.Process('P_MET_PROD', 'Metabolite production')
-        # targets
-        for metabolite in self._metabolites.values():
-            if metabolite.sbml_id and metabolite.concentration:
-                target = rba.xml.TargetSpecies(metabolite.sbml_id)
-                target.value = (self.default.parameters
-                                .metabolite_concentration(metabolite.sbml_id))
-                process.targets.concentrations.append(target)
-        return process
-
-    def macrocomponents(self, macro_fluxes):
-        """
-        Build macrocomponent production process.
-
-        Parameters
-        ----------
-        macro_flux : dict
-            Map from molecule name to production flux.
-
-        Returns
-        -------
-        rba.xml.Process
-            Macrocomponent production process.
-
-        """
-        process = rba.xml.Process('P_MACRO_PROD', 'Macrocomponent production')
-        for id_ in macro_fluxes:
-            target = rba.xml.TargetSpecies(id_)
-            target.value = (self.default.parameters
-                            .metabolite_concentration(id_))
-            process.targets.concentrations.append(target)
-        return process
-
-    def maintenance_atp(self, reaction_name):
-        """
-        Build maintenance ATP process.
-
-        Parameters
-        ----------
-        reaction_name : str
-            Name of maintenance ATP reaction.
-
-        Returns
-        -------
-        rba.xml.Process
-            Maintenance ATP process.
-
-        """
-        process = rba.xml.Process('P_maintenance_atp', 'Maintenance ATP')
-        target = rba.xml.TargetReaction(reaction_name)
-        target.lower_bound = 'maintenance_atp'
-        process.targets.reaction_fluxes.append(target)
         return process
 
     def translation_map(self, cofactors):
