@@ -33,7 +33,7 @@ class Density(object):
 
         Parameters
         ----------
-        target_densities : rba.xml.TargetDensity
+        target_densities : rba.xml.ListOfTargetDensities
             Structure holding target density information.
         parameters : rba.core.parameters.Parameters
             Parameter information.

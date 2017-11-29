@@ -38,6 +38,7 @@ def build_model(parameter_file):
     builder = ModelBuilder(default_data, user_data)
     model = RbaModel()
     model.metabolism = builder.build_metabolism()
+    model.density = builder.build_density()
     model.parameters = builder.build_parameters()
     model.proteins = builder.build_proteins()
     model.rnas = builder.build_rnas()

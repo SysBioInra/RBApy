@@ -1,12 +1,4 @@
 <RBAParameters>
-  <listOfTargetDensities>
-    <targetDensity upperBound="Cell_inner_membrane_density" compartment="Cell_inner_membrane"/>
-    <targetDensity upperBound="Cytoplasm_density" compartment="Cytoplasm"/>
-    <targetDensity upperBound="Periplasm_density" compartment="Periplasm"/>
-    <targetDensity upperBound="Membrane_density" compartment="Membrane"/>
-    <targetDensity upperBound="Cell_outer_membrane_density" compartment="Cell_outer_membrane"/>
-    <targetDensity upperBound="Cell_membrane_density" compartment="Cell_membrane"/>
-  </listOfTargetDensities>
   <listOfFunctions>
     <function id="amino_acid_concentration" type="linear" variable="growth_rate">
       <listOfParameters>
