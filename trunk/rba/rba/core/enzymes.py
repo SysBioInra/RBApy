@@ -8,8 +8,7 @@ import numpy
 import itertools
 
 # local imports
-from rba.core.functions import build_function
-from rba.core import functions
+from rba.core.functions import build_function, zero_function, default_ub
 
 
 class Enzymes(object):
@@ -39,7 +38,7 @@ class Enzymes(object):
             Chemical species information.
         reactions : list of str
             Reaction identifiers.
-        parameters : rba.core.functions.Functions
+        parameters : rba.core.parameters.Parameters
             Parameter information.
 
         """
@@ -70,18 +69,10 @@ class Enzymes(object):
         self._backward = [parameters[e.backward_efficiency]
                           for e in nonzero_enzymes]
 
-    def update_medium(self, medium):
-        """
-        Update transport terms based on medium concentrations.
-
-        Parameters
-        ----------
-        medium : dict
-            Mapping from metabolite prefixes to their concentration.
-
-        """
-        for eff_fn in itertools.chain(self._forward, self._backward):
-            functions.update_medium(eff_fn, medium)
+        # bounds
+        self.ub = default_ub.value * numpy.ones(len(self.ids))
+        self.lb = numpy.zeros(len(self.ids))
+        self.f = numpy.ones(len(self.ids))
 
     def efficiencies(self):
         """Compute efficiency for current parameter values."""

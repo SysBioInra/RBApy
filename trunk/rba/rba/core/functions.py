@@ -341,3 +341,8 @@ def build_aggregate(agg, known_functions):
         print('Unknown function: ' + error.args[0])
         raise UserWarning('Invalid aggregate.')
     return agg_class(fn_handles)
+
+
+zero_function = ConstantFunction({'CONSTANT': 0})
+default_lb = ConstantFunction({'CONSTANT': -1e3})
+default_ub = ConstantFunction({'CONSTANT': 1e5})
