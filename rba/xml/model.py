@@ -8,9 +8,6 @@ from os.path import join
 
 # local imports
 import rba.xml
-from rba.core.constraint_matrix import ConstraintMatrix
-from rba.core.solver import Solver
-from rba.results import Results
 
 
 class RbaModel(object):
@@ -41,6 +38,7 @@ class RbaModel(object):
         self.rnas = rba.xml.RbaMacromolecules()
         self.dna = rba.xml.RbaMacromolecules()
         self.processes = rba.xml.RbaProcesses()
+        self.targets = rba.xml.RbaTargets()
         self.medium = {}
         self.output_dir = ''
 
@@ -49,8 +47,11 @@ class RbaModel(object):
         """
         Make object from xml files.
 
-        Args:
-            input_dir: path to directory containing RBA XML files.
+        Parameters
+        ----------
+        input_dir : str
+            Path to directory containing RBA XML files.
+
         """
         obj = cls()
         obj.output_dir = input_dir
@@ -74,6 +75,9 @@ class RbaModel(object):
             )
         obj.processes = rba.xml.RbaProcesses().from_file(
             open(join(input_dir, 'processes.xml'))
+            )
+        obj.targets = rba.xml.RbaTargets().from_file(
+            open(join(input_dir, 'targets.xml'))
             )
         obj.enzymes = rba.xml.RbaEnzymes().from_file(
             open(join(input_dir, 'enzymes.xml'))
@@ -104,10 +108,13 @@ class RbaModel(object):
         """
         Write rba files in XML format.
 
-        Args:
-            output_dir: path to directory where files should be written. If
-                specified, output_dir attribute is overriden, otherwise value
-                currently stored in output_dir attribute is used.
+        Parameters
+        ----------
+        output_dir : str
+            Path to directory where files should be written. If
+            specified, output_dir attribute is overriden, otherwise value
+            currently stored in output_dir attribute is used.
+
         """
         if output_dir:
             self.output_dir = output_dir
@@ -119,6 +126,7 @@ class RbaModel(object):
         self.enzymes.write(self._output('enzymes.xml'), 'RBAEnzymes')
         self.parameters.write(self._output('parameters.xml'), 'RBAParameters')
         self.processes.write(self._output('processes.xml'), 'RBAProcesses')
+        self.targets.write(self._output('targets.xml'), 'RBATargets')
         # initial conditions (medium concentrations)
         with open(self._output('medium.tsv'), 'w') as output:
             output.write('Metabolite\tConcentration\n')
@@ -126,5 +134,5 @@ class RbaModel(object):
                 output.write('{}\t{}\n'.format(met, conc))
 
     def _output(self, file_name):
-        """Return full path to file contained in output direcotry."""
+        """Return full path to file contained in output directory."""
         return join(self.output_dir, file_name)
