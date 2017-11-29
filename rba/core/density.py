@@ -4,34 +4,42 @@
 from __future__ import division, print_function, absolute_import
 
 # local imports
-from rba.core.target_vector import TargetVector
+from rba.core.parameter_vector import ParameterVector
 
 
 class Density(object):
     """
     Class computing density-related substructures.
 
-    Attributes:
-        compartments: list of compartment identifiers. compartments[i] is
-            the identifier of the compartment involved in the ith constraint.
-        compartment_indices: List of indices. compartment_indices[i] is
-            the index (in the list of ids provided at construction) of
-            the compartment involved in the ith constraint.
-        signs: list of signs of constraints ('E' for equality, 'L' for
-            inequality - Lower than)
-        values (target_vector.TargetVector): object used to compute the
-            right-hand side of constraints depending on mu.
+    Attributes
+    ----------
+    compartments : list of str
+        compartment identifiers. compartments[i] is
+        the identifier of the compartment involved in the ith constraint.
+    compartment_indices : list of int
+        compartment_indices[i] is the index (in the list of ids provided at
+        construction) of the compartment involved in the ith constraint.
+    signs : list of str
+        signs of constraints ('E' for equality, 'L' for
+        inequality - Lower than)
+    values : rba.core.parameter_vector.ParameterVector
+        Right-hand side of constraints (depending on mu).
+
     """
 
-    def __init__(self, target_densities, known_functions, known_compartments):
+    def __init__(self, target_densities, parameters, known_compartments):
         """
         Constructor.
 
-        Args:
-            target_densities: xml structure holding target density information.
-            known_functions: dict mapping function ids with the object used to
-                compute them.
-            known_compartments: list of ids of compartments in the system.
+        Parameters
+        ----------
+        target_densities : rba.xml.TargetDensity
+            Structure holding target density information.
+        parameters : rba.core.parameters.Parameters
+            Parameter information.
+        known_compartments : list of str
+            ids of compartments in the system.
+
         """
         # extract target densities
         self.compartments = [md.compartment for md in target_densities]
@@ -50,4 +58,4 @@ class Density(object):
                 raise UserWarning('Density constraint ' + target.compartment
                                   + ': you must specify a value or an upper '
                                   'bound.')
-        self.values = TargetVector(values, known_functions)
+        self.values = ParameterVector(values, parameters)

@@ -21,7 +21,7 @@ class ConstraintMatrix(object):
         reaction_cols: Indices of columns corresponding to reactions.
         enzyme_cols: Indices of columns corresponding to enzymes.
         process_cols: Indices of columns corresponding to processes.
-        species_cols: Indices of columns corresponding to enzymes.
+        target_cols: Indices of columns corresponding to targets.
         row_names: Linear problem row names (constraints).
         row_signs: Linear problem row signs (equality or inequality).
         UB: Linear problem upper bounds.
@@ -50,7 +50,7 @@ class ConstraintMatrix(object):
         reactions = self._blocks.metabolism.reactions
         enzymes = self._blocks.enzymes.ids
         processes = self._blocks.processes.ids
-        undetermined_fluxes = self._blocks.processes.undetermined_values.names
+        undetermined_fluxes = self._blocks.processes.undetermined_targets.names
         compartments = self._blocks.density.compartments
         nb_reactions = len(reactions)
         nb_enzymes = len(enzymes)
@@ -61,14 +61,14 @@ class ConstraintMatrix(object):
         self.col_names = (reactions
                           + [e + '_enzyme' for e in enzymes]
                           + [p + '_machinery' for p in processes]
-                          + [m + '_flux' for m in undetermined_fluxes])
+                          + [m + '_target_flux' for m in undetermined_fluxes])
         self.reaction_cols = numpy.arange(nb_reactions)
         self.enzyme_cols = (self.reaction_cols[-1] + 1
                             + numpy.arange(nb_enzymes))
         self.process_cols = (self.enzyme_cols[-1] + 1
                              + numpy.arange(nb_processes))
-        self.species_cols = (self.process_cols[-1] + 1
-                             + numpy.arange(nb_undetermined))
+        self.target_cols = (self.process_cols[-1] + 1
+                            + numpy.arange(nb_undetermined))
         # row information
         self.row_names = (self._blocks.metabolism.internal
                           + [p + '_capacity' for p in processes]
@@ -79,17 +79,6 @@ class ConstraintMatrix(object):
                           + self._blocks.processes.capacity_signs
                           + ['L'] * 2 * nb_enzymes
                           + self._blocks.density.signs)
-        # upper bound, lower bound, objective function
-        nb_cols = len(self.col_names)
-        self.UB = 1e5 * numpy.ones(nb_cols)
-        self.LB = numpy.zeros(nb_cols)
-        self.f = numpy.zeros(nb_cols)
-        self.LB[self.reaction_cols] = (
-            -1e3 * numpy.array(self._blocks.metabolism.reversibility)
-            )
-        self.LB[self.reaction_cols[self._blocks.metabolism.zero_lb]] = 0
-        self.UB[self.reaction_cols[self._blocks.metabolism.zero_ub]] = 0
-        self.f[self.enzyme_cols] = 1
         # constant building blocks
         self._empty_ExPU = coo_matrix((nb_enzymes,
                                        nb_processes + nb_undetermined))
@@ -102,17 +91,17 @@ class ConstraintMatrix(object):
         self._R_to_E = coo_matrix(([1]*nb_enzymes, (range(nb_enzymes), R_ind)),
                                   shape=(nb_enzymes, nb_reactions))
         target_reactions = self._blocks.processes.target_reactions
-        self._value_reaction_cols \
-            = self.reaction_cols[[reactions.index(r)
-                                  for r in target_reactions.value_reactions]]
-        self._lb_reaction_cols \
-            = self.reaction_cols[[reactions.index(r)
-                                  for r in target_reactions.lb_reactions]]
-        self._ub_reaction_cols \
-            = self.reaction_cols[[reactions.index(r)
-                                  for r in target_reactions.ub_reactions]]
+        self._value_reaction_cols = self.reaction_cols[
+            [reactions.index(r) for r in target_reactions.value_reactions]
+            ]
+        self._lb_reaction_cols = self.reaction_cols[
+            [reactions.index(r) for r in target_reactions.lb_reactions]
+            ]
+        self._ub_reaction_cols = self.reaction_cols[
+            [reactions.index(r) for r in target_reactions.ub_reactions]
+            ]
         # set remaining attributes to None
-        self.A = self.b = None
+        self.A = self.b = self.LB = self.UB = self.f = None
         self.mu_opt = self.X = self.lambda_ = None
 
     def build_matrices(self, mu):
@@ -131,7 +120,7 @@ class ConstraintMatrix(object):
         density = self._blocks.density
         # mu-dependent blocks
         u_composition, u_proc_cost, u_weight \
-            = self._blocks.processes.undetermined_values.matrices(mu)
+            = self._blocks.processes.undetermined_targets.matrices(mu)
         process_capacity = processes.capacity.compute()
         forward, backward = enzymes.efficiencies()
         # stoichiometry constraints
@@ -162,16 +151,25 @@ class ConstraintMatrix(object):
 
         # build b
         # gather mu-dependent blocks
-        fluxes, processing, weight = processes.target_values.compute(mu)
+        fluxes, processing, weight = processes.determined_targets.compute(mu)
         density_rows = density.values.compute() - weight[c_indices].T
         # build vector
         self.b = numpy.concatenate([-fluxes, -processing,
                                     self._empty_2E, density_rows])
 
         # update lower bounds and upper bounds
-        # undetermined metabolites
-        self.LB[self.species_cols] = processes.undetermined_values.lb()
-        self.UB[self.species_cols] = processes.undetermined_values.ub()
+        self.LB = numpy.concatenate([self._blocks.metabolism.lb(),
+                                     self._blocks.enzymes.lb,
+                                     processes.lb,
+                                     processes.undetermined_targets.lb()])
+        self.UB = numpy.concatenate([self._blocks.metabolism.ub(),
+                                     self._blocks.enzymes.ub,
+                                     processes.ub,
+                                     processes.undetermined_targets.ub()])
+        self.f = numpy.concatenate([self._blocks.metabolism.f,
+                                    self._blocks.enzymes.f,
+                                    processes.f,
+                                    processes.undetermined_targets.f])
         # target reactions
         self.LB[self._lb_reaction_cols] = processes.target_reactions.lb()
         self.UB[self._ub_reaction_cols] = processes.target_reactions.ub()

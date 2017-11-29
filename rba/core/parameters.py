@@ -17,7 +17,7 @@ class Parameters(object):
         Mapping from parameter id with object used to compute it.
 
     """
-    
+
     def __init__(self, functions, aggregates):
         """
         Constructor.
@@ -75,13 +75,13 @@ class Parameters(object):
         ----------
         growth_rate : float
             Current growth rate.
+
         """
         # update functions first, then aggregates !!!
         for fn in self._growth_rate_fn:
             fn.update(growth_rate)
         for agg in self._growth_rate_agg:
             agg.update()
-        
 
     def update_medium(self, medium):
         """
