@@ -100,41 +100,7 @@ class RbaModel(object):
                 concentrations[met] = float(conc)
         self.medium = concentrations
 
-    def get_matrices(self):
-        """
-        Return matrix blocks used to solve the optimization problem.
-
-        Returns:
-            rba.core.RbaMatrices object containing matrix blocks.
-
-        """
-        return ConstraintMatrix(self)
-
-    def solve(self):
-        """
-        Solve current model.
-
-        Args:
-            catalytic_function: identifier of functions to use for catalytic
-                efficiencies of enzymes ('default' if no argument given).
-
-        Returns:
-            rba.core.RbaSolver object that contains solution (if one
-            was found) and matrices next to solution.
-
-        """
-        matrices = ConstraintMatrix(self)
-        solver = Solver(matrices)
-        solver.solve()
-        print('Optimal growth rate is {}.'.format(solver.mu_opt))
-        variables = {name: value for name, value in zip(matrices.col_names,
-                                                        solver.X)}
-        dual = {name: value for name, value in zip(matrices.row_names,
-                                                   solver.lambda_)}
-        results = Results(variables, dual, self)
-        return results
-
-    def write_files(self, output_dir=None):
+    def write(self, output_dir=None):
         """
         Write rba files in XML format.
 

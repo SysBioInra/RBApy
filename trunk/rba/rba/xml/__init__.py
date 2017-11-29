@@ -2,8 +2,9 @@
 RBA XML classes.
 """
 
-from rba.xml import (common, metabolism, parameters,
+from rba.xml import (common, model, metabolism, parameters,
                      macromolecules, processes, enzymes)
+from .model import RbaModel
 from .common import *
 from .metabolism import *
 from .density import *
@@ -12,7 +13,7 @@ from .macromolecules import *
 from .processes import *
 from .enzymes import *
 
-__all__ = []
+__all__ = ['RbaModel']
 __all__ += common.__all__
 __all__ += metabolism.__all__
 __all__ += density.__all__

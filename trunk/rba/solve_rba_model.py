@@ -21,8 +21,18 @@ if __name__ == '__main__':
         else:
             output_dir = xml_dir
 
+        # load model, build matrices and solve
         model = rba.RbaModel.from_xml(xml_dir)
-        results = model.solve()
+        matrices = rba.ConstraintMatrix(model)
+        solver = rba.Solver(matrices)
+        solver.solve()
+        print('Optimal growth rate is {}.'.format(solver.mu_opt))
+        variables = {name: value for name, value in zip(matrices.col_names,
+                                                        solver.X)}
+        dual = {name: value for name, value in zip(matrices.row_names,
+                                                   solver.lambda_)}
+        results = rba.Results(variables, dual, model)
+
         # write results to file
         with open(os.path.join(output_dir, 'reactions.out'), 'w') as f:
             f.write('Reaction\tFlux\n')

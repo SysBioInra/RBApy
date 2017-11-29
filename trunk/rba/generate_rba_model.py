@@ -12,7 +12,7 @@ if __name__ == '__main__':
     else:
         try:
             model = build_model(sys.argv[1])
-            model.write_files()
+            model.write()
         except UserWarning as error:
             print(error.message)
             print('Interrupting Execution')
