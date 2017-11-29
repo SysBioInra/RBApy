@@ -10,6 +10,7 @@ from rba.core.species import Species
 from rba.core.density import Density
 from rba.core.enzymes import Enzymes
 from rba.core.processes import Processes
+from rba.core.targets import Targets
 
 
 class ConstraintBlocks(object):
@@ -67,6 +68,8 @@ class ConstraintBlocks(object):
         # extract process information
         self.processes = Processes(data.processes.processes,
                                    self.species, self.parameters)
+        self.targets = Targets(data.processes.processes,
+                               self.species, self.parameters)
         # setup medium
         self.set_medium(data.medium)
 
