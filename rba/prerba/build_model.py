@@ -8,8 +8,8 @@ import os.path
 import pandas
 
 # local import
+from rba import RbaModel
 from rba.prerba.pipeline_parameters import PipelineParameters
-from rba.rba_model import RbaModel
 from rba.prerba.model_builder import ModelBuilder
 from rba.prerba.default_data import DefaultData
 from rba.prerba.user_data import UserData
