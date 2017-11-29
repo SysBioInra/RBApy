@@ -31,6 +31,8 @@ class ConstraintBlocks(object):
         Enzyme information.
     processes : rba.core.processes.Processes
         Process information.
+    targets : rba.core.targets.Targets
+        Target information.
 
     """
 
@@ -52,7 +54,7 @@ class ConstraintBlocks(object):
                                      data.parameters.aggregates)
         # extract density constraints
         compartments = [c.id for c in data.metabolism.compartments]
-        self.density = Density(data.parameters.target_densities,
+        self.density = Density(data.density.target_densities,
                                self.parameters, compartments)
         # extract base species composition (metabolites + polymers)
         self.species = Species(data, self.metabolism.internal)

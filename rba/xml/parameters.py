@@ -1,6 +1,4 @@
-"""
-Module defining parameter-specific classes used for RBA XML structures.
-"""
+"""Module defining parameter-specific classes for RBA XML structures."""
 
 # python 2/3 compatiblity
 from __future__ import division, print_function, absolute_import
@@ -9,12 +7,11 @@ from __future__ import division, print_function, absolute_import
 from lxml import etree
 
 # local imports
-from rba.xml.common import get_unique_child, ListOf, TargetValue
+from rba.xml.common import get_unique_child, ListOf
 
 __all__ = ['RbaParameters', 'Parameter', 'ListOfParameters', 'Function',
            'ListOfFunctions', 'FunctionReference', 'ListOfFunctionReferences',
-           'TargetDensity', 'ListOfTargetDensities', 'Aggregate',
-           'ListOfAggregates']
+           'Aggregate', 'ListOfAggregates']
 
 
 class RbaParameters(object):
@@ -29,13 +26,11 @@ class RbaParameters(object):
         List of user-defined functions.
     aggregates : ListOfAggregated
         List of user-defined aggregates (composition of functions).
+
     """
 
     def __init__(self):
-        """
-        Default constructor.
-        """
-        self.target_densities = ListOfTargetDensities()
+        """Constructor."""
         self.functions = ListOfFunctions()
         self.aggregates = ListOfAggregates()
 
@@ -49,83 +44,31 @@ class RbaParameters(object):
             Location where XML structure should be written.
         doc_name : str, optional
             Name of XML document.
+
         """
         root = etree.Element(doc_name)
-        root.extend([self.target_densities.to_xml_node(),
-                     self.functions.to_xml_node(),
+        root.extend([self.functions.to_xml_node(),
                      self.aggregates.to_xml_node()])
         etree.ElementTree(root).write(output_stream, pretty_print=True)
 
     @classmethod
     def from_file(cls, input_stream):
         """
-        Constructor from XML structure.
+        Build object from XML structure.
 
         Parameters
         ----------
         input_stream : file or buffer
             Location containing XML structure.
+
         """
         node = etree.ElementTree(file=input_stream).getroot()
         result = cls()
-        n = get_unique_child(node, ListOfTargetDensities.tag)
-        result.target_densities = ListOfTargetDensities.from_xml_node(n)
         n = get_unique_child(node, ListOfFunctions.tag)
         result.functions = ListOfFunctions.from_xml_node(n)
         n = get_unique_child(node, ListOfAggregates.tag)
         result.aggregates = ListOfAggregates.from_xml_node(n)
         return result
-
-
-class TargetDensity(TargetValue):
-    """
-    Density constraint.
-
-    Attributes
-    ----------
-    compartment : str
-        Compartment identifier.
-    """
-
-    tag = 'targetDensity'
-
-    def __init__(self, compartment):
-        """
-        Constructor.
-
-        Parameters
-        ----------
-        compartment : str
-            Compartment identifier.
-        """
-        super(TargetDensity, self).__init__()
-        self.compartment = compartment
-
-    def to_xml_node(self):
-        """
-        Convert to xml node.
-        """
-        result = super(TargetDensity, self).to_xml_node()
-        result.set('compartment', self.compartment)
-        return result
-
-    @classmethod
-    def from_xml_node(cls, node):
-        """
-        Constructor from xml node.
-        """
-        result = cls(node.get('compartment'))
-        result._init_from_xml_node(node)
-        return result
-
-
-class ListOfTargetDensities(ListOf):
-    """
-    List of TargetDensity elements.
-    """
-
-    tag = 'listOfTargetDensities'
-    list_element = TargetDensity
 
 
 class Parameter(object):
@@ -138,6 +81,7 @@ class Parameter(object):
         Identifier of parameter.
     value : float
         Value of parameter.
+
     """
 
     tag = 'parameter'
@@ -166,7 +110,7 @@ class Parameter(object):
 
     @classmethod
     def from_xml_node(cls, node):
-        """Constructor from xml node."""
+        """Build object from xml node."""
         return cls(node.get('id'), float(node.get('value')))
 
 
@@ -236,7 +180,7 @@ class Function(object):
 
     @classmethod
     def from_xml_node(cls, node):
-        """Constructor from xml node."""
+        """Build object from xml node."""
         result = cls(node.get('id'), node.get('type'),
                      {}, node.get('variable'))
         n = get_unique_child(node, 'listOfParameters', False)
@@ -246,9 +190,7 @@ class Function(object):
 
 
 class ListOfFunctions(ListOf):
-    """
-    List of Function elements.
-    """
+    """List of Function elements."""
 
     tag = 'listOfFunctions'
     list_element = Function
@@ -262,6 +204,7 @@ class FunctionReference(object):
     ----------
     function : str
         Function identifier.
+
     """
 
     tag = 'functionReference'
@@ -274,29 +217,24 @@ class FunctionReference(object):
         ----------
         function : str
             Function identifier.
+
         """
         self.function = function
 
     def to_xml_node(self):
-        """
-        Convert to xml node.
-        """
+        """Convert to xml node."""
         result = etree.Element(self.tag)
         result.set('function', self.function)
         return result
 
     @classmethod
     def from_xml_node(cls, node):
-        """
-        Constructor from xml node.
-        """
+        """Build object from xml node."""
         return cls(node.get('function'))
 
 
 class ListOfFunctionReferences(ListOf):
-    """
-    List of FunctionReference elements.
-    """
+    """List of FunctionReference elements."""
 
     tag = 'listOfFunctionReferences'
     list_element = FunctionReference
@@ -304,7 +242,7 @@ class ListOfFunctionReferences(ListOf):
 
 class Aggregate(object):
     """
-    Aggregate (composition of Functions)
+    Aggregate (composition of Functions).
 
     Attributes
     ----------
@@ -314,6 +252,7 @@ class Aggregate(object):
         Type of aggregation (e.g. 'multiplication').
     function_references : ListOfFunctionReferences
         References to functions aggregated.
+
     """
 
     tag = 'aggregate'
@@ -328,15 +267,14 @@ class Aggregate(object):
             Identifier.
         type_ : str
             Type of aggregation (e.g. 'multiplication').
+
         """
         self.id = id_ if id_ is not None else ''
         self.type = type_
         self.function_references = ListOfFunctionReferences()
 
     def to_xml_node(self):
-        """
-        Convert to xml node.
-        """
+        """Convert to xml node."""
         result = etree.Element(self.tag)
         result.set('id', self.id)
         result.set('type', self.type)
@@ -345,9 +283,7 @@ class Aggregate(object):
 
     @classmethod
     def from_xml_node(cls, node):
-        """
-        Constructor from xml node.
-        """
+        """Build object from xml node."""
         result = cls(node.get('id'), node.get('type'))
         n = get_unique_child(node, ListOfFunctionReferences.tag)
         result.function_references = ListOfFunctionReferences.from_xml_node(n)
@@ -355,9 +291,7 @@ class Aggregate(object):
 
 
 class ListOfAggregates(ListOf):
-    """
-    List of Aggregate elements.
-    """
+    """List of Aggregate elements."""
 
     tag = 'listOfAggregates'
     list_element = Aggregate

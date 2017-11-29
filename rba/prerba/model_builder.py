@@ -48,6 +48,26 @@ class ModelBuilder(object):
             metabolism.compartments.append(rba.xml.Compartment(c))
         return metabolism
 
+    def build_density(self):
+        """
+        Build density part of RBA model.
+
+        Returns
+        -------
+        rba.xml.RbaDensity
+            RBA density model in XML format.
+
+        """
+        density = rba.xml.RbaDensity()
+        constraints = density.target_densities
+        external = self.data.compartment('Secreted')
+        for c_id in self.data.compartments():
+            if c_id != external:
+                new_density = rba.xml.TargetDensity(c_id)
+                new_density.upper_bound = c_id + '_density'
+                constraints.append(new_density)
+        return density
+
     def build_parameters(self):
         """
         Build parameter part of RBA model.
@@ -59,17 +79,10 @@ class ModelBuilder(object):
 
         """
         parameters = rba.xml.RbaParameters()
-        constraints = parameters.target_densities
         def_params = self.default.parameters
-        # density constraints
+        # density related functions
         cytoplasm = self.data.compartment('Cytoplasm')
         external = self.data.compartment('Secreted')
-        for c_id in self.data.compartments():
-            if c_id != external:
-                new_density = rba.xml.TargetDensity(c_id)
-                new_density.upper_bound = c_id + '_density'
-                constraints.append(new_density)
-        # density related functions
         other_cpt = self.data.compartments()
         other_cpt.remove(cytoplasm)
         other_cpt.remove(external)

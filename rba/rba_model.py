@@ -34,6 +34,7 @@ class RbaModel(object):
     def __init__(self):
         """Build object with empty structures."""
         self.metabolism = rba.xml.RbaMetabolism()
+        self.density = rba.xml.RbaDensity()
         self.parameters = rba.xml.RbaParameters()
         self.proteins = rba.xml.RbaMacromolecules()
         self.enzymes = rba.xml.RbaEnzymes()
@@ -55,6 +56,9 @@ class RbaModel(object):
         obj.output_dir = input_dir
         obj.parameters = rba.xml.RbaParameters().from_file(
             open(join(input_dir, 'parameters.xml'))
+            )
+        obj.density = rba.xml.RbaDensity().from_file(
+            open(join(input_dir, 'density.xml'))
             )
         obj.metabolism = rba.xml.RbaMetabolism().from_file(
             open(join(input_dir, 'metabolism.xml'))
@@ -142,6 +146,7 @@ class RbaModel(object):
         if output_dir:
             self.output_dir = output_dir
         self.metabolism.write(self._output('metabolism.xml'), 'RBAMetabolism')
+        self.density.write(self._output('density.xml'), 'RBADensity')
         self.proteins.write(self._output('proteins.xml'), 'RBAProteins')
         self.rnas.write(self._output('rnas.xml'), 'RBARnas')
         self.dna.write(self._output('dna.xml'), 'RBADna')
