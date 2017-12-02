@@ -152,20 +152,20 @@ class DefaultProcesses(object):
 
         Returns
         -------
-        rba.xml.ComponentMap
+        rba.xml.ProcessingMap
             Translation map.
 
         """
-        map_ = rba.xml.ComponentMap('translation')
+        map_ = rba.xml.ProcessingMap('translation')
         def_metabolites = self.default.metabolites
         # constant costs
-        reactants = map_.constant_cost.reactants
+        reactants = map_.constant_processing.reactants
         self._append_metabolite(
             reactants, def_metabolites.charged_trna_key('fM'), 1
             )
         self._append_metabolite(reactants, 'GTP', 1)
         self._append_metabolite(reactants, 'H2O', 2)
-        products = map_.constant_cost.products
+        products = map_.constant_processing.products
         self._append_metabolite(products,
                                 def_metabolites.uncharged_trna_key('M'), 1)
         self._append_metabolite(products, 'MET', 1)
@@ -175,7 +175,7 @@ class DefaultProcesses(object):
         self._append_metabolite(products, 'H', 1)
         # amino acids
         for aa in def_metabolites.aas:
-            cost = rba.xml.Cost(aa, 1)
+            cost = rba.xml.ComponentProcessing(aa, 1)
             self._append_metabolite(
                 cost.reactants, def_metabolites.charged_trna_key(aa), 1
                 )
@@ -187,12 +187,12 @@ class DefaultProcesses(object):
             self._append_metabolite(cost.products, 'GDP', 2)
             self._append_metabolite(cost.products, 'Pi', 2)
             self._append_metabolite(cost.products, 'H', 2)
-            map_.costs.append(cost)
+            map_.component_processings.append(cost)
         # cofactors
         for cofactor in cofactors:
-            cost = rba.xml.Cost(cofactor.chebi)
+            cost = rba.xml.ComponentProcessing(cofactor.chebi)
             self._append_metabolite(cost.reactants, cofactor.chebi, 1)
-            map_.costs.append(cost)
+            map_.component_processings.append(cost)
         return map_
 
     def folding_map(self):
@@ -201,13 +201,15 @@ class DefaultProcesses(object):
 
         Returns
         -------
-        rba.xml.ComponentMap
+        rba.xml.ProcessingMap
             Folding map.
 
         """
-        map_ = rba.xml.ComponentMap('folding')
+        map_ = rba.xml.ProcessingMap('folding')
         for aa in self.default.metabolites.aas:
-            map_.costs.append(rba.xml.Cost(aa, 0.1))
+            map_.component_processings.append(
+                rba.xml.ComponentProcessing(aa, 0.1)
+                )
         return map_
 
     def transcription_map(self):
@@ -216,20 +218,20 @@ class DefaultProcesses(object):
 
         Returns
         -------
-        rba.xml.ComponentMap
+        rba.xml.ProcessingMap
             Transcription map.
 
         """
-        map_ = rba.xml.ComponentMap('transcription')
+        map_ = rba.xml.ProcessingMap('transcription')
         for n in self.default.metabolites.nucleotides:
-            cost = rba.xml.Cost(n)
+            cost = rba.xml.ComponentProcessing(n)
             self._append_metabolite(
                 cost.reactants, self.default.metabolites.ntp_key(n), 1
                 )
             self._append_metabolite(cost.reactants, 'H2O', 1)
             self._append_metabolite(cost.products, 'PPi', 1)
             self._append_metabolite(cost.products, 'H', 1)
-            map_.costs.append(cost)
+            map_.component_processings.append(cost)
         return map_
 
     def rna_degradation_map(self):
@@ -238,19 +240,19 @@ class DefaultProcesses(object):
 
         Returns
         -------
-        rba.xml.ComponentMap
+        rba.xml.ProcessingMap
             RNA degradation map.
 
         """
-        map_ = rba.xml.ComponentMap('rna_degradation')
+        map_ = rba.xml.ProcessingMap('rna_degradation')
         for n in self.default.metabolites.nucleotides:
-            cost = rba.xml.Cost(n)
+            cost = rba.xml.ComponentProcessing(n)
             self._append_metabolite(cost.reactants, 'H2O', 1)
             self._append_metabolite(
                 cost.products, self.default.metabolites.nmp_key(n), 1
                 )
             self._append_metabolite(cost.products, 'H', 1)
-            map_.costs.append(cost)
+            map_.component_processings.append(cost)
         return map_
 
     def replication_map(self):
@@ -259,20 +261,20 @@ class DefaultProcesses(object):
 
         Returns
         -------
-        rba.xml.ComponentMap
+        rba.xml.ProcessingMap
             Replication map.
 
         """
-        map_ = rba.xml.ComponentMap('replication')
+        map_ = rba.xml.ProcessingMap('replication')
         for n in self.default.metabolites.d_nucleotides:
-            cost = rba.xml.Cost(n)
+            cost = rba.xml.ComponentProcessing(n)
             self._append_metabolite(
                 cost.reactants, self.default.metabolites.dntp_key(n), 1
                 )
             self._append_metabolite(cost.reactants, 'H2O', 1)
             self._append_metabolite(cost.products, 'PPi', 1)
             self._append_metabolite(cost.products, 'H', 1)
-            map_.costs.append(cost)
+            map_.component_processings.append(cost)
         return map_
 
     def _append_metabolite(self, sr_list, key, sto):

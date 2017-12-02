@@ -4,6 +4,7 @@
 from __future__ import division, print_function, absolute_import
 
 from collections import namedtuple
+from itertools import chain
 import pandas
 
 from rba.prerba.uniprot_data import Cofactor, UniprotData
@@ -243,8 +244,8 @@ class ProteinData(object):
                           self._user_ids._raw_data.filename))
 
     def _check_location_validity(self):
-        known_locations = set(self._location_map.data.keys()
-                              + self._location_map.data.values())
+        known_locations = set(chain(self._location_map.data.keys(),
+                                    self._location_map.data.values()))
         invalid_locations = []
         for loc in set(self._locations.data.values()):
             if not pandas.isnull(loc) and loc not in known_locations:

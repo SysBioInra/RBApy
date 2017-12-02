@@ -1,4 +1,4 @@
-"""Module defining Machinery, Species and ComponentMap classes."""
+"""Module defining Machinery, Species and ProcessingMap classes."""
 
 # python 2/3 compatibility
 from __future__ import division, print_function, absolute_import
@@ -122,25 +122,29 @@ class Species(object):
                 names.append(macro + '_synthesis')
         return (reactions, names)
 
-    def _component_maps(self, component_sets, processes):
-        """Convert component map data to ComponentMap objects."""
-        component_map = {m.id: m for m in processes.component_maps}
+    def _processing_maps(self, component_sets, processes):
+        """Convert processing map data to ProcessingMap objects."""
+        processing_map = {m.id: m for m in processes.processing_maps}
         production_map = {}
         degradation_map = {}
         nb_processes = len(processes.processes)
         for set_, components in component_sets.items():
-            production_map[set_] = ComponentMap(components, self._metabolites,
-                                                nb_processes)
-            degradation_map[set_] = ComponentMap(components, self._metabolites,
-                                                 nb_processes)
+            production_map[set_] = ProcessingMap(
+                components, self._metabolites, nb_processes
+                )
+            degradation_map[set_] = ProcessingMap(
+                components, self._metabolites, nb_processes
+                )
         for p_index, process in enumerate(processes.processes):
             for prod in process.operations.productions:
-                production_map[prod.set].add(component_map[prod.component_map],
-                                             p_index)
+                production_map[prod.set].add(
+                    processing_map[prod.processing_map], p_index
+                    )
             for deg in process.operations.degradations:
-                degradation_map[deg.set].add(component_map[deg.component_map],
-                                             p_index)
-        return (production_map, degradation_map)
+                degradation_map[deg.set].add(
+                    processing_map[deg.processing_map], p_index
+                    )
+        return production_map, degradation_map
 
     def _macromolecule_components(self, macro_set):
         """
@@ -192,7 +196,7 @@ class Species(object):
                 = self._macromolecule_components(subdata[set_])
             component_names[set_] = [c.id for c in subdata[set_].components]
         [production_map, degradation_map] \
-            = self._component_maps(component_names, data.processes)
+            = self._processing_maps(component_names, data.processes)
         # compute composition and weight
         production_metabolites = []
         production_cost = []
@@ -212,8 +216,8 @@ class Species(object):
                 hstack(weight))
 
 
-class ComponentMap(object):
-    """Class storing component maps."""
+class ProcessingMap(object):
+    """Class storing processing maps."""
 
     def __init__(self, components, metabolites, nb_processes):
         """
@@ -244,27 +248,28 @@ class ComponentMap(object):
 
         Parameters
         ----------
-        map_ : rba.xml.ComponentMap
+        map_ : rba.xml.ProcessingMap
             Structure containing component map.
         process_index : int
             index of process using this component map.
 
         """
         # store constant costs
-        self._metabolite_constant += self._cost_vector(map_.constant_cost)
+        self._metabolite_constant \
+            += self._cost_vector(map_.constant_processing)
         # store component based costs
-        for cost in map_.costs:
-            c_index = self._components.index(cost.component)
+        for proc in map_.component_processings:
+            c_index = self._components.index(proc.component)
             self._processing_table[process_index, c_index] \
-                += cost.processing_cost
-            self._metabolite_table[:, c_index] += self._cost_vector(cost)
+                += proc.machinery_cost
+            self._metabolite_table[:, c_index] += self._cost_vector(proc)
 
-    def _cost_vector(self, cost):
-        """Transform cost data into a metabolite vector."""
+    def _cost_vector(self, proc):
+        """Transform processing data into a metabolite vector."""
         result = numpy.zeros(len(self._met_index))
-        for reac in cost.reactants:
+        for reac in proc.reactants:
             result[self._met_index[reac.species]] -= reac.stoichiometry
-        for prod in cost.products:
+        for prod in proc.products:
             result[self._met_index[prod.species]] += prod.stoichiometry
         return result
 

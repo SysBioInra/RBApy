@@ -14,8 +14,9 @@ from rba.xml.common import (get_unique_child, ListOf,
 __all__ = ['RbaProcesses', 'Process', 'ListOfProcesses',
            'Machinery', 'Capacity', 'Operations', 'Operation',
            'ListOfProductions', 'ListOfDegradations',
-           'ComponentMap', 'ListOfComponentMaps',
-           'ConstantCost', 'Cost', 'ListOfCosts']
+           'ProcessingMap', 'ListOfProcessingMaps',
+           'ConstantProcessing', 'ComponentProcessing',
+           'ListOfComponentProcessings']
 
 
 class RbaProcesses(object):
@@ -26,7 +27,7 @@ class RbaProcesses(object):
     ----------
     processes : ListOfProcesses
         List of cell processes.
-    component_maps : ListOfFunctions
+    processing_maps : ListOfProcessingMaps
         List of chemical reactions used for macromolecule synthesis.
 
     """
@@ -34,7 +35,7 @@ class RbaProcesses(object):
     def __init__(self):
         """Constructor."""
         self.processes = ListOfProcesses()
-        self.component_maps = ListOfComponentMaps()
+        self.processing_maps = ListOfProcessingMaps()
 
     def write(self, output_stream, doc_name='RBAProcesses'):
         """
@@ -50,7 +51,7 @@ class RbaProcesses(object):
         """
         root = etree.Element(doc_name)
         root.extend([self.processes.to_xml_node(),
-                     self.component_maps.to_xml_node()])
+                     self.processing_maps.to_xml_node()])
         etree.ElementTree(root).write(output_stream, pretty_print=True)
 
     @classmethod
@@ -68,8 +69,8 @@ class RbaProcesses(object):
         result = cls()
         n = get_unique_child(node, ListOfProcesses.tag)
         result.processes = ListOfProcesses.from_xml_node(n)
-        n = get_unique_child(node, ListOfComponentMaps.tag)
-        result.component_maps = ListOfComponentMaps.from_xml_node(n)
+        n = get_unique_child(node, ListOfProcessingMaps.tag)
+        result.processing_maps = ListOfProcessingMaps.from_xml_node(n)
         return result
 
 
@@ -248,8 +249,8 @@ class Operation(object):
 
     Attributes
     ----------
-    component_map : str
-        Identifier of ComponentMap defining metabolites involved in operation.
+    processing_map : str
+        Identifier of ProcessingMap defining metabolites involved in operation.
     set : str
         Identifier of Macromolecule set being operated on.
 
@@ -264,19 +265,19 @@ class Operation(object):
         Parameters
         ----------
         map_ :  str
-            Identifier of ComponentMap defining metabolites involved in
+            Identifier of ProcessingMap defining metabolites involved in
             operation.
         set_ : str
             Identifier of Macromolecule set being operated on.
 
         """
-        self.component_map = map_
+        self.processing_map = map_
         self.set = set_
 
     def to_xml_node(self):
         """Convert to xml node."""
         result = etree.Element(self.tag)
-        result.set('componentMap', self.component_map)
+        result.set('processingMap', self.processing_map)
         result.set('set', self.set)
         return result
 
@@ -284,7 +285,7 @@ class Operation(object):
     def from_xml_node(cls, node):
         """Build object from xml node."""
         result = cls('', '')
-        result.component_map = node.get('componentMap')
+        result.processing_map = node.get('processingMap')
         result.set = node.get('set')
         return result
 
@@ -303,7 +304,7 @@ class ListOfDegradations(ListOf):
     list_element = Operation
 
 
-class ComponentMap(object):
+class ProcessingMap(object):
     """
     Cost of [un]polymerization of components of a macromolecule.
 
@@ -311,15 +312,15 @@ class ComponentMap(object):
     ----------
     id : str
         Identifier of map.
-    constant_cost : ConstantCost
+    constant_processing : ConstantProcessing
         Cost associated with synthesis/degradation that do not depend
         on the number of components (e.g. initialization).
-    cost : ListOfCosts
+    component_processings : ListOfComponentProcessings
         Cost associated with [un]polymerization of components.
 
     """
 
-    tag = 'componentMap'
+    tag = 'processingMap'
 
     def __init__(self, id_):
         """
@@ -332,37 +333,38 @@ class ComponentMap(object):
 
         """
         self.id = id_
-        self.constant_cost = ConstantCost()
-        self.costs = ListOfCosts()
+        self.constant_processing = ConstantProcessing()
+        self.component_processings = ListOfComponentProcessings()
 
     def to_xml_node(self):
         """Convert to xml node."""
         result = etree.Element(self.tag)
         result.set('id', self.id)
-        result.extend([self.constant_cost.to_xml_node(),
-                       self.costs.to_xml_node()])
+        result.extend([self.constant_processing.to_xml_node(),
+                       self.component_processings.to_xml_node()])
         return result
 
     @classmethod
     def from_xml_node(cls, node):
         """Build object from xml node."""
         result = cls(node.get('id'))
-        n = get_unique_child(node, ConstantCost.tag, False)
+        n = get_unique_child(node, ConstantProcessing.tag, False)
         if n is not None:
-            result.constant_cost = ConstantCost.from_xml_node(n)
-        n = get_unique_child(node, ListOfCosts.tag)
-        result.costs = ListOfCosts.from_xml_node(n)
+            result.constant_processing = ConstantProcessing.from_xml_node(n)
+        n = get_unique_child(node, ListOfComponentProcessings.tag)
+        result.component_processings \
+            = ListOfComponentProcessings.from_xml_node(n)
         return result
 
 
-class ListOfComponentMaps(ListOf):
-    """List of ComponentMap elements."""
+class ListOfProcessingMaps(ListOf):
+    """List of ProcessingMap elements."""
 
-    tag = 'listOfComponentMaps'
-    list_element = ComponentMap
+    tag = 'listOfProcessingMaps'
+    list_element = ProcessingMap
 
 
-class ConstantCost(object):
+class ConstantProcessing(object):
     """
     Metabolites consumed/produced independent of component number/nature.
 
@@ -375,7 +377,7 @@ class ConstantCost(object):
 
     """
 
-    tag = 'constantCost'
+    tag = 'constantProcessing'
 
     def __init__(self):
         """Constructor."""
@@ -403,7 +405,7 @@ class ConstantCost(object):
         return result
 
 
-class Cost(object):
+class ComponentProcessing(object):
     """
     Cost of [un]polymerization of given component.
 
@@ -411,7 +413,7 @@ class Cost(object):
     ----------
     component : str
         Identifier of component.
-    processing_cost : float
+    machinery_cost : float
         Capacity cost for process machinery to [un]polymerize component.
     reactants : ListOfReactants
         Metabolites consumed.
@@ -420,9 +422,9 @@ class Cost(object):
 
     """
 
-    tag = 'cost'
+    tag = 'componentProcessing'
 
-    def __init__(self, component, processing_cost=0.0):
+    def __init__(self, component, machinery_cost=0.0):
         """
         Constructor.
 
@@ -430,12 +432,12 @@ class Cost(object):
         ----------
         component : str
             Identifier of component.
-        processing_cost : float, optional
+        machinery_cost : float, optional
             Capacity cost for process machinery to [un]polymerize component.
 
         """
         self.component = component
-        self.processing_cost = processing_cost
+        self.machinery_cost = machinery_cost
         self.reactants = ListOfReactants()
         self.products = ListOfProducts()
 
@@ -443,7 +445,7 @@ class Cost(object):
         """Convert to xml node."""
         result = etree.Element(self.tag)
         result.set('component', self.component)
-        result.set('processingCost', str(self.processing_cost))
+        result.set('machineryCost', str(self.machinery_cost))
         # optional subelements
         opt = [self.reactants, self.products]
         result.extend([e.to_xml_node() for e in opt if not e.is_empty()])
@@ -453,10 +455,10 @@ class Cost(object):
     def from_xml_node(cls, node):
         """Build object from xml node."""
         try:
-            proc_cost = float(node.get('processingCost'))
+            machinery_cost = float(node.get('machineryCost'))
         except TypeError:
-            proc_cost = 0.0
-        result = cls(node.get('component'), proc_cost)
+            machinery_cost = 0.0
+        result = cls(node.get('component'), machinery_cost)
         n = get_unique_child(node, ListOfReactants.tag, False)
         if n is not None:
             result.reactants = ListOfReactants.from_xml_node(n)
@@ -466,8 +468,8 @@ class Cost(object):
         return result
 
 
-class ListOfCosts(ListOf):
-    """List of Cost elements."""
+class ListOfComponentProcessings(ListOf):
+    """List of ComponentProcessing elements."""
 
-    tag = 'listOfCosts'
-    list_element = Cost
+    tag = 'listOfComponentProcessings'
+    list_element = ComponentProcessing
