@@ -84,7 +84,7 @@
       </machinery>
       <operations>
         <listOfProductions>
-          <operation componentMap="translation" set="protein"/>
+          <operation processingMap="translation" set="protein"/>
         </listOfProductions>
       </operations>
     </process>
@@ -104,28 +104,28 @@
       </machinery>
       <operations>
         <listOfProductions>
-          <operation componentMap="folding" set="protein"/>
+          <operation processingMap="folding" set="protein"/>
         </listOfProductions>
       </operations>
     </process>
     <process id="P_TSC" name="Transcription">
       <operations>
         <listOfProductions>
-          <operation componentMap="transcription" set="rna"/>
+          <operation processingMap="transcription" set="rna"/>
         </listOfProductions>
       </operations>
     </process>
     <process id="P_REP" name="Replication">
       <operations>
         <listOfProductions>
-          <operation componentMap="replication" set="dna"/>
+          <operation processingMap="replication" set="dna"/>
         </listOfProductions>
       </operations>
     </process>
     <process id="P_RNADEG" name="RNA degradation">
       <operations>
         <listOfDegradations>
-          <operation componentMap="rna_degradation" set="rna"/>
+          <operation processingMap="rna_degradation" set="rna"/>
         </listOfDegradations>
       </operations>
     </process>
@@ -133,9 +133,9 @@
     <process id="test_process_1" name="test_process_1"/>
     <process id="test_process_2" name="test_process_2"/>
   </listOfProcesses>
-  <listOfComponentMaps>
-    <componentMap id="translation">
-      <constantCost>
+  <listOfProcessingMaps>
+    <processingMap id="translation">
+      <constantProcessing>
         <listOfReactants>
           <speciesReference species="M_fmettrna_c" stoichiometry="1"/>
           <speciesReference species="M_gtp_c" stoichiometry="1"/>
@@ -148,9 +148,9 @@
           <speciesReference species="M_pi_c" stoichiometry="1"/>
           <speciesReference species="M_h_c" stoichiometry="1"/>
         </listOfProducts>
-      </constantCost>
-      <listOfCosts>
-        <cost component="A" processingCost="1">
+      </constantProcessing>
+      <listOfComponentProcessings>
+        <componentProcessing component="A" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_alatrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -162,8 +162,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="C" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="C" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_cystrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -175,8 +175,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="D" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="D" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_asptrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -188,8 +188,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="E" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="E" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_glutrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -201,8 +201,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="F" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="F" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_phetrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -214,8 +214,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="G" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="G" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_glytrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -227,8 +227,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="H" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="H" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_histrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -240,8 +240,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="I" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="I" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_iletrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -253,8 +253,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="K" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="K" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_lystrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -266,8 +266,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="L" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="L" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_leutrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -279,8 +279,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="M" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="M" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_mettrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -292,8 +292,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="N" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="N" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_asntrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -305,8 +305,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="P" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="P" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_protrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -318,8 +318,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="Q" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="Q" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_glntrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -331,8 +331,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="R" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="R" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_argtrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -344,8 +344,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="S" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="S" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_sertrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -357,8 +357,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="T" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="T" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_thrtrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -370,8 +370,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="V" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="V" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_valtrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -383,8 +383,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="W" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="W" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_trptrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -396,8 +396,8 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="Y" processingCost="1">
+        </componentProcessing>
+        <componentProcessing component="Y" machineryCost="1">
           <listOfReactants>
             <speciesReference species="M_tyrtrna_c" stoichiometry="1"/>
             <speciesReference species="M_gtp_c" stoichiometry="2"/>
@@ -409,81 +409,81 @@
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
-        </cost>
-        <cost component="CHEBI:29108" processingCost="0.0"/>
-        <cost component="CHEBI:18420" processingCost="0.0"/>
-        <cost component="CHEBI:29105" processingCost="0.0"/>
-        <cost component="CHEBI:49883" processingCost="0.0"/>
-        <cost component="CHEBI:597326" processingCost="0.0"/>
-        <cost component="CHEBI:30413" processingCost="0.0"/>
-        <cost component="CHEBI:57692" processingCost="0.0"/>
-        <cost component="CHEBI:60240" processingCost="0.0"/>
-        <cost component="CHEBI:29035" processingCost="0.0"/>
-        <cost component="CHEBI:21137" processingCost="0.0"/>
-        <cost component="CHEBI:49786" processingCost="0.0"/>
-        <cost component="CHEBI:60539" processingCost="0.0"/>
-        <cost component="CHEBI:24875" processingCost="0.0"/>
-        <cost component="CHEBI:58210" processingCost="0.0"/>
-        <cost component="CHEBI:49601" processingCost="0.0"/>
-        <cost component="CHEBI:58937" processingCost="0.0"/>
-        <cost component="CHEBI:57540" processingCost="0.0"/>
-        <cost component="CHEBI:48828" processingCost="0.0"/>
-        <cost component="CHEBI:57925" processingCost="0.0"/>
-        <cost component="CHEBI:60344" processingCost="0.0"/>
-        <cost component="CHEBI:29101" processingCost="0.0"/>
-        <cost component="CHEBI:58442" processingCost="0.0"/>
-        <cost component="CHEBI:29103" processingCost="0.0"/>
-        <cost component="CHEBI:29033" processingCost="0.0"/>
-        <cost component="CHEBI:62814" processingCost="0.0"/>
-        <cost component="CHEBI:60052" processingCost="0.0"/>
-        <cost component="CHEBI:18408" processingCost="0.0"/>
-        <cost component="CHEBI:15361" processingCost="0.0"/>
-        <cost component="CHEBI:17544" processingCost="0.0"/>
-        <cost component="CHEBI:23378" processingCost="0.0"/>
-        <cost component="CHEBI:71302" processingCost="0.0"/>
-        <cost component="CHEBI:79027" processingCost="0.0"/>
-        <cost component="CHEBI:83088" processingCost="0.0"/>
-        <cost component="CHEBI:29036" processingCost="0.0"/>
-        <cost component="CHEBI:24480" processingCost="0.0"/>
-        <cost component="CHEBI:36141" processingCost="0.0"/>
-        <cost component="CHEBI:28115" processingCost="0.0"/>
-        <cost component="CHEBI:58349" processingCost="0.0"/>
-        <cost component="CHEBI:60342" processingCost="0.0"/>
-        <cost component="CHEBI:47942" processingCost="0.0"/>
-        <cost component="CHEBI:17996" processingCost="0.0"/>
-        <cost component="CHEBI:30408" processingCost="0.0"/>
-        <cost component="CHEBI:57618" processingCost="0.0"/>
-      </listOfCosts>
-    </componentMap>
-    <componentMap id="folding">
-      <constantCost/>
-      <listOfCosts>
-        <cost component="A" processingCost="0.1"/>
-        <cost component="C" processingCost="0.1"/>
-        <cost component="D" processingCost="0.1"/>
-        <cost component="E" processingCost="0.1"/>
-        <cost component="F" processingCost="0.1"/>
-        <cost component="G" processingCost="0.1"/>
-        <cost component="H" processingCost="0.1"/>
-        <cost component="I" processingCost="0.1"/>
-        <cost component="K" processingCost="0.1"/>
-        <cost component="L" processingCost="0.1"/>
-        <cost component="M" processingCost="0.1"/>
-        <cost component="N" processingCost="0.1"/>
-        <cost component="P" processingCost="0.1"/>
-        <cost component="Q" processingCost="0.1"/>
-        <cost component="R" processingCost="0.1"/>
-        <cost component="S" processingCost="0.1"/>
-        <cost component="T" processingCost="0.1"/>
-        <cost component="V" processingCost="0.1"/>
-        <cost component="W" processingCost="0.1"/>
-        <cost component="Y" processingCost="0.1"/>
-      </listOfCosts>
-    </componentMap>
-    <componentMap id="transcription">
-      <constantCost/>
-      <listOfCosts>
-        <cost component="A" processingCost="0.0">
+        </componentProcessing>
+        <componentProcessing component="CHEBI:29108" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:18420" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:29105" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:49883" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:597326" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:30413" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:57692" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:60240" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:29035" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:21137" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:49786" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:60539" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:24875" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:58210" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:49601" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:58937" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:57540" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:48828" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:57925" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:60344" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:29101" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:58442" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:29103" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:29033" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:62814" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:60052" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:18408" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:15361" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:17544" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:23378" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:71302" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:79027" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:83088" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:29036" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:24480" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:36141" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:28115" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:58349" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:60342" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:47942" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:17996" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:30408" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:57618" machineryCost="0.0"/>
+      </listOfComponentProcessings>
+    </processingMap>
+    <processingMap id="folding">
+      <constantProcessing/>
+      <listOfComponentProcessings>
+        <componentProcessing component="A" machineryCost="0.1"/>
+        <componentProcessing component="C" machineryCost="0.1"/>
+        <componentProcessing component="D" machineryCost="0.1"/>
+        <componentProcessing component="E" machineryCost="0.1"/>
+        <componentProcessing component="F" machineryCost="0.1"/>
+        <componentProcessing component="G" machineryCost="0.1"/>
+        <componentProcessing component="H" machineryCost="0.1"/>
+        <componentProcessing component="I" machineryCost="0.1"/>
+        <componentProcessing component="K" machineryCost="0.1"/>
+        <componentProcessing component="L" machineryCost="0.1"/>
+        <componentProcessing component="M" machineryCost="0.1"/>
+        <componentProcessing component="N" machineryCost="0.1"/>
+        <componentProcessing component="P" machineryCost="0.1"/>
+        <componentProcessing component="Q" machineryCost="0.1"/>
+        <componentProcessing component="R" machineryCost="0.1"/>
+        <componentProcessing component="S" machineryCost="0.1"/>
+        <componentProcessing component="T" machineryCost="0.1"/>
+        <componentProcessing component="V" machineryCost="0.1"/>
+        <componentProcessing component="W" machineryCost="0.1"/>
+        <componentProcessing component="Y" machineryCost="0.1"/>
+      </listOfComponentProcessings>
+    </processingMap>
+    <processingMap id="transcription">
+      <constantProcessing/>
+      <listOfComponentProcessings>
+        <componentProcessing component="A" machineryCost="0.0">
           <listOfReactants>
             <speciesReference species="M_atp_c" stoichiometry="1"/>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
@@ -492,8 +492,8 @@
             <speciesReference species="M_ppi_c" stoichiometry="1"/>
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
-        </cost>
-        <cost component="C" processingCost="0.0">
+        </componentProcessing>
+        <componentProcessing component="C" machineryCost="0.0">
           <listOfReactants>
             <speciesReference species="M_ctp_c" stoichiometry="1"/>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
@@ -502,8 +502,8 @@
             <speciesReference species="M_ppi_c" stoichiometry="1"/>
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
-        </cost>
-        <cost component="G" processingCost="0.0">
+        </componentProcessing>
+        <componentProcessing component="G" machineryCost="0.0">
           <listOfReactants>
             <speciesReference species="M_gtp_c" stoichiometry="1"/>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
@@ -512,8 +512,8 @@
             <speciesReference species="M_ppi_c" stoichiometry="1"/>
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
-        </cost>
-        <cost component="U" processingCost="0.0">
+        </componentProcessing>
+        <componentProcessing component="U" machineryCost="0.0">
           <listOfReactants>
             <speciesReference species="M_utp_c" stoichiometry="1"/>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
@@ -522,13 +522,13 @@
             <speciesReference species="M_ppi_c" stoichiometry="1"/>
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
-        </cost>
-      </listOfCosts>
-    </componentMap>
-    <componentMap id="rna_degradation">
-      <constantCost/>
-      <listOfCosts>
-        <cost component="A" processingCost="0.0">
+        </componentProcessing>
+      </listOfComponentProcessings>
+    </processingMap>
+    <processingMap id="rna_degradation">
+      <constantProcessing/>
+      <listOfComponentProcessings>
+        <componentProcessing component="A" machineryCost="0.0">
           <listOfReactants>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
           </listOfReactants>
@@ -536,8 +536,8 @@
             <speciesReference species="M_amp_c" stoichiometry="1"/>
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
-        </cost>
-        <cost component="C" processingCost="0.0">
+        </componentProcessing>
+        <componentProcessing component="C" machineryCost="0.0">
           <listOfReactants>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
           </listOfReactants>
@@ -545,8 +545,8 @@
             <speciesReference species="M_cmp_c" stoichiometry="1"/>
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
-        </cost>
-        <cost component="G" processingCost="0.0">
+        </componentProcessing>
+        <componentProcessing component="G" machineryCost="0.0">
           <listOfReactants>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
           </listOfReactants>
@@ -554,8 +554,8 @@
             <speciesReference species="M_gmp_c" stoichiometry="1"/>
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
-        </cost>
-        <cost component="U" processingCost="0.0">
+        </componentProcessing>
+        <componentProcessing component="U" machineryCost="0.0">
           <listOfReactants>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
           </listOfReactants>
@@ -563,13 +563,13 @@
             <speciesReference species="M_ump_c" stoichiometry="1"/>
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
-        </cost>
-      </listOfCosts>
-    </componentMap>
-    <componentMap id="replication">
-      <constantCost/>
-      <listOfCosts>
-        <cost component="A" processingCost="0.0">
+        </componentProcessing>
+      </listOfComponentProcessings>
+    </processingMap>
+    <processingMap id="replication">
+      <constantProcessing/>
+      <listOfComponentProcessings>
+        <componentProcessing component="A" machineryCost="0.0">
           <listOfReactants>
             <speciesReference species="M_datp_c" stoichiometry="1"/>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
@@ -578,8 +578,8 @@
             <speciesReference species="M_ppi_c" stoichiometry="1"/>
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
-        </cost>
-        <cost component="C" processingCost="0.0">
+        </componentProcessing>
+        <componentProcessing component="C" machineryCost="0.0">
           <listOfReactants>
             <speciesReference species="M_dctp_c" stoichiometry="1"/>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
@@ -588,8 +588,8 @@
             <speciesReference species="M_ppi_c" stoichiometry="1"/>
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
-        </cost>
-        <cost component="G" processingCost="0.0">
+        </componentProcessing>
+        <componentProcessing component="G" machineryCost="0.0">
           <listOfReactants>
             <speciesReference species="M_dgtp_c" stoichiometry="1"/>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
@@ -598,8 +598,8 @@
             <speciesReference species="M_ppi_c" stoichiometry="1"/>
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
-        </cost>
-        <cost component="T" processingCost="0.0">
+        </componentProcessing>
+        <componentProcessing component="T" machineryCost="0.0">
           <listOfReactants>
             <speciesReference species="M_dttp_c" stoichiometry="1"/>
             <speciesReference species="M_h2o_c" stoichiometry="1"/>
@@ -608,8 +608,8 @@
             <speciesReference species="M_ppi_c" stoichiometry="1"/>
             <speciesReference species="M_h_c" stoichiometry="1"/>
           </listOfProducts>
-        </cost>
-      </listOfCosts>
-    </componentMap>
-  </listOfComponentMaps>
+        </componentProcessing>
+      </listOfComponentProcessings>
+    </processingMap>
+  </listOfProcessingMaps>
 </RBAProcesses>

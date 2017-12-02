@@ -326,7 +326,7 @@ class ModelBuilder(object):
             name = 'test_process_{}'.format(i)
             proc_list.append(rba.xml.Process(name, name))
         # component maps
-        map_list = processes.component_maps
+        map_list = processes.processing_maps
         map_list.append(def_proc.translation_map(self.data.cofactors()))
         map_list.append(def_proc.folding_map())
         map_list.append(def_proc.transcription_map())
