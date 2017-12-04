@@ -15,8 +15,10 @@ import rba.xml
 
 
 class ModelBuilder(object):
+    """RBA XML model builder."""
 
     def __init__(self, default_data, user_data):
+        """Constructor."""
         self.data = user_data
         self.default = default_data
 
@@ -28,6 +30,7 @@ class ModelBuilder(object):
         -------
         rba.xml.RbaMetabolism
             RBA metabolism model in XML format.
+
         """
         metabolism = rba.xml.RbaMetabolism()
 
@@ -311,17 +314,30 @@ class ModelBuilder(object):
         """
         processes = rba.xml.RbaProcesses()
         def_proc = DefaultProcesses(self.default, self.data.metabolite_map)
+        # gather macromolecule ids
+        proteins = list(self.data.enzymatic_proteins.keys())
+        proteins += [self.data.average_protein_id(c)
+                     for c in self.data.compartments()]
+        rnas = list(self.data.rna_data.keys())
+        rnas.append(self.default.metabolites.mrna)
+        dnas = [self.default.metabolites.dna]
+        for molecule in itertools.chain(self.data.ribosome,
+                                        self.data.chaperone):
+            if molecule.set_name == 'protein':
+                proteins.append(molecule.id)
+            elif molecule.set_name == 'rna':
+                rnas.append(molecule.id)
         # processes
         proc_list = processes.processes
         proc_list.append(def_proc.translation(
-            {m.id: m.stoichiometry for m in self.data.ribosome}
+            {m.id: m.stoichiometry for m in self.data.ribosome}, proteins
             ))
         proc_list.append(def_proc.folding(
-            {m.id: m.stoichiometry for m in self.data.chaperone}
+            {m.id: m.stoichiometry for m in self.data.chaperone}, proteins
             ))
-        proc_list.append(def_proc.transcription())
-        proc_list.append(def_proc.replication())
-        proc_list.append(def_proc.rna_degradation())
+        proc_list.append(def_proc.transcription(rnas))
+        proc_list.append(def_proc.replication(dnas))
+        proc_list.append(def_proc.rna_degradation(rnas))
         for i in range(3):
             name = 'test_process_{}'.format(i)
             proc_list.append(rba.xml.Process(name, name))
