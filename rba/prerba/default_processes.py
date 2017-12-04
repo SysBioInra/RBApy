@@ -7,6 +7,14 @@ from __future__ import division, print_function, absolute_import
 import rba.xml
 
 
+def create_processing(processing_map, set_, inputs):
+    """Create rba.xml.Processing with given information."""
+    processing = rba.xml.Processing(processing_map, set_)
+    for id_ in inputs:
+        processing.inputs.append(rba.xml.SpeciesReference(id_, 1))
+    return processing
+
+
 class DefaultProcesses(object):
     """
     Class initializing default process structure used by RBA.
@@ -33,7 +41,7 @@ class DefaultProcesses(object):
         self.default = default_data
         self._metabolites = metabolite_map
 
-    def translation(self, ribosome_composition):
+    def translation(self, ribosome_composition, inputs):
         """
         Build translation process.
 
@@ -42,6 +50,8 @@ class DefaultProcesses(object):
         ribosome_composition : dict
             Map from molecule identifiers to
             their stoichiometry within a ribosome unit.
+        inputs : list of str
+            Identifiers of process inputs.
 
         Returns
         -------
@@ -60,12 +70,13 @@ class DefaultProcesses(object):
         self._append_metabolite(machine.products, 'Pi', 2)
         self._append_metabolite(machine.products, 'H', 2)
         process.machinery.capacity.value = 'ribosome_capacity'
-        # operating costs
-        operation = rba.xml.Operation('translation', 'protein')
-        process.operations.productions.append(operation)
+        # processings
+        process.processings.productions.append(
+            create_processing('translation', 'protein', inputs)
+            )
         return process
 
-    def folding(self, chaperone_composition):
+    def folding(self, chaperone_composition, inputs):
         """
         Build folding process.
 
@@ -74,6 +85,8 @@ class DefaultProcesses(object):
         chaperone_composition : dict
             Map from molecule identifiers to
             their stoichiometry within an average chaperone.
+        inputs : list of str
+            Identifiers of process inputs.
 
         Returns
         -------
@@ -88,13 +101,19 @@ class DefaultProcesses(object):
             machine.reactants.append(rba.xml.SpeciesReference(id_, sto))
         process.machinery.capacity.value = 'chaperone_efficiency_LM'
         # operating costs
-        operation = rba.xml.Operation('folding', 'protein')
-        process.operations.productions.append(operation)
+        process.processings.productions.append(
+            create_processing('folding', 'protein', inputs)
+            )
         return process
 
-    def transcription(self):
+    def transcription(self, inputs):
         """
         Build transcription process.
+
+        Parameters
+        ----------
+        inputs : list of str
+            Identifiers of process inputs.
 
         Returns
         -------
@@ -104,14 +123,19 @@ class DefaultProcesses(object):
         """
         process = rba.xml.Process('P_TSC', 'Transcription')
         default_metabolites = self.default.metabolites
-        # operating costs
-        operation = rba.xml.Operation('transcription', 'rna')
-        process.operations.productions.append(operation)
+        process.processings.productions.append(
+            create_processing('transcription', 'rna', inputs)
+            )
         return process
 
-    def replication(self):
+    def replication(self, inputs):
         """
         Build replication process.
+
+        Parameters
+        ----------
+        inputs : list of str
+            Identifiers of process inputs.
 
         Returns
         -------
@@ -120,14 +144,19 @@ class DefaultProcesses(object):
 
         """
         process = rba.xml.Process('P_REP', 'Replication')
-        # operating costs
-        operation = rba.xml.Operation('replication', 'dna')
-        process.operations.productions.append(operation)
+        process.processings.productions.append(
+            create_processing('replication', 'dna', inputs)
+            )
         return process
 
-    def rna_degradation(self):
+    def rna_degradation(self, inputs):
         """
         Build RNA degradation process.
+
+        Parameters
+        ----------
+        inputs : list of str
+            Identifiers of process inputs.
 
         Returns
         -------
@@ -136,9 +165,9 @@ class DefaultProcesses(object):
 
         """
         process = rba.xml.Process('P_RNADEG', 'RNA degradation')
-        # operating costs
-        operation = rba.xml.Operation('rna_degradation', 'rna')
-        process.operations.degradations.append(operation)
+        process.processings.degradations.append(
+            create_processing('rna_degradation', 'rna', inputs)
+            )
         return process
 
     def translation_map(self, cofactors):

@@ -36,7 +36,6 @@ class Species(object):
     def __init__(self, data, metabolites):
         """Constructor."""
         self._metabolites = metabolites
-        self._compartments = [c.id for c in data.metabolism.compartments]
         # extract composition of base species
         self.ids = (metabolites
                     + [m.id for m in data.proteins.macromolecules]
@@ -47,22 +46,22 @@ class Species(object):
         # metabolite is returned
         self._index = {m: i for i, m in reversed(list(enumerate(self.ids)))}
         # metabolites (weights and processing costs are zero)
-        species_comp = -eye(len(metabolites))
-        species_proc = csr_matrix((len(data.processes.processes),
-                                   len(metabolites)))
-        species_deg = eye(len(metabolites))
-        species_deg_proc = csr_matrix((len(data.processes.processes),
-                                       len(metabolites)))
-        species_weight = csr_matrix((len(self._compartments),
-                                     len(metabolites)))
+        nb_comp = len(data.metabolism.compartments)
+        nb_met = len(metabolites)
+        nb_processes = len(data.processes.processes)
+        met_comp = -eye(nb_met)
+        met_proc = csr_matrix((nb_processes, nb_met))
+        met_deg = eye(nb_met)
+        met_deg_proc = csr_matrix((nb_processes, nb_met))
+        met_weight = csr_matrix((nb_comp, nb_met))
         # macromolecules
         [macro_comp, macro_proc, macro_deg, macro_deg_proc, macro_weight] \
-            = self._macromolecule_composition(data)
-        self.production = hstack([species_comp, macro_comp]).tocsr()
-        self.prod_proc_cost = hstack([species_proc, macro_proc]).tocsr()
-        self.degradation = hstack([species_deg, macro_deg]).tocsr()
-        self.deg_proc_cost = hstack([species_deg_proc, macro_deg_proc]).tocsr()
-        self.weight = hstack([species_weight, macro_weight]).tocsr()
+            = compute_macromolecule_composition(data, metabolites)
+        self.production = hstack([met_comp, macro_comp]).tocsr()
+        self.prod_proc_cost = hstack([met_proc, macro_proc]).tocsr()
+        self.degradation = hstack([met_deg, macro_deg]).tocsr()
+        self.deg_proc_cost = hstack([met_deg_proc, macro_deg_proc]).tocsr()
+        self.weight = hstack([met_weight, macro_weight]).tocsr()
 
     def create_machinery(self, machinery_set):
         """
@@ -122,33 +121,89 @@ class Species(object):
                 names.append(macro + '_synthesis')
         return (reactions, names)
 
-    def _processing_maps(self, component_sets, processes):
-        """Convert processing map data to ProcessingMap objects."""
-        processing_map = {m.id: m for m in processes.processing_maps}
-        production_map = {}
-        degradation_map = {}
-        nb_processes = len(processes.processes)
-        for set_, components in component_sets.items():
-            production_map[set_] = ProcessingMap(
-                components, self._metabolites, nb_processes
-                )
-            degradation_map[set_] = ProcessingMap(
-                components, self._metabolites, nb_processes
-                )
-        for p_index, process in enumerate(processes.processes):
-            for prod in process.operations.productions:
-                production_map[prod.set].add(
-                    processing_map[prod.processing_map], p_index
-                    )
-            for deg in process.operations.degradations:
-                degradation_map[deg.set].add(
-                    processing_map[deg.processing_map], p_index
-                    )
-        return production_map, degradation_map
 
-    def _macromolecule_components(self, macro_set):
+def compute_macromolecule_composition(data, metabolites):
+    """
+    Compute base information of macromolecules.
+
+    Returns
+    -------
+    (production, production_processing_cost, degradation,
+     degradation_processing_cost, weight) tuple
+
+    """
+    nb_processes = len(data.processes.processes)
+    compartments = [c.id for c in data.metabolism.compartments]
+    # get base macromolecule information
+    proteins = MacromoleculeSet(data.proteins, compartments,
+                                metabolites, nb_processes)
+    rnas = MacromoleculeSet(data.rnas, compartments, metabolites, nb_processes)
+    dna = MacromoleculeSet(data.dna, compartments, metabolites, nb_processes)
+    # apply processing maps
+    macro_sets = {'protein': proteins, 'rna': rnas, 'dna': dna}
+    maps = {m.id: m for m in data.processes.processing_maps}
+    for p_index, process in enumerate(data.processes.processes):
+        for prod in process.processings.productions:
+            inputs = [i.species for i in prod.inputs]
+            macro_sets[prod.set].apply_production_map(
+                maps[prod.processing_map], p_index, inputs
+                )
+        for deg in process.processings.degradations:
+            inputs = [i.species for i in deg.inputs]
+            macro_sets[deg.set].apply_degradation_map(
+                maps[deg.processing_map], p_index, inputs
+                )
+    # aggregate matrices across sets
+    production_metabolites = [s.production for s in (proteins, rnas, dna)]
+    production_cost = [s.production_cost for s in (proteins, rnas, dna)]
+    degradation_metabolites = [s.degradation for s in (proteins, rnas, dna)]
+    degradation_cost = [s.degradation_cost for s in (proteins, rnas, dna)]
+    weight = [s.weight for s in (proteins, rnas, dna)]
+    return (hstack(production_metabolites), hstack(production_cost),
+            hstack(degradation_metabolites), hstack(degradation_cost),
+            hstack(weight))
+
+
+class MacromoleculeSet(object):
+    """Macromolecule information."""
+
+    def __init__(self, macro_set, compartments, metabolites, nb_processes):
+        """Initialize set with zero productio/degradation costs."""
+        self.components = [c.id for c in macro_set.components]
+        self._molecule_index = {
+            m.id: i for i, m in enumerate(macro_set.macromolecules)
+            }
+        self._component_matrix = self._extract_component_matrix(macro_set)
+        self.weight = self._extract_weight_matrix(
+            macro_set, self._component_matrix, compartments
+            )
+        self._metabolites = metabolites
+        nb_met = len(metabolites)
+        nb_mol = len(self._molecule_index)
+        self.production = csr_matrix((nb_met, nb_mol))
+        self.degradation = csr_matrix((nb_met, nb_mol))
+        self.production_cost = csr_matrix((nb_processes, nb_mol))
+        self.degradation_cost = csr_matrix((nb_processes, nb_mol))
+
+    def apply_production_map(self, map_, process_index, inputs):
+        met, proc_cost = self._apply_map(map_, inputs)
+        self.production += met
+        self.production_cost[process_index, :] += proc_cost
+
+    def apply_degradation_map(self, map_, process_index, inputs):
+        met, proc_cost = self._apply_map(map_, inputs)
+        self.degradation += met
+        self.degradation_cost[process_index, :] += proc_cost
+
+    def _apply_map(self, map_, inputs):
+        # create column selector for inputs
+        cols = [self._molecule_index[i] for i in inputs]
+        proc_map = ProcessingMap(map_, self.components, self._metabolites)
+        return proc_map.apply_map(self._component_matrix[:, cols])
+
+    def _extract_component_matrix(self, macro_set):
         """
-        Extract component and weight matrices from macromolecule data.
+        Extract component matrix from macromolecule data.
 
         A component matrix is the description of macromolecules in terms
         of components (e.g. amino acids). Compare composition matrix, the
@@ -156,121 +211,66 @@ class Species(object):
         produced for synthesizing one macromolecule.
 
         """
-        # useful information
-        components = [c.id for c in macro_set.components]
-        # extract component matrix and location information
         nb_macros = len(macro_set.macromolecules)
-        C = lil_matrix((len(components), nb_macros))
-        compartment = []
+        C = lil_matrix((len(self.components), nb_macros))
         for col, macro in enumerate(macro_set.macromolecules):
             for c in macro.composition:
-                C[components.index(c.component), col] = c.stoichiometry
-            compartment.append(self._compartments.index(macro.compartment))
-        C = C.tocsr()
-        # compute weight and associate weight with location
+                C[self.components.index(c.component), col] = c.stoichiometry
+        return C.tocsr()
+
+    def _extract_weight_matrix(self, macro_set, C, compartments):
+        """Compute weight and associate weight with location."""
         # we first compute weight per component, then weight per molecule
         w = csr_matrix([c.weight for c in macro_set.components], dtype='float')
+        location = [compartments.index(m.compartment)
+                    for m in macro_set.macromolecules]
+        nb_macros = len(macro_set.macromolecules)
         W = csr_matrix(((w*C).toarray().ravel(),
-                        (compartment, range(nb_macros))),
-                       shape=(len(self._compartments), nb_macros))
-        return C, W
-
-    def _macromolecule_composition(self, data):
-        """
-        Compute base information of macromolecules.
-
-        Returns
-        -------
-        (production, production_processing_cost, degradation,
-         degradation_processing_cost, weight) tuple
-
-        """
-        # get base matrices
-        components = {}
-        component_names = {}
-        weights = {}
-        subdata = {'protein': data.proteins, 'rna': data.rnas, 'dna': data.dna}
-        sets = ['protein', 'rna', 'dna']
-        for set_ in sets:
-            [components[set_], weights[set_]] \
-                = self._macromolecule_components(subdata[set_])
-            component_names[set_] = [c.id for c in subdata[set_].components]
-        [production_map, degradation_map] \
-            = self._processing_maps(component_names, data.processes)
-        # compute composition and weight
-        production_metabolites = []
-        production_cost = []
-        degradation_metabolites = []
-        degradation_cost = []
-        weight = []
-        for set_ in sets:
-            [comp, cost] = production_map[set_].apply_map(components[set_])
-            production_metabolites.append(comp)
-            production_cost.append(cost)
-            [comp, cost] = degradation_map[set_].apply_map(components[set_])
-            degradation_metabolites.append(comp)
-            degradation_cost.append(cost)
-            weight.append(weights[set_])
-        return (hstack(production_metabolites), hstack(production_cost),
-                hstack(degradation_metabolites), hstack(degradation_cost),
-                hstack(weight))
+                        (location, range(nb_macros))),
+                       shape=(len(compartments), nb_macros))
+        return W
 
 
 class ProcessingMap(object):
     """Class storing processing maps."""
 
-    def __init__(self, components, metabolites, nb_processes):
+    def __init__(self, map_, components, metabolites):
         """
         Constructor.
 
         Parameters
         ----------
+        map_ : rba.xml.ProcessingMap
+            Structure containing processing map.
         components : list of rba.xml.Components
             Components handled by component map.
         metabolites : list of str
             Metabolites.
-        nb_processes : int
-            Number of processes.
 
         """
         nb_metabolites = len(metabolites)
         nb_components = len(components)
-        self._met_index = {m: i for i, m in enumerate(metabolites)}
-        self._metabolite_constant = numpy.zeros(nb_metabolites)
-        self._processing_constant = numpy.zeros(nb_processes)
-        self._components = components
-        self._metabolite_table = numpy.zeros([nb_metabolites, nb_components])
-        self._processing_table = numpy.zeros([nb_processes, nb_components])
-
-    def add(self, map_, process_index):
-        """
-        Add item to component map.
-
-        Parameters
-        ----------
-        map_ : rba.xml.ProcessingMap
-            Structure containing component map.
-        process_index : int
-            index of process using this component map.
-
-        """
+        met_index = {m: i for i, m in enumerate(metabolites)}
         # store constant costs
         self._metabolite_constant \
-            += self._cost_vector(map_.constant_processing)
+            = self._cost_vector(map_.constant_processing, met_index)
+        self._processing_constant = numpy.zeros(1)
         # store component based costs
+        self._metabolite_table = numpy.zeros([nb_metabolites, nb_components])
+        self._processing_table = numpy.zeros(nb_components)
         for proc in map_.component_processings:
-            c_index = self._components.index(proc.component)
-            self._processing_table[process_index, c_index] \
-                += proc.machinery_cost
-            self._metabolite_table[:, c_index] += self._cost_vector(proc)
+            c_index = components.index(proc.component)
+            self._processing_table[c_index] += proc.machinery_cost
+            self._metabolite_table[:, c_index] += self._cost_vector(proc,
+                                                                    met_index)
 
-    def _cost_vector(self, proc):
+    def _cost_vector(self, proc, met_index):
         """Transform processing data into a metabolite vector."""
-        result = numpy.zeros(len(self._met_index))
+        result = numpy.zeros(len(met_index))
         for reac in proc.reactants:
-            result[self._met_index[reac.species]] -= reac.stoichiometry
+            result[met_index[reac.species]] -= reac.stoichiometry
         for prod in proc.products:
-            result[self._met_index[prod.species]] += prod.stoichiometry
+            result[met_index[prod.species]] += prod.stoichiometry
         return result
 
     def apply_map(self, component_matrix):
@@ -303,4 +303,4 @@ class ProcessingMap(object):
                       + csr_matrix(self._metabolite_constant).T[:, cols])
         proc_cost = (csr_matrix(self._processing_table) * component_matrix
                      + csr_matrix(self._processing_constant).T[:, cols])
-        return [metab_cost, proc_cost]
+        return metab_cost, proc_cost

@@ -7,13 +7,13 @@ from __future__ import division, print_function, absolute_import
 from lxml import etree
 
 # local imports
-from rba.xml.common import (get_unique_child, ListOf,
+from rba.xml.common import (get_unique_child, ListOf, SpeciesReference,
                             TargetValue, MachineryComposition,
                             ListOfReactants, ListOfProducts)
 
 __all__ = ['RbaProcesses', 'Process', 'ListOfProcesses',
-           'Machinery', 'Capacity', 'Operations', 'Operation',
-           'ListOfProductions', 'ListOfDegradations',
+           'Machinery', 'Capacity', 'Processing', 'Processings',
+           'ListOfInputs', 'ListOfProductions', 'ListOfDegradations',
            'ProcessingMap', 'ListOfProcessingMaps',
            'ConstantProcessing', 'ComponentProcessing',
            'ListOfComponentProcessings']
@@ -86,7 +86,7 @@ class Process(object):
         Usual name.
     machinery : Machinery
         Molecular machinery used by process (can be empty).
-    operations : Operations
+    processings : rba.xml.Processings
         Molecules produced / degraded by process (can be empty).
 
     """
@@ -108,7 +108,7 @@ class Process(object):
         self.id = id_
         self.name = name
         self.machinery = Machinery()
-        self.operations = Operations()
+        self.processings = Processings()
 
     def to_xml_node(self):
         """Convert to xml node."""
@@ -116,7 +116,7 @@ class Process(object):
         process.set('id', self.id)
         process.set('name', self.name)
         # optional subelements
-        opt = [self.machinery, self.operations]
+        opt = [self.machinery, self.processings]
         process.extend([e.to_xml_node() for e in opt if not e.is_empty()])
         return process
 
@@ -127,9 +127,9 @@ class Process(object):
         n = get_unique_child(node, Machinery.tag, False)
         if n is not None:
             result.machinery = Machinery.from_xml_node(n)
-        n = get_unique_child(node, Operations.tag, False)
+        n = get_unique_child(node, Processings.tag, False)
         if n is not None:
-            result.operations = Operations.from_xml_node(n)
+            result.processings = Processings.from_xml_node(n)
         return result
 
 
@@ -198,7 +198,7 @@ class Capacity(TargetValue):
     tag = 'capacity'
 
 
-class Operations(object):
+class Processings(object):
     """
     Set of production and degradation operations.
 
@@ -211,7 +211,7 @@ class Operations(object):
 
     """
 
-    tag = 'operations'
+    tag = 'processings'
 
     def __init__(self):
         """Constructor."""
@@ -243,7 +243,14 @@ class Operations(object):
         return result
 
 
-class Operation(object):
+class ListOfInputs(ListOf):
+    """List of species inputs."""
+
+    tag = 'listOfInputs'
+    list_element = SpeciesReference
+
+
+class Processing(object):
     """
     Reference to a production or degradation operation.
 
@@ -252,11 +259,13 @@ class Operation(object):
     processing_map : str
         Identifier of ProcessingMap defining metabolites involved in operation.
     set : str
-        Identifier of Macromolecule set being operated on.
+        Identifier of Macromolecule set being processed.
+    inputs : rba.xml.ListOfInputs
+        List of Macromolecules being operated on.
 
     """
 
-    tag = 'operation'
+    tag = 'processing'
 
     def __init__(self, map_, set_):
         """
@@ -267,26 +276,28 @@ class Operation(object):
         map_ :  str
             Identifier of ProcessingMap defining metabolites involved in
             operation.
-        set_ : str
-            Identifier of Macromolecule set being operated on.
+        set : str
+            Identifier of Macromolecule set being processed.
 
         """
         self.processing_map = map_
         self.set = set_
+        self.inputs = ListOfInputs()
 
     def to_xml_node(self):
         """Convert to xml node."""
         result = etree.Element(self.tag)
         result.set('processingMap', self.processing_map)
         result.set('set', self.set)
+        result.extend([self.inputs.to_xml_node()])
         return result
 
     @classmethod
     def from_xml_node(cls, node):
         """Build object from xml node."""
-        result = cls('', '')
-        result.processing_map = node.get('processingMap')
-        result.set = node.get('set')
+        result = cls(node.get('processingMap'), node.get('set'))
+        n = get_unique_child(node, ListOfInputs.tag)
+        result.inputs = ListOfInputs.from_xml_node(n)
         return result
 
 
@@ -294,14 +305,14 @@ class ListOfProductions(ListOf):
     """List of Operation elements representing productions."""
 
     tag = 'listOfProductions'
-    list_element = Operation
+    list_element = Processing
 
 
 class ListOfDegradations(ListOf):
-    """List of Operation elements representiong degradations."""
+    """List of Operation elements representing degradations."""
 
     tag = 'listOfDegradations'
-    list_element = Operation
+    list_element = Processing
 
 
 class ProcessingMap(object):
