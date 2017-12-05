@@ -5,7 +5,9 @@ from __future__ import division, print_function, absolute_import
 
 # global imports
 from collections import namedtuple
-from scipy.sparse import csr_matrix, lil_matrix, hstack, eye
+from scipy.sparse import (
+    csr_matrix, csc_matrix, lil_matrix, coo_matrix, hstack, eye
+    )
 import numpy
 
 # class storing machinery-related information
@@ -119,7 +121,7 @@ class Species(object):
                 reaction[met_index, 0] = 1
                 reactions.append(reaction)
                 names.append(macro + '_synthesis')
-        return (reactions, names)
+        return reactions, names
 
 
 def compute_macromolecule_composition(data, metabolites):
@@ -168,7 +170,7 @@ class MacromoleculeSet(object):
     """Macromolecule information."""
 
     def __init__(self, macro_set, compartments, metabolites, nb_processes):
-        """Initialize set with zero productio/degradation costs."""
+        """Initialize set with zero production/degradation costs."""
         self.components = [c.id for c in macro_set.components]
         self._molecule_index = {
             m.id: i for i, m in enumerate(macro_set.macromolecules)
@@ -180,26 +182,40 @@ class MacromoleculeSet(object):
         self._metabolites = metabolites
         nb_met = len(metabolites)
         nb_mol = len(self._molecule_index)
-        self.production = csr_matrix((nb_met, nb_mol))
-        self.degradation = csr_matrix((nb_met, nb_mol))
-        self.production_cost = csr_matrix((nb_processes, nb_mol))
-        self.degradation_cost = csr_matrix((nb_processes, nb_mol))
+        self.production = coo_matrix((nb_met, nb_mol))
+        self.degradation = coo_matrix((nb_met, nb_mol))
+        self.production_cost = coo_matrix((nb_processes, nb_mol))
+        self.degradation_cost = coo_matrix((nb_processes, nb_mol))
 
     def apply_production_map(self, map_, process_index, inputs):
-        met, proc_cost = self._apply_map(map_, inputs)
-        self.production += met
-        self.production_cost[process_index, :] += proc_cost
+        self._apply_map(map_, inputs, process_index,
+                        self.production, self.production_cost)
 
     def apply_degradation_map(self, map_, process_index, inputs):
-        met, proc_cost = self._apply_map(map_, inputs)
-        self.degradation += met
-        self.degradation_cost[process_index, :] += proc_cost
+        self._apply_map(map_, inputs, process_index,
+                        self.degradation, self.degradation_cost)
 
-    def _apply_map(self, map_, inputs):
+    def _apply_map(self, map_, inputs, process_index, met_matrix, proc_matrix):
         # create column selector for inputs
-        cols = [self._molecule_index[i] for i in inputs]
+        cols = numpy.array([self._molecule_index[i] for i in inputs])
         proc_map = ProcessingMap(map_, self.components, self._metabolites)
-        return proc_map.apply_map(self._component_matrix[:, cols])
+        met, proc_cost = proc_map.apply_map(self._component_matrix[:, cols])
+        # update production/degradation reactions
+        met = met.tocoo()
+        met_matrix.row = numpy.concatenate([met_matrix.row, met.row])
+        met_matrix.col = numpy.concatenate([met_matrix.col, cols[met.col]])
+        met_matrix.data = numpy.concatenate([met_matrix.data, met.data])
+        # udpate procesing cost matrix
+        if proc_cost.nnz:
+            proc_cost = proc_cost.tocoo()
+            proc_matrix.row = numpy.concatenate(
+                [proc_matrix.row,
+                 numpy.array([process_index]*len(proc_cost.data))]
+                )
+            proc_matrix.col = numpy.concatenate([proc_matrix.col,
+                                                 proc_cost.col])
+            proc_matrix.data = numpy.concatenate([proc_matrix.data,
+                                                  proc_cost.data])
 
     def _extract_component_matrix(self, macro_set):
         """
