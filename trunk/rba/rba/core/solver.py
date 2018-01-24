@@ -16,7 +16,7 @@ def is_feasible(lp):
 def is_infeasible(lp):
     flag = lp.solution.get_status()
     return (flag == lp.solution.status.infeasible
-            or exit_flag == lp.solution.status.optimal_infeasible)
+            or flag == lp.solution.status.optimal_infeasible)
 
 
 def unknown_flag_msg(mu, lp):

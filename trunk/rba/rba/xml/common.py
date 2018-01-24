@@ -54,6 +54,7 @@ def get_unique_child(parent, child_name, strict=True):
     UserWarning
         When no child is found and strict is set to True or
         when more than one node is found.
+
     """
     children = parent.findall(child_name)
     if len(children) == 1:
@@ -77,20 +78,18 @@ class ListOf(object):
     ----------
     list_element : class
         type of elements stored by list.
+
     """
 
     list_element = None
 
     def __init__(self):
-        """
-        Default constructor.
-        """
+        """Build default object."""
         self._elements = []
+        self._elements_by_id = {}
 
     def __getitem__(self, i):
-        """
-        Return item with given index.
-        """
+        """Return item with given index."""
         return self._elements[i]
 
     def __iter__(self):
@@ -98,37 +97,35 @@ class ListOf(object):
         return iter(self._elements)
 
     def __len__(self):
-        """
-        Return length of list.
-        """
+        """Return length of list."""
         return len(self._elements)
 
     def append(self, element):
-        """
-        Append element to list.
-        """
+        """Append element to list."""
         assert isinstance(element, self.list_element)
         self._elements.append(element)
+        try:
+            self._elements_by_id[element.id] = element
+        except AttributeError:
+            pass
+
+    def get_by_id(self, identifier):
+        """Return element with given identifier or None if not found."""
+        return self._elements_by_id.get(identifier)
 
     def is_empty(self):
-        """
-        Return whether list is empty.
-        """
+        """Return whether list is empty."""
         return len(self._elements) == 0
 
     def to_xml_node(self):
-        """
-        Convert to xml node.
-        """
+        """Convert to xml node."""
         result = etree.Element(self.tag)
         result.extend([e.to_xml_node() for e in self._elements])
         return result
 
     @classmethod
     def from_xml_node(cls, node):
-        """
-        Constructor from xml node.
-        """
+        """Build object from xml node."""
         result = cls()
         for n in node.iterfind(cls.list_element.tag):
             result.append(cls.list_element.from_xml_node(n))
@@ -145,27 +142,22 @@ class MachineryComposition(object):
         List of reactants used to assemble machinery.
     products :ListOfProducts
         List of byproducts generated while assembling machinery.
+
     """
 
     tag = 'machineryComposition'
 
     def __init__(self):
-        """
-        Default constructor.
-        """
+        """Build default object."""
         self.reactants = ListOfReactants()
         self.products = ListOfProducts()
 
     def is_empty(self):
-        """
-        Return whether composition is fully empty.
-        """
+        """Return whether composition is fully empty."""
         return self.reactants.is_empty() and self.products.is_empty()
 
     def to_xml_node(self):
-        """
-        Convert to xml node.
-        """
+        """Convert to xml node."""
         result = etree.Element(self.tag)
         # optional subelements
         opt = [self.reactants, self.products]
@@ -174,9 +166,7 @@ class MachineryComposition(object):
 
     @classmethod
     def from_xml_node(cls, node):
-        """
-        Constructor from xml node.
-        """
+        """Build object from xml node."""
         result = cls()
         n = get_unique_child(node, ListOfReactants.tag, False)
         if n is not None:
@@ -197,6 +187,7 @@ class SpeciesReference(object):
         Identifier of species.
     stoichiometry : float
         Stoichiometry of species.
+
     """
 
     tag = 'speciesReference'
@@ -211,14 +202,13 @@ class SpeciesReference(object):
             Identifier of species.
         stoichiometry : float
             Stoichiometry of species.
+
         """
         self.species = species
         self.stoichiometry = stoichiometry
 
     def to_xml_node(self):
-        """
-        Convert to xml node.
-        """
+        """Convert to xml node."""
         result = etree.Element(self.tag)
         result.set('species', self.species)
         result.set('stoichiometry', str(self.stoichiometry))
@@ -226,25 +216,19 @@ class SpeciesReference(object):
 
     @classmethod
     def from_xml_node(cls, node):
-        """
-        Constructor from xml node.
-        """
+        """Build object from xml node."""
         return cls(node.get('species'), float(node.get('stoichiometry')))
 
 
 class ListOfReactants(ListOf):
-    """
-    List of SpeciesReference representing reactants.
-    """
+    """List of SpeciesReference representing reactants."""
 
     tag = 'listOfReactants'
     list_element = SpeciesReference
 
 
 class ListOfProducts(ListOf):
-    """
-    List of SpeciesReference representing products.
-    """
+    """List of SpeciesReference representing products."""
 
     tag = 'listOfProducts'
     list_element = SpeciesReference
@@ -262,28 +246,24 @@ class TargetValue(object):
         lower bound on target value (None if no lower bound).
     upper_bound : float or None
         upper bound on target value (None if no upper bound).
+
     """
+
     tag = 'targetValue'
 
     def __init__(self):
-        """
-        Default constructor.
-        """
+        """Build default object."""
         self.value = None
         self.lower_bound = None
         self.upper_bound = None
 
     def is_empty(self):
-        """
-        Return whether all attributes are unspecified.
-        """
+        """Return whether all attributes are unspecified."""
         return self.value is None and self.lower_bound is None \
             and self.upper_bound is None
 
     def to_xml_node(self):
-        """
-        Convert to xml node.
-        """
+        """Convert to xml node."""
         result = etree.Element(self.tag)
         if self.value is not None:
             result.set('value', str(self.value))
@@ -295,17 +275,13 @@ class TargetValue(object):
 
     @classmethod
     def from_xml_node(cls, node):
-        """
-        Constructor from xml node.
-        """
+        """Build object from xml node."""
         result = cls()
         result._init_from_xml_node(node)
         return result
 
     def _init_from_xml_node(self, node):
-        """
-        Match attributes with given node.
-        """
+        """Match attributes with given node."""
         self.value = node.get('value')
         self.lower_bound = node.get('lowerBound')
         self.upper_bound = node.get('upperBound')

@@ -109,7 +109,7 @@ class ModelBuilder(object):
         for agg in aggs:
             parameters.aggregates.append(agg)
         # target functions for metabolites and macrocomponents
-        for id_, concentration in self.data.macrocomponents:
+        for id_, concentration in self.data.macrocomponents.items():
             parameters.functions.append(
                 def_params.metabolite_concentration_function(
                     id_, concentration
