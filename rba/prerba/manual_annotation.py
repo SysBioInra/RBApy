@@ -172,7 +172,7 @@ class CuratedMetabolites(CuratedData):
                     conc = 0
                 self.data[id_] = Metabolite(name, sbml_id, float(conc))
             else:
-                invalid_ids.append(id)
+                invalid_ids.append(id_)
         if invalid_ids:
             print(
                 '{}: {} are invalid metabolite ids.'
