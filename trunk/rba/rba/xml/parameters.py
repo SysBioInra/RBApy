@@ -150,8 +150,8 @@ class Function(object):
             identifier of function (if applicable).
         type_: str
             type of function.
-        parameters : ListOfParameters, optional
-            list of parameters used by function.
+        parameters : dict, optional
+            dict containing parameters used by function.
         variable : str, optional
             name of variable (set to growth_rate if empty).
 
@@ -164,8 +164,12 @@ class Function(object):
             self.variable = 'growth_rate'
         self.parameters = ListOfParameters()
         if parameters:
-            for key, value in parameters.items():
-                self.parameters.append(Parameter(key, value))
+            self.set_parameters(parameters)
+
+    def set_parameters(self, parameters):
+        """Create parameter list from dictionary."""
+        for key, value in parameters.items():
+            self.parameters.append(Parameter(key, value))
 
     def to_xml_node(self):
         """Convert to xml node."""

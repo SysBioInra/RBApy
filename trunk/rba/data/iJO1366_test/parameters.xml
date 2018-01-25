@@ -2,12 +2,12 @@
   <listOfFunctions>
     <function id="amino_acid_concentration" type="linear" variable="growth_rate">
       <listOfParameters>
-        <parameter id="Y_MIN" value="-inf"/>
         <parameter id="LINEAR_CONSTANT" value="6.3138"/>
-        <parameter id="Y_MAX" value="inf"/>
-        <parameter id="LINEAR_COEF" value="-0.9757"/>
-        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="Y_MIN" value="-inf"/>
         <parameter id="X_MIN" value="0.25"/>
+        <parameter id="Y_MAX" value="inf"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="LINEAR_COEF" value="-0.9757"/>
       </listOfParameters>
     </function>
     <function id="fraction_protein_Cytoplasm" type="constant" variable="growth_rate">
@@ -25,7 +25,7 @@
         <parameter id="CONSTANT" value="0.04"/>
       </listOfParameters>
     </function>
-    <function id="fraction_protein_Periplasm" type="constant" variable="growth_rate">
+    <function id="fraction_protein_Cell_membrane" type="constant" variable="growth_rate">
       <listOfParameters>
         <parameter id="CONSTANT" value="0.04"/>
       </listOfParameters>
@@ -35,24 +35,24 @@
         <parameter id="CONSTANT" value="0.04"/>
       </listOfParameters>
     </function>
-    <function id="fraction_protein_Cell_outer_membrane" type="constant" variable="growth_rate">
+    <function id="fraction_protein_Periplasm" type="constant" variable="growth_rate">
       <listOfParameters>
         <parameter id="CONSTANT" value="0.04"/>
       </listOfParameters>
     </function>
-    <function id="fraction_protein_Cell_membrane" type="constant" variable="growth_rate">
+    <function id="fraction_protein_Cell_outer_membrane" type="constant" variable="growth_rate">
       <listOfParameters>
         <parameter id="CONSTANT" value="0.04"/>
       </listOfParameters>
     </function>
     <function id="fraction_non_enzymatic_protein_Cytoplasm" type="linear" variable="growth_rate">
       <listOfParameters>
-        <parameter id="Y_MIN" value="0"/>
         <parameter id="LINEAR_CONSTANT" value="0.3526"/>
-        <parameter id="Y_MAX" value="1"/>
-        <parameter id="LINEAR_COEF" value="-0.0502"/>
-        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="Y_MIN" value="0"/>
         <parameter id="X_MIN" value="0.25"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="LINEAR_COEF" value="-0.0502"/>
       </listOfParameters>
     </function>
     <function id="fraction_non_enzymatic_protein_Secreted" type="constant" variable="growth_rate">
@@ -62,52 +62,52 @@
     </function>
     <function id="fraction_non_enzymatic_protein_Cell_inner_membrane" type="linear" variable="growth_rate">
       <listOfParameters>
-        <parameter id="Y_MIN" value="0"/>
         <parameter id="LINEAR_CONSTANT" value="0.8965"/>
-        <parameter id="Y_MAX" value="1"/>
-        <parameter id="LINEAR_COEF" value="-0.0496"/>
-        <parameter id="X_MAX" value="1.6"/>
-        <parameter id="X_MIN" value="0.25"/>
-      </listOfParameters>
-    </function>
-    <function id="fraction_non_enzymatic_protein_Periplasm" type="linear" variable="growth_rate">
-      <listOfParameters>
         <parameter id="Y_MIN" value="0"/>
-        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
-        <parameter id="Y_MAX" value="1"/>
-        <parameter id="LINEAR_COEF" value="-0.0496"/>
-        <parameter id="X_MAX" value="1.6"/>
         <parameter id="X_MIN" value="0.25"/>
-      </listOfParameters>
-    </function>
-    <function id="fraction_non_enzymatic_protein_Membrane" type="linear" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="Y_MIN" value="0"/>
-        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
         <parameter id="Y_MAX" value="1"/>
-        <parameter id="LINEAR_COEF" value="-0.0496"/>
         <parameter id="X_MAX" value="1.6"/>
-        <parameter id="X_MIN" value="0.25"/>
-      </listOfParameters>
-    </function>
-    <function id="fraction_non_enzymatic_protein_Cell_outer_membrane" type="linear" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="Y_MIN" value="0"/>
-        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
-        <parameter id="Y_MAX" value="1"/>
         <parameter id="LINEAR_COEF" value="-0.0496"/>
-        <parameter id="X_MAX" value="1.6"/>
-        <parameter id="X_MIN" value="0.25"/>
       </listOfParameters>
     </function>
     <function id="fraction_non_enzymatic_protein_Cell_membrane" type="linear" variable="growth_rate">
       <listOfParameters>
-        <parameter id="Y_MIN" value="0"/>
         <parameter id="LINEAR_CONSTANT" value="0.8965"/>
-        <parameter id="Y_MAX" value="1"/>
-        <parameter id="LINEAR_COEF" value="-0.0496"/>
-        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="Y_MIN" value="0"/>
         <parameter id="X_MIN" value="0.25"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Membrane" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="X_MIN" value="0.25"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Periplasm" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="X_MIN" value="0.25"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Cell_outer_membrane" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="X_MIN" value="0.25"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
       </listOfParameters>
     </function>
     <function id="Cytoplasm_density" type="constant" variable="growth_rate">
@@ -117,7 +117,7 @@
     </function>
     <function id="inverse_average_protein_length" type="constant" variable="growth_rate">
       <listOfParameters>
-        <parameter id="CONSTANT" value="0.0031981915447"/>
+        <parameter id="CONSTANT" value="0.0031981915447008274"/>
       </listOfParameters>
     </function>
     <function id="zero" type="constant" variable="growth_rate">
@@ -144,12 +144,12 @@
     </function>
     <function id="chaperone_efficiency_LM" type="linear" variable="growth_rate">
       <listOfParameters>
-        <parameter id="Y_MIN" value="-inf"/>
         <parameter id="LINEAR_CONSTANT" value="-2888.0051"/>
-        <parameter id="Y_MAX" value="inf"/>
-        <parameter id="LINEAR_COEF" value="36044.48"/>
-        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="Y_MIN" value="-inf"/>
         <parameter id="X_MIN" value="0.25"/>
+        <parameter id="Y_MAX" value="inf"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="LINEAR_COEF" value="36044.48"/>
       </listOfParameters>
     </function>
     <function id="mrna_degradation_flux" type="constant" variable="growth_rate">
@@ -169,172 +169,12 @@
     </function>
     <function id="maintenance_atp" type="linear" variable="growth_rate">
       <listOfParameters>
-        <parameter id="Y_MIN" value="-inf"/>
         <parameter id="LINEAR_CONSTANT" value="-3.1595"/>
-        <parameter id="Y_MAX" value="inf"/>
-        <parameter id="LINEAR_COEF" value="12.1595"/>
-        <parameter id="X_MAX" value="inf"/>
+        <parameter id="Y_MIN" value="-inf"/>
         <parameter id="X_MIN" value="1"/>
-      </listOfParameters>
-    </function>
-    <function id="M_nad_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.0162"/>
-      </listOfParameters>
-    </function>
-    <function id="M_trnaile_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="2.716e-05"/>
-      </listOfParameters>
-    </function>
-    <function id="M_trnahis_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="8.85333333333e-06"/>
-      </listOfParameters>
-    </function>
-    <function id="M_trnapro_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="2.06666666667e-05"/>
-      </listOfParameters>
-    </function>
-    <function id="M_trnaleu_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="4.212e-05"/>
-      </listOfParameters>
-    </function>
-    <function id="M_spmd_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.007"/>
-      </listOfParameters>
-    </function>
-    <function id="M_trnaval_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="3.956e-05"/>
-      </listOfParameters>
-    </function>
-    <function id="M_trnacys_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="8.56e-06"/>
-      </listOfParameters>
-    </function>
-    <function id="M_pi_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.0144"/>
-      </listOfParameters>
-    </function>
-    <function id="M_cmp_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.001"/>
-      </listOfParameters>
-    </function>
-    <function id="M_trnaarg_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="2.76533333333e-05"/>
-      </listOfParameters>
-    </function>
-    <function id="M_trnamet_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="1.43733333333e-05"/>
-      </listOfParameters>
-    </function>
-    <function id="M_trnalys_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="3.208e-05"/>
-      </listOfParameters>
-    </function>
-    <function id="M_amp_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.0047"/>
-      </listOfParameters>
-    </function>
-    <function id="M_10fthf_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.0004"/>
-      </listOfParameters>
-    </function>
-    <function id="M_k_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.7063"/>
-      </listOfParameters>
-    </function>
-    <function id="M_trnaala_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="4.80266666667e-05"/>
-      </listOfParameters>
-    </function>
-    <function id="M_ctp_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.0005"/>
-      </listOfParameters>
-    </function>
-    <function id="M_coa_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.0003"/>
-      </listOfParameters>
-    </function>
-    <function id="M_atp_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.003"/>
-      </listOfParameters>
-    </function>
-    <function id="M_nadp_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.0009"/>
-      </listOfParameters>
-    </function>
-    <function id="M_trnathr_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="2.372e-05"/>
-      </listOfParameters>
-    </function>
-    <function id="M_adp_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.0026"/>
-      </listOfParameters>
-    </function>
-    <function id="M_nadph_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.0002"/>
-      </listOfParameters>
-    </function>
-    <function id="M_trnatyr_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="1.28933333333e-05"/>
-      </listOfParameters>
-    </function>
-    <function id="M_trnaglu_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="2.46e-05"/>
-      </listOfParameters>
-    </function>
-    <function id="M_trnaasp_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="2.25333333333e-05"/>
-      </listOfParameters>
-    </function>
-    <function id="M_gmp_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.0005"/>
-      </listOfParameters>
-    </function>
-    <function id="M_gdp_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.0002"/>
-      </listOfParameters>
-    </function>
-    <function id="M_trnaasn_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="2.25333333333e-05"/>
-      </listOfParameters>
-    </function>
-    <function id="M_cdp_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="0.0003"/>
-      </listOfParameters>
-    </function>
-    <function id="M_trnaphe_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="1.732e-05"/>
+        <parameter id="Y_MAX" value="inf"/>
+        <parameter id="X_MAX" value="inf"/>
+        <parameter id="LINEAR_COEF" value="12.1595"/>
       </listOfParameters>
     </function>
     <function id="M_ppi_c_concentration" type="constant" variable="growth_rate">
@@ -342,19 +182,14 @@
         <parameter id="CONSTANT" value="0.0009"/>
       </listOfParameters>
     </function>
-    <function id="M_trnaser_c_concentration" type="constant" variable="growth_rate">
+    <function id="M_trnaasn_c_concentration" type="constant" variable="growth_rate">
       <listOfParameters>
-        <parameter id="CONSTANT" value="2.01733333333e-05"/>
+        <parameter id="CONSTANT" value="2.25333333333e-05"/>
       </listOfParameters>
     </function>
-    <function id="M_trnatrp_c_concentration" type="constant" variable="growth_rate">
+    <function id="M_cmp_c_concentration" type="constant" variable="growth_rate">
       <listOfParameters>
-        <parameter id="CONSTANT" value="5.32e-06"/>
-      </listOfParameters>
-    </function>
-    <function id="M_trnagln_c_concentration" type="constant" variable="growth_rate">
-      <listOfParameters>
-        <parameter id="CONSTANT" value="2.46e-05"/>
+        <parameter id="CONSTANT" value="0.001"/>
       </listOfParameters>
     </function>
     <function id="M_trnagly_c_concentration" type="constant" variable="growth_rate">
@@ -362,7 +197,172 @@
         <parameter id="CONSTANT" value="5.72666666667e-05"/>
       </listOfParameters>
     </function>
+    <function id="M_trnaala_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="4.80266666667e-05"/>
+      </listOfParameters>
+    </function>
+    <function id="M_trnamet_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="1.43733333333e-05"/>
+      </listOfParameters>
+    </function>
+    <function id="M_k_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.7063"/>
+      </listOfParameters>
+    </function>
+    <function id="M_trnathr_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="2.372e-05"/>
+      </listOfParameters>
+    </function>
+    <function id="M_nadp_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0009"/>
+      </listOfParameters>
+    </function>
+    <function id="M_ctp_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0005"/>
+      </listOfParameters>
+    </function>
+    <function id="M_trnaser_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="2.01733333333e-05"/>
+      </listOfParameters>
+    </function>
+    <function id="M_coa_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0003"/>
+      </listOfParameters>
+    </function>
+    <function id="M_nad_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0162"/>
+      </listOfParameters>
+    </function>
+    <function id="M_trnaval_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="3.956e-05"/>
+      </listOfParameters>
+    </function>
+    <function id="M_spmd_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.006999999999999999"/>
+      </listOfParameters>
+    </function>
+    <function id="M_cdp_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0003"/>
+      </listOfParameters>
+    </function>
+    <function id="M_gmp_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0005"/>
+      </listOfParameters>
+    </function>
+    <function id="M_amp_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0047"/>
+      </listOfParameters>
+    </function>
+    <function id="M_trnaglu_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="2.46e-05"/>
+      </listOfParameters>
+    </function>
+    <function id="M_trnaarg_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="2.76533333333e-05"/>
+      </listOfParameters>
+    </function>
+    <function id="M_trnalys_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="3.208e-05"/>
+      </listOfParameters>
+    </function>
+    <function id="M_trnatyr_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="1.28933333333e-05"/>
+      </listOfParameters>
+    </function>
+    <function id="M_gdp_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0002"/>
+      </listOfParameters>
+    </function>
+    <function id="M_trnagln_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="2.46e-05"/>
+      </listOfParameters>
+    </function>
+    <function id="M_nadph_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0002"/>
+      </listOfParameters>
+    </function>
+    <function id="M_trnacys_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="8.56e-06"/>
+      </listOfParameters>
+    </function>
+    <function id="M_trnaleu_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="4.212e-05"/>
+      </listOfParameters>
+    </function>
+    <function id="M_trnaasp_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="2.25333333333e-05"/>
+      </listOfParameters>
+    </function>
+    <function id="M_trnaile_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="2.716e-05"/>
+      </listOfParameters>
+    </function>
+    <function id="M_trnapro_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="2.06666666667e-05"/>
+      </listOfParameters>
+    </function>
+    <function id="M_pi_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0144"/>
+      </listOfParameters>
+    </function>
+    <function id="M_trnahis_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="8.85333333333e-06"/>
+      </listOfParameters>
+    </function>
+    <function id="M_trnaphe_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="1.732e-05"/>
+      </listOfParameters>
+    </function>
+    <function id="M_adp_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0026"/>
+      </listOfParameters>
+    </function>
+    <function id="M_atp_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.003"/>
+      </listOfParameters>
+    </function>
     <function id="M_gtp_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0004"/>
+      </listOfParameters>
+    </function>
+    <function id="M_trnatrp_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="5.32e-06"/>
+      </listOfParameters>
+    </function>
+    <function id="M_10fthf_c_concentration" type="constant" variable="growth_rate">
       <listOfParameters>
         <parameter id="CONSTANT" value="0.0004"/>
       </listOfParameters>
@@ -4855,10 +4855,10 @@
         <functionReference function="fraction_protein_Cell_inner_membrane"/>
       </listOfFunctionReferences>
     </aggregate>
-    <aggregate id="Periplasm_density" type="multiplication">
+    <aggregate id="Cell_membrane_density" type="multiplication">
       <listOfFunctionReferences>
         <functionReference function="amino_acid_concentration"/>
-        <functionReference function="fraction_protein_Periplasm"/>
+        <functionReference function="fraction_protein_Cell_membrane"/>
       </listOfFunctionReferences>
     </aggregate>
     <aggregate id="Membrane_density" type="multiplication">
@@ -4867,16 +4867,16 @@
         <functionReference function="fraction_protein_Membrane"/>
       </listOfFunctionReferences>
     </aggregate>
+    <aggregate id="Periplasm_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Periplasm"/>
+      </listOfFunctionReferences>
+    </aggregate>
     <aggregate id="Cell_outer_membrane_density" type="multiplication">
       <listOfFunctionReferences>
         <functionReference function="amino_acid_concentration"/>
         <functionReference function="fraction_protein_Cell_outer_membrane"/>
-      </listOfFunctionReferences>
-    </aggregate>
-    <aggregate id="Cell_membrane_density" type="multiplication">
-      <listOfFunctionReferences>
-        <functionReference function="amino_acid_concentration"/>
-        <functionReference function="fraction_protein_Cell_membrane"/>
       </listOfFunctionReferences>
     </aggregate>
     <aggregate id="nonenzymatic_proteins_Cytoplasm" type="multiplication">
@@ -4903,12 +4903,12 @@
         <functionReference function="fraction_non_enzymatic_protein_Cell_inner_membrane"/>
       </listOfFunctionReferences>
     </aggregate>
-    <aggregate id="nonenzymatic_proteins_Periplasm" type="multiplication">
+    <aggregate id="nonenzymatic_proteins_Cell_membrane" type="multiplication">
       <listOfFunctionReferences>
         <functionReference function="amino_acid_concentration"/>
         <functionReference function="inverse_average_protein_length"/>
-        <functionReference function="fraction_protein_Periplasm"/>
-        <functionReference function="fraction_non_enzymatic_protein_Periplasm"/>
+        <functionReference function="fraction_protein_Cell_membrane"/>
+        <functionReference function="fraction_non_enzymatic_protein_Cell_membrane"/>
       </listOfFunctionReferences>
     </aggregate>
     <aggregate id="nonenzymatic_proteins_Membrane" type="multiplication">
@@ -4919,20 +4919,20 @@
         <functionReference function="fraction_non_enzymatic_protein_Membrane"/>
       </listOfFunctionReferences>
     </aggregate>
+    <aggregate id="nonenzymatic_proteins_Periplasm" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Periplasm"/>
+        <functionReference function="fraction_non_enzymatic_protein_Periplasm"/>
+      </listOfFunctionReferences>
+    </aggregate>
     <aggregate id="nonenzymatic_proteins_Cell_outer_membrane" type="multiplication">
       <listOfFunctionReferences>
         <functionReference function="amino_acid_concentration"/>
         <functionReference function="inverse_average_protein_length"/>
         <functionReference function="fraction_protein_Cell_outer_membrane"/>
         <functionReference function="fraction_non_enzymatic_protein_Cell_outer_membrane"/>
-      </listOfFunctionReferences>
-    </aggregate>
-    <aggregate id="nonenzymatic_proteins_Cell_membrane" type="multiplication">
-      <listOfFunctionReferences>
-        <functionReference function="amino_acid_concentration"/>
-        <functionReference function="inverse_average_protein_length"/>
-        <functionReference function="fraction_protein_Cell_membrane"/>
-        <functionReference function="fraction_non_enzymatic_protein_Cell_membrane"/>
       </listOfFunctionReferences>
     </aggregate>
     <aggregate id="ribosome_capacity" type="multiplication">
