@@ -14,5 +14,5 @@ if __name__ == '__main__':
             model = build_model(sys.argv[1])
             model.write()
         except UserWarning as error:
-            print(error.message)
+            print(error)
             print('Interrupting Execution')
