@@ -213,7 +213,7 @@ class MacromoleculeSet(object):
                  numpy.array([process_index]*len(proc_cost.data))]
                 )
             proc_matrix.col = numpy.concatenate([proc_matrix.col,
-                                                 proc_cost.col])
+                                                 cols[proc_cost.col]])
             proc_matrix.data = numpy.concatenate([proc_matrix.data,
                                                   proc_cost.data])
 
