@@ -29,9 +29,6 @@ class ConstraintMatrix(object):
         f: Linear problem objective function.
         A: Linear problem matrix (left-hand side).
         b: Linear problem right-hand side.
-        X: Solution to RBA problem (if one was found).
-        lambda_: Dual solution to RBA problem (if one was found).
-        mu_opt: Growth rate at solution (if one was found).
 
     """
 
@@ -59,7 +56,7 @@ class ConstraintMatrix(object):
         nb_compartments = len(compartments)
         # column information
         self.col_names = (reactions
-                          + [e + '_enzyme' for e in enzymes]
+                          + [e for e in enzymes]
                           + [p + '_machinery' for p in processes]
                           + [m + '_target_flux' for m in undetermined_fluxes])
         self.reaction_cols = numpy.arange(nb_reactions)
@@ -102,7 +99,6 @@ class ConstraintMatrix(object):
             ]
         # set remaining attributes to None
         self.A = self.b = self.LB = self.UB = self.f = None
-        self.mu_opt = self.X = self.lambda_ = None
 
     def build_matrices(self, mu):
         """
