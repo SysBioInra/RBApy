@@ -5,7 +5,6 @@ RBA package
 Package computing Resource Balance Analysis.
 """
 
-from .results import Results
 from .xml import RbaModel
 from .prerba import *
 from .core import *

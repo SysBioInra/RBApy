@@ -27,11 +27,7 @@ if __name__ == '__main__':
         solver = rba.Solver(matrices)
         solver.solve()
         print('Optimal growth rate is {}.'.format(solver.mu_opt))
-        variables = {name: value for name, value in zip(matrices.col_names,
-                                                        solver.X)}
-        dual = {name: value for name, value in zip(matrices.row_names,
-                                                   solver.lambda_)}
-        results = rba.Results(variables, dual, model)
+        results = rba.Results(model, matrices, solver)
 
         # write results to file
         with open(os.path.join(output_dir, 'reactions.out'), 'w') as f:
