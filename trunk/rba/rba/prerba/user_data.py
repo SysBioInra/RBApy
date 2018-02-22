@@ -7,6 +7,8 @@ from __future__ import division, print_function, absolute_import
 import os.path
 
 # local imports
+from rba.prerba.pipeline_parameters import PipelineParameters
+from rba.prerba.default_data import DefaultData
 from rba.prerba import sbml_filter
 from rba.prerba.uniprot_data import UniprotData
 from rba.prerba.manual_annotation import (
@@ -15,36 +17,62 @@ from rba.prerba.manual_annotation import (
 from rba.prerba.protein_data import ProteinData
 from rba.prerba.uniprot_importer import UniprotImporter
 from rba.prerba.fasta_parser import FastaParser
+from rba.prerba import protein_export
 
 
 class UserData(object):
 
-    def __init__(self, parameters, default_data):
-        self.default = default_data
+    def __init__(self, parameter_file):
         """Read data stored in filed described in parameters."""
-        organism_id = parameters['ORGANISM_ID']
-        sbml_file = parameters['SBML_FILE']
-        input_dir = parameters['INPUT_DIR']
-        external_line = parameters.get('EXTERNAL_COMPARTMENTS', None)
-        if external_line is not None:
-            external_ids = external_line.split(',')
-            external_ids = [e.strip() for e in external_compartments]
-        else:
-            external_ids = []
+        self._parameters = PipelineParameters(parameter_file).parameters
+        self.default = DefaultData()
         print('Importing SBML data...')
         self.sbml_data = sbml_filter.SBMLFilter(
-            os.path.join(input_dir, sbml_file), external_ids=external_ids
+            self._sbml_file(), external_ids=self._external_ids()
             )
         print('Importing Uniprot data and manual annotation...')
-        create_uniprot(os.path.join(input_dir, 'uniprot.csv'), organism_id)
-        genes_to_retrieve = []
-        for enzyme in self.sbml_data.enzymes:
-            genes_to_retrieve += [g for g in enzyme if g != '']
-        genes_to_retrieve = list(set(genes_to_retrieve))
-        self.protein_data = ProteinData(input_dir)
+        create_uniprot(self.input_path('uniprot.csv'), self._organism_id())
+        self.protein_data = ProteinData(self._input_dir())
+        self._initialize_gene_to_enzyme_mapping()
+        self._initialize_average_protein()
+        self.protein_data.update_helper_files()
+        known_species = set([s.id for s in self.sbml_data.species])
+        self.macrocomponents = CuratedMacrocomponents(
+            self._input_dir(), known_species
+            ).data
+        self.metabolite_map = self.build_metabolite_map(
+            self._input_dir(), known_species, self.cofactors()
+            )
+        self.rna_data = read_trnas(
+            self.input_path('trnas.fasta'), self.metabolite_map
+            )
+        self.ribosome = FastaParser(self.input_path('ribosome.fasta')).entries
+        self.chaperone = FastaParser(
+            self.input_path('chaperones.fasta')
+            ).entries
+
+    def _sbml_file(self):
+        return self.input_path(self._parameters['SBML_FILE'])
+
+    def input_path(self, filename):
+        return os.path.join(self._input_dir(), filename)
+
+    def _input_dir(self):
+        return self._parameters['INPUT_DIR']
+
+    def _external_ids(self):
+        line = self._parameters.get('EXTERNAL_COMPARTMENTS', None)
+        if line is None:
+            return []
+        return [e.strip() for e in line.split(',')]
+
+    def _organism_id(self):
+        return self._parameters['ORGANISM_ID']
+
+    def _initialize_gene_to_enzyme_mapping(self):
         self.enzymatic_proteins = {}
         self.protein_reference = {}
-        for g in genes_to_retrieve:
+        for g in self._sbml_enzymatic_genes():
             protein, reference = self.protein_data.protein_and_reference(g)
             if protein:
                 self.enzymatic_proteins[g] = protein
@@ -53,26 +81,26 @@ class UserData(object):
                 # spontaneous reaction or unknown protein
                 if reference:
                     self.protein_reference[g] = reference
+
+    def _sbml_enzymatic_genes(self):
+        result = []
+        for enzyme in self.sbml_data.enzymes:
+            result += [g for g in enzyme if g != '']
+        return list(set(result))
+
+    def _initialize_average_protein(self):
         # we remove non-standard amino acids from the average composition
         average_protein = self.protein_data.average_composition()
         self.average_protein = {aa: sto for aa, sto in average_protein.items()
                                 if aa in self.default.metabolites.aas}
-        self.protein_data.update_helper_files()
-        known_species = set([s.id for s in self.sbml_data.species])
-        self.macrocomponents = CuratedMacrocomponents(input_dir,
-                                                      known_species).data
-        self.metabolite_map = self.build_metabolite_map(
-            input_dir, known_species, self.cofactors()
+
+    def output_dir(self):
+        return self._parameters['OUTPUT_DIR']
+
+    def export_proteins(self, filename):
+        protein_export.export_proteins(
+            self.input_path(filename), self.enzymatic_proteins
             )
-        self.rna_data = read_trnas(
-            os.path.join(input_dir, 'trnas.fasta'), self.metabolite_map
-            )
-        self.ribosome = FastaParser(
-            os.path.join(input_dir, 'ribosome.fasta')
-            ).entries
-        self.chaperone = FastaParser(
-            os.path.join(input_dir, 'chaperones.fasta')
-            ).entries
 
     def sbml_species(self):
         return self.sbml_data.species

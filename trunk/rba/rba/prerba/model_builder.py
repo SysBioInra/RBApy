@@ -8,6 +8,9 @@ import itertools
 import copy
 
 # local imports
+from rba import RbaModel
+from rba.prerba.user_data import UserData
+from rba.prerba.default_data import DefaultData
 from rba.prerba.user_data import ntp_composition
 from rba.prerba.default_processes import DefaultProcesses
 from rba.prerba.default_targets import DefaultTargets
@@ -15,12 +18,28 @@ import rba.xml
 
 
 class ModelBuilder(object):
-    """RBA XML model builder."""
+    """Build a RBA model from user data."""
 
-    def __init__(self, default_data, user_data):
+    def __init__(self, parameter_file):
         """Constructor."""
-        self.data = user_data
-        self.default = default_data
+        self.data = UserData(parameter_file)
+        self.default = DefaultData()
+
+    def build_model(self):
+        """Build and return entire RbaModel."""
+        model = RbaModel()
+        model.metabolism = self.build_metabolism()
+        model.density = self.build_density()
+        model.parameters = self.build_parameters()
+        model.proteins = self.build_proteins()
+        model.rnas = self.build_rnas()
+        model.dna = self.build_dna()
+        model.processes = self.build_processes()
+        model.targets = self.build_targets()
+        model.enzymes = self.build_enzymes()
+        model.medium = self.build_medium()
+        model.output_dir = self.data.output_dir()
+        return model
 
     def build_metabolism(self):
         """
@@ -371,3 +390,14 @@ class ModelBuilder(object):
         targ_list.append(def_targ.macrocomponents(self.data.macrocomponents))
         targ_list.append(def_targ.maintenance_atp(self.default.atpm_reaction))
         return targets
+
+    def build_medium(self):
+        # !!! we identify metabolites by their prefix !!!
+        # M_glc_p and M_glc_e will be seen as the same metabolite M_glc
+        prefixes = (m.rsplit('_', 1)[0]
+                    for m in self.data.external_metabolites())
+        return dict.fromkeys(prefixes,
+                             self.default.activity.medium_concentration)
+
+    def export_proteins(self, filename):
+        self.data.export_proteins(filename)
