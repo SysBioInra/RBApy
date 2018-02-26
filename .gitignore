@@ -1,4 +1,9 @@
 
+data/iJO1366_test/*.xml
+data/iJO1366_test/*.out
+data/iJO1366_test/medium.tsv
+data/iJO1366_test/data/protein_summary.tsv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
