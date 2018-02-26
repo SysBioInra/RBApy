@@ -55,7 +55,12 @@ class ModelBuilder(object):
 
         metabolism.species = copy.deepcopy(self.data.sbml_species())
         metabolism.reactions = copy.deepcopy(self.data.sbml_reactions())
-        # add atpm reaction
+        metabolism.reactions.append(self._atpm_reaction())
+        for c in self.data.compartments():
+            metabolism.compartments.append(rba.xml.Compartment(c))
+        return metabolism
+
+    def _atpm_reaction(self):
         reaction = rba.xml.Reaction(self.default.atpm_reaction, False)
         for m in ['ATP', 'H2O']:
             id_ = self.data.metabolite_map[m].sbml_id
@@ -65,11 +70,7 @@ class ModelBuilder(object):
             id_ = self.data.metabolite_map[m].sbml_id
             if id_:
                 reaction.products.append(rba.xml.SpeciesReference(id_, 1))
-        metabolism.reactions.append(reaction)
-        # add compartments
-        for c in self.data.compartments():
-            metabolism.compartments.append(rba.xml.Compartment(c))
-        return metabolism
+        return reaction
 
     def build_density(self):
         """
@@ -82,13 +83,12 @@ class ModelBuilder(object):
 
         """
         density = rba.xml.RbaDensity()
-        constraints = density.target_densities
         external = self.data.compartment('Secreted')
         for c_id in self.data.compartments():
             if c_id != external:
                 new_density = rba.xml.TargetDensity(c_id)
                 new_density.upper_bound = c_id + '_density'
-                constraints.append(new_density)
+                density.target_densities.append(new_density)
         return density
 
     def build_parameters(self):
@@ -102,64 +102,69 @@ class ModelBuilder(object):
 
         """
         parameters = rba.xml.RbaParameters()
-        def_params = self.default.parameters
-        # density related functions
+        self._append_parameters(parameters, *self._density_parameters())
+        self._append_parameters(parameters, *self._protein_parameters())
+        self._append_parameters(parameters, *self._process_parameters())
+        self._append_parameters(parameters, *self._target_parameters())
+        self._append_parameters(parameters, *self._efficiency_parameters())
+        return parameters
+
+    def _append_parameters(self, parameters, fns, aggs):
+        for fn in fns:
+            parameters.functions.append(fn)
+        for agg in aggs:
+            parameters.aggregates.append(agg)
+
+    def _density_parameters(self):
         cytoplasm = self.data.compartment('Cytoplasm')
         external = self.data.compartment('Secreted')
         other_cpt = self.data.compartments()
         other_cpt.remove(cytoplasm)
         other_cpt.remove(external)
-        fns, aggs = def_params.density_functions(cytoplasm, external,
-                                                 other_cpt)
-        for fn in fns:
-            parameters.functions.append(fn)
-        for agg in aggs:
-            parameters.aggregates.append(agg)
-        # protein length
-        parameters.functions.append(
-            def_params.inverse_average_protein_length(
-                sum(self.data.average_protein().values())
-                )
+        return self.default.parameters.density_functions(
+            cytoplasm, external, other_cpt
             )
-        # process functions
-        fns, aggs = def_params.process_functions()
-        for fn in fns:
-            parameters.functions.append(fn)
-        for agg in aggs:
-            parameters.aggregates.append(agg)
-        # target functions for metabolites and macrocomponents
-        for id_, concentration in self.data.macrocomponents.items():
-            parameters.functions.append(
-                def_params.metabolite_concentration_function(
-                    id_, concentration
-                    )
-                )
+
+    def _protein_parameters(self):
+        fns = [self.default.parameters.inverse_average_protein_length(
+                   sum(self.data.average_protein().values())
+                   )]
+        aggs = []
+        return fns, aggs
+
+    def _process_parameters(self):
+        return self.default.parameters.process_functions()
+
+    def _target_parameters(self):
+        fns = [self.default.parameters.metabolite_concentration_function(
+                   id_, conc
+                   ) for id_, conc in self.data.macrocomponents.items()]
         for metabolite in self.data.metabolite_map.values():
             if metabolite.sbml_id and metabolite.concentration:
-                parameters.functions.append(
-                    def_params.metabolite_concentration_function(
+                fns.append(
+                    self.default.parameters.metabolite_concentration_function(
                         metabolite.sbml_id, metabolite.concentration
                         )
                     )
-        # enzyme efficiencies
+        aggs = []
+        return fns, aggs
+
+    def _efficiency_parameters(self):
+        fns = []
+        aggs = []
         # base enzymatic activity
-        parameters.functions.append(
-            self.default.activity.efficiency_function()
-            )
-        parameters.functions.append(
-            self.default.activity.transport_function()
-            )
+        fns.append(self.default.activity.efficiency_function())
+        fns.append(self.default.activity.transport_function())
         # transport functions and aggregates
         reaction_ids = [r.id for r in self.data.sbml_reactions()]
         for reaction in reaction_ids:
             if self.data.has_membrane_enzyme(reaction):
-                fns, agg = self.default.activity.transport_aggregate(
+                r_fns, r_agg = self.default.activity.transport_aggregate(
                     reaction, self.data.imported_metabolites(reaction)
                     )
-                for fn in fns:
-                    parameters.functions.append(fn)
-                parameters.aggregates.append(agg)
-        return parameters
+                fns += r_fns
+                aggs.append(r_agg)
+        return fns, aggs
 
     def build_proteins(self):
         """
