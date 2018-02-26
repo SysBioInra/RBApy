@@ -16,7 +16,7 @@ from rba.prerba.manual_annotation import (
     )
 from rba.prerba.protein_data import ProteinData
 from rba.prerba.uniprot_importer import UniprotImporter
-from rba.prerba.fasta_parser import FastaParser
+from rba.prerba.fasta_parser import parse_rba_fasta
 from rba.prerba import protein_export
 
 
@@ -54,7 +54,6 @@ class UserData(object):
         create_uniprot(self.input_path('uniprot.csv'), self._organism_id())
         self.protein_data = ProteinData(self._input_dir())
         self._initialize_gene_to_enzyme_mapping()
-        self._initialize_average_protein()
         self.protein_data.update_helper_files()
 
     def _organism_id(self):
@@ -79,12 +78,6 @@ class UserData(object):
             result += [g for g in enzyme if g != '']
         return list(set(result))
 
-    def _initialize_average_protein(self):
-        # we remove non-standard amino acids from the average composition
-        average_protein = self.protein_data.average_composition()
-        self.average_protein = {aa: sto for aa, sto in average_protein.items()
-                                if aa in self.default.metabolites.aas}
-
     def _import_manual_annotation(self):
         print('Importing manual annotation...')
         known_species = self._sbml_species_ids()
@@ -95,10 +88,8 @@ class UserData(object):
         self.rna_data = read_trnas(
             self.input_path('trnas.fasta'), self.metabolite_map
             )
-        self.ribosome = FastaParser(self.input_path('ribosome.fasta')).entries
-        self.chaperone = FastaParser(
-            self.input_path('chaperones.fasta')
-            ).entries
+        self.ribosome = parse_rba_fasta(self.input_path('ribosome.fasta'))
+        self.chaperone = parse_rba_fasta(self.input_path('chaperones_fasta'))
 
     def _sbml_species_ids(self):
         return set([s.id for s in self.sbml_data.species])
@@ -125,6 +116,12 @@ class UserData(object):
         keys += list(cofactor_info)
         names += list(cofactor_info.values())
         return keys, names
+
+    def average_protein(self):
+        # we remove non-standard amino acids from the average composition
+        average_protein = self.protein_data.average_composition()
+        return {aa: sto for aa, sto in average_protein.items()
+                if aa in self.default.metabolites.aas}
 
     def output_dir(self):
         return self._parameters['OUTPUT_DIR']
@@ -293,7 +290,7 @@ def read_trnas(filename, metabolite_map):
 
     """
     # read all real trnas (as described in fasta files)
-    trna_data = FastaParser(filename).entries
+    trna_data = parse_rba_fasta(filename)
     # map real trnas to user trnas
     # for example, user may agregate all trnas into a single metabolite
     # in this case, we take an average composition for a trna

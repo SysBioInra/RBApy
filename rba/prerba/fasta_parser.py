@@ -12,42 +12,38 @@ FastaEntry = namedtuple('FastaEntry',
                         'id name set_name stoichiometry sequence')
 
 
-class FastaParser(object):
+def parse_rba_fasta(input_file):
     """
-    Module parsing rba-formatted fasta files.
+    Parse rba-formatted fasta file.
 
-    Attributes
+    Parameters
     ----------
-    entries : list of FastaEntry
+    input_file : str
+        Path to fasta file.
+
+    Returns
+    -------
+    list of FastaEntry
         Entries read
 
     """
+    try:
+        return [parse_entry(r) for r in SeqIO.parse(input_file, 'fasta')]
 
-    def __init__(self, input_file):
-        """
-        Parse input file.
+    except IOError:
+        raise UserWarning('Please provide file ' + input_file)
 
-        Parameters
-        ----------
-        input_file : str
-            Path to fasta file.
 
-        """
-        self.entries = []
-        try:
-            for record in SeqIO.parse(input_file, 'fasta'):
-                header = record.description
-                try:
-                    [rba, id_, name, set_, sto] = header.split('|')
-                    sto = float(sto)
-                except ValueError:
-                    invalid_header(header)
-                if rba != 'rba':
-                    invalid_header(header)
-                self.entries.append(FastaEntry(id_, name, set_,
-                                               sto, str(record.seq)))
-        except IOError:
-            raise UserWarning('Please provide file ' + input_file)
+def parse_entry(record):
+    header = record.description
+    try:
+        [rba, id_, name, set_, sto] = header.split('|')
+        sto = float(sto)
+    except ValueError:
+        invalid_header(header)
+    if rba != 'rba':
+        invalid_header(header)
+    return FastaEntry(id_, name, set_, sto, str(record.seq))
 
 
 def invalid_header(line):

@@ -118,7 +118,7 @@ class ModelBuilder(object):
         # protein length
         parameters.functions.append(
             def_params.inverse_average_protein_length(
-                sum(self.data.average_protein.values())
+                sum(self.data.average_protein().values())
                 )
             )
         # process functions
@@ -194,7 +194,7 @@ class ModelBuilder(object):
             id_ = self.data.average_protein_id(compartment)
             proteins.macromolecules.append(
                 rba.xml.Macromolecule(id_, compartment,
-                                      self.data.average_protein)
+                                      self.data.average_protein())
                 )
         # machinery proteins
         cytoplasm = self.data.compartment('Cytoplasm')
