@@ -26,33 +26,16 @@ class UserData(object):
         """Read data stored in filed described in parameters."""
         self._parameters = PipelineParameters(parameter_file).parameters
         self.default = DefaultData()
+        self._import_sbml_data()
+        self._import_uniprot_data()
+        self._import_manual_annotation()
+
+    def _import_sbml_data(self):
         print('Importing SBML data...')
         self.sbml_data = sbml_filter.SBMLFilter(
-            self._sbml_file(), external_ids=self._external_ids()
+            self.input_path(self._parameters['SBML_FILE']),
+            external_ids=self._external_ids()
             )
-        print('Importing Uniprot data and manual annotation...')
-        create_uniprot(self.input_path('uniprot.csv'), self._organism_id())
-        self.protein_data = ProteinData(self._input_dir())
-        self._initialize_gene_to_enzyme_mapping()
-        self._initialize_average_protein()
-        self.protein_data.update_helper_files()
-        known_species = set([s.id for s in self.sbml_data.species])
-        self.macrocomponents = CuratedMacrocomponents(
-            self._input_dir(), known_species
-            ).data
-        self.metabolite_map = self.build_metabolite_map(
-            self._input_dir(), known_species, self.cofactors()
-            )
-        self.rna_data = read_trnas(
-            self.input_path('trnas.fasta'), self.metabolite_map
-            )
-        self.ribosome = FastaParser(self.input_path('ribosome.fasta')).entries
-        self.chaperone = FastaParser(
-            self.input_path('chaperones.fasta')
-            ).entries
-
-    def _sbml_file(self):
-        return self.input_path(self._parameters['SBML_FILE'])
 
     def input_path(self, filename):
         return os.path.join(self._input_dir(), filename)
@@ -65,6 +48,14 @@ class UserData(object):
         if line is None:
             return []
         return [e.strip() for e in line.split(',')]
+
+    def _import_uniprot_data(self):
+        print('Importing Uniprot data...')
+        create_uniprot(self.input_path('uniprot.csv'), self._organism_id())
+        self.protein_data = ProteinData(self._input_dir())
+        self._initialize_gene_to_enzyme_mapping()
+        self._initialize_average_protein()
+        self.protein_data.update_helper_files()
 
     def _organism_id(self):
         return self._parameters['ORGANISM_ID']
@@ -93,6 +84,47 @@ class UserData(object):
         average_protein = self.protein_data.average_composition()
         self.average_protein = {aa: sto for aa, sto in average_protein.items()
                                 if aa in self.default.metabolites.aas}
+
+    def _import_manual_annotation(self):
+        print('Importing manual annotation...')
+        known_species = self._sbml_species_ids()
+        self.macrocomponents = CuratedMacrocomponents(
+            self._input_dir(), known_species
+            ).data
+        self.metabolite_map = self._build_metabolite_map()
+        self.rna_data = read_trnas(
+            self.input_path('trnas.fasta'), self.metabolite_map
+            )
+        self.ribosome = FastaParser(self.input_path('ribosome.fasta')).entries
+        self.chaperone = FastaParser(
+            self.input_path('chaperones.fasta')
+            ).entries
+
+    def _sbml_species_ids(self):
+        return set([s.id for s in self.sbml_data.species])
+
+    def _build_metabolite_map(self):
+        """Map internal keys for metabolites with user-defined SBML ids."""
+        known_species = self._sbml_species_ids()
+        curated_data = CuratedMetabolites(self._input_dir(), known_species)
+        sbml_lookup = {s.split('_', 1)[1].lower(): s for s in known_species}
+        for id_, name in zip(*self._internal_species_ids_and_names()):
+            if id_ not in curated_data.data:
+                # id_ not mapped in curation file: add new entry
+                sbml_id = sbml_lookup.get((id_ + '_c').lower(), None)
+                conc = self.default.metabolites.concentration.get(key, 0)
+                curated_data.append(id_, name, sbml_id, conc)
+        curated_data.update_file()
+        return curated_data.data
+
+    def _internal_species_ids_and_names(self):
+        keys, names = self.default.metabolites.process_metabolites()
+        cofactor_info = {}
+        for cofactor in self.cofactors():
+            cofactor_info.setdefault(cofactor.chebi, cofactor.name)
+        keys += list(cofactor_info)
+        names += list(cofactor_info.values())
+        return keys, names
 
     def output_dir(self):
         return self._parameters['OUTPUT_DIR']
@@ -129,46 +161,6 @@ class UserData(object):
     def average_protein_id(self, compartment):
         """Return identifier of average protein in given compartment."""
         return self.protein_data.average_protein_id(compartment)
-
-    def build_metabolite_map(self, input_dir, known_species, cofactors):
-        """
-        Map internal keys for metabolites with user-defined SBML ids.
-
-        Parameters
-        ----------
-        input_dir : str
-            Path to directory containing helper files.
-        known_species : list of str
-            List of valid metabolite identifiers.
-        cofactors : list of rba.xml.uniprot_data.Cofactor
-            List of cofactors.
-
-        Returns
-        -------
-        dict
-            Dictionary where keys are internal metabolite identifiers and
-            values are corresponding user identifiers.
-
-        """
-        # metabolites to retrieve
-        keys, names = self.default.metabolites.process_metabolites()
-        cofactor_info = {}
-        for cofactor in cofactors:
-            cofactor_info.setdefault(cofactor.chebi, cofactor.name)
-        keys += list(cofactor_info)
-        names += list(cofactor_info.values())
-        # look for metabolites
-        curated_data = CuratedMetabolites(input_dir, known_species)
-        sbml_lookup = {s.split('_', 1)[1].lower(): s for s in known_species}
-        for key, name in zip(keys, names):
-            # if curated data is available use it,
-            # otherwise try to find sbml id using standard name
-            if key not in curated_data.data:
-                sbml_id = sbml_lookup.get((key + '_c').lower(), None)
-                conc = self.default.metabolites.concentration.get(key, 0)
-                curated_data.append(key, name, sbml_id, conc)
-        curated_data.update_file()
-        return curated_data.data
 
     def cofactors(self):
         """
