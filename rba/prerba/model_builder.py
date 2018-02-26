@@ -179,35 +179,40 @@ class ModelBuilder(object):
         proteins = rba.xml.RbaMacromolecules()
         # components
         for aa in self.default.metabolites.aas:
-            proteins.components.append(
-                rba.xml.Component(aa, '', 'amino_acid', 1)
-                )
+            self._add_component(proteins, aa, '', 'amino_acid', 1)
         for c in self.data.cofactors():
-            proteins.components.append(
-                rba.xml.Component(c.chebi, c.name, 'cofactor', 0)
-                )
+            self._add_component(proteins, c.chebi, c.name, 'cofactor', 0)
         # enzymatic proteins
         for gene_name, protein in self.data.enzymatic_proteins.items():
-            comp = self.data.aa_composition(protein.sequence)
-            for cofactor in protein.cofactors:
-                comp[cofactor.chebi] = cofactor.stoichiometry
-            proteins.macromolecules.append(
-                rba.xml.Macromolecule(gene_name, protein.location, comp)
-                )
+            self._add_macromolecule(proteins, gene_name, protein.location,
+                                    self._protein_composition(protein))
         # average proteins
         for comp in self.data.compartments():
-            proteins.macromolecules.append(
-                rba.xml.Macromolecule(self.data.average_protein_id(comp),
-                                      comp, self.data.average_protein())
+            self._add_macromolecule(
+                proteins, self.data.average_protein_id(comp),
+                comp, self.data.average_protein()
                 )
         # machinery proteins
         cytoplasm = self.data.compartment('Cytoplasm')
         for prot in itertools.chain(self.data.ribosome.proteins,
                                     self.data.chaperone.proteins):
-            proteins.macromolecules.append(rba.xml.Macromolecule(
-                prot.id, cytoplasm, self.data.aa_composition(prot.sequence)
-                ))
+            self._add_macromolecule(proteins, prot.id, cytoplasm,
+                                    self.data.aa_composition(prot.sequence))
         return proteins
+
+    def _add_component(self, set_, id_, name, type_, stoichio):
+        set_.components.append(rba.xml.Component(id_, name, type_, stoichio))
+
+    def _protein_composition(self, protein):
+        comp = self.data.aa_composition(protein.sequence)
+        for cofactor in protein.cofactors:
+            comp[cofactor.chebi] = cofactor.stoichiometry
+        return comp
+
+    def _add_macromolecule(self, set_, id_, location, composition):
+        set_.macromolecules.append(
+            rba.xml.Macromolecule(id_, location, composition)
+            )
 
     def build_rnas(self):
         """
@@ -220,36 +225,27 @@ class ModelBuilder(object):
 
         """
         rnas = rba.xml.RbaMacromolecules()
-        # components
-        rnas.components.append(
-            rba.xml.Component('A', 'Adenosine residue', 'Nucleotide', 2.9036)
-            )
-        rnas.components.append(
-            rba.xml.Component('C', 'Cytosine residue', 'Nucleotide', 2.7017)
-            )
-        rnas.components.append(
-            rba.xml.Component('G', 'Guanine residue', 'Nucleotide', 3.0382)
-            )
-        rnas.components.append(
-            rba.xml.Component('U', 'Uramine residue', 'Nucleotide', 2.7102)
-            )
+        self._add_component(rnas, 'A', 'Adenosine residue',
+                            'Nucleotide', 2.9036)
+        self._add_component(rnas, 'C', 'Cytosine residue',
+                            'Nucleotide', 2.7017)
+        self._add_component(rnas, 'G', 'Guanine residue', 'Nucleotide', 3.0382)
+        self._add_component(rnas, 'U', 'Uramine residue', 'Nucleotide', 2.7102)
         # user rnas
         cytoplasm = self.data.compartment('Cytoplasm')
         for rna_id, composition in self.data.rna_data.items():
-            rnas.macromolecules.append(rba.xml.Macromolecule(
-                rna_id, cytoplasm, composition
-                ))
+            self._add_macromolecule(rnas, rna_id, cytoplasm, composition)
         # average RNA
-        rnas.macromolecules.append(rba.xml.Macromolecule(
-            self.default.metabolites.mrna, cytoplasm,
+        self._add_macromolecule(
+            rnas, self.default.metabolites.mrna, cytoplasm,
             {'A': 0.2818, 'C': 0.2181, 'G': 0.2171, 'U': 0.283}
-            ))
+            )
         # machinery rnas
         for rna in itertools.chain(self.data.ribosome.rnas,
                                    self.data.chaperone.rnas):
-            rnas.macromolecules.append(rba.xml.Macromolecule(
-                rna.id, cytoplasm, ntp_composition(rna.sequence)
-                ))
+            self._add_macromolecule(
+                rnas, rna.id, cytoplasm, ntp_composition(rna.sequence)
+                )
         return rnas
 
     def build_dna(self):
@@ -263,20 +259,14 @@ class ModelBuilder(object):
 
         """
         dna = rba.xml.RbaMacromolecules()
-        # components
-        comp_a = rba.xml.Component('A', 'Adenosine residue', 'Nucleotide', 0)
-        comp_c = rba.xml.Component('C', 'Cytosine residue', 'Nucleotide', 0)
-        comp_g = rba.xml.Component('G', 'Guanine residue', 'Nucleotide', 0)
-        comp_t = rba.xml.Component('T', 'Thymine residue', 'Nucleotide', 0)
-        for comp in [comp_a, comp_c, comp_g, comp_t]:
-            dna.components.append(comp)
-        # average DNA
-        dna.macromolecules.append(
-            rba.xml.Macromolecule(
-                self.default.metabolites.dna,
-                self.data.compartment('Cytoplasm'),
-                {'A': 0.2818, 'C': 0.2181, 'G': 0.2171, 'T': 0.283}
-                )
+        self._add_component(dna, 'A', 'Adenosine residue', 'Nucleotide', 0)
+        self._add_component(dna, 'C', 'Cytosine residue', 'Nucleotide', 0)
+        self._add_component(dna, 'G', 'Guanine residue', 'Nucleotide', 0)
+        self._add_component(dna, 'T', 'Thymine residue', 'Nucleotide', 0)
+        self._add_macromolecule(
+            dna, self.default.metabolites.dna,
+            self.data.compartment('Cytoplasm'),
+            {'A': 0.2818, 'C': 0.2181, 'G': 0.2171, 'T': 0.283}
             )
         return dna
 
