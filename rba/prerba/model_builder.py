@@ -190,23 +190,18 @@ class ModelBuilder(object):
                 rba.xml.Macromolecule(gene_name, protein.location, comp)
                 )
         # average proteins
-        for compartment in self.data.compartments():
-            id_ = self.data.average_protein_id(compartment)
+        for comp in self.data.compartments():
             proteins.macromolecules.append(
-                rba.xml.Macromolecule(id_, compartment,
-                                      self.data.average_protein())
+                rba.xml.Macromolecule(self.data.average_protein_id(comp),
+                                      comp, self.data.average_protein())
                 )
         # machinery proteins
         cytoplasm = self.data.compartment('Cytoplasm')
-        for molecule in itertools.chain(self.data.ribosome,
-                                        self.data.chaperone):
-            if molecule.set_name == 'protein':
-                proteins.macromolecules.append(
-                    rba.xml.Macromolecule(
-                        molecule.id, cytoplasm,
-                        self.data.aa_composition(molecule.sequence)
-                    )
-                )
+        for prot in itertools.chain(self.data.ribosome.proteins,
+                                    self.data.chaperone.proteins):
+            proteins.macromolecules.append(rba.xml.Macromolecule(
+                prot.id, cytoplasm, self.data.aa_composition(prot.sequence)
+                ))
         return proteins
 
     def build_rnas(self):
@@ -245,13 +240,11 @@ class ModelBuilder(object):
             {'A': 0.2818, 'C': 0.2181, 'G': 0.2171, 'U': 0.283}
             ))
         # machinery rnas
-        for molecule in itertools.chain(self.data.ribosome,
-                                        self.data.chaperone):
-            if molecule.set_name == 'rna':
-                rnas.macromolecules.append(rba.xml.Macromolecule(
-                    molecule.id, cytoplasm,
-                    ntp_composition(molecule.sequence)
-                    ))
+        for rna in itertools.chain(self.data.ribosome.rnas,
+                                   self.data.chaperone.rnas):
+            rnas.macromolecules.append(rba.xml.Macromolecule(
+                rna.id, cytoplasm, ntp_composition(rna.sequence)
+                ))
         return rnas
 
     def build_dna(self):
@@ -340,19 +333,17 @@ class ModelBuilder(object):
         rnas = list(self.data.rna_data.keys())
         rnas.append(self.default.metabolites.mrna)
         dnas = [self.default.metabolites.dna]
-        for molecule in itertools.chain(self.data.ribosome,
-                                        self.data.chaperone):
-            if molecule.set_name == 'protein':
-                proteins.append(molecule.id)
-            elif molecule.set_name == 'rna':
-                rnas.append(molecule.id)
+        proteins += self.data.ribosome.protein_ids()
+        proteins += self.data.chaperone.protein_ids()
+        rnas += self.data.ribosome.rna_ids()
+        rnas += self.data.chaperone.rna_ids()
         # processes
         proc_list = processes.processes
         proc_list.append(def_proc.translation(
-            {m.id: m.stoichiometry for m in self.data.ribosome}, proteins
+            self.data.ribosome.composition(), proteins
             ))
         proc_list.append(def_proc.folding(
-            {m.id: m.stoichiometry for m in self.data.chaperone}, proteins
+            self.data.chaperone.composition(), proteins
             ))
         proc_list.append(def_proc.transcription(rnas))
         proc_list.append(def_proc.replication(dnas))

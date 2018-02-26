@@ -10,12 +10,12 @@ import os.path
 from rba.prerba.pipeline_parameters import PipelineParameters
 from rba.prerba.default_data import DefaultData
 from rba.prerba import sbml_filter
-from rba.prerba.uniprot_data import UniprotData
+from rba.prerba.protein_data import ProteinData
+from rba.prerba.uniprot_importer import UniprotImporter
 from rba.prerba.manual_annotation import (
     CuratedMetabolites, CuratedMacrocomponents
     )
-from rba.prerba.protein_data import ProteinData
-from rba.prerba.uniprot_importer import UniprotImporter
+from rba.prerba.user_machinery import UserMachinery
 from rba.prerba.fasta_parser import parse_rba_fasta
 from rba.prerba import protein_export
 
@@ -88,8 +88,8 @@ class UserData(object):
         self.rna_data = read_trnas(
             self.input_path('trnas.fasta'), self.metabolite_map
             )
-        self.ribosome = parse_rba_fasta(self.input_path('ribosome.fasta'))
-        self.chaperone = parse_rba_fasta(self.input_path('chaperones_fasta'))
+        self.ribosome = UserMachinery(self.input_path('ribosome.fasta'))
+        self.chaperone = UserMachinery(self.input_path('chaperones.fasta'))
 
     def _sbml_species_ids(self):
         return set([s.id for s in self.sbml_data.species])
