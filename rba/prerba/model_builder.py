@@ -102,19 +102,25 @@ class ModelBuilder(object):
 
         """
         parameters = rba.xml.RbaParameters()
+        self._append_all_parameter_functions(parameters)
+        self._append_all_parameter_aggregates(parameters)
+        return parameters
+
+    def _append_all_parameter_functions(self, parameters):
         self._append_functions(parameters, self._density_functions())
-        self._append_aggregates(parameters, self._density_aggregates())
         self._append_functions(parameters, self._protein_functions())
         self._append_functions(parameters, self._process_functions())
-        self._append_aggregates(parameters, self._process_aggregates())
         self._append_functions(parameters, self._target_functions())
         self._append_functions(parameters, self._efficiency_functions())
-        self._append_aggregates(parameters, self._efficiency_aggregates())
-        return parameters
 
     def _append_functions(self, parameters, fns):
         for fn in fns:
             parameters.functions.append(fn)
+
+    def _append_all_parameter_aggregates(self, parameters):
+        self._append_aggregates(parameters, self._density_aggregates())
+        self._append_aggregates(parameters, self._process_aggregates())
+        self._append_aggregates(parameters, self._efficiency_aggregates())
 
     def _append_aggregates(self, parameters, aggs):
         for agg in aggs:
@@ -152,17 +158,23 @@ class ModelBuilder(object):
         return self.default.parameters.process_aggregates()
 
     def _target_functions(self):
-        fns = [self.default.parameters.metabolite_concentration_function(
-                   id_, conc
-                   ) for id_, conc in self.data.macrocomponents.items()]
-        for metabolite in self.data.metabolite_map.values():
-            if metabolite.sbml_id and metabolite.concentration:
-                fns.append(
-                    self.default.parameters.metabolite_concentration_function(
-                        metabolite.sbml_id, metabolite.concentration
-                        )
-                    )
+        fns = [
+            self.default.parameters.metabolite_concentration_function(
+                  id_, conc
+                  )
+            for id_, conc in self.data.macrocomponents.items()
+            ]
+        fns += [
+            self.default.parameters.metabolite_concentration_function(
+                metabolite.sbml_id, metabolite.concentration
+                )
+            for metabolite in self._valid_metabolic_targets()
+            ]
         return fns
+
+    def _valid_metabolic_targets():
+        return (m for m in self.data.metabolite_map.values()
+                if m.sbml_id and m.concentration)
 
     def _efficiency_functions(self):
         fns = []
@@ -170,20 +182,22 @@ class ModelBuilder(object):
         fns.append(self.default.activity.efficiency_function())
         fns.append(self.default.activity.transport_function())
         # transport functions and aggregates
-        for reaction in (r.id for r in self.data.sbml_reactions()):
-            if self.data.has_membrane_enzyme(reaction):
-                fns += self.default.activity.transport_functions(
-                    reaction, self.data.imported_metabolites(reaction)
-                    )
+        for reaction in self._tranport_reactions:
+            fns += self.default.activity.transport_functions(
+                reaction, self.data.imported_metabolites(reaction)
+                )
         return fns
+
+    def _transport_reactions(self):
+        return (r.id for r in self.data.sbml_reactions()
+                if self.data.has_membrane_enzyme(reaction))
 
     def _efficiency_aggregates(self):
         aggs = []
-        for reaction in (r.id for r in self.data.sbml_reactions()):
-            if self.data.has_membrane_enzyme(reaction):
-                aggs.append(self.default.activity.transport_aggregate(
-                    reaction, self.data.imported_metabolites(reaction)
-                    ))
+        for reaction in self._transport_reactions():
+            aggs.append(self.default.activity.transport_aggregate(
+                reaction, self.data.imported_metabolites(reaction)
+                ))
         return aggs
 
     def build_proteins(self):
