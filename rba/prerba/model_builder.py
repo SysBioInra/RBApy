@@ -83,7 +83,7 @@ class ModelBuilder(object):
 
         """
         density = rba.xml.RbaDensity()
-        external = self.data.compartment('Secreted')
+        external = self._external()
         for c_id in self.data.compartments():
             if c_id != external:
                 new_density = rba.xml.TargetDensity(c_id)
@@ -119,14 +119,21 @@ class ModelBuilder(object):
             parameters.functions.append(fn)
 
     def _density_functions(self):
-        cytoplasm = self.data.compartment('Cytoplasm')
-        external = self.data.compartment('Secreted')
-        other_cpt = self.data.compartments()
-        other_cpt.remove(cytoplasm)
-        other_cpt.remove(external)
         return self.default.parameters.density_functions(
-            cytoplasm, external, other_cpt
+            self._cytoplasm(), self._external(), self._other_compartments()
             )
+
+    def _cytoplasm(self):
+        return self.data.compartment('Cytoplasm')
+
+    def _external(self):
+        return self.data.compartment('Secreted')
+
+    def _other_compartments(self):
+        result = self.data.compartments()
+        result.remove(self._cytoplasm())
+        result.remove(self._external())
+        return result
 
     def _protein_functions(self):
         return [self.default.parameters.inverse_average_protein_length(
@@ -158,25 +165,18 @@ class ModelBuilder(object):
             parameters.aggregates.append(agg)
 
     def _density_aggregates(self):
-        cytoplasm = self.data.compartment('Cytoplasm')
-        external = self.data.compartment('Secreted')
-        other_cpt = self.data.compartments()
-        other_cpt.remove(cytoplasm)
-        other_cpt.remove(external)
         return self.default.parameters.density_aggregates(
-            cytoplasm, external, other_cpt
+            self._cytoplasm(), self._external(), self._other_compartments()
             )
 
     def _process_aggregates(self):
         return self.default.parameters.process_aggregates()
 
     def _efficiency_aggregates(self):
-        aggs = []
-        for reaction in self.data.transport_reaction_ids():
-            aggs.append(self.default.activity.transport_aggregate(
-                reaction, self.data.imported_metabolites(reaction)
-                ))
-        return aggs
+        return [self.default.activity.transport_aggregate(
+                    r, self.data.imported_metabolites(r)
+                )
+                for r in self.data.transport_reaction_ids()]
 
     def build_proteins(self):
         """
@@ -203,10 +203,9 @@ class ModelBuilder(object):
             builder.add_macromolecule(self.data.average_protein_id(comp),
                                       comp, self.data.average_protein())
         # machinery proteins
-        cytoplasm = self.data.compartment('Cytoplasm')
         for prot in itertools.chain(self.data.ribosome.proteins,
                                     self.data.chaperone.proteins):
-            builder.add_macromolecule(prot.id, cytoplasm,
+            builder.add_macromolecule(prot.id, self._cytoplasm(),
                                       self.data.aa_composition(prot.sequence))
         return builder.result
 
@@ -232,18 +231,17 @@ class ModelBuilder(object):
         builder.add_component('G', 'Guanine residue', 'Nucleotide', 3.0382)
         builder.add_component('U', 'Uramine residue', 'Nucleotide', 2.7102)
         # user rnas
-        cytoplasm = self.data.compartment('Cytoplasm')
         for rna_id, composition in self.data.rna_data.items():
-            builder.add_macromolecule(rna_id, cytoplasm, composition)
+            builder.add_macromolecule(rna_id, self._cytoplasm(), composition)
         # average RNA
         builder.add_macromolecule(
-            self.default.metabolites.mrna, cytoplasm,
+            self.default.metabolites.mrna, self._cytoplasm(),
             {'A': 0.2818, 'C': 0.2181, 'G': 0.2171, 'U': 0.283}
             )
         # machinery rnas
         for rna in itertools.chain(self.data.ribosome.rnas,
                                    self.data.chaperone.rnas):
-            builder.add_macromolecule(rna.id, cytoplasm,
+            builder.add_macromolecule(rna.id, self._cytoplasm(),
                                       ntp_composition(rna.sequence))
         return builder.result
 
@@ -263,7 +261,7 @@ class ModelBuilder(object):
         builder.add_component('G', 'Guanine residue', 'Nucleotide', 0)
         builder.add_component('T', 'Thymine residue', 'Nucleotide', 0)
         builder.add_macromolecule(
-            self.default.metabolites.dna, self.data.compartment('Cytoplasm'),
+            self.default.metabolites.dna, self._cytoplasm(),
             {'A': 0.2818, 'C': 0.2181, 'G': 0.2171, 'T': 0.283}
             )
         return builder.result
