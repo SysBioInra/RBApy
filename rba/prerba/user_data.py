@@ -123,6 +123,20 @@ class UserData(object):
         return {aa: sto for aa, sto in average_protein.items()
                 if aa in self.default.metabolites.aas}
 
+    def average_protein_length(self):
+        return sum(self.average_protein().values())
+
+    def transport_reaction_ids(self):
+        return (r.id for r in self.sbml_reactions()
+                if self.has_membrane_enzyme(r.id))
+
+    def metabolite_targets(self):
+        result = [(m.sbml_id, m.concentration)
+                  for m in self.metabolite_map.values()
+                  if m.sbml_id and m.concentration]
+        result += [(id_, conc) for id_, conc in self.macrocomponents.items()]
+        return result
+
     def output_dir(self):
         return self._parameters['OUTPUT_DIR']
 
