@@ -277,33 +277,39 @@ class ModelBuilder(object):
 
         """
         enzymes = rba.xml.RbaEnzymes()
-        # user enzymes
-        def_act = self.default.activity
-        reaction_ids = [r.id for r in self.data.sbml_reactions()]
-        for reaction, comp in zip(reaction_ids,
-                                  self.data.enzyme_composition()):
-            if self.data.has_membrane_enzyme(reaction):
-                forward = def_act.transport_aggregate_id(reaction)
-                backward = def_act.transport_id
-            else:
-                forward = backward = def_act.efficiency_id
-            # base information
-            enzyme = rba.xml.Enzyme(reaction + '_enzyme', reaction,
-                                    forward, backward)
-            enzymes.enzymes.append(enzyme)
-            # machinery composition
-            reactants = enzyme.machinery_composition.reactants
-            for gene in comp:
-                ref = self.data.protein_reference.get(gene, None)
-                if ref:
-                    reactants.append(rba.xml.SpeciesReference(*ref))
-        # atpm enzyme
-        reaction = self.default.atpm_reaction
-        forward = backward = def_act.efficiency_id
+        reaction_ids = (r.id for r in self.data.sbml_reactions())
+        for r_id, comp in zip(reaction_ids, self.data.enzyme_composition()):
+            enzymes.enzymes.append(self._build_user_enzyme(r_id, comp))
+        enzymes.enzymes.append(self._atpm_enzyme())
+        return enzymes
+
+    def _build_user_enzyme(self, reaction, composition):
+        forward, backward = self._reaction_efficiencies(reaction)
         enzyme = rba.xml.Enzyme(reaction + '_enzyme', reaction,
                                 forward, backward)
-        enzymes.enzymes.append(enzyme)
-        return enzymes
+        self._add_enzyme_machinery(enzyme, composition)
+        return enzyme
+
+    def _reaction_efficiencies(self, reaction):
+        if self.data.is_transport_reaction(reaction):
+            forward = self.default.activity.transport_aggregate_id(reaction)
+            backward = self.default.activity.transport_id
+        else:
+            forward = backward = self.default.activity.efficiency_id
+        return forward, backward
+
+    def _add_enzyme_machinery(self, enzyme, composition):
+        # machinery composition
+        reactants = enzyme.machinery_composition.reactants
+        for gene in composition:
+            ref = self.data.protein_reference.get(gene, None)
+            if ref:
+                reactants.append(rba.xml.SpeciesReference(*ref))
+
+    def _atpm_enzyme(self):
+        r_id = self.default.atpm_reaction
+        forward = backward = self.default.activity.efficiency_id
+        return rba.xml.Enzyme(r_id + '_enzyme', r_id, forward, backward)
 
     def build_processes(self):
         """

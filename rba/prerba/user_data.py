@@ -128,7 +128,7 @@ class UserData(object):
 
     def transport_reaction_ids(self):
         return (r.id for r in self.sbml_reactions()
-                if self.has_membrane_enzyme(r.id))
+                if self.is_transport_reaction(r.id))
 
     def metabolite_targets(self):
         result = [(m.sbml_id, m.concentration)
@@ -154,7 +154,7 @@ class UserData(object):
     def enzyme_composition(self):
         return self.sbml_data.enzymes
 
-    def has_membrane_enzyme(self, reaction):
+    def is_transport_reaction(self, reaction):
         return self.sbml_data.has_membrane_enzyme[reaction]
 
     def imported_metabolites(self, reaction):
