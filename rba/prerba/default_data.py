@@ -38,40 +38,40 @@ class DefaultParameters(object):
         return Function(self.metabolite_concentration(id_),
                         'constant', {'CONSTANT': concentration})
 
+    def all_functions(self):
+        pass
+
     def process_functions(self):
-        fns = []
-        aggregates = []
-        # zero function
-        fns.append(Function('zero', 'constant', {'CONSTANT': 0}))
-        # efficiencies
-        fns.append(Function('ribosome_efficiency_MM', 'michaelisMenten',
-                            {'kmax': 97200, 'Km': 0.5, 'Y_MIN': 32400}))
-        fns.append(Function('ribosome_efficiency_CM', 'constant',
-                            {'CONSTANT': 97200}))
-        fns.append(Function('fraction_active_ribosomes', 'exponential',
-                            {'RATE': -0.083333}))
-        fns.append(Function('chaperone_efficiency_LM', 'linear',
-                            {'LINEAR_COEF': 36044.48,
-                             'LINEAR_CONSTANT': -2888.0051,
-                             'X_MIN': 0.25, 'X_MAX': 1.6,
-                             'Y_MIN': float('-Inf'), 'Y_MAX': float('Inf')}))
-        aggregates.append(build_aggregate(
+        return [
+            # zero function
+            Function('zero', 'constant', {'CONSTANT': 0}),
+            # efficiencies
+            Function('ribosome_efficiency_MM', 'michaelisMenten',
+                     {'kmax': 97200, 'Km': 0.5, 'Y_MIN': 32400}),
+            Function('ribosome_efficiency_CM', 'constant',
+                     {'CONSTANT': 97200}),
+            Function('fraction_active_ribosomes', 'exponential',
+                     {'RATE': -0.083333}),
+            Function('chaperone_efficiency_LM', 'linear',
+                     {'LINEAR_COEF': 36044.48, 'LINEAR_CONSTANT': -2888.0051,
+                      'X_MIN': 0.25, 'X_MAX': 1.6,
+                      'Y_MIN': float('-Inf'), 'Y_MAX': float('Inf')}),
+            # targets
+            Function('mrna_degradation_flux', 'constant',
+                     {'CONSTANT': 0.15996}),
+            Function('mrna_concentration', 'constant', {'CONSTANT': 0.01}),
+            Function('dna_concentration', 'constant', {'CONSTANT': 0.0807}),
+            Function('maintenance_atp', 'linear',
+                     {'LINEAR_COEF': 12.1595, 'LINEAR_CONSTANT': -3.1595,
+                      'X_MIN': 1, 'X_MAX': float('Inf'),
+                      'Y_MIN': float('-Inf'), 'Y_MAX': float('Inf')})
+            ]
+
+    def process_aggregates(self):
+        return [build_aggregate(
             'ribosome_capacity',
             ['ribosome_efficiency_MM', 'fraction_active_ribosomes']
-            ))
-        # targets
-        fns.append(Function('mrna_degradation_flux', 'constant',
-                            {'CONSTANT': 0.15996}))
-        fns.append(Function('mrna_concentration', 'constant',
-                            {'CONSTANT': 0.01}))
-        fns.append(Function('dna_concentration', 'constant',
-                            {'CONSTANT': 0.0807}))
-        fns.append(Function('maintenance_atp', 'linear',
-                            {'LINEAR_COEF': 12.1595,
-                             'LINEAR_CONSTANT': -3.1595,
-                             'X_MIN': 1, 'X_MAX': float('Inf'),
-                             'Y_MIN': float('-Inf'), 'Y_MAX': float('Inf')}))
-        return fns, aggregates
+            )]
 
     def density_functions(self, cytoplasm, external, other):
         cytoplasm_density = 4.8972
@@ -82,7 +82,6 @@ class DefaultParameters(object):
                         {'LINEAR_COEF': -0.9757, 'LINEAR_CONSTANT': 6.3138,
                          'X_MIN': 0.25, 'X_MAX': 1.6,
                          'Y_MIN': float('-Inf'), 'Y_MAX': float('Inf')})]
-        aggregates = []
         # protein fraction
         fns.append(self.protein_fraction(cytoplasm, cytoplasm_fraction))
         fns.append(self.protein_fraction(external, external_fraction))
@@ -94,6 +93,10 @@ class DefaultParameters(object):
         # total density
         fns.append(Function(cytoplasm + '_density',
                             'constant', {'CONSTANT': cytoplasm_density}))
+        return fns
+
+    def density_aggregates(self, cytoplasm, external, other):
+        aggregates = []
         for cpt in other:
             aggregates.append(build_aggregate(
                 cpt + '_density',
@@ -108,7 +111,7 @@ class DefaultParameters(object):
                  self.protein_fraction_id(cpt),
                  self.non_enzymatic_fraction_id(cpt)]
                 ))
-        return fns, aggregates
+        return aggregates
 
     @staticmethod
     def inverse_average_protein_length(length):
@@ -331,14 +334,17 @@ class DefaultActivity(object):
     def transport_aggregate_id(self, reaction):
         return '{}_efficiency'.format(reaction)
 
+    def transport_functions(self, reaction, metabolites):
+        return [
+            Function(self._transport_fn_id(reaction, met),
+                     'michaelisMenten', {'Km': 0.8, 'kmax': 1}, met)
+            for met in metabolites
+        ]
+
+    def _transport_fn_id(self, reaction, metabolite):
+        return '{}_{}_transport_factor'.format(reaction, metabolite)
+
     def transport_aggregate(self, reaction, metabolites):
-        fns = []
-        agg_fns = [self.transport_id]
-        for met in metabolites:
-            fn_id = '{}_{}_transport_factor'.format(reaction, met)
-            fns.append(
-                Function(fn_id, 'michaelisMenten', {'Km': 0.8, 'kmax': 1}, met)
-                )
-            agg_fns.append(fn_id)
-        agg = build_aggregate(self.transport_aggregate_id(reaction), agg_fns)
-        return fns, agg
+        agg_fns = ([self.transport_id]
+                   + [self._transport_fn_id(reaction, m) for m in metabolites])
+        return build_aggregate(self.transport_aggregate_id(reaction), agg_fns)

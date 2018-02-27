@@ -102,20 +102,25 @@ class ModelBuilder(object):
 
         """
         parameters = rba.xml.RbaParameters()
-        self._append_parameters(parameters, *self._density_parameters())
-        self._append_parameters(parameters, *self._protein_parameters())
-        self._append_parameters(parameters, *self._process_parameters())
-        self._append_parameters(parameters, *self._target_parameters())
-        self._append_parameters(parameters, *self._efficiency_parameters())
+        self._append_functions(parameters, self._density_functions())
+        self._append_aggregates(parameters, self._density_aggregates())
+        self._append_functions(parameters, self._protein_functions())
+        self._append_functions(parameters, self._process_functions())
+        self._append_aggregates(parameters, self._process_aggregates())
+        self._append_functions(parameters, self._target_functions())
+        self._append_functions(parameters, self._efficiency_functions())
+        self._append_aggregates(parameters, self._efficiency_aggregates())
         return parameters
 
-    def _append_parameters(self, parameters, fns, aggs):
+    def _append_functions(self, parameters, fns):
         for fn in fns:
             parameters.functions.append(fn)
+
+    def _append_aggregates(self, parameters, aggs):
         for agg in aggs:
             parameters.aggregates.append(agg)
 
-    def _density_parameters(self):
+    def _density_functions(self):
         cytoplasm = self.data.compartment('Cytoplasm')
         external = self.data.compartment('Secreted')
         other_cpt = self.data.compartments()
@@ -125,17 +130,28 @@ class ModelBuilder(object):
             cytoplasm, external, other_cpt
             )
 
-    def _protein_parameters(self):
-        fns = [self.default.parameters.inverse_average_protein_length(
+    def _density_aggregates(self):
+        cytoplasm = self.data.compartment('Cytoplasm')
+        external = self.data.compartment('Secreted')
+        other_cpt = self.data.compartments()
+        other_cpt.remove(cytoplasm)
+        other_cpt.remove(external)
+        return self.default.parameters.density_aggregates(
+            cytoplasm, external, other_cpt
+            )
+
+    def _protein_functions(self):
+        return [self.default.parameters.inverse_average_protein_length(
                    sum(self.data.average_protein().values())
                    )]
-        aggs = []
-        return fns, aggs
 
-    def _process_parameters(self):
+    def _process_functions(self):
         return self.default.parameters.process_functions()
 
-    def _target_parameters(self):
+    def _process_aggregates(self):
+        return self.default.parameters.process_aggregates()
+
+    def _target_functions(self):
         fns = [self.default.parameters.metabolite_concentration_function(
                    id_, conc
                    ) for id_, conc in self.data.macrocomponents.items()]
@@ -146,25 +162,29 @@ class ModelBuilder(object):
                         metabolite.sbml_id, metabolite.concentration
                         )
                     )
-        aggs = []
-        return fns, aggs
+        return fns
 
-    def _efficiency_parameters(self):
+    def _efficiency_functions(self):
         fns = []
-        aggs = []
         # base enzymatic activity
         fns.append(self.default.activity.efficiency_function())
         fns.append(self.default.activity.transport_function())
         # transport functions and aggregates
-        reaction_ids = [r.id for r in self.data.sbml_reactions()]
-        for reaction in reaction_ids:
+        for reaction in (r.id for r in self.data.sbml_reactions()):
             if self.data.has_membrane_enzyme(reaction):
-                r_fns, r_agg = self.default.activity.transport_aggregate(
+                fns += self.default.activity.transport_functions(
                     reaction, self.data.imported_metabolites(reaction)
                     )
-                fns += r_fns
-                aggs.append(r_agg)
-        return fns, aggs
+        return fns
+
+    def _efficiency_aggregates(self):
+        aggs = []
+        for reaction in (r.id for r in self.data.sbml_reactions()):
+            if self.data.has_membrane_enzyme(reaction):
+                aggs.append(self.default.activity.transport_aggregate(
+                    reaction, self.data.imported_metabolites(reaction)
+                    ))
+        return aggs
 
     def build_proteins(self):
         """
