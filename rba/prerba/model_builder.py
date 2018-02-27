@@ -322,40 +322,57 @@ class ModelBuilder(object):
 
         """
         processes = rba.xml.RbaProcesses()
+        for p in self._all_processes():
+            processes.processes.append(p)
+        for m in self._all_component_maps():
+            processes.processing_maps.append(m)
+        return processes
+
+    def _all_processes(self):
         def_proc = DefaultProcesses(self.default, self.data.metabolite_map)
-        # gather macromolecule ids
+        proteins = self._all_protein_ids()
+        rnas = self._all_rna_ids()
+        dnas = self._all_dna_ids()
+        result = [
+            def_proc.translation(self.data.ribosome.composition(), proteins),
+            def_proc.folding(self.data.chaperone.composition(), proteins),
+            def_proc.transcription(rnas),
+            def_proc.replication(dnas),
+            def_proc.rna_degradation(rnas)
+        ]
+        # !!! Useless processes added because test model runs faster
+        # with these empty processes
+        result += [rba.xml.Process('test_process_{}'.format(i), 'Test process')
+                   for i in range(3)]
+        return result
+
+    def _all_protein_ids(self):
         proteins = list(self.data.enzymatic_proteins.keys())
         proteins += [self.data.average_protein_id(c)
                      for c in self.data.compartments()]
-        rnas = list(self.data.rna_data.keys())
-        rnas.append(self.default.metabolites.mrna)
-        dnas = [self.default.metabolites.dna]
         proteins += self.data.ribosome.protein_ids()
         proteins += self.data.chaperone.protein_ids()
+        return proteins
+
+    def _all_rna_ids(self):
+        rnas = list(self.data.rna_data.keys())
+        rnas.append(self.default.metabolites.mrna)
         rnas += self.data.ribosome.rna_ids()
         rnas += self.data.chaperone.rna_ids()
-        # processes
-        proc_list = processes.processes
-        proc_list.append(def_proc.translation(
-            self.data.ribosome.composition(), proteins
-            ))
-        proc_list.append(def_proc.folding(
-            self.data.chaperone.composition(), proteins
-            ))
-        proc_list.append(def_proc.transcription(rnas))
-        proc_list.append(def_proc.replication(dnas))
-        proc_list.append(def_proc.rna_degradation(rnas))
-        for i in range(3):
-            name = 'test_process_{}'.format(i)
-            proc_list.append(rba.xml.Process(name, name))
-        # component maps
-        map_list = processes.processing_maps
-        map_list.append(def_proc.translation_map(self.data.cofactors()))
-        map_list.append(def_proc.folding_map())
-        map_list.append(def_proc.transcription_map())
-        map_list.append(def_proc.rna_degradation_map())
-        map_list.append(def_proc.replication_map())
-        return processes
+        return rnas
+
+    def _all_dna_ids(self):
+        return [self.default.metabolites.dna]
+
+    def _all_component_maps(self):
+        def_proc = DefaultProcesses(self.default, self.data.metabolite_map)
+        return [
+            def_proc.translation_map(self.data.cofactors()),
+            def_proc.folding_map(),
+            def_proc.transcription_map(),
+            def_proc.rna_degradation_map(),
+            def_proc.replication_map()
+        ]
 
     def build_targets(self):
         """
@@ -368,16 +385,21 @@ class ModelBuilder(object):
 
         """
         targets = rba.xml.RbaTargets()
-        def_targ = DefaultTargets(self.default, self.data.metabolite_map)
-        targ_list = targets.target_groups
-        targ_list.append(def_targ.translation(self.data.compartments()))
-        targ_list.append(def_targ.transcription())
-        targ_list.append(def_targ.replication())
-        targ_list.append(def_targ.rna_degradation())
-        targ_list.append(def_targ.metabolite_production())
-        targ_list.append(def_targ.macrocomponents(self.data.macrocomponents))
-        targ_list.append(def_targ.maintenance_atp(self.default.atpm_reaction))
+        for t in self._all_targets():
+            targets.target_groups.append(t)
         return targets
+
+    def _all_targets(self):
+        def_targ = DefaultTargets(self.default, self.data.metabolite_map)
+        return [
+            def_targ.translation(self.data.compartments()),
+            def_targ.transcription(),
+            def_targ.replication(),
+            def_targ.rna_degradation(),
+            def_targ.metabolite_production(),
+            def_targ.macrocomponents(self.data.macrocomponents),
+            def_targ.maintenance_atp(self.default.atpm_reaction)
+        ]
 
     def build_medium(self):
         # !!! we identify metabolites by their prefix !!!
