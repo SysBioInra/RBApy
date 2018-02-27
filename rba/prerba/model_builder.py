@@ -176,43 +176,33 @@ class ModelBuilder(object):
             RBA protein model in XML format.
 
         """
-        proteins = rba.xml.RbaMacromolecules()
+        builder = MacromoleculeBuilder()
         # components
         for aa in self.default.metabolites.aas:
-            self._add_component(proteins, aa, '', 'amino_acid', 1)
+            builder.add_component(aa, '', 'amino_acid', 1)
         for c in self.data.cofactors():
-            self._add_component(proteins, c.chebi, c.name, 'cofactor', 0)
+            builder.add_component(c.chebi, c.name, 'cofactor', 0)
         # enzymatic proteins
         for gene_name, protein in self.data.enzymatic_proteins.items():
-            self._add_macromolecule(proteins, gene_name, protein.location,
-                                    self._protein_composition(protein))
+            builder.add_macromolecule(gene_name, protein.location,
+                                      self._protein_composition(protein))
         # average proteins
         for comp in self.data.compartments():
-            self._add_macromolecule(
-                proteins, self.data.average_protein_id(comp),
-                comp, self.data.average_protein()
-                )
+            builder.add_macromolecule(self.data.average_protein_id(comp),
+                                      comp, self.data.average_protein())
         # machinery proteins
         cytoplasm = self.data.compartment('Cytoplasm')
         for prot in itertools.chain(self.data.ribosome.proteins,
                                     self.data.chaperone.proteins):
-            self._add_macromolecule(proteins, prot.id, cytoplasm,
-                                    self.data.aa_composition(prot.sequence))
-        return proteins
-
-    def _add_component(self, set_, id_, name, type_, stoichio):
-        set_.components.append(rba.xml.Component(id_, name, type_, stoichio))
+            builder.add_macromolecule(prot.id, cytoplasm,
+                                      self.data.aa_composition(prot.sequence))
+        return builder.result
 
     def _protein_composition(self, protein):
         comp = self.data.aa_composition(protein.sequence)
         for cofactor in protein.cofactors:
             comp[cofactor.chebi] = cofactor.stoichiometry
         return comp
-
-    def _add_macromolecule(self, set_, id_, location, composition):
-        set_.macromolecules.append(
-            rba.xml.Macromolecule(id_, location, composition)
-            )
 
     def build_rnas(self):
         """
@@ -224,29 +214,26 @@ class ModelBuilder(object):
             RBA RNA model in XML format.
 
         """
-        rnas = rba.xml.RbaMacromolecules()
-        self._add_component(rnas, 'A', 'Adenosine residue',
-                            'Nucleotide', 2.9036)
-        self._add_component(rnas, 'C', 'Cytosine residue',
-                            'Nucleotide', 2.7017)
-        self._add_component(rnas, 'G', 'Guanine residue', 'Nucleotide', 3.0382)
-        self._add_component(rnas, 'U', 'Uramine residue', 'Nucleotide', 2.7102)
+        builder = MacromoleculeBuilder()
+        builder.add_component('A', 'Adenosine residue', 'Nucleotide', 2.9036)
+        builder.add_component('C', 'Cytosine residue', 'Nucleotide', 2.7017)
+        builder.add_component('G', 'Guanine residue', 'Nucleotide', 3.0382)
+        builder.add_component('U', 'Uramine residue', 'Nucleotide', 2.7102)
         # user rnas
         cytoplasm = self.data.compartment('Cytoplasm')
         for rna_id, composition in self.data.rna_data.items():
-            self._add_macromolecule(rnas, rna_id, cytoplasm, composition)
+            builder.add_macromolecule(rna_id, cytoplasm, composition)
         # average RNA
-        self._add_macromolecule(
-            rnas, self.default.metabolites.mrna, cytoplasm,
+        builder.add_macromolecule(
+            self.default.metabolites.mrna, cytoplasm,
             {'A': 0.2818, 'C': 0.2181, 'G': 0.2171, 'U': 0.283}
             )
         # machinery rnas
         for rna in itertools.chain(self.data.ribosome.rnas,
                                    self.data.chaperone.rnas):
-            self._add_macromolecule(
-                rnas, rna.id, cytoplasm, ntp_composition(rna.sequence)
-                )
-        return rnas
+            builder.add_macromolecule(rna.id, cytoplasm,
+                                      ntp_composition(rna.sequence))
+        return builder.result
 
     def build_dna(self):
         """
@@ -258,17 +245,16 @@ class ModelBuilder(object):
             RBA DNA model in XML format.
 
         """
-        dna = rba.xml.RbaMacromolecules()
-        self._add_component(dna, 'A', 'Adenosine residue', 'Nucleotide', 0)
-        self._add_component(dna, 'C', 'Cytosine residue', 'Nucleotide', 0)
-        self._add_component(dna, 'G', 'Guanine residue', 'Nucleotide', 0)
-        self._add_component(dna, 'T', 'Thymine residue', 'Nucleotide', 0)
-        self._add_macromolecule(
-            dna, self.default.metabolites.dna,
-            self.data.compartment('Cytoplasm'),
+        builder = MacromoleculeBuilder()
+        builder.add_component('A', 'Adenosine residue', 'Nucleotide', 0)
+        builder.add_component('C', 'Cytosine residue', 'Nucleotide', 0)
+        builder.add_component('G', 'Guanine residue', 'Nucleotide', 0)
+        builder.add_component('T', 'Thymine residue', 'Nucleotide', 0)
+        builder.add_macromolecule(
+            self.default.metabolites.dna, self.data.compartment('Cytoplasm'),
             {'A': 0.2818, 'C': 0.2181, 'G': 0.2171, 'T': 0.283}
             )
-        return dna
+        return builder.result
 
     def build_enzymes(self):
         """
@@ -387,3 +373,18 @@ class ModelBuilder(object):
 
     def export_proteins(self, filename):
         self.data.export_proteins(filename)
+
+
+class MacromoleculeBuilder(object):
+    def __init__(self):
+        self.result = rba.xml.RbaMacromolecules()
+
+    def add_component(self, id_, name, type_, stoichiometry):
+        self.result.components.append(
+            rba.xml.Component(id_, name, type_, stoichiometry)
+            )
+
+    def add_macromolecule(self, id_, location, composition):
+        self.result.macromolecules.append(
+            rba.xml.Macromolecule(id_, location, composition)
+            )
