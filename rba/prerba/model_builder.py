@@ -102,21 +102,16 @@ class ModelBuilder(object):
 
         """
         parameters = rba.xml.RbaParameters()
-        self._append_all_parameter_functions(parameters)
-        self._append_all_parameter_aggregates(parameters)
+        for fn in self._all_parameter_functions():
+            parameters.functions.append(fn)
+        for fn in self._all_parameter_aggregates():
+            parameters.aggregates.append(agg)
         return parameters
 
-    def _append_all_parameter_functions(self, parameters):
-        self._append_functions(parameters, self._density_functions())
-        self._append_functions(parameters, self._protein_functions())
-        self._append_functions(parameters,
-                               self.default.parameters.process_functions())
-        self._append_functions(parameters, self._target_functions())
-        self._append_functions(parameters, self._efficiency_functions())
-
-    def _append_functions(self, parameters, fns):
-        for fn in fns:
-            parameters.functions.append(fn)
+    def _all_parameter_functions(self):
+        return (self._density_functions() + self._protein_functions()
+                + self.default.parameters.process_functions()
+                + self._target_functions() + self._efficiency_functions())
 
     def _density_functions(self):
         return self.default.parameters.density_functions(
@@ -392,7 +387,7 @@ class ModelBuilder(object):
     def _all_targets(self):
         def_targ = DefaultTargets(self.default, self.data.metabolite_map)
         return [
-            def_targ.translation(self.data.compartments()),
+                def_targ.translation(self.data.compartments()),
             def_targ.transcription(),
             def_targ.replication(),
             def_targ.rna_degradation(),
