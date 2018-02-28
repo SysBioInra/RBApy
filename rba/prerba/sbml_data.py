@@ -48,13 +48,20 @@ class SbmlData(object):
             identifiers of external compartments in SBML file.
 
         """
-        # load SBML file
-        input_document = libsbml.readSBML(input_file)
-        if input_document.getNumErrors() > 0:
-            input_document.printErrors()
-            raise UserWarning('Invalid SBML.')
+        document = self._load_document(input_file)
+        self._initialize_species(document, external_ids)
+        self._initialize_reactions_and_enzymes(document)
+        self._initialize_external_metabolites(document)
+        self._initialize_transporter_information(document, cytosol_id)
 
-        # store metabolite info
+    def _load_document(self, input_file):
+        document = libsbml.readSBML(input_file)
+        if document.getNumErrors() > 0:
+            document.printErrors()
+            raise UserWarning('Invalid SBML.')
+        return document
+
+    def _initialize_species(self, input_document, external_ids):
         if external_ids is None:
             external_ids = []
         self.species = rba.xml.ListOfSpecies()
@@ -64,20 +71,16 @@ class SbmlData(object):
                 boundary = True
             self.species.append(rba.xml.Species(spec.getId(), boundary))
 
-        # extract enzymes associated to reactions
+    def _initialize_reactions_and_enzymes(self, input_document):
         reaction_list = extract_reactions(input_document)
         enzyme_list = extract_enzymes(input_document)
         self.reactions, self.enzymes \
             = duplicate_reactions_and_enzymes(reaction_list, enzyme_list)
 
-        # find external metabolites
+    def _initialize_external_metabolites(self, input_document):
         self._set_boundary_condition(input_document)
         self.external_metabolites = [m.id for m in self.species
                                      if m.boundary_condition]
-
-        # identify membrane and transport reactions
-        self.imported_metabolites = self._find_transport_reactions(cytosol_id)
-        self.has_membrane_enzyme = find_membrane_reactions(self.reactions)
 
     def _set_boundary_condition(self, input_document):
         """
@@ -112,6 +115,10 @@ class SbmlData(object):
                            .getSpecies(metabolite.id).compartment)
             if compartment in external_compartments:
                 metabolite.boundary_condition = True
+
+    def _initialize_transporter_information(self, input_document, cytosol_id):
+        self.imported_metabolites = self._find_transport_reactions(cytosol_id)
+        self.has_membrane_enzyme = find_membrane_reactions(self.reactions)
 
     def _find_transport_reactions(self, cytosol_id):
         """
