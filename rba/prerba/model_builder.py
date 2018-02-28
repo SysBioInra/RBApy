@@ -12,6 +12,7 @@ from rba import RbaModel
 from rba.prerba.user_data import UserData
 from rba.prerba.default_data import DefaultData
 from rba.prerba.user_data import ntp_composition
+from rba.prerba.enzyme import Enzyme
 from rba.prerba.default_processes import DefaultProcesses
 from rba.prerba.default_targets import DefaultTargets
 import rba.xml
@@ -271,29 +272,13 @@ class ModelBuilder(object):
 
         """
         enzymes = rba.xml.RbaEnzymes()
-        for e in self._sbml_enzymes():
+        for e in self.data.sbml_enzymes():
             enzymes.enzymes.append(self._build_enzyme(e))
         # enzyme corresponding to maintenance ATP reaction
         enzymes.enzymes.append(self._build_enzyme(
             Enzyme(self.default.atpm_reaction, [], False)
             ))
         return enzymes
-
-    def _sbml_enzymes(self):
-        result = []
-        for r_id, comp in zip((r.id for r in self.data.sbml_reactions()),
-                              self.data.enzyme_composition()):
-            result.append(Enzyme(r_id, self._build_enzyme_composition(comp),
-                                 self.data.is_transport_reaction(r_id)))
-        return result
-
-    def _build_enzyme_composition(self, composition):
-        result = []
-        for gene in composition:
-            ref = self.data.protein_reference.get(gene, None)
-            if ref:
-                result.append(ref)
-        return result
 
     def _build_enzyme(self, enzyme):
         xml_enzyme = rba.xml.Enzyme(enzyme.reaction + '_enzyme',
@@ -386,7 +371,7 @@ class ModelBuilder(object):
     def _all_targets(self):
         def_targ = DefaultTargets(self.default, self.data.metabolite_map)
         return [
-            def_targ.translation(self.data.compartments()),
+                def_targ.translation(self.data.compartments()),
             def_targ.transcription(),
             def_targ.replication(),
             def_targ.rna_degradation(),
@@ -420,19 +405,3 @@ class MacromoleculeBuilder(object):
         self.result.macromolecules.append(
             rba.xml.Macromolecule(id_, location, composition)
             )
-
-
-class Enzyme(object):
-    def __init__(self, reaction, composition, is_transporter):
-        self.reaction = reaction
-        self.composition = composition
-        self._is_transporter = is_transporter
-        self._initialize_efficiencies()
-
-    def _initialize_efficiencies(self):
-        def_activities = DefaultData().activity
-        if self._is_transporter:
-            self.forward = def_activities.transport_aggregate_id(self.reaction)
-            self.backward = def_activities.transport_id
-        else:
-            self.forward = self.backward = def_activities.efficiency_id

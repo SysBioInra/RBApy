@@ -15,6 +15,7 @@ from rba.prerba.uniprot_importer import UniprotImporter
 from rba.prerba.manual_annotation import (
     CuratedMetabolites, CuratedMacrocomponents
     )
+from rba.prerba.enzyme import Enzyme
 from rba.prerba.user_machinery import UserMachinery
 from rba.prerba.fasta_parser import parse_rba_fasta
 from rba.prerba import protein_export
@@ -61,16 +62,16 @@ class UserData(object):
 
     def _initialize_gene_to_enzyme_mapping(self):
         self.enzymatic_proteins = {}
-        self.protein_reference = {}
+        self._protein_reference = {}
         for g in self._sbml_enzymatic_genes():
             protein, reference = self.protein_data.protein_and_reference(g)
             if protein:
                 self.enzymatic_proteins[g] = protein
-                self.protein_reference[g] = reference
+                self._protein_reference[g] = reference
             else:
                 # spontaneous reaction or unknown protein
                 if reference:
-                    self.protein_reference[g] = reference
+                    self._protein_reference[g] = reference
 
     def _sbml_enzymatic_genes(self):
         result = []
@@ -127,8 +128,8 @@ class UserData(object):
         return sum(self.average_protein().values())
 
     def transport_reaction_ids(self):
-        return (r.id for r in self.sbml_reactions()
-                if self.is_transport_reaction(r.id))
+        return (r.id for r in self.sbml_data.reactions
+                if self.sbml_data.has_membrane_enzyme[r.id])
 
     def metabolite_targets(self):
         result = [(m.sbml_id, m.concentration)
@@ -151,11 +152,21 @@ class UserData(object):
     def sbml_reactions(self):
         return self.sbml_data.reactions
 
-    def enzyme_composition(self):
-        return self.sbml_data.enzymes
+    def sbml_enzymes(self):
+        result = []
+        for r_id, comp in zip((r.id for r in self.sbml_data.reactions),
+                              self.sbml_data.enzymes):
+            result.append(Enzyme(r_id, self._build_enzyme_composition(comp),
+                                 self.sbml_data.has_membrane_enzyme[r_id]))
+        return result
 
-    def is_transport_reaction(self, reaction):
-        return self.sbml_data.has_membrane_enzyme[reaction]
+    def _build_enzyme_composition(self, composition):
+        result = []
+        for gene in composition:
+            ref = self._protein_reference.get(gene, None)
+            if ref:
+                result.append(ref)
+        return result
 
     def imported_metabolites(self, reaction):
         return self.sbml_data.imported_metabolites.get(reaction, [])
