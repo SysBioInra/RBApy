@@ -104,7 +104,7 @@ class ModelBuilder(object):
         parameters = rba.xml.RbaParameters()
         for fn in self._all_parameter_functions():
             parameters.functions.append(fn)
-        for fn in self._all_parameter_aggregates():
+        for agg in self._all_parameter_aggregates():
             parameters.aggregates.append(agg)
         return parameters
 
@@ -150,10 +150,9 @@ class ModelBuilder(object):
             )
         return fns
 
-    def _append_all_parameter_aggregates(self, parameters):
-        self._append_aggregates(parameters, self._density_aggregates())
-        self._append_aggregates(parameters, self._process_aggregates())
-        self._append_aggregates(parameters, self._efficiency_aggregates())
+    def _all_parameter_aggregates(self):
+        return (self._density_aggregates() + self._process_aggregates()
+                + self._efficiency_aggregates())
 
     def _append_aggregates(self, parameters, aggs):
         for agg in aggs:
@@ -272,39 +271,39 @@ class ModelBuilder(object):
 
         """
         enzymes = rba.xml.RbaEnzymes()
-        reaction_ids = (r.id for r in self.data.sbml_reactions())
-        for r_id, comp in zip(reaction_ids, self.data.enzyme_composition()):
-            enzymes.enzymes.append(self._build_user_enzyme(r_id, comp))
-        enzymes.enzymes.append(self._atpm_enzyme())
+        for e in self._sbml_enzymes():
+            enzymes.enzymes.append(self._build_enzyme(e))
+        # enzyme corresponding to maintenance ATP reaction
+        enzymes.enzymes.append(self._build_enzyme(
+            Enzyme(self.default.atpm_reaction, [], False)
+            ))
         return enzymes
 
-    def _build_user_enzyme(self, reaction, composition):
-        forward, backward = self._reaction_efficiencies(reaction)
-        enzyme = rba.xml.Enzyme(reaction + '_enzyme', reaction,
-                                forward, backward)
-        self._add_enzyme_machinery(enzyme, composition)
-        return enzyme
+    def _sbml_enzymes(self):
+        result = []
+        for r_id, comp in zip((r.id for r in self.data.sbml_reactions()),
+                              self.data.enzyme_composition()):
+            result.append(Enzyme(r_id, self._build_enzyme_composition(comp),
+                                 self.data.is_transport_reaction(r_id)))
+        return result
 
-    def _reaction_efficiencies(self, reaction):
-        if self.data.is_transport_reaction(reaction):
-            forward = self.default.activity.transport_aggregate_id(reaction)
-            backward = self.default.activity.transport_id
-        else:
-            forward = backward = self.default.activity.efficiency_id
-        return forward, backward
-
-    def _add_enzyme_machinery(self, enzyme, composition):
-        # machinery composition
-        reactants = enzyme.machinery_composition.reactants
+    def _build_enzyme_composition(self, composition):
+        result = []
         for gene in composition:
             ref = self.data.protein_reference.get(gene, None)
             if ref:
-                reactants.append(rba.xml.SpeciesReference(*ref))
+                result.append(ref)
+        return result
 
-    def _atpm_enzyme(self):
-        r_id = self.default.atpm_reaction
-        forward = backward = self.default.activity.efficiency_id
-        return rba.xml.Enzyme(r_id + '_enzyme', r_id, forward, backward)
+    def _build_enzyme(self, enzyme):
+        xml_enzyme = rba.xml.Enzyme(enzyme.reaction + '_enzyme',
+                                    enzyme.reaction, enzyme.forward,
+                                    enzyme.backward)
+        for ref in enzyme.composition:
+            xml_enzyme.machinery_composition.reactants.append(
+                rba.xml.SpeciesReference(*ref)
+            )
+        return xml_enzyme
 
     def build_processes(self):
         """
@@ -387,7 +386,7 @@ class ModelBuilder(object):
     def _all_targets(self):
         def_targ = DefaultTargets(self.default, self.data.metabolite_map)
         return [
-                def_targ.translation(self.data.compartments()),
+            def_targ.translation(self.data.compartments()),
             def_targ.transcription(),
             def_targ.replication(),
             def_targ.rna_degradation(),
@@ -421,3 +420,19 @@ class MacromoleculeBuilder(object):
         self.result.macromolecules.append(
             rba.xml.Macromolecule(id_, location, composition)
             )
+
+
+class Enzyme(object):
+    def __init__(self, reaction, composition, is_transporter):
+        self.reaction = reaction
+        self.composition = composition
+        self._is_transporter = is_transporter
+        self._initialize_efficiencies()
+
+    def _initialize_efficiencies(self):
+        def_activities = DefaultData().activity
+        if self._is_transporter:
+            self.forward = def_activities.transport_aggregate_id(self.reaction)
+            self.backward = def_activities.transport_id
+        else:
+            self.forward = self.backward = def_activities.efficiency_id
