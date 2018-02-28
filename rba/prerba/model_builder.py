@@ -371,7 +371,7 @@ class ModelBuilder(object):
     def _all_targets(self):
         def_targ = DefaultTargets(self.default, self.data.metabolite_map)
         return [
-                def_targ.translation(self.data.compartments()),
+            def_targ.translation(self.data.compartments()),
             def_targ.transcription(),
             def_targ.replication(),
             def_targ.rna_degradation(),

@@ -1,4 +1,4 @@
-"""Module defining SBMLFilter class."""
+"""Module defining SbmlData class."""
 
 # python 2/3 compatibility
 from __future__ import division, print_function, absolute_import
@@ -12,9 +12,9 @@ import libsbml
 import rba.xml
 
 
-class SBMLFilter(object):
+class SbmlData(object):
     """
-    Class used to filter RBA-relevant SBML data.
+    Class used to parse RBA-relevant SBML data.
 
     Attributes
     ----------

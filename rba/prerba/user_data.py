@@ -9,7 +9,7 @@ import os.path
 # local imports
 from rba.prerba.pipeline_parameters import PipelineParameters
 from rba.prerba.default_data import DefaultData
-from rba.prerba import sbml_filter
+from rba.prerba import sbml_data
 from rba.prerba.protein_data import ProteinData
 from rba.prerba.uniprot_importer import UniprotImporter
 from rba.prerba.manual_annotation import (
@@ -33,7 +33,7 @@ class UserData(object):
 
     def _import_sbml_data(self):
         print('Importing SBML data...')
-        self.sbml_data = sbml_filter.SBMLFilter(
+        self.sbml_data = sbml_data.SbmlData(
             self.input_path(self._parameters['SBML_FILE']),
             external_ids=self._external_ids()
             )
