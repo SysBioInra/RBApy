@@ -51,10 +51,7 @@ class SbmlData(object):
         self._initialize_species(model, external_ids)
         self.external_metabolites = [m.id for m in self.species
                                      if m.boundary_condition]
-        self._enzyme_comp = self._extract_enzyme_composition(model)
-        self.reactions = self._extract_reactions(model)
-        self._duplicate_reactions_with_multiple_enzymes()
-        self._initialize_enzymes(cytosol_id)
+        self._extract_reactions_and_enzymes(model, cytosol_id)
 
     def _load_document(self, input_file):
         document = libsbml.readSBML(input_file)
@@ -95,62 +92,62 @@ class SbmlData(object):
                 result.append(reaction.products[0].species)
         return set(result)
 
-    def _extract_enzyme_composition(self, model):
-        result = FbcAnnotationParser(model).parse_enzymes()
-        if not result:
-            result = CobraNoteParser(model).read_notes()
-        if not result:
-            print('Your SBML file does not contain fbc gene products nor uses '
-                  ' COBRA notes to define enzyme composition. '
-                  'Please comply with SBML'
-                  ' requirements defined in the README and rerun script.')
-            raise UserWarning('Invalid SBML.')
-        return result
-
-    def _extract_reactions(self, model):
-        result = rba.xml.ListOfReactions()
-        for reaction in model.reactions:
-            new_reaction = rba.xml.Reaction(reaction.id, reaction.reversible)
-            for reactant in reaction.reactants:
-                new_reaction.reactants.append(
-                    rba.xml.SpeciesReference(reactant.species,
-                                             reactant.stoichiometry)
-                )
-            for product in reaction.products:
-                new_reaction.products.append(
-                    rba.xml.SpeciesReference(product.species,
-                                             product.stoichiometry)
-                )
-            result.append(new_reaction)
-        return result
-
-    def _duplicate_reactions_with_multiple_enzymes(self):
-        new_enzymes = []
-        new_reactions = rba.xml.ListOfReactions()
-        for reaction, enzymes in zip(self.reactions, self._enzyme_comp):
-            suffix = 0
-            for enzyme in enzymes:
-                suffix += 1
-                r_clone = copy.copy(reaction)
-                if suffix > 1:
-                    r_clone.id += '_' + str(suffix)
-                new_enzymes.append(enzyme)
-                new_reactions.append(r_clone)
-        self.reactions = new_reactions
-        self._enzyme_comp = new_enzymes
-
-    def _initialize_enzymes(self, cytosol_id):
+    def _extract_reactions_and_enzymes(self, model, cytosol_id):
+        self.reactions = rba.xml.ListOfReactions()
         self.enzymes = []
-        external_prefixes = set(
+        ext_prefixes = set(
             self._prefix(m) for m in self.external_metabolites
         )
-        for r, c in zip(self.reactions, self._enzyme_comp):
-            enzyme = Enzyme(r.id, self._has_membrane_enzyme(r))
-            enzyme.gene_association = c
-            enzyme.imported_metabolites = self._imported_metabolites(
-                r, cytosol_id, external_prefixes
+        parser = self._create_enzyme_parser(model)
+        for reaction in model.reactions:
+            try:
+                enzymes = parser.enzyme_composition(reaction)
+            except UserWarning:
+                self._print_invalid_enzyme_notes()
+                raise UserWarning('Invalid SBML.')
+            # we create one reaction per associated enzyme
+            for suffix, enzyme in enumerate(enzymes):
+                id_ = reaction.id
+                if suffix > 0:
+                    id_ += '_' + str(suffix+1)
+                new_reaction = self._create_reaction(id_, reaction)
+                self.reactions.append(new_reaction)
+                self.enzymes.append(self._create_enzyme(
+                    new_reaction, enzyme, cytosol_id, ext_prefixes
+                ))
+
+    def _create_enzyme_parser(self, model):
+        if model.getPlugin('fbc'):
+            return FbcAnnotationParser(model.getPlugin('fbc'))
+        else:
+            return CobraNoteParser()
+
+    def _print_invalid_enzyme_notes(self):
+        print('Your SBML file does not contain fbc gene products nor uses '
+              ' COBRA notes to define enzyme composition for every '
+              'reaction. Please comply with SBML'
+              ' requirements defined in the README and rerun script.')
+
+    def _create_reaction(self, id_, reaction):
+        result = rba.xml.Reaction(id_, reaction.reversible)
+        for r in reaction.reactants:
+            result.reactants.append(
+                rba.xml.SpeciesReference(r.species, r.stoichiometry)
             )
-            self.enzymes.append(enzyme)
+        for p in reaction.products:
+            result.products.append(
+                rba.xml.SpeciesReference(p.species, p.stoichiometry)
+            )
+        return result
+
+    def _create_enzyme(self, reaction, composition, cytosol_id,
+                       external_prefixes):
+        enzyme = Enzyme(reaction.id, self._has_membrane_enzyme(reaction))
+        enzyme.gene_association = composition
+        enzyme.imported_metabolites = self._imported_metabolites(
+            reaction, cytosol_id, external_prefixes
+        )
+        return enzyme
 
     def _has_membrane_enzyme(self, reaction):
         compartments = [self._suffix(m.species)
@@ -198,22 +195,12 @@ class SbmlData(object):
 
 class FbcAnnotationParser(object):
     """Parse fbc annotation to gather enzyme compositions."""
-    def __init__(self, model):
-        self._model = model
-        self._fbc = model.getPlugin('fbc')
-
-    def parse_enzymes(self):
-        if not self._fbc:
-            return []
-        self._initialize_gene_id_to_name_map()
-        return [self._enzyme_composition(r) for r in self._model.reactions]
-
-    def _initialize_gene_id_to_name_map(self):
+    def __init__(self, fbc_model):
         self._gene_names = {}
-        for gene_product in self._fbc.getListOfGeneProducts():
+        for gene_product in fbc_model.getListOfGeneProducts():
             self._gene_names[gene_product.id] = gene_product.label
 
-    def _enzyme_composition(self, reaction):
+    def enzyme_composition(self, reaction):
         gp_association = reaction.getPlugin('fbc') \
                                  .getGeneProductAssociation()
         if gp_association:
@@ -246,21 +233,11 @@ class FbcAnnotationParser(object):
 
 
 class CobraNoteParser(object):
-    def __init__(self, model):
-        self._model = model
-
-    def read_notes(self):
-        reactions = self._model.reactions
+    def enzyme_composition(self, reaction):
         result = []
-        for reaction in self._model.reactions:
-            if not reaction.notes:
-                return []
-            result.append(self._parse_note(reaction.notes))
-        return result
-
-    def _parse_note(self, note):
-        result = []
-        for ga in self._gene_associations(note):
+        if not reaction.notes:
+            raise UserWarning('Missing enzyme annotation')
+        for ga in self._gene_associations(reaction.notes):
             composition = self._parse_gene_association(ga)
             if composition:
                 result.append(composition)
