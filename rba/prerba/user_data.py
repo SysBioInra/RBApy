@@ -127,8 +127,8 @@ class UserData(object):
     def average_protein_length(self):
         return sum(self.average_protein().values())
 
-    def transport_reaction_ids(self):
-        return self.sbml_data.transport_reaction_ids()
+    def transport_enzymes(self):
+        return (e for e in self.sbml_data.enzymes if e.is_transporter)
 
     def metabolite_targets(self):
         result = [(m.sbml_id, m.concentration)
@@ -152,7 +152,7 @@ class UserData(object):
         return self.sbml_data.reactions
 
     def sbml_enzymes(self):
-        result = self.sbml_data.enzymes()
+        result = self.sbml_data.enzymes
         for enzyme in result:
             enzyme.composition = self._build_enzyme_composition(
                 enzyme.gene_assocation
@@ -166,9 +166,6 @@ class UserData(object):
             if ref:
                 result.append(ref)
         return result
-
-    def imported_metabolites(self, reaction):
-        return self.sbml_data.imported_metabolites.get(reaction, [])
 
     def external_metabolites(self):
         return self.sbml_data.external_metabolites

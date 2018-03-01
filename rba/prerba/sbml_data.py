@@ -54,8 +54,10 @@ class SbmlData(object):
         self.enzyme_comp = self._extract_enzyme_composition(model)
         self.reactions = self._extract_reactions(model)
         self._duplicate_reactions_with_multiple_enzymes()
-        self._initialize_external_metabolites(model)
-        self._initialize_transporter_information(model, cytosol_id)
+        self._tag_external_metabolites(model)
+        self.external_metabolites = [m.id for m in self.species
+                                     if m.boundary_condition]
+        self._initialize_enzymes(cytosol_id)
 
     def _load_document(self, input_file):
         document = libsbml.readSBML(input_file)
@@ -118,11 +120,6 @@ class SbmlData(object):
         self.reactions = new_reactions
         self.enzyme_comp = new_enzymes
 
-    def _initialize_external_metabolites(self, model):
-        self._tag_external_metabolites(model)
-        self.external_metabolites = [m.id for m in self.species
-                                     if m.boundary_condition]
-
     def _tag_external_metabolites(self, model):
         """Find metabolites not already tagged as external."""
         external_compartments = self._identify_external_compartments(model)
@@ -155,15 +152,26 @@ class SbmlData(object):
                 result.append(reaction.products[0].species)
         return set(result)
 
-    def _initialize_transporter_information(self, model, cytosol_id):
-        self.imported_metabolites = self._imported_metabolites(
-            model, cytosol_id
+    def _initialize_enzymes(self, cytosol_id):
+        self.enzymes = []
+        external_prefixes = set(
+            self._prefix(m) for m in self.external_metabolites
         )
-        self._is_transporter = {
-            r.id: self._has_membrane_enzyme(r) for r in self.reactions
-        }
+        for r, c in zip(self.reactions, self.enzyme_comp):
+            enzyme = Enzyme(r.id, self._has_membrane_enzyme(r))
+            enzyme.gene_assocation = c
+            enzyme.imported_metabolites = self._imported_metabolites(
+                r, cytosol_id, external_prefixes
+            )
+            self.enzymes.append(enzyme)
 
-    def _imported_metabolites(self, model, cytosol_id):
+    def _has_membrane_enzyme(self, reaction):
+        compartments = [self._suffix(m.species)
+                        for m in itertools.chain(reaction.reactants,
+                                                 reaction.products)]
+        return any(c != compartments[0] for c in compartments[1:])
+
+    def _imported_metabolites(self, reaction, cytosol_id, external_prefixes):
         """
         Identify external metabolites imported into the cytosol.
 
@@ -174,18 +182,12 @@ class SbmlData(object):
         - they are not part of the cytosol.
         - one of the products is in the cytosol.
         """
-        external_prefixes = set(
-            self._prefix(m) for m in self.external_metabolites
-        )
-        result = {}
-        for reaction in self.reactions:
-            if self._has_cytosolic_product(reaction, cytosol_id):
-                transported = self._noncytosolic_external_reactants(
-                    reaction, cytosol_id, external_prefixes
-                )
-                if transported:
-                    result[reaction.id] = transported
-        return result
+        if self._has_cytosolic_product(reaction, cytosol_id):
+            return self._noncytosolic_external_reactants(
+                reaction, cytosol_id, external_prefixes
+            )
+        else:
+            return []
 
     def _prefix(self, metabolite_id):
         return metabolite_id.rsplit('_', 1)[0]
@@ -205,23 +207,6 @@ class SbmlData(object):
             if cpt != cytosol_id and prefix in external_prefixes:
                 result.append(reactant.species)
         return result
-
-    def _has_membrane_enzyme(self, reaction):
-        compartments = [self._suffix(m.species)
-                        for m in itertools.chain(reaction.reactants,
-                                                 reaction.products)]
-        return any(c != compartments[0] for c in compartments[1:])
-
-    def enzymes(self):
-        result = []
-        for r, c in zip(self.reactions, self.enzyme_comp):
-            enzyme = Enzyme(r.id, self._is_transporter[r.id])
-            enzyme.gene_assocation = c
-            result.append(enzyme)
-        return result
-
-    def transport_reaction_ids(self):
-        return (r.id for r in self.reactions if self._is_transporter[r.id])
 
 
 class FbcAnnotationParser(object):

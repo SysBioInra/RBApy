@@ -145,9 +145,9 @@ class ModelBuilder(object):
     def _efficiency_functions(self):
         fns = [self.default.activity.efficiency_function(),
                self.default.activity.transport_function()]
-        for r_id in self.data.transport_reaction_ids():
+        for e in self.data.transport_enzymes():
             fns += self.default.activity.transport_functions(
-                r_id, self.data.imported_metabolites(r_id)
+                e.reaction, e.imported_metabolites
             )
         return fns
 
@@ -169,9 +169,9 @@ class ModelBuilder(object):
 
     def _efficiency_aggregates(self):
         return [self.default.activity.transport_aggregate(
-                    r, self.data.imported_metabolites(r)
+                    e.reaction, e.imported_metabolites
                 )
-                for r in self.data.transport_reaction_ids()]
+                for e in self.data.transport_enzymes()]
 
     def build_proteins(self):
         """

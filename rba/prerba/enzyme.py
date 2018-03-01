@@ -13,12 +13,13 @@ class Enzyme(object):
         self.reaction = reaction
         self.gene_assocation = []
         self.composition = []
-        self._is_transporter = is_transporter
+        self.imported_metabolites = []
+        self.is_transporter = is_transporter
         self._initialize_efficiencies()
 
     def _initialize_efficiencies(self):
         def_activities = DefaultData().activity
-        if self._is_transporter:
+        if self.is_transporter:
             self.forward = def_activities.transport_aggregate_id(self.reaction)
             self.backward = def_activities.transport_id
         else:
