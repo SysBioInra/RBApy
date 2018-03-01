@@ -75,7 +75,7 @@ class UserData(object):
 
     def _sbml_enzymatic_genes(self):
         result = []
-        for enzyme in self.sbml_data.enzymes:
+        for enzyme in self.sbml_data.enzyme_comp:
             result += [g for g in enzyme if g != '']
         return list(set(result))
 
@@ -129,7 +129,7 @@ class UserData(object):
 
     def transport_reaction_ids(self):
         return (r.id for r in self.sbml_data.reactions
-                if self.sbml_data.has_membrane_enzyme[r.id])
+                if self.sbml_data.is_transporter[r.id])
 
     def metabolite_targets(self):
         result = [(m.sbml_id, m.concentration)
@@ -155,9 +155,9 @@ class UserData(object):
     def sbml_enzymes(self):
         result = []
         for r_id, comp in zip((r.id for r in self.sbml_data.reactions),
-                              self.sbml_data.enzymes):
+                              self.sbml_data.enzyme_comp):
             result.append(Enzyme(r_id, self._build_enzyme_composition(comp),
-                                 self.sbml_data.has_membrane_enzyme[r_id]))
+                                 self.sbml_data.is_transporter[r_id]))
         return result
 
     def _build_enzyme_composition(self, composition):

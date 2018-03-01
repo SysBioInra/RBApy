@@ -29,7 +29,7 @@ class SbmlData(object):
         SBML identifiers of external metabolites.
     imported_metabolites: list
         SBML identifiers of imported metabolites.
-    has_membrane_enzyme: dict
+    is_transporter: dict
         Keys are reaction ids and values booleans
         indicating whether reaction occurs in the membrane.
 
@@ -54,7 +54,9 @@ class SbmlData(object):
         document = self._load_document(input_file)
         model = document.model
         self._initialize_species(model, external_ids)
-        self._initialize_reactions_and_enzymes(model)
+        self.reactions = self._extract_reactions(model)
+        self.enzyme_comp = self._extract_enzyme_composition(model)
+        self._duplicate_reactions_with_multiple_enzymes()
         self._initialize_external_metabolites(model)
         self._initialize_transporter_information(model, cytosol_id)
 
@@ -75,14 +77,8 @@ class SbmlData(object):
                 boundary = True
             self.species.append(rba.xml.Species(spec.getId(), boundary))
 
-    def _initialize_reactions_and_enzymes(self, model):
-        reaction_list = self._extract_reactions(model)
-        enzyme_list = self._extract_enzymes(model)
-        self.reactions, self.enzymes \
-            = duplicate_reactions_and_enzymes(reaction_list, enzyme_list)
-
     def _extract_reactions(self, model):
-        reactions = rba.xml.ListOfReactions()
+        result = rba.xml.ListOfReactions()
         for reaction in model.reactions:
             new_reaction = rba.xml.Reaction(reaction.id, reaction.reversible)
             for reactant in reaction.reactants:
@@ -95,20 +91,35 @@ class SbmlData(object):
                     rba.xml.SpeciesReference(product.species,
                                              product.stoichiometry)
                 )
-            reactions.append(new_reaction)
-        return reactions
+            result.append(new_reaction)
+        return result
 
-    def _extract_enzymes(self, model):
-        enzymes = FbcAnnotationParser(model).parse_enzymes()
-        if not enzymes:
-            enzymes = CobraNoteParser(model).read_notes()
-        if not enzymes:
+    def _extract_enzyme_composition(self, model):
+        result = FbcAnnotationParser(model).parse_enzymes()
+        if not result:
+            result = CobraNoteParser(model).read_notes()
+        if not result:
             print('Your SBML file does not contain fbc gene products nor uses '
                   ' COBRA notes to define enzyme composition. '
                   'Please comply with SBML'
                   ' requirements defined in the README and rerun script.')
             raise UserWarning('Invalid SBML.')
-        return enzymes
+        return result
+
+    def _duplicate_reactions_with_multiple_enzymes(self):
+        new_enzymes = []
+        new_reactions = rba.xml.ListOfReactions()
+        for reaction, enzymes in zip(self.reactions, self.enzyme_comp):
+            suffix = 0
+            for enzyme in enzymes:
+                suffix += 1
+                r_clone = copy.copy(reaction)
+                if suffix > 1:
+                    r_clone.id += '_' + str(suffix)
+                new_enzymes.append(enzyme)
+                new_reactions.append(r_clone)
+        self.reactions = new_reactions
+        self.enzyme_comp = new_enzymes
 
     def _initialize_external_metabolites(self, model):
         self._tag_external_metabolites(model)
@@ -148,18 +159,22 @@ class SbmlData(object):
         return set(result)
 
     def _initialize_transporter_information(self, model, cytosol_id):
-        self.imported_metabolites = self._transport_reactions(
+        self.imported_metabolites = self._imported_metabolites(
             model, cytosol_id
         )
-        self.has_membrane_enzyme = find_membrane_reactions(self.reactions)
+        self.is_transporter = {
+            r.id: self._has_membrane_enzyme(r) for r in self.reactions
+        }
 
-    def _transport_reactions(self, model, cytosol_id):
+    def _imported_metabolites(self, model, cytosol_id):
         """
-        Identify all transport reactions in the SBML file.
+        Identify external metabolites imported into the cytosol.
 
         They meet the following conditions:
-        - one of the reactants has the same prefix (e.g. M_glc) as one of the
-        external metabolites. This product should not be in the cytosol.
+        - they are a reactant.
+        - they have the same prefix (e.g. M_glc) as one of the
+        external metabolites.
+        - they are not part of the cytosol.
         - one of the products is in the cytosol.
         """
         external_prefixes = set(
@@ -194,72 +209,11 @@ class SbmlData(object):
                 result.append(reactant.species)
         return result
 
-
-def duplicate_reactions_and_enzymes(reaction_list, enzyme_list):
-    """
-    Duplicate reactions catalyzed by several enzymes.
-
-    Parameters
-    ----------
-    reactions: rba.xml.ListOfReactions
-        List of reactions.
-
-    enzymes: list of lists of lists
-        List of same length as reactions. Every reaction should be represented
-        as the list of enzyme that catalyzes it. Every enzyme should be
-        reprensented as the list of proteins that compose it.
-
-    Returns
-    -------
-    (reactions, enzymes) couple with
-    reactions: rba.xml.ListOfReactions
-        Updated list of reactions where reactions with multiple enzymes have
-        been duplicated.
-    enzymes: list of lists
-        Updated list of enzymes. Now every reaction is represented by exactly
-        one enzyme.
-
-    """
-    enzymes = []
-    reactions = rba.xml.ListOfReactions()
-    for reaction, reaction_enzymes in zip(reaction_list, enzyme_list):
-        # duplicate reactions having multiple enzymes
-        suffix = 0
-        for enzyme in reaction_enzymes:
-            suffix += 1
-            clone = copy.copy(reaction)
-            if suffix > 1:
-                clone.id += '_' + str(suffix)
-            enzymes.append(enzyme)
-            reactions.append(clone)
-    return reactions, enzymes
-
-
-def find_membrane_reactions(reactions):
-    """
-    Identify reactions with membrane enzymes.
-
-    Parameters
-    ----------
-    reactions: rba.xml.ListOfReactions
-        List of reactions.
-
-    Returns
-    -------
-    dict
-        Dictionary where keys are reactions. Value associated to key
-        is true if enzyme associated to reaction is a membrane enzyme,
-        false otherwise.
-
-    """
-    result = {}
-    for reaction in reactions:
-        compartments = [m.species.rsplit('_', 1)[1]
+    def _has_membrane_enzyme(self, reaction):
+        compartments = [self._suffix(m.species)
                         for m in itertools.chain(reaction.reactants,
                                                  reaction.products)]
-        result[reaction.id] \
-            = any(c != compartments[0] for c in compartments[1:])
-    return result
+        return any(c != compartments[0] for c in compartments[1:])
 
 
 class FbcAnnotationParser(object):
