@@ -81,11 +81,9 @@ class SbmlData(object):
             = duplicate_reactions_and_enzymes(reaction_list, enzyme_list)
 
     def _extract_enzymes(self, model):
-        fbc_parser = FbcAnnotationParser(model)
-        if fbc_parser.is_fbc_available():
-            enzymes = fbc_parser.parse_enzymes()
-        else:
-            enzymes = read_notes(model)
+        enzymes = FbcAnnotationParser(model).parse_enzymes()
+        if not enzymes:
+            enzymes = CobraNoteParser(model).read_notes()
         if not enzymes:
             print('Your SBML file does not contain fbc gene products nor uses '
                   'notes to define enzyme composition. Please comply with SBML'
@@ -330,53 +328,15 @@ def find_membrane_reactions(reactions):
     return result
 
 
-def read_notes(model):
-    """
-    Parse old-fashioned notes containing enzyme components.
-
-    Parameters
-    ----------
-    model: SBML document
-        Valid SBML document.
-
-    Returns
-    -------
-    list of lists of lists
-        For every reaction in the model, return a list of enzymes that
-        catalyze this reaction. An enzyme is represented by a list of
-        proteins that composes it.
-
-    """
-    reactions = model.reactions
-    enzymes = []
-    for reaction in reactions:
-        notes = reaction.getNotes()
-        # check that a note is indeed available
-        if not notes:
-            return None
-        # fields may be encapsulated in a <html> tag (or equivalent)
-        if (notes.getNumChildren() == 1
-                and notes.getChild(0).getName() != "p"):
-            notes = notes.getChild(0)
-        for i in range(notes.getNumChildren()):
-            text = notes.getChild(i).getChild(0).toString()
-            enzyme_composition = read_gene_association(text)
-            if enzyme_composition:
-                enzymes.append(enzyme_composition)
-    return enzymes
-
-
 class FbcAnnotationParser(object):
     """Parse fbc annotation to gather enzyme compositions."""
     def __init__(self, model):
         self._model = model
         self._fbc = model.getPlugin('fbc')
 
-    def is_fbc_available(self):
-        return self._fbc
-
     def parse_enzymes(self):
-        assert(self.is_fbc_available())
+        if not self._fbc:
+            return []
         self._initialize_gene_id_to_name_map()
         return [self._enzyme_composition(r) for r in self._model.reactions]
 
@@ -426,40 +386,57 @@ class FbcAnnotationParser(object):
             raise UserWarning('Invalid SBML.')
 
 
-def read_gene_association(text):
-    """
-    Parse GENE_ASSOCIATION field from string representing a note field.
+class CobraNoteParser(object):
+    def __init__(self, model):
+        self._model = model
 
-    For this version, we assume that relations are always 'or's of 'and's.
+    def read_notes(self):
+        reactions = self._model.reactions
+        result = []
+        for reaction in self._model.reactions:
+            if not reaction.notes:
+                return []
+            result.append(self._parse_note(reaction.notes))
+        return result
 
-    Parameters
-    ----------
-    text: string
-        Note field containing GENE_ASSOCIATION.
+    def _parse_note(self, note):
+        result = []
+        for ga in self._gene_associations(note):
+            composition = self._parse_gene_association(ga)
+            if composition:
+                result.append(composition)
+        return result
 
-    Returns
-    -------
-    list of lists
-        List of enzymes extracted. Every enzyme is represented as a list of
-        protein identifiers.
+    def _gene_associations(self, note):
+        # fields may be encapsulated in a <html> tag (or equivalent)
+        note = self._remove_html_tag(note)
+        return (note.getChild(i).getChild(0).toString()
+                for i in range(notes.getNumChildren()))
 
-    """
-    tags = text.split(':', 1)
-    if len(tags) != 2:
-        print('Invalid note field: ' + text)
-        return None
-    if tags[0] != "GENE_ASSOCIATION":
-        return None
-    else:
-        enzyme_set = tags[1]
-        if len(enzyme_set) == 0:
-            return []
-        # field is not standard: we try to standardize a little.
-        # remove parentheses
-        enzyme_set = ''.join(c for c in enzyme_set if c not in '()')
-        # split enzymes
-        enzymes = enzyme_set.split(' or ')
-        compositions = []
-        for enzyme in enzymes:
-            compositions.append([e.strip() for e in enzyme.split(' and ')])
-        return compositions
+    def _remove_html_tag(self, note):
+        if (note.getNumChildren() == 1
+                and note.getChild(0).getName() != "p"):
+            return note.getChild(0)
+        return note
+
+    def _parse_gene_association(self, text):
+        """We assume that relations are always 'or's of 'and's."""
+        tags = text.split(':', 1)
+        if len(tags) != 2:
+            print('Invalid note field: ' + text)
+            return None
+        if tags[0] != "GENE_ASSOCIATION":
+            return None
+        else:
+            enzyme_set = tags[1]
+            if len(enzyme_set) == 0:
+                return []
+            # field is not standard: we try to standardize a little.
+            # remove parentheses
+            enzyme_set = ''.join(c for c in enzyme_set if c not in '()')
+            # split enzymes
+            enzymes = enzyme_set.split(' or ')
+            compositions = []
+            for enzyme in enzymes:
+                compositions.append([e.strip() for e in enzyme.split(' and ')])
+            return compositions
