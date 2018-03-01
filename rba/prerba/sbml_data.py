@@ -76,9 +76,22 @@ class SbmlData(object):
 
     def _initialize_reactions_and_enzymes(self, model):
         reaction_list = extract_reactions(model)
-        enzyme_list = extract_enzymes(model)
+        enzyme_list = self._extract_enzymes(model)
         self.reactions, self.enzymes \
             = duplicate_reactions_and_enzymes(reaction_list, enzyme_list)
+
+    def _extract_enzymes(self, model):
+        fbc_parser = FbcAnnotationParser(model)
+        if fbc_parser.is_fbc_available():
+            enzymes = fbc_parser.parse_enzymes()
+        else:
+            enzymes = read_notes(model)
+        if not enzymes:
+            print('Your SBML file does not contain fbc gene products nor uses '
+                  'notes to define enzyme composition. Please comply with SBML'
+                  ' requirements defined in the README and rerun script.')
+            raise UserWarning('Invalid SBML.')
+        return enzymes
 
     def _initialize_external_metabolites(self, model):
         self._tag_external_metabolites(model)
@@ -198,10 +211,10 @@ def duplicate_reactions_and_enzymes(reaction_list, enzyme_list):
 
     Parameters
     ----------
-    reaction_list: rba.xml.ListOfReactions
+    reactions: rba.xml.ListOfReactions
         List of reactions.
 
-    enzyme_list: list of lists of lists
+    enzymes: list of lists of lists
         List of same length as reactions. Every reaction should be represented
         as the list of enzyme that catalyzes it. Every enzyme should be
         reprensented as the list of proteins that compose it.
@@ -317,35 +330,6 @@ def find_membrane_reactions(reactions):
     return result
 
 
-def extract_enzymes(model):
-    """
-    Parse annotation containing enzyme components.
-
-    Parameters
-    ----------
-    model: SBML document
-        Valid SBML document.
-
-    Returns
-    -------
-    list of lists of lists
-        For every reaction in the model, return a list of enzymes that
-        catalyze this reaction. An enzyme is represented by a list of
-        proteins that composes it.
-
-    """
-    # try to read fbc notes, else read old-fashioned notes
-    enzymes = read_fbc_annotation(model)
-    if not enzymes:
-        enzymes = read_notes(model)
-    if not enzymes:
-        print('Your SBML file does not contain fbc gene products nor uses '
-              'notes to define enzyme composition. Please comply with SBML'
-              ' requirements defined in the README and rerun script.')
-        raise UserWarning('Invalid SBML.')
-    return enzymes
-
-
 def read_notes(model):
     """
     Parse old-fashioned notes containing enzyme components.
@@ -382,48 +366,64 @@ def read_notes(model):
     return enzymes
 
 
-def read_fbc_annotation(model):
-    """
-    Parse fbc annotation to gather enzyme compositions.
+class FbcAnnotationParser(object):
+    """Parse fbc annotation to gather enzyme compositions."""
+    def __init__(self, model):
+        self._model = model
+        self._fbc = model.getPlugin('fbc')
 
-    Parameters
-    ----------
-    model: SBML document
-        Valid SBML document.
+    def is_fbc_available(self):
+        return self._fbc
 
-    Returns
-    -------
-    list of lists of lists
-        For every reaction in the model, return a list of enzymes that
-        catalyze this reaction. An enzyme is represented by a list of
-        proteins that composes it.
+    def parse_enzymes(self):
+        assert(self.is_fbc_available())
+        self._initialize_gene_id_to_name_map()
+        return [self._enzyme_composition(r) for r in self._model.reactions]
 
-    """
-    # get fbc annotation (if available)
-    fbc = model.getPlugin('fbc')
-    if not fbc:
-        return None
+    def _initialize_gene_id_to_name_map(self):
+        self._gene_names = {}
+        for gene_product in self._fbc.getListOfGeneProducts():
+            self._gene_names[gene_product.id] = gene_product.label
 
-    # get gene id - gene name association
-    gene_names = {}
-    for gene_product in fbc.getListOfGeneProducts():
-        gene_names[gene_product.getId()] = gene_product.getLabel()
-
-    # gather enzyme composition
-    enzyme_list = []
-    reactions = model.reactions
-    for reaction in reactions:
-        # get fbc:geneProductAssociation
+    def _enzyme_composition(self, reaction):
         gp_association = reaction.getPlugin('fbc') \
                                  .getGeneProductAssociation()
         if gp_association:
-            enzymes = read_fbc_association(gp_association, gene_names)
+            return self._read_fbc_association(gp_association)
         else:
-            # no gene association: we assume this reaction is
-            # spontaneous
-            enzymes = [[]]
-        enzyme_list.append(enzymes)
-    return enzyme_list
+            return [[]]
+
+    def _read_fbc_association(self, gp_association):
+        """We assume that relations are always 'or's of 'and's."""
+        association = gp_association.getAssociation()
+        if association.isGeneProductRef():
+            gene_id = association.getGeneProduct()
+            return [[self._gene_names[gene_id]]]
+        elif association.isFbcOr():
+            return [self._read_fbc_association_components(a)
+                    for a in association.getListOfAssociations()]
+        elif association.isFbcAnd():
+            result = []
+            for assoc in association.getListOfAssociations():
+                result += self._read_fbc_association_components(assoc)
+            return [result]
+        else:
+            print('Invalid association.')
+            raise UserWarning('Invalid SBML.')
+
+    def _read_fbc_association_components(self, association):
+        """We assume that relations are always 'and's."""
+        if association.isGeneProductRef():
+            gene_id = association.getGeneProduct()
+            return [self._gene_names[gene_id]]
+        elif association.isFbcAnd():
+            result = []
+            for assoc in association.getListOfAssociations():
+                result += self._read_fbc_association_components(assoc)
+            return result
+        else:
+            print('Invalid association (we only support ors of ands)')
+            raise UserWarning('Invalid SBML.')
 
 
 def read_gene_association(text):
@@ -463,78 +463,3 @@ def read_gene_association(text):
         for enzyme in enzymes:
             compositions.append([e.strip() for e in enzyme.split(' and ')])
         return compositions
-
-
-def read_fbc_association(gp_association, gene_names=None):
-    """
-    Parse fbc:geneProductAssociation.
-
-    For this version, we assume that relations are always 'or's of 'and's.
-
-    Parameters
-    ----------
-    gp_association: fbc:geneProductAssociation object
-        association to parse.
-    gene_names: dict
-        dictionary used to replace gene ids by their name.
-
-    Returns
-    -------
-    list of lists
-        List of enzymes extracted. Every enzyme is represented as a list of
-        gene identifiers.
-
-    """
-    association = gp_association.getAssociation()
-    if association.isGeneProductRef():
-        gene_id = association.getGeneProduct()
-        if gene_names:
-            return [[gene_names[gene_id]]]
-        else:
-            return [[gene_id]]
-    elif association.isFbcOr():
-        return [read_fbc_association_components(a, gene_names)
-                for a in association.getListOfAssociations()]
-    elif association.isFbcAnd():
-        result = []
-        for assoc in association.getListOfAssociations():
-            result += read_fbc_association_components(assoc, gene_names)
-        return [result]
-    else:
-        print('Invalid association.')
-        raise UserWarning('Invalid SBML.')
-
-
-def read_fbc_association_components(association, gene_names=None):
-    """
-    Parse fbc:Association and return the list of gene names it contains.
-
-    For this version, we assume that relations are always 'and's.
-
-    Parameters
-    ----------
-    association: fbc:Assocation object
-        association to parse.
-    gene_names: object
-        dictionary used to replace gene ids by their name.
-
-    Returns
-    -------
-    list
-        List of gene names.
-
-    """
-    if association.isGeneProductRef():
-        gene_id = association.getGeneProduct()
-        if gene_names:
-            return [gene_names[gene_id]]
-        else:
-            return [gene_id]
-    elif association.isFbcAnd():
-        result = []
-        for assoc in association.getListOfAssociations():
-            result += read_fbc_association_components(assoc, gene_names)
-        return result
-    else:
-        print('Invalid association (we only support ors of ands)')
-        raise UserWarning('Invalid SBML.')
