@@ -48,11 +48,14 @@ class SbmlData(object):
             identifiers of external compartments in SBML file.
 
         """
+        # WARNING: not storing document in a variable will result
+        # in segmentation fault!
         document = self._load_document(input_file)
-        self._initialize_species(document, external_ids)
-        self._initialize_reactions_and_enzymes(document)
-        self._initialize_external_metabolites(document)
-        self._initialize_transporter_information(document, cytosol_id)
+        model = document.model
+        self._initialize_species(model, external_ids)
+        self._initialize_reactions_and_enzymes(model)
+        self._initialize_external_metabolites(model)
+        self._initialize_transporter_information(model, cytosol_id)
 
     def _load_document(self, input_file):
         document = libsbml.readSBML(input_file)
@@ -61,103 +64,110 @@ class SbmlData(object):
             raise UserWarning('Invalid SBML.')
         return document
 
-    def _initialize_species(self, input_document, external_ids):
+    def _initialize_species(self, model, external_ids):
         if external_ids is None:
             external_ids = []
         self.species = rba.xml.ListOfSpecies()
-        for spec in input_document.getModel().species:
+        for spec in model.species:
             boundary = spec.getBoundaryCondition()
             if spec.getCompartment() in external_ids:
                 boundary = True
             self.species.append(rba.xml.Species(spec.getId(), boundary))
 
-    def _initialize_reactions_and_enzymes(self, input_document):
-        reaction_list = extract_reactions(input_document)
-        enzyme_list = extract_enzymes(input_document)
+    def _initialize_reactions_and_enzymes(self, model):
+        reaction_list = extract_reactions(model)
+        enzyme_list = extract_enzymes(model)
         self.reactions, self.enzymes \
             = duplicate_reactions_and_enzymes(reaction_list, enzyme_list)
 
-    def _initialize_external_metabolites(self, input_document):
-        self._set_boundary_condition(input_document)
+    def _initialize_external_metabolites(self, model):
+        self._tag_external_metabolites(model)
         self.external_metabolites = [m.id for m in self.species
                                      if m.boundary_condition]
 
-    def _set_boundary_condition(self, input_document):
-        """
-        Go through reactions and identify external metabolites.
+    def _tag_external_metabolites(self, model):
+        """Find metabolites not already tagged as external."""
+        external_compartments = self._identify_external_compartments(model)
+        for metabolite in self.species:
+            compartment = model.getSpecies(metabolite.id).compartment
+            if compartment in external_compartments:
+                metabolite.boundary_condition = True
 
-        We try to find metabolites whose boundaryCondition is not already set.
+    def _identify_external_compartments(self, model):
+        """
         External metabolites must meet the following conditions:
          (i) they participate in a sink/production reaction.
          (ii) all metabolites of their compartment meet condition (i).
         """
-        # identify species participating in a sink reaction
-        sink_species = []
-        for reaction in input_document.getModel().reactions:
-            if len(reaction.reactants) + len(reaction.products) > 1:
-                continue
-            if len(reaction.reactants) == 1:
-                sink_species.append(reaction.reactants[0].getSpecies())
-            else:
-                sink_species.append(reaction.products[0].getSpecies())
-        # find external compartments
-        external_compartments \
-            = [c.getId() for c in input_document.getModel().compartments]
-        for metabolite in input_document.getModel().species:
-            if metabolite.getId() not in sink_species:
-                try:
-                    external_compartments.remove(metabolite.getCompartment())
-                except ValueError:
-                    pass
-        # tag all metabolites belonging to external compartments as boundary
-        for metabolite in self.species:
-            compartment = (input_document.getModel()
-                           .getSpecies(metabolite.id).compartment)
-            if compartment in external_compartments:
-                metabolite.boundary_condition = True
+        sink_species = self._sink_species(model.reactions)
+        result = set(c.id for c in model.compartments)
+        for metabolite in model.species:
+            if metabolite.id not in sink_species:
+                result.discard(metabolite.compartment)
+        return result
 
-    def _initialize_transporter_information(self, input_document, cytosol_id):
-        self.imported_metabolites = self._find_transport_reactions(cytosol_id)
+    def _sink_species(self, reactions):
+        result = []
+        for reaction in reactions:
+            if (len(reaction.reactants) == 1 and
+                    len(reaction.products) == 0):
+                result.append(reaction.reactants[0].species)
+            elif (len(reaction.products) == 1 and
+                    len(reaction.reactants) == 0):
+                result.append(reaction.products[0].species)
+        return set(result)
+
+    def _initialize_transporter_information(self, model, cytosol_id):
+        self.imported_metabolites = self._transport_reactions(
+            model, cytosol_id
+        )
         self.has_membrane_enzyme = find_membrane_reactions(self.reactions)
 
-    def _find_transport_reactions(self, cytosol_id):
+    def _transport_reactions(self, model, cytosol_id):
         """
         Identify all transport reactions in the SBML file.
 
         They meet the following conditions:
-        - one of the products has the same prefix (e.g. M_glc) as one of the
+        - one of the reactants has the same prefix (e.g. M_glc) as one of the
         external metabolites. This product should not be in the cytosol.
-        - one of the reactants is in the cytosol.
+        - one of the products is in the cytosol.
         """
-        external_prefixes \
-            = [m.rsplit('_', 1)[0] for m in self.external_metabolites]
-        imported_metabolites = {}
+        external_prefixes = set(
+            self._prefix(m) for m in self.external_metabolites
+        )
+        result = {}
         for reaction in self.reactions:
-            transported = []
-            # check that one of the products is in the cytosol
-            comps = [p.species.rsplit('_', 1)[1] for p in reaction.products]
-            if all(comp != cytosol_id for comp in comps):
-                continue
-            # look if one of the reactant has the prefix of an external
-            # metabolite and is NOT in the cytosol
-            transported = []
-            for reactant in reaction.reactants:
-                [prefix, comp] = reactant.species.rsplit('_', 1)
-                if comp != cytosol_id and prefix in external_prefixes:
-                    transported.append(reactant.species)
-            if transported:
-                imported_metabolites[reaction.id] = transported
-        return imported_metabolites
+            if self._has_cytosolic_product(reaction, cytosol_id):
+                transported = self._noncytosolic_external_reactants(
+                    reaction, cytosol_id, external_prefixes
+                )
+                if transported:
+                    result[reaction.id] = transported
+        return result
+
+    def _prefix(self, metabolite_id):
+        return metabolite_id.rsplit('_', 1)[0]
+
+    def _has_cytosolic_product(self, reaction, cytosol_id):
+        return any(self._suffix(p.species) == cytosol_id
+                   for p in reaction.products)
+
+    def _suffix(self, metabolite_id):
+        return metabolite_id.rsplit('_', 1)[1]
+
+    def _noncytosolic_external_reactants(self, reaction, cytosol_id,
+                                         external_prefixes):
+        result = []
+        for reactant in reaction.reactants:
+            prefix, cpt = reactant.species.rsplit('_', 1)
+            if cpt != cytosol_id and prefix in external_prefixes:
+                result.append(reactant.species)
+        return result
 
 
-def extract_reactions(input_document):
+def extract_reactions(model):
     """
     Parse reactions.
-
-    Parameters
-    ----------
-    input_document: SBML document
-        Valid SBML document.
 
     Returns
     -------
@@ -166,18 +176,18 @@ def extract_reactions(input_document):
 
     """
     reactions = rba.xml.ListOfReactions()
-    for reaction in input_document.model.reactions:
-        # create reaction in RBA objects
-        new_reaction = rba.xml.Reaction(reaction.getId(),
-                                        reaction.getReversible())
+    for reaction in model.reactions:
+        new_reaction = rba.xml.Reaction(reaction.id, reaction.reversible)
         for reactant in reaction.reactants:
-            sr = rba.xml.SpeciesReference(reactant.getSpecies(),
-                                          reactant.getStoichiometry())
-            new_reaction.reactants.append(sr)
+            new_reaction.reactants.append(
+                rba.xml.SpeciesReference(reactant.species,
+                                         reactant.stoichiometry)
+            )
         for product in reaction.products:
-            sr = rba.xml.SpeciesReference(product.getSpecies(),
-                                          product.getStoichiometry())
-            new_reaction.products.append(sr)
+            new_reaction.products.append(
+                rba.xml.SpeciesReference(product.species,
+                                         product.stoichiometry)
+            )
         reactions.append(new_reaction)
     return reactions
 
@@ -307,13 +317,13 @@ def find_membrane_reactions(reactions):
     return result
 
 
-def extract_enzymes(input_document):
+def extract_enzymes(model):
     """
     Parse annotation containing enzyme components.
 
     Parameters
     ----------
-    input_document: SBML document
+    model: SBML document
         Valid SBML document.
 
     Returns
@@ -325,9 +335,9 @@ def extract_enzymes(input_document):
 
     """
     # try to read fbc notes, else read old-fashioned notes
-    enzymes = read_fbc_annotation(input_document)
+    enzymes = read_fbc_annotation(model)
     if not enzymes:
-        enzymes = read_notes(input_document)
+        enzymes = read_notes(model)
     if not enzymes:
         print('Your SBML file does not contain fbc gene products nor uses '
               'notes to define enzyme composition. Please comply with SBML'
@@ -336,13 +346,13 @@ def extract_enzymes(input_document):
     return enzymes
 
 
-def read_notes(input_document):
+def read_notes(model):
     """
     Parse old-fashioned notes containing enzyme components.
 
     Parameters
     ----------
-    input_document: SBML document
+    model: SBML document
         Valid SBML document.
 
     Returns
@@ -353,7 +363,7 @@ def read_notes(input_document):
         proteins that composes it.
 
     """
-    reactions = input_document.getModel().reactions
+    reactions = model.reactions
     enzymes = []
     for reaction in reactions:
         notes = reaction.getNotes()
@@ -372,13 +382,13 @@ def read_notes(input_document):
     return enzymes
 
 
-def read_fbc_annotation(input_document):
+def read_fbc_annotation(model):
     """
     Parse fbc annotation to gather enzyme compositions.
 
     Parameters
     ----------
-    input_document: SBML document
+    model: SBML document
         Valid SBML document.
 
     Returns
@@ -390,7 +400,7 @@ def read_fbc_annotation(input_document):
 
     """
     # get fbc annotation (if available)
-    fbc = input_document.getModel().getPlugin('fbc')
+    fbc = model.getPlugin('fbc')
     if not fbc:
         return None
 
@@ -401,7 +411,7 @@ def read_fbc_annotation(input_document):
 
     # gather enzyme composition
     enzyme_list = []
-    reactions = input_document.getModel().reactions
+    reactions = model.reactions
     for reaction in reactions:
         # get fbc:geneProductAssociation
         gp_association = reaction.getPlugin('fbc') \
