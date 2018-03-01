@@ -235,64 +235,6 @@ def duplicate_reactions_and_enzymes(reaction_list, enzyme_list):
     return reactions, enzymes
 
 
-def find_reaction_location(reaction):
-    """
-    Find reactions with reactants and products in a single compartment.
-
-    Parameters
-    ----------
-    reactions: rba.xml.Reaction
-        Reaction.
-
-    Returns
-    -------
-    str
-        Compartment containing reaction or empty string if reactants and
-        products were in more than one compartment.
-
-    """
-    compartments = [m.species.rsplit('_', 1)[1]
-                    for m in itertools.chain(reaction.reactants,
-                                             reaction.products)]
-    return all(c == compartments[0] for c in compartments[1:])
-
-
-def enzymatic_protein_location(enzyme_comp, reactions):
-    """
-    Guess location of enzymatic proteins.
-
-    For every protein we record the location of the reactions it catalyzes.
-    If locations match, we assume that the protein is contained
-    in this compartment.
-
-    Parameters
-    ----------
-    enzyme_comp: list of lists
-        List of enzymes where an enzyme is a list of protein ids.
-    reactions: rba.xml.ListOfReactions
-        List of reactions.
-
-    Returns
-    -------
-    dict
-        Dictionary containing locations predicted. Key are protein ids and
-        values are compartment names.
-
-    """
-    protein_location_list = {}
-    for enzyme_composition, reaction in zip(enzyme_comp, reactions):
-        location = sbml_filter.find_reaction_location(reaction)
-        if location:
-            for prot in enzyme_comp:
-                protein_location_list.setdefault(prot, []).append(location)
-    result = {}
-    for protein, location_list in protein_location_list:
-        if (len(location_list) == 1 or
-                all(loc == location_list[0] for loc in location_list[1:])):
-            result[protein] = location_list[0]
-    return result
-
-
 def find_membrane_reactions(reactions):
     """
     Identify reactions with membrane enzymes.
