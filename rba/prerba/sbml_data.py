@@ -150,7 +150,7 @@ class SbmlData(object):
         compartments = [self._suffix(m.species)
                         for m in itertools.chain(reaction.reactants,
                                                  reaction.products)]
-        return any(c != compartments[0] for c in compartments[1:])
+        return all(c == compartments[0] for c in compartments[1:])
 
     def _imported_metabolites(self, reaction, cytosol_id):
         """
