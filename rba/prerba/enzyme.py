@@ -11,6 +11,7 @@ from rba.prerba.default_data import DefaultData
 class Enzyme(object):
     def __init__(self, reaction, is_transporter):
         self.reaction = reaction
+        self.gene_assocation = []
         self.composition = []
         self._is_transporter = is_transporter
         self._initialize_efficiencies()

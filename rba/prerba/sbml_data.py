@@ -29,9 +29,6 @@ class SbmlData(object):
         SBML identifiers of external metabolites.
     imported_metabolites: list
         SBML identifiers of imported metabolites.
-    is_transporter: dict
-        Keys are reaction ids and values booleans
-        indicating whether reaction occurs in the membrane.
 
     """
 
@@ -54,8 +51,8 @@ class SbmlData(object):
         document = self._load_document(input_file)
         model = document.model
         self._initialize_species(model, external_ids)
-        self.reactions = self._extract_reactions(model)
         self.enzyme_comp = self._extract_enzyme_composition(model)
+        self.reactions = self._extract_reactions(model)
         self._duplicate_reactions_with_multiple_enzymes()
         self._initialize_external_metabolites(model)
         self._initialize_transporter_information(model, cytosol_id)
@@ -77,6 +74,18 @@ class SbmlData(object):
                 boundary = True
             self.species.append(rba.xml.Species(spec.getId(), boundary))
 
+    def _extract_enzyme_composition(self, model):
+        result = FbcAnnotationParser(model).parse_enzymes()
+        if not result:
+            result = CobraNoteParser(model).read_notes()
+        if not result:
+            print('Your SBML file does not contain fbc gene products nor uses '
+                  ' COBRA notes to define enzyme composition. '
+                  'Please comply with SBML'
+                  ' requirements defined in the README and rerun script.')
+            raise UserWarning('Invalid SBML.')
+        return result
+
     def _extract_reactions(self, model):
         result = rba.xml.ListOfReactions()
         for reaction in model.reactions:
@@ -92,18 +101,6 @@ class SbmlData(object):
                                              product.stoichiometry)
                 )
             result.append(new_reaction)
-        return result
-
-    def _extract_enzyme_composition(self, model):
-        result = FbcAnnotationParser(model).parse_enzymes()
-        if not result:
-            result = CobraNoteParser(model).read_notes()
-        if not result:
-            print('Your SBML file does not contain fbc gene products nor uses '
-                  ' COBRA notes to define enzyme composition. '
-                  'Please comply with SBML'
-                  ' requirements defined in the README and rerun script.')
-            raise UserWarning('Invalid SBML.')
         return result
 
     def _duplicate_reactions_with_multiple_enzymes(self):
@@ -162,7 +159,7 @@ class SbmlData(object):
         self.imported_metabolites = self._imported_metabolites(
             model, cytosol_id
         )
-        self.is_transporter = {
+        self._is_transporter = {
             r.id: self._has_membrane_enzyme(r) for r in self.reactions
         }
 
@@ -214,6 +211,17 @@ class SbmlData(object):
                         for m in itertools.chain(reaction.reactants,
                                                  reaction.products)]
         return any(c != compartments[0] for c in compartments[1:])
+
+    def enzymes(self):
+        result = []
+        for r, c in zip(self.reactions, self.enzyme_comp):
+            enzyme = Enzyme(r.id, self._is_transporter[r.id])
+            enzyme.gene_assocation = c
+            result.append(enzyme)
+        return result
+
+    def transport_reaction_ids(self):
+        return (r.id for r in self.reactions if self._is_transporter[r.id])
 
 
 class FbcAnnotationParser(object):

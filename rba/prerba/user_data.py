@@ -128,8 +128,7 @@ class UserData(object):
         return sum(self.average_protein().values())
 
     def transport_reaction_ids(self):
-        return (r.id for r in self.sbml_data.reactions
-                if self.sbml_data.is_transporter[r.id])
+        return self.sbml_data.transport_reaction_ids()
 
     def metabolite_targets(self):
         result = [(m.sbml_id, m.concentration)
@@ -153,12 +152,11 @@ class UserData(object):
         return self.sbml_data.reactions
 
     def sbml_enzymes(self):
-        result = []
-        for r_id, comp in zip((r.id for r in self.sbml_data.reactions),
-                              self.sbml_data.enzyme_comp):
-            enzyme = Enzyme(r_id, self.sbml_data.is_transporter[r_id])
-            enzyme.composition = self._build_enzyme_composition(comp)
-            result.append(enzyme)
+        result = self.sbml_data.enzymes()
+        for enzyme in result:
+            enzyme.composition = self._build_enzyme_composition(
+                enzyme.gene_assocation
+            )
         return result
 
     def _build_enzyme_composition(self, composition):
