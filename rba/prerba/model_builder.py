@@ -276,7 +276,7 @@ class ModelBuilder(object):
             enzymes.enzymes.append(self._build_enzyme(e))
         # enzyme corresponding to maintenance ATP reaction
         enzymes.enzymes.append(self._build_enzyme(
-            Enzyme(self.default.atpm_reaction, [], False)
+            Enzyme(self.default.atpm_reaction, False)
             ))
         return enzymes
 

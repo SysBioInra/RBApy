@@ -156,8 +156,9 @@ class UserData(object):
         result = []
         for r_id, comp in zip((r.id for r in self.sbml_data.reactions),
                               self.sbml_data.enzyme_comp):
-            result.append(Enzyme(r_id, self._build_enzyme_composition(comp),
-                                 self.sbml_data.is_transporter[r_id]))
+            enzyme = Enzyme(r_id, self.sbml_data.is_transporter[r_id])
+            enzyme.composition = self._build_enzyme_composition(comp)
+            result.append(enzyme)
         return result
 
     def _build_enzyme_composition(self, composition):
