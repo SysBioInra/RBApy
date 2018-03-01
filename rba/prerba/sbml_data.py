@@ -25,8 +25,8 @@ class SbmlData(object):
         Enzymes corresponding to SBML annotations.
     reactions: rba.xml.ListOfReaction
         SBML reactions.
-    external_metabolites: list
-        SBML identifiers of external metabolites.
+    external_prefixes: list
+        Prefix of external metabolites (e.g. M_glc for M_glc_e).
 
     """
 
@@ -138,14 +138,15 @@ class SbmlData(object):
         return result
 
     def _create_enzyme(self, reaction, composition, cytosol_id):
-        enzyme = Enzyme(reaction.id, self._has_membrane_enzyme(reaction))
+        enzyme = Enzyme(reaction.id,
+                        not self._all_species_in_same_compartment(reaction))
         enzyme.gene_association = composition
         enzyme.imported_metabolites = self._imported_metabolites(
             reaction, cytosol_id
         )
         return enzyme
 
-    def _has_membrane_enzyme(self, reaction):
+    def _all_species_in_same_compartment(self, reaction):
         compartments = [self._suffix(m.species)
                         for m in itertools.chain(reaction.reactants,
                                                  reaction.products)]
