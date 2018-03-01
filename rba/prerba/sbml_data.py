@@ -9,6 +9,7 @@ import itertools
 import libsbml
 
 # local imports
+from rba.prerba.enzyme import Enzyme
 import rba.xml
 
 
@@ -75,10 +76,27 @@ class SbmlData(object):
             self.species.append(rba.xml.Species(spec.getId(), boundary))
 
     def _initialize_reactions_and_enzymes(self, model):
-        reaction_list = extract_reactions(model)
+        reaction_list = self._extract_reactions(model)
         enzyme_list = self._extract_enzymes(model)
         self.reactions, self.enzymes \
             = duplicate_reactions_and_enzymes(reaction_list, enzyme_list)
+
+    def _extract_reactions(self, model):
+        reactions = rba.xml.ListOfReactions()
+        for reaction in model.reactions:
+            new_reaction = rba.xml.Reaction(reaction.id, reaction.reversible)
+            for reactant in reaction.reactants:
+                new_reaction.reactants.append(
+                    rba.xml.SpeciesReference(reactant.species,
+                                             reactant.stoichiometry)
+                )
+            for product in reaction.products:
+                new_reaction.products.append(
+                    rba.xml.SpeciesReference(product.species,
+                                             product.stoichiometry)
+                )
+            reactions.append(new_reaction)
+        return reactions
 
     def _extract_enzymes(self, model):
         enzymes = FbcAnnotationParser(model).parse_enzymes()
@@ -86,7 +104,8 @@ class SbmlData(object):
             enzymes = CobraNoteParser(model).read_notes()
         if not enzymes:
             print('Your SBML file does not contain fbc gene products nor uses '
-                  'notes to define enzyme composition. Please comply with SBML'
+                  ' COBRA notes to define enzyme composition. '
+                  'Please comply with SBML'
                   ' requirements defined in the README and rerun script.')
             raise UserWarning('Invalid SBML.')
         return enzymes
@@ -174,33 +193,6 @@ class SbmlData(object):
             if cpt != cytosol_id and prefix in external_prefixes:
                 result.append(reactant.species)
         return result
-
-
-def extract_reactions(model):
-    """
-    Parse reactions.
-
-    Returns
-    -------
-    rba.xml.ListOfReactions
-        Reactions in RBA format.
-
-    """
-    reactions = rba.xml.ListOfReactions()
-    for reaction in model.reactions:
-        new_reaction = rba.xml.Reaction(reaction.id, reaction.reversible)
-        for reactant in reaction.reactants:
-            new_reaction.reactants.append(
-                rba.xml.SpeciesReference(reactant.species,
-                                         reactant.stoichiometry)
-            )
-        for product in reaction.products:
-            new_reaction.products.append(
-                rba.xml.SpeciesReference(product.species,
-                                         product.stoichiometry)
-            )
-        reactions.append(new_reaction)
-    return reactions
 
 
 def duplicate_reactions_and_enzymes(reaction_list, enzyme_list):
@@ -356,20 +348,11 @@ class FbcAnnotationParser(object):
     def _read_fbc_association(self, gp_association):
         """We assume that relations are always 'or's of 'and's."""
         association = gp_association.getAssociation()
-        if association.isGeneProductRef():
-            gene_id = association.getGeneProduct()
-            return [[self._gene_names[gene_id]]]
-        elif association.isFbcOr():
+        if association.isFbcOr():
             return [self._read_fbc_association_components(a)
                     for a in association.getListOfAssociations()]
-        elif association.isFbcAnd():
-            result = []
-            for assoc in association.getListOfAssociations():
-                result += self._read_fbc_association_components(assoc)
-            return [result]
         else:
-            print('Invalid association.')
-            raise UserWarning('Invalid SBML.')
+            return [self._read_fbc_association_components(association)]
 
     def _read_fbc_association_components(self, association):
         """We assume that relations are always 'and's."""
@@ -422,21 +405,17 @@ class CobraNoteParser(object):
     def _parse_gene_association(self, text):
         """We assume that relations are always 'or's of 'and's."""
         tags = text.split(':', 1)
-        if len(tags) != 2:
+        if len(tags) != 2 and tags[0] != "GENE_ASSOCIATION":
             print('Invalid note field: ' + text)
             return None
-        if tags[0] != "GENE_ASSOCIATION":
-            return None
-        else:
-            enzyme_set = tags[1]
-            if len(enzyme_set) == 0:
-                return []
-            # field is not standard: we try to standardize a little.
-            # remove parentheses
-            enzyme_set = ''.join(c for c in enzyme_set if c not in '()')
-            # split enzymes
-            enzymes = enzyme_set.split(' or ')
-            compositions = []
-            for enzyme in enzymes:
-                compositions.append([e.strip() for e in enzyme.split(' and ')])
-            return compositions
+        enzyme_description = self._remove_parentheses(tags[1])
+        if not enzyme_description:
+            return []
+        return [self._enzyme_composition(e)
+                for e in enzyme_description.split(' or ')]
+
+    def _remove_parentheses(self, string):
+        return ''.join(c for c in string if c not in '()')
+
+    def _enzyme_composition(self, enzyme):
+        return [gene.strip() for gene in enzyme.split(' and ')]
