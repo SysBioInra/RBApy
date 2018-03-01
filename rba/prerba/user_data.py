@@ -75,8 +75,8 @@ class UserData(object):
 
     def _sbml_enzymatic_genes(self):
         result = []
-        for enzyme in self.sbml_data.enzyme_comp:
-            result += [g for g in enzyme if g != '']
+        for enzyme in self.sbml_data.enzymes:
+            result += [g for g in enzyme.gene_association if g != '']
         return list(set(result))
 
     def _import_manual_annotation(self):
@@ -155,7 +155,7 @@ class UserData(object):
         result = self.sbml_data.enzymes
         for enzyme in result:
             enzyme.composition = self._build_enzyme_composition(
-                enzyme.gene_assocation
+                enzyme.gene_association
             )
         return result
 

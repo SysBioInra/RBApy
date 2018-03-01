@@ -21,14 +21,12 @@ class SbmlData(object):
     ----------
     species: rba.xml.ListOfSpecies
         SBML species.
-    enzymes: list
-        Enzymes as a list of protein identifiers.
+    enzymes: list of rba.prerba.enzyme.Enzyme
+        Enzymes corresponding to SBML annotations.
     reactions: rba.xml.ListOfReaction
         SBML reactions.
     external_metabolites: list
         SBML identifiers of external metabolites.
-    imported_metabolites: list
-        SBML identifiers of imported metabolites.
 
     """
 
@@ -51,12 +49,11 @@ class SbmlData(object):
         document = self._load_document(input_file)
         model = document.model
         self._initialize_species(model, external_ids)
-        self.enzyme_comp = self._extract_enzyme_composition(model)
-        self.reactions = self._extract_reactions(model)
-        self._duplicate_reactions_with_multiple_enzymes()
-        self._tag_external_metabolites(model)
         self.external_metabolites = [m.id for m in self.species
                                      if m.boundary_condition]
+        self._enzyme_comp = self._extract_enzyme_composition(model)
+        self.reactions = self._extract_reactions(model)
+        self._duplicate_reactions_with_multiple_enzymes()
         self._initialize_enzymes(cytosol_id)
 
     def _load_document(self, input_file):
@@ -69,12 +66,34 @@ class SbmlData(object):
     def _initialize_species(self, model, external_ids):
         if external_ids is None:
             external_ids = []
+        external_ids += self._identify_external_compartments(model)
         self.species = rba.xml.ListOfSpecies()
         for spec in model.species:
-            boundary = spec.getBoundaryCondition()
-            if spec.getCompartment() in external_ids:
+            boundary = spec.boundary_condition
+            if spec.compartment in external_ids:
                 boundary = True
             self.species.append(rba.xml.Species(spec.getId(), boundary))
+
+    def _identify_external_compartments(self, model):
+        # Compartments are considered external if all metabolites
+        # they contain participate in a sink/production reaction
+        sink_species = self._sink_species(model.reactions)
+        result = set(c.id for c in model.compartments)
+        for metabolite in model.species:
+            if metabolite.id not in sink_species:
+                result.discard(metabolite.compartment)
+        return result
+
+    def _sink_species(self, reactions):
+        result = []
+        for reaction in reactions:
+            if (len(reaction.reactants) == 1 and
+                    len(reaction.products) == 0):
+                result.append(reaction.reactants[0].species)
+            elif (len(reaction.products) == 1 and
+                    len(reaction.reactants) == 0):
+                result.append(reaction.products[0].species)
+        return set(result)
 
     def _extract_enzyme_composition(self, model):
         result = FbcAnnotationParser(model).parse_enzymes()
@@ -108,7 +127,7 @@ class SbmlData(object):
     def _duplicate_reactions_with_multiple_enzymes(self):
         new_enzymes = []
         new_reactions = rba.xml.ListOfReactions()
-        for reaction, enzymes in zip(self.reactions, self.enzyme_comp):
+        for reaction, enzymes in zip(self.reactions, self._enzyme_comp):
             suffix = 0
             for enzyme in enzymes:
                 suffix += 1
@@ -118,48 +137,16 @@ class SbmlData(object):
                 new_enzymes.append(enzyme)
                 new_reactions.append(r_clone)
         self.reactions = new_reactions
-        self.enzyme_comp = new_enzymes
-
-    def _tag_external_metabolites(self, model):
-        """Find metabolites not already tagged as external."""
-        external_compartments = self._identify_external_compartments(model)
-        for metabolite in self.species:
-            compartment = model.getSpecies(metabolite.id).compartment
-            if compartment in external_compartments:
-                metabolite.boundary_condition = True
-
-    def _identify_external_compartments(self, model):
-        """
-        External metabolites must meet the following conditions:
-         (i) they participate in a sink/production reaction.
-         (ii) all metabolites of their compartment meet condition (i).
-        """
-        sink_species = self._sink_species(model.reactions)
-        result = set(c.id for c in model.compartments)
-        for metabolite in model.species:
-            if metabolite.id not in sink_species:
-                result.discard(metabolite.compartment)
-        return result
-
-    def _sink_species(self, reactions):
-        result = []
-        for reaction in reactions:
-            if (len(reaction.reactants) == 1 and
-                    len(reaction.products) == 0):
-                result.append(reaction.reactants[0].species)
-            elif (len(reaction.products) == 1 and
-                    len(reaction.reactants) == 0):
-                result.append(reaction.products[0].species)
-        return set(result)
+        self._enzyme_comp = new_enzymes
 
     def _initialize_enzymes(self, cytosol_id):
         self.enzymes = []
         external_prefixes = set(
             self._prefix(m) for m in self.external_metabolites
         )
-        for r, c in zip(self.reactions, self.enzyme_comp):
+        for r, c in zip(self.reactions, self._enzyme_comp):
             enzyme = Enzyme(r.id, self._has_membrane_enzyme(r))
-            enzyme.gene_assocation = c
+            enzyme.gene_association = c
             enzyme.imported_metabolites = self._imported_metabolites(
                 r, cytosol_id, external_prefixes
             )
