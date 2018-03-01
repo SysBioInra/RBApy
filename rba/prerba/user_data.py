@@ -167,8 +167,8 @@ class UserData(object):
                 result.append(ref)
         return result
 
-    def external_metabolites(self):
-        return self.sbml_data.external_metabolites
+    def external_prefixes(self):
+        return self.sbml_data.external_prefixes
 
     def compartments(self):
         return self.protein_data.compartments()

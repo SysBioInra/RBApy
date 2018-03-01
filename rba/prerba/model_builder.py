@@ -383,9 +383,7 @@ class ModelBuilder(object):
     def build_medium(self):
         # !!! we identify metabolites by their prefix !!!
         # M_glc_p and M_glc_e will be seen as the same metabolite M_glc
-        prefixes = (m.rsplit('_', 1)[0]
-                    for m in self.data.external_metabolites())
-        return dict.fromkeys(prefixes,
+        return dict.fromkeys(self.data.external_prefixes(),
                              self.default.activity.medium_concentration)
 
     def export_proteins(self, filename):
