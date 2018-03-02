@@ -11,7 +11,7 @@ import copy
 from rba import RbaModel
 from rba.prerba.user_data import UserData
 from rba.prerba.default_data import DefaultData
-from rba.prerba.user_data import ntp_composition
+from rba.prerba.macromolecule import ntp_composition
 from rba.prerba.enzyme import Enzyme
 from rba.prerba.default_processes import DefaultProcesses
 from rba.prerba.default_targets import DefaultTargets
@@ -192,7 +192,7 @@ class ModelBuilder(object):
         # enzymatic proteins
         for gene_name, protein in self.data.enzymatic_proteins.items():
             builder.add_macromolecule(gene_name, protein.location,
-                                      self._protein_composition(protein))
+                                      protein.composition())
         # average proteins
         for comp in self.data.compartments():
             builder.add_macromolecule(self.data.average_protein_id(comp),
@@ -201,14 +201,8 @@ class ModelBuilder(object):
         for prot in itertools.chain(self.data.ribosome.proteins,
                                     self.data.chaperone.proteins):
             builder.add_macromolecule(prot.id, self._cytoplasm(),
-                                      self.data.aa_composition(prot.sequence))
+                                      prot.composition())
         return builder.result
-
-    def _protein_composition(self, protein):
-        comp = self.data.aa_composition(protein.sequence)
-        for cofactor in protein.cofactors:
-            comp[cofactor.chebi] = cofactor.stoichiometry
-        return comp
 
     def build_rnas(self):
         """

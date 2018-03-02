@@ -9,6 +9,8 @@ from rba.prerba.default_data import DefaultData
 
 
 class Enzyme(object):
+    DEF_ACTIVITIES = DefaultData().activity
+
     def __init__(self, reaction, is_transporter):
         self.reaction = reaction
         self.gene_association = []
@@ -18,9 +20,10 @@ class Enzyme(object):
         self._initialize_efficiencies()
 
     def _initialize_efficiencies(self):
-        def_activities = DefaultData().activity
         if self.is_transporter:
-            self.forward = def_activities.transport_aggregate_id(self.reaction)
-            self.backward = def_activities.transport_id
+            self.forward = self.DEF_ACTIVITIES.transport_aggregate_id(
+                self.reaction
+            )
+            self.backward = self.DEF_ACTIVITIES.transport_id
         else:
-            self.forward = self.backward = def_activities.efficiency_id
+            self.forward = self.backward = self.DEF_ACTIVITIES.efficiency_id

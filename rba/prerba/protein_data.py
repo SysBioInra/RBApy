@@ -7,36 +7,12 @@ from collections import namedtuple
 from itertools import chain
 import pandas
 
+from rba.prerba.macromolecule import Protein
 from rba.prerba.uniprot_data import Cofactor, UniprotData
 from rba.prerba.manual_annotation import (
     CuratedCofactors, CuratedSubunits, CuratedLocations,
     CuratedLocationMap, CuratedUnknownProteins
     )
-
-
-class Protein(object):
-    """
-    Basic protein information.
-
-    Attributes
-    ----------
-    location : str
-        Location of protein.
-    stoichiometry : int or float
-        Stoichiometry of protein within enzymatic complex.
-    cofactors : Cofactor
-        Cofactors of protein.
-    sequence : str
-        Sequence of protein (amino acids in one-lette format).
-
-    """
-
-    def __init__(self):
-        """Build default protein."""
-        self.location = None
-        self.stoichiometry = None
-        self.cofactors = None
-        self.sequence = None
 
 
 class ProteinData(object):

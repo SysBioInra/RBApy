@@ -19,6 +19,7 @@ from rba.prerba.enzyme import Enzyme
 from rba.prerba.user_machinery import UserMachinery
 from rba.prerba.fasta_parser import parse_rba_fasta
 from rba.prerba import protein_export
+from rba.prerba.macromolecule import ntp_composition
 
 
 class UserData(object):
@@ -193,74 +194,6 @@ class UserData(object):
                     cofactors.append(c)
                     known_ids.add(c.chebi)
         return cofactors
-
-    def aa_composition(self, sequence):
-        """
-        Translate sequence into amino acid composition.
-
-        Parameters
-        ----------
-        sequence : str
-            Protein sequence in one-letter format.
-
-        Returns
-        -------
-        dict
-            Dictionary where keys are amino acid identifiers and values the
-            number of times the amino acid appeared in the sequence.
-
-        """
-        return composition(sequence, self.default.metabolites.aas)
-
-
-def composition(sequence, alphabet):
-    """
-    Compute composition of sequence with given alphabet.
-
-    Parameters
-    ----------
-    sequence : str
-        Sequence to decompose.
-    alphabet : str
-        Letters to count in the original sequence. A letter of the
-        sequence that is not in alphabet will be ignored.
-
-    Returns
-    -------
-    dict
-        Keys are letters of the alphabet and values the corresponding counts
-        in the sequence.
-
-    """
-    comp = dict.fromkeys(alphabet, 0)
-    for n in sequence:
-        try:
-            comp[n] += 1
-        except KeyError:
-            pass
-    return comp
-
-
-def ntp_composition(sequence):
-    """
-    Translate sequence into ntp composition.
-
-    Parameters
-    ----------
-    sequence : str
-        DNA or RNA sequence. If a DNA sequence is provided, all T will
-        be converted to U.
-
-    Returns
-    -------
-    dict
-        Dictionary where keys are ntp identifiers and values the
-        number of times the ntps appeared in the sequence.
-
-    """
-    comp = composition(sequence, 'ACGTU')
-    comp['U'] += comp.pop('T')
-    return comp
 
 
 def create_uniprot(input_file, organism_id):
