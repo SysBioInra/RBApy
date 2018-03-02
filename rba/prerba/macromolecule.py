@@ -34,7 +34,6 @@ def aa_composition(sequence):
 
 class Macromolecule(object):
     def __init__(self):
-        """Build default protein."""
         self.id = None
         self.location = None
         self.stoichiometry = None
@@ -58,8 +57,8 @@ class Protein(Macromolecule):
 
     """
     def __init__(self):
-        """Build default protein."""
-        self.cofactors = []
+        super(Protein, self).__init__()
+        self.cofactors = None
 
     def composition(self):
         comp = aa_composition(self.sequence)
@@ -68,6 +67,9 @@ class Protein(Macromolecule):
         return comp
 
 
-class Rna(object):
+class Rna(Macromolecule):
+    def __init__(self):
+        super(Rna, self).__init__()
+
     def composition(self):
         return ntp_composition(self.sequence)

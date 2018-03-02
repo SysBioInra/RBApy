@@ -32,6 +32,7 @@ class UserMachinery(object):
         molecule.id = fasta_record.id
         molecule.stoichiometry = fasta_record.stoichiometry
         molecule.sequence = fasta_record.sequence
+        molecule.cofactors = []
 
     def _create_rna(self, fasta_record):
         result = Rna()
