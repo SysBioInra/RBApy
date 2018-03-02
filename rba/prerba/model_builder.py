@@ -11,7 +11,6 @@ import copy
 from rba import RbaModel
 from rba.prerba.user_data import UserData
 from rba.prerba.default_data import DefaultData
-from rba.prerba.macromolecule import ntp_composition
 from rba.prerba.enzyme import Enzyme
 from rba.prerba.default_processes import DefaultProcesses
 from rba.prerba.default_targets import DefaultTargets
@@ -231,7 +230,7 @@ class ModelBuilder(object):
         for rna in itertools.chain(self.data.ribosome.rnas,
                                    self.data.chaperone.rnas):
             builder.add_macromolecule(rna.id, self._cytoplasm(),
-                                      ntp_composition(rna.sequence))
+                                      rna.composition())
         return builder.result
 
     def build_dna(self):

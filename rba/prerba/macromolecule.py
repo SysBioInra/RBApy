@@ -8,6 +8,29 @@ from __future__ import division, print_function, absolute_import
 # local imports
 from rba.prerba.default_data import DefaultData
 
+_DEFAULT_AMINO_ACIDS = DefaultData().metabolites.aas
+
+
+def composition(sequence, alphabet):
+    """Compute composition of sequence with given alphabet."""
+    comp = dict.fromkeys(alphabet, 0)
+    for n in sequence:
+        try:
+            comp[n] += 1
+        except KeyError:
+            pass
+    return comp
+
+
+def ntp_composition(sequence):
+    comp = composition(sequence, 'ACGTU')
+    comp['U'] += comp.pop('T')
+    return comp
+
+
+def aa_composition(sequence):
+    return composition(sequence, _DEFAULT_AMINO_ACIDS)
+
 
 class Macromolecule(object):
     def __init__(self):
@@ -34,35 +57,17 @@ class Protein(Macromolecule):
         Sequence of protein (amino acids in one-lette format).
 
     """
-    DEFAULT_AMINO_ACIDS = DefaultData().metabolites.aas
-
     def __init__(self):
         """Build default protein."""
         self.cofactors = []
 
     def composition(self):
-        comp = self._aa_composition()
+        comp = aa_composition(self.sequence)
         for cofactor in self.cofactors:
             comp[cofactor.chebi] = cofactor.stoichiometry
         return comp
 
-    def _aa_composition(self):
-        return composition(self.sequence, self.DEFAULT_AMINO_ACIDS)
 
-
-def composition(sequence, alphabet):
-    """Compute composition of sequence with given alphabet."""
-    comp = dict.fromkeys(alphabet, 0)
-    for n in sequence:
-        try:
-            comp[n] += 1
-        except KeyError:
-            pass
-    return comp
-
-
-def ntp_composition(sequence):
-    """Translate rna or dna sequence into ntp composition."""
-    comp = composition(sequence, 'ACGTU')
-    comp['U'] += comp.pop('T')
-    return comp
+class Rna(object):
+    def composition(self):
+        return ntp_composition(self.sequence)
