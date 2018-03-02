@@ -5,7 +5,6 @@ from __future__ import division, print_function, absolute_import
 
 # global imports
 import itertools
-import copy
 
 # local imports
 from rba import RbaModel
@@ -27,17 +26,27 @@ class ModelBuilder(object):
 
     def build_model(self):
         """Build and return entire RbaModel."""
+        from time import time
+        top = time()
         model = RbaModel()
         model.metabolism = self.build_metabolism()
+        print('metab', time() - top); top = time()
         model.density = self.build_density()
+        print('dens', time() - top); top = time()
         model.parameters = self.build_parameters()
+        print('param', time() - top); top = time()
         model.proteins = self.build_proteins()
         model.rnas = self.build_rnas()
         model.dna = self.build_dna()
+        print('macro', time() - top); top = time()
         model.processes = self.build_processes()
+        print('proc', time() - top); top = time()
         model.targets = self.build_targets()
+        print('targ', time() - top); top = time()
         model.enzymes = self.build_enzymes()
+        print('enz', time() - top); top = time()
         model.medium = self.build_medium()
+        print('med', time() - top); top = time()
         model.output_dir = self.data.output_dir()
         return model
 
@@ -53,8 +62,8 @@ class ModelBuilder(object):
         """
         metabolism = rba.xml.RbaMetabolism()
 
-        metabolism.species = copy.deepcopy(self.data.sbml_species())
-        metabolism.reactions = copy.deepcopy(self.data.sbml_reactions())
+        metabolism.species = self.data.sbml_species()
+        metabolism.reactions = self.data.sbml_reactions()
         metabolism.reactions.append(self._atpm_reaction())
         for c in self.data.compartments():
             metabolism.compartments.append(rba.xml.Compartment(c))
