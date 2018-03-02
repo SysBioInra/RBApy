@@ -62,16 +62,10 @@ class UserData(object):
 
     def _initialize_gene_to_enzyme_mapping(self):
         self.enzymatic_proteins = {}
-        self._protein_reference = {}
         for g in self._sbml_enzymatic_genes():
             protein, reference = self.protein_data.protein_and_reference(g)
             if protein:
                 self.enzymatic_proteins[g] = protein
-                self._protein_reference[g] = reference
-            else:
-                # spontaneous reaction or unknown protein
-                if reference:
-                    self._protein_reference[g] = reference
 
     def _sbml_enzymatic_genes(self):
         result = []
@@ -162,9 +156,9 @@ class UserData(object):
     def _build_enzyme_composition(self, composition):
         result = []
         for gene in composition:
-            ref = self._protein_reference.get(gene, None)
-            if ref:
-                result.append(ref)
+            protein, reference = self.protein_data.protein_and_reference(gene)
+            if reference:
+                result.append(reference)
         return result
 
     def external_prefixes(self):
