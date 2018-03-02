@@ -29,7 +29,6 @@ class ProteinData(object):
         Map from uniprot locations to user locations.
 
     """
-
     def __init__(self, input_dir):
         """
         Build object from uniprot and manual data.
@@ -54,6 +53,31 @@ class ProteinData(object):
                                                              'Cytoplasm')
         self._average_id = self.average_protein_id(self._default_location)
 
+    def _check_location_validity(self):
+        known_locations = set(chain(self._location_map.data.keys(),
+                                    self._location_map.data.values()))
+        invalid_locations = []
+        for loc in set(self._locations.data.values()):
+            if not pandas.isnull(loc) and loc not in known_locations:
+                invalid_locations.append(loc)
+        if invalid_locations:
+            print('Warning: unknown location(s) {} will be replaced by {}.'
+                  'Check that data in {} and {} are consistent.'
+                  .format(', '.join(set(invalid_locations)),
+                          self._default_location,
+                          self._manual.location_map.filename,
+                          self._manual.locations.filename))
+
+    def _check_user_identifiers(self):
+        invalid_identifiers = [i for i in self._user_ids.data.values()
+                               if i and not i.startswith('average_protein_')
+                               and not self._uniprot.entry(i)]
+        if invalid_identifiers:
+            print('Warning: {} are invalid gene identifiers. '
+                  'Check data provided provided in {}.'
+                  .format(', '.join(invalid_identifiers),
+                          self._user_ids._raw_data.filename))
+
     def protein_and_reference(self, gene_id):
         """
         Retrieve base protein information and protein reference.
@@ -76,108 +100,51 @@ class ProteinData(object):
             If protein is 'spontaneous', None is returned.
 
         """
-        if not gene_id:
+        user_id = self._user_ids.data.get(gene_id, gene_id)
+        if self._is_spontaneous_id(user_id):
             return None, None
-        user_id = self._user_ids.data.get(gene_id, 0)
-        if user_id != 0:
-            if user_id == '' or pandas.isnull(user_id):
-                return None, None
-            elif user_id.startswith('average_protein_'):
-                return None, (user_id, 1)
-        protein = self.find_uniprot(user_id if user_id != 0 else gene_id)
-        if protein:
-            return protein, (gene_id, protein.stoichiometry)
+        elif self._is_average_protein_id(user_id):
+            return None, (user_id, 1)
         else:
-            if user_id == 0:
+            protein = self.find_uniprot(user_id)
+            if protein:
+                return protein, (gene_id, protein.stoichiometry)
+            else:
                 self._user_ids.append(gene_id, self._average_id)
-            return None, (self._average_id, 1)
+                return None, (self._average_id, 1)
+
+    def _is_spontaneous_id(self, id_):
+        return id_ == '' or pandas.isnull(id_)
+
+    def _is_average_protein_id(self, id_):
+        return id_.startswith('average_protein_')
 
     def find_uniprot(self, gene_id):
-        """
-        Retrieve information for protein from gene identifier.
-
-        Parameters
-        ----------
-        gene_id : str
-            Gene identifier.
-
-        Returns
-        -------
-        Protein
-            Basic protein information (missing information replaced by
-            default values).
-
-        """
+        """Retrieve information for protein from gene identifier."""
         uniprot_id = self._uniprot.entry(gene_id)
         if not uniprot_id:
             return None
+        protein = self._create_protein_from_manual_info(uniprot_id)
+        self._fill_missing_information(protein, uniprot_id)
+        return protein
+
+    def _create_protein_from_manual_info(self, identifier):
+        protein = Protein()
+        protein.location = self._locations.data.get(identifier)
+        protein.cofactors = self._cofactors.data.get(identifier)
+        protein.stoichiometry = self._subunits.data.get(identifier)
+        return protein
+
+    def _fill_missing_information(self, protein, uniprot_id):
         uniprot_line = self._uniprot.line(uniprot_id)
-        protein = self._manual_info(uniprot_id)
         if protein.location is None:
             protein.location = self._uniprot_location(uniprot_line)
         if protein.cofactors is None:
             protein.cofactors = self._uniprot_cofactors(uniprot_line)
         if protein.stoichiometry is None:
             protein.stoichiometry = self._uniprot_subunits(uniprot_line)
-        protein.sequence = uniprot_line['Sequence']
-        return protein
-
-    def average_protein_id(self, compartment):
-        """Return identifier of average protein in given compartment."""
-        return 'average_protein_' + compartment
-
-    def average_composition(self):
-        """Return average composition of proteins."""
-        return self._uniprot.average_protein_composition()
-
-    def compartments(self):
-        """
-        Return list of compartment identifiers.
-
-        Returns
-        -------
-        list
-            List of compartment identifiers.
-
-        """
-        return list(set(self._location_map.data.values()))
-
-    def compartment(self, compartment):
-        """
-        Return user identifier associated with compartment..
-
-        Parameters
-        ----------
-        compartment: str
-            Valid uniprot compartment identifier (e.g. Cytoplasm, Secreted)
-            or user identifier.
-
-        Returns
-        -------
-        str
-            User identifier associated with compartment. If a user identifier
-            was provided as an input, it is returned without change.
-
-        """
-        if compartment in self._location_map.data.values():
-            return compartment
-        else:
-            return self._location_map.data[compartment]
-
-    def update_helper_files(self):
-        """Update helper files (if needed)."""
-        self._locations.update_file()
-        self._location_map.update_file()
-        self._cofactors.update_file()
-        self._subunits.update_file()
-        self._user_ids.update_file()
-
-    def _manual_info(self, identifier):
-        protein = Protein()
-        protein.location = self._locations.data.get(identifier)
-        protein.cofactors = self._cofactors.data.get(identifier)
-        protein.stoichiometry = self._subunits.data.get(identifier)
-        return protein
+        if not protein.sequence:
+            protein.sequence = uniprot_line['Sequence']
 
     def _uniprot_location(self, uniprot_line):
         location = self._uniprot.find_location(uniprot_line)
@@ -209,27 +176,29 @@ class ProteinData(object):
             subunits = 1
         return subunits
 
-    def _check_user_identifiers(self):
-        invalid_identifiers = [i for i in self._user_ids.data.values()
-                               if i and not i.startswith('average_protein_')
-                               and not self._uniprot.entry(i)]
-        if invalid_identifiers:
-            print('Warning: {} are invalid gene identifiers. '
-                  'Check data provided provided in {}.'
-                  .format(', '.join(invalid_identifiers),
-                          self._user_ids._raw_data.filename))
+    def average_protein_id(self, compartment):
+        """Return identifier of average protein in given compartment."""
+        return 'average_protein_' + compartment
 
-    def _check_location_validity(self):
-        known_locations = set(chain(self._location_map.data.keys(),
-                                    self._location_map.data.values()))
-        invalid_locations = []
-        for loc in set(self._locations.data.values()):
-            if not pandas.isnull(loc) and loc not in known_locations:
-                invalid_locations.append(loc)
-        if invalid_locations:
-            print('Warning: unknown location(s) {} will be replaced by {}.'
-                  'Check that data in {} and {} are consistent.'
-                  .format(', '.join(set(invalid_locations)),
-                          self.default_location,
-                          self._manual.location_map.filename,
-                          self._manual.locations.filename))
+    def average_composition(self):
+        """Return average composition of proteins."""
+        return self._uniprot.average_protein_composition()
+
+    def compartments(self):
+        """Return list of compartment identifiers."""
+        return list(set(self._location_map.data.values()))
+
+    def compartment(self, compartment):
+        """Return user identifier associated with compartment."""
+        if compartment in self._location_map.data.values():
+            return compartment
+        else:
+            return self._location_map.data[compartment]
+
+    def update_helper_files(self):
+        """Update helper files (if needed)."""
+        self._locations.update_file()
+        self._location_map.update_file()
+        self._cofactors.update_file()
+        self._subunits.update_file()
+        self._user_ids.update_file()
