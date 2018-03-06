@@ -55,18 +55,18 @@ class UserData(object):
         print('Importing Uniprot data...')
         create_uniprot(self.input_path('uniprot.csv'), self._organism_id())
         self.protein_data = ProteinData(self._input_dir())
-        self._initialize_gene_to_enzyme_mapping()
+        self._retrieve_enzymatic_proteins()
         self.protein_data.update_helper_files()
 
     def _organism_id(self):
         return self._parameters['ORGANISM_ID']
 
-    def _initialize_gene_to_enzyme_mapping(self):
-        self.enzymatic_proteins = {}
+    def _retrieve_enzymatic_proteins(self):
+        self.enzymatic_proteins = []
         for g in self._sbml_enzymatic_genes():
             protein, reference = self.protein_data.protein_and_reference(g)
             if protein:
-                self.enzymatic_proteins[g] = protein
+                self.enzymatic_proteins.append(protein)
 
     def _sbml_enzymatic_genes(self):
         result = []
@@ -188,7 +188,7 @@ class UserData(object):
         """
         cofactors = []
         known_ids = set()
-        for protein in self.enzymatic_proteins.values():
+        for protein in self.enzymatic_proteins:
             for c in protein.cofactors:
                 if c.chebi not in known_ids:
                     cofactors.append(c)

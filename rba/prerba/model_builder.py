@@ -198,13 +198,13 @@ class ModelBuilder(object):
         for c in self.data.cofactors():
             builder.add_component(c.chebi, c.name, 'cofactor', 0)
         # enzymatic proteins
-        for gene_name, protein in self.data.enzymatic_proteins.items():
-            builder.add_macromolecule(gene_name, protein.location,
+        for protein in self.data.enzymatic_proteins:
+            builder.add_macromolecule(protein.id, protein.location,
                                       protein.composition())
         # average proteins
-        for comp in self.data.compartments():
-            builder.add_macromolecule(self.data.average_protein_id(comp),
-                                      comp, self.data.average_protein())
+        for c in self.data.compartments():
+            builder.add_macromolecule(self.data.average_protein_id(c),
+                                      c, self.data.average_protein())
         # machinery proteins
         for prot in itertools.chain(self.data.ribosome.proteins,
                                     self.data.chaperone.proteins):
@@ -328,7 +328,7 @@ class ModelBuilder(object):
         return result
 
     def _all_protein_ids(self):
-        proteins = list(self.data.enzymatic_proteins.keys())
+        proteins = [p.id for p in self.data.enzymatic_proteins]
         proteins += [self.data.average_protein_id(c)
                      for c in self.data.compartments()]
         proteins += self.data.ribosome.protein_ids()

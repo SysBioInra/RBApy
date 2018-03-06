@@ -129,11 +129,12 @@ class ProteinData(object):
         if not uniprot_id:
             return None
         protein = Protein()
+        protein.id = gene_id
         self._fill_with_manual_info(protein, uniprot_id)
         self._fill_with_uniprot_info(protein, uniprot_id)
         return protein
 
-    def _fill_with_manual_info(self, identifier):
+    def _fill_with_manual_info(self, protein, identifier):
         protein.location = self._locations.data.get(identifier)
         protein.cofactors = self._cofactors.data.get(identifier)
         protein.stoichiometry = self._subunits.data.get(identifier)
