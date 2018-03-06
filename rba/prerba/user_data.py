@@ -22,7 +22,7 @@ from rba.prerba import protein_export
 
 
 class UserData(object):
-
+    """Data contained in files provided by the user."""
     def __init__(self, parameter_file):
         """Read data stored in filed described in parameters."""
         self._parameters = PipelineParameters(parameter_file).parameters
@@ -130,14 +130,18 @@ class UserData(object):
                 rnas[rna.id] = rna
         return rnas.values()
 
-    def average_protein(self):
+    def average_protein_composition(self):
         # we remove non-standard amino acids from the average composition
         average_protein = self.protein_data.average_composition()
         return {aa: sto for aa, sto in average_protein.items()
                 if aa in self.default.metabolites.aas}
 
     def average_protein_length(self):
-        return sum(self.average_protein().values())
+        return sum(self.average_protein_composition().values())
+
+    def average_protein_id(self, compartment):
+        """Return identifier of average protein in given compartment."""
+        return self.protein_data.average_protein_id(compartment)
 
     def transport_enzymes(self):
         return (e for e in self.sbml_data.enzymes if e.is_transporter)
@@ -188,21 +192,8 @@ class UserData(object):
     def compartment(self, id_):
         return self.protein_data.compartment(id_)
 
-    def average_protein_id(self, compartment):
-        """Return identifier of average protein in given compartment."""
-        return self.protein_data.average_protein_id(compartment)
-
     def cofactors(self):
-        """
-        Extract protein cofactors.
-
-        Returns
-        -------
-        list
-            List of cofactors associated with protein in the model. Each
-            cofactor is represented only once.
-
-        """
+        """List of all protein cofactors."""
         cofactors = []
         known_ids = set()
         for protein in self.enzymatic_proteins:

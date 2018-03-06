@@ -192,7 +192,7 @@ class ModelBuilder(object):
             builder.add_macromolecule(protein.id, protein.location,
                                       protein.composition())
         # average proteins
-        average_composition = self.data.average_protein()
+        average_composition = self.data.average_protein_composition()
         for c in self.data.compartments():
             builder.add_macromolecule(self.data.average_protein_id(c),
                                       c, average_composition)
