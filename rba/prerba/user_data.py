@@ -11,7 +11,7 @@ from rba.prerba.pipeline_parameters import PipelineParameters
 from rba.prerba.default_data import DefaultData
 from rba.prerba import sbml_data
 from rba.prerba.protein_data import ProteinData
-from rba.prerba.uniprot_importer import UniprotImporter
+from rba.prerba.uniprot_importer import create_uniprot_if_absent
 from rba.prerba.manual_annotation import (
     CuratedMetabolites, CuratedMacrocomponents
     )
@@ -52,8 +52,8 @@ class UserData(object):
 
     def _import_uniprot_data(self):
         print('Importing Uniprot data...')
-        create_uniprot_if_necessary(self.input_path('uniprot.csv'),
-                                    self._organism_id())
+        create_uniprot_if_absent(self.input_path('uniprot.csv'),
+                                 self._organism_id())
         self.protein_data = ProteinData(self._input_dir())
         self._retrieve_enzymatic_proteins()
         self.protein_data.update_helper_files()
@@ -211,15 +211,3 @@ class UserData(object):
                     cofactors.append(c)
                     known_ids.add(c.chebi)
         return cofactors
-
-
-def create_uniprot_if_necessary(input_file, organism_id):
-    if not os.path.isfile(input_file):
-        print('Could not find uniprot file. Downloading most recent'
-              ' version...')
-        raw_data = UniprotImporter(organism_id).data
-        if len(raw_data) == 0:
-            raise UserWarning('Invalid organism, could not retrieve '
-                              'Uniprot data.')
-        with open(input_file, 'w') as f:
-            f.write(raw_data)

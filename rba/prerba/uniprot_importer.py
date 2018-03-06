@@ -4,11 +4,24 @@
 from __future__ import division, print_function, absolute_import
 
 # global imports
+import os.path
 import urllib
 try:
     from urllib.request import Request, urlopen
 except ImportError:
     from urllib2 import Request, urlopen
+
+
+def create_uniprot_if_absent(input_file, organism_id):
+    if not os.path.isfile(input_file):
+        print('Could not find uniprot file. Downloading most recent'
+              ' version...')
+        raw_data = UniprotImporter(organism_id).data
+        if len(raw_data) == 0:
+            raise UserWarning('Invalid organism, could not retrieve '
+                              'Uniprot data.')
+        with open(input_file, 'w') as f:
+            f.write(raw_data)
 
 
 class UniprotImporter(object):
