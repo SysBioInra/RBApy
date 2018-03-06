@@ -202,9 +202,10 @@ class ModelBuilder(object):
             builder.add_macromolecule(protein.id, protein.location,
                                       protein.composition())
         # average proteins
+        average_composition = self.data.average_protein()
         for c in self.data.compartments():
             builder.add_macromolecule(self.data.average_protein_id(c),
-                                      c, self.data.average_protein())
+                                      c, average_composition)
         # machinery proteins
         for prot in itertools.chain(self.data.ribosome.proteins,
                                     self.data.chaperone.proteins):
