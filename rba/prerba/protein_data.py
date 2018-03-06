@@ -49,8 +49,9 @@ class ProteinData(object):
         self._location_map = CuratedLocationMap(input_dir)
         self._check_location_validity()
         self._check_user_identifiers()
-        self._default_location = self._location_map.data.get('Cytoplasm',
-                                                             'Cytoplasm')
+        self._default_location = self._location_map.data.get(
+            'Cytoplasm', 'Cytoplasm'
+            )
         self._average_id = self.average_protein_id(self._default_location)
 
     def _check_location_validity(self):
@@ -60,6 +61,9 @@ class ProteinData(object):
         for loc in set(self._locations.data.values()):
             if not pandas.isnull(loc) and loc not in known_locations:
                 invalid_locations.append(loc)
+        self._warn_invalid_locations(invalid_locations)
+
+    def _warn_invalid_locations(self, invalid_locations):
         if invalid_locations:
             print('Warning: unknown location(s) {} will be replaced by {}.'
                   'Check that data in {} and {} are consistent.'
@@ -106,7 +110,7 @@ class ProteinData(object):
         elif self._is_average_protein_id(user_id):
             return None, (user_id, 1)
         else:
-            protein = self.find_uniprot(user_id)
+            protein = self._find_uniprot(user_id)
             if protein:
                 return protein, (gene_id, protein.stoichiometry)
             else:
@@ -119,23 +123,22 @@ class ProteinData(object):
     def _is_average_protein_id(self, id_):
         return id_.startswith('average_protein_')
 
-    def find_uniprot(self, gene_id):
+    def _find_uniprot(self, gene_id):
         """Retrieve information for protein from gene identifier."""
         uniprot_id = self._uniprot.entry(gene_id)
         if not uniprot_id:
             return None
-        protein = self._create_protein_from_manual_info(uniprot_id)
-        self._fill_missing_information(protein, uniprot_id)
+        protein = Protein()
+        self._fill_with_manual_info(protein, uniprot_id)
+        self._fill_with_uniprot_info(protein, uniprot_id)
         return protein
 
-    def _create_protein_from_manual_info(self, identifier):
-        protein = Protein()
+    def _fill_with_manual_info(self, identifier):
         protein.location = self._locations.data.get(identifier)
         protein.cofactors = self._cofactors.data.get(identifier)
         protein.stoichiometry = self._subunits.data.get(identifier)
-        return protein
 
-    def _fill_missing_information(self, protein, uniprot_id):
+    def _fill_with_uniprot_info(self, protein, uniprot_id):
         uniprot_line = self._uniprot.line(uniprot_id)
         if protein.location is None:
             protein.location = self._uniprot_location(uniprot_line)
