@@ -82,40 +82,28 @@ class ProteinData(object):
                   .format(', '.join(invalid_identifiers),
                           self._user_ids._raw_data.filename))
 
-    def protein_and_reference(self, gene_id):
+    def protein(self, gene_id):
         """
-        Retrieve base protein information and protein reference.
-
-        Parameters
-        ----------
-        gene_id : str
-            Gene identifier.
+        Retrieve base protein information.
 
         Returns
         -------
         Protein
-            Basic protein information. None if protein is unknown or
-            'spontaneous'.
-        tuple (str, numeric)
-            (name, stoichiometry) that should be used in protein reference
-            (e.g. for enzymes or other machineries composed of proteins).
-            In general, value is (gene_id, protein.stoichiometry).
-            If protein is unknown, value is (average_protein, 1).
-            If protein is 'spontaneous', None is returned.
-
+            Basic protein information. None if protein is unknown,
+            average protein or 'spontaneous'.
         """
         user_id = self._user_ids.data.get(gene_id, gene_id)
-        if self._is_spontaneous_id(user_id):
-            return None, None
-        elif self._is_average_protein_id(user_id):
-            return None, (user_id, 1)
+        if (self._is_spontaneous_id(user_id)
+                or self._is_average_protein_id(user_id)):
+            return None
+        protein = self._find_uniprot(user_id)
+        if protein:
+            protein.id = gene_id
+            return protein
         else:
-            protein = self._find_uniprot(user_id)
-            if protein:
-                return protein, (gene_id, protein.stoichiometry)
-            else:
-                self._user_ids.append(gene_id, self._average_id)
-                return None, (self._average_id, 1)
+            # unknown gene identifier
+            self._user_ids.append(gene_id, self._average_id)
+            return None
 
     def _is_spontaneous_id(self, id_):
         return id_ == '' or pandas.isnull(id_)
@@ -129,7 +117,6 @@ class ProteinData(object):
         if not uniprot_id:
             return None
         protein = Protein()
-        protein.id = gene_id
         self._fill_with_manual_info(protein, uniprot_id)
         self._fill_with_uniprot_info(protein, uniprot_id)
         return protein
@@ -179,6 +166,41 @@ class ProteinData(object):
             self._subunits.append(uniprot_line, 1)
             subunits = 1
         return subunits
+
+    def reference(self, gene_id):
+        """
+        Retrieve protein reference.
+
+        Returns
+        -------
+        tuple (str, numeric)
+            (id, stoichiometry) that should be used in protein reference.
+            If protein is 'spontaneous', None is returned.
+
+        """
+        user_id = self._user_ids.data.get(gene_id, gene_id)
+        if self._is_spontaneous_id(user_id):
+            return None
+        if self._is_average_protein_id(user_id):
+            return (user_id, 1)
+        stoichiometry = self._stoichiometry(user_id)
+        if stoichiometry:
+            return (gene_id, stoichiometry)
+        else:
+            # unknown gene identifier
+            self._user_ids.append(gene_id, self._average_id)
+            return (self._average_id, 1)
+
+    def _stoichiometry(self, gene_id):
+        """Retrieve stoichiometry from gene identifier."""
+        uniprot_id = self._uniprot.entry(gene_id)
+        if not uniprot_id:
+            return None
+        result = self._subunits.data.get(uniprot_id)
+        if result:
+            return result
+        else:
+            return self._uniprot_subunits(self._uniprot.line(uniprot_id))
 
     def average_protein_id(self, compartment):
         """Return identifier of average protein in given compartment."""

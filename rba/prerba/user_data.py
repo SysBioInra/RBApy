@@ -64,7 +64,7 @@ class UserData(object):
     def _retrieve_enzymatic_proteins(self):
         self.enzymatic_proteins = []
         for g in self._sbml_enzymatic_genes():
-            protein, reference = self.protein_data.protein_and_reference(g)
+            protein = self.protein_data.protein(g)
             if protein:
                 self.enzymatic_proteins.append(protein)
 
@@ -157,7 +157,7 @@ class UserData(object):
     def _build_enzyme_composition(self, composition):
         result = []
         for gene in composition:
-            protein, reference = self.protein_data.protein_and_reference(gene)
+            reference = self.protein_data.reference(gene)
             if reference:
                 result.append(reference)
         return result
