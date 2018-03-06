@@ -229,8 +229,9 @@ class ModelBuilder(object):
         builder.add_component('G', 'Guanine residue', 'Nucleotide', 3.0382)
         builder.add_component('U', 'Uramine residue', 'Nucleotide', 2.7102)
         # user rnas
-        for rna_id, composition in self.data.rna_data.items():
-            builder.add_macromolecule(rna_id, self._cytoplasm(), composition)
+        for rna in self.data.trnas:
+            builder.add_macromolecule(rna.id, self._cytoplasm(),
+                                      rna.composition())
         # average RNA
         builder.add_macromolecule(
             self.default.metabolites.mrna, self._cytoplasm(),
@@ -337,7 +338,7 @@ class ModelBuilder(object):
         return proteins
 
     def _all_rna_ids(self):
-        rnas = list(self.data.rna_data.keys())
+        rnas = [rna.id for rna in self.data.trnas]
         rnas.append(self.default.metabolites.mrna)
         rnas += self.data.ribosome.rna_ids()
         rnas += self.data.chaperone.rna_ids()

@@ -72,4 +72,8 @@ class Rna(Macromolecule):
         super(Rna, self).__init__()
 
     def composition(self):
-        return ntp_composition(self.sequence)
+        if isinstance(self.sequence, str):
+            return ntp_composition(self.sequence)
+        else:
+            comp = ntp_composition(''.join(self.sequence))
+            return {k: v/len(self.sequence) for k, v in comp.items()}

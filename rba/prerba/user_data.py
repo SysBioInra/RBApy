@@ -17,9 +17,8 @@ from rba.prerba.manual_annotation import (
     )
 from rba.prerba.enzyme import Enzyme
 from rba.prerba.user_machinery import UserMachinery
-from rba.prerba.fasta_parser import parse_rba_fasta
+from rba.prerba.fasta_parser import RbaFastaParser
 from rba.prerba import protein_export
-from rba.prerba.macromolecule import ntp_composition
 
 
 class UserData(object):
@@ -53,7 +52,8 @@ class UserData(object):
 
     def _import_uniprot_data(self):
         print('Importing Uniprot data...')
-        create_uniprot(self.input_path('uniprot.csv'), self._organism_id())
+        create_uniprot_if_necessary(self.input_path('uniprot.csv'),
+                                    self._organism_id())
         self.protein_data = ProteinData(self._input_dir())
         self._retrieve_enzymatic_proteins()
         self.protein_data.update_helper_files()
@@ -81,9 +81,7 @@ class UserData(object):
             self._input_dir(), known_species
             ).data
         self.metabolite_map = self._build_metabolite_map()
-        self.rna_data = read_trnas(
-            self.input_path('trnas.fasta'), self.metabolite_map
-            )
+        self.trnas = self._read_trnas(self.input_path('trnas.fasta'))
         self.ribosome = UserMachinery(self.input_path('ribosome.fasta'))
         self.chaperone = UserMachinery(self.input_path('chaperones.fasta'))
 
@@ -112,6 +110,25 @@ class UserData(object):
         keys += list(cofactor_info)
         names += list(cofactor_info.values())
         return keys, names
+
+    def _read_trnas(self, filename):
+        """Read trnas in fasta file."""
+        trna_data = RbaFastaParser(filename).rnas
+        # replace ids with user ids
+        for rna in trna_data:
+            user_metabolite = self.metabolite_map.get(rna.id.upper())
+            if user_metabolite and user_metabolite.sbml_id:
+                rna.id = user_metabolite.sbml_id
+        # fuse all trnas that have the same id
+        rnas = {}
+        for rna in trna_data:
+            aggregate_rna = rnas.get(rna.id)
+            if aggregate_rna:
+                aggregate_rna.sequence.append(rna.sequence)
+            else:
+                rna.sequence = [rna.sequence]
+                rnas[rna.id] = rna
+        return rnas.values()
 
     def average_protein(self):
         # we remove non-standard amino acids from the average composition
@@ -196,63 +213,13 @@ class UserData(object):
         return cofactors
 
 
-def create_uniprot(input_file, organism_id):
-    """
-    Create uniprot file if necessary.
-
-    Parameters
-    ----------
-    input_file : str
-        File containing Uniprot data (or where it should be created).
-    organism_id : int
-        Uniprot organism id to fetch.
-
-    """
+def create_uniprot_if_necessary(input_file, organism_id):
     if not os.path.isfile(input_file):
         print('Could not find uniprot file. Downloading most recent'
               ' version...')
         raw_data = UniprotImporter(organism_id).data
         if len(raw_data) == 0:
-            raise UserWarning(
-                'Invalid organism, could not retrieve Uniprot data. '
-                )
+            raise UserWarning('Invalid organism, could not retrieve '
+                              'Uniprot data.')
         with open(input_file, 'w') as f:
             f.write(raw_data)
-
-
-def read_trnas(filename, metabolite_map):
-    """
-    Read trnas in fasta file.
-
-    Parameters
-    ----------
-    filename : str
-        File containing RNA information.
-
-    Returns
-    -------
-    dict
-        Keys are identifiers and values are the composition of RNAs.
-        A composition is a dictionary where keys are NTPs and values are the
-        average counts for the NTP over RNAs sharing the same identifier.
-
-    """
-    # read all real trnas (as described in fasta files)
-    trna_data = parse_rba_fasta(filename)
-    # map real trnas to user trnas
-    # for example, user may agregate all trnas into a single metabolite
-    # in this case, we take an average composition for a trna
-    sequence_list = {}
-    for rna in trna_data:
-        user_metabolite = metabolite_map.get(rna.id.upper(), None)
-        if user_metabolite and user_metabolite.sbml_id:
-            user_id = user_metabolite.sbml_id
-        else:
-            user_id = rna.id
-        rna_list = sequence_list.setdefault(user_id, [])
-        rna_list.append(rna.sequence)
-    average_comp = {}
-    for id_, seq in sequence_list.items():
-        comp = ntp_composition(''.join(seq))
-        average_comp[id_] = {k: v/len(seq) for k, v in comp.items()}
-    return average_comp

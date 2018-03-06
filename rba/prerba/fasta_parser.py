@@ -7,31 +7,43 @@ from __future__ import division, print_function, absolute_import
 from collections import namedtuple
 from Bio import SeqIO
 
+# local imports
+from rba.prerba.macromolecule import Protein, Rna
+
 # class holding fasta entries
 FastaEntry = namedtuple('FastaEntry',
                         'id name set_name stoichiometry sequence')
 
 
-def parse_rba_fasta(input_file):
-    """
-    Parse rba-formatted fasta file.
+class RbaFastaParser(object):
+    """Parse rba-formatted fasta file."""
+    def __init__(self, input_file):
+        self.proteins = []
+        self.rnas = []
+        try:
+            for r in SeqIO.parse(input_file, 'fasta'):
+                self._create_molecule(parse_entry(r))
+        except IOError:
+            raise UserWarning('Please provide file ' + input_file)
+        except UserWarning as e:
+            raise UserWarning(input_file + ': ' + e.msg())
 
-    Parameters
-    ----------
-    input_file : str
-        Path to fasta file.
+    def _create_molecule(self, entry):
+        if entry.set_name == 'protein':
+            molecule = Protein()
+            molecule.cofactors = []
+            self.proteins.append(molecule)
+        elif entry.set_name == 'rna':
+            molecule = Rna()
+            self.rnas.append(molecule)
+        else:
+            raise UserWarning('Unknown molecule type ' + entry.set_name)
+        self._initialize_molecule(molecule, entry)
 
-    Returns
-    -------
-    list of FastaEntry
-        Entries read
-
-    """
-    try:
-        return [parse_entry(r) for r in SeqIO.parse(input_file, 'fasta')]
-
-    except IOError:
-        raise UserWarning('Please provide file ' + input_file)
+    def _initialize_molecule(self, molecule, fasta_record):
+        molecule.id = fasta_record.id
+        molecule.stoichiometry = fasta_record.stoichiometry
+        molecule.sequence = fasta_record.sequence
 
 
 def parse_entry(record):
