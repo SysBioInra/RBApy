@@ -199,8 +199,8 @@ class ModelBuilder(object):
         # machinery proteins
         for prot in itertools.chain(self.data.ribosome.proteins,
                                     self.data.chaperone.proteins):
-            builder.add_macromolecule(prot.id, self._cytoplasm(),
-                                      prot.composition())
+            loc = prot.location if prot.location else self._cytoplasm()
+            builder.add_macromolecule(prot.id, loc, prot.composition())
         return builder.result
 
     def build_rnas(self):
