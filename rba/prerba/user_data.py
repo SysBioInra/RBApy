@@ -64,7 +64,7 @@ class UserData(object):
     def _retrieve_enzymatic_proteins(self):
         self.enzymatic_proteins = []
         for g in self._sbml_enzymatic_genes():
-            protein = self.protein_data.protein(g)
+            protein = self.protein_data.create_protein_from_gene_id(g)
             if protein:
                 self.enzymatic_proteins.append(protein)
 
@@ -82,8 +82,10 @@ class UserData(object):
             ).data
         self.metabolite_map = self._build_metabolite_map()
         self.trnas = self._read_trnas(self.input_path('trnas.fasta'))
-        self.ribosome = UserMachinery(self.input_path('ribosome.fasta'))
-        self.chaperone = UserMachinery(self.input_path('chaperones.fasta'))
+        self.ribosome = UserMachinery(self.input_path('ribosome.fasta'),
+                                      self.protein_data)
+        self.chaperone = UserMachinery(self.input_path('chaperones.fasta'),
+                                       self.protein_data)
 
     def _sbml_species_ids(self):
         return set([s.id for s in self.sbml_data.species])

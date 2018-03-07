@@ -82,7 +82,7 @@ class ProteinData(object):
                   .format(', '.join(invalid_identifiers),
                           self._user_ids._raw_data.filename))
 
-    def protein(self, gene_id):
+    def create_protein_from_gene_id(self, gene_id):
         """
         Retrieve base protein information.
 
@@ -96,8 +96,9 @@ class ProteinData(object):
         if (self._is_spontaneous_id(user_id)
                 or self._is_average_protein_id(user_id)):
             return None
-        protein = self._find_uniprot(user_id)
-        if protein:
+        uniprot_id = self._uniprot.entry(user_id)
+        if uniprot_id:
+            protein = self.create_protein_from_uniprot_id(uniprot_id)
             protein.id = gene_id
             return protein
         else:
@@ -111,20 +112,16 @@ class ProteinData(object):
     def _is_average_protein_id(self, id_):
         return id_.startswith('average_protein_')
 
-    def _find_uniprot(self, gene_id):
-        """Retrieve information for protein from gene identifier."""
-        uniprot_id = self._uniprot.entry(gene_id)
-        if not uniprot_id:
-            return None
+    def create_protein_from_uniprot_id(self, uniprot_id):
         protein = Protein()
         self._fill_with_manual_info(protein, uniprot_id)
         self._fill_with_uniprot_info(protein, uniprot_id)
         return protein
 
-    def _fill_with_manual_info(self, protein, identifier):
-        protein.location = self._locations.data.get(identifier)
-        protein.cofactors = self._cofactors.data.get(identifier)
-        protein.stoichiometry = self._subunits.data.get(identifier)
+    def _fill_with_manual_info(self, protein, uniprot_id):
+        protein.location = self._locations.data.get(uniprot_id)
+        protein.cofactors = self._cofactors.data.get(uniprot_id)
+        protein.stoichiometry = self._subunits.data.get(uniprot_id)
 
     def _fill_with_uniprot_info(self, protein, uniprot_id):
         uniprot_line = self._uniprot.line(uniprot_id)
@@ -183,19 +180,16 @@ class ProteinData(object):
             return None
         if self._is_average_protein_id(user_id):
             return (user_id, 1)
-        stoichiometry = self._stoichiometry(user_id)
-        if stoichiometry:
+        uniprot_id = self._uniprot.entry(gene_id)
+        if uniprot_id:
+            stoichiometry = self._stoichiometry(uniprot_id)
             return (gene_id, stoichiometry)
         else:
             # unknown gene identifier
             self._user_ids.append(gene_id, self._average_id)
             return (self._average_id, 1)
 
-    def _stoichiometry(self, gene_id):
-        """Retrieve stoichiometry from gene identifier."""
-        uniprot_id = self._uniprot.entry(gene_id)
-        if not uniprot_id:
-            return None
+    def _stoichiometry(self, uniprot_id):
         result = self._subunits.data.get(uniprot_id)
         if result:
             return result
