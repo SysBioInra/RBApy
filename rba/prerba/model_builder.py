@@ -169,7 +169,8 @@ class ModelBuilder(object):
         return [self.default.activity.transport_aggregate(
                     e.reaction, e.imported_metabolites
                 )
-                for e in self.data.transport_enzymes()]
+                for e in self.data.transport_enzymes()
+                if e.imported_metabolites]
 
     def build_proteins(self):
         """

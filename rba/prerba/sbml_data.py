@@ -144,6 +144,7 @@ class SbmlData(object):
         enzyme.imported_metabolites = self._imported_metabolites(
             reaction, cytosol_id
         )
+        enzyme.initialize_efficiencies()
         return enzyme
 
     def _all_species_in_same_compartment(self, reaction):
