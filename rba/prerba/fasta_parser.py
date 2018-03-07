@@ -26,7 +26,7 @@ class RbaFastaParser(object):
         except IOError:
             raise UserWarning('Please provide file ' + input_file)
         except UserWarning as e:
-            raise UserWarning(input_file + ': ' + e.msg())
+            raise UserWarning(input_file + ': ' + str(e))
 
     def _create_molecule(self, entry):
         if entry.set_name == 'protein':
