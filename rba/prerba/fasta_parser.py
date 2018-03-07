@@ -17,7 +17,9 @@ FastaEntry = namedtuple('FastaEntry',
 
 class RbaFastaParser(object):
     """Parse rba-formatted fasta file."""
-    def __init__(self, input_file):
+    def __init__(self, input_file, uniprot_data=None):
+        self._input_file = input_file
+        self._uniprot = uniprot_data
         self.proteins = []
         self.rnas = []
         try:
@@ -30,20 +32,59 @@ class RbaFastaParser(object):
 
     def _create_molecule(self, entry):
         if entry.set_name == 'protein':
-            molecule = Protein()
-            molecule.cofactors = []
-            self.proteins.append(molecule)
+            self.proteins.append(self._create_protein(entry))
         elif entry.set_name == 'rna':
             molecule = Rna()
+            self._initialize_molecule(molecule, entry)
             self.rnas.append(molecule)
         else:
             raise UserWarning('Unknown molecule type ' + entry.set_name)
-        self._initialize_molecule(molecule, entry)
+
+    def _create_protein(self, entry):
+        result = Protein()
+        self._initialize_molecule(result, entry)
+        result.cofactors = []
+        if self._uniprot:
+            self._fill_missing_protein_information(result)
+        return result
+
+    def _fill_missing_protein_information(self, protein):
+        try:
+            self._copy_protein_info(
+                protein,
+                self._uniprot.create_protein_from_uniprot_id(protein.id)
+            )
+        except KeyError:
+            if self._has_missing_info(protein):
+                raise UserWarning(
+                    '{}: protein {} has missing information and does not match'
+                    ' a known Uniprot id. Please fill in all information or '
+                    'adapt identifier.'
+                )
+
+    def _copy_protein_info(self, protein, uniprot_protein):
+        if protein.location is None:
+            protein.location = uniprot_protein.location
+        if not protein.cofactors:
+            protein.cofactors = uniprot_protein.cofactors
+        if not protein.stoichiometry:
+            protein.stoichiometry = uniprot_protein.stoichiometry
+        if not protein.sequence:
+            protein.sequence = uniprot_protein.sequence
+
+    def _print_ids_not_found_in_uniprot(self, ids):
+        if ids:
+            print('Warning ({}): proteins {} could not be retrieved in '
+                  'Uniprot.'.format(self._filename, ', '.join(ids)))
 
     def _initialize_molecule(self, molecule, fasta_record):
         molecule.id = fasta_record.id
         molecule.stoichiometry = fasta_record.stoichiometry
         molecule.sequence = fasta_record.sequence
+
+    def _has_missing_info(self, molecule):
+        return not (molecule.id and molecule.stoichiometry
+                    and molecule.sequence)
 
 
 def parse_entry(record):
