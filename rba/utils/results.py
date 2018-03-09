@@ -109,6 +109,27 @@ class Results(object):
                 result[enzyme] = (b_opt[f], b_opt[b])
         return result
 
+    def write(self, output_dir):
+        with open(os.path.join(output_dir, 'reactions.out'), 'w') as f:
+            f.write('Reaction\tFlux\n')
+            for reaction, flux in self.reaction_fluxes().items():
+                f.write('{}\t{}\n'.format(reaction, flux))
+        with open(os.path.join(output_dir, 'enzymes.out'), 'w') as f:
+            f.write('Enzyme\tConcentration\n')
+            for enzyme, conc in self.enzyme_concentrations().items():
+                f.write('{}\t{}\n'.format(enzyme, conc))
+        with open(os.path.join(output_dir,
+                               'process_machineries.out'), 'w') as f:
+            f.write('Process\tMachinery Concentration\n')
+            for process, conc in \
+                    self.process_machinery_concentrations().items():
+                f.write('{}\t{}\n'.format(process, conc))
+
+    def print_main_transport_reactions(self, number=10):
+        print('\nTop {} boundary fluxes:'.format(number))
+        for flux in self.sorted_boundary_fluxes()[:number]:
+            print('{} {}'.format(*flux))
+
 
 def reaction_string(reaction):
     reactants = ' + '.join(['{} {}'.format(r.stoichiometry, r.species)
