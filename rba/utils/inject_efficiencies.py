@@ -84,7 +84,8 @@ class ParameterUpdater(object):
             return new_fn
         current_fn = self._parameters.functions.get_by_id(fn_id)
         if current_fn:
-            current_fn = self._create_function(current_fn.id)
+            current_fn.type = 'constant'
+            current_fn.set_parameters({'CONSTANT': self._efficiency})
             return current_fn
         return None
 
