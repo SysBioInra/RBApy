@@ -162,14 +162,14 @@ class Function(object):
             self.variable = variable
         else:
             self.variable = 'growth_rate'
-        self.parameters = ListOfParameters()
-        if parameters:
-            self.set_parameters(parameters)
+        self.set_parameters(parameters)
 
     def set_parameters(self, parameters):
         """Create parameter list from dictionary."""
-        for key, value in parameters.items():
-            self.parameters.append(Parameter(key, value))
+        self.parameters = ListOfParameters()
+        if parameters:
+            for key, value in parameters.items():
+                self.parameters.append(Parameter(key, value))
 
     def to_xml_node(self):
         """Convert to xml node."""
