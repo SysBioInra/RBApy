@@ -11,7 +11,7 @@ import os.path
 import rba
 
 
-if __name__ == '__main__':
+def main():
     if len(sys.argv) < 2:
         print('Please provide path to directory containing xml files.')
     else:
@@ -28,24 +28,33 @@ if __name__ == '__main__':
         solver.solve()
         print('Optimal growth rate is {}.'.format(solver.mu_opt))
         results = rba.Results(model, matrices, solver)
+        write_results(results, output_dir)
+        # print_main_transport_reactions(results)
 
-        # write results to file
-        with open(os.path.join(output_dir, 'reactions.out'), 'w') as f:
-            f.write('Reaction\tFlux\n')
-            for reaction, flux in results.reaction_fluxes().items():
-                f.write('{}\t{}\n'.format(reaction, flux))
-        with open(os.path.join(output_dir, 'enzymes.out'), 'w') as f:
-            f.write('Enzyme\tConcentration\n')
-            for enzyme, conc in results.enzyme_concentrations().items():
-                f.write('{}\t{}\n'.format(enzyme, conc))
-        with open(os.path.join(output_dir,
-                               'process_machineries.out'), 'w') as f:
-            f.write('Process\tMachinery Concentration\n')
-            for process, conc in \
-                    results.process_machinery_concentrations().items():
-                f.write('{}\t{}\n'.format(process, conc))
-        # write main transport reactions
-        print('\nTop 10 boundary fluxes:')
-        b_fluxes = results.sorted_boundary_fluxes()
-        for flux in b_fluxes[:10]:
-            print('{} {}'.format(*flux))
+
+def write_results(results, output_dir):
+    with open(os.path.join(output_dir, 'reactions.out'), 'w') as f:
+        f.write('Reaction\tFlux\n')
+        for reaction, flux in results.reaction_fluxes().items():
+            f.write('{}\t{}\n'.format(reaction, flux))
+    with open(os.path.join(output_dir, 'enzymes.out'), 'w') as f:
+        f.write('Enzyme\tConcentration\n')
+        for enzyme, conc in results.enzyme_concentrations().items():
+            f.write('{}\t{}\n'.format(enzyme, conc))
+    with open(os.path.join(output_dir,
+                           'process_machineries.out'), 'w') as f:
+        f.write('Process\tMachinery Concentration\n')
+        for process, conc in \
+                results.process_machinery_concentrations().items():
+            f.write('{}\t{}\n'.format(process, conc))
+
+
+def print_main_transport_reactions(results):
+    print('\nTop 10 boundary fluxes:')
+    b_fluxes = results.sorted_boundary_fluxes()
+    for flux in b_fluxes[:10]:
+        print('{} {}'.format(*flux))
+
+
+if __name__ == '__main__':
+    main()
