@@ -109,6 +109,14 @@ class ListOf(object):
         except AttributeError:
             pass
 
+    def remove(self, element):
+        """Remove element from list."""
+        self._elements.remove(element)
+        try:
+            del self._elements_by_id[element.id]
+        except AttributeError:
+            pass
+
     def get_by_id(self, identifier):
         """Return element with given identifier or None if not found."""
         return self._elements_by_id.get(identifier)
