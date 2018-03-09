@@ -1,3 +1,4 @@
 default_enzyme	0.1	0.2
 default_transporter	0.3	0.4
-enzyme_parameter_efficiencies	0.5	0.6
+parameterized_enzyme	0.5	0.6
+parameterized_transporter	0.7	0.8
