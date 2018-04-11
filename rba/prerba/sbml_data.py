@@ -121,7 +121,7 @@ class SbmlData(object):
 
     def _print_invalid_enzyme_notes(self):
         print('Your SBML file does not contain fbc gene products nor uses '
-              ' COBRA notes to define enzyme composition for every '
+              ' COBRA notes to define enzyme composition for every '
               'reaction. Please comply with SBML'
               ' requirements defined in the README and rerun script.')
 
@@ -244,7 +244,7 @@ class CobraNoteParser(object):
         # fields may be encapsulated in a <html> tag (or equivalent)
         note = self._remove_html_tag(note)
         return (note.getChild(i).getChild(0).toString()
-                for i in range(notes.getNumChildren()))
+                for i in range(note.getNumChildren()))
 
     def _remove_html_tag(self, note):
         if (note.getNumChildren() == 1
