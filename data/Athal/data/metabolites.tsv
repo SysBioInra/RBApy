@@ -1,103 +1,104 @@
 ID	NAME	SBML ID	CONCENTRATION
 NAD	NAD	S_NAD_43__c	0.0162
-ILETRNA	Charged trna ile	S_L_45_Isoleucyl_45_tRNA_40_Ile_41__c	
-CHEBI:71302	Mo-molybdopterin	[MISSING]	
+ILETRNA	Charged trna ile	S_L_45_Isoleucyl_45_tRNA_40_Ile_41__c	[MISSING]
+CHEBI:71302	Mo-molybdopterin	[MISSING]	[MISSING]
 TRNAILE	Uncharged trna ile	S_tRNA_40_Ile_41__c	2.716e-05
-CHEBI:57540	NAD(+)	S_NAD_43__c	
-dCTP	dCTP	S_dCTP_c	
-LYSTRNA	Charged trna lys	S_L_45_Lysyl_45_tRNA_40_Lys_41__c	
-HISTRNA	Charged trna his	S_L_45_Histidyl_45_tRNA_40_His_41__c	
+CHEBI:57540	NAD(+)	S_NAD_43__c	[MISSING]
+dCTP	dCTP	S_dCTP_c	[MISSING]
+LYSTRNA	Charged trna lys	S_L_45_Lysyl_45_tRNA_40_Lys_41__c	[MISSING]
+HISTRNA	Charged trna his	S_L_45_Histidyl_45_tRNA_40_His_41__c	[MISSING]
 TRNAPRO	Uncharged trna pro	S_tRNA_40_Pro_41__c	2.06666666667e-05
-CHEBI:21137	[3Fe-4S] cluster	[MISSING]	
-TYRTRNA	Charged trna tyr	S_L_45_Tyrosyl_45_tRNA_40_Tyr_41__c	
-CHEBI:29033	Fe(2+)	[MISSING]	
-CHEBI:58210	FMN	[MISSING]	
-CHEBI:29035	Mn(2+)	[MISSING]	
-LEUTRNA	Charged trna leu	S_L_45_Leucyl_45_tRNA_40_Leu_41__c	
-TRPTRNA	Charged trna trp	S_L_45_Tryptophanyl_45_tRNA_40_Trp_41__c	
-H	Proton	S_H_43__c	
-GLNTRNA	Charged trna gln	S_L_45_Glutaminyl_45_tRNA_40_Gln_41__m	
-CHEBI:597326	pyridoxal 5'-phosphate	[MISSING]	
+CHEBI:21137	[3Fe-4S] cluster	[MISSING]	[MISSING]
+TYRTRNA	Charged trna tyr	S_L_45_Tyrosyl_45_tRNA_40_Tyr_41__c	[MISSING]
+CHEBI:29033	Fe(2+)	[MISSING]	[MISSING]
+CHEBI:58210	FMN	[MISSING]	[MISSING]
+CHEBI:29035	Mn(2+)	[MISSING]	[MISSING]
+LEUTRNA	Charged trna leu	S_L_45_Leucyl_45_tRNA_40_Leu_41__c	[MISSING]
+TRPTRNA	Charged trna trp	S_L_45_Tryptophanyl_45_tRNA_40_Trp_41__c	[MISSING]
+H	Proton	S_H_43__c	[MISSING]
+GLNTRNA	Charged trna gln	S_L_45_Glutaminyl_45_tRNA_40_Gln_41__m	[MISSING]
+CHEBI:597326	pyridoxal 5'-phosphate	[MISSING]	[MISSING]
 TRNALEU	Uncharged trna leu	S_tRNA_40_Leu_41__c	4.212e-05
-SPMD	SPMD	[MISSING]	0.007
-dGTP	dGTP	S_dGTP_c	
-CHEBI:29108	Ca(2+)	[MISSING]	
-CHEBI:29105	Zn(2+)	[MISSING]	
+SPMD	SPMD	[MISSING]	0.006999999999999999
+dGTP	dGTP	S_dGTP_c	[MISSING]
+CHEBI:29108	Ca(2+)	[MISSING]	[MISSING]
+CHEBI:29105	Zn(2+)	[MISSING]	[MISSING]
 TRNAVAL	Uncharged trna val	S_tRNA_40_Val_41__c	3.956e-05
-CHEBI:29103	K(+)	[MISSING]	
-CHEBI:79027	L-topaquinone	[MISSING]	
+CHEBI:29103	K(+)	[MISSING]	[MISSING]
+CHEBI:79027	L-topaquinone	[MISSING]	[MISSING]
 TRNACYS	Uncharged trna cys	S_tRNA_40_Cys_41__c	8.56e-06
-VALTRNA	Charged trna val	S_L_45_Valyl_45_tRNA_40_Val_41__c	
+VALTRNA	Charged trna val	S_L_45_Valyl_45_tRNA_40_Val_41__c	[MISSING]
 Pi	Phosphate	S_Orthophosphate_c	0.0144
-CHEBI:24875	Fe cation	[MISSING]	
+CHEBI:24875	Fe cation	[MISSING]	[MISSING]
 CMP	CMP	S_CMP_c	0.001
 TRNAARG	Uncharged trna arg	S_tRNA_40_Arg_41__c	2.76533333333e-05
 TRNAMET	Uncharged trna met	S_tRNA_40_Met_41__c	1.43733333333e-05
 TRNALYS	Uncharged trna lys	S_tRNA_40_Lys_41__c	3.208e-05
-CHEBI:30413	heme	[MISSING]	
-CHEBI:60240	a divalent metal cation	[MISSING]	
+CHEBI:30413	heme	[MISSING]	[MISSING]
+CHEBI:60240	a divalent metal cation	[MISSING]	[MISSING]
 AMP	AMP	S_AMP_c	0.0047
-PROTRNA	Charged trna pro	S_L_45_Prolyl_45_tRNA_40_Pro_41__c	
-FOR	Formate	S_Formate_c	
+PROTRNA	Charged trna pro	S_L_45_Prolyl_45_tRNA_40_Pro_41__c	[MISSING]
+FOR	Formate	S_Formate_c	[MISSING]
 10FTHF	10-Formyltetrahydrofolate	S_10_45_Formyltetrahydrofolate_c	0.0004
 K	Potassium	[MISSING]	0.7063
-CHEBI:83088	(R)-lipoate	[MISSING]	
-dTTP	dTTP	S_dTTP_c	
-CHEBI:23378	Cu cation	[MISSING]	
-GLYTRNA	Charged trna gly	S_Glycyl_45_tRNA_40_Gly_41__c	
-ARGTRNA	Charged trna arg	S_L_45_Arginyl_45_tRNA_40_Arg_41__c	
+CHEBI:83088	(R)-lipoate	[MISSING]	[MISSING]
+dTTP	dTTP	S_dTTP_c	[MISSING]
+CHEBI:23378	Cu cation	[MISSING]	[MISSING]
+GLYTRNA	Charged trna gly	S_Glycyl_45_tRNA_40_Gly_41__c	[MISSING]
+ARGTRNA	Charged trna arg	S_L_45_Arginyl_45_tRNA_40_Arg_41__c	[MISSING]
 TRNAALA	Uncharged trna ala	S_tRNA_40_Ala_41__c	4.80266666667e-05
-ALATRNA	Charged trna ala	S_L_45_Alanyl_45_tRNA_c	
+ALATRNA	Charged trna ala	S_L_45_Alanyl_45_tRNA_c	[MISSING]
 CTP	CTP	S_CTP_c	0.0005
-UMP	UMP	S_UMP_c	
-CHEBI:58937	thiamine diphosphate	[MISSING]	
-CHEBI:60052	siroheme	[MISSING]	
+UMP	UMP	S_UMP_c	[MISSING]
+CHEBI:58937	thiamine diphosphate	[MISSING]	[MISSING]
+CHEBI:60052	siroheme	[MISSING]	[MISSING]
 COA	Coenzyme A	S_CoA_c	0.0003
 ATP	ATP	S_ATP_c	0.003
 NADP	NADP	S_NADP_43__c	0.0009
-CHEBI:49883	[4Fe-4S] cluster	[MISSING]	
-FMETTRNA	Charged trna fmet	S_N_45_Formylmethionyl_45_tRNA_c	
-CHEBI:60342	dipyrromethane	[MISSING]	
-CHEBI:60344	heme b	[MISSING]	
+CHEBI:49883	[4Fe-4S] cluster	[MISSING]	[MISSING]
+FMETTRNA	Charged trna fmet	S_N_45_Formylmethionyl_45_tRNA_c	[MISSING]
+CHEBI:60342	dipyrromethane	[MISSING]	[MISSING]
+CHEBI:60344	heme b	[MISSING]	[MISSING]
 TRNATHR	Uncharged trna thr	S_tRNA_40_Thr_41__c	2.372e-05
-CHEBI:18420	Mg(2+)	[MISSING]	
-CHEBI:58349	NADP(+)	[MISSING]	
+CHEBI:18420	Mg(2+)	[MISSING]	[MISSING]
+CHEBI:58349	NADP(+)	[MISSING]	[MISSING]
 ADP	ADP	S_ADP_c	0.0026
-SERTRNA	Charged trna ser	S_L_45_Seryl_45_tRNA_40_Ser_41__c	
-CHEBI:15361	pyruvate	[MISSING]	
+SERTRNA	Charged trna ser	S_L_45_Seryl_45_tRNA_40_Ser_41__c	[MISSING]
+CHEBI:15361	pyruvate	[MISSING]	[MISSING]
 NADPH	NADPH	S_NADPH_c	0.0002
-ASNTRNA	Charged trna asn	S_L_45_Asparaginyl_45_tRNA_40_Asn_41__c	
+ASNTRNA	Charged trna asn	S_L_45_Asparaginyl_45_tRNA_40_Asn_41__c	[MISSING]
 TRNATYR	Uncharged trna tyr	S_tRNA_40_Tyr_41__c	1.28933333333e-05
 TRNAHIS	Uncharged trna his	S_tRNA_40_His_41__c	8.85333333333e-06
 TRNAASP	Uncharged trna asp	S_tRNA_40_Asp_41__c	2.25333333333e-05
 GMP	GMP	S_GMP_c	0.0005
-CHEBI:57618	FMNH2	[MISSING]	
+CHEBI:57618	FMNH2	[MISSING]	[MISSING]
 GDP	GDP	S_GDP_c	0.0002
 TRNAASN	Uncharged trna asn	S_tRNA_40_Asn_41__c	2.25333333333e-05
-dATP	dATP	S_dATP_c	
-CHEBI:57692	FAD	[MISSING]	
-MET	Methionine	S_L_45_Methionine_c	
-H2O	H2O	S_H2O_c	
+dATP	dATP	S_dATP_c	[MISSING]
+CHEBI:57692	FAD	[MISSING]	[MISSING]
+MET	Methionine	S_L_45_Methionine_c	[MISSING]
+H2O	H2O	S_H2O_c	[MISSING]
 CDP	CDP	S_CDP_c	0.0003
 TRNAPHE	Uncharged trna phe	S_tRNA_40_Phe_41__c	1.732e-05
 PPi	Pyrophosphate	S_Pyrophosphate_c	0.0009
-CHEBI:72953	decylplastoquinone	[MISSING]	
+CHEBI:72953	decylplastoquinone	[MISSING]	[MISSING]
 TRNASER	Uncharged trna ser	S_tRNA_40_Ser_41__c	2.01733333333e-05
-THRTRNA	Charged trna thr	S_L_45_Threonyl_45_tRNA_40_Thr_41__c	
-ASPTRNA	Charged trna asp	S_L_45_Aspartyl_45_tRNA_40_Asp_41__c	
-CHEBI:49601	[2Fe-2S] cluster	[MISSING]	
-GLUTRNA	Charged trna glu	S_L_45_Glutamyl_45_tRNA_40_Glu_41__c	
+THRTRNA	Charged trna thr	S_L_45_Threonyl_45_tRNA_40_Thr_41__c	[MISSING]
+ASPTRNA	Charged trna asp	S_L_45_Aspartyl_45_tRNA_40_Asp_41__c	[MISSING]
+CHEBI:49601	[2Fe-2S] cluster	[MISSING]	[MISSING]
+GLUTRNA	Charged trna glu	S_L_45_Glutamyl_45_tRNA_40_Glu_41__c	[MISSING]
 TRNATRP	Uncharged trna trp	S_tRNA_40_Trp_41__c	5.32e-06
 TRNAGLN	Uncharged trna gln	S_tRNA_40_Gln_41__c	2.46e-05
-METTRNA	Charged trna met	S_L_45_Methionyl_45_tRNA_40_Met_41__c	
-UTP	UTP	S_UTP_c	
+METTRNA	Charged trna met	S_L_45_Methionyl_45_tRNA_40_Met_41__c	[MISSING]
+UTP	UTP	S_UTP_c	[MISSING]
 TRNAGLU	Uncharged trna glu	S_tRNA_40_Glu_41__c	2.46e-05
 TRNAGLY	Uncharged trna gly	S_tRNA_40_Gly_41__c	5.72666666667e-05
-CHEBI:38290	L-ascorbate	[MISSING]	
-CHEBI:16810	2-oxoglutarate	[MISSING]	
+CHEBI:38290	L-ascorbate	[MISSING]	[MISSING]
+CHEBI:16810	2-oxoglutarate	[MISSING]	[MISSING]
 GTP	GTP	S_GTP_c	0.0004
-UDP	UDP	S_UDP_c	
-CYSTRNA	Charged trna cys	S_L_45_Cysteinyl_45_tRNA_40_Cys_41__c	
-PHETRNA	Charged trna phe	S_L_45_Phenylalanyl_45_tRNA_40_Phe_41__c	
-CHEBI:17544	hydrogencarbonate	[MISSING]	
-CHEBI:25213	a metal cation	[MISSING]	
+UDP	UDP	S_UDP_c	[MISSING]
+CYSTRNA	Charged trna cys	S_L_45_Cysteinyl_45_tRNA_40_Cys_41__c	[MISSING]
+PHETRNA	Charged trna phe	S_L_45_Phenylalanyl_45_tRNA_40_Phe_41__c	[MISSING]
+CHEBI:17544	hydrogencarbonate	[MISSING]	[MISSING]
+CHEBI:25213	a metal cation	[MISSING]	[MISSING]
+GLNTRNA	Uncharged trna gln	[MISSING]	0.0
