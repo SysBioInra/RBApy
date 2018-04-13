@@ -255,8 +255,10 @@ class CobraNoteParser(object):
     def _parse_gene_association(self, text):
         """We assume that relations are always 'or's of 'and's."""
         tags = text.split(':', 1)
-        if len(tags) != 2 and tags[0] != "GENE_ASSOCIATION":
+        if len(tags) != 2:
             print('Invalid note field: ' + text)
+            return None
+        if tags[0] != "GENE_ASSOCIATION":
             return None
         enzyme_description = self._remove_parentheses(tags[1])
         if not enzyme_description:
