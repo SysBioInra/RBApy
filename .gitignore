@@ -1,9 +1,10 @@
 
 data/iJO1366_test/*.xml
-data/iJO1366_test/*.out
+data/*/*.out
 data/*/medium.tsv
 data/*/data/protein_summary.tsv
 data/subtilis/*.xml
+data/Athal/*.xml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
