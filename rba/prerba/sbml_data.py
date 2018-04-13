@@ -237,14 +237,14 @@ class CobraNoteParser(object):
         for ga in self._gene_associations(reaction.notes):
             composition = self._parse_gene_association(ga)
             if composition:
-                result.append(composition)
+                result += composition
         return result
 
     def _gene_associations(self, note):
         # fields may be encapsulated in a <html> tag (or equivalent)
         note = self._remove_html_tag(note)
         return (note.getChild(i).getChild(0).toString()
-                for i in range(notes.getNumChildren()))
+                for i in range(note.getNumChildren()))
 
     def _remove_html_tag(self, note):
         if (note.getNumChildren() == 1
