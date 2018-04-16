@@ -1,28 +1,24 @@
 UNIPROT NAME	USER ID
-Peroxisome membrane	[MISSING]
-Peroxisome matrix	[MISSING]
-Golgi apparatus	[MISSING]
-Plastid	[MISSING]
-Peroxisome	[MISSING]
-Endoplasmic reticulum	[MISSING]
-Vacuole	[MISSING]
-Membrane	[MISSING]
-Endoplasmic reticulum lumen	[MISSING]
-Mitochondrion membrane	[MISSING]
-Endoplasmic reticulum membrane	[MISSING]
-Microsome membrane	[MISSING]
-Secreted	[MISSING]
-Vacuole membrane	[MISSING]
-Isoform 1	[MISSING]
-Nucleus	[MISSING]
-Mitochondrion matrix	[MISSING]
-Phosphatidylserine decarboxylase 1 beta chain	[MISSING]
-Mitochondrion outer membrane	[MISSING]
-Endosome membrane	[MISSING]
-Mitochondrion inner membrane	[MISSING]
-Glyoxysome	[MISSING]
-Cytoplasm	[MISSING]
-Isoform Short	[MISSING]
-Cell membrane	[MISSING]
-Golgi apparatus membrane	[MISSING]
-Mitochondrion	[MISSING]
+Plastid	Plastid
+Mitochondrion	Mitochondrion
+Golgi apparatus	Golgi_apparatus
+Cytoplasm	Cytoplasm
+Mitochondrion membrane	Mitochondrion_membrane
+Secreted	Secreted
+Cell membrane	Cell_membrane
+Membrane	Membrane
+Peroxisome	Peroxisome
+Vacuole membrane	Vacuole_membrane
+Mitochondrion inner membrane	Mitochondrion_inner_membrane
+Endoplasmic reticulum membrane	Endoplasmic_reticulum_membrane
+Vacuole	Vacuole
+Nucleus	Nucleus
+Isoform 1	Isoform_1
+Mitochondrion matrix	Mitochondrion_matrix
+Mitochondrion outer membrane	Mitochondrion_outer_membrane
+Glyoxysome	Glyoxysome
+Endosome membrane	Endosome_membrane
+Microsome membrane	Microsome_membrane
+Golgi apparatus membrane	Golgi_apparatus_membrane
+Peroxisome membrane	Peroxisome_membrane
+Endoplasmic reticulum	Endoplasmic_reticulum
