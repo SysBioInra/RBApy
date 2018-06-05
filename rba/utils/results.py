@@ -4,6 +4,7 @@ from __future__ import absolute_import, division, print_function
 
 import itertools
 import numpy
+import os.path
 
 
 class Results(object):

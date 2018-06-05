@@ -80,7 +80,7 @@ setup(
     install_requires=[
         'pandas',
         'lxml',
-        'libsbml',
+        'python-libsbml',
         'scipy',
         'biopython',
         'cplex',
