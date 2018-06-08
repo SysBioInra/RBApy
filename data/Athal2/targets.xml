@@ -1,0 +1,69 @@
+<RBATargets>
+  <listOfTargetGroups>
+    <targetGroup id="translation_targets">
+      <listOfConcentrations>
+        <targetSpecies value="nonenzymatic_proteins_Microsome_membrane" species="average_protein_Microsome_membrane"/>
+        <targetSpecies value="nonenzymatic_proteins_Plastid" species="average_protein_Plastid"/>
+        <targetSpecies value="nonenzymatic_proteins_Peroxisome" species="average_protein_Peroxisome"/>
+        <targetSpecies value="nonenzymatic_proteins_Isoform_1" species="average_protein_Isoform_1"/>
+        <targetSpecies value="nonenzymatic_proteins_Membrane" species="average_protein_Membrane"/>
+        <targetSpecies value="nonenzymatic_proteins_Endosome_membrane" species="average_protein_Endosome_membrane"/>
+        <targetSpecies value="nonenzymatic_proteins_Mitochondrion_inner_membrane" species="average_protein_Mitochondrion_inner_membrane"/>
+        <targetSpecies value="nonenzymatic_proteins_Endoplasmic_reticulum" species="average_protein_Endoplasmic_reticulum"/>
+        <targetSpecies value="nonenzymatic_proteins_Cell_membrane" species="average_protein_Cell_membrane"/>
+        <targetSpecies value="nonenzymatic_proteins_Golgi_apparatus_membrane" species="average_protein_Golgi_apparatus_membrane"/>
+        <targetSpecies value="nonenzymatic_proteins_Nucleus" species="average_protein_Nucleus"/>
+        <targetSpecies value="nonenzymatic_proteins_Endoplasmic_reticulum_membrane" species="average_protein_Endoplasmic_reticulum_membrane"/>
+        <targetSpecies value="nonenzymatic_proteins_Mitochondrion_outer_membrane" species="average_protein_Mitochondrion_outer_membrane"/>
+        <targetSpecies value="nonenzymatic_proteins_Vacuole_membrane" species="average_protein_Vacuole_membrane"/>
+        <targetSpecies value="nonenzymatic_proteins_Golgi_apparatus" species="average_protein_Golgi_apparatus"/>
+        <targetSpecies value="nonenzymatic_proteins_Vacuole" species="average_protein_Vacuole"/>
+        <targetSpecies value="nonenzymatic_proteins_Glyoxysome" species="average_protein_Glyoxysome"/>
+        <targetSpecies value="nonenzymatic_proteins_Peroxisome_membrane" species="average_protein_Peroxisome_membrane"/>
+        <targetSpecies value="nonenzymatic_proteins_Cytoplasm" species="average_protein_Cytoplasm"/>
+        <targetSpecies value="nonenzymatic_proteins_Mitochondrion_membrane" species="average_protein_Mitochondrion_membrane"/>
+        <targetSpecies value="nonenzymatic_proteins_Secreted" species="average_protein_Secreted"/>
+        <targetSpecies value="nonenzymatic_proteins_Mitochondrion_matrix" species="average_protein_Mitochondrion_matrix"/>
+        <targetSpecies value="nonenzymatic_proteins_Mitochondrion" species="average_protein_Mitochondrion"/>
+      </listOfConcentrations>
+    </targetGroup>
+    <targetGroup id="transcription_targets">
+      <listOfConcentrations>
+        <targetSpecies value="mrna_concentration" species="mrna"/>
+      </listOfConcentrations>
+      <listOfProductionFluxes>
+        <targetSpecies value="mrna_degradation_flux" species="mrna"/>
+      </listOfProductionFluxes>
+    </targetGroup>
+    <targetGroup id="replication_targets">
+      <listOfConcentrations>
+        <targetSpecies value="dna_concentration" species="dna"/>
+      </listOfConcentrations>
+    </targetGroup>
+    <targetGroup id="rna_degradation">
+      <listOfDegradationFluxes>
+        <targetSpecies value="mrna_degradation_flux" species="mrna"/>
+      </listOfDegradationFluxes>
+    </targetGroup>
+    <targetGroup id="metabolite_production">
+      <listOfConcentrations>
+        <targetSpecies value="S_AMP_c_concentration" species="S_AMP_c"/>
+        <targetSpecies value="S_CTP_c_concentration" species="S_CTP_c"/>
+        <targetSpecies value="S_CoA_c_concentration" species="S_CoA_c"/>
+        <targetSpecies value="S_ATP_c_concentration" species="S_ATP_c"/>
+        <targetSpecies value="S_ADP_c_concentration" species="S_ADP_c"/>
+        <targetSpecies value="S_NADPH_c_concentration" species="S_NADPH_c"/>
+        <targetSpecies value="S_GMP_c_concentration" species="S_GMP_c"/>
+        <targetSpecies value="S_GDP_c_concentration" species="S_GDP_c"/>
+        <targetSpecies value="S_CDP_c_concentration" species="S_CDP_c"/>
+        <targetSpecies value="S_GTP_c_concentration" species="S_GTP_c"/>
+      </listOfConcentrations>
+    </targetGroup>
+    <targetGroup id="macrocomponent_production"/>
+    <targetGroup id="maintenance_atp_target">
+      <listOfReactionFluxes>
+        <targetReaction lowerBound="maintenance_atp" reaction="R_maintenance_atp"/>
+      </listOfReactionFluxes>
+    </targetGroup>
+  </listOfTargetGroups>
+</RBATargets>

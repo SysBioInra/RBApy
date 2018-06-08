@@ -9,7 +9,7 @@
 # stored. Can be asolute path or path relative to where program is RUN (!).  
 ##############################################################################
 
-INPUT_DIR = data/Athal2/data
+INPUT_DIR = data/Cyano/data
 
 ##############################################################################
 # SBML_FILE
@@ -17,17 +17,7 @@ INPUT_DIR = data/Athal2/data
 # located in INPUT_DIR (or provide a path relative to INPUT_DIR).
 ##############################################################################
 
-SBML_FILE = model.xml
-
-##############################################################################
-# EXTERNAL_COMPARTMENTS
-# Identifier of SBML compartments that contain boundary metabolites. If
-# metabolites are already tagged as 'boundaryCondition', you do not need
-# to specify this parameter. If several compartments contain boundary
-# metabolites, write them down separated by a comma.
-##############################################################################
-
-EXTERNAL_COMPARTMENTS = C_ext
+SBML_FILE = data_sd07.xml
 
 ##############################################################################
 # ORGANISM_ID                                                                  
@@ -38,7 +28,7 @@ EXTERNAL_COMPARTMENTS = C_ext
 #   www.uniprot.org/taxonomy/
 ##############################################################################
 
-ORGANISM_ID = 3702
+ORGANISM_ID = 1111708
 
 ##############################################################################
 # OUTPUT_DIR                                                                  
@@ -46,5 +36,5 @@ ORGANISM_ID = 3702
 # relative to where program is RUN (!).
 ##############################################################################
 
-OUTPUT_DIR = data/Athal2
+OUTPUT_DIR = data/Cyano
 
