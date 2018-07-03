@@ -12,7 +12,7 @@ import rba  # noqa
 
 def main():
     output = '.'
-    ModelConverter('old_data/', 'medium_2').model.write_files('.')
+    ModelConverter('old_data/', 'medium_2').model.write('.')
 
 
 class ModelConverter(object):
@@ -27,7 +27,7 @@ class ModelConverter(object):
         self._read_parameters()
         self._read_enzymes(medium)
         self._read_processes()
-        self.model.medium = self.model.read_medium('medium.tsv')
+        self.model.set_medium('medium.tsv')
         self.adapt_metabolite_names()
         self.add_matp_process()
 
@@ -128,7 +128,7 @@ class ModelConverter(object):
                                    rba.xml.is_true(e.get('zero_cost')))
             enzymes.append(new_e)
             n = e.find('machineryComposition')
-            if n:
+            if n is not None:
                 new_e.machinery_composition \
                     = rba.xml.MachineryComposition.from_xml_node(n)
 
@@ -214,30 +214,34 @@ class ModelConverter(object):
                 )
             for deg in p.iterfind('operatingCosts/degradation'):
                 new_p.processings.degradations.append(
-                    rba.xml.Operation.from_xml_node(deg)
+                    self._create_processing(deg)
                     )
 
     def _create_processing(self, node):
-        result = rba.xml.Processing.from_xml_node(node)
+        result = rba.xml.Processing(node.get('componentMap'),
+                                    node.get('set'))
         if result.set == 'protein':
             set_ = self.model.proteins
         elif result.set == 'rna':
             set_ = self.model.rnas
-        elif resut.set == 'dna':
+        elif result.set == 'dna':
             set_ = self.model.dna
         for id_ in (m.id for m in set_.macromolecules):
             result.inputs.append(rba.xml.SpeciesReference(id_, 1))
         return result
 
     def _read_component_maps(self):
+        root = self._xml_root('processes.xml')
         for map_ in root.iterfind('listOfComponentMaps/componentMap'):
-            new_map = rba.xml.ComponentMap(map_.get('id'))
-            self.model.processes.component_maps.append(new_m)
+            new_map = rba.xml.ProcessingMap(map_.get('id'))
+            self.model.processes.processing_maps.append(new_map)
             node = map_.find('constantCost')
             if node is not None:
-                new_m.constant_cost = rba.xml.ConstantCost.from_xml_node(node)
+                new_map.constant_processing = rba.xml.ConstantProcessing.from_xml_node(node)
             for c in map_.iterfind('cost'):
-                new_m.costs.append(rba.xml.Cost.from_xml_node(c))
+                new_map.component_processings.append(
+                    rba.xml.ComponentProcessing.from_xml_node(c)
+                )
 
     def _read_targets(self):
         root = self._xml_root('processes.xml')
@@ -249,17 +253,17 @@ class ModelConverter(object):
                     target, target.get('species') + '_concentration'
                 )
                 if target.get('degradation') == '1':
-                    new_group.targets.degradation_fluxes.append(new_t)
+                    new_group.degradation_fluxes.append(new_t)
                 elif target.get('dilution_compensation') == '0':
-                    new_group.targets.production_fluxes.append(new_t)
+                    new_group.production_fluxes.append(new_t)
                 else:
-                    new_group.targets.concentrations.append(new_t)
-            for target in p.iterfind('targets/targetReaction'):
+                    new_group.concentrations.append(new_t)
+            for target in process.iterfind('targets/targetReaction'):
                 new_t = rba.xml.TargetReaction(target.get('reaction'))
                 new_t.value = self._parse_value(
                     target, target.get('reaction') + '_flux'
                     )
-                new_group.targets.reaction_fluxes.append(new_t)
+                new_group.reaction_fluxes.append(new_t)
             if not new_group.is_empty():
                 self.model.targets.target_groups.append(new_group)
 
@@ -276,27 +280,28 @@ class ModelConverter(object):
             mc = p.machinery.machinery_composition
             for sr in chain(mc.reactants, mc.products):
                 sr.species = metabolite_name(sr.species)
-            for t in chain(p.targets.concentrations,
-                           p.targets.production_fluxes,
-                           p.targets.degradation_fluxes):
+        for g in self.model.targets.target_groups:
+            for t in chain(g.concentrations,
+                           g.production_fluxes,
+                           g.degradation_fluxes):
                 t.species = metabolite_name(t.species)
-        for m in self.model.processes.component_maps:
-            for s in chain(m.constant_cost.reactants,
-                           m.constant_cost.products):
+        for m in self.model.processes.processing_maps:
+            for s in chain(m.constant_processing.reactants,
+                           m.constant_processing.products):
                 s.species = metabolite_name(s.species)
-            for c in m.costs:
+            for c in m.component_processings:
                 for s in chain(c.reactants, c.products):
                     s.species = metabolite_name(s.species)
         for fn in self.model.parameters.functions:
             if fn.variable:
                 fn.variable = metabolite_name(fn.variable)
 
-    def add_matp_process():
-        result = rba.xml.Process('P_maintenance_atp', 'Maintenance ATP')
-        self.model.processes.process.append(result)
+    def add_matp_process(self):
+        result = rba.xml.TargetGroup('maintenance_atp_target')
+        self.model.targets.target_groups.append(result)
         target = rba.xml.TargetReaction('Eatpm')
         target.lower_bound = 'maintenanceATP'
-        result.targets.reaction_fluxes.append(target)
+        result.reaction_fluxes.append(target)
 
 
 def metabolite_name(old_name):
