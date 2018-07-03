@@ -19,6 +19,7 @@ INPUT_DIR = data/Athal/data
 
 SBML_FILE = model.xml
 
+
 ##############################################################################
 # EXTERNAL_COMPARTMENTS
 # Identifier of SBML compartments that contain boundary metabolites. If
@@ -28,6 +29,7 @@ SBML_FILE = model.xml
 ##############################################################################
 
 EXTERNAL_COMPARTMENTS = C_ext
+
 
 ##############################################################################
 # ORGANISM_ID                                                                  

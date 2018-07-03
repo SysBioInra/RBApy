@@ -1,8 +1,10 @@
 
 data/iJO1366_test/*.xml
-data/iJO1366_test/*.out
-data/iJO1366_test/medium.tsv
-data/iJO1366_test/data/protein_summary.tsv
+data/*/*.out
+data/*/medium.tsv
+data/*/data/protein_summary.tsv
+data/subtilis/*.xml
+data/Athal/*.xml
 
 .DS_Store
 

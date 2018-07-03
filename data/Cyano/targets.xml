@@ -1,0 +1,80 @@
+<RBATargets>
+  <listOfTargetGroups>
+    <targetGroup id="translation_targets">
+      <listOfConcentrations>
+        <targetSpecies value="nonenzymatic_proteins_Cellular_thylakoid_membrane" species="average_protein_Cellular_thylakoid_membrane"/>
+        <targetSpecies value="nonenzymatic_proteins_Secreted" species="average_protein_Secreted"/>
+        <targetSpecies value="nonenzymatic_proteins_Cell_inner_membrane" species="average_protein_Cell_inner_membrane"/>
+        <targetSpecies value="nonenzymatic_proteins_Cytoplasm" species="average_protein_Cytoplasm"/>
+        <targetSpecies value="nonenzymatic_proteins_Membrane" species="average_protein_Membrane"/>
+        <targetSpecies value="nonenzymatic_proteins_Periplasm" species="average_protein_Periplasm"/>
+        <targetSpecies value="nonenzymatic_proteins_Cell_membrane" species="average_protein_Cell_membrane"/>
+      </listOfConcentrations>
+    </targetGroup>
+    <targetGroup id="transcription_targets">
+      <listOfConcentrations>
+        <targetSpecies value="mrna_concentration" species="mrna"/>
+      </listOfConcentrations>
+      <listOfProductionFluxes>
+        <targetSpecies value="mrna_degradation_flux" species="mrna"/>
+      </listOfProductionFluxes>
+    </targetGroup>
+    <targetGroup id="replication_targets">
+      <listOfConcentrations>
+        <targetSpecies value="dna_concentration" species="dna"/>
+      </listOfConcentrations>
+    </targetGroup>
+    <targetGroup id="rna_degradation">
+      <listOfDegradationFluxes>
+        <targetSpecies value="mrna_degradation_flux" species="mrna"/>
+      </listOfDegradationFluxes>
+    </targetGroup>
+    <targetGroup id="metabolite_production">
+      <listOfConcentrations>
+        <targetSpecies value="M_nad_c_concentration" species="M_nad_c"/>
+        <targetSpecies value="M_trnaile_c_concentration" species="M_trnaile_c"/>
+        <targetSpecies value="M_trnahis_c_concentration" species="M_trnahis_c"/>
+        <targetSpecies value="M_trnapro_c_concentration" species="M_trnapro_c"/>
+        <targetSpecies value="M_trnaleu_c_concentration" species="M_trnaleu_c"/>
+        <targetSpecies value="M_spmd_c_concentration" species="M_spmd_c"/>
+        <targetSpecies value="M_trnaval_c_concentration" species="M_trnaval_c"/>
+        <targetSpecies value="M_trnacys_c_concentration" species="M_trnacys_c"/>
+        <targetSpecies value="M_pi_c_concentration" species="M_pi_c"/>
+        <targetSpecies value="M_cmp_c_concentration" species="M_cmp_c"/>
+        <targetSpecies value="M_trnaarg_c_concentration" species="M_trnaarg_c"/>
+        <targetSpecies value="M_trnamet_c_concentration" species="M_trnamet_c"/>
+        <targetSpecies value="M_trnalys_c_concentration" species="M_trnalys_c"/>
+        <targetSpecies value="M_amp_c_concentration" species="M_amp_c"/>
+        <targetSpecies value="M_10fthf_c_concentration" species="M_10fthf_c"/>
+        <targetSpecies value="M_k_c_concentration" species="M_k_c"/>
+        <targetSpecies value="M_trnaala_c_concentration" species="M_trnaala_c"/>
+        <targetSpecies value="M_ctp_c_concentration" species="M_ctp_c"/>
+        <targetSpecies value="M_coa_c_concentration" species="M_coa_c"/>
+        <targetSpecies value="M_atp_c_concentration" species="M_atp_c"/>
+        <targetSpecies value="M_nadp_c_concentration" species="M_nadp_c"/>
+        <targetSpecies value="M_trnathr_c_concentration" species="M_trnathr_c"/>
+        <targetSpecies value="M_adp_c_concentration" species="M_adp_c"/>
+        <targetSpecies value="M_nadph_c_concentration" species="M_nadph_c"/>
+        <targetSpecies value="M_trnatyr_c_concentration" species="M_trnatyr_c"/>
+        <targetSpecies value="M_trnaglu_c_concentration" species="M_trnaglu_c"/>
+        <targetSpecies value="M_trnaasp_c_concentration" species="M_trnaasp_c"/>
+        <targetSpecies value="M_gmp_c_concentration" species="M_gmp_c"/>
+        <targetSpecies value="M_gdp_c_concentration" species="M_gdp_c"/>
+        <targetSpecies value="M_trnaasn_c_concentration" species="M_trnaasn_c"/>
+        <targetSpecies value="M_cdp_c_concentration" species="M_cdp_c"/>
+        <targetSpecies value="M_trnaphe_c_concentration" species="M_trnaphe_c"/>
+        <targetSpecies value="M_ppi_c_concentration" species="M_ppi_c"/>
+        <targetSpecies value="M_trnaser_c_concentration" species="M_trnaser_c"/>
+        <targetSpecies value="M_trnatrp_c_concentration" species="M_trnatrp_c"/>
+        <targetSpecies value="M_trnagly_c_concentration" species="M_trnagly_c"/>
+        <targetSpecies value="M_gtp_c_concentration" species="M_gtp_c"/>
+      </listOfConcentrations>
+    </targetGroup>
+    <targetGroup id="macrocomponent_production"/>
+    <targetGroup id="maintenance_atp_target">
+      <listOfReactionFluxes>
+        <targetReaction lowerBound="maintenance_atp" reaction="R_maintenance_atp"/>
+      </listOfReactionFluxes>
+    </targetGroup>
+  </listOfTargetGroups>
+</RBATargets>

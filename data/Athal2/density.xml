@@ -1,0 +1,26 @@
+<RBADensity>
+  <listOfTargetDensities>
+    <targetDensity upperBound="Microsome_membrane_density" compartment="Microsome_membrane"/>
+    <targetDensity upperBound="Plastid_density" compartment="Plastid"/>
+    <targetDensity upperBound="Peroxisome_density" compartment="Peroxisome"/>
+    <targetDensity upperBound="Isoform_1_density" compartment="Isoform_1"/>
+    <targetDensity upperBound="Membrane_density" compartment="Membrane"/>
+    <targetDensity upperBound="Endosome_membrane_density" compartment="Endosome_membrane"/>
+    <targetDensity upperBound="Mitochondrion_inner_membrane_density" compartment="Mitochondrion_inner_membrane"/>
+    <targetDensity upperBound="Endoplasmic_reticulum_density" compartment="Endoplasmic_reticulum"/>
+    <targetDensity upperBound="Cell_membrane_density" compartment="Cell_membrane"/>
+    <targetDensity upperBound="Golgi_apparatus_membrane_density" compartment="Golgi_apparatus_membrane"/>
+    <targetDensity upperBound="Nucleus_density" compartment="Nucleus"/>
+    <targetDensity upperBound="Endoplasmic_reticulum_membrane_density" compartment="Endoplasmic_reticulum_membrane"/>
+    <targetDensity upperBound="Mitochondrion_outer_membrane_density" compartment="Mitochondrion_outer_membrane"/>
+    <targetDensity upperBound="Vacuole_membrane_density" compartment="Vacuole_membrane"/>
+    <targetDensity upperBound="Golgi_apparatus_density" compartment="Golgi_apparatus"/>
+    <targetDensity upperBound="Vacuole_density" compartment="Vacuole"/>
+    <targetDensity upperBound="Glyoxysome_density" compartment="Glyoxysome"/>
+    <targetDensity upperBound="Peroxisome_membrane_density" compartment="Peroxisome_membrane"/>
+    <targetDensity upperBound="Cytoplasm_density" compartment="Cytoplasm"/>
+    <targetDensity upperBound="Mitochondrion_membrane_density" compartment="Mitochondrion_membrane"/>
+    <targetDensity upperBound="Mitochondrion_matrix_density" compartment="Mitochondrion_matrix"/>
+    <targetDensity upperBound="Mitochondrion_density" compartment="Mitochondrion"/>
+  </listOfTargetDensities>
+</RBADensity>

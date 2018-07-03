@@ -4,6 +4,7 @@ from __future__ import absolute_import, division, print_function
 
 import itertools
 import numpy
+import os.path
 
 
 class Results(object):
@@ -32,7 +33,7 @@ class Results(object):
         return {i: self.variables[i] for i in self.reactions}
 
     def enzyme_concentrations(self):
-        return {i: self.variables.get(i + '_enzyme', 0) for i in self.enzymes}
+        return {i: self.variables.get(i, 0) for i in self.enzymes}
 
     def process_machinery_concentrations(self):
         return {i: self.variables[i + '_machinery'] for i in self.processes}

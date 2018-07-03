@@ -5,11 +5,13 @@ from __future__ import division, print_function, absolute_import
 
 # global imports
 import os.path
-import urllib
 try:
     from urllib.request import Request, urlopen
+    from urllib.parse import urlencode
 except ImportError:
     from urllib2 import Request, urlopen
+    from urllib import urlencode
+import shutil
 
 
 def create_uniprot_if_absent(input_file, organism_id):
@@ -20,7 +22,7 @@ def create_uniprot_if_absent(input_file, organism_id):
         if len(raw_data) == 0:
             raise UserWarning('Invalid organism, could not retrieve '
                               'Uniprot data.')
-        with open(input_file, 'w') as f:
+        with open(input_file, 'wb') as f:
             f.write(raw_data)
 
 
@@ -54,13 +56,12 @@ class UniprotImporter(object):
             'query': 'organism:' + organism_id,
             'columns': url_columns()
         }
-        url_data = urllib.urlencode(params)
-        request = Request(url, url_data)
+        url_data = urlencode(params)
+        request = Request(url, url_data.encode('ascii'))
         contact = "anne.goelzer@inra.fr"
         request.add_header('User-Agent', 'Python %s' % contact)
         response = urlopen(request)
         self.data = response.read()
-
 
 def url_columns():
     """Build the url part that specifies which columns we want."""

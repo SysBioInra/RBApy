@@ -99,7 +99,7 @@ class UserData(object):
             if id_ not in curated_data.data:
                 # id_ not mapped in curation file: add new entry
                 sbml_id = sbml_lookup.get((id_ + '_c').lower(), None)
-                conc = self.default.metabolites.concentration.get(key, 0)
+                conc = self.default.metabolites.concentration.get(id_, 0)
                 curated_data.append(id_, name, sbml_id, conc)
         curated_data.update_file()
         return curated_data.data

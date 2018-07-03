@@ -1,0 +1,1076 @@
+<RBAParameters>
+  <listOfFunctions>
+    <function id="amino_acid_concentration" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="-inf"/>
+        <parameter id="LINEAR_CONSTANT" value="6.3138"/>
+        <parameter id="Y_MAX" value="inf"/>
+        <parameter id="LINEAR_COEF" value="-0.9757"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Cytoplasm" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.7"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Secreted" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.1"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Microsome_membrane" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Plastid" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Peroxisome" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Isoform_1" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Membrane" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Endosome_membrane" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Mitochondrion_inner_membrane" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Endoplasmic_reticulum" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Cell_membrane" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Golgi_apparatus_membrane" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Nucleus" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Endoplasmic_reticulum_membrane" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Mitochondrion_outer_membrane" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Vacuole_membrane" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Golgi_apparatus" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Vacuole" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Glyoxysome" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Peroxisome_membrane" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Mitochondrion_membrane" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Mitochondrion_matrix" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_protein_Mitochondrion" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00952380952381"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Cytoplasm" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.3526"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0502"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Secreted" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="1"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Microsome_membrane" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Plastid" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Peroxisome" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Isoform_1" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Membrane" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Endosome_membrane" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Mitochondrion_inner_membrane" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Endoplasmic_reticulum" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Cell_membrane" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Golgi_apparatus_membrane" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Nucleus" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Endoplasmic_reticulum_membrane" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Mitochondrion_outer_membrane" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Vacuole_membrane" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Golgi_apparatus" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Vacuole" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Glyoxysome" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Peroxisome_membrane" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Mitochondrion_membrane" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Mitochondrion_matrix" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_non_enzymatic_protein_Mitochondrion" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="0"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
+        <parameter id="Y_MAX" value="1"/>
+        <parameter id="LINEAR_COEF" value="-0.0496"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="Cytoplasm_density" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="4.8972"/>
+      </listOfParameters>
+    </function>
+    <function id="inverse_average_protein_length" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.00250331396871"/>
+      </listOfParameters>
+    </function>
+    <function id="zero" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0"/>
+      </listOfParameters>
+    </function>
+    <function id="ribosome_efficiency_MM" type="michaelisMenten" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="kmax" value="97200"/>
+        <parameter id="Y_MIN" value="32400"/>
+        <parameter id="Km" value="0.5"/>
+      </listOfParameters>
+    </function>
+    <function id="ribosome_efficiency_CM" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="97200"/>
+      </listOfParameters>
+    </function>
+    <function id="fraction_active_ribosomes" type="exponential" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="RATE" value="-0.083333"/>
+      </listOfParameters>
+    </function>
+    <function id="chaperone_efficiency_LM" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="-inf"/>
+        <parameter id="LINEAR_CONSTANT" value="-2888.0051"/>
+        <parameter id="Y_MAX" value="inf"/>
+        <parameter id="LINEAR_COEF" value="36044.48"/>
+        <parameter id="X_MAX" value="1.6"/>
+        <parameter id="X_MIN" value="0.25"/>
+      </listOfParameters>
+    </function>
+    <function id="mrna_degradation_flux" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.15996"/>
+      </listOfParameters>
+    </function>
+    <function id="mrna_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.01"/>
+      </listOfParameters>
+    </function>
+    <function id="dna_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0807"/>
+      </listOfParameters>
+    </function>
+    <function id="maintenance_atp" type="linear" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="Y_MIN" value="-inf"/>
+        <parameter id="LINEAR_CONSTANT" value="-3.1595"/>
+        <parameter id="Y_MAX" value="inf"/>
+        <parameter id="LINEAR_COEF" value="12.1595"/>
+        <parameter id="X_MAX" value="inf"/>
+        <parameter id="X_MIN" value="1"/>
+      </listOfParameters>
+    </function>
+    <function id="S_AMP_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0047"/>
+      </listOfParameters>
+    </function>
+    <function id="S_CTP_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0005"/>
+      </listOfParameters>
+    </function>
+    <function id="S_CoA_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0003"/>
+      </listOfParameters>
+    </function>
+    <function id="S_ATP_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.003"/>
+      </listOfParameters>
+    </function>
+    <function id="S_ADP_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0026"/>
+      </listOfParameters>
+    </function>
+    <function id="S_NADPH_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0002"/>
+      </listOfParameters>
+    </function>
+    <function id="S_GMP_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0005"/>
+      </listOfParameters>
+    </function>
+    <function id="S_GDP_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0002"/>
+      </listOfParameters>
+    </function>
+    <function id="S_CDP_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0003"/>
+      </listOfParameters>
+    </function>
+    <function id="S_GTP_c_concentration" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="0.0004"/>
+      </listOfParameters>
+    </function>
+    <function id="default_efficiency" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="200000"/>
+      </listOfParameters>
+    </function>
+    <function id="default_transporter_efficiency" type="constant" variable="growth_rate">
+      <listOfParameters>
+        <parameter id="CONSTANT" value="2000000.0"/>
+      </listOfParameters>
+    </function>
+    <function id="R_BIO_L_S_Sucrose_biomass_transport_factor" type="michaelisMenten" variable="S_Sucrose_biomass">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_BIO_L_S_Glucose_biomass_transport_factor" type="michaelisMenten" variable="S_Glucose_biomass">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_BIO_L_S_beta_45_D_45_Fructose_biomass_transport_factor" type="michaelisMenten" variable="S_beta_45_D_45_Fructose_biomass">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_BIO_L_S_L_45_Alanine_biomass_transport_factor" type="michaelisMenten" variable="S_L_45_Alanine_biomass">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_BIO_L_S_L_45_Aspartate_biomass_transport_factor" type="michaelisMenten" variable="S_L_45_Aspartate_biomass">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_BIO_L_S_L_45_Glutamate_biomass_transport_factor" type="michaelisMenten" variable="S_L_45_Glutamate_biomass">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_BIO_L_S_L_45_Glutamine_biomass_transport_factor" type="michaelisMenten" variable="S_L_45_Glutamine_biomass">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_BIO_L_S_L_45_Serine_biomass_transport_factor" type="michaelisMenten" variable="S_L_45_Serine_biomass">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex1_S_CO2_ext_transport_factor" type="michaelisMenten" variable="S_CO2_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex2_S_H2O_ext_transport_factor" type="michaelisMenten" variable="S_H2O_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex3_S_Oxygen_ext_transport_factor" type="michaelisMenten" variable="S_Oxygen_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex4_S_Nitrate_ext_transport_factor" type="michaelisMenten" variable="S_Nitrate_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex5_S_NH3_ext_transport_factor" type="michaelisMenten" variable="S_NH3_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex6_S_L_45_Glutamate_ext_transport_factor" type="michaelisMenten" variable="S_L_45_Glutamate_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex7_S_L_45_Glutamine_ext_transport_factor" type="michaelisMenten" variable="S_L_45_Glutamine_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex8_S_L_45_Aspartate_ext_transport_factor" type="michaelisMenten" variable="S_L_45_Aspartate_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex9_S_L_45_Alanine_ext_transport_factor" type="michaelisMenten" variable="S_L_45_Alanine_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex10_S_L_45_Serine_ext_transport_factor" type="michaelisMenten" variable="S_L_45_Serine_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex11_S_Hydrogen_sulfide_ext_transport_factor" type="michaelisMenten" variable="S_Hydrogen_sulfide_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex12_S_Sulfate_ext_transport_factor" type="michaelisMenten" variable="S_Sulfate_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex12_2_S_Sulfate_ext_transport_factor" type="michaelisMenten" variable="S_Sulfate_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex13_S_Glucose_ext_transport_factor" type="michaelisMenten" variable="S_Glucose_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex14_S_beta_45_D_45_Fructose_ext_transport_factor" type="michaelisMenten" variable="S_beta_45_D_45_Fructose_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex15_S_Maltose_ext_transport_factor" type="michaelisMenten" variable="S_Maltose_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex17_S_Sucrose_ext_transport_factor" type="michaelisMenten" variable="S_Sucrose_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_Ex18_S_Orthophosphate_ext_transport_factor" type="michaelisMenten" variable="S_Orthophosphate_ext">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+  </listOfFunctions>
+  <listOfAggregates>
+    <aggregate id="Microsome_membrane_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Microsome_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Plastid_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Plastid"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Peroxisome_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Peroxisome"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Isoform_1_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Isoform_1"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Membrane_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Endosome_membrane_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Endosome_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Mitochondrion_inner_membrane_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Mitochondrion_inner_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Endoplasmic_reticulum_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Endoplasmic_reticulum"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Cell_membrane_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Cell_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Golgi_apparatus_membrane_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Golgi_apparatus_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Nucleus_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Nucleus"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Endoplasmic_reticulum_membrane_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Endoplasmic_reticulum_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Mitochondrion_outer_membrane_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Mitochondrion_outer_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Vacuole_membrane_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Vacuole_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Golgi_apparatus_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Golgi_apparatus"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Vacuole_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Vacuole"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Glyoxysome_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Glyoxysome"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Peroxisome_membrane_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Peroxisome_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Mitochondrion_membrane_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Mitochondrion_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Mitochondrion_matrix_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Mitochondrion_matrix"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="Mitochondrion_density" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="fraction_protein_Mitochondrion"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Cytoplasm" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Cytoplasm"/>
+        <functionReference function="fraction_non_enzymatic_protein_Cytoplasm"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Secreted" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Secreted"/>
+        <functionReference function="fraction_non_enzymatic_protein_Secreted"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Microsome_membrane" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Microsome_membrane"/>
+        <functionReference function="fraction_non_enzymatic_protein_Microsome_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Plastid" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Plastid"/>
+        <functionReference function="fraction_non_enzymatic_protein_Plastid"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Peroxisome" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Peroxisome"/>
+        <functionReference function="fraction_non_enzymatic_protein_Peroxisome"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Isoform_1" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Isoform_1"/>
+        <functionReference function="fraction_non_enzymatic_protein_Isoform_1"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Membrane" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Membrane"/>
+        <functionReference function="fraction_non_enzymatic_protein_Membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Endosome_membrane" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Endosome_membrane"/>
+        <functionReference function="fraction_non_enzymatic_protein_Endosome_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Mitochondrion_inner_membrane" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Mitochondrion_inner_membrane"/>
+        <functionReference function="fraction_non_enzymatic_protein_Mitochondrion_inner_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Endoplasmic_reticulum" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Endoplasmic_reticulum"/>
+        <functionReference function="fraction_non_enzymatic_protein_Endoplasmic_reticulum"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Cell_membrane" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Cell_membrane"/>
+        <functionReference function="fraction_non_enzymatic_protein_Cell_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Golgi_apparatus_membrane" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Golgi_apparatus_membrane"/>
+        <functionReference function="fraction_non_enzymatic_protein_Golgi_apparatus_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Nucleus" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Nucleus"/>
+        <functionReference function="fraction_non_enzymatic_protein_Nucleus"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Endoplasmic_reticulum_membrane" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Endoplasmic_reticulum_membrane"/>
+        <functionReference function="fraction_non_enzymatic_protein_Endoplasmic_reticulum_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Mitochondrion_outer_membrane" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Mitochondrion_outer_membrane"/>
+        <functionReference function="fraction_non_enzymatic_protein_Mitochondrion_outer_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Vacuole_membrane" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Vacuole_membrane"/>
+        <functionReference function="fraction_non_enzymatic_protein_Vacuole_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Golgi_apparatus" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Golgi_apparatus"/>
+        <functionReference function="fraction_non_enzymatic_protein_Golgi_apparatus"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Vacuole" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Vacuole"/>
+        <functionReference function="fraction_non_enzymatic_protein_Vacuole"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Glyoxysome" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Glyoxysome"/>
+        <functionReference function="fraction_non_enzymatic_protein_Glyoxysome"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Peroxisome_membrane" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Peroxisome_membrane"/>
+        <functionReference function="fraction_non_enzymatic_protein_Peroxisome_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Mitochondrion_membrane" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Mitochondrion_membrane"/>
+        <functionReference function="fraction_non_enzymatic_protein_Mitochondrion_membrane"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Mitochondrion_matrix" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Mitochondrion_matrix"/>
+        <functionReference function="fraction_non_enzymatic_protein_Mitochondrion_matrix"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="nonenzymatic_proteins_Mitochondrion" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="amino_acid_concentration"/>
+        <functionReference function="inverse_average_protein_length"/>
+        <functionReference function="fraction_protein_Mitochondrion"/>
+        <functionReference function="fraction_non_enzymatic_protein_Mitochondrion"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="ribosome_capacity" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="ribosome_efficiency_MM"/>
+        <functionReference function="fraction_active_ribosomes"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_BIO_L_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_BIO_L_S_Sucrose_biomass_transport_factor"/>
+        <functionReference function="R_BIO_L_S_Glucose_biomass_transport_factor"/>
+        <functionReference function="R_BIO_L_S_beta_45_D_45_Fructose_biomass_transport_factor"/>
+        <functionReference function="R_BIO_L_S_L_45_Alanine_biomass_transport_factor"/>
+        <functionReference function="R_BIO_L_S_L_45_Aspartate_biomass_transport_factor"/>
+        <functionReference function="R_BIO_L_S_L_45_Glutamate_biomass_transport_factor"/>
+        <functionReference function="R_BIO_L_S_L_45_Glutamine_biomass_transport_factor"/>
+        <functionReference function="R_BIO_L_S_L_45_Serine_biomass_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex1_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex1_S_CO2_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex2_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex2_S_H2O_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex3_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex3_S_Oxygen_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex4_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex4_S_Nitrate_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex5_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex5_S_NH3_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex6_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex6_S_L_45_Glutamate_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex7_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex7_S_L_45_Glutamine_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex8_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex8_S_L_45_Aspartate_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex9_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex9_S_L_45_Alanine_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex10_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex10_S_L_45_Serine_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex11_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex11_S_Hydrogen_sulfide_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex12_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex12_S_Sulfate_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex12_2_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex12_2_S_Sulfate_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex13_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex13_S_Glucose_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex14_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex14_S_beta_45_D_45_Fructose_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex15_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex15_S_Maltose_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex17_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex17_S_Sucrose_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_Ex18_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_Ex18_S_Orthophosphate_ext_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+  </listOfAggregates>
+</RBAParameters>

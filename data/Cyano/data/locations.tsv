@@ -1,0 +1,259 @@
+ENTRY	GENE NAME	NAME	LOCATION
+P74535	sll1336	Sll1336 protein	Cytoplasm
+Q57310	lpxB slr0015	Lipid-A-disaccharide synthase (EC 2.4.1.182)	Cytoplasm
+P54206	cbbS rbcS slr0012	Ribulose bisphosphate carboxylase small chain (RuBisCO small subunit) (EC 4.1.1.39)	Cytoplasm
+P74521	glgA1 glgA sll0945	Glycogen synthase 1 (EC 2.4.1.21) (Starch [bacterial glycogen] synthase 1)	Cytoplasm
+P73953	slr1512	Slr1512 protein	Cytoplasm
+P74181	ggt slr1269	Glutathione hydrolase proenzyme (EC 3.4.19.13) (Gamma-glutamyltranspeptidase proenzyme) (EC 2.3.2.2) [Cleaved into: Glutathione hydrolase large chain; Glutathione hydrolase small chain]	Cytoplasm
+P72840	slr1302	Slr1302 protein	Cytoplasm
+P74158	suhB sll1383	Inositol-1-monophosphatase (I-1-Pase) (IMPase) (Inositol-1-phosphatase) (EC 3.1.3.25)	Cytoplasm
+P73067	dxs sll1945	1-deoxy-D-xylulose-5-phosphate synthase (EC 2.2.1.7) (1-deoxyxylulose-5-phosphate synthase) (DXP synthase) (DXPS)	Cytoplasm
+Q59977	gltA sll0401	Citrate synthase (EC 2.3.3.16)	Cytoplasm
+P74301	nadC slr0936	Probable nicotinate-nucleotide pyrophosphorylase [carboxylating] (EC 2.4.2.19) (Quinolinate phosphoribosyltransferase [decarboxylating]) (QAPRTase)	Cytoplasm
+Q55863	pyk1 sll0587	Pyruvate kinase 1 (PK 1) (EC 2.7.1.40)	Cytoplasm
+P74246	slr1167	Uncharacterized oxidoreductase slr1167 (EC 1.1.-.-)	Cytoplasm
+P74240	nrdA slr1164	Ribonucleoside-diphosphate reductase subunit alpha (EC 1.17.4.1) (Ribonucleotide reductase)	Cytoplasm
+P74241	sat slr1165	Sulfate adenylyltransferase (EC 2.7.7.4) (ATP-sulfurylase) (Sulfate adenylate transferase) (SAT)	Cytoplasm
+P73403	sll1722	Sll1722 protein	Cytoplasm
+P27319	isiB sll0248	Flavodoxin	Cytoplasm
+Q55621	purF sll0757	Amidophosphoribosyltransferase (ATase) (EC 2.4.2.14) (Glutamine phosphoribosylpyrophosphate amidotransferase) (GPATase)	Cytoplasm
+P74435	trpF sll0356	N-(5'-phosphoribosyl)anthranilate isomerase (PRAI) (EC 5.3.1.24)	Cytoplasm
+Q55626	folD sll0753	Bifunctional protein FolD [Includes: Methylenetetrahydrofolate dehydrogenase (EC 1.5.1.5); Methenyltetrahydrofolate cyclohydrolase (EC 3.5.4.9)]	Cytoplasm
+P73367	aroQ sll1112	3-dehydroquinate dehydratase (3-dehydroquinase) (EC 4.2.1.10) (Type II DHQase)	Cytoplasm
+P73761	pyrF sll0838	Orotidine 5'-phosphate decarboxylase (EC 4.1.1.23) (OMP decarboxylase) (OMPDCase) (OMPdecase)	Cytoplasm
+P73660	hemC slr1887	Porphobilinogen deaminase (PBG) (EC 2.5.1.61) (Hydroxymethylbilane synthase) (HMBS) (Pre-uroporphyrinogen synthase)	Cytoplasm
+P74325	slr0953	Slr0953 protein	Cytoplasm
+P74309	fda fbaB slr0943	Fructose-bisphosphate aldolase class 1 (EC 4.1.2.13) (Fructose-bisphosphate aldolase class I) (FBP aldolase)	Cytoplasm
+P74308	slr0942	Aldo/keto reductase slr0942 (AKR) (EC 1.1.1.184) (AKR3G1)	Cytoplasm
+P73651	ribF slr1882	Bifunctional riboflavin kinase/FMN adenylyltransferase (Riboflavin biosynthesis protein RibF) [Includes: Riboflavin kinase (EC 2.7.1.26) (Flavokinase); FMN adenylyltransferase (EC 2.7.7.2) (FAD pyrophosphorylase) (FAD synthase)]	Cytoplasm
+P73648	glmM sll1758	Phosphoglucosamine mutase (EC 5.4.2.10)	Cytoplasm
+P28373	chlL frxC slr0749	Light-independent protochlorophyllide reductase iron-sulfur ATP-binding protein (DPOR subunit L) (LI-POR subunit L) (EC 1.3.7.7)	Cytoplasm
+P74292	nadE slr1691	Glutamine-dependent NAD(+) synthetase (EC 6.3.5.1) (NAD(+) synthase [glutamine-hydrolyzing])	Cytoplasm
+P74618	pgl devB sll1479	6-phosphogluconolactonase (6PGL) (EC 3.1.1.31)	Cytoplasm
+Q55498	purE sll0901	N5-carboxyaminoimidazole ribonucleotide mutase (N5-CAIR mutase) (EC 5.4.99.18) (5-(carboxyamino)imidazole ribonucleotide mutase)	Cytoplasm
+P72849	pbsA1 sll1184	Heme oxygenase 1 (EC 1.14.14.18)	Cytoplasm
+P74507	gpmI pgm slr1945	2,3-bisphosphoglycerate-independent phosphoglycerate mutase (BPG-independent PGAM) (Phosphoglyceromutase) (iPGM) (EC 5.4.2.12)	Cytoplasm
+Q55905	ppsA slr0301	Phosphoenolpyruvate synthase (PEP synthase) (EC 2.7.9.2) (Pyruvate, water dikinase)	Cytoplasm
+P55037	gltB sll1502	Ferredoxin-dependent glutamate synthase 1 (EC 1.4.7.1) (Fd-GOGAT)	Cytoplasm
+P72652	cpcF sll1051	Phycocyanin alpha phycocyanobilin lyase CpcF	Cytoplasm
+P73002	cbiA sll1501	Cobyrinate a,c-diamide synthase (EC 6.3.5.11) (Cobyrinic acid a,c-diamide synthetase)	Cytoplasm
+P72646	sll1054	Sll1054 protein	Cytoplasm
+P72988	lpxC sll1508	UDP-3-O-acyl-N-acetylglucosamine deacetylase (UDP-3-O-acyl-GlcNAc deacetylase) (EC 3.5.1.108) (UDP-3-O-[R-3-hydroxymyristoyl]-N-acetylglucosamine deacetylase)	Cytoplasm
+P73911	katG sll1987	Catalase-peroxidase (CP) (EC 1.11.1.21) (Peroxidase/catalase)	Cytoplasm
+Q55598	slr0384	Slr0384 protein	Cytoplasm
+P73426	ispF slr1542	2-C-methyl-D-erythritol 2,4-cyclodiphosphate synthase (MECDP-synthase) (MECPP-synthase) (MECPS) (EC 4.6.1.12)	Cytoplasm
+P74152	slr1467	Precorrin isomerase	Cytoplasm
+P74027	slr1334	Slr1334 protein	Cytoplasm
+P73493	gshB slr1238	Glutathione synthetase (EC 6.3.2.3) (GSH synthetase) (GSH-S) (GSHase) (Glutathione synthase)	Cytoplasm
+P54261	gcvT sll0171	Aminomethyltransferase (EC 2.1.2.10) (Glycine cleavage system T protein)	Cytoplasm
+P74134	acsF2 sll1874	Magnesium-protoporphyrin IX monomethyl ester [oxidative] cyclase 2 (Mg-protoporphyrin IX monomethyl ester oxidative cyclase 2) (EC 1.14.13.81)	Cytoplasm
+P74133	pbsA2 sll1875	Heme oxygenase 2 (EC 1.14.14.18)	Cytoplasm
+P74127	sll1878	ABC transporter	Cytoplasm
+P74373	dfa3 sll1521	Putative diflavin flavoprotein A 3 (EC 1.-.-.-)	Cytoplasm
+P73574	fabG slr0886	3-oxoacyl-[acyl-carrier-protein] reductase (EC 1.1.1.100) (3-ketoacyl-acyl carrier protein reductase)	Cytoplasm
+P73575	slr0887	Slr0887 protein	Cytoplasm
+P72663	ispE sll0711	4-diphosphocytidyl-2-C-methyl-D-erythritol kinase (CMK) (EC 2.7.1.148) (4-(cytidine-5'-diphospho)-2-C-methyl-D-erythritol kinase)	Cytoplasm
+P73058	hisD1 hisD slr1848	Histidinol dehydrogenase 1 (HDH 1) (EC 1.1.1.23)	Cytoplasm
+P72743	ubiX slr1099	Flavin prenyltransferase UbiX (EC 2.5.1.129)	Cytoplasm
+Q55336	purT slr0861	Formate-dependent phosphoribosylglycinamide formyltransferase (5'-phosphoribosylglycinamide transformylase 2) (Formate-dependent GAR transformylase) (EC 2.1.2.-) (GAR transformylase 2) (GART 2) (Non-folate glycinamide ribonucleotide transformylase) (Phosphoribosylglycinamide formyltransferase 2)	Cytoplasm
+P73086	slr2044	ABC transporter	Cytoplasm
+P73408	slr1840	Uncharacterized protein slr1840	Cytoplasm
+P73411	zwf slr1843	Glucose-6-phosphate 1-dehydrogenase (G6PD) (EC 1.1.1.49)	Cytoplasm
+P73410	cysK slr1842	Cysteine synthase (CSase) (EC 2.5.1.47) (O-acetylserine (thiol)-lyase) (OAS-TL) (O-acetylserine sulfhydrylase)	Cytoplasm
+Q55373	bchE slr0905	Anaerobic magnesium-protoporphyrin IX monomethyl ester cyclase (MPE cyclase) (EC 1.21.98.3)	Cytoplasm
+Q55484	lysA sll0504	Diaminopimelate decarboxylase (DAP decarboxylase) (DAPDC) (EC 4.1.1.20)	Cytoplasm
+P74724	purK sll0578	N5-carboxyaminoimidazole ribonucleotide synthase (N5-CAIR synthase) (EC 6.3.4.18) (5-(carboxyamino)imidazole ribonucleotide synthetase)	Cytoplasm
+Q55749	cobA sll0378	Uroporphyrinogen-III C-methyltransferase (Urogen III methylase) (EC 2.1.1.107) (SUMT) (Uroporphyrinogen III methylase) (UROM)	Cytoplasm
+Q55756	carB sll0370	Carbamoyl-phosphate synthase large chain (EC 6.3.5.5) (Carbamoyl-phosphate synthetase ammonia chain)	Cytoplasm
+Q55731	sll0398	Deoxyguanosinetriphosphate triphosphohydrolase-like protein	Cytoplasm
+Q55643	ispH lytB slr0348	4-hydroxy-3-methylbut-2-enyl diphosphate reductase (HMBPP reductase) (EC 1.17.7.4)	Cytoplasm
+P74073	sll1258	Sll1258 protein	Cytoplasm
+Q55135	purU sll0070	Formyltetrahydrofolate deformylase (EC 3.5.1.10) (Formyl-FH(4) hydrolase)	Cytoplasm
+P74207	leuD sll1444	3-isopropylmalate dehydratase small subunit (EC 4.2.1.33) (Alpha-IPM isomerase) (IPMI) (Isopropylmalate isomerase)	Cytoplasm
+P74208	pyrG sll1443	CTP synthase (EC 6.3.4.2) (Cytidine 5'-triphosphate synthase) (Cytidine triphosphate synthetase) (CTP synthetase) (CTPS) (UTP--ammonia ligase)	Cytoplasm
+P74211	pdxH fprA sll1440	Pyridoxine/pyridoxamine 5'-phosphate oxidase (EC 1.4.3.5) (PNP/PMP oxidase) (PNPOx) (Pyridoxal 5'-phosphate synthase)	Cytoplasm
+P54205	cbbL rbcL slr0009	Ribulose bisphosphate carboxylase large chain (RuBisCO large subunit) (EC 4.1.1.39)	Cytoplasm
+P73948	slr1508	Slr1508 protein	Cytoplasm
+Q55383	mdh sll0891	Malate dehydrogenase (EC 1.1.1.37)	Cytoplasm
+P74215	gatB sll1435	Aspartyl/glutamyl-tRNA(Asn/Gln) amidotransferase subunit B (Asp/Glu-ADT subunit B) (EC 6.3.5.-)	Cytoplasm
+P27320	petF fed ssl0020	Ferredoxin-1 (Ferredoxin I)	Cytoplasm
+P72940	cysC slr0676	Probable adenylyl-sulfate kinase (EC 2.7.1.25) (APS kinase) (ATP adenosine-5'-phosphosulfate 3'-phosphotransferase) (Adenosine-5'-phosphosulfate kinase)	Cytoplasm
+P73672	ispG gcpE slr2136	4-hydroxy-3-methylbut-2-en-1-yl diphosphate synthase (ferredoxin) (EC 1.17.7.1) (1-hydroxy-2-methyl-2-(E)-butenyl 4-diphosphate synthase)	Cytoplasm
+Q55163	fmt slr0070	Methionyl-tRNA formyltransferase (EC 2.1.2.9)	Cytoplasm
+P73351	slr1201	Slr1201 protein	Cytoplasm
+P73832	cphB slr2001	Cyanophycinase (EC 3.4.15.6)	Cytoplasm
+P73833	cphA slr2002	Cyanophycin synthetase (EC 6.3.2.29) (EC 6.3.2.30) (Cyanophycin synthase)	Cytoplasm
+P72703	speB1 sll0228	Agmatinase 1 (EC 3.5.3.11) (Agmatine ureohydrolase 1) (AUH 1)	Cytoplasm
+P28463	hemA slr1808	Glutamyl-tRNA reductase (GluTR) (EC 1.2.1.70)	Cytoplasm
+P73053	thyX sll1635	Flavin-dependent thymidylate synthase (FDTS) (EC 2.1.1.148) (FAD-dependent thymidylate synthase) (Thymidylate synthase ThyX) (TS) (TSase)	Cytoplasm
+Q55388	sll0556	Sll0556 protein	Cytoplasm
+P54918	alr slr0827	Alanine racemase (EC 5.1.1.1)	Cytoplasm
+P74498	sll1848	1-acyl-sn-glycerol-3-phosphate acyltransferase (EC 2.3.1.51)	Cytoplasm
+P0DJF8	mtnP sll0135	S-methyl-5'-thioadenosine phosphorylase (EC 2.4.2.28) (5'-methylthioadenosine phosphorylase) (MTA phosphorylase) (MTAP)	Cytoplasm
+P48576	leuA slr0186	2-isopropylmalate synthase (EC 2.3.3.13) (Alpha-IPM synthase) (Alpha-isopropylmalate synthase)	Cytoplasm
+Q55574	pyrE slr0185	Orotate phosphoribosyltransferase (OPRT) (OPRTase) (EC 2.4.2.10)	Cytoplasm
+Q55482	uppS sll0506	Isoprenyl transferase (EC 2.5.1.-)	Cytoplasm
+Q55424	sll0828	Putative amidase (EC 3.5.1.4)	Cytoplasm
+P74732	slr0591	Ribonucleoside-diphosphate reductase subunit beta (EC 1.17.4.1)	Cytoplasm
+Q55898	ppk sll0290	Polyphosphate kinase (EC 2.7.4.1) (ATP-polyphosphate phosphotransferase) (Polyphosphoric acid kinase)	Cytoplasm
+P74323	ispD slr0951	2-C-methyl-D-erythritol 4-phosphate cytidylyltransferase (EC 2.7.7.60) (4-diphosphocytidyl-2C-methyl-D-erythritol synthase) (MEP cytidylyltransferase) (MCT)	Cytoplasm
+P72736	folK slr1093	2-amino-4-hydroxy-6-hydroxymethyldihydropteridine pyrophosphokinase (EC 2.7.6.3) (6-hydroxymethyl-7,8-dihydropterin pyrophosphokinase) (PPPK) (7,8-dihydro-6-hydroxymethylpterin-pyrophosphokinase) (HPPK)	Cytoplasm
+Q55595	gloA slr0381	Probable lactoylglutathione lyase (EC 4.4.1.5) (Aldoketomutase) (Glyoxalase I) (Glx I) (Ketone-aldehyde mutase) (Methylglyoxalase) (S-D-lactoylglutathione methylglyoxal lyase)	Cytoplasm
+Q55702	slr0229	Uncharacterized oxidoreductase slr0229 (EC 1.1.-.-)	Cytoplasm
+P74232	purD slr1159	Phosphoribosylamine--glycine ligase (EC 6.3.4.13) (GARS) (Glycinamide ribonucleotide synthetase) (Phosphoribosylglycinamide synthetase)	Cytoplasm
+P74689	ilvD slr0452	Dihydroxy-acid dehydratase (DAD) (EC 4.2.1.9)	Cytoplasm
+P74741	purH slr0597	Bifunctional purine biosynthesis protein PurH [Includes: Phosphoribosylaminoimidazolecarboxamide formyltransferase (EC 2.1.2.3) (AICAR transformylase); IMP cyclohydrolase (EC 3.5.4.10) (ATIC) (IMP synthase) (Inosinicase)]	Cytoplasm
+P74697	slr0458	Slr0458 protein	Cytoplasm
+P72624	sll1392	Sll1392 protein	Cytoplasm
+P72585	fcl sll1213	GDP-L-fucose synthase (EC 1.1.1.271) (GDP-4-keto-6-deoxy-D-mannose-3,5-epimerase-4-reductase)	Cytoplasm
+P23353	aroC sll1747	Chorismate synthase (CS) (EC 4.2.3.5) (5-enolpyruvylshikimate-3-phosphate phospholyase)	Cytoplasm
+P28372	chlN slr0750	Light-independent protochlorophyllide reductase subunit N (DPOR subunit N) (LI-POR subunit N) (EC 1.3.7.7)	Cytoplasm
+P74269	cimA sll1564	(R)-citramalate synthase (EC 2.3.1.182)	Cytoplasm
+P74130	trpE2 slr1979	Anthranilate synthase component I-like protein (EC 4.1.3.27)	Cytoplasm
+P74304	cbiC cobH sll0916	Cobalt-precorrin-8 methylmutase (EC 5.4.99.60) (Cobalt-precorrin isomerase)	Cytoplasm
+P72711	cbiJ cobK slr0252	Cobalt-precorrin-6A reductase (EC 1.3.1.106)	Cytoplasm
+Q55467	chlM slr0525	Magnesium-protoporphyrin O-methyltransferase (EC 2.1.1.11) (Magnesium-protoporphyrin IX methyltransferase)	Cytoplasm
+P72584	acsF1 sll1214	Magnesium-protoporphyrin IX monomethyl ester [oxidative] cyclase 1 (Mg-protoporphyrin IX monomethyl ester oxidative cyclase 1) (EC 1.14.13.81)	Cytoplasm
+P51634	chlI slr1030	Magnesium-chelatase subunit ChlI (EC 6.6.1.1) (Mg-protoporphyrin IX chelatase)	Cytoplasm
+Q55450	gatC slr0033	Glutamyl-tRNA(Gln) amidotransferase subunit C (Glu-ADT subunit C) (EC 6.3.5.-)	Cytoplasm
+P54691	ilvE slr0032	Probable branched-chain-amino-acid aminotransferase (BCAT) (EC 2.6.1.42)	Cytoplasm
+P74163	pyrB slr1476	Aspartate carbamoyltransferase (EC 2.1.3.2) (Aspartate transcarbamylase) (ATCase)	Cytoplasm
+P29107	ilvC sll1363	Ketol-acid reductoisomerase (NADP(+)) (KARI) (EC 1.1.1.86) (Acetohydroxy-acid isomeroreductase) (AHIR) (Alpha-keto-beta-hydroxylacyl reductoisomerase) (Ketol-acid reductoisomerase type 1) (Ketol-acid reductoisomerase type I)	Cytoplasm
+Q55496	sll0493	Sll0493 protein	Cytoplasm
+P74455	sll0146	High-affinity branched-chain amino acid transport protein BraE	Cytoplasm
+Q55867	slr0624	Slr0624 protein	Cytoplasm
+Q55929	slr0788	Pre-B cell enhancing factor	Cytoplasm
+P72818	menG sll1653	2-phytyl-1,4-naphtoquinone methyltransferase (EC 2.1.1.329) (Demethylphylloquinone methyltransferase)	Cytoplasm
+Q55404	acsA acs sll0542	Acetyl-coenzyme A synthetase (AcCoA synthetase) (Acs) (EC 6.2.1.1) (Acetate--CoA ligase) (Acyl-activating enzyme)	Cytoplasm
+P73358	ssr2016	Ssr2016 protein	Cytoplasm
+P73903	glsA slr2079	Glutaminase (EC 3.5.1.2)	Cytoplasm
+P74770	bioF slr0917	Putative 8-amino-7-oxononanoate synthase (AONS) (EC 2.3.1.47) (7-keto-8-amino-pelargonic acid synthase) (7-KAP synthase) (8-amino-7-ketopelargonate synthase)	Cytoplasm
+P54386	gdhA slr0710	NADP-specific glutamate dehydrogenase (NADP-GDH) (EC 1.4.1.4)	Cytoplasm
+P72787	thiL slr1787	Thiamine-monophosphate kinase (TMP kinase) (Thiamine-phosphate kinase) (EC 2.7.4.16)	Cytoplasm
+Q08871	des6 sll0262	Acyl-CoA 6-desaturase (EC 1.14.19.3) (Delta(6)-desaturase) (Linoleoyl-CoA desaturase)	Cytoplasm
+P72775	sll1682	Alanine dehydrogenase (EC 1.4.1.1)	Cytoplasm
+Q55452	sll0036	Uncharacterized protein sll0036	Cytoplasm
+P37101	prk ptk sll1525	Phosphoribulokinase (PRK) (PRKase) (EC 2.7.1.19) (Phosphopentokinase)	Cytoplasm
+P29256	psaF sll0819	Photosystem I reaction center subunit III (PSI-F)	Cytoplasm
+P49057	guaA slr0213	GMP synthase [glutamine-hydrolyzing] (EC 6.3.5.2) (GMP synthetase) (Glutamine amidotransferase)	Cytoplasm
+Q55786	metH slr0212	Methionine synthase (EC 2.1.1.13) (5-methyltetrahydrofolate--homocysteine methyltransferase) (Methionine synthase, vitamin-B12 dependent) (MS)	Cytoplasm
+Q59995	slr0214	Cytosine-specific methyltransferase (EC 2.1.1.37)	Cytoplasm
+P74025	sll1220	Potential NAD-reducing hydrogenase subunit	Cytoplasm
+P74438	pyrC slr0406	Dihydroorotase (DHOase) (EC 3.5.2.3)	Cytoplasm
+P73448	narB sll1454	Nitrate reductase (EC 1.7.5.1)	Cytoplasm
+P73509	sll1359	Sll1359 protein	Cytoplasm
+P73510	sll1358	Sll1358 protein	Cytoplasm
+P73511	glgP sll1356	Glycogen phosphorylase (EC 2.4.1.1)	Cytoplasm
+P74299	ppc sll0920	Phosphoenolpyruvate carboxylase (PEPC) (PEPCase) (EC 4.1.1.31)	Cytoplasm
+P72753	upp sll1035	Uracil phosphoribosyltransferase (EC 2.4.2.9) (UMP pyrophosphorylase) (UPRTase)	Cytoplasm
+P73283	fabF sll1069	3-oxoacyl-[acyl-carrier-protein] synthase 2 (EC 2.3.1.179) (3-oxoacyl-[acyl-carrier-protein] synthase II) (Beta-ketoacyl-ACP synthase II) (KAS II)	Cytoplasm
+P73538	bioB slr1364	Biotin synthase (EC 2.8.1.6)	Cytoplasm
+Q55471	slr0529	Slr0529 protein	Cytoplasm
+P74576	speA1 speA slr0662	Biosynthetic arginine decarboxylase 1 (ADC 1) (EC 4.1.1.19)	Cytoplasm
+P74033	slr0806	Slr0806 protein	Cytoplasm
+P74582	acnB slr0665	Aconitate hydratase B (ACN) (Aconitase) (EC 4.2.1.3) ((2R,3S)-2-methylisocitrate dehydratase) ((2S,3R)-3-hydroxybutane-1,2,3-tricarboxylate dehydratase) (2-methyl-cis-aconitate hydratase) (EC 4.2.1.99) (Iron-responsive protein-like) (IRP-like) (RNA-binding protein)	Cytoplasm
+P74383	sll0422	Isoaspartyl peptidase/L-asparaginase (EC 3.4.19.5) (Beta-aspartyl-peptidase) (Isoaspartyl dipeptidase) [Cleaved into: Isoaspartyl peptidase/L-asparaginase subunit alpha; Isoaspartyl peptidase/L-asparaginase subunit beta]	Cytoplasm
+Q55158	ribD slr0066	Riboflavin biosynthesis protein RibD [Includes: Diaminohydroxyphosphoribosylaminopyrimidine deaminase (DRAP deaminase) (EC 3.5.4.26) (Riboflavin-specific deaminase); 5-amino-6-(5-phosphoribosylamino)uracil reductase (EC 1.1.1.193) (HTP reductase)]	Cytoplasm
+P74384	purB sll0421	Adenylosuccinate lyase (ASL) (EC 4.3.2.2) (Adenylosuccinase) (ASase)	Cytoplasm
+P73737	murI slr1746	Glutamate racemase (EC 5.1.1.3)	Cytoplasm
+P74342	folB slr1626	Probable dihydroneopterin aldolase (DHNA) (EC 4.1.2.25) (7,8-dihydroneopterin aldolase)	Cytoplasm
+Q55474	sll0513	Sll0513 protein	Cytoplasm
+P73245	sll1917	Oxygen-independent coproporphyrinogen-III oxidase-like protein sll1917	Cytoplasm
+Q55860	cobQ cbiP slr0618	Cobyric acid synthase	Cytoplasm
+Q55766	rpiA slr0194	Ribose-5-phosphate isomerase A (EC 5.3.1.6) (Phosphoriboisomerase A) (PRI)	Cytoplasm
+P74422	ntcB slr0395	Probable nitrogen assimilation transcriptional activator	Cytoplasm
+P73534	pyk2 sll1275	Pyruvate kinase 2 (PK 2) (EC 2.7.1.40)	Cytoplasm
+Q55200	sphX sll0679	Protein SphX	Cytoplasm
+P72854	sir slr0963	Sulfite reductase [ferredoxin] (EC 1.8.7.1)	Cytoplasm
+P77960	trpA slr0966	Tryptophan synthase alpha chain (EC 4.2.1.20)	Cytoplasm
+P73617	trpD slr1867	Anthranilate phosphoribosyltransferase (EC 2.4.2.18)	Cytoplasm
+Q55281	mntA sll1599	Manganese transport system ATP-binding protein MntA	Cytoplasm
+P73258	slr1134	Slr1134 protein	Cytoplasm
+Q55725	menD sll0603	2-succinyl-5-enolpyruvyl-6-hydroxy-3-cyclohexene-1-carboxylate synthase (SEPHCHC synthase) (EC 2.2.1.9)	Cytoplasm
+P72946	hisD2 slr0682	Putative histidinol dehydrogenase 2 (HDH 2) (EC 1.1.1.23)	Cytoplasm
+P73952	sll1418	Sll1418 protein	Cytoplasm
+P52208	gnd sll0329	6-phosphogluconate dehydrogenase, decarboxylating (EC 1.1.1.44)	Cytoplasm
+P74281	sll1559	Soluble hydrogenase 42 kD subunit	Cytoplasm
+P74285	cugP sll1558	UTP--glucose-1-phosphate uridylyltransferase (EC 2.7.7.9) (Cyanobacterial UDP-glucose pyrophosphorylase) (UDP-glucose pyrophosphorylase) (UDP-Glc PPase)	Cytoplasm
+P73023	sll1005	Regulatory protein for beta-lactamase	Cytoplasm
+P74193	thrC sll1172	Threonine synthase (TS) (EC 4.2.3.1)	Cytoplasm
+P73270	speB2 sll1077	Probable agmatinase 2 (EC 3.5.3.11) (Agmatine ureohydrolase 2) (AUH 2)	Cytoplasm
+Q55034	stpA slr0746	Glucosylglycerol-phosphate phosphatase (GGP-P) (EC 3.1.3.69) (Glucosylglycerol 3-phosphatase) (Salt tolerance protein A)	Cytoplasm
+Q55087	chlP sll1091	Geranylgeranyl diphosphate reductase (EC 1.3.1.83) (Geranylgeranyl reductase)	Cytoplasm
+P73799	slr1259	Slr1259 protein	Cytoplasm
+P72587	speA2 speA slr1312	Biosynthetic arginine decarboxylase 2 (ADC 2) (EC 4.1.1.19)	Cytoplasm
+P72623	glgA2 sll1393	Probable glycogen synthase 2 (EC 2.4.1.21) (Starch [bacterial glycogen] synthase 2)	Cytoplasm
+P37294	crtB pys slr1255	15-cis-phytoene synthase (PSase) (EC 2.5.1.32)	Cytoplasm
+Q55828	dapL sll0480	LL-diaminopimelate aminotransferase (DAP-AT) (DAP-aminotransferase) (LL-DAP-aminotransferase) (EC 2.6.1.83)	Cytoplasm
+P74388	sll0418	2-methyl-6-phytyl-1,4-hydroquinone methyltransferase (EC 2.1.1.295) (2-methyl-6-phytylbenzoquinone/2-methyl-6-solanyl-1,4-benzoquinone methyltransferase) (MPBQ/MSBQ methyltransferase)	Cytoplasm
+P74497	mtnA slr1938	Methylthioribose-1-phosphate isomerase (M1Pi) (MTR-1-P isomerase) (EC 5.3.1.23) (S-methyl-5-thioribose-1-phosphate isomerase)	Cytoplasm
+P74104	ribBA ribA sll1894	Riboflavin biosynthesis protein RibBA [Includes: 3,4-dihydroxy-2-butanone 4-phosphate synthase (DHBP synthase) (EC 4.1.99.12); GTP cyclohydrolase-2 (EC 3.5.4.25) (GTP cyclohydrolase II)]	Cytoplasm
+P73807	hisC sll1958	Histidinol-phosphate aminotransferase (EC 2.6.1.9) (Imidazole acetol-phosphate transaminase)	Cytoplasm
+Q55811	slr0091	Aldehyde dehydrogenase	Cytoplasm
+Q55810	slr0090	Uncharacterized protein slr0090	Cytoplasm
+Q55393	dfa1 sll0550	Diflavin flavoprotein A 1 (EC 1.-.-.-) (NADH:oxygen oxidoreductase) (SsATF573)	Cytoplasm
+Q55389	ftrC sll0554	Ferredoxin-thioredoxin reductase, catalytic chain (FTR-C) (EC 1.8.7.2) (Ferredoxin-thioredoxin reductase subunit B) (FTR-B)	Cytoplasm
+P74416	gcvP slr0293	Glycine dehydrogenase (decarboxylating) (EC 1.4.4.2) (Glycine cleavage system P-protein) (Glycine decarboxylase) (Glycine dehydrogenase (aminomethyl-transferring))	Cytoplasm
+P72965	thiE sll0635	Thiamine-phosphate synthase (TP synthase) (TPS) (EC 2.5.1.3) (Thiamine-phosphate pyrophosphorylase) (TMP pyrophosphorylase) (TMP-PPase)	Cytoplasm
+P74260	glpK slr1672	Glycerol kinase (EC 2.7.1.30) (ATP:glycerol 3-phosphotransferase) (Glycerokinase) (GK)	Cytoplasm
+P54384	leuC sll1470	3-isopropylmalate dehydratase large subunit (EC 4.2.1.33) (Alpha-IPM isomerase) (IPMI) (Isopropylmalate isomerase)	Cytoplasm
+P52415	glgC agp slr1176	Glucose-1-phosphate adenylyltransferase (EC 2.7.7.27) (ADP-glucose pyrophosphorylase) (ADPGlc PPase) (ADP-glucose synthase)	Cytoplasm
+P74250	gpx1 slr1171	Hydroperoxy fatty acid reductase gpx1 (EC 1.11.1.22)	Cytoplasm
+P72772	chlD slr1777	Magnesium-chelatase subunit ChlD (Mg-chelatase subunit D) (EC 6.6.1.1) (Mg-protoporphyrin IX chelatase)	Cytoplasm
+P73393	sll1734	Sll1734 protein	Cytoplasm
+P19569	psaD slr0737	Photosystem I reaction center subunit II (Photosystem I 16 kDa polypeptide) (PSI-D)	Cytoplasm
+P52981	glgB sll0158	1,4-alpha-glucan branching enzyme GlgB (EC 2.4.1.18) (1,4-alpha-D-glucan:1,4-alpha-D-glucan 6-glucosyl-transferase) (Alpha-(1->4)-glucan branching enzyme) (Glycogen branching enzyme) (BE)	Cytoplasm
+P52965	nifJ sll0741	Putative pyruvate-flavodoxin oxidoreductase (EC 1.2.7.-)	Cytoplasm
+P73527	ribH sll1282	6,7-dimethyl-8-ribityllumazine synthase (DMRL synthase) (LS) (Lumazine synthase) (EC 2.5.1.78)	Cytoplasm
+P74061	rpe sll0807	Ribulose-phosphate 3-epimerase (EC 5.1.3.1) (Pentose-5-phosphate 3-epimerase) (PPE) (R5P3E)	Cytoplasm
+P74225	sll1102	Sll1102 protein	Cytoplasm
+P73922	slr2094	D-fructose 1,6-bisphosphatase class 2/sedoheptulose 1,7-bisphosphatase (FBPase class 2/SBPase) (EC 3.1.3.11) (EC 3.1.3.37)	Cytoplasm
+Q55612	lpxD slr0776	UDP-3-O-acylglucosamine N-acyltransferase (EC 2.3.1.-)	Cytoplasm
+Q55607	chlB slr0772	Light-independent protochlorophyllide reductase subunit B (DPOR subunit B) (LI-POR subunit B) (EC 1.3.7.7)	Cytoplasm
+Q55663	dxr sll0019	1-deoxy-D-xylulose 5-phosphate reductoisomerase (DXP reductoisomerase) (EC 1.1.1.267) (1-deoxyxylulose-5-phosphate reductoisomerase) (2-C-methyl-D-erythritol 4-phosphate synthase)	Cytoplasm
+P72859	sll0938	Aspartate transaminase	Cytoplasm
+P73246	nadD sll1916	Probable nicotinate-nucleotide adenylyltransferase (EC 2.7.7.18) (Deamido-NAD(+) diphosphorylase) (Deamido-NAD(+) pyrophosphorylase) (Nicotinate mononucleotide adenylyltransferase) (NaMN adenylyltransferase)	Cytoplasm
+P72861	sll0936	Uncharacterized protein sll0936	Cytoplasm
+P73881	coaBC dfp sll0250	Coenzyme A biosynthesis bifunctional protein CoaBC (DNA/pantothenate metabolism flavoprotein) [Includes: Phosphopantothenoylcysteine decarboxylase (PPCDC) (EC 4.1.1.36) (CoaC); Phosphopantothenate--cysteine ligase (EC 6.3.2.5) (CoaB) (PPC synthetase) (PPCS) (Phosphopantothenoylcysteine synthase)]	Cytoplasm
+Q59987	por pcr slr0506	Light-dependent protochlorophyllide reductase (PCR) (EC 1.3.1.33) (NADPH-protochlorophyllide oxidoreductase) (LPOR) (POR)	Cytoplasm
+P72982	sll1510	Sll1510 protein	Cytoplasm
+P73016	fabI envM slr1051	Enoyl-[acyl-carrier-protein] reductase [NADH] FabI (ENR) (EC 1.3.1.9) (NADH-dependent enoyl-ACP reductase)	Cytoplasm
+Q55117	menC sll0409	o-succinylbenzoate synthase (OSB synthase) (OSBS) (EC 4.2.1.113) (4-(2'-carboxyphenyl)-4-oxybutyric acid synthase) (o-succinylbenzoic acid synthase)	Cytoplasm
+Q55894	thiC slr0118	Phosphomethylpyrimidine synthase (EC 4.1.99.17) (Hydroxymethylpyrimidine phosphate synthase) (HMP-P synthase) (HMP-phosphate synthase) (HMPP synthase) (Thiamine biosynthesis protein ThiC)	Cytoplasm
+P77969	hemB sll1994	Delta-aminolevulinic acid dehydratase (ALAD) (ALADH) (EC 4.2.1.24) (Porphobilinogen synthase)	Cytoplasm
+P74591	aroE slr1559	Shikimate dehydrogenase (NADP(+)) (SDH) (EC 1.1.1.25)	Cytoplasm
+P73471	purC slr1226	Phosphoribosylaminoimidazole-succinocarboxamide synthase (EC 6.3.2.6) (SAICAR synthetase)	Cytoplasm
+P73242	fabD slr2023	Malonyl CoA-acyl carrier protein transacylase (MCT) (EC 2.3.1.39)	Cytoplasm
+P73248	folP slr2026	Dihydropteroate synthase (DHPS) (EC 2.5.1.15) (Dihydropteroate pyrophosphorylase)	Cytoplasm
+P73727	slr1737	Slr1737 protein	Cytoplasm
+P73721	slr1735	ABC transporter	Cytoplasm
+P73731	slr1739	Photosystem II reaction center Psb28 protein	Cytoplasm
+P52986	hom sll0455	Homoserine dehydrogenase (HDH) (EC 1.1.1.3)	Cytoplasm
+P73821	serA sll1908	D-3-phosphoglycerate dehydrogenase (PGDH) (EC 1.1.1.95) (2-oxoglutarate reductase) (EC 1.1.1.399)	Cytoplasm
+P73392	sll1735	Uncharacterized protein sll1735	Cytoplasm
+P74746	slr0600	Slr0600 protein	Cytoplasm
+Q55585	gabD slr0370	Probable succinate-semialdehyde dehydrogenase [NADP(+)] (SSDH) (EC 1.2.1.79)	Cytoplasm
+Q55367	cynS slr0899	Cyanate hydratase (Cyanase) (EC 4.2.1.104) (Cyanate hydrolase) (Cyanate lyase)	Cytoplasm
+P74306	crtQ slr0940	Zeta-carotene desaturase (EC 1.3.5.6) (9,9'-di-cis-zeta-carotene desaturase) (Carotene 7,8-desaturase)	Cytoplasm
+P73558	gatA slr0877	Glutamyl-tRNA(Gln) amidotransferase subunit A (Glu-ADT subunit A) (EC 6.3.5.7)	Cytoplasm
+P73638	cpcE slr1878	Phycocyanobilin lyase subunit alpha (EC 4.-.-.-) (Phycocyanin operon protein CpcE)	Cytoplasm
+P73560	gcvH slr0879	Glycine cleavage system H protein	Cytoplasm
+Q55512	asd slr0549	Aspartate-semialdehyde dehydrogenase (ASA dehydrogenase) (ASADH) (EC 1.2.1.11) (Aspartate-beta-semialdehyde dehydrogenase)	Cytoplasm
+P20170	trpE slr0738	Anthranilate synthase component 1 (AS) (ASI) (EC 4.1.3.27)	Cytoplasm
+Q55758	pyrR sll0368	Bifunctional protein PyrR [Includes: Pyrimidine operon regulatory protein; Uracil phosphoribosyltransferase (UPRTase) (EC 2.4.2.9)]	Cytoplasm
+P72934	pyrC' sll1018	Probable dihydroorotase-like protein (Aspartate carbamoyltransferase 42 kDa non-catalytic chain)	Cytoplasm
+P72933	gloB sll1019	Hydroxyacylglutathione hydrolase (EC 3.1.2.6) (Glyoxalase II) (Glx II)	Cytoplasm
+P73826	phaB slr1994	Acetoacetyl-CoA reductase (EC 1.1.1.36)	Cytoplasm
+P73825	phaA slr1993	Acetyl-CoA acetyltransferase (EC 2.3.1.9) (Beta-ketothiolase PhaA)	Cytoplasm
+P73824	gpx2 slr1992	Hydroperoxy fatty acid reductase gpx2 (EC 1.11.1.22)	Cytoplasm
+Q55664	fbaA fda sll0018	Fructose-bisphosphate aldolase class 2 (FBP aldolase) (FBPA) (EC 4.1.2.13) (Fructose-1,6-bisphosphate aldolase) (Fructose-bisphosphate aldolase class II)	Cytoplasm
+Q55741	sll0384	Sll0384 protein	Cytoplasm
+Q55593	tmk slr0379	Thymidylate kinase (EC 2.7.4.9) (dTMP kinase)	Cytoplasm
+P74589	sll1496	Mannose-1-phosphate guanyltransferase	Cytoplasm
+P74587	carA sll1498	Carbamoyl-phosphate synthase small chain (EC 6.3.5.5) (Carbamoyl-phosphate synthetase glutamine chain)	Cytoplasm
+P55038	gltS sll1499	Ferredoxin-dependent glutamate synthase 2 (EC 1.4.7.1) (FD-GOGAT)	Cytoplasm
+P73774	sll1161	Adenylate cyclase	Cytoplasm
+Q55759	folE slr0426	GTP cyclohydrolase 1 (EC 3.5.4.16) (GTP cyclohydrolase I) (GTP-CH-I)	Cytoplasm
+Q55141	ilvH ilvN sll0065	Acetolactate synthase small subunit (EC 2.2.1.6) (Acetohydroxy-acid synthase small subunit) (AHAS) (ALS)	Cytoplasm
+Q59992	trpB slr0543	Tryptophan synthase beta chain (EC 4.2.1.20)	Cytoplasm
+Q55508	trpC slr0546	Indole-3-glycerol phosphate synthase (IGPS) (EC 4.1.1.48)	Cytoplasm
