@@ -6,8 +6,8 @@ from __future__ import division, print_function, absolute_import
 # global imports
 from lxml import etree
 
-__all__ = ['MachineryComposition', 'SpeciesReference', 'ListOfReactants',
-           'ListOfProducts', 'TargetValue']
+__all__ = ['is_true', 'MachineryComposition', 'SpeciesReference',
+           'ListOfReactants', 'ListOfProducts', 'TargetValue']
 
 
 def is_true(attribute):
