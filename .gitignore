@@ -4,6 +4,8 @@ data/iJO1366_test/*.out
 data/iJO1366_test/medium.tsv
 data/iJO1366_test/data/protein_summary.tsv
 
+.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
