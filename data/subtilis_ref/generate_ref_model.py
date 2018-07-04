@@ -251,9 +251,10 @@ class ModelConverter(object):
                 new_map.constant_processing \
                     = rba.xml.ConstantProcessing.from_xml_node(node)
             for c in map_.iterfind('cost'):
-                new_map.component_processings.append(
-                    rba.xml.ComponentProcessing.from_xml_node(c)
-                )
+                new_proc = rba.xml.ComponentProcessing.from_xml_node(c)
+                if c.get('processingCost') is not None:
+                    new_proc.machinery_cost = c.get('processingCost')
+                new_map.component_processings.append(new_proc)
 
     def _read_targets(self):
         root = self._xml_root('processes.xml')
