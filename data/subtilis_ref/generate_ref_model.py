@@ -262,8 +262,12 @@ class ModelConverter(object):
             new_group = rba.xml.TargetGroup(process.get('id') + '_targets')
             for target in process.iterfind('targets/targetValue'):
                 new_t = rba.xml.TargetSpecies(target.get('species'))
+                if target.get('dilution_compensation') != '0':
+                    suffix = '_concentration'
+                else:
+                    suffix = '_flux'
                 new_t.value = self._parse_value(
-                    target, target.get('species') + '_concentration'
+                    target, target.get('species') + suffix
                 )
                 if target.get('degradation') == '1':
                     new_group.degradation_fluxes.append(new_t)
