@@ -73,7 +73,8 @@ class ModelConverter(object):
     def _read_functions(self):
         root = self._xml_root('parameters.xml')
         func = root.find('listOfFunctions')
-        self.model.parameters.functions = rba.xml.ListOfFunctions.from_xml_node(func)
+        self.model.parameters.functions \
+            = rba.xml.ListOfFunctions.from_xml_node(func)
 
     def _read_densities(self):
         root = self._xml_root('parameters.xml')
@@ -175,7 +176,9 @@ class ModelConverter(object):
             id_ = '{}_transport_factor_{}'.format(enzyme.get('id'), i)
             new_fn = rba.xml.Function(id_, fn.get('type'),
                                       variable=fn.get('variable'))
-            new_fn.parameters = rba.xml.ListOfParameters.from_xml_node(fn)
+            new_fn.parameters = rba.xml.ListOfParameters.from_xml_node(
+                fn.find('listOfParameters')
+            )
             result.append(new_fn)
         return result
 
@@ -237,7 +240,8 @@ class ModelConverter(object):
             self.model.processes.processing_maps.append(new_map)
             node = map_.find('constantCost')
             if node is not None:
-                new_map.constant_processing = rba.xml.ConstantProcessing.from_xml_node(node)
+                new_map.constant_processing \
+                    = rba.xml.ConstantProcessing.from_xml_node(node)
             for c in map_.iterfind('cost'):
                 new_map.component_processings.append(
                     rba.xml.ComponentProcessing.from_xml_node(c)
