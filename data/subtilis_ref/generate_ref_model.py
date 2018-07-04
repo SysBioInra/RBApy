@@ -1,4 +1,7 @@
 
+# python 2/3 compatiblity
+from __future__ import division, print_function, absolute_import
+
 from lxml import etree
 import libsbml
 from itertools import chain
