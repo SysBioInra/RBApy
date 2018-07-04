@@ -168,6 +168,9 @@ class ModelConverter(object):
             if transport:
                 new_agg = rba.xml.Aggregate(self._transport(id_),
                                             'multiplication')
+                new_agg.function_references.append(
+                    rba.xml.FunctionReference(self._base(id_))
+                )
                 for fn in transport:
                     new_agg.function_references.append(
                         rba.xml.FunctionReference(fn.id)
