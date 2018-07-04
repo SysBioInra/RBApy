@@ -114,6 +114,7 @@ class ModelConverter(object):
     def _read_enzymes(self, medium):
         self._read_enzyme_machineries()
         self._read_efficiencies(medium)
+        self._convert_metabolite_names()
 
     def _read_enzyme_machineries(self):
         root = self._xml_root('enzymes.xml')
