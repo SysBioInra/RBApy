@@ -25,6 +25,7 @@ class ModelConverter(object):
         self.model.rnas = self._read_macromolecules('rnas.xml', 'rna')
         self.model.dna = self._read_macromolecules('dna.xml', 'dna')
         self._read_parameters()
+        self._add_zero_function()
         self._read_enzymes(medium)
         self._read_processes()
         self.model.set_medium('medium.tsv')
@@ -307,6 +308,11 @@ class ModelConverter(object):
         target = rba.xml.TargetReaction('Eatpm')
         target.lower_bound = 'maintenanceATP'
         result.reaction_fluxes.append(target)
+
+    def _add_zero_function(self):
+        self.model.parameters.functions.append(
+            rba.xml.Function('zero', 'constant', {'CONSTANT': 0})
+        )
 
 
 def metabolite_name(old_name):
