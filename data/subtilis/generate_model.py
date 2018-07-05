@@ -25,8 +25,7 @@ def main():
     subtilis.parameters.aggregates.append(flagella_activation_aggregate())
 
     # add enzymatic activities
-    add_enzymatic_activities(subtilis.enzymes,
-                             subtilis.parameters, 'medium_2')
+    add_enzymatic_activities(subtilis.enzymes, subtilis.parameters, 'medium_2')
 
     # add zero_cost flags
     # add_zero_cost_flags(subtilis.model.enzymes)
@@ -157,7 +156,7 @@ def apply_old_stoichiometries(enzymes):
             try:
                 sr.stoichiometry = data[sr.species]
             except KeyError:
-                print(sr.species)
+                pass
 
 
 if __name__ == "__main__":
