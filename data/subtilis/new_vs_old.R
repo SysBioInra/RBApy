@@ -20,7 +20,7 @@ auto_fluxes <- auto_fluxes[reaction_match, ]
 model <- lm(auto_fluxes$Flux ~ ref_fluxes$Flux)
 
 # plot results
-pdf('pipeline_vs_ref.pdf')
+pdf('results/pipeline_vs_ref.pdf')
 plot(ref_fluxes$Flux, auto_fluxes$Flux)
 abline(model)
 dev.off()
