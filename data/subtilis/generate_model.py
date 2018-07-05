@@ -17,32 +17,18 @@ old_data = 'data/subtilis_ref/old_data/'
 def main():
     builder = rba.ModelBuilder('data/subtilis/params.in')
     subtilis = builder.build_model()
+    subtilis.medium = reference_medium(subtilis)
+    add_enzymatic_activities(subtilis.enzymes, subtilis.parameters, 'medium_2')
+    apply_old_stoichiometries(subtilis.enzymes)
+    add_flagella_constraint(subtilis)
+    subtilis.write()
 
-    # add flagella constraint
+
+def add_flagella_constraint(subtilis):
     subtilis.targets.target_groups.append(flagella_activation())
     for fn in flagella_activation_functions():
         subtilis.parameters.functions.append(fn)
     subtilis.parameters.aggregates.append(flagella_activation_aggregate())
-
-    # add enzymatic activities
-    add_enzymatic_activities(subtilis.enzymes, subtilis.parameters, 'medium_2')
-
-    # add zero_cost flags
-    # add_zero_cost_flags(subtilis.model.enzymes)
-
-    # apply old stoichiometries
-    apply_old_stoichiometries(subtilis.enzymes)
-
-    # set medium to original medium
-    with open(old_data + 'medium.csv', 'r') as f:
-        old_medium = dict.fromkeys(subtilis.medium, 0)
-        for line in f:
-            met, conc = line.rstrip('\n').split('\t')
-            old_medium[met[:-2]] = conc
-    subtilis.medium = old_medium
-
-    # write xml files
-    subtilis.write()
 
 
 def flagella_activation():
@@ -157,6 +143,15 @@ def apply_old_stoichiometries(enzymes):
                 sr.stoichiometry = data[sr.species]
             except KeyError:
                 pass
+
+
+def reference_medium(subtilis):
+    with open(old_data + 'medium.csv', 'r') as f:
+        old_medium = dict.fromkeys(subtilis.medium, 0)
+        for line in f:
+            met, conc = line.rstrip('\n').split('\t')
+            old_medium[met[:-2]] = conc
+    return old_medium
 
 
 if __name__ == "__main__":
