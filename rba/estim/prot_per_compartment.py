@@ -69,9 +69,9 @@ if __name__ == '__main__':
 
 	compartment_data = compute_compartment_data(exp_df, prot_data, loc_data, cm_data, config)
 
-	solution = compute_linear_fits(exp_df, compartment_data)
+	solution = compute_linear_fits(exp_df, compartment_data, normalize=True, sums_to_one=True)
 
 	export_solution(compartment_data, solution, config)
-	
+
 	visualize_solution(exp_df, compartment_data, solution)
 	

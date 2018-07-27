@@ -104,7 +104,7 @@ def compute_compartment_data(exp_df, prot_df, loc_df, cm_df, config):
 	return comp_data
 
 
-def compute_linear_fits(exp_df, data_df):
+def compute_linear_fits(exp_df, data_df, normalize=False, sums_to_one=False):
 	sum_per_exp = []
 	for exp in data_df.columns:
 		sum_per_exp.append(sum(data_df[exp]))
@@ -113,7 +113,10 @@ def compute_linear_fits(exp_df, data_df):
 	growth_rates = exp_df['Growth rate']
 	comp2linfit = {}
 	for comp in data_df.index:
-		vals = data_df.loc[comp] / sum_per_exp
+		if normalize:
+			vals = data_df.loc[comp] / sum_per_exp
+		else:
+			vals = data_df.loc[comp]
 		slope, intercept, rval, pval, stderr = linregress(list(growth_rates), list(vals))
 		if comp == 'secreted':
 			comp2linfit[comp] = False
@@ -128,7 +131,10 @@ def compute_linear_fits(exp_df, data_df):
 	num_cols2 = 2 * len(comp2linfit)
 	num_cols = 2 * num_linfits + num_constant
 	num_exp = len(exp_df.index)
-	num_rows = len(comp2linfit) * num_exp + num_exp
+	if sums_to_one:
+		num_rows = len(comp2linfit) * num_exp + num_exp
+	else:
+		num_rows = len(comp2linfit) * num_exp
 
 	A = np.zeros((num_rows, num_cols))
 	b = np.zeros((num_rows, 1))
@@ -144,17 +150,26 @@ def compute_linear_fits(exp_df, data_df):
 		if comp2linfit[comp]:
 			A[idx_row: idx_row+num_exp, idx_col] = gr
 			A[idx_row: idx_row+num_exp, idx_col + 1] = ones
-			A[last_constraint_idx:, idx_col] = gr
-			A[last_constraint_idx:, idx_col + 1] = ones
-			b[idx_row: idx_row+num_exp, 0] = np.array(data_df.loc[comp] / sum_per_exp)
+			if sums_to_one:
+				A[last_constraint_idx:, idx_col] = gr
+				A[last_constraint_idx:, idx_col + 1] = ones
+			if normalize:
+				b[idx_row: idx_row+num_exp, 0] = np.array(data_df.loc[comp] / sum_per_exp)
+			else:
+				b[idx_row: idx_row+num_exp, 0] = np.array(data_df.loc[comp])
 			idx_col = idx_col + 2
 		else:
-			b[idx_row: idx_row+num_exp, 0] = np.array(data_df.loc[comp] / sum_per_exp)
+			if normalize:
+				b[idx_row: idx_row+num_exp, 0] = np.array(data_df.loc[comp] / sum_per_exp)
+			else:
+				b[idx_row: idx_row+num_exp, 0] = np.array(data_df.loc[comp])
 			A[idx_row: idx_row + num_exp, idx_col] = ones
-			A[last_constraint_idx:, idx_col] = ones
+			if sums_to_one:
+				A[last_constraint_idx:, idx_col] = ones
 			idx_col = idx_col + 1
 		idx_row = idx_row + num_exp
-	b[last_constraint_idx:, 0] = ones
+	if sums_to_one:
+		b[last_constraint_idx:, 0] = ones
 
 	A2 = numpy_to_cvxopt_matrix(A)
 	b2 = numpy_to_cvxopt_matrix(b)
