@@ -1,6 +1,9 @@
 from collections import defaultdict
 import ConfigParser
 
+import matplotlib.pyplot as plt
+plt.style.use('ggplot')
+
 from utils import *
 
 
@@ -17,6 +20,35 @@ def export_solution(ne_compartment_data, solution, config):
 		ne_compartment_data.to_csv(comp_out_file, sep=config.get('Output', 'delimiter'))
 	else:
 		raise Exception('Output file type (%s) not allows. Use csv or excel.' % out_file_type)
+
+def visualize_solution(exp_data, ratio_data, sol):
+
+	growth_rates = np.array(exp_data['Growth rate'])
+	comp2portion = defaultdict(list)
+	for comp in ratio_data.index:
+		for exp in exp_data.index:
+			comp_p = ratio_data[exp][comp] / sum(ratio_data[exp])
+			comp2portion[comp].append(comp_p)
+	compartments = list(ratio_data.index)
+	num_comp = len(compartments)
+	col_num = 2
+	row_num = int(np.ceil(num_comp / 2.))
+	for i in range(num_comp):
+		comp = compartments[i]
+		exp_portions = ratio_data.loc[comp]
+		intercept = sol.loc[comp]['intercept']
+		slope = sol.loc[comp]['slope']
+		fit = intercept + growth_rates * slope
+
+		ax = plt.subplot(row_num, col_num, i+1)
+		ax.plot(growth_rates, exp_portions, 'x')
+		ax.plot(growth_rates, fit, '-')
+		if i+1 in (4, 5):
+			ax.set_xlabel('Growth rate (1/h)')
+		ax.set_title(comp)
+	plt.suptitle('Fraction of nonenzymatic protein')
+	plt.tight_layout()
+	plt.show()
 
 if __name__ == '__main__':
 	config = ConfigParser.ConfigParser()
@@ -66,4 +98,6 @@ if __name__ == '__main__':
 	linear_fits = compute_linear_fits(experiment_data, ratio_data)
 
 	export_solution(ne_comp_data, linear_fits, config)
+
+	visualize_solution(experiment_data, ratio_data, linear_fits)
 
