@@ -33,7 +33,7 @@ TRNALEU	Uncharged trna leu	M_trnaleu_c	4.2119999999999997e-05
 TRNAMET	Uncharged trna met	M_trnamet_c	1.4373333333333334e-05
 TRNAASN	Uncharged trna asn	M_trnaasn_c	2.2533333333333333e-05
 TRNAPRO	Uncharged trna pro	M_trnapro_c	2.0666666666666666e-05
-TRNAGLN	Uncharged trna gln	[MISSING]	2.46e-05
+TRNAGLN	Uncharged trna gln	M_glutrna_LPAREN_gln_RPAREN__c	2.46e-05
 TRNAARG	Uncharged trna arg	M_trnaarg_c	2.7653333333333332e-05
 TRNASER	Uncharged trna ser	M_trnaser_c	2.0173333333333332e-05
 TRNATHR	Uncharged trna thr	M_trnathr_c	2.372e-05
@@ -69,34 +69,34 @@ FOR	Formate	M_for_c	0
 H2O	H2O	M_h2o_c	0
 H	Proton	M_h_c	0
 PPi	Pyrophosphate	M_ppi_c	0.0009
-CHEBI:58937	thiamine diphosphate	[MISSING]	0
+CHEBI:58937	thiamine diphosphate	M_thmpp_c	0
 CHEBI:60052	siroheme	[MISSING]	0
-CHEBI:57540	NAD(+)	[MISSING]	0
-CHEBI:49883	[4Fe-4S] cluster	[MISSING]	0
-CHEBI:24875	Fe cation	[MISSING]	0
-CHEBI:25516	Ni cation	[MISSING]	0
+CHEBI:57540	NAD(+)	M_nad_c	0
+CHEBI:49883	[4Fe-4S] cluster	M_fe2_c	0
+CHEBI:24875	Fe cation	M_fe2_c	0
+CHEBI:25516	Ni cation	M_ni2_c	0
 CHEBI:60342	dipyrromethane	[MISSING]	0
-CHEBI:60344	heme b	[MISSING]	0
-CHEBI:57783	NADPH	[MISSING]	0
+CHEBI:60344	heme b	M_pheme_c	0
+CHEBI:57783	NADPH	M_nadph_c	0
 CHEBI:28115	methylcob(III)alamin	[MISSING]	0
-CHEBI:21137	[3Fe-4S] cluster	[MISSING]	0
-CHEBI:30413	heme	[MISSING]	0
+CHEBI:21137	[3Fe-4S] cluster	M_fe2_c	0
+CHEBI:30413	heme	M_pheme_c	0
 CHEBI:60240	a divalent metal cation	[MISSING]	0
-CHEBI:28938	NH4(+)	[MISSING]	0
-CHEBI:18420	Mg(2+)	[MISSING]	0
-CHEBI:48828	Co(2+)	[MISSING]	0
-CHEBI:597326	pyridoxal 5'-phosphate	[MISSING]	0
-CHEBI:18408	adenosylcob(III)alamin	[MISSING]	0
-CHEBI:58210	FMN	[MISSING]	0
-CHEBI:29035	Mn(2+)	[MISSING]	0
-CHEBI:29036	Cu(2+)	[MISSING]	0
-CHEBI:49601	[2Fe-2S] cluster	[MISSING]	0
+CHEBI:28938	NH4(+)	M_nh4_c	0
+CHEBI:18420	Mg(2+)	M_mg2_c	0
+CHEBI:48828	Co(2+)	M_cobalt2_c	0
+CHEBI:597326	pyridoxal 5'-phosphate	M_pydx5p_c	0
+CHEBI:18408	adenosylcob(III)alamin	M_adocbl_c	0
+CHEBI:58210	FMN	M_fmn_c	0
+CHEBI:29035	Mn(2+)	M_mn2_c	0
+CHEBI:29036	Cu(2+)	M_cu2_c	0
+CHEBI:49601	[2Fe-2S] cluster	M_fe2_c	0
 CHEBI:83088	(R)-lipoate	[MISSING]	0
-CHEBI:57618	FMNH2	[MISSING]	0
-CHEBI:49786	Ni(2+)	[MISSING]	0
-CHEBI:15361	pyruvate	[MISSING]	0
-CHEBI:57692	FAD	[MISSING]	0
+CHEBI:57618	FMNH2	M_fmn_c	0
+CHEBI:49786	Ni(2+)	M_ni2_c	0
+CHEBI:15361	pyruvate	M_pyr_c	0
+CHEBI:57692	FAD	M_fad_c	0
 CHEBI:60539	Mo-bis(molybdopterin guanine dinucleotide)	[MISSING]	0
-CHEBI:30616	ATP	[MISSING]	0
-CHEBI:29105	Zn(2+)	[MISSING]	0
-CHEBI:29103	K(+)	[MISSING]	0
+CHEBI:30616	ATP	M_atp_c	0
+CHEBI:29105	Zn(2+)	M_zn2_c	0
+CHEBI:29103	K(+)	M_k_c	0

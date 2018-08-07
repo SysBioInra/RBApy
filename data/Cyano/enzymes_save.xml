@@ -890,7 +890,7 @@
         </listOfReactants>
       </machineryComposition>
     </enzyme>
-    <enzyme id="R_ATPS4rpp_enzyme" reaction="R_ATPS4rpp" forward_efficiency="default_transporter_efficiency" backward_efficiency="default_transporter_efficiency" zeroCost="false">
+    <enzyme id="R_ATPS4rpp_enzyme" reaction="R_ATPS4rpp" forward_efficiency="R_ATPS4rpp_efficiency" backward_efficiency="default_transporter_efficiency" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
           <speciesReference species="sll1322" stoichiometry="1.0"/>
@@ -906,7 +906,7 @@
         </listOfReactants>
       </machineryComposition>
     </enzyme>
-    <enzyme id="R_ATPSu_enzyme" reaction="R_ATPSu" forward_efficiency="default_transporter_efficiency" backward_efficiency="default_transporter_efficiency" zeroCost="false">
+    <enzyme id="R_ATPSu_enzyme" reaction="R_ATPSu" forward_efficiency="R_ATPSu_efficiency" backward_efficiency="default_transporter_efficiency" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
           <speciesReference species="sll1322" stoichiometry="1.0"/>
@@ -4704,7 +4704,7 @@
         </listOfReactants>
       </machineryComposition>
     </enzyme>
-    <enzyme id="R_RBCh_enzyme" reaction="R_RBCh" forward_efficiency="R_RBCh_efficiency" backward_efficiency="default_efficiency" zeroCost="false">
+    <enzyme id="R_RBCh_enzyme" reaction="R_RBCh" forward_efficiency="default_efficiency" backward_efficiency="default_efficiency" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
           <speciesReference species="slr0009" stoichiometry="1.0"/>
@@ -4734,7 +4734,7 @@
       </machineryComposition>
     </enzyme>
     <enzyme id="R_RBK_enzyme" reaction="R_RBK" forward_efficiency="default_efficiency" backward_efficiency="default_efficiency" zeroCost="false"/>
-    <enzyme id="R_RBPC_enzyme" reaction="R_RBPC" forward_efficiency="R_RBPC_efficiency" backward_efficiency="default_efficiency" zeroCost="false">
+    <enzyme id="R_RBPC_enzyme" reaction="R_RBPC" forward_efficiency="default_efficiency" backward_efficiency="default_efficiency" zeroCost="false">
       <machineryComposition>
         <listOfReactants>
           <speciesReference species="slr0009" stoichiometry="1.0"/>
@@ -5590,7 +5590,7 @@
       </machineryComposition>
     </enzyme>
     <enzyme id="R_O2tc_enzyme" reaction="R_O2tc" forward_efficiency="R_O2tc_efficiency" backward_efficiency="default_transporter_efficiency" zeroCost="false"/>
-    <enzyme id="R_O2tu_enzyme" reaction="R_O2tu" forward_efficiency="default_transporter_efficiency" backward_efficiency="default_transporter_efficiency" zeroCost="false"/>
+    <enzyme id="R_O2tu_enzyme" reaction="R_O2tu" forward_efficiency="R_O2tu_efficiency" backward_efficiency="default_transporter_efficiency" zeroCost="false"/>
     <enzyme id="R_GLCt2pp_enzyme" reaction="R_GLCt2pp" forward_efficiency="R_GLCt2pp_efficiency" backward_efficiency="default_transporter_efficiency" zeroCost="false">
       <machineryComposition>
         <listOfReactants>

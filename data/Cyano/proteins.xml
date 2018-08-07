@@ -77,7 +77,7 @@
         <componentReference component="Y" stoichiometry="7"/>
       </composition>
     </macromolecule>
-    <macromolecule id="sll0521" compartment="Membrane">
+    <macromolecule id="sll0521" compartment="Cell_membrane">
       <composition>
         <componentReference component="A" stoichiometry="20"/>
         <componentReference component="C" stoichiometry="1"/>
@@ -1388,7 +1388,7 @@
         <componentReference component="Y" stoichiometry="5"/>
       </composition>
     </macromolecule>
-    <macromolecule id="sll0834" compartment="Membrane">
+    <macromolecule id="sll0834" compartment="Cell_membrane">
       <composition>
         <componentReference component="A" stoichiometry="70"/>
         <componentReference component="C" stoichiometry="3"/>
@@ -3529,7 +3529,7 @@
         <componentReference component="Y" stoichiometry="38"/>
       </composition>
     </macromolecule>
-    <macromolecule id="slr1595" compartment="Membrane">
+    <macromolecule id="slr1595" compartment="Cell_membrane">
       <composition>
         <componentReference component="A" stoichiometry="34"/>
         <componentReference component="C" stoichiometry="4"/>
@@ -3723,7 +3723,7 @@
         <componentReference component="Y" stoichiometry="19"/>
       </composition>
     </macromolecule>
-    <macromolecule id="slr0415" compartment="Membrane">
+    <macromolecule id="slr0415" compartment="Cell_membrane">
       <composition>
         <componentReference component="A" stoichiometry="66"/>
         <componentReference component="C" stoichiometry="5"/>
@@ -11536,7 +11536,7 @@
         <componentReference component="Y" stoichiometry="12"/>
       </composition>
     </macromolecule>
-    <macromolecule id="slr1736" compartment="Membrane">
+    <macromolecule id="slr1736" compartment="Cell_membrane">
       <composition>
         <componentReference component="A" stoichiometry="24"/>
         <componentReference component="C" stoichiometry="5"/>
@@ -12920,30 +12920,6 @@
       </composition>
     </macromolecule>
     <macromolecule id="average_protein_Cytoplasm" compartment="Cytoplasm">
-      <composition>
-        <componentReference component="A" stoichiometry="26.9155973767"/>
-        <componentReference component="C" stoichiometry="3.24721984602"/>
-        <componentReference component="E" stoichiometry="19.4801824922"/>
-        <componentReference component="D" stoichiometry="16.1730824066"/>
-        <componentReference component="G" stoichiometry="23.3678357571"/>
-        <componentReference component="F" stoichiometry="12.8314798973"/>
-        <componentReference component="I" stoichiometry="20.1445680068"/>
-        <componentReference component="H" stoichiometry="6.03621328771"/>
-        <componentReference component="K" stoichiometry="13.6532648988"/>
-        <componentReference component="M" stoichiometry="6.35272312518"/>
-        <componentReference component="L" stoichiometry="36.494439692"/>
-        <componentReference component="N" stoichiometry="13.0527516396"/>
-        <componentReference component="Q" stoichiometry="17.8391787853"/>
-        <componentReference component="P" stoichiometry="16.3595665811"/>
-        <componentReference component="S" stoichiometry="18.754776162"/>
-        <componentReference component="R" stoichiometry="16.244083262"/>
-        <componentReference component="T" stoichiometry="17.6124893071"/>
-        <componentReference component="W" stoichiometry="4.96948959224"/>
-        <componentReference component="V" stoichiometry="21.2189905902"/>
-        <componentReference component="Y" stoichiometry="9.38865126889"/>
-      </composition>
-    </macromolecule>
-    <macromolecule id="average_protein_Membrane" compartment="Membrane">
       <composition>
         <componentReference component="A" stoichiometry="26.9155973767"/>
         <componentReference component="C" stoichiometry="3.24721984602"/>
