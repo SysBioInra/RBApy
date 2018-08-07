@@ -57,10 +57,10 @@ class Solver(object):
             return
 
         # bissection
-        mu_min = 0.0
+        mu_min = 0
         mu_max = 2.5
         mu_test = mu_max
-        while (mu_max - mu_min) > 1e-4:
+        while (mu_max - mu_min) > 1e-6:
             self.matrix.build_matrices(mu_test)
             lp = self.build_lp()
             lp.solve()
@@ -74,6 +74,41 @@ class Solver(object):
                 return
             # next mu to be tested
             mu_test = (mu_min + mu_max) / 2
+
+    def solve_grid(self):
+        """Compute configuration corresponding to maximal growth rate."""
+        self._sol_basis = None
+        self.X = self.lambda_ = self.mu_opt = None
+
+        # check that mu=0 is solution
+        self.matrix.build_matrices(0)
+        lp = self.build_lp()
+        lp.solve()
+        if is_feasible(lp):
+            self._store_results(0.0, lp)
+        elif is_infeasible(lp):
+            print('Mu = 0 is infeasible, check matrix consistency.')
+            return
+        else:
+            print(unknown_flag_msg(0, lp))
+            return
+
+        # grid
+	vec_mu = numpy.arange(0,0.8,0.001)
+        for mu_test in vec_mu:
+	    print(mu_test)
+            self.matrix.build_matrices(mu_test)
+            lp = self.build_lp()
+            lp.solve()
+            if is_feasible(lp):
+                print("mu feasible")
+                self._store_results(mu_test, lp)
+            elif is_infeasible(lp):
+                print("mu infeasible")
+            else:
+                print(unknown_flag_msg(mu_test, lp))
+                return
+
 
     def build_lp(self):
         """
@@ -117,6 +152,7 @@ class Solver(object):
         # how many threads to use
         # lp_problem.parameters.threads.set(0)
         lp_problem.set_results_stream(None)
+
         # define columns and add rows
         lp_problem.variables.add(
             obj=self.matrix.f, ub=self.matrix.UB, lb=self.matrix.LB,
