@@ -306,7 +306,7 @@ def build_function(type_, params, variable):
     try:
         return fn_class(params, variable)
     except KeyError as error:
-        print('Missing parameter: ' + error.message)
+        print('Missing parameter: ' + str(error))
         raise UserWarning('Invalid function.')
 
 

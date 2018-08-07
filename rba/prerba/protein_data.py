@@ -110,7 +110,8 @@ class ProteinData(object):
         return id_ == '' or pandas.isnull(id_)
 
     def _is_average_protein_id(self, id_):
-        return id_.startswith('average_protein_')
+        return(id_.startswith('average_protein_') and
+               id_[16:] in self._location_map.data.values())
 
     def create_protein_from_uniprot_id(self, uniprot_id):
         protein = Protein()

@@ -6,6 +6,8 @@ data/*/data/protein_summary.tsv
 data/subtilis/*.xml
 data/Athal/*.xml
 
+.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
