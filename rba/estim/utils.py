@@ -1,11 +1,13 @@
-from collections import defaultdict
+from collections import defaultdict, MutableMapping
 import numpy as np
 import pandas as pd
 from numpy.linalg import lstsq
 from scipy.stats import linregress, pearsonr
+from scipy.stats.mstats import gmean
 
 from cvxopt import solvers, matrix
 
+R = 6.022140857e23
 
 def numpy_to_cvxopt_matrix(A):
     if isinstance(A, np.ndarray):
@@ -43,7 +45,6 @@ def load_experiment_data(config):
 def load_location_data(config):
 	return read_data(config, 'LocationData')
 
-
 def load_protein_data(config):
 	return read_data(config, 'ProteinData')
 
@@ -57,6 +58,9 @@ def load_compartment_map(config):
 
 def load_is_enzymatic_data(config):
 	return read_data(config, 'IsEnzymaticData')
+
+def load_flux_data(config):
+	return read_data(config, 'FluxData')
 
 
 def create_mock_compartment_map(config, prot_data):
@@ -83,6 +87,7 @@ def compute_compartment_data(exp_df, prot_df, loc_df, cm_df, config):
 
 	cm_col = config.get('CompartmentMap', 'cm_column')
 	
+	import collections
 	comp2comp = defaultdict(list)
 	for c in cm_df.index:
 		mapped = cm_df.loc[c][cm_col]
@@ -195,3 +200,185 @@ def compute_linear_fits(exp_df, data_df, normalize=False, sums_to_one=False):
 			solution['intercept'][comp] = x[idx]
 			idx = idx + 1
 	return solution
+
+def get_mmol_gcdw(protein_count, cell_dry_weight):
+    return protein_count * 1e3 / (R * cell_dry_weight)
+
+def get_gene_cnt_per_reaction(rba_model, fluxes=None):
+    gene_cnt = defaultdict(int)
+    for enz in rba_model.enzymes.enzymes:
+        reaction_id = enz.id[2:-7]
+        if reaction_id[-2] == '_' and reaction_id[-1].isdigit():
+            reaction_id = reaction_id[:-2]
+
+        if fluxes is not None:
+            if reaction_id in fluxes:
+                for sr in enz.machinery_composition.reactants:
+                    gene_cnt[sr.species] = gene_cnt[sr.species] + 1
+        else:
+            for sr in enz.machinery_composition.reactants:
+                gene_cnt[sr.species] = gene_cnt[sr.species] + 1
+    return gene_cnt
+
+def is_enz_cytosolic(enz_id, rba_model):
+    protein_compartments = defaultdict(int)
+    enz = rba_model.enzymes.enzymes.get_by_id('R_%s_enzyme' % enz_id)
+    for sp in enz.machinery_composition.reactants:
+        prot = rba_model.proteins.macromolecules.get_by_id(sp.species)
+        protein_compartments[prot.compartment] = protein_compartments[prot.compartment] + 1
+    if len(protein_compartments) == 1 and protein_compartments.keys()[0] == 'Cytoplasm':
+        return True
+    else:
+        return False
+
+class Enzymes(MutableMapping):
+    """A dictionary that applies an arbitrary key-altering
+       function before accessing the keys"""
+
+    def __init__(self, *args, **kwargs):
+        self.store = dict()
+        self.update(dict(*args, **kwargs))  # use the free update to set keys
+
+    def __init__(self, rba_model, fluxes, protein_counts, protein_concentrations, gene_cnt, nz_gene_cnt, cdw):
+        self.store = dict()
+        self.fluxes = dict(fluxes)
+        self.cdw = cdw
+        for enz in rba_model.enzymes.enzymes:
+            enz_id = enz.id[2:-7]
+            is_cytosolic = is_enz_cytosolic(enz_id, rba_model)
+            if enz_id[-2] == '_' and enz_id[-1].isdigit():
+                flux_id = enz_id[:-2]
+            else:
+                flux_id = enz_id
+            #if flux_id not in fluxes:
+            #    continue
+            flux = 0. if flux_id not in fluxes else fluxes[flux_id]
+            genes = {}
+            for sr in enz.machinery_composition.reactants:
+                gid = sr.species
+                stoich = sr.stoichiometry
+                r_cnt = gene_cnt[gid]
+                nz_r_cnt = 0 if gid not in nz_gene_cnt else nz_gene_cnt[gid]
+                count = 0 if gid not in protein_counts else protein_counts[gid]
+                conc = 0 if gid not in protein_counts else protein_concentrations[gid]
+                gene = Protein(gid, r_cnt, nz_r_cnt, stoich, count, conc)
+                genes[gid] = gene
+            enzyme = Enzyme(enz_id, flux, genes, is_cytosolic, cdw)
+
+            self.store[enz_id] = enzyme
+        self.correct_ATPS4rpp()
+        self.adjust_isoenzymes()
+        for enz in self.store.values():
+            enz.set_kapp()
+
+    def adjust_isoenzymes(self):
+        flux2enzyme = defaultdict(list)
+        for enz_id in self.store:
+            if enz_id[-2] == '_' and enz_id[-1].isdigit():
+                store_id = enz_id[:-2]
+            else:
+                store_id = enz_id
+            flux2enzyme[store_id].append(enz_id)
+        for flux, enz_ids in flux2enzyme.items():
+            enzymes = [self.store[_id] for _id in enz_ids]
+            if len(enzymes) == 1:
+                continue
+            counts = np.array([enz.count for enz in enzymes])
+            proportions = counts / np.sum(counts)
+            for (enz, prop) in zip(enzymes, proportions):
+                enz.flux = enz.flux * prop
+        self.flux2enzyme = flux2enzyme
+
+    def correct_ATPS4rpp(self):
+        if 'ATPS4rpp' in self.store:
+            ATPS4rpp_enz = self.store['ATPS4rpp']
+            counts = np.array([gene.count for gene in ATPS4rpp_enz.genes.values()])
+            stoichs = np.array([gene.stoichiometry for gene in ATPS4rpp_enz.genes.values()])
+            reactions = np.array([gene.nz_reactions for gene in ATPS4rpp_enz.genes.values()])
+            counts = counts / stoichs
+            counts = counts / reactions
+            counts = filter(lambda x: x != 0, counts)
+            ATPS4rpp_enz.count = gmean(counts)
+
+
+    def __getitem__(self, key):
+        return self.store[self.__keytransform__(key)]
+
+    def __setitem__(self, key, value):
+        self.store[self.__keytransform__(key)] = value
+
+    def __delitem__(self, key):
+        del self.store[self.__keytransform__(key)]
+
+    def __iter__(self):
+        return iter(self.store)
+
+    def __len__(self):
+        return len(self.store)
+
+    def __keytransform__(self, key):
+        return key
+
+
+class Enzyme(object):
+    def __init__(self, name, flux, genes, is_cytosolic, cdw):
+        self.name = name
+        self.flux = flux
+        self.genes = genes
+        self.is_cytosolic = is_cytosolic
+        self.cdw = cdw
+        self.set_count()
+        self.set_conc()
+        self.set_kapp()
+
+
+    def __repr__(self):
+        _str = 'Reaction: {}\nFlux:    {}\nCount: {}\nkapp:      {}\n'.format(self.name, self.flux, self.count, self.kapp/3600)
+        _str = _str + 'Genes\tReactions\tStoichiometry\tCount\n'
+        gene_str = '\n'.join([str(gene) for gene in self.genes.values()])
+        return _str + gene_str
+
+    def set_count(self):
+        counts = np.array([gene.count for gene in self.genes.values()])
+        stoichs = np.array([gene.stoichiometry for gene in self.genes.values()])
+        reactions = np.array([gene.nz_reactions for gene in self.genes.values()])
+        # if there is any non-zero protein that is used only in this reaction, filter other zeros
+        exclusive_non_zero = False
+        if len(counts) > 1 and 0. in counts:
+            for (cnt, reac) in zip(counts, reactions):
+                if reac == 1 and cnt != 0:
+                    exclusive_non_zero = True
+        counts = counts / stoichs
+        #counts = counts / reactions
+        if exclusive_non_zero:
+            counts = filter(lambda x: x != 0, counts)
+        self.count = gmean(counts)
+
+    def set_conc(self):
+        self.set_count()
+        self.concentration = self.count / R / self.cdw * 1e3
+
+    def set_kapp(self):
+        self.kapp = self.flux / self.concentration if (self.concentration != 0 and not np.isnan(self.concentration)) else 0
+
+
+class Protein(object):
+    def __init__(self, gene, reactions, nz_reactions, stoichiometry, count, concentration):
+        self.gene = gene
+        self.reactions = reactions
+        self.nz_reactions = nz_reactions
+        self.stoichiometry = stoichiometry
+        self.count = count
+        self.concentration = concentration
+
+    def __repr__(self):
+        _str = '{}\t{}/{}\t{}\t{}\t{}'.format(self.gene,
+                                           self.nz_reactions,
+                                           self.reactions,
+                                           self.stoichiometry,
+                                           self.count,
+                                           self.concentration)
+        return _str
+
+    def __str__(self):
+        return self.__repr__()
