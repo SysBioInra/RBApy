@@ -94,9 +94,9 @@ class Solver(object):
             return
 
         # grid
-	vec_mu = numpy.arange(0,0.8,0.001)
+        vec_mu = numpy.arange(0, 0.8, 0.001)
         for mu_test in vec_mu:
-	    print(mu_test)
+            print(mu_test)
             self.matrix.build_matrices(mu_test)
             lp = self.build_lp()
             lp.solve()
@@ -108,7 +108,6 @@ class Solver(object):
             else:
                 print(unknown_flag_msg(mu_test, lp))
                 return
-
 
     def build_lp(self):
         """

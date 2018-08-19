@@ -255,17 +255,15 @@ class InverseFunction(BaseFunction):
 
         """
         super(InverseFunction, self).__init__(variable)
-	self._xmax = parameters['CONSTANT']
+        self._xmax = parameters['CONSTANT']
         self.value = 0
 
     def update(self, x):
         """Evaluate function."""
-	try:
-        self.value = self._xmax / x
-	except KeyError:
-        print('variable is 0, impossible to do inversion')
-
-
+        try:
+            self.value = self._xmax / x
+        except KeyError:
+            print('variable is 0, impossible to do inversion')
 
 
 class MultiplicationFunction(object):

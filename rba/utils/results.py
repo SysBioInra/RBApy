@@ -127,9 +127,9 @@ class Results(object):
                     self.process_machinery_concentrations().items():
                 f.write('{}\t{}\n'.format(process, conc))
 
-    def export_matlab(self,output_dir):
+    def export_matlab(self, output_dir):
         data = {'X': self._solver.X, 'ColNames': self._matrices.col_names, 'Enzymes': self.enzymes, 'Processes': self.processes}
-	scipy.io.savemat(os.path.join(output_dir, 'rba_matlab.mat'), data,do_compression=True)
+        scipy.io.savemat(os.path.join(output_dir, 'rba_matlab.mat'), data, do_compression=True)
 
     def print_main_transport_reactions(self, number=10):
         print('\nTop {} boundary fluxes:'.format(number))
