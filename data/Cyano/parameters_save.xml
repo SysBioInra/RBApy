@@ -58,7 +58,7 @@
     <function id="fraction_non_enzymatic_protein_Cellular_thylakoid_membrane" type="linear" variable="growth_rate">
       <listOfParameters>
         <parameter id="Y_MIN" value="0"/>
-        <parameter id="LINEAR_CONSTANT" value="0.6"/>
+        <parameter id="LINEAR_CONSTANT" value="0.8965"/>
         <parameter id="Y_MAX" value="1"/>
         <parameter id="LINEAR_COEF" value="-0.0496"/>
         <parameter id="X_MAX" value="1.6"/>
@@ -362,38 +362,25 @@
         <parameter id="CONSTANT" value="2000000.0"/>
       </listOfParameters>
     </function>
-    <function id="R_RBPC_M_o2_p_transport_factor" type="inverse" variable="M_o2_p">
+    <function id="R_ATPS4rpp_M_h_p_transport_factor" type="michaelisMenten" variable="M_h_p">
       <listOfParameters>
-        <parameter id="CONSTANT" value="1"/>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
       </listOfParameters>
     </function>
-    <function id="R_RBPC_M_co2_p_transport_factor" type="linear" variable="M_co2_p">
-       <listOfParameters>
-        <parameter id="Y_MIN" value="-inf"/>
-        <parameter id="LINEAR_CONSTANT" value="0"/>
-        <parameter id="Y_MAX" value="inf"/>
-        <parameter id="LINEAR_COEF" value="1"/>
-        <parameter id="X_MAX" value="inf"/>
-        <parameter id="X_MIN" value="1"/>
-      </listOfParameters>
-    </function>
-    <function id="R_RBCh_M_co2_p_transport_factor" type="inverse" variable="M_co2_p">
+    <function id="R_ATPSu_M_h_u_transport_factor" type="michaelisMenten" variable="M_h_u">
       <listOfParameters>
-        <parameter id="CONSTANT" value="1"/>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
       </listOfParameters>
     </function>
-    <function id="R_RBCh_M_o2_p_transport_factor" type="linear" variable="M_o2_p">
-       <listOfParameters>
-        <parameter id="Y_MIN" value="-inf"/>
-        <parameter id="LINEAR_CONSTANT" value="0"/>
-        <parameter id="Y_MAX" value="inf"/>
-        <parameter id="LINEAR_COEF" value="1"/>
-        <parameter id="X_MAX" value="inf"/>
-        <parameter id="X_MIN" value="1"/>
-      </listOfParameters>
-    </function>
-
     <function id="R_O2tc_M_o2_p_transport_factor" type="michaelisMenten" variable="M_o2_p">
+      <listOfParameters>
+        <parameter id="kmax" value="1"/>
+        <parameter id="Km" value="0.8"/>
+      </listOfParameters>
+    </function>
+    <function id="R_O2tu_M_o2_u_transport_factor" type="michaelisMenten" variable="M_o2_u">
       <listOfParameters>
         <parameter id="kmax" value="1"/>
         <parameter id="Km" value="0.8"/>
@@ -1049,24 +1036,28 @@
         <functionReference function="fraction_active_ribosomes"/>
       </listOfFunctionReferences>
     </aggregate>
-    <aggregate id="R_RBPC_efficiency" type="multiplication">
+    <aggregate id="R_ATPS4rpp_efficiency" type="multiplication">
       <listOfFunctionReferences>
-        <functionReference function="default_efficiency"/>
-        <functionReference function="R_RBPC_M_co2_p_transport_factor"/>
-	<functionReference function="R_RBPC_M_o2_p_transport_factor"/>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_ATPS4rpp_M_h_p_transport_factor"/>
       </listOfFunctionReferences>
     </aggregate>
-    <aggregate id="R_RBCh_efficiency" type="multiplication">
+    <aggregate id="R_ATPSu_efficiency" type="multiplication">
       <listOfFunctionReferences>
-        <functionReference function="default_efficiency"/>
-        <functionReference function="R_RBCh_M_co2_p_transport_factor"/>
-	<functionReference function="R_RBCh_M_o2_p_transport_factor"/>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_ATPSu_M_h_u_transport_factor"/>
       </listOfFunctionReferences>
     </aggregate>
     <aggregate id="R_O2tc_efficiency" type="multiplication">
       <listOfFunctionReferences>
         <functionReference function="default_transporter_efficiency"/>
         <functionReference function="R_O2tc_M_o2_p_transport_factor"/>
+      </listOfFunctionReferences>
+    </aggregate>
+    <aggregate id="R_O2tu_efficiency" type="multiplication">
+      <listOfFunctionReferences>
+        <functionReference function="default_transporter_efficiency"/>
+        <functionReference function="R_O2tu_M_o2_u_transport_factor"/>
       </listOfFunctionReferences>
     </aggregate>
     <aggregate id="R_GLCt2pp_efficiency" type="multiplication">

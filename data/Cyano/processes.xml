@@ -624,7 +624,6 @@
               <speciesReference species="average_protein_Secreted" stoichiometry="1"/>
               <speciesReference species="average_protein_Cell_inner_membrane" stoichiometry="1"/>
               <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
-              <speciesReference species="average_protein_Membrane" stoichiometry="1"/>
               <speciesReference species="average_protein_Periplasm" stoichiometry="1"/>
               <speciesReference species="average_protein_Cell_membrane" stoichiometry="1"/>
               <speciesReference species="P74227" stoichiometry="1"/>
@@ -1276,7 +1275,6 @@
               <speciesReference species="average_protein_Secreted" stoichiometry="1"/>
               <speciesReference species="average_protein_Cell_inner_membrane" stoichiometry="1"/>
               <speciesReference species="average_protein_Cytoplasm" stoichiometry="1"/>
-              <speciesReference species="average_protein_Membrane" stoichiometry="1"/>
               <speciesReference species="average_protein_Periplasm" stoichiometry="1"/>
               <speciesReference species="average_protein_Cell_membrane" stoichiometry="1"/>
               <speciesReference species="P74227" stoichiometry="1"/>
@@ -1387,12 +1385,12 @@
               <speciesReference species="M_trnaala_c" stoichiometry="1"/>
               <speciesReference species="M_trnaphe_c" stoichiometry="1"/>
               <speciesReference species="M_trnaser_c" stoichiometry="1"/>
-              <speciesReference species="trnagln" stoichiometry="1"/>
               <speciesReference species="M_trnaarg_c" stoichiometry="1"/>
               <speciesReference species="M_trnagly_c" stoichiometry="1"/>
               <speciesReference species="M_trnaasp_c" stoichiometry="1"/>
               <speciesReference species="M_trnapro_c" stoichiometry="1"/>
               <speciesReference species="M_trnaglu_c" stoichiometry="1"/>
+              <speciesReference species="M_glutrna_LPAREN_gln_RPAREN__c" stoichiometry="1"/>
               <speciesReference species="trnasecys" stoichiometry="1"/>
               <speciesReference species="M_trnalys_c" stoichiometry="1"/>
               <speciesReference species="M_trnatyr_c" stoichiometry="1"/>
@@ -1433,12 +1431,12 @@
               <speciesReference species="M_trnaala_c" stoichiometry="1"/>
               <speciesReference species="M_trnaphe_c" stoichiometry="1"/>
               <speciesReference species="M_trnaser_c" stoichiometry="1"/>
-              <speciesReference species="trnagln" stoichiometry="1"/>
               <speciesReference species="M_trnaarg_c" stoichiometry="1"/>
               <speciesReference species="M_trnagly_c" stoichiometry="1"/>
               <speciesReference species="M_trnaasp_c" stoichiometry="1"/>
               <speciesReference species="M_trnapro_c" stoichiometry="1"/>
               <speciesReference species="M_trnaglu_c" stoichiometry="1"/>
+              <speciesReference species="M_glutrna_LPAREN_gln_RPAREN__c" stoichiometry="1"/>
               <speciesReference species="trnasecys" stoichiometry="1"/>
               <speciesReference species="M_trnalys_c" stoichiometry="1"/>
               <speciesReference species="M_trnatyr_c" stoichiometry="1"/>
@@ -1650,6 +1648,7 @@
             <speciesReference species="M_h2o_c" stoichiometry="2"/>
           </listOfReactants>
           <listOfProducts>
+            <speciesReference species="M_glutrna_LPAREN_gln_RPAREN__c" stoichiometry="1"/>
             <speciesReference species="M_gdp_c" stoichiometry="2"/>
             <speciesReference species="M_pi_c" stoichiometry="2"/>
             <speciesReference species="M_h_c" stoichiometry="2"/>
@@ -1733,36 +1732,136 @@
             <speciesReference species="M_h_c" stoichiometry="2"/>
           </listOfProducts>
         </componentProcessing>
-        <componentProcessing component="CHEBI:18420" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:58937" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:29105" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:597326" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:57692" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:29103" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:49883" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:58210" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:18420" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_mg2_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:58937" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_thmpp_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:29105" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_zn2_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:597326" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_pydx5p_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:57692" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_fad_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:29103" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_k_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:49883" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_fe2_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:58210" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_fmn_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
         <componentProcessing component="CHEBI:60342" machineryCost="0.0"/>
         <componentProcessing component="CHEBI:60240" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:29035" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:21137" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:60344" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:24875" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:18408" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:30413" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:15361" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:49601" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:57540" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:48828" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:49786" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:57618" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:29035" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_mn2_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:21137" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_fe2_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:60344" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_pheme_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:24875" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_fe2_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:18408" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_adocbl_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:30413" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_pheme_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:15361" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_pyr_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:49601" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_fe2_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:57540" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_nad_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:48828" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_cobalt2_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:49786" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_ni2_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:57618" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_fmn_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
         <componentProcessing component="CHEBI:28115" machineryCost="0.0"/>
         <componentProcessing component="CHEBI:60539" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:28938" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:29036" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:28938" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_nh4_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:29036" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_cu2_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
         <componentProcessing component="CHEBI:60052" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:57783" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:25516" machineryCost="0.0"/>
-        <componentProcessing component="CHEBI:30616" machineryCost="0.0"/>
+        <componentProcessing component="CHEBI:57783" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_nadph_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:25516" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_ni2_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
+        <componentProcessing component="CHEBI:30616" machineryCost="0.0">
+          <listOfReactants>
+            <speciesReference species="M_atp_c" stoichiometry="1"/>
+          </listOfReactants>
+        </componentProcessing>
         <componentProcessing component="CHEBI:83088" machineryCost="0.0"/>
       </listOfComponentProcessings>
     </processingMap>

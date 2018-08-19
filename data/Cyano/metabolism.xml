@@ -4,7 +4,6 @@
     <compartment id="Secreted"/>
     <compartment id="Cell_inner_membrane"/>
     <compartment id="Cytoplasm"/>
-    <compartment id="Membrane"/>
     <compartment id="Periplasm"/>
     <compartment id="Cell_membrane"/>
   </listOfCompartments>
@@ -11491,16 +11490,13 @@
         <speciesReference species="M_sucr_p" stoichiometry="1.0"/>
       </listOfProducts>
     </reaction>
-    <reaction id="R_SUCRabcpp_syn" reversible="false">
+    <reaction id="R_SUCRabcpp_syn" reversible="true">
       <listOfReactants>
-        <speciesReference species="M_atp_c" stoichiometry="1.0"/>
-        <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+        <speciesReference species="M_h_p" stoichiometry="1.0"/>
         <speciesReference species="M_sucr_p" stoichiometry="1.0"/>
       </listOfReactants>
       <listOfProducts>
-        <speciesReference species="M_adp_c" stoichiometry="1.0"/>
         <speciesReference species="M_h_c" stoichiometry="1.0"/>
-        <speciesReference species="M_pi_c" stoichiometry="1.0"/>
         <speciesReference species="M_sucr_c" stoichiometry="1.0"/>
       </listOfProducts>
     </reaction>

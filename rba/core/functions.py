@@ -225,6 +225,49 @@ class MichaelisMentenFunction(BaseFunction):
         self.value = max(y, self._y_min) if self._y_min else y
 
 
+class InverseFunction(BaseFunction):
+    """
+    Class computing inverse functions.
+
+    Attributes
+    ----------
+    name : str
+        identifier of this class.
+    variable : str
+        variable used by function.
+    value : float
+        current function value.
+
+    """
+
+    name = 'inverse'
+
+    def __init__(self, parameters, variable):
+        """
+        Constructor.
+
+        Parameters
+        ----------
+        parameters : dict
+            Dict that must contain the following keys: CONSTANT.
+        variable : str
+            Function variable.
+
+        """
+        super(InverseFunction, self).__init__(variable)
+	self._xmax = parameters['CONSTANT']
+        self.value = 0
+
+    def update(self, x):
+        """Evaluate function."""
+	try:
+        self.value = self._xmax / x
+	except KeyError:
+        print('variable is 0, impossible to do inversion')
+
+
+
+
 class MultiplicationFunction(object):
     """
     Class computing multiplication functions.
@@ -272,7 +315,7 @@ class MultiplicationFunction(object):
 
 # list of accepted function names and classes implementing them
 SIMPLE = [ConstantFunction, LinearFunction, IndicatorFunction,
-          ExponentialFunction, MichaelisMentenFunction]
+          ExponentialFunction, MichaelisMentenFunction, InverseFunction]
 AGGREGATE = [MultiplicationFunction]
 VALID_FNS = {c.name: c for c in SIMPLE}
 VALID_AGGS = {c.name: c for c in AGGREGATE}

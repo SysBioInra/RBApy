@@ -86,14 +86,6 @@
         <componentReference component="G" stoichiometry="29.0"/>
       </composition>
     </macromolecule>
-    <macromolecule id="trnagln" compartment="Cytoplasm">
-      <composition>
-        <componentReference component="A" stoichiometry="15.0"/>
-        <componentReference component="C" stoichiometry="23.0"/>
-        <componentReference component="U" stoichiometry="16.0"/>
-        <componentReference component="G" stoichiometry="21.0"/>
-      </composition>
-    </macromolecule>
     <macromolecule id="M_trnaarg_c" compartment="Cytoplasm">
       <composition>
         <componentReference component="A" stoichiometry="17.0"/>
@@ -132,6 +124,14 @@
         <componentReference component="C" stoichiometry="27.0"/>
         <componentReference component="U" stoichiometry="13.0"/>
         <componentReference component="G" stoichiometry="22.0"/>
+      </composition>
+    </macromolecule>
+    <macromolecule id="M_glutrna_LPAREN_gln_RPAREN__c" compartment="Cytoplasm">
+      <composition>
+        <componentReference component="A" stoichiometry="15.0"/>
+        <componentReference component="C" stoichiometry="23.0"/>
+        <componentReference component="U" stoichiometry="16.0"/>
+        <componentReference component="G" stoichiometry="21.0"/>
       </composition>
     </macromolecule>
     <macromolecule id="trnasecys" compartment="Cytoplasm">
