@@ -289,9 +289,9 @@ class DefaultMetabolites(object):
         names.append('Methionine')
         # charged + uncharged trnas
         names += [self.charged_trna_name(aa) for aa in self.aas]
-        keys += [self.uncharged_trna_key(aa) for aa in self.aas]
-        names += [self.uncharged_trna_name(aa) for aa in self.aas]
         keys += [self.charged_trna_key(aa) for aa in self.aas]
+        names += [self.uncharged_trna_name(aa) for aa in self.aas]
+        keys += [self.uncharged_trna_key(aa) for aa in self.aas]
         keys.append(self.charged_trna_key(self.aa_fM))
         names.append(self.charged_trna_name(self.aa_fM))
         # nucleotides

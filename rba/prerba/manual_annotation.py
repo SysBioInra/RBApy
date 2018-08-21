@@ -56,7 +56,7 @@ class CuratedLocations(CuratedData):
     def __init__(self, input_dir):
         filename = os.path.join(input_dir, 'locations.tsv')
         super(CuratedLocations, self).__init__(
-            filename, ['ENTRY', 'GENE NAME', 'NAME', 'LOCATION']
+            filename, ['ENTRY', 'GENE NAME', 'PROTEIN NAME', 'LOCATION']
             )
         self.data = {r[0]: r[3] for r in self._raw_data.rows()}
         if self._raw_data.has_missing_information('LOCATION'):
