@@ -6,10 +6,10 @@ from __future__ import division, print_function, absolute_import
 # global imports
 import os.path
 try:
-    from urllib.request import Request, urlopen
+    from urllib.request import urlopen
     from urllib.parse import urlencode
 except ImportError:
-    from urllib2 import Request, urlopen
+    from urllib2 import urlopen
     from urllib import urlencode
 import shutil
 
@@ -57,10 +57,7 @@ class UniprotImporter(object):
             'columns': url_columns()
         }
         url_data = urlencode(params)
-        request = Request(url, url_data.encode('ascii'))
-        contact = "anne.goelzer@inra.fr"
-        request.add_header('User-Agent', 'Python %s' % contact)
-        response = urlopen(request)
+        response = urlopen(url + '?' + url_data)
         self.data = response.read()
 
 def url_columns():
