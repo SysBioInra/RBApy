@@ -44,6 +44,7 @@ class CurationData(object):
                                         na_values=[self.missing_tag])
         except IOError:
             print('Helper file {} not found.'.format(filename))
+            self.write(self.filename)
 
     def update_file(self):
         """
