@@ -8,7 +8,7 @@ analyze_results <- function() {
 read_fluxes <- function() {
   fluxes <- read_reference_fluxes()
   pipeline_results <- c(
-    'raw.out', 'metabolites_medium.out', 'tmp.out'
+    'raw.out', 'metabolites_medium.out', 'med_met_kcat_flag.out'
   )
   for (filename in pipeline_results) {
     fluxes <- left_join(fluxes,
@@ -48,19 +48,25 @@ plot_results <- function(fluxes, growth_rates) {
                            tidy_fluxes$test_flux[tidy_fluxes$experiment == e])^2
                      })
   inset <- data.frame(experiment = exp_levels,
-                      label = sprintf('growth rate = %.2f\nR^2 = %.2f',
-                                      growth_rates, rsquared))
-  labels <- c('raw' = 'First run',
-              'corrected metabolites' = 'After matching of metabolite IDs',
-              'corrected kcat' = 'After adjustment of catalytic constants')
+                      growth_rate = signif(growth_rates, 2),
+                      rsquared = signif(rsquared, 2))
   result <- ggplot(tidy_fluxes) +
-    geom_point(aes(flux, test_flux), color = 'blue') +
-    geom_abline(slope=1) +
+    geom_point(aes(flux, test_flux), color = rgb(1/255, 115/255, 178/255)) +
+    geom_abline(slope=1, linetype = 2) +
     facet_wrap(vars(experiment), labeller = labeller(experiment = labels)) +
-    geom_text(data = inset, aes(x = -38, y = 60, label = label), hjust = 0, vjust = 1) +
+    theme_classic() +
+    theme(strip.background = element_blank(), strip.text.x = element_blank()) +
+    coord_fixed(xlim = c(-60,60)) +
+    geom_text(data = inset, aes(x = -Inf, y = Inf, label = inset_label(growth_rate, rsquared)), hjust = 0, vjust = 1) +
     labs(x = 'Fluxes from hand-curated model\n(mmol/gCDW/h)',
          y = 'Fluxes from RBApy model\n(mmol/gCDW/h)')
   pdf('results/pipeline_vs_ref.pdf', 9, 4); print(result); dev.off()
+}
+
+inset_label <- function(growth_rate, rsquared) {
+  return(lapply(seq_along(growth_rate), function(i) paste0(
+    "growth rate = ", growth_rate[i], " 1/h\n", "R^2 = ", rsquared[i]
+  )))
 }
 
 analyze_results()
