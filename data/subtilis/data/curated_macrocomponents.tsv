@@ -1,0 +1,12 @@
+TARGET_METABOLITE	TARGET_FLUX
+M_mmq_c	0.0003
+M_put_c	0.0341
+M_pgout_c	0.10182
+M_wtaout_c	0.0109
+M_1gdg_c	8.575e-5
+M_2gdg_c	1.1029e-4
+M_3gdg_c	6.5833e-5
+M_lyspg_c	2.2057e-5
+M_pgo_c	1.7586e-4
+M_pe_c	5.5951e-4
+M_cl_c	4.642e-6
