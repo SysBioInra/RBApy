@@ -1,9 +1,0 @@
-<RBADensity>
-  <listOfTargetDensities>
-    <targetDensity upperBound="Cellular_thylakoid_membrane_density" compartment="Cellular_thylakoid_membrane"/>
-    <targetDensity upperBound="Cell_inner_membrane_density" compartment="Cell_inner_membrane"/>
-    <targetDensity upperBound="Cytoplasm_density" compartment="Cytoplasm"/>
-    <targetDensity upperBound="Periplasm_density" compartment="Periplasm"/>
-    <targetDensity upperBound="Cell_membrane_density" compartment="Cell_membrane"/>
-  </listOfTargetDensities>
-</RBADensity>
