@@ -128,8 +128,15 @@ class Results(object):
                 f.write('{}\t{}\n'.format(process, conc))
 
     def export_matlab(self, output_dir):
-        data = {'X': self._solver.X, 'ColNames': self._matrices.col_names, 'Enzymes': self.enzymes, 'Processes': self.processes}
-        scipy.io.savemat(os.path.join(output_dir, 'rba_matlab.mat'), data, do_compression=True)
+        data = {
+            'mu_opt': self._solver.mu_opt, 'X': self._solver.X,
+            'A': self._matrices.A, 'b': self._matrices.b,
+            'f': self._matrices.f, 'UB': self._matrices.UB,
+            'LB': self._matrices.LB, 'ColNames': self._matrices.col_names,
+            'Enzymes': self.enzymes, 'Processes': self.processes
+        }
+        scipy.io.savemat(os.path.join(output_dir, 'rba_matlab.mat'),
+                         data, do_compression=True)
 
     def print_main_transport_reactions(self, number=10):
         print('\nTop {} boundary fluxes:'.format(number))
