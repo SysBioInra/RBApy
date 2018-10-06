@@ -167,23 +167,25 @@ class CuratedMetabolites(CuratedData):
         self.data = {}
         invalid_ids = []
         for id_, name, sbml_id, conc in self._raw_data.rows():
-            if pandas.isnull(sbml_id) or sbml_id in known_species:
-                if pandas.isnull(sbml_id):
-                    sbml_id = None
-                if pandas.isnull(conc) or conc == '':
-                    conc = 0
-                self.data[id_] = Metabolite(name, sbml_id, float(conc))
-            else:
+            if pandas.isnull(sbml_id):
+                sbml_id = None
+            elif sbml_id not in known_species:
                 invalid_ids.append(id_)
+                sbml_id = None
+            if pandas.isnull(conc) or conc == '':
+                conc = 0
+            self.data[id_] = Metabolite(name, sbml_id, float(conc))
         if invalid_ids:
             print(
-                '{}: {} are invalid metabolite ids.'
-                'Unknown metabolites will be removed from production targets.'
+                '{}: {} do not map to valid SBML metabolite ids. '
+                'These metabolites will be removed from processes and '
+                'production targets.'
                 .format(filename, ', '.join(invalid_ids))
                 )
         self._warning = (
             'WARNING: unidentified key metabolites have been added to file {}.'
-            'Unknown metabolites will be removed from production targets.'
+            ' These metabolites will be removed from processes and '
+            'production targets.'
             .format(filename)
             )
 
@@ -208,7 +210,7 @@ class CuratedMacrocomponents(CuratedData):
                 invalid_ids.append(met)
         if invalid_ids:
             print(
-                '{}: {} are invalid metabolite ids.'
-                'Unknown metabolites will be removed from production targets.'
+                '{}: {} are not valid SBML metabolite ids. '
+                'These entries will be removed from production targets.'
                 .format(filename, ', '.join(invalid_ids))
                 )
