@@ -149,10 +149,11 @@ class UserData(object):
         return (e for e in self.sbml_data.enzymes if e.is_transporter)
 
     def metabolite_targets(self):
-        result = [(m.sbml_id, m.concentration)
-                  for m in self.metabolite_map.values()
+        result = [(id_, m.sbml_id, m.concentration)
+                  for id_, m in self.metabolite_map.items()
                   if m.sbml_id and m.concentration]
-        result += [(id_, conc) for id_, conc in self.macrocomponents.items()]
+        result += [(id_, id_, conc)
+                   for id_, conc in self.macrocomponents.items()]
         return result
 
     def output_dir(self):

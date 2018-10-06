@@ -120,11 +120,11 @@ class DefaultTargets(object):
 
         """
         targets = rba.xml.TargetGroup('metabolite_production')
-        for metabolite in self._metabolites.values():
+        for id_, metabolite in self._metabolites.items():
             if metabolite.sbml_id and metabolite.concentration:
                 target = rba.xml.TargetSpecies(metabolite.sbml_id)
                 target.value = (self.default.parameters
-                                .metabolite_concentration(metabolite.sbml_id))
+                                .metabolite_concentration(id_))
                 targets.concentrations.append(target)
         return targets
 

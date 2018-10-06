@@ -136,7 +136,9 @@ class ModelBuilder(object):
 
     def _target_functions(self):
         return [
-            self.default.parameters.metabolite_concentration_function(*target)
+            self.default.parameters.metabolite_concentration_function(
+                target[0], target[2]
+            )
             for target in self.data.metabolite_targets()
         ]
 
