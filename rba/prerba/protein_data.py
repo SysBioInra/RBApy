@@ -161,8 +161,8 @@ class ProteinData(object):
     def _uniprot_subunits(self, uniprot_line):
         subunits = self._uniprot.find_subunits(uniprot_line)
         if not subunits:
-            self._subunits.append(uniprot_line, 1)
             subunits = 1
+        self._subunits.append(uniprot_line, subunits)
         return subunits
 
     def reference(self, gene_id):
