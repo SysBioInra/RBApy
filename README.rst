@@ -43,7 +43,7 @@ these helper files and rerun the script to obtain more relevant output
 Once the RBA model was generated, you can solve it using:
 
 ```
-python solve_model.py path/to/model
+python solve_rba_model.py path/to/model
 ```
 
 where the path points to the directory containing the XML files defining
@@ -73,7 +73,7 @@ in the input directory *after* the script has been run for the first time.
    protein within its enzymatic complex. For every ambiguous entry, gene
    name and protein name are provided for proper identification. User
    should read annotation field and provide `[MISSING]` stoichiometry.
- - `location_mapping.tsv`: this file is used to link uniprot location ids
+ - `location_map.tsv`: this file is used to link uniprot location ids
    with user-defined compartment ids. For every
    uniprot location, user may fill in a name compartment
    (e.g. SBML compartment names). The idea behind this
@@ -96,7 +96,10 @@ rerun the pipeline to regenerate RBA input properly.
 SBML file requirements
 ----------------------
 
-The SBML file must be a valid SBML file.
+The SBML file must be a valid SBML file, with gene-reaction associations. 
+RBApy assumes that the boolean relation is always “or”s of “and”s, e.g. (g1 and g2) or (g3 and g4) 
+Moreover, the words  “or” and “and” must be written in lowercase letters.
+Empty fields in Gene-association will be interpreted as a diffusion reaction. 
 
 
 Repository structure and files:
@@ -117,9 +120,23 @@ pipeline
 
 Authors
 -------
+Copyright (c) 2018 INRA - MaIAGE - France
+S. Fischer, A. Bulovic, A. Goelzer
 
 License
 -------
+RBApy is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-Acknowledgments
+RBApy is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with RBApy.  If not, see <https://www.gnu.org/licenses/>
+
+Citation
 ---------------
