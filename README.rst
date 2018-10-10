@@ -63,11 +63,7 @@ in the input directory *after* the script has been run for the first time.
    as `[MISSING]` with a uniprot identifier, an average protein (ids of the
    type `average_protein_xxx` as defined in `proteins.xml`) or leave empty
    for spontaneous reactions.
- - `metabolites.tsv`: metabolite ID mapping with SBML for (a) processes: metabolites 
- involved in translation and transcription, (b) targets: metabolites that 
- have a target concentration, (c) protein cofactors imported from Uniprot.
- for every metabolite, user should check inferred values and fill in fields tagged
-   as `[MISSING]`. Metabolites with [MISSING] field will be ignored in the final model.
+ - `metabolites.tsv`: metabolite ID mapping with SBML for (a) processes: metabolites involved in translation and transcription, (b) targets: metabolites that have a target concentration, (c) protein cofactors imported from Uniprot.  for every metabolite, user should check inferred values and fill in fields tagged as `[MISSING]`. Metabolites with [MISSING] field will be ignored in the final model.
  - `cofactors.tsv`: for every protein, lists name, chebi identifier and
    stoichiometry of cofactors. Based on the last column (containing uniprot
    annotation), user should check inferred values and fill in fields tagged
