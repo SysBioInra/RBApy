@@ -63,6 +63,11 @@ in the input directory *after* the script has been run for the first time.
    as `[MISSING]` with a uniprot identifier, an average protein (ids of the
    type `average_protein_xxx` as defined in `proteins.xml`) or leave empty
    for spontaneous reactions.
+ - `metabolites.tsv`: metabolite ID mapping with SBML for (a) processes: metabolites 
+ involved in translation and transcription, (b) targets: metabolites that 
+ have a target concentration, (c) protein cofactors imported from Uniprot.
+ for every metabolite, user should check inferred values and fill in fields tagged
+   as `[MISSING]`. Metabolites with [MISSING] field will be ignored in the final model.
  - `cofactors.tsv`: for every protein, lists name, chebi identifier and
    stoichiometry of cofactors. Based on the last column (containing uniprot
    annotation), user should check inferred values and fill in fields tagged
@@ -83,10 +88,10 @@ in the input directory *after* the script has been run for the first time.
  - `locations.tsv`: this file lists proteins for which uniprot has no
    location data. Protein and gene names are given to help fill in missing
    locations. Note that locations *must* correspond to names
-   defined in `location_mapping.tsv` (user name if one was defined,
+   defined in `location_map.tsv` (user name if one was defined,
    else Uniprot name). If fields are left empty or `[MISSING]`,
    proteins are assumed to be located in `Cytoplasm` (or user-defined
-   counterpart as defined in `location_mapping.tsv`.
+   counterpart as defined in `location_map.tsv`.
 
 In order for the RBA results to be relevant, please fill in as much
 information as possible. Every time you provide new information, please
