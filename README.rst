@@ -97,10 +97,8 @@ SBML file requirements
 ----------------------
 
 The SBML file must be a valid SBML file, with gene-reaction associations. 
-
 RBApy assumes that the boolean relation is always “or”s of “and”s, e.g. (g1 and g2) or (g3 and g4) 
 Moreover, the words  “or” and “and” must be written in lowercase letters.
-
 Empty fields in Gene-association will be interpreted as a diffusion reaction. 
 
 
@@ -122,8 +120,7 @@ pipeline
 
 Authors
 -------
-Copyright (c) 2018 INRA - MaIAGE - France
-
+Copyright (c) 2018 INRA - MaIAGE - France.
 S. Fischer, A. Bulovic, A. Goelzer
 
 License
