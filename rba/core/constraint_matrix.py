@@ -1,4 +1,4 @@
-"""Module defining ConstraintMatrixc class."""
+"""Module defining ConstraintMatrix class."""
 
 # python 2/3 compatibility
 from __future__ import division, print_function, absolute_import
@@ -171,3 +171,12 @@ class ConstraintMatrix(object):
         r_fluxes = targets.target_reactions.value()
         self.LB[self._value_reaction_cols] = r_fluxes
         self.UB[self._value_reaction_cols] = r_fluxes
+
+    def set_medium(self, medium):
+        """
+        Change medium composition.
+
+        Args:
+            medium: dict mapping metabolite prefixes with their concentration.
+        """
+        self._blocks.set_medium(medium)
