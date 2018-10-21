@@ -14,6 +14,7 @@ class Results(object):
         self._model = model
         self._matrices = matrices
         self._solver = solver
+        self.mu_opt = solver.mu_opt
         self.variables = {name: value for name, value in
                           zip(matrices.col_names, solver.X)}
         self.dual_values = {name: value for name, value in

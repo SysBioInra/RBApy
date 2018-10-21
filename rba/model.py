@@ -7,7 +7,7 @@ from __future__ import division, print_function, absolute_import
 from os.path import join
 
 # local imports
-import rba.xml
+import rba
 
 
 class RbaModel(object):
@@ -41,6 +41,7 @@ class RbaModel(object):
         self.targets = rba.xml.RbaTargets()
         self.medium = {}
         self.output_dir = ''
+        self._constraint_matrix = None
 
     @classmethod
     def from_xml(cls, input_dir):
@@ -103,6 +104,8 @@ class RbaModel(object):
                 [met, conc] = line.rstrip().split('\t')
                 concentrations[met] = float(conc)
         self.medium = concentrations
+        if self._constraint_matrix:
+            self._constraint_matrix.set_medium(concentrations)
 
     def write(self, output_dir=None):
         """
@@ -136,3 +139,10 @@ class RbaModel(object):
     def _output(self, file_name):
         """Return full path to file contained in output directory."""
         return join(self.output_dir, file_name)
+
+    def solve(self, recompute_matrices=True):
+        if recompute_matrices or self._constraint_matrix is None:
+            self._constraint_matrix = rba.ConstraintMatrix(self)
+        solver = rba.Solver(self._constraint_matrix)
+        solver.solve()
+        return rba.Results(self, self._constraint_matrix, solver)

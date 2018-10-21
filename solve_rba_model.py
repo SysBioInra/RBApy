@@ -23,11 +23,8 @@ def main():
 
         # load model, build matrices and solve
         model = rba.RbaModel.from_xml(xml_dir)
-        matrices = rba.ConstraintMatrix(model)
-        solver = rba.Solver(matrices)
-        solver.solve()
-        print('Optimal growth rate is {}.'.format(solver.mu_opt))
-        results = rba.Results(model, matrices, solver)
+        results = model.solve()
+        print('Optimal growth rate is {}.'.format(results.mu_opt))
         results.write(output_dir)
         # results.print_main_transport_reactions()
 
