@@ -8,6 +8,7 @@ from os.path import join
 
 # local imports
 import rba
+from rba.utils.inject_efficiencies import inject_efficiencies
 
 
 class RbaModel(object):
@@ -146,3 +147,6 @@ class RbaModel(object):
         solver = rba.Solver(self._constraint_matrix)
         solver.solve()
         return rba.Results(self, self._constraint_matrix, solver)
+
+    def import_enzyme_efficiency_constants(self, file_name):
+        inject_efficiencies(self, file_name)

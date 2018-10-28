@@ -25,6 +25,10 @@ from __future__ import absolute_import, division, print_function
 import rba
 
 
+def inject_efficiencies(rba_model, efficiency_file):
+    EfficiencyInjecter(rba_model, efficiency_file)
+
+
 class EfficiencyInjecter(object):
     def __init__(self, rba_model, efficiency_file):
         self.model = rba_model
