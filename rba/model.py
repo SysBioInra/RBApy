@@ -45,6 +45,23 @@ class RbaModel(object):
         self._constraint_matrix = None
 
     @classmethod
+    def from_data(cls, params_file):
+        """
+        Make object from data directory (SBML, FASTA and helper files).
+
+        Parameters
+        ----------
+        params_file : str
+            Path to params.in file.
+
+        """
+        builder = rba.ModelBuilder(params_file)
+        builder.export_proteins('protein_summary.tsv')
+        print('Building model...')
+        model = builder.build_model()
+        return model
+
+    @classmethod
     def from_xml(cls, input_dir):
         """
         Make object from xml files.
