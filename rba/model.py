@@ -148,5 +148,5 @@ class RbaModel(object):
         solver.solve()
         return rba.Results(self, self._constraint_matrix, solver)
 
-    def import_enzyme_efficiency_constants(self, file_name):
+    def set_enzyme_efficiency_constants(self, file_name):
         inject_efficiencies(self, file_name)
