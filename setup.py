@@ -1,6 +1,6 @@
 """
 Module computing Resource Balance Analysis.
-This file is adapted from 
+This file is adapted from
 
 https://github.com/pypa/sampleproject/
 """
@@ -19,12 +19,12 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='rba',
-    
+
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
     version='1.0.2',
-    
+
     description='Resource balance analysis',
     long_description=long_description,
 
@@ -53,7 +53,7 @@ setup(
 
         # Pick your license as you wish (should match "license" above)
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)'
-        
+
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
         'Programming Language :: Python :: 2',
@@ -83,7 +83,6 @@ setup(
         'python-libsbml',
         'scipy',
         'biopython',
-        'cplex',
     ],
 
     # List additional groups of dependencies here (e.g. development
