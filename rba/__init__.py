@@ -10,7 +10,8 @@ from .prerba import *
 from .core import *
 from .utils import *
 
-from . import prerba, core
+from . import prerba, core, utils
+
 __all__ = ['RbaModel']
 __all__ += prerba.__all__
 __all__ += core.__all__
