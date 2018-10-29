@@ -1,8 +1,9 @@
 """
 Inject efficiencies into existing model.
 
-New efficiencies are read from a CSV file. Each line of the file must have
-one of the 4 following formats:
+New efficiencies are read from a tab-separated CSV file.
+Each line of the file must have one of the 4 following formats
+(all spaces are really tabs):
  - default_efficiency <default_efficiency_value>
  - default_transporter_efficiency <default_transporter_efficiency_value>
  - <enzyme_id> <forward_efficiency_constant> <backward_efficiency_constant>
@@ -161,6 +162,7 @@ class EfficiencyFile(object):
             return False
         if (len(parameters) == 0) or (len(parameters) % 2) != 0:
             return False
+        parameters = dict(zip(parameters[::2], parameters[1::2]))
         eff = self._efficiencies.setdefault(id_, EfficiencyParameters(id_))
         if sense == 'forward':
             eff.set_forward(fn_type, parameters)
