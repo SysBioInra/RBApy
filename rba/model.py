@@ -159,6 +159,22 @@ class RbaModel(object):
         return join(self.output_dir, file_name)
 
     def solve(self, recompute_matrices=True):
+        """
+        Solve RBA model.
+
+        Parameters
+        ----------
+        recompute_matrices : bool, optional
+            If the model is solved several time, recompute matrices defining
+            the optimality problem (True by default). This parameter should be
+            set to False when only the medium composition changes (medium
+            concentrations do not appear in the matrices).
+
+        Returns
+        -------
+        rba.utils.Results object containing optimal growth rate and fluxes.
+
+        """
         if recompute_matrices or self._constraint_matrix is None:
             self._constraint_matrix = rba.ConstraintMatrix(self)
         solver = rba.Solver(self._constraint_matrix)
