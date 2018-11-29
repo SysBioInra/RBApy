@@ -19,8 +19,12 @@
 color: #3d2c32; }
 
 .column {
-  float: left;
-  padding: 5px;
+  padding: 10px;
+  display: inline-block;
+}
+
+.row {
+	text-align: center;
 }
 
 .row::after {
