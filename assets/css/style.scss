@@ -17,3 +17,14 @@
   .main-content h5,
   .main-content h6 {
 color: #3d2c32; }
+
+.column {
+  float: left;
+  padding: 5px;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}

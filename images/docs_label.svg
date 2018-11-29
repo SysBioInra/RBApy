@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="-114.47378"
-     inkscape:cy="-54.66593"
+     inkscape:zoom="7.9195959"
+     inkscape:cx="4.9325254"
+     inkscape:cy="-8.2315935"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -59,23 +59,23 @@
      transform="translate(-50.528739,-99.318456)">
     <g
        aria-label="DOcs"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#3d2c32;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#4c352f;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        id="text840-3">
       <path
          d="m 50.528739,104.61012 h 1.982611 c 1.4605,0 2.645834,-1.18533 2.645834,-2.64583 0,-1.45344 -1.185334,-2.638778 -2.638778,-2.645834 h -1.989667 z m 4.480278,-2.64583 c 0,1.38994 -1.121833,2.50472 -2.511778,2.50472 h -1.827388 v -5.009443 h 1.827388 c 1.389945,0 2.511778,1.114783 2.511778,2.504723 z"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#3d2c32;fill-opacity:1;stroke-width:0.26458332px"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#4c352f;fill-opacity:1;stroke-width:0.26458332px"
          id="path3935" />
       <path
          d="m 55.971769,101.96429 c 0,1.46755 1.178278,2.64583 2.645834,2.64583 1.467555,0 2.652889,-1.17828 2.652889,-2.64583 0,-1.46756 -1.185334,-2.645834 -2.652889,-2.645834 -1.467556,0 -2.645834,1.178274 -2.645834,2.645834 z m 0.134056,0 c 0,-1.397 1.114778,-2.511778 2.511778,-2.511778 1.397,0 2.518833,1.114778 2.518833,2.511778 0,1.397 -1.121833,2.51178 -2.518833,2.51178 -1.397,0 -2.511778,-1.11478 -2.511778,-2.51178 z"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#3d2c32;fill-opacity:1;stroke-width:0.26458332px"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#4c352f;fill-opacity:1;stroke-width:0.26458332px"
          id="path3937" />
       <path
          d="m 66.596443,103.72818 c -0.451555,0.45861 -1.086555,0.74789 -1.778,0.74789 -1.389944,0 -2.511778,-1.12184 -2.511778,-2.51178 0,-1.38994 1.121834,-2.511778 2.511778,-2.511778 0.691445,0 1.312333,0.275166 1.763889,0.719668 l 0.09878,-0.0917 c -0.479778,-0.472726 -1.135945,-0.762004 -1.862667,-0.762004 -1.4605,0 -2.645833,1.185334 -2.645833,2.645834 0,1.4605 1.185333,2.64583 2.645833,2.64583 0.733778,0 1.397,-0.29633 1.876778,-0.77611 z"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#3d2c32;fill-opacity:1;stroke-width:0.26458332px"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#4c352f;fill-opacity:1;stroke-width:0.26458332px"
          id="path3939" />
       <path
          d="m 70.423641,100.68018 c 0,-0.747891 -0.606778,-1.361724 -1.354667,-1.361724 -0.747888,0 -1.354666,0.606778 -1.354666,1.354664 0,0.74789 0.606778,1.35467 1.354666,1.35467 0.677334,0 1.220612,0.55033 1.220612,1.22767 0,0.67733 -0.543278,1.22061 -1.220612,1.22061 -0.677333,0 -1.220611,-0.55034 -1.220611,-1.22767 h -0.134055 c 0,0.74789 0.606778,1.36172 1.354666,1.36172 0.747889,0 1.354667,-0.60678 1.354667,-1.35466 0,-0.74789 -0.606778,-1.35467 -1.354667,-1.35467 -0.677333,0 -1.220611,-0.54328 -1.220611,-1.22061 0,-0.67733 0.543278,-1.220613 1.220611,-1.220613 0.677334,0 1.220612,0.543283 1.220612,1.220613 z"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#3d2c32;fill-opacity:1;stroke-width:0.26458332px"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#4c352f;fill-opacity:1;stroke-width:0.26458332px"
          id="path3941" />
     </g>
   </g>

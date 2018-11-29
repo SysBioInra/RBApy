@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="292.86457"
-     inkscape:cy="-166.05334"
+     inkscape:zoom="11.2"
+     inkscape:cx="89.269499"
+     inkscape:cy="-9.9063277"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -59,35 +59,35 @@
      transform="translate(257.95738,-3.3125005)">
     <g
        aria-label="INSTALL"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#3d2c32;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#4c352f;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        id="text840">
       <path
          d="M -257.82332,8.604167 V 3.3125005 h -0.13406 V 8.604167 Z"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#3d2c32;fill-opacity:1;stroke-width:0.26458332px"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#4c352f;fill-opacity:1;stroke-width:0.26458332px"
          id="path2714" />
       <path
          d="m -251.90162,8.604167 h 0.21872 V 3.3125005 h -0.14111 v 5.1505554 l -4.08516,-5.1505554 h -0.23284 V 8.604167 h 0.14111 V 3.4536116 Z"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#3d2c32;fill-opacity:1;stroke-width:0.26458332px"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#4c352f;fill-opacity:1;stroke-width:0.26458332px"
          id="path2716" />
       <path
          d="m -247.94665,4.6742227 c 0,-0.7478889 -0.60678,-1.3617222 -1.35467,-1.3617222 -0.74789,0 -1.35466,0.6067777 -1.35466,1.3546666 0,0.7478889 0.60677,1.3546666 1.35466,1.3546666 0.67734,0 1.22061,0.5503333 1.22061,1.2276667 0,0.6773333 -0.54327,1.220611 -1.22061,1.220611 -0.67733,0 -1.22061,-0.5503333 -1.22061,-1.2276666 h -0.13405 c 0,0.7478889 0.60677,1.3617222 1.35466,1.3617222 0.74789,0 1.35467,-0.6067778 1.35467,-1.3546666 0,-0.7478889 -0.60678,-1.3546667 -1.35467,-1.3546667 -0.67733,0 -1.22061,-0.5432777 -1.22061,-1.220611 0,-0.6773334 0.54328,-1.2206111 1.22061,-1.2206111 0.67734,0 1.22061,0.5432777 1.22061,1.2206111 z"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#3d2c32;fill-opacity:1;stroke-width:0.26458332px"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#4c352f;fill-opacity:1;stroke-width:0.26458332px"
          id="path2718" />
       <path
          d="M -247.0334,3.3125005 V 3.446556 h 2.01789 v 5.157611 h 0.13406 V 3.446556 h 2.02494 V 3.3125005 Z"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#3d2c32;fill-opacity:1;stroke-width:0.26458332px"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#4c352f;fill-opacity:1;stroke-width:0.26458332px"
          id="path2720" />
       <path
          d="m -242.44111,8.604167 0.79022,-1.7003889 h 3.20322 l 0.80434,1.7003889 h 0.15522 l -2.49061,-5.2916665 h -0.14817 l -2.46944,5.2916665 z m 2.39183,-5.1293888 1.53106,3.2878888 h -3.06211 z"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#3d2c32;fill-opacity:1;stroke-width:0.26458332px"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#4c352f;fill-opacity:1;stroke-width:0.26458332px"
          id="path2722" />
       <path
          d="m -236.52249,3.3125005 h -0.13406 V 8.604167 h 3.302 V 8.4701114 h -3.16794 z"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#3d2c32;fill-opacity:1;stroke-width:0.26458332px"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#4c352f;fill-opacity:1;stroke-width:0.26458332px"
          id="path2724" />
       <path
          d="m -232.04387,3.3125005 h -0.13406 V 8.604167 h 3.302 V 8.4701114 h -3.16794 z"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#3d2c32;fill-opacity:1;stroke-width:0.26458332px"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Slim Joe';-inkscape-font-specification:'Slim Joe';fill:#4c352f;fill-opacity:1;stroke-width:0.26458332px"
          id="path2726" />
     </g>
   </g>
