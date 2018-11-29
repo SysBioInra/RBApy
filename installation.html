@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: subpage
 ---
 
 <!DOCTYPE html>
@@ -10,9 +10,22 @@ layout: home
 		<b>RBApy</b> can be installed with Python 2.7 and Python 3.5 (or any later version compatible with the cplex package).
 	</p>
 
-	<h1>Install CPLEX</h1>
+	<h1>1. Install CPLEX</h1>
 	<p>
-		IBM&reg; CPLEX is an optimization software package. <b>RBApy</b> uses this package for the construction and checking of feasibility of the Linear Programming (LP) problem.
+		IBM&reg; CPLEX is an optimization software package. <b>RBApy</b> uses this package for the construction and checking of feasibility of the Linear Programming (LP) problem. To download and install CPLEX, you need to have an academic email address.
+
+		<ul>
+		  <li>create account with IBM website (https://ibm.onthehub.com/)</li>
+		  <li>request faculty eligibility with your institutional email address: go to your account > eligibility tab. Follow instructions.</li>
+		  <li>look for latest IBM ILOG CPLEX faculty version, complete survey and download</li>
+		</ul> 
+
+		After you have successfuly downloaded the package you need to install it and setup the Python API. On UNIX systems, navigate to executable and run following commands (make sure to adapt the executable name if necessary):
+
+		```bash
+		chmod u+x cplex_studio12.7.1.osx.bin 
+		./cplex_studio12.7.1.osx.bin 
+		```
 	</p>
 
 </body>
