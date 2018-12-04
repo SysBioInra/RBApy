@@ -8,6 +8,127 @@ layout: subpage
 	<body>
 
 		<h1>Usage</h1>
+		
+<h2>1. Running an existing model </h2>
+<h3>1.1 How to run an existing model?</h3>
+<p>
+Open a console at the root of the RBApy repository.
+</p>
+<p>
+If the RBA model already exists,  run:
+<pre><code> python solve_rba_model.py path/to/model </code></pre>
+
+where the path points to the directory containing the XML files defining the RBA model.
+</p>
+
+
+<h3>1.2 How to visualize results of RBApy simulations?</h3>
+
+<h3>1.3 How to change the medium?</h3>
+
+<p>
+The medium composition is defined in the file <b><font color="#77B5FE"> medium.tsv</font></b>. The file is located in the  directory containing the XML files defining the RBA model. 
+The first column contain the prefixes of metabolites that are detected in the external compartments in the SBML (see section 5.1). 
+The second column corresponds to the concentration of metabolites in millimoles.
+</p>
+
+<p>
+To change the medium composition:
+Open the file medium.tsv defining the medium composition. 
+Update the metabolite concentration as follows:
+</p>
+
+<pre><code> 
+--------------------------------
+Original file
+--------------------------------
+Metabolite    Concentration
+M_k    10
+M_no3    10
+etc.
+ </code></pre>
+
+<p>
+Change the concentration of M_no3 from 10mM to 5mM.
+</p>
+<pre><code> 
+--------------------------------
+New file
+--------------------------------
+Metabolite    Concentration
+M_k    10
+M_no3    5
+etc.
+ </code></pre>
+<p>
+Run again the model using:
+</p>
+<pre><code> 
+python solve_rba_model.py path/to/model
+ </code></pre>
+
+<p>
+Here RBApy evaluates the apparent catalytic rates of transporters using the new  metabolite concentrations, before solving the optimization problem.
+</p>
+
+
+
+<h3>1.4 Can I change my model parameters? </h3>
+
+<p>
+RBA model parameters are defined in the file <b><font color="#77B5FE"> parameters.xml</font></b>. This file is located in the  directory containing the XML files of the RBA model. 
+</p>
+<p>
+To update parameters
+Open the file parameters.xml
+Update the value of the parameter that you want to change. For instance:
+</p>
+<pre><code> 
+--------------------------------
+Original file: 
+the function ribosomeEfficiencyMM describing the efficiencies of ribosomes
+max(Ymin, kmax*µ/(Km+µ)) 
+--------------------------------
+  <function id="ribosomeEfficiencyMM" type="michaelisMenten">
+         <listOfParameters>
+                <parameter id="kmax" value="97200"/>
+                <parameter id="Km" value="0.5"/>
+                <parameter id="Y_MIN" value="32400"/>
+         </listOfParameters>
+  </function>etc.
+ </code></pre>
+
+<p>
+Change the maximal rate of translation from 97200 aa/h to 48600 aa/h:
+</p>
+<pre><code> 
+--------------------------------
+New file: 
+the function ribosomeEfficiencyMM describing the efficiencies of ribosomes
+max(Ymin, kmax*µ/(Km+µ)) 
+--------------------------------
+  <function id="ribosomeEfficiencyMM" type="michaelisMenten">
+         <listOfParameters>
+                <parameter id="kmax" value="48600"/>
+                <parameter id="Km" value="0.5"/>
+                <parameter id="Y_MIN" value="32400"/>
+         </listOfParameters>
+  </function>
+<pre><code> 
+<p>
+Run the model using:
+<pre><code> 
+python solve_rba_model.py path/to/model
+ </code></pre>
+</p>
+<p>
+Here RBApy will automatically read the new values. For the units of all parameters, please refer to the paper Goelzer et al. 2015, or to the description of the XML format defining RBA models.
+</p>
+<p>
+ <b><font color="#77B5FE">Be careful when you update some parameters! </font></b>
+Some parameters such as the fraction of total proteins allocated to the different compartments must sum to 1.
+The fraction of non-enzymatic proteins within compartments should be lower than 1.
+</p>
 
 	</body>
 </html>
