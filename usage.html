@@ -35,8 +35,10 @@ The second column corresponds to the concentration of metabolites in millimoles.
 
 <p>
 To change the medium composition:
-Open the file medium.tsv defining the medium composition. 
-Update the metabolite concentration as follows:
+	<ul>
+		<li>Open the file medium.tsv defining the medium composition. </li>
+		<li>Update the metabolite concentration as follows:</li>
+		
 </p>
 
 <pre><code> --------------------------------
@@ -48,7 +50,7 @@ M_no3    10
 etc. </code></pre>
 
 <p>
-Change the concentration of M_no3 from 10mM to 5mM and save the file.
+<li>Change the concentration of M_no3 from 10mM to 5mM and save the file.</li>
 </p>
 <pre><code> --------------------------------
 New file
@@ -58,10 +60,11 @@ M_k    10
 M_no3    5
 etc. </code></pre>
 <p>
-Run again the model using:
+<li>Run again the model using:</li>
 </p>
 <pre><code> python solve_rba_model.py path/to/model </code></pre>
 
+		</ul>
 <p>
 Here RBApy evaluates the apparent catalytic rates of transporters using the new metabolite concentrations, before solving the optimization problem.
 </p>
