@@ -44,8 +44,7 @@ Original file
 Metabolite    Concentration
 M_k    10
 M_no3    10
-etc.
- </code></pre>
+etc. </code></pre>
 
 <p>
 Change the concentration of M_no3 from 10mM to 5mM and save the file.
@@ -56,14 +55,11 @@ New file
 Metabolite    Concentration
 M_k    10
 M_no3    5
-etc.
- </code></pre>
+etc. </code></pre>
 <p>
 Run again the model using:
 </p>
-<pre><code> 
-python solve_rba_model.py path/to/model
- </code></pre>
+<pre><code> python solve_rba_model.py path/to/model </code></pre>
 
 <p>
 Here RBApy evaluates the apparent catalytic rates of transporters using the new metabolite concentrations, before solving the optimization problem.
@@ -79,8 +75,7 @@ RBA model parameters are defined in the file <b><font color="#77B5FE"> parameter
 To update parameters
 Open the file parameters.xml
 Update the value of the parameter that you want to change. For instance:
-<pre><code> 
---------------------------------
+<pre><code> --------------------------------
 Original file: 
 the function ribosomeEfficiencyMM describing the efficiencies of ribosomes
 max(Ymin, kmax*µ/(Km+µ)) 
@@ -91,13 +86,11 @@ max(Ymin, kmax*µ/(Km+µ))
                 &lt;parameter id="Km" value="0.5"/>
                 &lt;parameter id="Y_MIN" value="32400"/>
          &lt;/listOfParameters>
-  &lt;/function>etc.
- </code></pre>
+  &lt;/function>etc. </code></pre>
 </p>
 <p>
 Change the maximal rate of translation from 97200 aa/h to 48600 aa/h:
-<pre><code> 
---------------------------------
+<pre><code> --------------------------------
 New file: 
 the function ribosomeEfficiencyMM describing the efficiencies of ribosomes
 max(Ymin, kmax*µ/(Km+µ)) 
@@ -108,14 +101,11 @@ max(Ymin, kmax*µ/(Km+µ))
                 &lt;parameter id="Km" value="0.5"/>
                 &lt;parameter id="Y_MIN" value="32400"/>
          &lt;/listOfParameters>
-  &lt;/function>
-<pre><code> 
+  &lt;/function><pre><code> 
 </p>
 <p>
 Run the model using:
-<pre><code> 
-python solve_rba_model.py path/to/model
- </code></pre>
+<pre><code> python solve_rba_model.py path/to/model </code></pre>
 </p>
 <p>
 Here RBApy will automatically read the new values. For the units of all parameters, please refer to the paper Goelzer et al. 2015, or to the description of the XML format defining RBA models.
