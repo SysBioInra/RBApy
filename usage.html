@@ -28,7 +28,7 @@ where the path points to the directory containing the XML files defining the RBA
 
 <p>
 The medium composition is defined in the file <b><font color="#77B5FE"> medium.tsv</font></b>. The file is located in the  directory containing the XML files defining the RBA model. 
-The first column contain the prefixes of metabolites that are detected in the external compartments in the SBML (see section 5.1). 
+The first column contains the prefixes of metabolites that are detected in the external compartments in the SBML (see section 5.1). 
 The second column corresponds to the concentration of metabolites in millimoles.
 </p>
 
@@ -38,8 +38,7 @@ Open the file medium.tsv defining the medium composition.
 Update the metabolite concentration as follows:
 </p>
 
-<pre><code> 
---------------------------------
+<pre><code> --------------------------------
 Original file
 --------------------------------
 Metabolite    Concentration
@@ -49,10 +48,9 @@ etc.
  </code></pre>
 
 <p>
-Change the concentration of M_no3 from 10mM to 5mM.
+Change the concentration of M_no3 from 10mM to 5mM and save the file.
 </p>
-<pre><code> 
---------------------------------
+<pre><code> --------------------------------
 New file
 --------------------------------
 Metabolite    Concentration
@@ -68,7 +66,7 @@ python solve_rba_model.py path/to/model
  </code></pre>
 
 <p>
-Here RBApy evaluates the apparent catalytic rates of transporters using the new  metabolite concentrations, before solving the optimization problem.
+Here RBApy evaluates the apparent catalytic rates of transporters using the new metabolite concentrations, before solving the optimization problem.
 </p>
 
 
