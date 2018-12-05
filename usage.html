@@ -10,7 +10,7 @@ layout: subpage
 		<h1>Usage</h1>
 		
 <h2>1. Running an existing model </h2>
-<h3>1.1 How to run an existing model?</h3>
+<h3 id="#sec1.1">1.1 How to run an existing model?</h3>
 <p>
 Open a console at the root of the RBApy repository.
 </p>
@@ -119,6 +119,127 @@ Here RBApy will automatically read the new values. For the units of all paramete
 Some parameters such as the fraction of total proteins allocated to the different compartments must sum to 1.
 The fraction of non-enzymatic proteins within compartments should be lower than 1.
 </p>
+	
+	
+<h2>2. Creating a new RBA model </h2> 
+    
+<h3>2.1 What do I need to create a new RBA model?</h3>
+To create your own RBA model, you need the full rbapy package, and:
+<ul>
+<li>The NCBI taxon ID of your organism (e.g. 83333 for Escherichia coli K-12) </li>
+<li>a valid SBML file for the same organism (see requirements in section 5.1).</li>
+</ul>
+Thanks to the taxon ID, RBApy will automatically download the latest release of your organism on Uniprot and will try to match Uniprot gene names with the gene names of the SBML file.
+
+<h3>2.2 How to create my new RBA model?</h3>
+Define one input directory and put the SBML file, the fasta files in the input directory.
+
+Fill in the file input/params.in, where you will specify the taxon ID, the path to the input and output directories, the name of the SBML file, and the external compartments of the SBML file
+
+Open a console at the root of the RBApy repository and run:
+<pre><code>python generate_rba_model.py path/to/params.in</code></pre>
+
+This execution generates:
+<ul>
+<li>several XML files describing the RBA model. They are located in the output directory specified in params.in</li>
+<li>several CSV Helper files (see section 5.3) containing default values for  ambiguous information (e.g. cofactor IDs which couldn’t automatically be linked to model metabolites). They are located in the input directory, with your SBML and fasta files.</li> 
+</ul>
+You can now refine your model (see <a href="#sec2.3">section 2.3</a>) or run your model (see <a href="#sec1.1">section 1.1</a>).
+
+<h3 id="sec2.3">2.3 How to refine my RBA model?</h3>
+After the first run of model generation, one has:
+<ul>
+<li>several XML files describing the RBA model. They are located in the output directory specified in params.in</li>
+<li>several CSV Helper files (see section 5.3) containing default values for  ambiguous information (e.g. cofactor IDs which couldn’t automatically be linked to model metabolites). They are located in the input directory, with your SBML and fasta files. </li>
+</ul>
+
+To refine an RBA model, the user can:
+After the first run of model generation, one has:
+<ul>
+<li>Edit manually the XML files (not recommended) </li>
+<li>Edit manually the fasta files and the helper files, fill them in with information and re-run the model generation using: </li>
+<pre><code> python generate_rba_model.py path/to/params.in</code></pre>
+</ul>
+We strongly recommend the user to start the edition of helper and fasta files in the following order:
+<ol>
+<li>Update  the helper file location_map.tsv (<a href="#sec2.3.2.2">section 2.3.2.2</a>)</li>
+<li>Update  the helper file metabolites.tsv (<a href="#sec2.3.2.1">section 2.3.2.1</a>)</li>
+<li>Update the fasta files with user-defined molecular machineries (<a href="#sec2.3.1">section 2.3.1</a>)</li>
+<li>Update helper files specific to proteins: location.tsv (<a href="#sec2.3.2.3">section 2.3.2.3</a>), cofactors.tsv  (<a href="#sec2.3.2.4">section 2.3.2.4</a>) and subunits.tsv  (<a href="#sec2.3.2.5">section 2.3.2.5</a>) </li>
+</ol>
+During step 3, the new proteins detected within the fasta files will be automatically added in files location.tsv, cofactors.tsv and  subunits.tsv if missing information is detected. Therefore doing step 3 before step 4 enables to edit these files only one time.
+
+The user can regenerate the model each time a helper file is modified using 
+<pre><code> python generate_rba_model.py path/to/params.in</code></pre>
+Or only at the end.
+The user can also choose to solve the model each time  to see the impact of these modifications on the simulations. 
+<pre><code> python solve_rba_model.py path/to/model</code></pre>
+
+<h3 id="sec2.3.1">2.3.1 Insertion of user-defined molecular machineries</h3>
+
+<p>
+During the first run of RBApy, the package will use by default the ribosome composition, 
+the average chaperone composition and the tRNAs of <i>Escherichia coli</i>.
+To adapt the machineries to the organism of interest, simply substitute the proteins/rnas within the files 
+while keeping strictly the format.
+</p>
+<p>
+An example: the ribosome machinery.
+The ribosome is usually composed of 3rRNAs (5S, 15S,  23S), around 50 ribosomal proteins, 
+and the initiation, elongation and release factors.
+The <b>ribosome.fasta</b> lists all the machinery composition in a pseudo-fasta format:
+</p>
+<pre><code>>rba|rrnO-16S|rrnO-16S|rna|1
+TTTATCGGAGAGTTTGATCCTGGCTCAGGACGAACGCTGGCGGCGTGCCTAATACATGCA
+AGTCGAGCGGACAGATGGGAGCTTGCTCCCTGATGTTAGCGGCGGACGGGTGAGTAACAC
+GTGGGTAACCTGCCTGTAAGACTGGGATAACTCCGGGAAACCGGGGCTAATACCGGATGG
+TTGTTTGAA …
+>rba|rrnO-23S|rrnO-23S|rna|1
+GGTTAAGTTAGAAAGGGCGCACGGTGGATGCCTTGGCACTAGGAGCCGATGAAGGACGGG
+ACGAACACCGATATGCTTCGGGGAGCTGTAAGCAAGCTTTGATCCGGAGATTTCCGAATG
+GGGAAACC …
+>rba|rrnO-5S|rrnO-5S|rna|1
+TTTGGTGGCGATAGCGAAGAGGTCACACCCGTTCCCATACCGAACACGGAAGTTAAGCTC
+TTCAGCGCCGATGGTAGTCGGGGGTTTCCCCCTGTGAGAGTAGGACGCCGCC
+>rba|P0AG67|RS1_ECOLI 30S ribosomal protein S1 OS=Escherichia coli (strain K12) GN=rpsA PE=1 SV=1|protein|1
+MTESFAQLFEESLKEIETRPGSIVRGVVVAIDKDVVLVDAGLKSESAIPAEQFKNAQGEL
+EIQVGDEVDVALDA…
+…</code></pre>
+The format of entry is as follows:
+<pre><code>>rba | Molecule ID | Molecule Name | Molecule Type | Molecule Stoichiometry
+--- Sequence ----
+</code></pre>
+<ul>
+<li>rba: means that this entry corresponds to RBA machinery</li>
+<li>Molecule ID: The identifier of the molecules. For proteins, the ID must corresponds either to the Uniprot Protein, either to one of the gene names.</li>  
+<li>Molecule Name: the name of the molecule.  </li>
+<li>Molecule Type: the Type of the molecule. Type can take two values: protein, rna. See below. The molecule type enables to insert automatically the new molecule 
+in proteins.xml and rnas.xml, and also 
+in processes.xml, within the list of production of processes that target molecules of same Type </li>
+<li>Molecule Stoichiometry: the stoichiometry of the molecule within the molecular machine.</li>
+</ul>
+
+<p>
+During the parsing of the fasta file, each time a protein is read, RBApy tries to extract automatically the location (see 3.3.2.3), cofactors (see 3.3.2.4) of the protein. In case of ambiguities, the protein is also inserted in the corresponding files locations.tsv, and cofactors.tsv. 
+If the protein is not present in the uniprot file, the protein is still inserted in proteins.xml using the amino-acid sequence of the fasta file, and in processes.xml.  By default, the protein will be located in the cytoplasm, without cofactors. Moreover, the unknown protein is also inserted in the file unknown_proteins.tsv (see 3.3.2.6).
+</p>
+
+<p>
+An advice: For the ID of proteins, we recommend to use either the Uniprot protein ID (e.g. P21464), either the absolute identifier of the gene name (e.g. BSU16490), but not the gene name in 4 letters (e.g. rpsB). Indeed, the field gene name in Uniprot contains the current gene name of the protein, but also all synonyms. Sometimes, some genes may have been renamed, which can result in multiple entries for the 4-letters gene name.
+</p>
+
+To update the RBA model, re-run the model generation by
+<pre><code>python generate_rba_model.py path/to/params.in</code></pre>
+
+Now look in the files
+<ul>
+<li>proteins.xml which contains the new proteins of the molecular machine.</li>
+<li>rnas.xml  which contains the new rnas of the molecular machine</li>
+<li>processes.xml where the new proteins have been included in the processes “Translation” and “Folding”, and the new rnas in the processes “Transcription” and “RNA degradation”</li>
+</ul>
+
+
+<h3 id="sec2.3.2">2.3.2 Helper files</h3>
 
 	</body>
 </html>
