@@ -16,10 +16,11 @@ Open a console at the root of the RBApy repository.
 </p>
 <p>
 If the RBA model already exists,  run:
+</p>
 <pre><code> python solve_rba_model.py path/to/model </code></pre>
 
 where the path points to the directory containing the XML files defining the RBA model.
-</p>
+
 
 
 <h3>1.2 How to visualize results of RBApy simulations?</h3>
@@ -75,6 +76,7 @@ RBA model parameters are defined in the file <b><font color="#77B5FE"> parameter
 To update parameters
 Open the file parameters.xml
 Update the value of the parameter that you want to change. For instance:
+</p>	
 <pre><code> --------------------------------
 Original file: 
 the function ribosomeEfficiencyMM describing the efficiencies of ribosomes
@@ -86,8 +88,8 @@ max(Ymin, kmax*µ/(Km+µ))
                 &lt;parameter id="Km" value="0.5"/>
                 &lt;parameter id="Y_MIN" value="32400"/>
          &lt;/listOfParameters>
-  &lt;/function>etc. </code></pre>
-</p>
+  &lt;/function>
+  etc. </code></pre>
 <p>
 Change the maximal rate of translation from 97200 aa/h to 48600 aa/h:
 </p>
