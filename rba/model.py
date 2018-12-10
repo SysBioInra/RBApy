@@ -183,6 +183,3 @@ class RbaModel(object):
 
     def set_enzyme_efficiencies(self, file_name):
         efficiencies.set_efficiencies(self, file_name)
-
-
-RbaModel.set_enzyme_efficiencies.__doc__ = efficiencies.__doc__
