@@ -373,7 +373,7 @@ To update the RBA model, re-run the model generation by
 <p>
 Now look in the file proteins.xml that contains the localisation and composition in amino-acids and cofactors of proteins. The attribute "compartment" is updated with the new 
 	localisation of the protein.
-<pre><code> &lt;macromolecule id="b4358" compartment="Periplasm">
+<pre><code> &lt;macromolecule id="b4358" compartment="<font color="#77B5FE">Periplasm</font>">
   &lt;composition>
         &lt;componentReference component="A" stoichiometry="39"/>
         &lt;componentReference component="C" stoichiometry="8"/>
@@ -400,5 +400,64 @@ Now look in the file proteins.xml that contains the localisation and composition
 &lt;/macromolecule></code></pre>
 	</p>
         
+<h4 id="sec2.3.2.5">2.3.2.5 Cofactors.tsv</h4>
+<p>
+RBApy parses automatically the field COFACTOR of the Uniprot file to determine the cofactors of a protein. 
+	However, the field COFACTOR is often written in natural language, which can lead to difficulties during the parsing.
+Therefore, for every protein having ambiguities, the file <font color="#77B5FE">cofactors.tsv</font> lists name, chebi identifier and stoichiometry of cofactors per protein. If one protein has several cofactors, several lines corresponding to the protein are present in cofactors.tsv. Based on the last column (containing uniprot cofactor annotation), user should check inferred values and fill in fields tagged as [MISSING]. Important: if annotation says that there is no cofactor, do not remove line from csv file. Ignore name and chebi fields and set stoichiometry to 0.
+<p>
+The file cofactors.tsv contains 5 columns:
+<ul>
+<li>ENTRY:   Uniprot ID of the protein; </li>
+<li>CHEBI: ChEBI ID of the cofactor; </li>    
+<li>NAME: Name of the cofactor; </li>
+<li>STOICHIOMETRY : stoichiometry of the cofactor for 1 protein; </li>
+<li>UNIPROT ANNOTATION: copy of the field COFACTOR of the Uniprot file. </li> 
+</ul>
+</p>
+<p>
+Here is the example of the protein P0ACC7 (Uniprot ID) for which the field COFACTOR cannot be automatically parsed. The following entries are
+ automatically inserted in the file cofactor.tsv. The user must indicate which cofactor the protein will use:
+<table>
+	<tr><td>ENTRY</td><td>CHEBI</td><td>NAME</td><td>STOICHIOMETRY</td><td>UNIPROT ANNOTATION</td></tr>
+	<tr><td>P0ACC7</td><td>CHEBI:18420</td><td>Mg(2+)</td><td>1</td><td>Binds 1 Mg(2+) ion per subunit (PubMed:17473010). Can also use Co(2+) ion to a lesser extent (PubMed:11329257). {ECO:0000269|PubMed:11329257, ECO:0000269|PubMed:17473010};/td></tr>
+	<tr><td>P0ACC7</td><td>CHEBI:48828</td><td>Co(2+)</td><td>0</td><td>Binds 1 Mg(2+) ion per subunit (PubMed:17473010). Can also use Co(2+) ion to a lesser extent (PubMed:11329257). {ECO:0000269|PubMed:11329257, ECO:0000269|PubMed:17473010};/td></tr>
+</table>	
+Two cofactors (Mg(2+) and Co(2+)) were detected during the parsing of cofactors. In the example, only Mg(2+) will be used per monomer of P0ACC7.
+</p>  
+<p>
+To update the RBA model, re-run the generation by
+<pre><code>python generate_rba_model.py path/to/params.in</code></pre>
+</p>
+
+<p>
+Now look in the file proteins.xml that contains the localisation and composition in amino-acids and cofactors of proteins. 
+	The cofactor and its stoichiometry are added (In the example, the protein entry "P0ACC7" corresponds to the gene name "b3730"):
+<pre><code>&lt;macromolecule id="b3730" compartment="Cytoplasm">
+  &lt;composition>
+        &lt;componentReference component="A" stoichiometry="45"/>
+        &lt;componentReference component="C" stoichiometry="4"/>
+        &lt;componentReference component="E" stoichiometry="26"/>
+        &lt;componentReference component="D" stoichiometry="29"/>
+        &lt;componentReference component="G" stoichiometry="49"/>
+        &lt;componentReference component="F" stoichiometry="7"/>
+        &lt;componentReference component="I" stoichiometry="30"/>
+        &lt;componentReference component="H" stoichiometry="12"/>
+        &lt;componentReference component="K" stoichiometry="25"/>
+        &lt;componentReference component="M" stoichiometry="9"/>
+        &lt;componentReference component="L" stoichiometry="45"/>
+        <font color="#77B5FE">&lt;componentReference component="CHEBI:18420" stoichiometry="1.0"/></font>
+        &lt;componentReference component="N" stoichiometry="24"/>
+        &lt;componentReference component="Q" stoichiometry="20"/>
+        &lt;componentReference component="P" stoichiometry="13"/>
+        &lt;componentReference component="S" stoichiometry="11"/>
+        &lt;componentReference component="R" stoichiometry="24"/>
+        &lt;componentReference component="T" stoichiometry="30"/>
+        &lt;componentReference component="W" stoichiometry="3"/>
+        &lt;componentReference component="V" stoichiometry="39"/>
+        &lt;componentReference component="Y" stoichiometry="11"/>
+  &lt;/composition>
+&lt;/macromolecule></code></pre>
+</p>
 	</body>
 </html>
