@@ -10,7 +10,7 @@ layout: subpage
 		<h1>Usage</h1>
 		
 <h2>1. Running an existing model </h2>
-<h3 id="#sec1.1">1.1 How to run an existing model?</h3>
+<h3 id="sec1.1">1.1 How to run an existing model?</h3>
 <p>
 Open a console at the root of the RBApy repository.
 </p>
@@ -23,9 +23,9 @@ where the path points to the directory containing the XML files defining the RBA
 
 
 
-<h3>1.2 How to visualize results of RBApy simulations?</h3>
+<h3 id="sec1.2">1.2 How to visualize results of RBApy simulations?</h3>
 
-<h3>1.3 How to change the medium?</h3>
+<h3 id="sec1.3">1.3 How to change the medium?</h3>
 
 <p>
 The medium composition is defined in the file <b><font color="#77B5FE"> medium.tsv</font></b>. The file is located in the  directory containing the XML files defining the RBA model. 
@@ -71,7 +71,7 @@ Here RBApy evaluates the apparent catalytic rates of transporters using the new 
 
 
 
-<h3>1.4 Can I change my model parameters? </h3>
+<h3 id="sec1.4">1.4 Can I change my model parameters? </h3>
 <p>
 RBA model parameters are defined in the file <b><font color="#77B5FE"> parameters.xml</font></b>. This file is located in the  directory containing the XML files of the RBA model. 
 </p>
@@ -123,7 +123,7 @@ The fraction of non-enzymatic proteins within compartments should be lower than 
 	
 <h2>2. Creating a new RBA model </h2> 
     
-<h3>2.1 What do I need to create a new RBA model?</h3>
+<h3 id="sec2.1">2.1 What do I need to create a new RBA model?</h3>
 To create your own RBA model, you need the full rbapy package, and:
 <ul>
 <li>The NCBI taxon ID of your organism (e.g. 83333 for Escherichia coli K-12) </li>
@@ -131,7 +131,7 @@ To create your own RBA model, you need the full rbapy package, and:
 </ul>
 Thanks to the taxon ID, RBApy will automatically download the latest release of your organism on Uniprot and will try to match Uniprot gene names with the gene names of the SBML file.
 
-<h3>2.2 How to create my new RBA model?</h3>
+<h3 id="sec2.2">2.2 How to create my new RBA model?</h3>
 Define one input directory and put the SBML file, the fasta files in the input directory.
 
 Fill in the file input/params.in, where you will specify the taxon ID, the path to the input and output directories, the name of the SBML file, and the external compartments of the SBML file
@@ -240,6 +240,53 @@ Now look in the files
 
 
 <h3 id="sec2.3.2">2.3.2 Helper files</h3>
+		       
+<h4 id="sec2.3.2.1">2.3.2.1 Metabolites.tsv</h4>
+<p>
+The file <b><font color="#77B5FE">metabolites.tsv</font></b> is critical for RBApy. First It identifies metabolic precursors 
+	that are consumed/produced by the cellular processes to build biomass component. 
+	Second, the file is also used to link these metabolic biobricks to SBML ids of metabolites from the metabolic network. 
+</p>	
+
+In metabolites.tsv, the user declare:
+<ol>
+<li>M1: All metabolic precursors that are consumed/produced by the cellular processes to build proteins, RNAs, DNAs. A minima, RBApy expects to find the metabolic precursors involved in the default processes: Replication, Transcription, Translation, Folding, RNA degradation, which are: all charged/uncharged tRNAs, NMP, NDP, NTP, dNTP, water, protons, mono- and di-phosphate.
+Therefore, RBApy tries to detect common SBML IDs for these precursors, namely:
+<ul>
+<li>M_trnaala_c, M_trnaarg_c, ..., M_trnaval_c for uncharged tRNAs</li>
+<li>M_alatrna_c, M_argtrna_c, ..., M_valtrna_c for charged tRNAs</li>
+<li>M_ATP_c, M_GTP_c, M_CTP_c, M_UTP_c, for ATP, GTP, CTP and UTP respectively</li>
+<li>M_ADP_c, M_GDP_c, M_CDP_c, M_UDP_c, for ADP, GDP, CDP and UDP respectively</li>
+<li>M_AMP_c, M_GMP_c, M_CMP_c, M_UMP_c, for AMP, GMP, CMP and UMP respectively</li>
+<li>M_h2o_c, M_h_c, M_p_c, M_pp_c for water, proton, mono- and di-phosphate respectively</li>
+	</ul></li>
+<li>M2: All ions/cofactors required to have the active form of a protein. The ions and cofactors are automatically extracted from the Uniprot annotation (see <a href="#sec2.3.2.5">section 2.3.2.5</a>) and reported in metabolites.tsv for ID matching.</p>
+ </li>
+<li>M3: All metabolites for which the intracellular concentration is growth-rate independent, and the value of this concentration. The set of growth-rate independent metabolites includes building 
+	blocks for cell wall and membrane synthesis, a few metabolites such as co-enzyme A. Usually these metabolites are present in the biomass reaction of the SBML file. Exclude all metabolites from the set M1 and M2 from the biomass reaction. The remaining ones form the set M3. The targeted concentrations correspond to the stoichiometric coefficients of the biomass reaction.
+</li>
+</ol>
+By default, the file is built using the sets M1, M2 and M3 of the bacterium <i>Bacillus subtilis</i>.
+
+<p>
+The file metabolites.tsv, is organized in 4 columns, entitled ID, NAME, SBML ID and  CONCENTRATION.
+<ul>
+<li>ID: is the absolute identifier of the metabolite, which can be the ChEBI;</li>
+<li>NAME: the name of the metabolite;</li>
+<li>SBML ID: the SBML ID corresponding to the metabolite, present in the genome-scale metabolic model;</li>
+<li>CONCENTRATION: the concentration of growth-rate independent metabolite. </li>
+<ul>
+To update the RBA model, re-run the model generation by
+<pre><code>python generate_rba_model.py path/to/params.in</code></pre>
+</p>
+	
+<p>
+Now look in the files
+<ul> 
+<li>processes.xml: The lists of of metabolic precursors used in cellular processes are updated </li>
+<li>targets.xml: The targeted group named metabolite_production is updated with the set of metabolite M3, and their targeted concentrations are reported in the file parameters.xml. </li>
+	</ul>
+</p>
 
 	</body>
 </html>
