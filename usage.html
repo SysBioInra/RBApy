@@ -309,7 +309,7 @@ Remark: This file is optional, because the identification of metabolic precursor
 
 <h4 id="sec2.3.2.3">2.3.2.3 Location_map.tsv </h4>
 <p>
-The file location_map.tsv is used to link uniprot location ids with user-defined compartment ids. For every uniprot location, user may fill in a name compartment (e.g. SBML compartment names). 
+The file  <b><font color="#77B5FE">location_map.tsv</font></b>  is used to link uniprot location ids with user-defined compartment ids. For every uniprot location, user may fill in a name compartment (e.g. SBML compartment names). 
 The idea behind this file is that it can be used to fuse compartments or ignore them. 
 If the field is left empty (or [MISSING]), a compartment named after uniprot location is created.
 </p>
@@ -334,8 +334,7 @@ To update the RBA model, re-run the model generation by
 <pre><code> python generate_rba_model.py path/to/params.in</code></pre>
 
 Now look in the file metabolism.xml that contains the list of cellular compartments.  Compartments are updated as follows:
-<pre><code> 
-&lt;RBAMetabolism>
+<pre><code> &lt;RBAMetabolism>
   &lt;listOfCompartments>
     &lt;compartment id="Cell_inner_membrane"/>
     &lt;compartment id="Cytoplasm"/>
@@ -345,5 +344,61 @@ Now look in the file metabolism.xml that contains the list of cellular compartme
   &lt;/listOfCompartments>
 </code></pre>
 
+
+<h4 id="sec2.3.2.4">2.3.2.4 Locations.tsv</h4>
+<p>
+RBApy parses automatically the field SUBCELLULAR LOCATION [CC] of the Uniprot file to determine the location of a protein.
+Proteins for which uniprot has no location data are listed in the file <b><font color="#77B5FE">locations.tsv</font></b> . 
+The file locations.tsv contains 4 columns, named
+<ul>
+<li>ENTRY:  Uniprot ID of protein;   </li>
+<li>GENE NAME:  the gene names as in the  Uniprot file;</li> 
+<li>PROTEIN NAME:  the protein names as in the  Uniprot file;</li>   
+<li>LOCATION: location that has to be updated. Note that locations must correspond to names defined in location_map.tsv (user name if one was defined, else Uniprot name). 
+If fields are left empty or [MISSING], proteins are assumed to be located in Cytoplasm (or user-defined counterpart as defined in location_map.tsv).</li>
+</ul>	
+</p>
+<p>
+An example
+<table>
+	<tr><td>ENTRY</td><td>GENE NAME</td><td>PROTEIN NAME</td><td>LOCATION</td></tr>
+	<tr><td>P39400</td><td>lgoD yjjN b4358 JW5793</td><td>L-galactonate-5-dehydrogenase (EC 1.1.1.-)</td><td>Periplasm</td></tr>
+</table>
+In this example, the protein P39400 will be localised in the compartment "Periplasm".
+</p>
+<p>
+To update the RBA model, re-run the model generation by
+<pre><code> python generate_rba_model.py path/to/params.in</code></pre>
+</p>
+<p>
+Now look in the file proteins.xml that contains the localisation and composition in amino-acids and cofactors of proteins. The attribute "compartment" is updated with the new 
+	localisation of the protein.
+<pre><code> &lt;macromolecule id="b4358" compartment="Periplasm">
+  &lt;composition>
+        &lt;componentReference component="A" stoichiometry="39"/>
+        &lt;componentReference component="C" stoichiometry="8"/>
+        &lt;componentReference component="E" stoichiometry="20"/>
+        &lt;componentReference component="D" stoichiometry="16"/>
+        &lt;componentReference component="G" stoichiometry="32"/>
+        &lt;componentReference component="F" stoichiometry="13"/>
+        &lt;componentReference component="I" stoichiometry="26"/>
+        &lt;componentReference component="H" stoichiometry="9"/>
+        &lt;componentReference component="K" stoichiometry="16"/>
+        &lt;componentReference component="M" stoichiometry="8"/>
+        &lt;componentReference component="L" stoichiometry="24"/>
+        &lt;componentReference component="N" stoichiometry="14"/>
+        &lt;componentReference component="Q" stoichiometry="17"/>
+        &lt;componentReference component="P" stoichiometry="19"/>
+        &lt;componentReference component="S" stoichiometry="13"/>
+        &lt;componentReference component="R" stoichiometry="15"/>
+        &lt;componentReference component="T" stoichiometry="16"/>
+        &lt;componentReference component="W" stoichiometry="2"/>
+        &lt;componentReference component="V" stoichiometry="28"/>
+        &lt;componentReference component="Y" stoichiometry="5"/>
+        &lt;componentReference component="CHEBI:29105" stoichiometry="2"/>
+  &lt;/composition>
+&lt;/macromolecule></code></pre>
+	</p>
+        
 	</body>
 </html>
