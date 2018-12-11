@@ -431,7 +431,7 @@ To update the RBA model, re-run the generation by
 </p>
 
 <p>
-	Now look at the <font color="#77B5FE">file proteins.xml</font> that contains the localisation and composition in amino-acids and cofactors of proteins. 
+	Now look at the file <font color="#77B5FE">proteins.xml</font> that contains the localisation and composition in amino-acids and cofactors of proteins. 
 	The cofactor and its stoichiometry are added (In the example, the protein entry "P0ACC7" corresponds to the gene name "b3730"):
 <pre><code>&lt;macromolecule id="b3730" compartment="Cytoplasm">
   &lt;composition>
@@ -468,7 +468,7 @@ For every ambiguous and empty entry, gene name and protein name are provided for
 	By default, the stoichiometry of the protein is set to 1. User should read annotation field (or any other sources of information) and update the stoichiometry if necessary. 
 </p>
 <p>
-Subunits.tsv contains 5  columns, named 
+Subunits.tsv contains 5 columns, named 
 <ul>
 <li>ENTRY: Uniprot ID of protein</li>
 <li>STOICHIOMETRY: the stoichiometry of the protein within its enzymatic complex (the default value is 1)</li>
@@ -496,20 +496,39 @@ Now look at the file <font color="#77B5FE">enzymes.xml</font> that contains the 
 	The stoichiometry of the ATP synthase complex (identifier "R_ATPS4rpp_enzyme") is updated:
 <pre><code>&lt;enzyme id="R_ATPS4rpp_enzyme" reaction="R_ATPS4rpp" forward_efficiency="R_ATPS4rpp_efficiency" backward_efficiency="default_transporter_efficiency" zeroCost="false">
       &lt;machineryComposition>
-        <listOfReactants>
+        &lt;listOfReactants>
           &lt;speciesReference species="b3734" stoichiometry="3.0"/>
           &lt;speciesReference species="b3732" stoichiometry="3.0"/>
           &lt;speciesReference species="b3731" stoichiometry="1.0"/>
           &lt;speciesReference species="b3733" stoichiometry="1.0"/>
           &lt;speciesReference species="b3735" stoichiometry="1.0"/>
-          &lt;font color="#77B5FE"><speciesReference species="b3737" stoichiometry="10.0"/></font>
+          <font color="#77B5FE">&lt;speciesReference species="b3737" stoichiometry="10.0"/></font>
           &lt;speciesReference species="b3736" stoichiometry="2.0"/>
           &lt;speciesReference species="b3738" stoichiometry="1.0"/>
           &lt;speciesReference species="b3739" stoichiometry="0.1"/>
         &lt;/listOfReactants>
       &lt;/machineryComposition>
-    &lt;/enzyme></code></pre>
-	
+    &lt;/enzyme></code></pre>	
 </p>
+
+<h4 id="sec2.3.2.7">2.3.2.7 Unknown_proteins.tsv</h4>
+<p>
+The file <b><font color="#77B5FE">unknown_proteins.tsv</font></b> contains the gene names for which the automatic matching 
+between the SBML IDs and either the user-defined protein IDs in the fasta files, either the Uniprot gene names failed.
+By default, RBApy associates a default cytoplasmic protein of mean composition, named "average_protein_Cytoplasm".
+However, the user can choose to associate another average protein, or another gene name, as soon as the gene name ID 
+is present in the Uniprot file. 
+</p>
+<p> The file unknown_proteins.tsv contains two columns:
+<ul>
+	<li>SBML ID: the gene name ID of the SBML file that could not be matched</li>
+	<li>UNIPROT GENE: the Uniprot gene name that will be associated to the SBML gene name. By default, the value is assigned to "average_protein_Cytoplasm". </li>
+</ul>
+</p>
+<p>
+To update the RBA model, re-run the model generation by
+<pre><code>python generate_rba_model.py path/to/params.in</code></pre>
+</p>
+
 	</body>
 </html>
