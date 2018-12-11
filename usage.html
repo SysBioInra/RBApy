@@ -530,5 +530,39 @@ To update the RBA model, re-run the model generation by
 <pre><code>python generate_rba_model.py path/to/params.in</code></pre>
 </p>
 
+<h2 id="sec3">3. Calibrating a RBA model</h2>
+<h3 id="sec3.1">3.1 Data requirement and format</h3>
+<h3 id="sec3.2">3.2 Estimating parameters</h3>
+<h3 id="sec3.3">3.3 Updating the parameter file</h3>
+
+<h2 id="sec4">4. Details on the SBML requirements</h2>
+<p>
+Normally, RBApy should be compatible with any SBML models (SBML level 2 and 3) that have been generated using the protocol of Thiele & Palsson.
+"A protocol for generating a high-quality genome-scale metabolic reconstruction." Nature protocols 5.1 (2010): 93.". However, in practice, ambiguous information may be present, 
+which can disturb or slow down the process of RBA model building. 
+</p>
+<h3 id="sec4.1">4.1 Gene-association requirements</h3>
+<p>
+In RBA, one reaction is always catalyzed by an unique enzymatic complex. Therefore, isoenzymes, i.e. reactions that are 
+catalyzed by several distinct enzymatic complexes, are duplicated. 
+For instance, if one reaction R is catalyzed by two different enzymes, E1 and E2, then we introduce two reactions R1 and R2, 
+catalyzed respectively by E1 and E2. The two enzymes have their own apparent catalytic rates kapp1 and kapp2.
+</p>
+<p>
+During the parsing of the SBML file, RBApy parses the boolean rule of gene(s) associated to the reaction and duplicates 
+	the reaction automatically if necessary. RBApy can parse gene-association reactions that are annotated either in the field “note”, either using the fbc plugin with SBML 
+level 3. However, sometimes, the boolean rule can be very complex, and thus difficult to parse. 
+	Therefore, <font color="#77B5FE">RBApy assumes that the boolean relation is always “or”s of “and”s</font>. Moreover, the words  “or” and “and” must be written in lowercase letters.
+</p>
+<p>
+<font color="#77B5FE">Empty fields</font> in Gene-association will be interpreted as a <font color="#77B5FE">Ediffusion reaction</font>, meaning that no enzyme will be associated to the reaction.
+In contrast, <font color="#77B5FE">any other character string will automatically be considered as a gene name. </font> RBApy will try to match the gene name with a Uniprot entry. If the matching fails, then a default protein of 
+	average composition is created. The unknown gene name will be inserted in the file unknown_protein.tsv for manual curation (see <a href="#sec2.3.2.7">section 2.3.2.7</a>).
+Therefore, a reaction without a gene association may be catalyzed by an enzyme, then the user should insert any character strings such as “-” or “unknown”.
+</p>
+<h3 id="sec4.2">4.2 External compartments</h3>
+<p>
+Explain how external compartments are automatically detected and what they are used for (michaelis-menten function, medium metabolites).
+</p>
 	</body>
 </html>
