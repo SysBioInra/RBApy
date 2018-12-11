@@ -165,7 +165,7 @@ We strongly recommend the user to start the edition of helper and fasta files in
 <li>Update  the helper file location_map.tsv (<a href="#sec2.3.2.2">section 2.3.2.2</a>)</li>
 <li>Update  the helper file metabolites.tsv (<a href="#sec2.3.2.1">section 2.3.2.1</a>)</li>
 <li>Update the fasta files with user-defined molecular machineries (<a href="#sec2.3.1">section 2.3.1</a>)</li>
-<li>Update helper files specific to proteins: location.tsv (<a href="#sec2.3.2.3">section 2.3.2.3</a>), cofactors.tsv  (<a href="#sec2.3.2.4">section 2.3.2.4</a>) and subunits.tsv  (<a href="#sec2.3.2.5">section 2.3.2.5</a>) </li>
+<li>Update helper files specific to proteins: location.tsv (<a href="#sec2.3.2.4">section 2.3.2.4</a>), cofactors.tsv  (<a href="#sec2.3.2.5">section 2.3.2.5</a>) and subunits.tsv (<a href="#sec2.3.2.6">section 2.3.2.6</a>) </li>
 </ol>
 During step 3, the new proteins detected within the fasta files will be automatically added in files location.tsv, cofactors.tsv and  subunits.tsv if missing information is detected. Therefore doing step 3 before step 4 enables to edit these files only one time.
 
@@ -187,7 +187,7 @@ while keeping strictly the format.
 An example: the ribosome machinery.
 The ribosome is usually composed of 3rRNAs (5S, 15S,  23S), around 50 ribosomal proteins, 
 and the initiation, elongation and release factors.
-The <b>ribosome.fasta</b> lists all the machinery composition in a pseudo-fasta format:
+	The <b><font color="#77B5FE">ribosome.fasta</font></b> lists all the machinery composition in a pseudo-fasta format:
 </p>
 <pre><code>>rba|rrnO-16S|rrnO-16S|rna|1
 TTTATCGGAGAGTTTGATCCTGGCTCAGGACGAACGCTGGCGGCGTGCCTAATACATGCA
@@ -233,9 +233,9 @@ To update the RBA model, re-run the model generation by
 
 Now look in the files
 <ul>
-<li>proteins.xml which contains the new proteins of the molecular machine.</li>
-<li>rnas.xml  which contains the new rnas of the molecular machine</li>
-<li>processes.xml where the new proteins have been included in the processes “Translation” and “Folding”, and the new rnas in the processes “Transcription” and “RNA degradation”</li>
+	<li><font color="#77B5FE">proteins.xml</font> which contains the new proteins of the molecular machine.</li>
+<li><font color="#77B5FE">rnas.xml</font>  which contains the new rnas of the molecular machine</li>
+<li><font color="#77B5FE">processes.xml</font> where the new proteins have been included in the processes “Translation” and “Folding”, and the new rnas in the processes “Transcription” and “RNA degradation”</li>
 </ul>
 
 
@@ -281,10 +281,10 @@ To update the RBA model, re-run the model generation by
 </p>
 	
 <p>
-Now look in the files
+Now look at the files
 <ul> 
-<li>processes.xml: The lists of of metabolic precursors used in cellular processes are updated </li>
-<li>targets.xml: The targeted group named metabolite_production is updated with the set of metabolite M3, and their targeted concentrations are reported in the file parameters.xml. </li>
+	<li><font color="#77B5FE">processes.xml</font>: The lists of of metabolic precursors used in cellular processes are updated </li>
+<li><font color="#77B5FE">targets.xml</font>: The targeted group named "metabolite_production" is updated with the set of metabolite M3, and their targeted concentrations are reported in the file parameters.xml. </li>
 	</ul>
 </p>
 
