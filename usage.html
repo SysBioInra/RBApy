@@ -220,8 +220,12 @@ in processes.xml, within the list of production of processes that target molecul
 </ul>
 
 <p>
-During the parsing of the fasta file, each time a protein is read, RBApy tries to extract automatically the location (see <a href="#sec2.3.2.3">section 2.3.2.3</a>), cofactors (see <a href="#sec2.3.2.4">2.3.2.4</a>) of the protein. In case of ambiguities, the protein is also inserted in the corresponding files locations.tsv, and cofactors.tsv. 
-If the protein is not present in the uniprot file, the protein is still inserted in proteins.xml using the amino-acid sequence of the fasta file, and in processes.xml.  By default, the protein will be located in the cytoplasm, without cofactors. Moreover, the unknown protein is also inserted in the file unknown_proteins.tsv (see <a href="#sec2.3.2.6">2.3.2.6</a>).
+During the parsing of the fasta file, each time a protein is read, RBApy tries to extract automatically the location 
+	(see <a href="#sec2.3.2.4">section 2.3.2.4</a>), cofactors (see <a href="#sec2.3.2.5">2.3.2.5</a>) of the protein. 
+	In case of ambiguities, the protein is also inserted in the corresponding files locations.tsv, and cofactors.tsv. 
+If the protein is not present in the uniprot file, the protein is still inserted in proteins.xml using the amino-acid sequence 
+	of the fasta file, and in processes.xml.  By default, the protein will be located in the cytoplasm, without cofactors. 
+	Moreover, the unknown protein is also inserted in the file unknown_proteins.tsv (see <a href="#sec2.3.2.7">2.3.2.7</a>).
 </p>
 
 <p>
@@ -404,7 +408,7 @@ To update the RBA model, re-run the model generation by
 <p>
 RBApy parses automatically the field COFACTOR of the Uniprot file to determine the cofactors of a protein. 
 	However, the field COFACTOR is often written in natural language, which can lead to difficulties during the parsing.
-Therefore, for every protein having ambiguities, the file <font color="#77B5FE">cofactors.tsv</font> lists name, chebi identifier and stoichiometry of cofactors per protein. If one protein has several cofactors, several lines corresponding to the protein are present in cofactors.tsv. Based on the last column (containing uniprot cofactor annotation), user should check inferred values and fill in fields tagged as [MISSING]. Important: if annotation says that there is no cofactor, do not remove line from csv file. Ignore name and chebi fields and set stoichiometry to 0.
+Therefore, for every protein having ambiguities, the file <b><font color="#77B5FE">cofactors.tsv</font></b> lists name, chebi identifier and stoichiometry of cofactors per protein. If one protein has several cofactors, several lines corresponding to the protein are present in cofactors.tsv. Based on the last column (containing uniprot cofactor annotation), user should check inferred values and fill in fields tagged as [MISSING]. Important: if annotation says that there is no cofactor, do not remove line from csv file. Ignore name and chebi fields and set stoichiometry to 0.
 <p>
 The file cofactors.tsv contains 5 columns:
 <ul>
