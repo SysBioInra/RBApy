@@ -271,10 +271,10 @@ By default, the file is built using the sets M1, M2 and M3 of the bacterium <i>B
 <p>
 The file metabolites.tsv, is organized in 4 columns, entitled ID, NAME, SBML ID and  CONCENTRATION.
 <ul>
-<li>ID: is the absolute identifier of the metabolite, which can be the ChEBI;</li>
-<li>NAME: the name of the metabolite;</li>
-<li>SBML ID: the SBML ID corresponding to the metabolite, present in the genome-scale metabolic model;</li>
-<li>CONCENTRATION: the concentration of growth-rate independent metabolite. </li>
+<li>ID: is the absolute identifier of the metabolite, which can be the ChEBI</li>
+<li>NAME: the name of the metabolite</li>
+<li>SBML ID: the SBML ID corresponding to the metabolite, present in the genome-scale metabolic model</li>
+<li>CONCENTRATION: the concentration of growth-rate independent metabolite </li>
 </ul>
 To update the RBA model, re-run the model generation by
 <pre><code>python generate_rba_model.py path/to/params.in</code></pre>
@@ -295,8 +295,8 @@ Now look in the files
 <p>
 The file is organized in two columns, TARGET_METABOLITE  and  TARGET_FLUX.
 <ul>
-<li>TARGET_METABOLITE: the SBML ID of the metabolic precursor necessary to build the macro-component;</li>
-<li> TARGET_FLUX: the value C of the targeted concentration.</li>
+<li>TARGET_METABOLITE: the SBML ID of the metabolic precursor necessary to build the macro-component</li>
+<li> TARGET_FLUX: the value C of the targeted concentration</li>
 </ul>
 The pipeline will automatically add to each metabolic precursor  a consumption flux equal to µC, where µ is the growth rate.
 </p>
@@ -333,7 +333,7 @@ To update the RBA model, re-run the model generation by
 </p>
 <pre><code> python generate_rba_model.py path/to/params.in</code></pre>
 
-Now look in the file metabolism.xml that contains the list of cellular compartments.  Compartments are updated as follows:
+Now look at the file <font color="#77B5FE">metabolism.xml</font> that contains the list of cellular compartments. Compartments are updated as follows:
 <pre><code> &lt;RBAMetabolism>
   &lt;listOfCompartments>
     &lt;compartment id="Cell_inner_membrane"/>
@@ -351,28 +351,28 @@ RBApy parses automatically the field SUBCELLULAR LOCATION [CC] of the Uniprot fi
 Proteins for which uniprot has no location data are listed in the file <b><font color="#77B5FE">locations.tsv</font></b> . 
 The file locations.tsv contains 4 columns, named
 <ul>
-<li>ENTRY:  Uniprot ID of protein;   </li>
-<li>GENE NAME:  the gene names as in the  Uniprot file;</li> 
-<li>PROTEIN NAME:  the protein names as in the  Uniprot file;</li>   
+<li>ENTRY:  Uniprot ID of protein   </li>
+<li>GENE NAME:  the gene names as in the  Uniprot file</li> 
+<li>PROTEIN NAME:  the protein names as in the  Uniprot file</li>   
 <li>LOCATION: location that has to be updated. Note that locations must correspond to names defined in location_map.tsv (user name if one was defined, else Uniprot name). 
 If fields are left empty or [MISSING], proteins are assumed to be located in Cytoplasm (or user-defined counterpart as defined in location_map.tsv).</li>
 </ul>	
 </p>
 <p>
-An example
+Here is the example of the protein P39400 (Uniprot ID) for which the field SUBCELLULAR LOCATION [CC] of the Uniprot file was missing. 
 <table>
 	<tr><td>ENTRY</td><td>GENE NAME</td><td>PROTEIN NAME</td><td>LOCATION</td></tr>
-	<tr><td>P39400</td><td>lgoD yjjN b4358 JW5793</td><td>L-galactonate-5-dehydrogenase (EC 1.1.1.-)</td><td>Periplasm</td></tr>
+	<tr><td>P39400</td><td>lgoD yjjN b4358 JW5793</td><td>L-galactonate-5-dehydrogenase (EC 1.1.1.-)</td><td><font color="#77B5FE">Periplasm</font></td></tr>
 </table>
-In this example, the protein P39400 will be localised in the compartment "Periplasm".
+In this example, the protein P39400 will be assigned to the compartment "Periplasm".
 </p>
 <p>
 To update the RBA model, re-run the model generation by
 <pre><code> python generate_rba_model.py path/to/params.in</code></pre>
 </p>
 <p>
-Now look in the file proteins.xml that contains the localisation and composition in amino-acids and cofactors of proteins. The attribute "compartment" is updated with the new 
-	localisation of the protein.
+	Now look at the file <font color="#77B5FE">proteins.xml</font> that contains the localisation and composition in amino-acids and cofactors of proteins. 
+	The attribute "compartment" is updated with the new localisation of the protein.
 <pre><code> &lt;macromolecule id="b4358" compartment="<font color="#77B5FE">Periplasm</font>">
   &lt;composition>
         &lt;componentReference component="A" stoichiometry="39"/>
@@ -408,11 +408,11 @@ Therefore, for every protein having ambiguities, the file <font color="#77B5FE">
 <p>
 The file cofactors.tsv contains 5 columns:
 <ul>
-<li>ENTRY:   Uniprot ID of the protein; </li>
-<li>CHEBI: ChEBI ID of the cofactor; </li>    
-<li>NAME: Name of the cofactor; </li>
-<li>STOICHIOMETRY : stoichiometry of the cofactor for 1 protein; </li>
-<li>UNIPROT ANNOTATION: copy of the field COFACTOR of the Uniprot file. </li> 
+<li>ENTRY:   Uniprot ID of the protein </li>
+<li>CHEBI: ChEBI ID of the cofactor </li>    
+<li>NAME: Name of the cofactor </li>
+<li>STOICHIOMETRY : stoichiometry of the cofactor for 1 protein </li>
+<li>UNIPROT ANNOTATION: copy of the field COFACTOR of the Uniprot file</li> 
 </ul>
 </p>
 <p>
@@ -420,8 +420,8 @@ Here is the example of the protein P0ACC7 (Uniprot ID) for which the field COFAC
  automatically inserted in the file cofactor.tsv. The user must indicate which cofactor the protein will use:
 <table>
 	<tr><td>ENTRY</td><td>CHEBI</td><td>NAME</td><td>STOICHIOMETRY</td><td>UNIPROT ANNOTATION</td></tr>
-	<tr><td>P0ACC7</td><td>CHEBI:18420</td><td>Mg(2+)</td><td>1</td><td>Binds 1 Mg(2+) ion per subunit (PubMed:17473010). Can also use Co(2+) ion to a lesser extent (PubMed:11329257). {ECO:0000269|PubMed:11329257, ECO:0000269|PubMed:17473010};</td></tr>
-	<tr><td>P0ACC7</td><td>CHEBI:48828</td><td>Co(2+)</td><td>0</td><td>Binds 1 Mg(2+) ion per subunit (PubMed:17473010). Can also use Co(2+) ion to a lesser extent (PubMed:11329257). {ECO:0000269|PubMed:11329257, ECO:0000269|PubMed:17473010};</td></tr>
+	<tr><td>P0ACC7</td><td>CHEBI:18420</td><td>Mg(2+)</td><td><font color="#77B5FE">1</font></td><td>Binds 1 Mg(2+) ion per subunit (PubMed:17473010). Can also use Co(2+) ion to a lesser extent (PubMed:11329257). {ECO:0000269|PubMed:11329257, ECO:0000269|PubMed:17473010};</td></tr>
+	<tr><td>P0ACC7</td><td>CHEBI:48828</td><td>Co(2+)</td><td><font color="#77B5FE">0</font></td><td>Binds 1 Mg(2+) ion per subunit (PubMed:17473010). Can also use Co(2+) ion to a lesser extent (PubMed:11329257). {ECO:0000269|PubMed:11329257, ECO:0000269|PubMed:17473010};</td></tr>
 </table>	
 Two cofactors (Mg(2+) and Co(2+)) were detected during the parsing of cofactors. In the example, only Mg(2+) will be used per monomer of P0ACC7.
 </p>  
@@ -431,7 +431,7 @@ To update the RBA model, re-run the generation by
 </p>
 
 <p>
-Now look in the file proteins.xml that contains the localisation and composition in amino-acids and cofactors of proteins. 
+	Now look at the <font color="#77B5FE">file proteins.xml</font> that contains the localisation and composition in amino-acids and cofactors of proteins. 
 	The cofactor and its stoichiometry are added (In the example, the protein entry "P0ACC7" corresponds to the gene name "b3730"):
 <pre><code>&lt;macromolecule id="b3730" compartment="Cytoplasm">
   &lt;composition>
@@ -458,6 +458,58 @@ Now look in the file proteins.xml that contains the localisation and composition
         &lt;componentReference component="Y" stoichiometry="11"/>
   &lt;/composition>
 &lt;/macromolecule></code></pre>
+</p>
+
+
+<h4 id="sec2.3.2.6">2.3.2.6 Subunits.tsv </h4>
+<p>
+RBApy parses automatically the field SUBUNIT STRUCTURE [CC] of the Uniprot file to determine the stoichiometry of a protein within its enzymatic complex. 
+For every ambiguous and empty entry, gene name and protein name are provided for proper identification in the file <b><font color="#77B5FE">subunits.tsv</font></b>. 
+	By default, the stoichiometry of the protein is set to 1. User should read annotation field (or any other sources of information) and update the stoichiometry if necessary. 
+</p>
+<p>
+Subunits.tsv contains 5  columns, named 
+<ul>
+<li>ENTRY: Uniprot ID of protein</li>
+<li>STOICHIOMETRY: the stoichiometry of the protein within its enzymatic complex (the default value is 1)</li>
+<li>GENE NAMES: the gene names as in the  Uniprot file</li>
+<li>PROTEIN NAME:  the protein names as in the  Uniprot file</li>
+<li>UNIPROT NOTE: the field SUBUNIT STRUCTURE [CC] of the Uniprot file. If the field SUBUNIT STRUCTURE [CC] is empty, then [MISSING] is indicated here.</li>
+</ul>
+</p>
+<p>
+Here is the example of the protein P68699 (Uniprot ID) for which the field SUBUNIT STRUCTURE [CC] of the Uniprot file cannot be parsed automatically. 
+	The protein P68699 is the ATP synthase subunit c, which is present in 10 copies per complex.
+The user must indicate the stoichiometry of P68699 (the default value is 1):
+<table>
+	<tr><td>ENTRY</td><td>STOICHIOMETRY</td><td>GENE NAMES</td><td>PROTEIN NAMES</td><td>UNIPROT NOTE/td></tr>
+	<tr><td>P68699</td><td><font color="#77B5FE">10</font></td><td>atpE papH uncE b3737 JW3715</td><td>ATP synthase subunit c (ATP synthase F(0) sector subunit c) (Dicyclohexylcarbodiimide-binding protein) (F-type ATPase subunit c) (F-ATPase subunit c) (Lipid-binding protein)</td><td>SUBUNIT: F-type ATPases have 2 components, F(1) - the catalytic core - and F(0) - the membrane proton channel. F(1) has five subunits: alpha(3), beta(3), gamma(1), delta(1), epsilon(1). F(0) has three main subunits: a(1), b(2) and c(10). The alpha and beta chains form an alternating ring which encloses part of the gamma chain. F(1) is attached to F(0) by a central stalk formed by the gamma and epsilon chains, while a peripheral stalk is formed by the delta and b chains. {ECO:0000269|PubMed:11320246}.
+</td></tr>
+</table>	
+</p>
+ <p>
+To update the RBA model, re-run the model generation by
+<pre><code>python generate_rba_model.py path/to/params.in</code></pre>
+</p>
+<p>
+Now look at the file <font color="#77B5FE">enzymes.xml</font> that contains the composition of enzymatic complexes. 
+	The stoichiometry of the ATP synthase complex (identifier "R_ATPS4rpp_enzyme") is updated:
+<pre><code>&lt;enzyme id="R_ATPS4rpp_enzyme" reaction="R_ATPS4rpp" forward_efficiency="R_ATPS4rpp_efficiency" backward_efficiency="default_transporter_efficiency" zeroCost="false">
+      &lt;machineryComposition>
+        <listOfReactants>
+          &lt;speciesReference species="b3734" stoichiometry="3.0"/>
+          &lt;speciesReference species="b3732" stoichiometry="3.0"/>
+          &lt;speciesReference species="b3731" stoichiometry="1.0"/>
+          &lt;speciesReference species="b3733" stoichiometry="1.0"/>
+          &lt;speciesReference species="b3735" stoichiometry="1.0"/>
+          &lt;font color="#77B5FE"><speciesReference species="b3737" stoichiometry="10.0"/></font>
+          &lt;speciesReference species="b3736" stoichiometry="2.0"/>
+          &lt;speciesReference species="b3738" stoichiometry="1.0"/>
+          &lt;speciesReference species="b3739" stoichiometry="0.1"/>
+        &lt;/listOfReactants>
+      &lt;/machineryComposition>
+    &lt;/enzyme></code></pre>
+	
 </p>
 	</body>
 </html>
