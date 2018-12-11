@@ -306,5 +306,44 @@ To update the RBA model, re-run the model generation by
 Remark: This file is optional, because the identification of metabolic precursors and their targeted concentrations can also be defined in metabolites.tsv. However, the user may choose to define these precursors in a separate file, because of the specific role of macro-components in the cell.
 </p>
 
+
+<h4 id="sec2.3.2.3">2.3.2.3 Location_map.tsv </h4>
+<p>
+The file location_map.tsv is used to link uniprot location ids with user-defined compartment ids. For every uniprot location, user may fill in a name compartment (e.g. SBML compartment names). 
+The idea behind this file is that it can be used to fuse compartments or ignore them. 
+If the field is left empty (or [MISSING]), a compartment named after uniprot location is created.
+</p>
+
+An example:
+<table>
+<tr><td>UNIPROT NAME</td>    <td>USER ID</td></tr>
+<tr><td>Cell outer membrane</td>    <td>Cell_outer_membrane</td></tr>
+<tr><td>Cell inner membrane</td>    <td>Cell_inner_membrane</td></tr>
+<tr><td>Cytoplasm</td>    <td>Cytoplasm</td></tr>
+<tr><td>Cell membrane</td>   <td>Cell_inner_membrane</td></tr>
+<tr><td>Periplasm</td>    <td>Periplasm</td></tr>
+<tr><td>Membrane</td>    <td>Cell_inner_membrane</td></tr>
+<tr><td>Secreted</td>    <td>Secreted</td></tr>
+</table>
+<p>
+In this example, proteins that have the location "Cell membrane" and "Membrane" have the same location in the RBA model: "Cell_inner_membrane"
+</p>
+<p>
+To update the RBA model, re-run the model generation by
+</p>
+<pre><code> python generate_rba_model.py path/to/params.in</code></pre>
+
+Now look in the file metabolism.xml that contains the list of cellular compartments.  Compartments are updated as follows:
+<pre><code> 
+&lt;RBAMetabolism>
+  &lt;listOfCompartments>
+    &lt;compartment id="Cell_inner_membrane"/>
+    &lt;compartment id="Cytoplasm"/>
+    &lt;compartment id="Cell_outer_membrane"/>
+    &lt;compartment id="Periplasm"/>
+    &lt;compartment id="Secreted"/>
+  &lt;/listOfCompartments>
+</code></pre>
+
 	</body>
 </html>
