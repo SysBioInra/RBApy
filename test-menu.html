@@ -11,15 +11,15 @@ layout: subpage
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <ul>
+  <ol>
     <li><a href="#">About</a></li>
-    <ul>
+    <ol>
       <li><a href="#">Underlist</a></li>
-    </ul>
+    </ol>
     <li><a href="#">Services</a></li>
     <li><a href="#">Clients</a></li>
     <li><a href="#">Contact</a></li>
-  </ul>
+  </ol>
 </div>
 
 <h2>Animated Sidenav Example</h2>
@@ -34,6 +34,7 @@ function openNav() {
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
+openNav()
 </script>
    
 </body>
