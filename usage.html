@@ -7,7 +7,41 @@ layout: subpage
 <html>
 	<body>
 
-		<h1>Usage</h1>
+
+
+<div id="mySidenav" class="sidenav">
+  <ol>
+    <li><a href="usage.html#sec1">Running an existing model</a></li>
+    <ol>
+      <li><a href="usage.html#sec1.1">How to run an existing model?</a></li>
+      <li><a href="usage.html#sec1.2">How to visualize results of RBApy simulation?</a></li>
+      <li><a href="usage.html#sec1.3">How to change the medium?</a></li>
+      <li><a href="usage.html#sec1.4">How to change model parameters?</a></li>
+    </ol>
+    <li><a href="usage.html#sec2">Creating a new RBA model</a></li>
+    <ol>
+      <li><a href="usage.html#sec2.1">What do I need to create a new RBA model?</a></li>
+      <li><a href="usage.html#sec2.2">How to create my new RBA model?</a></li>
+      <li><a href="usage.html#sec2.3">How to refine my new RBA model?</a></li>
+    </ol>
+    <li><a href="usage.html#sec3">Calibrating an RBA model</a></li>
+    <ol>
+      <li><a href="usage.html#sec3.1">Data requirement and format</a></li>
+      <li><a href="usage.html#sec3.2">Estimating parameters</a></li>
+      <li><a href="usage.html#sec3.3">Updating the parameter files</a></li>
+    </ol>
+    <li><a href="usage.html#sec4">Details on the SBML requirements</a></li>
+    <ol>
+      <li><a href="usage.html#sec4.1">Gene-association requirements</a></li>
+      <li><a href="usage.html#sec4.2">External compartments</a></li>
+    </ol>
+  </ol>
+</div>
+
+
+
+
+<h1>Usage</h1>
 		
 <h2 id="sec1">1. Running an existing model </h2>
 <h3 id="sec1.1">1.1 How to run an existing model?</h3>
@@ -568,5 +602,18 @@ Therefore, a reaction without a gene association may be catalyzed by an enzyme, 
 <p>
 Explain how external compartments are automatically detected and what they are used for (michaelis-menten function, medium metabolites).
 </p>
+
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "600px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+openNav()
+</script>
+
 	</body>
 </html>
