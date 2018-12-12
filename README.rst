@@ -22,13 +22,13 @@ parameter file `input/params.in`. Then open a console at the root
 of the repository and run:
 
 ```
-python generate_xml_file.py input/params.in
+python generate_rba_model.py input/params.in
 ```
 
 or, more generally:
 
 ```
-python generate_xml_file.py path/to/params.in
+python generate_rba_model.py path/to/params.in
 ```
 The script will generate several files used as an input for the RBA solver.
 By default, they will be written to the `output` directory.
