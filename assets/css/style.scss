@@ -1,0 +1,83 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+.page-header {
+	background-color: #f9ad5a;
+	background-image: none;
+	padding-top: 20px;
+	padding-bottom: 30px;
+}
+
+.main-content h1,
+  .main-content h2,
+  .main-content h3,
+  .main-content h4,
+  .main-content h5,
+  .main-content h6 {
+color: #3d2c32; }
+
+.column {
+  padding: 10px;
+  display: inline-block;
+}
+
+.row {
+	text-align: center;
+	padding-bottom: 40px;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #4c352f;
+  overflow-x: hidden;
+  transition: 0.0s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 6px 6px 6px 25px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #a1a1a1;
+  display: block;
+  transition: 0.0s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.openButton {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  font-size: 30px;
+  color: #4c352f;
+}

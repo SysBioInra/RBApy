@@ -1,6 +1,6 @@
-import cobra
-import ConfigParser
+from configparser import ConfigParser
 import pandas as pd
+import cplex
 
 import rba
 
@@ -10,18 +10,32 @@ from utils import *
 def set_bounds(fba_model, flux_data, config):
     lb_column = config.get('FluxData', 'lb_column')
     ub_column = config.get('FluxData', 'ub_column')
+    variable_names = fba_model.variables.get_names()
     for fluxes in flux_data.index:
         reactions = fluxes.split(',')
-        constr = fba_model.problem.Constraint(
-            sum([fba_model.reactions.get_by_id(r).flux_expression for r in reactions]),
-            lb = flux_data.loc[fluxes][lb_column],
-            ub = flux_data.loc[fluxes][ub_column],
-        )
-        fba_model.add_cons_vars(constr)
+        indices = [variable_names.index(reac) for reac in reactions]
+        lin_expr = [cplex.SparsePair(indices, [1]*len(indices)),]
+
+        names_lb = ['{}_LB'.format(fluxes),]
+        senses_lb = ['GE',]
+        rhs_lb = [flux_data[lb_column][fluxes],]
+        fba_model.linear_constraints.add(names=names_lb)
+        fba_model.linear_constraints.set_linear_components(zip(names_lb, lin_expr))
+        fba_model.linear_constraints.set_senses(zip(names_lb, senses_lb))
+        fba_model.linear_constraints.set_rhs(zip(names_lb, rhs_lb))
+
+        names_ub = ['{}_UB'.format(fluxes),]
+        senses_ub = ['LE',]
+        rhs_ub = [flux_data[ub_column][fluxes],]
+        fba_model.linear_constraints.add(names=names_ub)
+        fba_model.linear_constraints.set_linear_components(zip(names_ub, lin_expr))
+        fba_model.linear_constraints.set_senses(zip(names_ub, senses_ub))
+        fba_model.linear_constraints.set_rhs(zip(names_ub, rhs_ub))
+    return fba_model
 
 
 if __name__ == '__main__':
-    config = ConfigParser.ConfigParser()
+    config = ConfigParser()
     config.read('kapp.cfg')
 
     flux_data = load_flux_data(config)
@@ -31,15 +45,16 @@ if __name__ == '__main__':
     cdw = float(config.get('ProteinData', 'cdw'))
 
     fba_model_file = config.get('Model', 'fba')
-    fba_model = cobra.io.read_sbml_model(fba_model_file)
+    biomass_reaction = config.get('Model', 'biomass_reaction')
+    fba_model = create_fba_problem(fba_model_file, biomass_reaction)
+    fba_model = set_bounds(fba_model, flux_data, config)
+    fba_model.solve()
+    fluxes = {a[2:]: b for a,b in zip(fba_model.variables.get_names(),
+                                  fba_model.solution.get_values())}
+    non_zero_fluxes = dict(filter(lambda i : i[1] != 0, fluxes.items()))
 
     rba_model_dir = config.get('Model', 'rba')
     rba_model = rba.RbaModel.from_xml(rba_model_dir)
-
-    set_bounds(fba_model, flux_data, config)
-    fba_sol = fba_model.optimize()
-    all_fluxes = dict(fba_sol.fluxes)
-    non_zero_fluxes = dict(filter(lambda i : i[1] != 0, all_fluxes.items()))
 
     gene_cnt = get_gene_cnt_per_reaction(rba_model)
     nz_gene_cnt = get_gene_cnt_per_reaction(rba_model, non_zero_fluxes)
@@ -51,6 +66,7 @@ if __name__ == '__main__':
 
     enz_ids = [enz for enz in enzymes.keys() if enzymes[enz].is_cytosolic]
     enz_kapp_df = pd.DataFrame(index=enz_ids, columns=['kapp'])
+    enz_kapp_df.index.name = 'Reaction ID'
 
     for enz_id in enz_ids:
         enz = enzymes[enz_id]
@@ -58,8 +74,9 @@ if __name__ == '__main__':
 
     output_file = config.get('Output', 'file')
     output_file_type = config.get('Output', 'file_type')
+    nz_values = enz_kapp_df.iloc[enz_kapp_df['kapp'].nonzero()]
     if output_file_type == 'excel':
-        enz_kapp_df.to_excel(output_file)
+        nz_values.to_excel(output_file)
     elif output_file_type == 'csv':
         delimiter = config.get('Output', 'delimiter')
-        enz_kapp_df.to_csv(output_file, delimiter)
+        nz_values.to_csv(output_file, str(delimiter))

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="21.588236mm"
+   height="5.2916665mm"
+   viewBox="0 0 21.588236 5.2916665"
+   version="1.1"
+   id="svg1564"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="home_label.svg">
+  <defs
+     id="defs1558" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11.2"
+     inkscape:cx="44.504905"
+     inkscape:cy="-7.6206"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1029"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata1561">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(171.81197,-44.889883)">
+    <g
+       aria-label="HOME"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:125%;font-family:'Big John';-inkscape-font-specification:'Big John';letter-spacing:0px;word-spacing:0px;fill:#4c352f;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="text817">
+      <path
+         d="m -171.81197,44.889883 v 5.291666 h 1.38995 V 48.16366 h 1.67922 v 2.017889 h 1.38994 v -5.291666 h -1.38994 v 1.883833 h -1.67922 v -1.883833 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Big John';-inkscape-font-specification:'Big John';fill:#4c352f;fill-opacity:1;stroke-width:0.26458332px"
+         id="path2117" />
+      <path
+         d="m -166.39187,47.542771 c 0,1.4605 1.17828,2.638778 2.63878,2.638778 1.4605,0 2.64583,-1.178278 2.64583,-2.638778 0,-1.4605 -1.18533,-2.652888 -2.64583,-2.652888 -1.4605,0 -2.63878,1.192388 -2.63878,2.652888 z m 3.90172,-0.0071 c 0,0.691444 -0.56444,1.262944 -1.26294,1.262944 -0.69145,0 -1.25589,-0.5715 -1.25589,-1.262944 0,-0.6985 0.56444,-1.262945 1.25589,-1.262945 0.6985,0 1.26294,0.564445 1.26294,1.262945 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Big John';-inkscape-font-specification:'Big John';fill:#4c352f;fill-opacity:1;stroke-width:0.26458332px"
+         id="path2119" />
+      <path
+         d="m -159.51204,44.889883 h -0.62795 v 5.291666 h 1.397 v -2.709333 l 1.38995,1.255889 1.38289,-1.262945 v 2.716389 h 1.397 v -5.291666 h -0.62795 l -2.15194,1.961444 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Big John';-inkscape-font-specification:'Big John';fill:#4c352f;fill-opacity:1;stroke-width:0.26458332px"
+         id="path2121" />
+      <path
+         d="m -153.51162,50.181549 h 3.28789 v -1.135944 h -1.89795 v -0.973667 h 1.67922 v -1.171222 h -1.67922 v -0.860778 h 1.89795 v -1.150055 h -3.28789 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Big John';-inkscape-font-specification:'Big John';fill:#4c352f;fill-opacity:1;stroke-width:0.26458332px"
+         id="path2123" />
+    </g>
+  </g>
+</svg>

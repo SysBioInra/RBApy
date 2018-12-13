@@ -1,0 +1,628 @@
+---
+layout: subpage
+---
+
+
+<!DOCTYPE html>
+<html>
+	<body>
+
+
+
+<div id="mySidenav" class="sidenav">
+<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <ol type="I">
+    <li><a href="usage.html#sec1">Running an existing model</a></li>
+    <ol>
+      <li><a href="usage.html#sec1.1">How to run an existing model?</a></li>
+      <li><a href="usage.html#sec1.2">How to visualize results of RBApy simulation?</a></li>
+      <li><a href="usage.html#sec1.3">How to change the medium?</a></li>
+      <li><a href="usage.html#sec1.4">How to change model parameters?</a></li>
+    </ol>
+    <li><a href="usage.html#sec2">Creating a new RBA model</a></li>
+    <ol>
+      <li><a href="usage.html#sec2.1">What do I need to create a new RBA model?</a></li>
+      <li><a href="usage.html#sec2.2">How to create my new RBA model?</a></li>
+      <li><a href="usage.html#sec2.3">How to refine my new RBA model?</a></li>
+	    <ol type="a">
+		    <li><a href="usage.html#sec2.3.1">Insertion of user-defined molecular machineries</a></li>
+		    <li><a href="usage.html#sec2.3.2">Helper files</a></li>
+	    </ol>			    
+    </ol>
+    <li><a href="usage.html#sec3">Calibrating an RBA model</a></li>
+    <ol>
+      <li><a href="usage.html#sec3.1">Data requirement and format</a></li>
+      <li><a href="usage.html#sec3.2">Estimating parameters</a></li>
+      <li><a href="usage.html#sec3.3">Updating the parameter files</a></li>
+    </ol>
+    <li><a href="usage.html#sec4">Details on the SBML requirements</a></li>
+    <ol>
+      <li><a href="usage.html#sec4.1">Gene-association requirements</a></li>
+      <li><a href="usage.html#sec4.2">External compartments</a></li>
+    </ol>
+  </ol>
+</div>
+
+<div id="myOpenButton" class="openButton" onclick="openNav()"> 
+	&#9776;
+</div>
+
+
+
+
+<h1>Usage</h1>
+		
+<h2 id="sec1">1. Running an existing model </h2>
+<h3 id="sec1.1">1.1 How to run an existing model?</h3>
+<p>
+Open a console at the root of the RBApy repository.
+</p>
+<p>
+If the RBA model already exists,  run:
+</p>
+<pre><code> python solve_rba_model.py path/to/model </code></pre>
+
+where the path points to the directory containing the XML files defining the RBA model.
+
+
+
+<h3 id="sec1.2">1.2 How to visualize results of RBApy simulations?</h3>
+
+<h3 id="sec1.3">1.3 How to change the medium?</h3>
+
+<p>
+The medium composition is defined in the file <b><font color="#77B5FE"> medium.tsv</font></b>. The file is located in the  directory containing the XML files defining the RBA model. 
+The first column contains the prefixes of metabolites that are detected in the external compartments in the SBML (see section 5.1). 
+The second column corresponds to the concentration of metabolites in millimoles.
+</p>
+
+<p>
+To change the medium composition:
+	<ul>
+		<li>Open the file medium.tsv defining the medium composition. </li>
+		<li>Update the metabolite concentration as follows:</li>
+		
+</p>
+
+<pre><code> --------------------------------
+Original file
+--------------------------------
+Metabolite    Concentration
+M_k    10
+M_no3    10
+etc. </code></pre>
+
+<p>
+<li>Change the concentration of M_no3 from 10mM to 5mM and save the file.</li>
+</p>
+<pre><code> --------------------------------
+New file
+--------------------------------
+Metabolite    Concentration
+M_k    10
+M_no3    5
+etc. </code></pre>
+<p>
+<li>Run again the model using:</li>
+</p>
+<pre><code> python solve_rba_model.py path/to/model </code></pre>
+
+		</ul>
+<p>
+Here RBApy evaluates the apparent catalytic rates of transporters using the new metabolite concentrations, before solving the optimization problem.
+</p>
+
+
+
+<h3 id="sec1.4">1.4 Can I change my model parameters? </h3>
+<p>
+RBA model parameters are defined in the file <b><font color="#77B5FE"> parameters.xml</font></b>. This file is located in the  directory containing the XML files of the RBA model. 
+</p>
+<p>
+To update parameters
+Open the file parameters.xml
+Update the value of the parameter that you want to change. For instance:
+</p>	
+<pre><code> --------------------------------
+Original file: 
+the function ribosomeEfficiencyMM describing the efficiencies of ribosomes
+max(Ymin, kmax*µ/(Km+µ)) 
+--------------------------------
+  &lt;function id="ribosomeEfficiencyMM" type="michaelisMenten">
+         &lt;listOfParameters>
+                &lt;parameter id="kmax" value="97200"/>
+                &lt;parameter id="Km" value="0.5"/>
+                &lt;parameter id="Y_MIN" value="32400"/>
+         &lt;/listOfParameters>
+  &lt;/function>
+  etc. </code></pre>
+<p>
+Change the maximal rate of translation from 97200 aa/h to 48600 aa/h:
+</p>
+<pre><code> --------------------------------
+New file: 
+the function ribosomeEfficiencyMM describing the efficiencies of ribosomes
+max(Ymin, kmax*µ/(Km+µ)) 
+--------------------------------
+  &lt;function id="ribosomeEfficiencyMM" type="michaelisMenten">
+         &lt;listOfParameters>
+                &lt;parameter id="kmax" value="48600"/>
+                &lt;parameter id="Km" value="0.5"/>
+                &lt;parameter id="Y_MIN" value="32400"/>
+         &lt;/listOfParameters>
+  &lt;/function>></code></pre>
+<p>
+Run the model using:</p>
+<pre><code> python solve_rba_model.py path/to/model </code></pre>
+<p>
+Here RBApy will automatically read the new values. For the units of all parameters, please refer to the paper Goelzer et al. 2015, or to the description of the XML format defining RBA models.
+</p>
+<p>
+ <b><font color="#77B5FE">Be careful when you update some parameters! </font></b>
+Some parameters such as the fraction of total proteins allocated to the different compartments must sum to 1.
+The fraction of non-enzymatic proteins within compartments should be lower than 1.
+</p>
+	
+	
+<h2 id="sec2">2. Creating a new RBA model </h2> 
+    
+<h3 id="sec2.1">2.1 What do I need to create a new RBA model?</h3>
+To create your own RBA model, you need the full rbapy package, and:
+<ul>
+<li>The NCBI taxon ID of your organism (e.g. 83333 for Escherichia coli K-12) </li>
+<li>a valid SBML file for the same organism (see requirements in section 5.1).</li>
+</ul>
+Thanks to the taxon ID, RBApy will automatically download the latest release of your organism on Uniprot and will try to match Uniprot gene names with the gene names of the SBML file.
+
+<h3 id="sec2.2">2.2 How to create my new RBA model?</h3>
+Define one input directory and put the SBML file, the fasta files in the input directory.
+
+Fill in the file input/params.in, where you will specify the taxon ID, the path to the input and output directories, the name of the SBML file, and the external compartments of the SBML file
+
+Open a console at the root of the RBApy repository and run:
+<pre><code>python generate_rba_model.py path/to/params.in</code></pre>
+
+This execution generates:
+<ul>
+<li>several XML files describing the RBA model. They are located in the output directory specified in params.in</li>
+<li>several CSV Helper files (see section 5.3) containing default values for  ambiguous information (e.g. cofactor IDs which couldn’t automatically be linked to model metabolites). They are located in the input directory, with your SBML and fasta files.</li> 
+</ul>
+You can now refine your model (see <a href="#sec2.3">section 2.3</a>) or run your model (see <a href="#sec1.1">section 1.1</a>).
+
+<h3 id="sec2.3">2.3 How to refine my RBA model?</h3>
+After the first run of model generation, one has:
+<ul>
+<li>several XML files describing the RBA model. They are located in the output directory specified in params.in</li>
+<li>several CSV Helper files (see section 5.3) containing default values for  ambiguous information (e.g. cofactor IDs which couldn’t automatically be linked to model metabolites). They are located in the input directory, with your SBML and fasta files. </li>
+</ul>
+
+To refine an RBA model, the user can:
+After the first run of model generation, one has:
+<ul>
+<li>Edit manually the XML files (not recommended) </li>
+<li>Edit manually the fasta files and the helper files, fill them in with information and re-run the model generation using: </li>
+<pre><code> python generate_rba_model.py path/to/params.in</code></pre>
+</ul>
+We strongly recommend the user to start the edition of helper and fasta files in the following order:
+<ol>
+<li>Update  the helper file location_map.tsv (<a href="#sec2.3.2.2">section 2.3.2.2</a>)</li>
+<li>Update  the helper file metabolites.tsv (<a href="#sec2.3.2.1">section 2.3.2.1</a>)</li>
+<li>Update the fasta files with user-defined molecular machineries (<a href="#sec2.3.1">section 2.3.1</a>)</li>
+<li>Update helper files specific to proteins: location.tsv (<a href="#sec2.3.2.4">section 2.3.2.4</a>), cofactors.tsv  (<a href="#sec2.3.2.5">section 2.3.2.5</a>) and subunits.tsv (<a href="#sec2.3.2.6">section 2.3.2.6</a>) </li>
+</ol>
+During step 3, the new proteins detected within the fasta files will be automatically added in files location.tsv, cofactors.tsv and  subunits.tsv if missing information is detected. Therefore doing step 3 before step 4 enables to edit these files only one time.
+
+The user can regenerate the model each time a helper file is modified using 
+<pre><code> python generate_rba_model.py path/to/params.in</code></pre>
+Or only at the end.
+The user can also choose to solve the model each time  to see the impact of these modifications on the simulations. 
+<pre><code> python solve_rba_model.py path/to/model</code></pre>
+
+<h3 id="sec2.3.1">2.3.1 Insertion of user-defined molecular machineries</h3>
+
+<p>
+During the first run of RBApy, the package will use by default the ribosome composition, 
+the average chaperone composition and the tRNAs of <i>Escherichia coli</i>.
+To adapt the machineries to the organism of interest, simply substitute the proteins/rnas within the files 
+while keeping strictly the format.
+</p>
+<p>
+An example: the ribosome machinery.
+The ribosome is usually composed of 3rRNAs (5S, 15S,  23S), around 50 ribosomal proteins, 
+and the initiation, elongation and release factors.
+	The <b><font color="#77B5FE">ribosome.fasta</font></b> lists all the machinery composition in a pseudo-fasta format:
+</p>
+<pre><code>>rba|rrnO-16S|rrnO-16S|rna|1
+TTTATCGGAGAGTTTGATCCTGGCTCAGGACGAACGCTGGCGGCGTGCCTAATACATGCA
+AGTCGAGCGGACAGATGGGAGCTTGCTCCCTGATGTTAGCGGCGGACGGGTGAGTAACAC
+GTGGGTAACCTGCCTGTAAGACTGGGATAACTCCGGGAAACCGGGGCTAATACCGGATGG
+TTGTTTGAA …
+>rba|rrnO-23S|rrnO-23S|rna|1
+GGTTAAGTTAGAAAGGGCGCACGGTGGATGCCTTGGCACTAGGAGCCGATGAAGGACGGG
+ACGAACACCGATATGCTTCGGGGAGCTGTAAGCAAGCTTTGATCCGGAGATTTCCGAATG
+GGGAAACC …
+>rba|rrnO-5S|rrnO-5S|rna|1
+TTTGGTGGCGATAGCGAAGAGGTCACACCCGTTCCCATACCGAACACGGAAGTTAAGCTC
+TTCAGCGCCGATGGTAGTCGGGGGTTTCCCCCTGTGAGAGTAGGACGCCGCC
+>rba|P0AG67|RS1_ECOLI 30S ribosomal protein S1 OS=Escherichia coli (strain K12) GN=rpsA PE=1 SV=1|protein|1
+MTESFAQLFEESLKEIETRPGSIVRGVVVAIDKDVVLVDAGLKSESAIPAEQFKNAQGEL
+EIQVGDEVDVALDA…
+…</code></pre>
+The format of entry is as follows:
+<pre><code>>rba | Molecule ID | Molecule Name | Molecule Type | Molecule Stoichiometry
+--- Sequence ----
+</code></pre>
+<ul>
+<li>rba: means that this entry corresponds to RBA machinery</li>
+<li>Molecule ID: The identifier of the molecules. For proteins, the ID must corresponds either to the Uniprot Protein, either to one of the gene names.</li>  
+<li>Molecule Name: the name of the molecule.  </li>
+<li>Molecule Type: the Type of the molecule. Type can take two values: protein, rna. See below. The molecule type enables to insert automatically the new molecule 
+in proteins.xml and rnas.xml, and also 
+in processes.xml, within the list of production of processes that target molecules of same Type </li>
+<li>Molecule Stoichiometry: the stoichiometry of the molecule within the molecular machine.</li>
+</ul>
+
+<p>
+During the parsing of the fasta file, each time a protein is read, RBApy tries to extract automatically the location 
+	(see <a href="#sec2.3.2.4">section 2.3.2.4</a>), cofactors (see <a href="#sec2.3.2.5">2.3.2.5</a>) of the protein. 
+	In case of ambiguities, the protein is also inserted in the corresponding files locations.tsv, and cofactors.tsv. 
+If the protein is not present in the uniprot file, the protein is still inserted in proteins.xml using the amino-acid sequence 
+	of the fasta file, and in processes.xml.  By default, the protein will be located in the cytoplasm, without cofactors. 
+	Moreover, the unknown protein is also inserted in the file unknown_proteins.tsv (see <a href="#sec2.3.2.7">2.3.2.7</a>).
+</p>
+
+<p>
+An advice: For the ID of proteins, we recommend to use either the Uniprot protein ID (e.g. P21464), either the absolute identifier of the gene name (e.g. BSU16490), but not the gene name in 4 letters (e.g. rpsB). Indeed, the field gene name in Uniprot contains the current gene name of the protein, but also all synonyms. Sometimes, some genes may have been renamed, which can result in multiple entries for the 4-letters gene name.
+</p>
+
+To update the RBA model, re-run the model generation by
+<pre><code>python generate_rba_model.py path/to/params.in</code></pre>
+
+Now look in the files
+<ul>
+	<li><font color="#77B5FE">proteins.xml</font> which contains the new proteins of the molecular machine.</li>
+<li><font color="#77B5FE">rnas.xml</font>  which contains the new rnas of the molecular machine</li>
+<li><font color="#77B5FE">processes.xml</font> where the new proteins have been included in the processes “Translation” and “Folding”, and the new rnas in the processes “Transcription” and “RNA degradation”</li>
+</ul>
+
+
+<h3 id="sec2.3.2">2.3.2 Helper files</h3>
+		       
+<h4 id="sec2.3.2.1">2.3.2.1 Metabolites.tsv</h4>
+<p>
+The file <b><font color="#77B5FE">metabolites.tsv</font></b> is critical for RBApy. First It identifies metabolic precursors 
+	that are consumed/produced by the cellular processes to build biomass component. 
+	Second, the file is also used to link these metabolic biobricks to SBML ids of metabolites from the metabolic network. 
+</p>	
+
+In metabolites.tsv, the user declare:
+<ol>
+<li>M1: All metabolic precursors that are consumed/produced by the cellular processes to build proteins, RNAs, DNAs. A minima, RBApy expects to find the metabolic precursors involved in the default processes: Replication, Transcription, Translation, Folding, RNA degradation, which are: all charged/uncharged tRNAs, NMP, NDP, NTP, dNTP, water, protons, mono- and di-phosphate.
+Therefore, RBApy tries to detect common SBML IDs for these precursors, namely:
+<ul>
+<li>M_trnaala_c, M_trnaarg_c, ..., M_trnaval_c for uncharged tRNAs</li>
+<li>M_alatrna_c, M_argtrna_c, ..., M_valtrna_c for charged tRNAs</li>
+<li>M_ATP_c, M_GTP_c, M_CTP_c, M_UTP_c, for ATP, GTP, CTP and UTP respectively</li>
+<li>M_ADP_c, M_GDP_c, M_CDP_c, M_UDP_c, for ADP, GDP, CDP and UDP respectively</li>
+<li>M_AMP_c, M_GMP_c, M_CMP_c, M_UMP_c, for AMP, GMP, CMP and UMP respectively</li>
+<li>M_h2o_c, M_h_c, M_p_c, M_pp_c for water, proton, mono- and di-phosphate respectively</li>
+	</ul></li>
+<li>M2: All ions/cofactors required to have the active form of a protein. The ions and cofactors are automatically extracted from the Uniprot annotation (see <a href="#sec2.3.2.5">section 2.3.2.5</a>) and reported in metabolites.tsv for ID matching.</p>
+ </li>
+<li>M3: All metabolites for which the intracellular concentration is growth-rate independent, and the value of this concentration. The set of growth-rate independent metabolites includes building 
+	blocks for cell wall and membrane synthesis, a few metabolites such as co-enzyme A. Usually these metabolites are present in the biomass reaction of the SBML file. Exclude all metabolites from the set M1 and M2 from the biomass reaction. The remaining ones form the set M3. The targeted concentrations correspond to the stoichiometric coefficients of the biomass reaction.
+</li>
+</ol>
+By default, the file is built using the sets M1, M2 and M3 of the bacterium <i>Bacillus subtilis</i>.
+
+<p>
+The file metabolites.tsv, is organized in 4 columns, entitled ID, NAME, SBML ID and  CONCENTRATION.
+<ul>
+<li>ID: is the absolute identifier of the metabolite, which can be the ChEBI</li>
+<li>NAME: the name of the metabolite</li>
+<li>SBML ID: the SBML ID corresponding to the metabolite, present in the genome-scale metabolic model</li>
+<li>CONCENTRATION: the concentration of growth-rate independent metabolite </li>
+</ul>
+To update the RBA model, re-run the model generation by
+<pre><code>python generate_rba_model.py path/to/params.in</code></pre>
+</p>
+	
+<p>
+Now look at the files
+<ul> 
+	<li><font color="#77B5FE">processes.xml</font>: The lists of of metabolic precursors used in cellular processes are updated </li>
+<li><font color="#77B5FE">targets.xml</font>: The targeted group named "metabolite_production" is updated with the set of metabolite M3, and their targeted concentrations are reported in the file parameters.xml. </li>
+	</ul>
+</p>
+
+<h4 id="sec2.3.2.2">2.3.2.2 Macrocomponents.tsv (optional) </h4>
+<p>
+	The file <b><font color="#77B5FE">macrocomponents.tsv</font></b> describes the metabolic requirements to build macro-components such as the cell wall or the cytoplasmic membrane. Usually, the intracellular concentration of such macro-components is growth-rate independent. The file describes which metabolite is required for macro-component synthesis, and  the value of this concentration. 
+</p>
+<p>
+The file is organized in two columns, TARGET_METABOLITE  and  TARGET_FLUX.
+<ul>
+<li>TARGET_METABOLITE: the SBML ID of the metabolic precursor necessary to build the macro-component</li>
+<li> TARGET_FLUX: the value C of the targeted concentration</li>
+</ul>
+The pipeline will automatically add to each metabolic precursor  a consumption flux equal to µC, where µ is the growth rate.
+</p>
+<p>
+To update the RBA model, re-run the model generation by
+<pre><code>python generate_rba_model.py path/to/params.in</code></pre>
+Remark: This file is optional, because the identification of metabolic precursors and their targeted concentrations can also be defined in metabolites.tsv. However, the user may choose to define these precursors in a separate file, because of the specific role of macro-components in the cell.
+</p>
+
+
+<h4 id="sec2.3.2.3">2.3.2.3 Location_map.tsv </h4>
+<p>
+The file  <b><font color="#77B5FE">location_map.tsv</font></b>  is used to link uniprot location ids with user-defined compartment ids. For every uniprot location, user may fill in a name compartment (e.g. SBML compartment names). 
+The idea behind this file is that it can be used to fuse compartments or ignore them. 
+If the field is left empty (or [MISSING]), a compartment named after uniprot location is created.
+</p>
+
+An example:
+<table>
+<tr><td>UNIPROT NAME</td>    <td>USER ID</td></tr>
+<tr><td>Cell outer membrane</td>    <td>Cell_outer_membrane</td></tr>
+<tr><td>Cell inner membrane</td>    <td>Cell_inner_membrane</td></tr>
+<tr><td>Cytoplasm</td>    <td>Cytoplasm</td></tr>
+<tr><td>Cell membrane</td>   <td>Cell_inner_membrane</td></tr>
+<tr><td>Periplasm</td>    <td>Periplasm</td></tr>
+<tr><td>Membrane</td>    <td>Cell_inner_membrane</td></tr>
+<tr><td>Secreted</td>    <td>Secreted</td></tr>
+</table>
+<p>
+In this example, proteins that have the location "Cell membrane" and "Membrane" have the same location in the RBA model: "Cell_inner_membrane"
+</p>
+<p>
+To update the RBA model, re-run the model generation by
+</p>
+<pre><code> python generate_rba_model.py path/to/params.in</code></pre>
+
+Now look at the file <font color="#77B5FE">metabolism.xml</font> that contains the list of cellular compartments. Compartments are updated as follows:
+<pre><code> &lt;RBAMetabolism>
+  &lt;listOfCompartments>
+    &lt;compartment id="Cell_inner_membrane"/>
+    &lt;compartment id="Cytoplasm"/>
+    &lt;compartment id="Cell_outer_membrane"/>
+    &lt;compartment id="Periplasm"/>
+    &lt;compartment id="Secreted"/>
+  &lt;/listOfCompartments>
+</code></pre>
+
+
+<h4 id="sec2.3.2.4">2.3.2.4 Locations.tsv</h4>
+<p>
+RBApy parses automatically the field SUBCELLULAR LOCATION [CC] of the Uniprot file to determine the location of a protein.
+Proteins for which uniprot has no location data are listed in the file <b><font color="#77B5FE">locations.tsv</font></b> . 
+The file locations.tsv contains 4 columns, named
+<ul>
+<li>ENTRY:  Uniprot ID of protein   </li>
+<li>GENE NAME:  the gene names as in the  Uniprot file</li> 
+<li>PROTEIN NAME:  the protein names as in the  Uniprot file</li>   
+<li>LOCATION: location that has to be updated. Note that locations must correspond to names defined in location_map.tsv (user name if one was defined, else Uniprot name). 
+If fields are left empty or [MISSING], proteins are assumed to be located in Cytoplasm (or user-defined counterpart as defined in location_map.tsv).</li>
+</ul>	
+</p>
+<p>
+Here is the example of the protein P39400 (Uniprot ID) for which the field SUBCELLULAR LOCATION [CC] of the Uniprot file was missing. 
+<table>
+	<tr><td>ENTRY</td><td>GENE NAME</td><td>PROTEIN NAME</td><td>LOCATION</td></tr>
+	<tr><td>P39400</td><td>lgoD yjjN b4358 JW5793</td><td>L-galactonate-5-dehydrogenase (EC 1.1.1.-)</td><td><font color="#77B5FE">Periplasm</font></td></tr>
+</table>
+In this example, the protein P39400 will be assigned to the compartment "Periplasm".
+</p>
+<p>
+To update the RBA model, re-run the model generation by
+<pre><code> python generate_rba_model.py path/to/params.in</code></pre>
+</p>
+<p>
+	Now look at the file <font color="#77B5FE">proteins.xml</font> that contains the localisation and composition in amino-acids and cofactors of proteins. 
+	The attribute "compartment" is updated with the new localisation of the protein.
+<pre><code> &lt;macromolecule id="b4358" compartment="<font color="#77B5FE">Periplasm</font>">
+  &lt;composition>
+        &lt;componentReference component="A" stoichiometry="39"/>
+        &lt;componentReference component="C" stoichiometry="8"/>
+        &lt;componentReference component="E" stoichiometry="20"/>
+        &lt;componentReference component="D" stoichiometry="16"/>
+        &lt;componentReference component="G" stoichiometry="32"/>
+        &lt;componentReference component="F" stoichiometry="13"/>
+        &lt;componentReference component="I" stoichiometry="26"/>
+        &lt;componentReference component="H" stoichiometry="9"/>
+        &lt;componentReference component="K" stoichiometry="16"/>
+        &lt;componentReference component="M" stoichiometry="8"/>
+        &lt;componentReference component="L" stoichiometry="24"/>
+        &lt;componentReference component="N" stoichiometry="14"/>
+        &lt;componentReference component="Q" stoichiometry="17"/>
+        &lt;componentReference component="P" stoichiometry="19"/>
+        &lt;componentReference component="S" stoichiometry="13"/>
+        &lt;componentReference component="R" stoichiometry="15"/>
+        &lt;componentReference component="T" stoichiometry="16"/>
+        &lt;componentReference component="W" stoichiometry="2"/>
+        &lt;componentReference component="V" stoichiometry="28"/>
+        &lt;componentReference component="Y" stoichiometry="5"/>
+        &lt;componentReference component="CHEBI:29105" stoichiometry="2"/>
+  &lt;/composition>
+&lt;/macromolecule></code></pre>
+	</p>
+        
+<h4 id="sec2.3.2.5">2.3.2.5 Cofactors.tsv</h4>
+<p>
+RBApy parses automatically the field COFACTOR of the Uniprot file to determine the cofactors of a protein. 
+	However, the field COFACTOR is often written in natural language, which can lead to difficulties during the parsing.
+Therefore, for every protein having ambiguities, the file <b><font color="#77B5FE">cofactors.tsv</font></b> lists name, chebi identifier and stoichiometry of cofactors per protein. If one protein has several cofactors, several lines corresponding to the protein are present in cofactors.tsv. Based on the last column (containing uniprot cofactor annotation), user should check inferred values and fill in fields tagged as [MISSING]. Important: if annotation says that there is no cofactor, do not remove line from csv file. Ignore name and chebi fields and set stoichiometry to 0.
+<p>
+The file cofactors.tsv contains 5 columns:
+<ul>
+<li>ENTRY:   Uniprot ID of the protein </li>
+<li>CHEBI: ChEBI ID of the cofactor </li>    
+<li>NAME: Name of the cofactor </li>
+<li>STOICHIOMETRY : stoichiometry of the cofactor for 1 protein </li>
+<li>UNIPROT ANNOTATION: copy of the field COFACTOR of the Uniprot file</li> 
+</ul>
+</p>
+<p>
+Here is the example of the protein P0ACC7 (Uniprot ID) for which the field COFACTOR cannot be automatically parsed. The following entries are
+ automatically inserted in the file cofactor.tsv. The user must indicate which cofactor the protein will use:
+<table>
+	<tr><td>ENTRY</td><td>CHEBI</td><td>NAME</td><td>STOICHIOMETRY</td><td>UNIPROT ANNOTATION</td></tr>
+	<tr><td>P0ACC7</td><td>CHEBI:18420</td><td>Mg(2+)</td><td><font color="#77B5FE">1</font></td><td>Binds 1 Mg(2+) ion per subunit (PubMed:17473010). Can also use Co(2+) ion to a lesser extent (PubMed:11329257). {ECO:0000269|PubMed:11329257, ECO:0000269|PubMed:17473010};</td></tr>
+	<tr><td>P0ACC7</td><td>CHEBI:48828</td><td>Co(2+)</td><td><font color="#77B5FE">0</font></td><td>Binds 1 Mg(2+) ion per subunit (PubMed:17473010). Can also use Co(2+) ion to a lesser extent (PubMed:11329257). {ECO:0000269|PubMed:11329257, ECO:0000269|PubMed:17473010};</td></tr>
+</table>	
+Two cofactors (Mg(2+) and Co(2+)) were detected during the parsing of cofactors. In the example, only Mg(2+) will be used per monomer of P0ACC7.
+</p>  
+<p>
+To update the RBA model, re-run the generation by
+<pre><code>python generate_rba_model.py path/to/params.in</code></pre>
+</p>
+
+<p>
+	Now look at the file <font color="#77B5FE">proteins.xml</font> that contains the localisation and composition in amino-acids and cofactors of proteins. 
+	The cofactor and its stoichiometry are added (In the example, the protein entry "P0ACC7" corresponds to the gene name "b3730"):
+<pre><code>&lt;macromolecule id="b3730" compartment="Cytoplasm">
+  &lt;composition>
+        &lt;componentReference component="A" stoichiometry="45"/>
+        &lt;componentReference component="C" stoichiometry="4"/>
+        &lt;componentReference component="E" stoichiometry="26"/>
+        &lt;componentReference component="D" stoichiometry="29"/>
+        &lt;componentReference component="G" stoichiometry="49"/>
+        &lt;componentReference component="F" stoichiometry="7"/>
+        &lt;componentReference component="I" stoichiometry="30"/>
+        &lt;componentReference component="H" stoichiometry="12"/>
+        &lt;componentReference component="K" stoichiometry="25"/>
+        &lt;componentReference component="M" stoichiometry="9"/>
+        &lt;componentReference component="L" stoichiometry="45"/>
+        <font color="#77B5FE">&lt;componentReference component="CHEBI:18420" stoichiometry="1.0"/></font>
+        &lt;componentReference component="N" stoichiometry="24"/>
+        &lt;componentReference component="Q" stoichiometry="20"/>
+        &lt;componentReference component="P" stoichiometry="13"/>
+        &lt;componentReference component="S" stoichiometry="11"/>
+        &lt;componentReference component="R" stoichiometry="24"/>
+        &lt;componentReference component="T" stoichiometry="30"/>
+        &lt;componentReference component="W" stoichiometry="3"/>
+        &lt;componentReference component="V" stoichiometry="39"/>
+        &lt;componentReference component="Y" stoichiometry="11"/>
+  &lt;/composition>
+&lt;/macromolecule></code></pre>
+</p>
+
+
+<h4 id="sec2.3.2.6">2.3.2.6 Subunits.tsv </h4>
+<p>
+RBApy parses automatically the field SUBUNIT STRUCTURE [CC] of the Uniprot file to determine the stoichiometry of a protein within its enzymatic complex. 
+For every ambiguous and empty entry, gene name and protein name are provided for proper identification in the file <b><font color="#77B5FE">subunits.tsv</font></b>. 
+	By default, the stoichiometry of the protein is set to 1. User should read annotation field (or any other sources of information) and update the stoichiometry if necessary. 
+</p>
+<p>
+Subunits.tsv contains 5 columns, named 
+<ul>
+<li>ENTRY: Uniprot ID of protein</li>
+<li>STOICHIOMETRY: the stoichiometry of the protein within its enzymatic complex (the default value is 1)</li>
+<li>GENE NAMES: the gene names as in the  Uniprot file</li>
+<li>PROTEIN NAME:  the protein names as in the  Uniprot file</li>
+<li>UNIPROT NOTE: the field SUBUNIT STRUCTURE [CC] of the Uniprot file. If the field SUBUNIT STRUCTURE [CC] is empty, then [MISSING] is indicated here.</li>
+</ul>
+</p>
+<p>
+Here is the example of the protein P68699 (Uniprot ID) for which the field SUBUNIT STRUCTURE [CC] of the Uniprot file cannot be parsed automatically. 
+	The protein P68699 is the ATP synthase subunit c, which is present in 10 copies per complex.
+The user must indicate the stoichiometry of P68699 (the default value is 1):
+<table>
+	<tr><td>ENTRY</td><td>STOICHIOMETRY</td><td>GENE NAMES</td><td>PROTEIN NAMES</td><td>UNIPROT NOTE</td></tr>
+	<tr><td>P68699</td><td><font color="#77B5FE">10</font></td><td>atpE papH uncE b3737 JW3715</td><td>ATP synthase subunit c (ATP synthase F(0) sector subunit c) (Dicyclohexylcarbodiimide-binding protein) (F-type ATPase subunit c) (F-ATPase subunit c) (Lipid-binding protein)</td><td>SUBUNIT: F-type ATPases have 2 components, F(1) - the catalytic core - and F(0) - the membrane proton channel. F(1) has five subunits: alpha(3), beta(3), gamma(1), delta(1), epsilon(1). F(0) has three main subunits: a(1), b(2) and c(10). The alpha and beta chains form an alternating ring which encloses part of the gamma chain. F(1) is attached to F(0) by a central stalk formed by the gamma and epsilon chains, while a peripheral stalk is formed by the delta and b chains. {ECO:0000269|PubMed:11320246}.
+</td></tr>
+</table>	
+</p>
+ <p>
+To update the RBA model, re-run the model generation by
+<pre><code>python generate_rba_model.py path/to/params.in</code></pre>
+</p>
+<p>
+Now look at the file <font color="#77B5FE">enzymes.xml</font> that contains the composition of enzymatic complexes. 
+	The stoichiometry of the ATP synthase complex (identifier "R_ATPS4rpp_enzyme") is updated:
+<pre><code>&lt;enzyme id="R_ATPS4rpp_enzyme" reaction="R_ATPS4rpp" forward_efficiency="R_ATPS4rpp_efficiency" backward_efficiency="default_transporter_efficiency" zeroCost="false">
+      &lt;machineryComposition>
+        &lt;listOfReactants>
+          &lt;speciesReference species="b3734" stoichiometry="3.0"/>
+          &lt;speciesReference species="b3732" stoichiometry="3.0"/>
+          &lt;speciesReference species="b3731" stoichiometry="1.0"/>
+          &lt;speciesReference species="b3733" stoichiometry="1.0"/>
+          &lt;speciesReference species="b3735" stoichiometry="1.0"/>
+          <font color="#77B5FE">&lt;speciesReference species="b3737" stoichiometry="10.0"/></font>
+          &lt;speciesReference species="b3736" stoichiometry="2.0"/>
+          &lt;speciesReference species="b3738" stoichiometry="1.0"/>
+          &lt;speciesReference species="b3739" stoichiometry="0.1"/>
+        &lt;/listOfReactants>
+      &lt;/machineryComposition>
+    &lt;/enzyme></code></pre>	
+</p>
+
+<h4 id="sec2.3.2.7">2.3.2.7 Unknown_proteins.tsv</h4>
+<p>
+The file <b><font color="#77B5FE">unknown_proteins.tsv</font></b> contains the gene names for which the automatic matching 
+between the SBML IDs and either the user-defined protein IDs in the fasta files, either the Uniprot gene name failed.
+By default, RBApy associates a default cytoplasmic protein of mean composition, named "average_protein_Cytoplasm".
+However, the user can choose to associate another average protein, or another gene name, as soon as the gene name ID 
+is present in the Uniprot file. 
+</p>
+<p> The file unknown_proteins.tsv contains two columns:
+<ul>
+	<li>SBML ID: the gene name ID of the SBML file that could not be matched</li>
+	<li>UNIPROT GENE: the Uniprot gene name that will be associated to the SBML gene name. By default, the value is assigned to "average_protein_Cytoplasm". </li>
+</ul>
+</p>
+<p>
+To update the RBA model, re-run the model generation by
+<pre><code>python generate_rba_model.py path/to/params.in</code></pre>
+</p>
+
+<h2 id="sec3">3. Calibrating a RBA model</h2>
+<h3 id="sec3.1">3.1 Data requirement and format</h3>
+<h3 id="sec3.2">3.2 Estimating parameters</h3>
+<h3 id="sec3.3">3.3 Updating the parameter file</h3>
+
+<h2 id="sec4">4. Details on the SBML requirements</h2>
+<p>
+Normally, RBApy should be compatible with any SBML models (SBML level 2 and 3) that have been generated using the protocol of Thiele & Palsson.
+"A protocol for generating a high-quality genome-scale metabolic reconstruction." Nature protocols 5.1 (2010): 93.". However, in practice, ambiguous information may be present, 
+which can disturb or slow down the process of RBA model building. 
+</p>
+<h3 id="sec4.1">4.1 Gene-association requirements</h3>
+<p>
+In RBA, one reaction is always catalyzed by an unique enzymatic complex. Therefore, isoenzymes, i.e. reactions that are 
+catalyzed by several distinct enzymatic complexes, are duplicated. 
+For instance, if one reaction R is catalyzed by two different enzymes, E1 and E2, then we introduce two reactions R1 and R2, 
+catalyzed respectively by E1 and E2. The two enzymes have their own apparent catalytic rates kapp1 and kapp2.
+</p>
+<p>
+During the parsing of the SBML file, RBApy parses the boolean rule of gene(s) associated to the reaction and duplicates 
+	the reaction automatically if necessary. RBApy can parse gene-association reactions that are annotated either in the field “note”, either using the fbc plugin with SBML 
+level 3. However, sometimes, the boolean rule can be very complex, and thus difficult to parse. 
+	Therefore, <font color="#77B5FE">RBApy assumes that the boolean relation is always “or”s of “and”s</font>. Moreover, the words  “or” and “and” must be written in lowercase letters.
+</p>
+<p>
+<font color="#77B5FE">Empty fields</font> in Gene-association will be interpreted as a <font color="#77B5FE">Ediffusion reaction</font>, meaning that no enzyme will be associated to the reaction.
+In contrast, <font color="#77B5FE">any other character string will automatically be considered as a gene name. </font> RBApy will try to match the gene name with a Uniprot entry. If the matching fails, then a default protein of 
+	average composition is created. The unknown gene name will be inserted in the file unknown_protein.tsv for manual curation (see <a href="#sec2.3.2.7">section 2.3.2.7</a>).
+Therefore, a reaction without a gene association may be catalyzed by an enzyme, then the user should insert any character strings such as “-” or “unknown”.
+</p>
+<h3 id="sec4.2">4.2 External compartments</h3>
+<p>
+Explain how external compartments are automatically detected and what they are used for (michaelis-menten function, medium metabolites).
+</p>
+
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "600px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+openNav()
+</script>
+
+	</body>
+</html>

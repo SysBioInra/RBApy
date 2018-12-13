@@ -1,0 +1,72 @@
+---
+layout: subpage
+---
+
+<!DOCTYPE html>
+<html>
+<body>
+
+	<h1>Installation</h1>
+
+	<p>
+		<b>RBApy</b> can be installed with Python 2.7 and Python 3.5 (or any later version compatible with the cplex package).
+	</p>
+
+	<h2>1. Install CPLEX</h2>
+	<p>
+		IBM&reg; CPLEX is an optimization software package. <b>RBApy</b> uses this package for the construction and checking of feasibility of the Linear Programming (LP) problem. To download and install CPLEX, you need to have an academic email address.
+
+		<ul>
+		  <li>create account on the <a href="https://ibm.onthehub.com/">IBM website</a></li>
+		  <li>request faculty eligibility with your institutional email address: go to your account > eligibility tab. Follow instructions.</li>
+		  <li>look for latest IBM ILOG CPLEX faculty version, complete survey and download</li>
+		</ul> 
+
+		After you have successfuly downloaded the package you need to install it and setup the Python API. On UNIX systems, navigate to executable and run following commands (make sure to adapt the executable name if necessary):
+	</p>
+
+	<pre><code>bash
+chmod u+x cplex_studio12.7.1.osx.bin 
+./cplex_studio12.7.1.osx.bin </code></pre>
+
+	<p>
+		Make sure to remember CPLEX’s installation path, as we need to navigate to it to setup the python API. Go to the directory where CPLEX is installed, then go the sub-directory named python. A file named “setup.py” should be present. Then setup the python API by typing  <code>python setup.py install</code> in the terminal. Here is an example with a default Mac installation, cplex 12.7 and python3.5:
+	</p>
+
+		<pre><code>bash
+cd /Users/my_username/Applications/IBM/ILOG/CPLEX_Studio1271/cplex/python/3.5/x86-64_osx
+python setup.py install
+# alternative: install to custom location
+python setup.py install --home yourPythonPackageshome/cplex</code></pre>
+
+	<p>You can check that CPLEX was correctly installed by running:</p>
+
+	<pre><code>python
+import cplex</code></pre>
+
+
+
+	<h2>2. Install <b>RBApy</b> package</h2>
+	<p>
+		Download the RBApy package directly from out <a href="https://github.com/SysBioInra/RBApy">github page</a> or clone the repository by running:
+	</p>
+	<pre><code>bash
+git clone https://github.com/abulovic/RBA-pipeline path/to/rbapy/package</code></pre>
+
+	<p>
+		Navigate to the directory containing RBApy and install it:
+	</p>
+
+	<pre><code>bash
+cd path/to/rbapy/package
+python setup.py install</code></pre>
+
+	<p>
+		This step may take some time, as it will install missing dependencies. After this step is finished, you can check that RBApy was correctly installed by running:
+	</p>
+	<pre><code>python
+import rba</code></pre>
+
+	<!-- Troubleshooting - TODO -->
+</body>
+</html>
