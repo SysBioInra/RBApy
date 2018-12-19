@@ -4,7 +4,9 @@ import pandas as pd
 from numpy.linalg import lstsq
 from scipy.stats import linregress, pearsonr
 from scipy.stats.mstats import gmean
+import libsbml
 
+import cplex
 from cvxopt import solvers, matrix
 
 R = 6.022140857e23
@@ -123,9 +125,7 @@ def compute_linear_fits(exp_df, data_df, normalize=False, sums_to_one=False):
         else:
             vals = data_df.loc[comp]
         slope, intercept, rval, pval, stderr = linregress(list(growth_rates), list(vals))
-        if comp == 'secreted':
-            comp2linfit[comp] = False
-        elif pval < 0.05:
+        if pval < 0.05:
             comp2linfit[comp] = True
         else:
             comp2linfit[comp] = False
@@ -230,6 +230,71 @@ def is_enz_cytosolic(enz_id, rba_model):
         return True
     else:
         return False
+
+def create_fba_problem(sbml_file, biomass_reaction):
+    # load model
+    document = libsbml.readSBML(sbml_file)
+    sbml_model = document.getModel()
+    if sbml_model is None:
+        raise Exception('Unable to load model from provided file path.')
+    # load species and reactions
+    reactions = {r[1].getId(): r[0] for r in enumerate(sbml_model.getListOfReactions())}
+    if biomass_reaction not in reactions:
+        raise Exception('Provided biomass reaction {} not in model {}.'.format(
+            biomass_reaction,
+            sbml_model.getName()
+        ))
+    species = {s[1].getId(): s[0] for s in enumerate(sbml_model.getListOfSpecies())}
+    reaction_ids = sorted(reactions, key=reactions.get, reverse=False)
+    species_ids = sorted(species, key=species.get, reverse=False)
+    N_reac = len(reactions)
+    N_spec = len(species)
+    # create necessary matrices and vectors:
+    # - stoichiometric matrix S
+    # - upper / lower bound vectors: UB / LB
+    # - right hand side vector: RHS
+    # - objective function vector
+    UB = np.zeros((N_reac,))
+    LB = np.zeros((N_reac,))
+    RHS = np.zeros((N_spec,))
+    obj_fun_vec = np.zeros((N_reac,))
+    obj_fun_vec[reactions[biomass_reaction]] = 1
+    rows = defaultdict(list)
+    values = defaultdict(list)
+
+    for r_idx, reaction in enumerate(sbml_model.getListOfReactions()):
+        plugin = reaction.getPlugin('fbc')
+        if plugin is None:
+            raise Exception('No fbc plugin defined for reaction {}. No way \
+                to determine reaction bounds.'.format(reaction.getName()))
+        reactants = {r.getSpecies(): r.getStoichiometry() for r in reaction.getListOfReactants()}
+        products = {p.getSpecies(): p.getStoichiometry() for p in reaction.getListOfProducts()}
+        reaction_species = list(set(reactants.keys() + products.keys()))
+        stoichiometries = []
+        for s in reaction_species:
+            stoich = products.get(s, 0) - reactants.get(s, 0)
+            stoichiometries.append(stoich)
+        for sp, stoich in zip(reaction_species,stoichiometries):
+            sp_idx = species[sp]
+            rows[sp_idx].append(r_idx)
+            values[sp_idx].append(stoich)
+
+        UB[r_idx] = sbml_model.getParameter(plugin.getUpperFluxBound()).getValue()
+        LB[r_idx] = sbml_model.getParameter(plugin.getLowerFluxBound()).getValue()
+    # create CPLEX objects
+    lp_problem = cplex.Cplex()
+    cplex_rows = []
+    for sp_idx in sorted(species.values()):
+        cplex_rows.append(cplex.SparsePair(rows[sp_idx], values[sp_idx]))
+
+    lp_problem.objective.set_sense(lp_problem.objective.sense.maximize)
+    lp_problem.variables.add(names=reaction_ids, obj=obj_fun_vec,
+                             ub=UB, lb=LB)
+    lp_problem.linear_constraints.add(names=species_ids, rhs=RHS,
+                                      senses=['E'] * len(species),
+                                      lin_expr=cplex_rows)
+    lp_problem.set_results_stream(None)
+    return lp_problem
 
 class Enzymes(MutableMapping):
     """A dictionary that applies an arbitrary key-altering
