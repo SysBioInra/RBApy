@@ -6,6 +6,8 @@ import itertools
 import numpy
 import scipy.io
 import os.path
+import collections
+import json
 
 
 class Results(object):
@@ -127,6 +129,52 @@ class Results(object):
             for process, conc in \
                     self.process_machinery_concentrations().items():
                 f.write('{}\t{}\n'.format(process, conc))
+
+
+    def write_fluxes(self, output_file, file_type='json', merge_isozyme_reactions=True,
+                     only_nonzero=True, remove_prefix=False):
+        '''
+        Writes the simulation-generated fluxes to a file.
+
+        Parameters
+        ----------
+        output_file : string
+            Path to the output file
+        file_type: string
+            Either json or csv. In case of csv, values are separated
+            by semicolon.
+        merge_isozyme_reactions: bool
+            If true, fluxes through reactions catalzyed by isoenzymes
+            will be added together to a single flux
+        only_nonzero: bool
+            If true, only non-zero fluxes will be exported
+        remove_prefix: bool
+            If true, removes the beginning prefix "R_" from the
+            reaction's name
+        '''
+        if file_type not in ('json', 'csv'):
+            raise ValueError('file_type can be either json on csv')
+        rf = self.reaction_fluxes()
+        if remove_prefix:
+            rf = {k[2:]: v for k, v in rf.items()}
+        if only_nonzero:
+            rf = {k: v for k, v in rf.items() if v != 0.}
+        if merge_isozyme_reactions:
+            rf_merged = collections.defaultdict(float)
+            for reac_id, flux_val in rf.items():
+                if reac_id[-1].isdigit() and reac_id[-2] == '_':
+                    rf_merged[reac_id[:-2]] += flux_val
+                else:
+                    rf_merged[reac_id] += flux_val
+            rf = rf_merged
+        if file_type == 'json':
+            with open(output_file, 'w') as fout:
+                fout.write(json.dumps(rf, indent=4))
+        elif file_type == 'csv':
+            with open(output_file, 'w') as fout:
+                fout.write('\n'.join(['{};{}'.format(k, v) for k, v in rf.items()]))
+
+
 
     def export_matlab(self, output_dir):
         data = {
