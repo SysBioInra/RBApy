@@ -174,6 +174,33 @@ class Results(object):
             with open(output_file, 'w') as fout:
                 fout.write('\n'.join(['{};{}'.format(k, v) for k, v in rf.items()]))
 
+    def write_proteins(self, output_file, file_type='csv'):
+        '''
+        Write simulated protein concentrations to a file.
+        output_file: string
+            Path to the output file
+        file_type: str
+            File type, can be csv of json
+        '''
+        prot_conc = collections.defaultdict(float)
+        for enz_id, enz_conc in self.enzyme_concentrations().items():
+            if enz_conc == 0:
+                continue
+            enz = self._model.enzymes.enzymes.get_by_id(enz_id)
+            for sp in enz.machinery_composition.reactants:
+                prot_conc[sp.species] += sp.stoichiometry * enz_conc
+        for mach_id, mach_conc in self.process_machinery_concentrations().items():
+            if mach_conc == 0:
+                continue
+            mach = self._model.processes.processes.get_by_id(mach_id)
+            for sp in mach.machinery.machinery_composition.reactants:
+                prot_conc[sp.species] += sp.stoichiometry * enz_conc
+        if file_type == 'csv':
+            with open(output_file, 'w') as fout:
+                fout.write('\n'.join(['{}\t{}'.format(k, v) for k, v in prot_conc.items()]))
+        elif file_type == 'json':
+            with open(output_file, 'w') as fout:
+                fout.write(json.dumps(prot_conc, indent=4))
 
 
     def export_matlab(self, output_dir):
