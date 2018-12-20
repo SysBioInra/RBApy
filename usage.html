@@ -663,6 +663,12 @@ Apart from reactions and enzymes, RBApy estimates concentrations of cell process
 <h3 id="sec5.2">Isoenzymes</h3>
 <p>As described in section <a href="usage.html#sec4.1">4.1</a>, more than one protein complex can be assigned to an enzymatic function. In such cases, RBA will create as many reactions as there are protein complexes associated with it, and each flux and protein complex will be a variable in the optimization procedure. For example, if in the metabolism file we find a reaction with an ID <b>Reac1</b> which is catalyzed by three different protein complexes, RBA will create three flux variables with IDs <b>Reac1</b>, <b>Reac1_2</b> and <b>Reac1_3</b> and three enzyme variables, each one associated to a specific protein complex, with IDs <b>Reac1_enzyme</b>, <b>Reac1_2_enzyme</b> and <b>Reac1_3_enzyme</b>.
 
+
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+
+
 <script>
 function openNav() {
   document.getElementById("mySidenav").style.width = "470px";
@@ -671,7 +677,23 @@ function openNav() {
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("myBtn").style.display = "block";
+  } else {
+    document.getElementById("myBtn").style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+
 openNav()
+window.onscroll = function() {scrollFunction()};
 </script>
 
 	</body>
