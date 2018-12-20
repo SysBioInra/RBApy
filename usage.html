@@ -653,14 +653,14 @@ Therefore, a reaction without a gene association may be catalyzed by an enzyme, 
 
 <h2 id="sec5">5. Miscellaneous </h2>
 
-<h3 id="sec5.1">Decision variable IDs within RBApy</h3>
+<h3 id="sec5.1">5.1 Decision variable IDs within RBApy</h3>
 <p>
 In genome scale metabolic reconstructions, it is customary to give "R_" prefixes to reaction IDs, and "M_" prefixes to metabolites. Cobrapy toolbox removes these prefixes, and they are also absent, for example, from the Escher maps flux visualization tool. RBApy retains these prefixes. Because of that, in some result export functions, it is possible to remove this prefix to make the data compatible with visualization tools. 
 Apart from flux variables, RBApy also estimates enzyme abundances. Assuming that the reaction ID is <b>R_reaction</b>, a corresponding enzyme ID will be <b>R_reaction_enzyme</b>. 
 Apart from reactions and enzymes, RBApy estimates concentrations of cell process macromolecular machines, such as ribosomes, chaperones, etc. These processes are defined in the processes.xml file, and their IDs are usually preceeded by "P_" prefix. 
 </p>
 
-<h3 id="sec5.2">Isoenzymes</h3>
+<h3 id="sec5.2">5.2 Isoenzymes</h3>
 <p>As described in section <a href="usage.html#sec4.1">4.1</a>, more than one protein complex can be assigned to an enzymatic function. In such cases, RBA will create as many reactions as there are protein complexes associated with it, and each flux and protein complex will be a variable in the optimization procedure. For example, if in the metabolism file we find a reaction with an ID <b>Reac1</b> which is catalyzed by three different protein complexes, RBA will create three flux variables with IDs <b>Reac1</b>, <b>Reac1_2</b> and <b>Reac1_3</b> and three enzyme variables, each one associated to a specific protein complex, with IDs <b>Reac1_enzyme</b>, <b>Reac1_2_enzyme</b> and <b>Reac1_3_enzyme</b>.
 
 
