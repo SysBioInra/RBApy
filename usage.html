@@ -49,6 +49,11 @@ layout: subpage
       <li><a href="usage.html#sec4.1">Gene-association requirements</a></li>
       <li><a href="usage.html#sec4.2">External compartments</a></li>
     </ol>
+    <li><a href="usage.html#sec5">Miscellaneous</a></li>
+    <ol>
+      <li><a href="usage.html#sec5.1">Decision variable IDs within RBApy</a></li>
+      <li><a href="usage.html#sec5.2">Isoenzymes</a></li>
+    </ol>
   </ol>
 </div>
 
@@ -76,6 +81,16 @@ where the path points to the directory containing the XML files defining the RBA
 
 
 <h3 id="sec1.2">1.2 How to visualize results of RBApy simulations?</h3>
+Results of RBApy simulations can be exported in formats supported for visualization of genome-scale flux data with <a href="https://escher.github.io/">Escher maps</a> and protein data with <a href="https://proteomaps.net/">Proteomaps</a>.
+To export flux data in a format compatible with Escher maps (JSON), a line can be added to you simulation script
+<pre><code>  results.write_flux('path_to_file',
+                                file_type='json',
+                                merge_isozyme_reactions=True,
+                                only_nonzero=True,
+                                remove_prefix=True)
+</code></pre>
+The generated file can then be uploaded to Escher maps via their menu <b> Data -> Load reaction data</b>.
+Supported file types are json and csv. If <b>merge_isozyme_reactions</b> option is set to True, all the reactions which are catalyzed by the same enzymatic function, but of different protein composition are summed up under the original reaction ID (check <a href="usage.html#sec5.2">section 5.2</a>). If the reactions IDs are preceeded by an "R_" prefix, but the visualization tool expects it to be absent, it can be removed by setting the option <b>remove_prefix</b> to True.
 
 <h3 id="sec1.3">1.3 How to change the medium?</h3>
 
@@ -636,6 +651,17 @@ Therefore, a reaction without a gene association may be catalyzed by an enzyme, 
 	the higher the concentration, the higher the import efficiency.
 </p>
 
+<h2 id="sec5">5. Miscellaneous </h2>
+
+<h3 id="sec5.1">Decision variable IDs within RBApy</h3>
+<p>
+In genome scale metabolic reconstructions, it is customary to give "R_" prefixes to reaction IDs, and "M_" prefixes to metabolites. Cobrapy toolbox removes these prefixes, and they are also absent, for example, from the Escher maps flux visualization tool. RBApy retains these prefixes. Because of that, in some result export functions, it is possible to remove this prefix to make the data compatible with visualization tools. 
+Apart from flux variables, RBApy also estimates enzyme abundances. Assuming that the reaction ID is <b>R_reaction</b>, a corresponding enzyme ID will be <b>R_reaction_enzyme</b>. 
+Apart from reactions and enzymes, RBApy estimates concentrations of cell process macromolecular machines, such as ribosomes, chaperones, etc. These processes are defined in the processes.xml file, and their IDs are usually preceeded by "P_" prefix. 
+</p>
+
+<h3 id="sec5.2">Isoenzymes</h3>
+<p>As described in section <a href="usage.html#sec4.1">4.1</a>, more than one protein complex can be assigned to an enzymatic function. In such cases, RBA will create as many reactions as there are protein complexes associated with it, and each flux and protein complex will be a variable in the optimization procedure. For example, if in the metabolism file we find a reaction with an ID <b>Reac1</b> which is catalyzed by three different protein complexes, RBA will create three flux variables with IDs <b>Reac1</b>, <b>Reac1_2</b> and <b>Reac1_3</b> and three enzyme variables, each one associated to a specific protein complex, with IDs <b>Reac1_enzyme</b>, <b>Reac1_2_enzyme</b> and <b>Reac1_3_enzyme</b>.
 
 <script>
 function openNav() {
