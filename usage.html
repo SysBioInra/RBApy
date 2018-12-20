@@ -83,11 +83,11 @@ where the path points to the directory containing the XML files defining the RBA
 <h3 id="sec1.2">1.2 How to visualize results of RBApy simulations?</h3>
 Results of RBApy simulations can be exported in formats supported for visualization of genome-scale flux data with <a href="https://escher.github.io/">Escher maps</a> and protein data with <a href="https://proteomaps.net/">Proteomaps</a>.
 To export flux data in a format compatible with Escher maps (JSON), a line can be added to you simulation script
-<pre><code>  results.write_flux('path_to_file',
-                                file_type='json',
-                                merge_isozyme_reactions=True,
-                                only_nonzero=True,
-                                remove_prefix=True)
+<pre><code>results.write_flux('path_to_file',
+                              file_type='json',
+                              merge_isozyme_reactions=True,
+                              only_nonzero=True,
+                              remove_prefix=True)
 </code></pre>
 The generated file can then be uploaded to Escher maps via their menu <b> Data -> Load reaction data</b>.
 Supported file types are json and csv. If <b>merge_isozyme_reactions</b> option is set to True, all the reactions which are catalyzed by the same enzymatic function, but of different protein composition are summed up under the original reaction ID (check <a href="usage.html#sec5.2">section 5.2</a>). If the reactions IDs are preceeded by an "R_" prefix, but the visualization tool expects it to be absent, it can be removed by setting the option <b>remove_prefix</b> to True.
