@@ -626,7 +626,11 @@ To update the RBA model, re-run the model generation by
 <pre><code>python generate_rba_model.py path/to/params.in</code></pre>
 </p>
 
-<h2 id="sec3">3. Calibrating a RBA model</h2>
+<h2 id="sec3">3. Calibrating an RBA model</h2>
+  <p>
+    An existing RBA model can be calibrated using the <b>RBApy.estim</b> package, which containts a number of scripts. <pre><code>prot_per_compartment.py</code></pre> is a script allowing one to estimate the percentage of protein allocated to each compartment of the organism. <pre><code>nonenz_per_compartment.py</code></pre> uses the functional annotations of proteins, such as COG, to estimate the portion of protein in each compartment which is non-enzymatic. Nonenzymatic proteins can be considered those that do not perform a function within the model (they are not assigned either to metabolic enzymes or to other molecular machines). <pre><code>kapp.py</code></pre> allows for the estimation of apparent catalytic rates of enzymes from fluxomics and proteomics experiments performed in sufficiently similar conditions. 
+  </p>
+
 <h3 id="sec3.1">3.1 Data requirement and format</h3>
 <h3 id="sec3.2">3.2 Estimating parameters</h3>
 <h3 id="sec3.3">3.3 Updating the parameter file</h3>
