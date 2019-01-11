@@ -673,7 +673,7 @@ For the case of csv file, only character delimiters are allowed (such as :, ;, e
     If we imagine a case in which the portion of the protein for compartment "Cytosol" is described as <code>0.7 - 0.1 &mu;</code>, and the minimum and maximum growth rate available for experimental data were 0.2 and 2 [1/h], this information should be inputted into the <code>parameters.xml</code> file of RBA in the following way:
   </p>
 
-<pre lang="xml"><function id="fraction_protein_Cytosol" type="linear" variable="growth_rate">
+<xml><function id="fraction_protein_Cytosol" type="linear" variable="growth_rate">
   <listOfParameters>
     <parameter id="Y_MIN" value="-inf"/>
     <parameter id="LINEAR_CONSTANT" value="0.7"/>
@@ -682,7 +682,7 @@ For the case of csv file, only character delimiters are allowed (such as :, ;, e
     <parameter id="X_MIN" value="0.2"/>
     <parameter id="X_MAX" value="2"/>
   </listOfParameters>
-</function></pre>
+</function></xml>
 
 <h2 id="sec4">4. Details on the SBML requirements</h2>
 <p>
