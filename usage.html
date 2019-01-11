@@ -662,14 +662,27 @@ For the case of csv file, only character delimiters are allowed (such as :, ;, e
     The configuration script has five fields:
     <ol>
       <li><code>[Experiment]</code>: a csv/excel file which lists the IDs of experiments in one column, and associated growth rates in the other.
-      The expriment IDs need to match ones in the proteomics files. The experiment IDs are expected to be in the first column, and you need to provide the name of the column containing growth rates in the configuration file, under the name <code>growth_rate_column</code></li>.
+      The expriment IDs need to match ones in the proteomics files. The experiment IDs are expected to be in the first column, and you need to provide the name of the column containing growth rates in the configuration file, under the name <code>growth_rate_column</code>.</li>
       <li><code>[ProteinData]</code>: a csv/excel file containing measured protein abundances. All experiments are expected to be in the same file (in case of csv) or on the same sheet (in the case of an excel file). If the location data is present in the same sheet, you can additionally provide the parameter <code>location column</code>. If not, you can separately fill out the configuration for the subcellular location information.</li>
       <li><code>[LocationData]</code>: a csv/excel file containing protein IDs in the first column and subcellular locations in one of the other columns. User needs to provide the column name in <code>location_column</code> parameter.</li>
       <li><code>[CompartmentMap]</code>: a csv/excel file you can use to map multiple compartments onto one. For example, in <i>E. coli</i>, there are comartments called "Outer membrane" and "Cell outer membrane", which can logically be mapped onto one single compartment. This file is for such a purpose. First column should contain the original compartments, and one other column needs to contain the new compartments. The name of this column needs to be supplied in the <code>cm_column</code> parameter.</li>
       <li><code>[Output]</code>: the results of the fitting with be outputted to this file. It requires you to give path to a file, a file type and file type - specific parameters.</li>
     </ol>
+
+    Running the script for the estimation of protein percentage per compartment will generate a file in which, for each compartment, there will be a slope and intercept listed. These are the results of fitting the data onto a linear function of the growth rate. If no slope is indicated, this means that the data could be described better by a constant. The fitting procedure ensures that the sum of protein fractions per compartment always sums to one and that in the range of provided growth rates no fraction is bellow zero.
+    If we imagine a case in which the portion of the protein for compartment "Cytosol" is described as <code>0.7 - 0.1 &mu;</code>, and the minimum and maximum growth rate available for experimental data were 0.2 and 2 [1/h], this information should be inputted into the <code>parameters.xml</code> file of RBA in the following way:
   </p>
 
+<pre><code><function id="fraction_protein_Cytosol" type="linear" variable="growth_rate">
+  <listOfParameters>
+    <parameter id="Y_MIN" value="-inf"/>
+    <parameter id="LINEAR_CONSTANT" value=<b>"0.7"</b>/>
+    <parameter id="Y_MAX" value="inf"/>
+    <parameter id="LINEAR_COEF" value=<b>"-0.1"</b>/>
+    <parameter id="X_MIN" value=<b>"0.2"</b>/>
+    <parameter id="X_MAX" value=<b>"2"</b>/>
+  </listOfParameters>
+</function></code></pre>
 
 <h2 id="sec4">4. Details on the SBML requirements</h2>
 <p>
