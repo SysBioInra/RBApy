@@ -40,9 +40,8 @@ layout: subpage
     </ol>
     <li><a href="usage.html#sec3">Calibrating an RBA model</a></li>
     <ol>
-      <li><a href="usage.html#sec3.1">Data requirement and format</a></li>
-      <li><a href="usage.html#sec3.2">Estimating parameters</a></li>
-      <li><a href="usage.html#sec3.3">Updating the parameter files</a></li>
+      <li><a href="usage.html#sec3.1">Calibration configuration files</a></li>
+      <li><a href="usage.html#sec3.2">Estimating protein percentage per compartment</a></li>
     </ol>
     <li><a href="usage.html#sec4">Details on the SBML requirements</a></li>
     <ol>
@@ -631,9 +630,35 @@ To update the RBA model, re-run the model generation by
     An existing RBA model can be calibrated using the <b>RBApy.estim</b> package, which containts a number of scripts. <code>prot_per_compartment.py</code> is a script allowing one to estimate the percentage of protein allocated to each compartment of the organism. <code>nonenz_per_compartment.py</code> uses the functional annotations of proteins, such as COG, to estimate the portion of protein in each compartment which is non-enzymatic. Nonenzymatic proteins can be considered those that do not perform a function within the model (they are not assigned either to metabolic enzymes or to other molecular machines). <code>kapp.py</code> allows for the estimation of apparent catalytic rates of enzymes from fluxomics and proteomics experiments performed in sufficiently similar conditions. 
   </p>
 
-<h3 id="sec3.1">3.1 Data requirement and format</h3>
-<h3 id="sec3.2">3.2 Estimating parameters</h3>
-<h3 id="sec3.3">3.3 Updating the parameter file</h3>
+<h3 id=sec3.1>3.1 Calibration configuration files</h3>
+  <p>
+    All the calibration scripts make use of configuration files, in a format that is expected from the <a href="https://docs.python.org/3/library/configparser.html">Python's standard configuration parser</a>. All the files that are passed to the calibration scripts need to be either in <code>csv</code> or in some type of Excel format. This is specified via the <code>file_type</code> value, which can take on <code>csv</code> or <code>excel</code> values.
+    For example, in specifying the file with experiment details, in the case we are providing it in csv format, the configuration would look as follows:
+  </p>
+<pre><code>[Experiment]
+file = /path/to/file
+file_type = csv
+delimiter = ;
+...</code></pre>
+
+<p>
+  If you would want to provide the data in excel format, the configuration would look something like this:
+</p>
+<pre><code>[Experiment]
+file = /path/to/file
+file_type = excel
+delimiter = ;
+sheet_name = Sheet1
+skiprows = 3
+...</code></pre>
+
+For the case of csv file, only character delimiters are allowed, tabulation and white space are not.
+
+<h3 id="sec3.2">3.2 Estimating protein percentage per compartment</h3>
+  <!--<p>
+    In order to estimate the protein percentage per compartment, the user needs to have at her disposal a proteomics experiments for cells at different growth rates, and proteins need to have subcellular location annotation. All this information is given to the script via the configuration file <code>prot_per_compartment.cfg</code>.
+  </p>-->
+
 
 <h2 id="sec4">4. Details on the SBML requirements</h2>
 <p>
