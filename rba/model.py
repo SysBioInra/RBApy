@@ -179,6 +179,7 @@ class RbaModel(object):
             self._constraint_matrix = rba.ConstraintMatrix(self)
         solver = rba.Solver(self._constraint_matrix)
         solver.solve()
+	#solver.solve_grid()
         return rba.Results(self, self._constraint_matrix, solver)
 
     def set_enzyme_efficiencies(self, file_name):
