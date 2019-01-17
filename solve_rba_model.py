@@ -27,14 +27,7 @@ def main():
 	
         print('Optimal growth rate is {}.'.format(results.mu_opt))
         results.write(output_dir)
-	#results.write_fluxes(xml_dir+'fluxEcoli',
-        #           file_type='json',
-        #           merge_isozyme_reactions=True,
-        #           only_nonzero=True,
-        #           remove_prefix=True)
 
-	
-        # results.print_main_transport_reactions()
 
 
 if __name__ == '__main__':
