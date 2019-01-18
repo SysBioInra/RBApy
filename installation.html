@@ -30,7 +30,11 @@ chmod u+x cplex_studio12.7.1.osx.bin
 ./cplex_studio12.7.1.osx.bin </code></pre>
 
 	<p>
-		Make sure to remember CPLEX’s installation path, as we need to navigate to it to setup the python API. Go to the directory where CPLEX is installed, then go the sub-directory named python. A file named “setup.py” should be present. Then setup the python API by typing  <code>python setup.py install</code> in the terminal. Here is an example with a default Mac installation, cplex 12.7 and python3.5:
+		Make sure to remember CPLEX’s installation path, as we need to navigate to it to setup the python API. 
+		Go to the directory where CPLEX is installed, then go the sub-directory named python. 
+		A file named “setup.py” should be present. Be sure that you have administrator permissions, 
+		then setup the python API by typing <code>python setup.py install</code> in the terminal.  
+		Here is an example with a default Mac installation, cplex 12.7 and python3.5:
 	</p>
 
 		<pre><code>bash
@@ -51,10 +55,10 @@ import cplex</code></pre>
 		Download the RBApy package directly from out <a href="https://github.com/SysBioInra/RBApy">github page</a> or clone the repository by running:
 	</p>
 	<pre><code>bash
-git clone https://github.com/abulovic/RBA-pipeline path/to/rbapy/package</code></pre>
+git clone https://github.com/SysBioInra/RBApy</code></pre>
 
 	<p>
-		Navigate to the directory containing RBApy and install it:
+		Navigate to the directory containing RBApy, be sure that you have administrator permissions and install it:
 	</p>
 
 	<pre><code>bash
