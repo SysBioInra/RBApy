@@ -153,17 +153,16 @@ class Solver(object):
         lp_problem.set_results_stream(None)
 
         # define columns and add rows
-	lp_problem.variables.add(names=self.matrix.col_names)
-	lp_problem.variables.set_lower_bounds(zip(self.matrix.col_names, self.matrix.LB))
-	lp_problem.variables.set_upper_bounds(zip(self.matrix.col_names, self.matrix.UB))
+        lp_problem.variables.add(names=self.matrix.col_names)
+        lp_problem.variables.set_lower_bounds(zip(self.matrix.col_names, self.matrix.LB))
+        lp_problem.variables.set_upper_bounds(zip(self.matrix.col_names, self.matrix.UB))
         lp_problem.objective.set_sense(lp_problem.objective.sense.minimize)
-	lp_problem.objective.set_linear(zip(self.matrix.col_names, self.matrix.f))
+        lp_problem.objective.set_linear(zip(self.matrix.col_names, self.matrix.f))
 
-	
-	lp_problem.linear_constraints.add(names=self.matrix.row_names)
-	lp_problem.linear_constraints.set_linear_components(zip(self.matrix.row_names, rows))
-	lp_problem.linear_constraints.set_rhs(zip(self.matrix.row_names, self.matrix.b))
-	lp_problem.linear_constraints.set_senses(zip(self.matrix.row_names,self.matrix.row_signs))
+        lp_problem.linear_constraints.add(names=self.matrix.row_names)
+        lp_problem.linear_constraints.set_linear_components(zip(self.matrix.row_names, rows))
+        lp_problem.linear_constraints.set_rhs(zip(self.matrix.row_names, self.matrix.b))
+        lp_problem.linear_constraints.set_senses(zip(self.matrix.row_names,self.matrix.row_signs))
         # set starting point (not exactly sure how this works)
         if self._sol_basis is not None:
             lp_problem.start.set_basis(*self._sol_basis)
