@@ -106,7 +106,7 @@ class SbmlData(object):
             for suffix, enzyme in enumerate(enzymes):
                 id_ = reaction.id
                 if suffix > 0:
-                    id_ += '_' + str(suffix+1)
+                    id_ += '_duplicate_' + str(suffix+1)
                 new_reaction = self._create_reaction(id_, reaction)
                 self.reactions.append(new_reaction)
                 self.enzymes.append(self._create_enzyme(
