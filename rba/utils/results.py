@@ -151,6 +151,10 @@ class Results(object):
         remove_prefix: bool
             If true, removes the beginning prefix "R_" from the
             reaction's name
+
+        Returns
+        -------
+        dictionary of flux: values written to the file
         '''
         if file_type not in ('json', 'csv'):
             raise ValueError('file_type can be either json on csv')
@@ -162,8 +166,9 @@ class Results(object):
         if merge_isozyme_reactions:
             rf_merged = collections.defaultdict(float)
             for reac_id, flux_val in rf.items():
-                if reac_id[-1].isdigit() and reac_id[-2] == '_':
-                    rf_merged[reac_id[:-2]] += flux_val
+                if "duplicate" in reac_id:
+                    last_idx = reac_id.index('duplicate') - 1
+                    rf_merged[reac_id[:last_idx]] += flux_val
                 else:
                     rf_merged[reac_id] += flux_val
             rf = rf_merged
@@ -173,6 +178,7 @@ class Results(object):
         elif file_type == 'csv':
             with open(output_file, 'w') as fout:
                 fout.write('\n'.join(['{};{}'.format(k, v) for k, v in rf.items()]))
+        return rf
 
     def write_proteins(self, output_file, file_type='csv'):
         '''
@@ -181,6 +187,10 @@ class Results(object):
             Path to the output file
         file_type: str
             File type, can be csv of json
+
+        Returns
+        -------
+        Dictionary of protein ID - concentrations written to the file
         '''
         prot_conc = collections.defaultdict(float)
         for enz_id, enz_conc in self.enzyme_concentrations().items():
@@ -201,6 +211,7 @@ class Results(object):
         elif file_type == 'json':
             with open(output_file, 'w') as fout:
                 fout.write(json.dumps(prot_conc, indent=4))
+        return prot_conc
 
 
     def export_matlab(self, output_dir):
