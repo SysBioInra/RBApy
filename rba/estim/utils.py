@@ -208,8 +208,9 @@ def get_gene_cnt_per_reaction(rba_model, fluxes=None):
     gene_cnt = defaultdict(int)
     for enz in rba_model.enzymes.enzymes:
         reaction_id = enz.id[2:-7]
-        if reaction_id[-2] == '_' and reaction_id[-1].isdigit():
-            reaction_id = reaction_id[:-2]
+        if 'duplicate' in reaction_id:
+            dup_index = reaction_id.index('duplicate') - 1
+            reaction_id = reaction_id[:dup_index]
 
         if fluxes is not None:
             if reaction_id in fluxes:
@@ -311,8 +312,9 @@ class Enzymes(MutableMapping):
         for enz in rba_model.enzymes.enzymes:
             enz_id = enz.id[2:-7]
             is_cytosolic = is_enz_cytosolic(enz_id, rba_model)
-            if enz_id[-2] == '_' and enz_id[-1].isdigit():
-                flux_id = enz_id[:-2]
+            if 'duplicate' in enz_id:
+                dup_index = enz_id.index('duplicate') - 1
+                flux_id = enz_id[:dup_index]
             else:
                 flux_id = enz_id
             #if flux_id not in fluxes:
@@ -339,8 +341,9 @@ class Enzymes(MutableMapping):
     def adjust_isoenzymes(self):
         flux2enzyme = defaultdict(list)
         for enz_id in self.store:
-            if enz_id[-2] == '_' and enz_id[-1].isdigit():
-                store_id = enz_id[:-2]
+            if 'duplicate' in enz_id:
+                dup_index = enz_id.index('duplicate') - 1
+                store_id = enz_id[:dup_index]
             else:
                 store_id = enz_id
             flux2enzyme[store_id].append(enz_id)
