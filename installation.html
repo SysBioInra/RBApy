@@ -42,8 +42,10 @@ Open a terminal, navigate to executable and run following commands (make sure to
 		<pre><code>cd Path/To/Cplex/cplex/python/x86-64_linux</code></pre>
 		In this directory you should find a file <code>setup.py</code>. Be sure that you have administrator permissions, 
 		then set up the Python API by typing in the terminal:
+
 		<pre><code>python setup.py install</code></pre> 
 		or
+
 		<pre><code>sudo python setup.py install</code></pre>   
 	</p>
 	<p>You can check that CPLEX was correctly installed by running:</p>
@@ -55,11 +57,15 @@ import cplex</code></pre>
 <h3>2.2 On Windows systems</h3>
 <p>
 Open the navigator, navigate to the location of the CPLEX installer and run it. Make sure to remember CPLEX's installation path, as we will need to navigate to it to set up the Python API. <br>
-Then open a batch console <b>with administrative permissions</b>. Go to the directory where CPLEX is installed, then go the sub-directory named python. 
-<pre><code>cd Path\To\Cplex\cplex\python\x64_win64</code></pre>
-A file named "setup.py" should be present. Then setup the Python API by typing in the console (Be sure to adapt the python path and versions of the example to yours).
-<pre><code>Path\To\Python\python.exe setup.py install</code></pre> 
+Then open a batch console <b>with administrative permissions</b>. Go to the directory where CPLEX is installed, then go the sub-directory named <code>python</code>. 
 </p>
+
+<pre><code>cd Path\To\Cplex\cplex\python\x64_win64</code></pre>
+<p>
+A file named <code>setup.py</code> should be present. Then setup the Python API by typing in the console (Make sure to adapt the Python path and the versions of the libraries to the ones you have on your computer).
+</p>
+<pre><code>Path\To\Python\python.exe setup.py install</code></pre> 
+
 
 	<p>You can check that CPLEX was correctly installed by running:</p>
 
@@ -73,17 +79,23 @@ Open a terminal, navigate to executable and run following commands (make sure to
 
 	<pre><code>chmod u+x cplex_studio12.7.1.osx.bin 
 ./cplex_studio12.7.1.osx.bin </code></pre>
+
 <p>
-Make sure to remember CPLEX's installation path, as we need to navigate to it to setup the python API. 
-		Go to the directory where CPLEX is installed, then go the sub-directory named python. 
-		A file named "setup.py" should be present. Be sure that you have administrator permissions, 
-		then setup the python API by typing <pre><code>python setup.py install</code></pre>
+Do remember the installation path of CPLEX, as we will need to navigate to it to set up the Python API. 
+		Go to the directory where CPLEX is installed, then go the sub-directory named <code>python</code>. 
+		A file named <code>setup.py</code> should be present. Be sure that you have administrator permissions, 
+		then set up the Python API by typing 
+		</p>
+
+		<pre><code>python setup.py install</code></pre>
+<p>
 Here is an example with a default Mac installation, cplex 12.7 and python3.5:
+</p>
 		<pre><code>cd /Users/my_username/Applications/IBM/ILOG/CPLEX_Studio1271/cplex/python/3.5/x86-64_osx
 python setup.py install
 # alternative: install to custom location
 python setup.py install --home yourPythonPackageshome/cplex</code></pre>
-</p>
+
 
 	<p>You can check that CPLEX was correctly installed by running:</p>
 
