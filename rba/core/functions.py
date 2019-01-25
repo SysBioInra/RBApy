@@ -225,6 +225,50 @@ class MichaelisMentenFunction(BaseFunction):
         self.value = max(y, self._y_min) if self._y_min else y
 
 
+class CompetitiveInhibitionFunction(BaseFunction):
+    """
+    Class computing michaelis menten functions.
+
+    Attributes
+    ----------
+    name : str
+        identifier of this class.
+    variable : str
+        variable used by function.
+    value : float
+        current function value.
+
+    """
+
+    name = 'competitiveInhibition'
+
+    def __init__(self, parameters, variable):
+        """
+        Constructor.
+
+        Parameters
+        ----------
+        parameters : dict
+            Dict that must contain the following keys: kmax, Km.
+            Optionally, it may contain Y_MIN.
+        variable : str
+            Function variable.
+
+        """
+        super(CompetitiveInhibitionFunction, self).__init__(variable)
+        self._kmax = float(parameters['kmax'])
+        self._Km = float(parameters['Km'])
+        self._Ki = float(parameters['Ki'])
+        self._I = float(parameters['I'])
+        self._y_min = parameters.get('Y_MIN', None)
+        self.value = 0
+
+    def update(self, x):
+        """Evaluate function at given point."""
+        y = self._kmax * x / (x + self._Km * (1 + self._I / self._Ki))
+        self.value = max(y, self._y_min) if self._y_min else y
+
+
 class InverseFunction(BaseFunction):
     """
     Class computing inverse functions.
@@ -313,7 +357,8 @@ class MultiplicationFunction(object):
 
 # list of accepted function names and classes implementing them
 SIMPLE = [ConstantFunction, LinearFunction, IndicatorFunction,
-          ExponentialFunction, MichaelisMentenFunction, InverseFunction]
+          ExponentialFunction, MichaelisMentenFunction, InverseFunction,
+          CompetitiveInhibitionFunction]
 AGGREGATE = [MultiplicationFunction]
 VALID_FNS = {c.name: c for c in SIMPLE}
 VALID_AGGS = {c.name: c for c in AGGREGATE}
