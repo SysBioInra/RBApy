@@ -33,15 +33,13 @@ Download the appropriate python release for your system and install it.
 Open a terminal, navigate to executable and run following commands (make sure to adapt the executable name if necessary):
 	</p>
 
-	<pre><code>bash
-chmod u+x cplex_studio12.7.1.osx.bin 
+	<pre><code>chmod u+x cplex_studio12.7.1.osx.bin 
 ./cplex_studio12.7.1.osx.bin </code></pre>
 
 	<p>
 		Make sure to remember CPLEX's installation path, as we need to navigate to it to setup the python API. 
 		Go to the directory where CPLEX is installed, then go the sub-directory named python. 
-		<pre><code>bash
-cd Path/To/Cplex/cplex/python/x86-64_linux</code></pre>
+		<pre><code>cd Path/To/Cplex/cplex/python/x86-64_linux</code></pre>
 		A file named "setup.py" should be present. Be sure that you have administrator permissions, 
 		then setup the python API by typing in the terminal <pre><code>python setup.py install</code></pre> or <pre><code>sudo python setup.py install</code></pre>   
 	</p>
@@ -70,8 +68,7 @@ import cplex</code></pre>
 Open a terminal, navigate to executable and run following commands (make sure to adapt the executable name if necessary):
 	</p>
 
-	<pre><code>bash
-chmod u+x cplex_studio12.7.1.osx.bin 
+	<pre><code>chmod u+x cplex_studio12.7.1.osx.bin 
 ./cplex_studio12.7.1.osx.bin </code></pre>
 <p>
 Make sure to remember CPLEX's installation path, as we need to navigate to it to setup the python API. 
@@ -79,8 +76,7 @@ Make sure to remember CPLEX's installation path, as we need to navigate to it to
 		A file named "setup.py" should be present. Be sure that you have administrator permissions, 
 		then setup the python API by typing <pre><code>python setup.py install</code></pre>
 Here is an example with a default Mac installation, cplex 12.7 and python3.5:
-		<pre><code>bash
-cd /Users/my_username/Applications/IBM/ILOG/CPLEX_Studio1271/cplex/python/3.5/x86-64_osx
+		<pre><code>cd /Users/my_username/Applications/IBM/ILOG/CPLEX_Studio1271/cplex/python/3.5/x86-64_osx
 python setup.py install
 # alternative: install to custom location
 python setup.py install --home yourPythonPackageshome/cplex</code></pre>
@@ -97,18 +93,15 @@ import cplex</code></pre>
 	<p>
 		Download the RBApy package directly from out <a href="https://github.com/SysBioInra/RBApy">github page</a> or clone the repository by running:
 	</p>
-	<pre><code>bash
-git clone https://github.com/SysBioInra/RBApy</code></pre>
+	<pre><code>git clone https://github.com/SysBioInra/RBApy</code></pre>
 
 	<p>
 		Navigate to the directory containing RBApy, be sure that you have <b>administrator permissions</b> and install it by typing:<br>
 On UNIX and MAC systems,
-	<pre><code>bash
-cd path/to/rbapy/package
+	<pre><code>cd path/to/rbapy/package
 python setup.py install</code></pre>
 On Windows systems,
-	<pre><code>bash
-cd path\to\rbapy\package
+	<pre><code>cd path\to\rbapy\package
 Path\To\Python\python.exe setup.py install</code></pre>
 Be sure to adapt "Path\To\Python" to your Python path and versions.
 </p>
