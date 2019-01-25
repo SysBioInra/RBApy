@@ -3,6 +3,12 @@
 
 @import "{{ site.theme }}";
 
+
+#header-image {
+  text-align: center;
+  width: 100%;
+}
+
 .page-header {
 	background-color: #f9ad5a;
 	background-image: none;
