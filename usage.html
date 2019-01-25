@@ -43,6 +43,7 @@ layout: subpage
       <li><a href="usage.html#sec3.1">Calibration configuration files</a></li>
       <li><a href="usage.html#sec3.2">Estimating protein percentage per compartment</a></li>
       <li><a href="usage.html#sec3.3">Estimating portion of nonenzymatic protein per compartment</a></li>
+      <li><a href="usage.html#sec3.4">Estimating the apparent catalytic rates of enzymes</a></li>
     </ol>
     <li><a href="usage.html#sec4">Details on the SBML requirements</a></li>
     <ol>
@@ -693,9 +694,24 @@ For the case of csv file, only character delimiters are allowed (such as :, ;, e
   Two additional files that need to be provided are:
   <ol>
     <li><code>[CategoryData]</code>: Proteins with assigned functional categories. First column is expected to contain protein IDs, and one of the other columns the functional categories. The name of this column needs to be provided in the <code>cat_column</code> parameter.</li>
-    <li><code>[IsEnzymaticData]</code>: a file describing which functional category is considered enzymatic (opposite of housekeeping). First column should contain a full list of functional categories, and one other column should contain <code>TRUE</code> or <code>FALSE</code> values. The name of that column should be provided in the <code>is_enzymatic_column</code> parameter.</li>
+    <li><code>[IsEnzymaticData]</code>: a file describing which functional category is considered enzymatic (opposite of housekeeping). First column should contain a full list of functional categories, and one other column should contain <code>TRUE</code> or <code>FALSE</code> values. The name of that column should be provided in the <code>is_enzymatic_column</code> parameter.</li>  
   </ol>
 </p>
+
+
+<h3 id="sec3.4">3.4 Estimating the apparent catalytic rates of enzymes</h3>
+<p>
+  In order to estimate the apparent catalytic rates of enzymes, you need to provide fluxomics and proteomics data. Proteins need to have same identifiers as the ones used in the model. The configuration script has four fields:
+  <ol>
+    <li>
+       <code>[ProteinData]</code> where you need to provide the path to the file containing the proteomics data, as well as the cell dry weight for the cell at that growth conditions. This is assuming that the proteomics data is given in copies per cell. If the data is already provided as a concentration, you can set the cell dry weight (cdw) parameter to 1.
+    </li>
+    <li>[Flux data]</li> where you need to provide the path to the fluxomics data. The first column is expected to contain one or more reaction IDs (from the model) separated by a comma. There are two additional columns you need to provide: upper bound and lower bound on the reactions, and the name of these columns needs to be supplied in the configuration file under <code>ub_column</code> and <code>lb_column</code>.
+    <li><code>[Model]</code></li> in which you need to provide paths to the original metabolic model in SBML format used for creation of the RBA model, as well as the path to the directory containing the XML files specifying the RBA model. You also need to provide a name of the biomass reaction you wish to use as the objective function in an FBA simulation (which is used for the calibration procedure).
+    <li><code>[Output]</code></li> where you specify the file in which the results of the estimation will be stored.
+  </ol>
+</p>
+
 
 
 <h2 id="sec4">4. Details on the SBML requirements</h2>
