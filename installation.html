@@ -62,19 +62,19 @@ Then open a batch console <b>with administrative permissions</b>. Go to the dire
 
 <pre><code>cd Path\To\Cplex\cplex\python\x64_win64</code></pre>
 <p>
-A file named <code>setup.py</code> should be present. Then setup the Python API by typing in the console (Make sure to adapt the Python path and the versions of the libraries to the ones you have on your computer).
+A file named <code>setup.py</code> should be present. Set up the Python API by typing in the console (Make sure to adapt the Python path and the versions of the libraries to the ones you have on your computer).
 </p>
 <pre><code>Path\To\Python\python.exe setup.py install</code></pre> 
 
 
-	<p>You can check that CPLEX was correctly installed by running:</p>
+<p>You can check that CPLEX was correctly installed by running:</p>
 
 	<pre><code>Path\To\Python\python.exe
 import cplex</code></pre>
 
 <h3>2.3 On MAC systems</h3>
 	<p>
-Open a terminal, navigate to executable and run following commands (make sure to adapt the executable name if necessary):
+	Open a terminal, navigate to executable and run following commands (make sure to adapt the executable name if necessary):
 	</p>
 
 	<pre><code>chmod u+x cplex_studio12.7.1.osx.bin 
@@ -118,7 +118,7 @@ python setup.py install</code></pre>
 On Windows systems,
 	<pre><code>cd path\to\rbapy\package
 Path\To\Python\python.exe setup.py install</code></pre>
-Be sure to adapt "Path\To\Python" to your Python path and versions.
+The <code>Path\To\Python"</code> should be replaced by your Python path and versions.
 </p>
 	<p>
 		This step may take some time, as it will install missing dependencies. After this step is finished, you can check that RBApy was correctly installed by running:
