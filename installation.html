@@ -18,12 +18,12 @@ Download the appropriate python release for your system and install it.
 </p>
 	<h2>2. Install CPLEX</h2>
 	<p>
-		IBM&reg; CPLEX is an optimization software package. <b>RBApy</b> uses this package for the generation and checking of feasibility of the Linear Programming (LP) problem. To download and install CPLEX, you need to have an academic email address.
+		IBM&reg; CPLEX is an optimization software package. <b>RBApy</b> uses this package for the generation and checking of feasibility of the Linear Programming (LP) problem. CPLEX requires a licence to run, and one can be obtained for free if you have an academic email address. This you can do as follows:
 
 		<ul>
-		  <li>create account on the <a href="https://ibm.onthehub.com/">IBM website</a></li>
-		  <li>request faculty eligibility with your institutional email address: go to your account > eligibility tab. Follow instructions.</li>
-		  <li>look for latest IBM ILOG CPLEX faculty version, complete survey and download</li>
+		  <li>Create an account on the <a href="https://ibm.onthehub.com/">IBM website</a></li>
+		  <li>Request faculty eligibility with your institutional email address: go to your account > eligibility tab. Follow instructions.</li>
+		  <li>Look for latest IBM ILOG CPLEX faculty version, complete survey and download</li>
 		</ul> 
 
 		After you have successfuly downloaded the package you need to install it and setup the Python API. </p>
@@ -37,11 +37,14 @@ Open a terminal, navigate to executable and run following commands (make sure to
 ./cplex_studio12.7.1.osx.bin </code></pre>
 
 	<p>
-		Make sure to remember CPLEX's installation path, as we need to navigate to it to setup the python API. 
-		Go to the directory where CPLEX is installed, then go the sub-directory named python. 
+		Make sure to remember CPLEX's installation path, as we need to navigate to it to setup the Python API. 
+		Go to the directory where CPLEX is installed, then go the sub-directory named <code>python</code>. 
 		<pre><code>cd Path/To/Cplex/cplex/python/x86-64_linux</code></pre>
-		A file named "setup.py" should be present. Be sure that you have administrator permissions, 
-		then setup the python API by typing in the terminal <pre><code>python setup.py install</code></pre> or <pre><code>sudo python setup.py install</code></pre>   
+		In this directory you should find a file <code>setup.py</code>. Be sure that you have administrator permissions, 
+		then set up the Python API by typing in the terminal:
+		<pre><code>python setup.py install</code></pre> 
+		or
+		<pre><code>sudo python setup.py install</code></pre>   
 	</p>
 	<p>You can check that CPLEX was correctly installed by running:</p>
 
@@ -51,10 +54,10 @@ import cplex</code></pre>
 
 <h3>2.2 On Windows systems</h3>
 <p>
-Open the navigator, navigate to CPLEX installer and run it. Make sure to remember CPLEX's installation path,  as we need to navigate to it to setup the python API. <br>
+Open the navigator, navigate to the location of the CPLEX installer and run it. Make sure to remember CPLEX's installation path, as we will need to navigate to it to set up the Python API. <br>
 Then open a batch console <b>with administrative permissions</b>. Go to the directory where CPLEX is installed, then go the sub-directory named python. 
 <pre><code>cd Path\To\Cplex\cplex\python\x64_win64</code></pre>
-A file named "setup.py" should be present. Then setup the python API by typing in the console (Be sure to adapt the python path and versions of the example to yours).
+A file named "setup.py" should be present. Then setup the Python API by typing in the console (Be sure to adapt the python path and versions of the example to yours).
 <pre><code>Path\To\Python\python.exe setup.py install</code></pre> 
 </p>
 
