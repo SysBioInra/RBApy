@@ -7,14 +7,18 @@ layout: subpage
 <body>
 
 	<h1>Installation</h1>
-
-	<p>
+		<p>
 		<b>RBApy</b> can be installed with Python 2.7 and Python 3.5 (or any later version compatible with the cplex package).
 	</p>
-
-	<h2>1. Install CPLEX</h2>
+	<h2>1. Install Python</h2>
+<p>
+	If Python is not installed on your own computer, you need to install it. 
+Go to the website  <a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>. 
+Download the appropriate python release for your system and install it.
+</p>
+	<h2>2. Install CPLEX</h2>
 	<p>
-		IBM&reg; CPLEX is an optimization software package. <b>RBApy</b> uses this package for the construction and checking of feasibility of the Linear Programming (LP) problem. To download and install CPLEX, you need to have an academic email address.
+		IBM&reg; CPLEX is an optimization software package. <b>RBApy</b> uses this package for the generation and checking of feasibility of the Linear Programming (LP) problem. To download and install CPLEX, you need to have an academic email address.
 
 		<ul>
 		  <li>create account on the <a href="https://ibm.onthehub.com/">IBM website</a></li>
@@ -22,7 +26,11 @@ layout: subpage
 		  <li>look for latest IBM ILOG CPLEX faculty version, complete survey and download</li>
 		</ul> 
 
-		After you have successfuly downloaded the package you need to install it and setup the Python API. On UNIX systems, navigate to executable and run following commands (make sure to adapt the executable name if necessary):
+		After you have successfuly downloaded the package you need to install it and setup the Python API. </p>
+
+<h3>2.1. On Unix systems</h3>
+	<p>
+Open a terminal, navigate to executable and run following commands (make sure to adapt the executable name if necessary):
 	</p>
 
 	<pre><code>bash
@@ -30,18 +38,53 @@ chmod u+x cplex_studio12.7.1.osx.bin
 ./cplex_studio12.7.1.osx.bin </code></pre>
 
 	<p>
-		Make sure to remember CPLEX’s installation path, as we need to navigate to it to setup the python API. 
+		Make sure to remember CPLEX's installation path, as we need to navigate to it to setup the python API. 
 		Go to the directory where CPLEX is installed, then go the sub-directory named python. 
-		A file named “setup.py” should be present. Be sure that you have administrator permissions, 
-		then setup the python API by typing <code>python setup.py install</code> in the terminal.  
-		Here is an example with a default Mac installation, cplex 12.7 and python3.5:
+		<pre><code>bash
+cd Path/To/Cplex/cplex/python/x86-64_linux</code></pre>
+		A file named "setup.py" should be present. Be sure that you have administrator permissions, 
+		then setup the python API by typing in the terminal <pre><code>python setup.py install</code></pre> or <pre><code>sudo python setup.py install</code></pre>   
+	</p>
+	<p>You can check that CPLEX was correctly installed by running:</p>
+
+	<pre><code>python
+import cplex</code></pre>
+
+
+<h3>2.2 On Windows systems</h3>
+<p>
+Open the navigator, navigate to CPLEX installer and run it. Make sure to remember CPLEX's installation path,  as we need to navigate to it to setup the python API. <br>
+Then open a batch console <b>with administrative permissions</b>. Go to the directory where CPLEX is installed, then go the sub-directory named python. 
+<pre><code>cd Path\To\Cplex\cplex\python\x64_win64</code></pre>
+A file named "setup.py" should be present. Then setup the python API by typing in the console (Be sure to adapt the python path and versions of the example to yours).
+<pre><code>Path\To\Python\python.exe setup.py install</code></pre> 
+</p>
+
+	<p>You can check that CPLEX was correctly installed by running:</p>
+
+	<pre><code>Path\To\Python\python.exe
+import cplex</code></pre>
+
+<h3>2.3 On MAC systems</h3>
+	<p>
+Open a terminal, navigate to executable and run following commands (make sure to adapt the executable name if necessary):
 	</p>
 
+	<pre><code>bash
+chmod u+x cplex_studio12.7.1.osx.bin 
+./cplex_studio12.7.1.osx.bin </code></pre>
+<p>
+Make sure to remember CPLEX's installation path, as we need to navigate to it to setup the python API. 
+		Go to the directory where CPLEX is installed, then go the sub-directory named python. 
+		A file named "setup.py" should be present. Be sure that you have administrator permissions, 
+		then setup the python API by typing <pre><code>python setup.py install</code></pre>.
+Here is an example with a default Mac installation, cplex 12.7 and python3.5:
 		<pre><code>bash
 cd /Users/my_username/Applications/IBM/ILOG/CPLEX_Studio1271/cplex/python/3.5/x86-64_osx
 python setup.py install
 # alternative: install to custom location
 python setup.py install --home yourPythonPackageshome/cplex</code></pre>
+</p>
 
 	<p>You can check that CPLEX was correctly installed by running:</p>
 
@@ -50,7 +93,7 @@ import cplex</code></pre>
 
 
 
-	<h2>2. Install <b>RBApy</b> package</h2>
+	<h2>3. Install <b>RBApy</b> package</h2>
 	<p>
 		Download the RBApy package directly from out <a href="https://github.com/SysBioInra/RBApy">github page</a> or clone the repository by running:
 	</p>
@@ -58,19 +101,22 @@ import cplex</code></pre>
 git clone https://github.com/SysBioInra/RBApy</code></pre>
 
 	<p>
-		Navigate to the directory containing RBApy, be sure that you have administrator permissions and install it:
-	</p>
-
+		Navigate to the directory containing RBApy, be sure that you have <b>administrator permissions</b> and install it by typing:<br>
+On UNIX and MAC systems,
 	<pre><code>bash
 cd path/to/rbapy/package
 python setup.py install</code></pre>
-
+On Windows systems,
+	<pre><code>bash
+cd path/to/rbapy/package
+PathToPython/python.exe setup.py install</code></pre>
+Be sure to adapt "PathToPython" to your Python path and versions.
+</p>
 	<p>
 		This step may take some time, as it will install missing dependencies. After this step is finished, you can check that RBApy was correctly installed by running:
 	</p>
 	<pre><code>python
 import rba</code></pre>
-
 	<!-- Troubleshooting - TODO -->
 </body>
 </html>
