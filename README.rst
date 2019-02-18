@@ -7,6 +7,10 @@ This module also exports various files that are used for
 initialization of a RBA problem as proposed by
 `MaiAGE <http://maiage.jouy.inra.fr>`_.
 
+For a complete documentation on RBApy installation and usage, please visit the website:
+https://sysbioinra.github.io/RBApy/
+
+
 Getting Started
 ---------------
 
