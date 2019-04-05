@@ -50,30 +50,30 @@ class Solver(object):
         lp.solve()
         if is_feasible(lp):
             self._store_results(0.0, lp)
-	    print('Mu = 0 is feasible.')
+            print('Mu = 0 is feasible.')
         elif is_infeasible(lp):
             print('Mu = 0 is infeasible, check matrix consistency.')
             return
         else:
             print(unknown_flag_msg(0, lp))
             return
-	
+
 
         # bissection
         mu_min = 0
         mu_max = 2.5
         mu_test = mu_max
-        while (mu_max - mu_min) > 1e-6:		
-            self.matrix.build_matrices(mu_test)	
-	    lp = self.build_lp()
+        while (mu_max - mu_min) > 1e-6:
+            self.matrix.build_matrices(mu_test)
+            lp = self.build_lp()
             lp.solve()
             if is_feasible(lp):
                 mu_min = mu_test
                 self._store_results(mu_test, lp)
-		print('Mu = ' + str(mu_test) + ' is feasible.')
+                print('Mu = ' + str(mu_test) + ' is feasible.')
             elif is_infeasible(lp):
                 mu_max = mu_test
-		print('Mu = ' + str(mu_test) + ' is infeasible.')
+                print('Mu = ' + str(mu_test) + ' is infeasible.')
             else:
                 print(unknown_flag_msg(mu_test, lp))
                 return
@@ -105,7 +105,7 @@ class Solver(object):
             lp = self.build_lp()
             lp.solve()
             if is_feasible(lp):
-		print('Mu = ' + str(mu_test) + ' is feasible.')
+                print('Mu = ' + str(mu_test) + ' is feasible.')
                 self._store_results(mu_test, lp)
             elif is_infeasible(lp):
                 print('Mu = ' + str(mu_test) + ' is infeasible.')
