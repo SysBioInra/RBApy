@@ -220,7 +220,9 @@ class Results(object):
             'A': self._matrices.A, 'b': self._matrices.b,
             'f': self._matrices.f, 'UB': self._matrices.UB,
             'LB': self._matrices.LB, 'ColNames': self._matrices.col_names,
-            'Enzymes': self.enzymes, 'Processes': self.processes
+            'Enzymes': self.enzymes, 'Processes': self.processes,
+            'RowNames': self._matrices.row_names, 'RowSigns': self._matrices.row_signs,
+            'Medium': self._model.medium
         }
         scipy.io.savemat(os.path.join(output_dir, 'rba_matlab.mat'),
                          data, do_compression=True)
