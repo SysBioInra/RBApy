@@ -79,7 +79,10 @@ class Solver(object):
                 return
             # next mu to be tested
             mu_test = (mu_min + mu_max) / 2
-
+            
+        # Recompute the matrices so that it necessarily correspond to the solution
+        self.matrix.build_matrices(self.mu_opt)
+        
     def solve_grid(self):
         """Compute configuration corresponding to maximal growth rate."""
         self._sol_basis = None
