@@ -22,14 +22,14 @@ def main():
             output_dir = xml_dir
 
         # load model, build matrices and solve
-	print('Model building from XML files ...')
+        print('Model building from XML files ...')
         model = rba.RbaModel.from_xml(xml_dir)
-	print('Starting iterative RBA resolution...')
+        print('Starting iterative RBA resolution...')
         results = model.solve()
-	
+
         print('Optimal growth rate is {}.'.format(results.mu_opt))
         results.write(output_dir)
-	
+
 
 
 if __name__ == '__main__':

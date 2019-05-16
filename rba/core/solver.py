@@ -63,6 +63,7 @@ class Solver(object):
         mu_min = 0
         mu_max = 2.5
         mu_test = mu_max
+        self._sol_basis = None
         while (mu_max - mu_min) > 1e-6:
             self.matrix.build_matrices(mu_test)
             lp = self.build_lp()
@@ -171,8 +172,7 @@ class Solver(object):
         lp_problem.linear_constraints.set_senses(zip(self.matrix.row_names,self.matrix.row_signs))
         # set starting point (not exactly sure how this works)
         if self._sol_basis is not None:
-            lp_problem.start.set_basis(*self._sol_basis)
-            # lp_problem.start.set_start(
-            # self._sol_basis[0], self._sol_basis[1], self.X, [], [],
-            # self.lambda_)
+            lp_problem.start.set_start(
+                self._sol_basis[0], self._sol_basis[1], self.X, [], [],
+                self.lambda_)
         return lp_problem

@@ -47,9 +47,10 @@ class SbmlData(object):
         # WARNING: not storing document in a variable will result
         # in segmentation fault!
         document = self._load_document(input_file)
-        model = document.model
+        model = document.getModel()
         self._initialize_species(model, external_ids)
-        self.external_prefixes = [self._prefix(m.id) for m in self.species
+        self.external_prefixes = [self._prefix(m.id)
+                                  for m in self.species
                                   if m.boundary_condition]
         self._extract_reactions_and_enzymes(model, cytosol_id)
 
@@ -65,38 +66,38 @@ class SbmlData(object):
             external_ids = []
         external_ids += self._identify_external_compartments(model)
         self.species = rba.xml.ListOfSpecies()
-        for spec in model.species:
-            boundary = spec.boundary_condition
-            if spec.compartment in external_ids:
+        for spec in model.getListOfSpecies():
+            boundary = spec.getBoundaryCondition()
+            if spec.getCompartment() in external_ids:
                 boundary = True
             self.species.append(rba.xml.Species(spec.getId(), boundary))
 
     def _identify_external_compartments(self, model):
         # Compartments are considered external if all metabolites
         # they contain participate in a sink/production reaction
-        sink_species = self._sink_species(model.reactions)
-        result = set(c.id for c in model.compartments)
-        for metabolite in model.species:
-            if metabolite.id not in sink_species:
-                result.discard(metabolite.compartment)
+        sink_species = self._sink_species(model.getListOfReactions())
+        result = set(c.getId() for c in model.getListOfCompartments())
+        for metabolite in model.getListOfSpecies():
+            if metabolite.getId() not in sink_species:
+                result.discard(metabolite.getCompartment())
         return result
 
     def _sink_species(self, reactions):
         result = []
         for reaction in reactions:
-            if (len(reaction.reactants) == 1 and
-                    len(reaction.products) == 0):
-                result.append(reaction.reactants[0].species)
-            elif (len(reaction.products) == 1 and
-                    len(reaction.reactants) == 0):
-                result.append(reaction.products[0].species)
+            if (len(reaction.getListOfReactants()) == 1 and
+                    len(reaction.getListOfProducts()) == 0):
+                result.append(reaction.getReactant(0).getSpecies())
+            elif (len(reaction.getListOfProducts()) == 1 and
+                    len(reaction.getListOfReactants()) == 0):
+                result.append(reaction.getProduct(0).getSpecies())
         return set(result)
 
     def _extract_reactions_and_enzymes(self, model, cytosol_id):
         self.reactions = rba.xml.ListOfReactions()
         self.enzymes = []
         parser = self._create_annotation_parser(model)
-        for reaction in model.reactions:
+        for reaction in model.getListOfReactions():
             try:
                 enzymes = parser.enzyme_composition(reaction)
             except UserWarning:
@@ -104,7 +105,7 @@ class SbmlData(object):
                 raise UserWarning('Invalid SBML.')
             # we create one reaction per associated enzyme
             for suffix, enzyme in enumerate(enzymes):
-                id_ = reaction.id
+                id_ = reaction.getId()
                 if suffix > 0:
                     id_ += '_duplicate_' + str(suffix+1)
                 new_reaction = self._create_reaction(id_, reaction)
@@ -126,14 +127,14 @@ class SbmlData(object):
               ' requirements defined in the README and rerun script.')
 
     def _create_reaction(self, id_, reaction):
-        result = rba.xml.Reaction(id_, reaction.reversible)
-        for r in reaction.reactants:
+        result = rba.xml.Reaction(id_, reaction.getReversible())
+        for r in reaction.getListOfReactants():
             result.reactants.append(
-                rba.xml.SpeciesReference(r.species, r.stoichiometry)
+                rba.xml.SpeciesReference(r.getSpecies(), r.getStoichiometry())
             )
-        for p in reaction.products:
+        for p in reaction.getListOfProducts():
             result.products.append(
-                rba.xml.SpeciesReference(p.species, p.stoichiometry)
+                rba.xml.SpeciesReference(p.getSpecies(), p.getStoichiometry())
             )
         return result
 
@@ -195,7 +196,7 @@ class FbcAnnotationParser(object):
     def __init__(self, fbc_model):
         self._gene_names = {}
         for gene_product in fbc_model.getListOfGeneProducts():
-            self._gene_names[gene_product.id] = gene_product.label
+            self._gene_names[gene_product.getId()] = gene_product.getLabel()
 
     def enzyme_composition(self, reaction):
         gp_association = reaction.getPlugin('fbc') \
@@ -232,9 +233,9 @@ class FbcAnnotationParser(object):
 class CobraNoteParser(object):
     def enzyme_composition(self, reaction):
         result = []
-        if not reaction.notes:
+        if not reaction.getNotes():
             raise UserWarning('Missing enzyme annotation')
-        for ga in self._gene_associations(reaction.notes):
+        for ga in self._gene_associations(reaction.getNotes()):
             composition = self._parse_gene_association(ga)
             if composition:
                 result += composition
