@@ -108,9 +108,12 @@ import cplex</code></pre>
 
 	<h2>3. Install <b>RBApy</b> package</h2>
 	<p>
-		Download the RBApy package directly from out <a href="https://github.com/SysBioInra/RBApy">github page</a> or clone the repository by running:
+		We recommend that you use the stable relase of the RBApy package which you can download from our <a href="https://github.com/SysBioInra/RBApy">github page</a>, and find under the tab <i>Releases</i>. 
+		Alternatively, if you wish to clone the repository, make sure you checkout the commit containing the tag referencing the latest release, as shown:
 	</p>
-	<pre><code>git clone https://github.com/SysBioInra/RBApy</code></pre>
+	<pre><code>git clone https://github.com/SysBioInra/RBApy
+cd RBApy
+git checkout tags/v1.0</code></pre>
 
 	<p>
 		Navigate to the directory containing RBApy, be sure that you have <b>administrator permissions</b> and install it by typing:<br>
@@ -124,12 +127,21 @@ On Windows systems,
 	<pre><code>cd path\to\rbapy\package
 Path\To\Python\python.exe setup.py install</code></pre>
 
+
 <p>
 The <code>Path\To\Python</code> should be replaced by a Python installation path valid on your computer.
 </p>
+
+
 	<p>
-		This step may take some time, as it will install missing dependencies. After this step is finished, you can check that RBApy was correctly installed by running:
-		</p>
+		This step may take some time, as it will install missing dependencies. 
+	</p>
+<p>
+	((<b>NOTE:</b> RBApy needs <code>scipy<=1.2.1</code>, so check that you have the appropriate version installed. This issue arose because the latest <code>scipy</code> version (1.3.0) introduced some changes which are not yet supported by RBApy, but should be in near future.))
+</p>
+<p>
+		After this step is finished, you can check that RBApy was correctly installed by running:
+</p>
 
 	<pre><code>python
 import rba</code></pre>
