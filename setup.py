@@ -81,7 +81,7 @@ setup(
         'pandas',
         'lxml',
         'python-libsbml',
-        'scipy',
+        'scipy<=1.2.1',
         'biopython',
     ],
 
