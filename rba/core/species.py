@@ -197,7 +197,8 @@ class MacromoleculeSet(object):
 
     def _apply_map(self, map_, inputs, process_index, met_matrix, proc_matrix):
         # create column selector for inputs
-        cols = numpy.array([self._molecule_index[i] for i in inputs])
+        cols = numpy.array([self._molecule_index[i] for i in inputs],
+                           dtype = int)
         proc_map = ProcessingMap(map_, self.components, self._metabolites)
         met, proc_cost = proc_map.apply_map(self._component_matrix[:, cols])
         # update production/degradation reactions
@@ -314,7 +315,7 @@ class ProcessingMap(object):
 
         """
         # column selector used to duplicate vectors to match final matrix size
-        cols = numpy.zeros(component_matrix.shape[1])
+        cols = numpy.zeros(component_matrix.shape[1], dtype = int)
         metab_cost = (csr_matrix(self._metabolite_table) * component_matrix
                       + csr_matrix(self._metabolite_constant).T[:, cols])
         proc_cost = (csr_matrix(self._processing_table) * component_matrix
