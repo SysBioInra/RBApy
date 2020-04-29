@@ -141,8 +141,8 @@ class Results(object):
         output_file : string
             Path to the output file
         file_type: string
-            Either json or csv. In case of csv, values are separated
-            by semicolon.
+            Either json, csv ,or tsv. In case of csv and tsv, values are separated
+            by comma or tabs.
         merge_isozyme_reactions: bool
             If true, fluxes through reactions catalzyed by isoenzymes
             will be added together to a single flux
@@ -156,8 +156,8 @@ class Results(object):
         -------
         dictionary of flux: values written to the file
         '''
-        if file_type not in ('json', 'csv'):
-            raise ValueError('file_type can be either json on csv')
+        if file_type not in ('json', 'csv', 'tsv'):
+            raise ValueError('file_type can be either json, csv, or tsv')
         rf = self.reaction_fluxes()
         if remove_prefix:
             rf = {k[2:]: v for k, v in rf.items()}
@@ -177,7 +177,10 @@ class Results(object):
                 fout.write(json.dumps(rf, indent=4))
         elif file_type == 'csv':
             with open(output_file, 'w') as fout:
-                fout.write('\n'.join(['{};{}'.format(k, v) for k, v in rf.items()]))
+                fout.write('\n'.join(['{},{}'.format(k, v) for k, v in rf.items()]))
+        elif file_type == 'tsv':
+            with open(output_file, 'w') as fout:
+                fout.write('\n'.join(['{}\t{}'.format(k, v) for k, v in rf.items()]))
         return rf
 
     def write_proteins(self, output_file, file_type='csv'):
