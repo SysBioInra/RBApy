@@ -7,6 +7,7 @@ from __future__ import division, print_function, absolute_import
 import copy
 import itertools
 import libsbml
+import re
 
 # local imports
 from rba.prerba.enzyme import Enzyme
@@ -100,6 +101,8 @@ class SbmlData(object):
         for reaction in model.getListOfReactions():
             try:
                 enzymes = parser.enzyme_composition(reaction)
+                # remove 'G_' prefix from SBML Level3 gene entries
+                enzymes = [[re.sub("^G_", "", e[0])] for e in enzymes]
             except UserWarning:
                 self._print_invalid_enzyme_notes()
                 raise UserWarning('Invalid SBML.')
