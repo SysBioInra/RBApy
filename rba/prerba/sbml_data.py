@@ -102,7 +102,11 @@ class SbmlData(object):
             try:
                 enzymes = parser.enzyme_composition(reaction)
                 # remove 'G_' prefix from SBML Level3 gene entries
-                enzymes = [[re.sub("^G_", "", e[0])] for e in enzymes]
+                trimmed_enzymes = list()
+                for enz in enzymes:
+                    enz = [re.sub("^G_", "", e) for e in enz]
+                    trimmed_enzymes.append(enz)
+                enzymes = trimmed_enzymes
             except UserWarning:
                 self._print_invalid_enzyme_notes()
                 raise UserWarning('Invalid SBML.')
