@@ -166,8 +166,8 @@ class UniprotData(object):
 class LocationParser(object):
     """Class parsing 'Subcellular location' field of uniprot."""
 
-    _location_reader = re.compile(r'SUBCELLULAR LOCATION:\s([\w\s]+\w)')
-
+    #_location_reader = re.compile(r'SUBCELLULAR LOCATION:\s([\w\s]+\w)')
+    _location_reader = re.compile(r'\s+([\w\s]+\w)')
     def parse(self, field):
         """
         Parse 'Subcellular location' field in uniprot.
@@ -183,10 +183,23 @@ class LocationParser(object):
             Compartment read.
 
         """
+
+	# Remove all fields such as {ECO:XX|Pubmed:ggg}
+	# location_remove_ECO = re.compile(r'\{(\w|:|\||-|,|\s)+\}(.|;|\s)');
+	# Remove all fields such as [Isoform 1]
+	location_remove_ISO = re.compile(r'\[.*\]:');
+
+
         if pandas.isnull(field):
             return None
         try:
-            return self._location_reader.match(field).group(1)
+	    # split subcellular localisation
+	    # take the second elements, 1st is ''
+	    fieldSplit = re.split('SUBCELLULAR LOCATION:',field)
+	    # now remove [XXXX]:
+            fieldWithoutIso = location_remove_ISO.sub("",fieldSplit[1])
+            return self._location_reader.match(fieldWithoutIso).group(1)
+            #return self._location_reader.match(field).group(1)
         except AttributeError:
             print(field)
             raise
