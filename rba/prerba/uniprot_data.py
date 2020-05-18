@@ -38,14 +38,27 @@ class UniprotData(object):
         self.data.set_index('Entry', inplace=True)
         # create mapping from gene ids to uniprot ids
         self._gene_to_entry = {}
+	self._gene_annotation_score = {}
         gene_reader = re.compile(r'([^\s]+)')
-        for entry, genes in zip(self.data.index, self.data['Gene names']):
+	annotation_reader = re.compile(r'[0-5]')
+        for entry, genes, annotation in zip(self.data.index, self.data['Gene names'], self.data['Annotation']):
             # transform raw uniprot field into standardized list
             if pandas.isnull(genes):
                 continue
             gene_ids = set(g.upper() for g in gene_reader.findall(genes))
+	    annotation_score = annotation_reader.findall(annotation)
             for gene in gene_ids:
-                self._gene_to_entry[gene] = entry
+		# test if the gene is already present in the list _gene_to_entry.keys()
+		if gene in self._gene_to_entry.keys():
+			# gene present. Test of the annotation score.
+			if int(annotation_score[0]) > self._gene_annotation_score[gene]:
+				# better annotation, keep the entry
+				self._gene_to_entry[gene] = entry
+				self._gene_annotation_score[gene] = int(annotation_score[0])
+		else:
+			# gene absent: insertion
+                	self._gene_to_entry[gene] = entry
+			self._gene_annotation_score[gene] = int(annotation_score[0])
         # create parsers
         self._location_parser = LocationParser()
         self._cofactor_parser = CofactorParser()
@@ -166,8 +179,8 @@ class UniprotData(object):
 class LocationParser(object):
     """Class parsing 'Subcellular location' field of uniprot."""
 
-    _location_reader = re.compile(r'SUBCELLULAR LOCATION:\s([\w\s]+\w)')
-
+    #_location_reader = re.compile(r'SUBCELLULAR LOCATION:\s([\w\s]+\w)')
+    _location_reader = re.compile(r'\s+([\w\s]+\w)')
     def parse(self, field):
         """
         Parse 'Subcellular location' field in uniprot.
@@ -183,10 +196,23 @@ class LocationParser(object):
             Compartment read.
 
         """
+
+	# Remove all fields such as {ECO:XX|Pubmed:ggg}
+	# location_remove_ECO = re.compile(r'\{(\w|:|\||-|,|\s)+\}(.|;|\s)');
+	# Remove all fields such as [Isoform 1]
+	location_remove_ISO = re.compile(r'\[.*\]:');
+
+
         if pandas.isnull(field):
             return None
         try:
-            return self._location_reader.match(field).group(1)
+	    # split subcellular localisation
+	    # take the second elements, 1st is ''
+	    fieldSplit = re.split('SUBCELLULAR LOCATION:',field)
+	    # now remove [XXXX]:
+            fieldWithoutIso = location_remove_ISO.sub("",fieldSplit[1])
+            return self._location_reader.match(fieldWithoutIso).group(1)
+            #return self._location_reader.match(field).group(1)
         except AttributeError:
             print(field)
             raise
