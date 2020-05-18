@@ -73,6 +73,13 @@ def url_columns():
     cols = ['id', 'entry name', 'genes', 'protein names', 'organism',
             'organism-id']
 
+    ######################
+    # Annotation quality #
+    ######################
+    # **Reviewed**, **Annotation score**
+    cols += ['reviewed', 'annotation score']
+
+
     #############
     # Sequences #
     #############
