@@ -6,6 +6,7 @@ from __future__ import division, print_function, absolute_import
 # global imports
 import copy
 import itertools
+import re
 import libsbml
 
 # local imports
@@ -197,6 +198,11 @@ class FbcAnnotationParser(object):
         self._gene_names = {}
         for gene_product in fbc_model.getListOfGeneProducts():
             self._gene_names[gene_product.getId()] = gene_product.getLabel()
+        # remove 'G_' prefix if present
+        # (compatibility issue with COBRApy,
+        #  the label should be the gene name according to FBC specs)
+        self._gene_names = {id: re.sub("^G_", "", name)
+                            for id, name in self._gene_names.items()}
 
     def enzyme_composition(self, reaction):
         gp_association = reaction.getPlugin('fbc') \
