@@ -60,9 +60,10 @@ class ConstraintMatrix(object):
                           + [p + '_machinery' for p in processes]
                           + [m + '_target_flux' for m in undetermined_fluxes])
         self.reaction_cols = numpy.arange(nb_reactions)
-        self.enzyme_cols = self.reaction_cols[-1] + 1 + numpy.arange(nb_enzymes)
-        self.process_cols = self.enzyme_cols[-1] + 1 + numpy.arange(nb_processes)
-        self.target_cols = (self.process_cols[-1] + 1 +
+        self.enzyme_cols = nb_reactions + numpy.arange(nb_enzymes)
+        self.process_cols = (nb_reactions + nb_enzymes +
+                             numpy.arange(nb_processes))
+        self.target_cols = (nb_reactions + nb_enzymes + nb_processes +
                             numpy.arange(nb_undetermined))
         # row information
         self.row_names = (self._blocks.metabolism.internal
