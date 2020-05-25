@@ -82,7 +82,7 @@ setup(
         'lxml',
         'python-libsbml',
         'scipy<=1.2.1',
-        'biopython',
+        'biopython', 'cplex'
     ],
 
     # List additional groups of dependencies here (e.g. development
