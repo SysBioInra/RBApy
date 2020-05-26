@@ -10,6 +10,7 @@ import re
 import libsbml
 import sympy
 from sympy.logic.boolalg import to_dnf
+from sympy.core.sympify import SympifyError
 
 # local imports
 from rba.prerba.enzyme import Enzyme
@@ -127,7 +128,7 @@ class SbmlData(object):
             return CobraNoteParser()
 
     def _print_invalid_enzyme_notes(self):
-        print('Your SBML file does not contain fbc gene products nor uses '
+        print('Your SBML file must contain valid fbc gene products or'
               ' COBRA notes to define enzyme composition for every '
               'reaction. Please comply with SBML'
               ' requirements defined in the README and rerun script.')
@@ -241,10 +242,14 @@ class CobraNoteParser(object):
         if not reaction.getNotes():
             raise UserWarning('Missing enzyme annotation')
         for ga in self._gene_associations(reaction.getNotes()):
-            sympy_expr = self._parse_gene_association(ga)
-            composition = extract_enzyme_list(sympy_expr)
-            if composition:
-                result += composition
+            expr = self._parse_gene_association(ga)
+            if expr:
+                my_expr = self._remove_stoichiometry(expr)
+                try:
+                    result += extract_enzyme_list(self._to_sympy(my_expr))
+                except (TypeError, SyntaxError, AttributeError, SympifyError):
+                    print("Invalid GENE ASSOCIATION: " + expr + ".")
+                    raise UserWarning('Invalid SBML.')
         return result
 
     def _gene_associations(self, note):
@@ -263,9 +268,15 @@ class CobraNoteParser(object):
         tags = text.split(':', 1)
         if len(tags) != 2 or tags[0] != "GENE_ASSOCIATION":
             return None
-        sympy_expr = re.sub(r'\bOR\b', r'|', tags[1], flags=re.IGNORECASE)
+        return(tags[1].strip())
+
+    def _to_sympy(self, expr):
+        sympy_expr = re.sub(r'\bOR\b', r'|', expr, flags=re.IGNORECASE)
         sympy_expr = re.sub(r'\bAND\b', r'&', sympy_expr, flags=re.IGNORECASE)
-        return(sympy_expr)
+        return sympy_expr
+
+    def _remove_stoichiometry(self, expr):
+        return re.sub(r'\d+\*', r'', expr)
 
 def extract_enzyme_list(sympy_expr):
     dnf_expr = str(to_dnf(sympy_expr))
