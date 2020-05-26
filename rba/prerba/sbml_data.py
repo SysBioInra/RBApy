@@ -8,6 +8,8 @@ import copy
 import itertools
 import re
 import libsbml
+import sympy
+from sympy.logic.boolalg import to_dnf
 
 # local imports
 from rba.prerba.enzyme import Enzyme
@@ -208,31 +210,25 @@ class FbcAnnotationParser(object):
         gp_association = reaction.getPlugin('fbc') \
                                  .getGeneProductAssociation()
         if gp_association:
-            return self._read_fbc_association(gp_association)
+            result = self._parse_fbc_association(gp_association.getAssociation())
+            return extract_enzyme_list(result)
         else:
             return [[]]
 
-    def _read_fbc_association(self, gp_association):
-        """We assume that relations are always 'or's of 'and's."""
-        association = gp_association.getAssociation()
+    def _parse_fbc_association(self, association):
         if association.isFbcOr():
-            return [self._read_fbc_association_components(a)
-                    for a in association.getListOfAssociations()]
-        else:
-            return [self._read_fbc_association_components(association)]
-
-    def _read_fbc_association_components(self, association):
-        """We assume that relations are always 'and's."""
-        if association.isGeneProductRef():
-            gene_id = association.getGeneProduct()
-            return [self._gene_names[gene_id]]
+            result = " | ".join(self._parse_fbc_association(a)
+                                for a in association.getListOfAssociations())
+            return "(" + result + ")"
         elif association.isFbcAnd():
-            result = []
-            for assoc in association.getListOfAssociations():
-                result += self._read_fbc_association_components(assoc)
-            return result
+            result = " & ".join(self._parse_fbc_association(a)
+                                for a in association.getListOfAssociations())
+            return "(" + result + ")"
+        elif association.isGeneProductRef():
+            gene_id = association.getGeneProduct()
+            return self._gene_names[gene_id]
         else:
-            print('Invalid association (we only support ors of ands)')
+            print('Unknown FBC association type')
             raise UserWarning('Invalid SBML.')
 
 
@@ -242,7 +238,8 @@ class CobraNoteParser(object):
         if not reaction.getNotes():
             raise UserWarning('Missing enzyme annotation')
         for ga in self._gene_associations(reaction.getNotes()):
-            composition = self._parse_gene_association(ga)
+            sympy_expr = self._parse_gene_association(ga)
+            composition = extract_enzyme_list(sympy_expr)
             if composition:
                 result += composition
         return result
@@ -260,18 +257,21 @@ class CobraNoteParser(object):
         return note
 
     def _parse_gene_association(self, text):
-        """We assume that relations are always 'or's of 'and's."""
         tags = text.split(':', 1)
         if len(tags) != 2 or tags[0] != "GENE_ASSOCIATION":
             return None
-        enzyme_description = self._remove_parentheses(tags[1])
-        if not enzyme_description:
-            return []
-        return [self._enzyme_composition(e)
-                for e in enzyme_description.split(' or ')]
+        sympy_expr = re.sub(r'\bOR\b', r'|', tags[1], flags=re.IGNORECASE)
+        sympy_expr = re.sub(r'\bAND\b', r'&', sympy_expr, flags=re.IGNORECASE)
+        return(sympy_expr)
 
-    def _remove_parentheses(self, string):
-        return ''.join(c for c in string if c not in '()')
+def extract_enzyme_list(sympy_expr):
+    dnf_expr = str(to_dnf(sympy_expr))
+    # remove parentheses for easier parsing (not useful once in DNF)
+    enzyme_description = re.sub(r'[()]', r'', dnf_expr)
+    if not enzyme_description:
+        return []
+    return [enzyme_composition(e)
+            for e in enzyme_description.split(' | ')]
 
-    def _enzyme_composition(self, enzyme):
-        return [gene.strip() for gene in enzyme.split(' and ')]
+def enzyme_composition(enzyme):
+    return [gene.strip() for gene in enzyme.split(' & ')]
