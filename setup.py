@@ -78,11 +78,14 @@ setup(
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
     install_requires=[
+        'numpy',
         'pandas',
         'lxml',
         'python-libsbml',
         'scipy<=1.2.1',
-        'biopython', 'cplex'
+        'biopython',
+        'simpy',
+        'cplex'
     ],
 
     # List additional groups of dependencies here (e.g. development
