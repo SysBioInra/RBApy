@@ -106,6 +106,9 @@ class SbmlData(object):
             except UserWarning:
                 self._print_invalid_enzyme_notes()
                 raise UserWarning('Invalid SBML.')
+            # if no enzyme was detected, add "empty" enzyme
+            if not enzymes:
+                enzymes = [['']]
             # we create one reaction per associated enzyme
             for suffix, enzyme in enumerate(enzymes):
                 id_ = reaction.getId()
