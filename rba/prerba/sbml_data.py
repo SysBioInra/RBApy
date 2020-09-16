@@ -31,7 +31,7 @@ class SbmlData(object):
 
     """
 
-    def __init__(self, input_file, cytosol_id='c', external_ids=None):
+    def __init__(self, input_file, cytosol_id='c', external_ids=None, interface_id=None):
         """
         Build from file.
 
@@ -53,7 +53,7 @@ class SbmlData(object):
         self.external_prefixes = [self._prefix(m.id)
                                   for m in self.species
                                   if m.boundary_condition]
-        self._extract_reactions_and_enzymes(model, cytosol_id)
+        self._extract_reactions_and_enzymes(model, cytosol_id, interface_id)
 
     def _load_document(self, input_file):
         document = libsbml.readSBML(input_file)
@@ -94,7 +94,7 @@ class SbmlData(object):
                 result.append(reaction.getProduct(0).getSpecies())
         return set(result)
 
-    def _extract_reactions_and_enzymes(self, model, cytosol_id):
+    def _extract_reactions_and_enzymes(self, model, cytosol_id, interface_id):
         self.reactions = rba.xml.ListOfReactions()
         self.enzymes = []
         parser = self._create_annotation_parser(model)
@@ -112,7 +112,7 @@ class SbmlData(object):
                 new_reaction = self._create_reaction(id_, reaction)
                 self.reactions.append(new_reaction)
                 self.enzymes.append(self._create_enzyme(
-                    new_reaction, enzyme, cytosol_id
+                    new_reaction, enzyme, cytosol_id, interface_id
                 ))
 
     def _create_annotation_parser(self, model):
@@ -139,13 +139,14 @@ class SbmlData(object):
             )
         return result
 
-    def _create_enzyme(self, reaction, composition, cytosol_id):
+    def _create_enzyme(self, reaction, composition, cytosol_id, interface_id):
         enzyme = Enzyme(reaction.id,
                         not self._all_species_in_same_compartment(reaction))
         enzyme.gene_association = composition
-        enzyme.imported_metabolites = self._imported_metabolites(
-            reaction, cytosol_id
-        )
+	enzyme.compartments_of_metabolites = self._retrieve_compartments_of_metabolites(reaction)
+        enzyme.imported_metabolites = self._imported_metabolites(enzyme,
+            	reaction, cytosol_id, interface_id)
+
         enzyme.initialize_efficiencies()
         return enzyme
 
@@ -155,7 +156,16 @@ class SbmlData(object):
                                                  reaction.products)]
         return all(c == compartments[0] for c in compartments[1:])
 
-    def _imported_metabolites(self, reaction, cytosol_id):
+    def _retrieve_compartments_of_metabolites(self, reaction):
+        compartments = [self._suffix(m.species)
+                        for m in itertools.chain(reaction.reactants,
+                                                 reaction.products)]
+	# remove double entries + order entries by alphabetic order
+	compartments = set(compartments)
+	return compartments
+
+
+    def _imported_metabolites(self, enzyme, reaction, cytosol_id, interface_id):
         """
         Identify external metabolites imported into the cytosol.
 
@@ -166,12 +176,22 @@ class SbmlData(object):
         - they are not part of the cytosol.
         - one of the products is in the cytosol.
         """
-        if self._has_cytosolic_product(reaction, cytosol_id):
-            return self._noncytosolic_external_reactants(
-                reaction, cytosol_id
-            )
-        else:
-            return []
+
+	if interface_id == []:
+		if self._has_cytosolic_product(reaction, cytosol_id):
+		    return self._noncytosolic_external_reactants(
+		        reaction, cytosol_id
+		    )
+		else:
+		    return []
+		
+	else:
+		if enzyme.compartments_of_metabolites == interface_id:
+		    return self._noncytosolic_external_reactants(
+		        reaction, cytosol_id)
+		else:
+		    return []
+
 
     def _prefix(self, metabolite_id):
         return metabolite_id.rsplit('_', 1)[0]

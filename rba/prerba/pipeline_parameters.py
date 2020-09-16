@@ -32,7 +32,7 @@ class PipelineParameters(object):
         """
         self.obligatory_tags = ['INPUT_DIR', 'OUTPUT_DIR', 'SBML_FILE',
                                 'ORGANISM_ID']
-        self.optional_tags = ['EXTERNAL_COMPARTMENTS']
+        self.optional_tags = ['EXTERNAL_COMPARTMENTS','INTERFACE_COMPARTMENTS']
         self.parameters = {}
 
         try:

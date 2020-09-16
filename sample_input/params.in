@@ -20,6 +20,27 @@ INPUT_DIR = sample_input/data
 SBML_FILE = sample.xml
 
 ##############################################################################
+# EXTERNAL_COMPARTMENTS (optional)
+# Identifier of SBML compartments that contain boundary metabolites. If
+# metabolites are already tagged as 'boundaryCondition', you do not need
+# to specify this parameter. If several compartments contain boundary
+# metabolites, write them down separated by a comma.
+##############################################################################
+
+# EXTERNAL_COMPARTMENTS = e 
+
+##############################################################################
+# INTERFACE_COMPARTMENTS (optional, but recommended)
+# Identifiers of SBML compartments that delimit the interface between exterior-interior of
+# cells. A michaelis-menten efficiency will be automatically assigned to the enzymes. 
+# the identifiers must be separated by a comma
+# If this option is not specified, RBApy will look for any reaction importing metabolites 
+# into the cytosol. 
+##############################################################################
+
+# INTERFACE_COMPARTMENTS = c,p 
+
+##############################################################################
 # ORGANISM_ID                                                                  
 # Taxonomy ID of target organism as established by the NCBI. Please retrieve
 # id of your organism on:

@@ -35,7 +35,8 @@ class UserData(object):
         print('Importing SBML data...')
         self.sbml_data = sbml_data.SbmlData(
             self.input_path(self._parameters['SBML_FILE']),
-            external_ids=self._external_ids()
+            external_ids=self._external_ids(),
+	    interface_id=self._interface_ids()
             )
 
     def input_path(self, filename):
@@ -49,6 +50,12 @@ class UserData(object):
         if line is None:
             return []
         return [e.strip() for e in line.split(',')]
+
+    def _interface_ids(self):
+        line = self._parameters.get('INTERFACE_COMPARTMENTS', None)
+        if line is None:
+            return []
+        return set(line.split(','))
 
     def _import_uniprot_data(self):
         print('Importing Uniprot data...')
