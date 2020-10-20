@@ -143,10 +143,8 @@ class SbmlData(object):
         enzyme = Enzyme(reaction.id,
                         not self._all_species_in_same_compartment(reaction))
         enzyme.gene_association = composition
-	enzyme.compartments_of_metabolites = self._retrieve_compartments_of_metabolites(reaction)
-        enzyme.imported_metabolites = self._imported_metabolites(enzyme,
-            	reaction, cytosol_id, interface_id)
-
+        enzyme.compartments_of_metabolites = self._retrieve_compartments_of_metabolites(reaction)
+        enzyme.imported_metabolites = self._imported_metabolites(enzyme, reaction, cytosol_id, interface_id)
         enzyme.initialize_efficiencies()
         return enzyme
 
@@ -157,12 +155,10 @@ class SbmlData(object):
         return all(c == compartments[0] for c in compartments[1:])
 
     def _retrieve_compartments_of_metabolites(self, reaction):
-        compartments = [self._suffix(m.species)
-                        for m in itertools.chain(reaction.reactants,
-                                                 reaction.products)]
+        compartments = [self._suffix(m.species) for m in itertools.chain(reaction.reactants, reaction.products)]
 	# remove double entries + order entries by alphabetic order
-	compartments = set(compartments)
-	return compartments
+        compartments = set(compartments)
+        return compartments
 
 
     def _imported_metabolites(self, enzyme, reaction, cytosol_id, interface_id):
@@ -177,20 +173,17 @@ class SbmlData(object):
         - one of the products is in the cytosol.
         """
 
-	if interface_id == []:
-		if self._has_cytosolic_product(reaction, cytosol_id):
-		    return self._noncytosolic_external_reactants(
-		        reaction, cytosol_id
-		    )
-		else:
-		    return []
+        if interface_id == []:
+                if self._has_cytosolic_product(reaction, cytosol_id):
+                        return self._noncytosolic_external_reactants(reaction, cytosol_id)
+                else:
+                        return []
 		
-	else:
-		if enzyme.compartments_of_metabolites == interface_id:
-		    return self._noncytosolic_external_reactants(
-		        reaction, cytosol_id)
-		else:
-		    return []
+        else:
+                if enzyme.compartments_of_metabolites == interface_id:
+                        return self._noncytosolic_external_reactants(reaction, cytosol_id)
+                else:
+                        return []
 
 
     def _prefix(self, metabolite_id):
