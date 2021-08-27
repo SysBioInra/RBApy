@@ -294,52 +294,52 @@ class TutorialTestCase(unittest.TestCase):
         ribosome_capacity = my_model.parameters.functions.get_by_id('ribosome_capacity').parameters.get_by_id('CONSTANT')
 
         maximal_density.value = 10
-        results = my_model.solve()
+        results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 0.08795976638793945, rtol=rtol)
         maximal_density.value = 100
-        results = my_model.solve()
+        results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 0.09327113628387451, rtol=rtol)
         maximal_density.value = 1000
-        results = my_model.solve()
+        results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 0.09383797645568848, rtol=rtol)
         maximal_density.value = 10000
-        results = my_model.solve()
+        results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 0.09389519691467285, rtol=rtol)
 
         transport_kcat.value = 100
         precursor_kcat.value = 100
         biomass_kcat.value = 100
-        results = my_model.solve()
+        results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 0.938953161239624, rtol=rtol)
 
         precursor_kcat.value = 100000
         biomass_kcat.value = 100000
-        results = my_model.solve()
+        results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 1.161106824874878, rtol=rtol)
         precursor_kcat.value = 1000000
         biomass_kcat.value = 1000000
-        results = my_model.solve()
+        results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 1.1613553762435913, rtol=rtol)
 
         transport_kcat.value = 100
-        results = my_model.solve()
+        results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 1.1613553762435913, rtol=rtol)
         transport_kcat.value = 200
-        results = my_model.solve()
+        results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 2.322656512260437, rtol=rtol)
         transport_kcat.value = 50
-        results = my_model.solve()
+        results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 0.5806845426559448, rtol=rtol)
 
         maximal_density.value = 10000
-        results = my_model.solve()
+        results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 0.5806845426559448, rtol=rtol)
         maximal_density.value = 100
-        results = my_model.solve()
+        results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 0.577893853187561, rtol=rtol)
         maximal_density.value = 10
-        results = my_model.solve()
+        results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 0.5537021160125732, rtol=rtol)
         maximal_density.value = 1
-        results = my_model.solve()
+        results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 0.3903120756149292, rtol=rtol)
