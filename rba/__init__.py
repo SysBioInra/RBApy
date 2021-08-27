@@ -5,12 +5,13 @@ RBA package
 Package computing Resource Balance Analysis.
 """
 
-from .model import RbaModel
-from .prerba import *
-from .core import *
-from .utils import *
+from ._version import __version__  # noqa: F401
+from .model import RbaModel  # noqa: F401
+from .prerba import *  # noqa: F401
+from .core import *  # noqa: F401
+from .utils import *  # noqa: F401
 
-from . import prerba, core, utils
+from . import prerba, core, utils  # noqa: F401
 
 __all__ = ['RbaModel']
 __all__ += prerba.__all__

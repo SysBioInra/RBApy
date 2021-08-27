@@ -45,7 +45,7 @@ class RbaModel(object):
         self._constraint_matrix = None
 
     @classmethod
-    def from_data(cls, params_file):
+    def from_data(cls, params_file, verbose=False):
         """
         Make object from data directory (SBML, FASTA and helper files).
 
@@ -54,10 +54,11 @@ class RbaModel(object):
         params_file : str
             Path to params.in file.
 
+        verbose : bool, optional
+            Whether to display status information
         """
-        builder = rba.ModelBuilder(params_file)
+        builder = rba.ModelBuilder(params_file, verbose=verbose)
         builder.export_proteins('protein_summary.tsv')
-        print('Building model...')
         model = builder.build_model()
         return model
 
@@ -76,31 +77,31 @@ class RbaModel(object):
         obj.output_dir = input_dir
         obj.parameters = rba.xml.RbaParameters().from_file(
             open(join(input_dir, 'parameters.xml'))
-            )
+        )
         obj.density = rba.xml.RbaDensity().from_file(
             open(join(input_dir, 'density.xml'))
-            )
+        )
         obj.metabolism = rba.xml.RbaMetabolism().from_file(
             open(join(input_dir, 'metabolism.xml'))
-            )
+        )
         obj.proteins = rba.xml.RbaMacromolecules().from_file(
             open(join(input_dir, 'proteins.xml'))
-            )
+        )
         obj.rnas = rba.xml.RbaMacromolecules().from_file(
             open(join(input_dir, 'rnas.xml'))
-            )
+        )
         obj.dna = rba.xml.RbaMacromolecules().from_file(
             open(join(input_dir, 'dna.xml'))
-            )
+        )
         obj.processes = rba.xml.RbaProcesses().from_file(
             open(join(input_dir, 'processes.xml'))
-            )
+        )
         obj.targets = rba.xml.RbaTargets().from_file(
             open(join(input_dir, 'targets.xml'))
-            )
+        )
         obj.enzymes = rba.xml.RbaEnzymes().from_file(
             open(join(input_dir, 'enzymes.xml'))
-            )
+        )
         obj.set_medium(join(input_dir, 'medium.tsv'))
         return obj
 
@@ -158,7 +159,7 @@ class RbaModel(object):
         """Return full path to file contained in output directory."""
         return join(self.output_dir, file_name)
 
-    def solve(self, recompute_matrices=True):
+    def solve(self, recompute_matrices=True, lp_solver='cplex', bissection_tol=1e-6, max_bissection_iters=None, verbose=False):
         """
         Solve RBA model.
 
@@ -170,6 +171,18 @@ class RbaModel(object):
             set to False when only the medium composition changes (medium
             concentrations do not appear in the matrices).
 
+        lp_solver : str, optional
+            LP solver (``cplex``, ``cplex_optlang``, ``glpk``, ``glpk_exact``, ``scipy``)
+
+        bissection_tol : float, optional
+            Tolerance for bissection
+
+        max_bissection_iters : int, optional
+            Maximum number of iterations for bissection
+
+        verbose : bool, optional
+            Whether to display status information
+
         Returns
         -------
         rba.utils.Results object containing optimal growth rate and fluxes.
@@ -177,9 +190,13 @@ class RbaModel(object):
         """
         if recompute_matrices or self._constraint_matrix is None:
             self._constraint_matrix = rba.ConstraintMatrix(self)
-        solver = rba.Solver(self._constraint_matrix)
+        solver = rba.Solver(self._constraint_matrix,
+                            lp_solver=lp_solver,
+                            bissection_tol=bissection_tol,
+                            max_bissection_iters=max_bissection_iters,
+                            verbose=verbose)
         solver.solve()
-	#solver.solve_grid()
+        # solver.solve_grid()
         return rba.Results(self, self._constraint_matrix, solver)
 
     def set_enzyme_efficiencies(self, file_name):

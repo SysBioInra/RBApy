@@ -5,51 +5,53 @@ from __future__ import division, print_function, absolute_import
 
 # global imports
 import os.path
+import sys
 try:
     from urllib.request import urlopen
     from urllib.parse import urlencode
 except ImportError:
     from urllib2 import urlopen
     from urllib import urlencode
-import shutil
 
 
 def create_uniprot_if_absent(input_file, organism_id):
     if not os.path.isfile(input_file):
-        print('Could not find uniprot file. Downloading most recent'
-              ' version...')
+        print('Could not find UniProt file. Downloading most recent'
+              ' version ...', end='')
+        sys.stdout.flush()
         raw_data = UniprotImporter(organism_id).data
         if len(raw_data) == 0:
             raise UserWarning('Invalid organism, could not retrieve '
-                              'Uniprot data.')
+                              'UniProt data.')
         with open(input_file, 'wb') as f:
             f.write(raw_data)
+        print(' done')
 
 
 class UniprotImporter(object):
     """
-    Class retrieving uniprot data for specified organism.
+    Class retrieving UniProt data for specified organism.
 
     Attributes
     ----------
     data : ?
-        Data downloaded from uniprot.
+        Data downloaded from UniProt.
 
     """
 
     def __init__(self, organism_id):
         """
-        Build object from uniprot organism identifier.
+        Build object from UniProt organism identifier.
 
         Parameters
         ----------
         organism_id : str
             Information used to retrieve organism. It can be
-            a uniprot identifier, a species name, etc.
+            a UniProt identifier, a species name, etc.
 
         """
         # code adapted from
-        # http://www.uniprot.org/help/programmatic_access
+        # http://www.UniProt.org/help/programmatic_access
         url = 'http://www.uniprot.org/uniprot/'
         params = {
             'format': 'tab',

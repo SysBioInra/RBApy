@@ -17,22 +17,25 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
+with open(path.join(here, 'rba', '_version.py'), 'r') as f:
+    version = f.readline().split("'")[1]
+
 setup(
     name='rba',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='1.0.2',
+    version=version,
 
-    description='Resource balance analysis',
+    description='Package for automated generation of bacterial Resource Balance Analysis (RBA) models and simulation of RBA models',
     long_description=long_description,
 
     # The project's main homepage.
-    url='',
+    url='https://sysbioinra.github.io/RBApy/',
 
     # Author details
-    author='Stephan Fischer, Anne Goelzer, Felipe Golib',
+    author='Ana Bulovic, Stephan Fischer, Anne Goelzer, Felipe Golib',
     author_email='anne.goelzer@inra.fr',
 
     # Choose your license
@@ -63,7 +66,17 @@ setup(
     ],
 
     # What does your project relate to?
-    keywords='metabolism',
+    keywords=[
+        'metabolism',
+        'Resource Balance Analysus',
+        'molecular biology',
+        'cell biology',
+        'biochemistry',
+        'systems biology',
+        'computational biology',
+        'mathematical modeling',
+        'numerical simulation',        
+    ],
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
@@ -78,11 +91,13 @@ setup(
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
     install_requires=[
-        'pandas',
+        'biopython',
         'lxml',
+        'numpy',
+        'optlang',
+        'pandas',
         'python-libsbml',
-        'scipy<=1.2.1',
-        'biopython', 'cplex'
+        'scipy',
     ],
 
     # List additional groups of dependencies here (e.g. development
@@ -90,8 +105,9 @@ setup(
     # for example:
     # $ pip install -e .[dev,test]
     extras_require={
+        'cplex': ['cplex'],
         'dev': ['check-manifest'],
-        'test': ['coverage'],
+        'test': ['pytest', 'pytest-cov', 'coverage'],
     },
 
     # If there are data files included in your packages that need to be
@@ -111,8 +127,9 @@ setup(
     # "scripts" keyword. Entry points provide cross-platform support and allow
     # pip to create the appropriate form of executable for the target platform.
     entry_points={
-        #'console_scripts': [
-        #'sample=sample:main',
-        #],
+        'console_scripts': [
+            'generate-rba-model=rba.cli.generate_rba_model:main',
+            'solve-rba-model=rba.cli.solve_rba_model:main',
+        ],
     },
 )

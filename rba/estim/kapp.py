@@ -1,4 +1,3 @@
-import cobra
 import ConfigParser
 import pandas as pd
 

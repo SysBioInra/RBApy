@@ -6,7 +6,7 @@ from __future__ import division, print_function, absolute_import
 # global imports
 from collections import namedtuple
 from scipy.sparse import (
-    csr_matrix, csc_matrix, lil_matrix, coo_matrix, hstack, eye
+    csr_matrix, lil_matrix, coo_matrix, hstack, eye
     )
 import numpy
 

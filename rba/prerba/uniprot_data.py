@@ -14,12 +14,12 @@ Cofactor = namedtuple('Cofactor', 'chebi name stoichiometry uniprot_note')
 
 class UniprotData(object):
     """
-    Class parsing RBA-relevant Uniprot data.
+    Class parsing RBA-relevant UniProt data.
 
     Parameters
     ----------
     data: pandas.DataFrame
-        raw uniprot data
+        raw UniProt data
 
     """
 
@@ -29,20 +29,20 @@ class UniprotData(object):
 
         Parameters
         ----------
-        input_file: path to uniprot file.
+        input_file: path to UniProt file.
 
         """
-        # open uniprot data
+        # open UniProt data
         self.data = pandas.read_csv(os.path.join(input_dir, 'uniprot.csv'),
                                     sep='\t')
         self.data.set_index('Entry', inplace=True)
-        # create mapping from gene ids to uniprot ids
+        # create mapping from gene ids to UniProt ids
         self._gene_to_entry = {}
         self._gene_annotation_score = {}
         gene_reader = re.compile(r'([^\s]+)')
         annotation_reader = re.compile(r'[0-5]')
         for entry, genes, annotation in zip(self.data.index, self.data['Gene names'], self.data['Annotation']):
-            # transform raw uniprot field into standardized list
+            # transform raw UniProt field into standardized list
             if pandas.isnull(genes):
                 continue
             gene_ids = set(g.upper() for g in gene_reader.findall(genes))
@@ -66,12 +66,12 @@ class UniprotData(object):
 
     def line(self, uniprot_id):
         """
-        Return data line corresponding to uniprot identifier.
+        Return data line corresponding to UniProt identifier.
 
         Parameters
         ----------
         uniprot_id : str
-            Uniprot identifier of a protein.
+            UniProt identifier of a protein.
 
         Returns
         -------
@@ -138,7 +138,7 @@ class UniprotData(object):
 
     def entry(self, gene):
         """
-        Find uniprot entries from gene identifiers.
+        Find UniProt entries from gene identifiers.
 
         Parameters
         ----------
@@ -149,7 +149,7 @@ class UniprotData(object):
         -------
         result : dict
             Dictionary where keys are gene ids and values are
-            corresponding uniprot entries.
+            corresponding UniProt entries.
         not_found : list
             Gene ids that could not be retrieved.
 
@@ -177,18 +177,18 @@ class UniprotData(object):
 
 
 class LocationParser(object):
-    """Class parsing 'Subcellular location' field of uniprot."""
+    """Class parsing 'Subcellular location' field of UniProt."""
 
     #_location_reader = re.compile(r'SUBCELLULAR LOCATION:\s([\w\s]+\w)')
     _location_reader = re.compile(r'\s+([\w\s]+\w)')
     def parse(self, field):
         """
-        Parse 'Subcellular location' field in uniprot.
+        Parse 'Subcellular location' field in UniProt.
 
         Parameters
         ----------
         field : str
-            Subcellular location field from uniprot.
+            Subcellular location field from UniProt.
 
         Returns
         -------
@@ -220,14 +220,14 @@ class LocationParser(object):
 
 class SubunitParser(object):
     """
-    Class parsing 'Subunit' uniprot field.
+    Class parsing 'Subunit' UniProt field.
 
     Attributes
     ----------
     prefix_rule : dict
         Dictionary determining rule used to infer stoichiometry.
         Keys are all caps prefixes preceding 'mer' in words found
-        in uniprot field,
+        in UniProt field,
         values are stoichiometries associated with them. For example,
         prefix_rule[MONO] = 1.
 
@@ -240,7 +240,7 @@ class SubunitParser(object):
 
     def parse(self, field):
         """
-        Parse uniprot field.
+        Parse UniProt field.
 
         Parameters
         ----------
@@ -268,7 +268,7 @@ class SubunitParser(object):
 
 
 class CofactorParser(object):
-    """Class parsing Cofactor uniprot field."""
+    """Class parsing Cofactor UniProt field."""
 
     _name_reader = re.compile(r'Name=([^;]+); Xref=ChEBI:([^;]+);')
     _note_reader = re.compile(r'Note=(.*)')
@@ -276,12 +276,12 @@ class CofactorParser(object):
 
     def parse(self, field):
         """
-        Parse uniprot field.
+        Parse UniProt field.
 
         Parameters
         ----------
         field : str
-            Uniprot field containing cofactor information.
+            UniProt field containing cofactor information.
 
         Returns
         -------
