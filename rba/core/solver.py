@@ -55,13 +55,9 @@ class Solver(object):
             if self.verbose:
                 print(' μ = 0 is feasible.')
         elif self.lp_solver.is_infeasible():
-            if self.verbose:
-                print(' μ = 0 is infeasible, check matrix consistency.')
-            return
+            raise ValueError(' μ = 0 is infeasible, check matrix consistency.')
         else:
-            if self.verbose:
-                print(' ' + self.unknown_flag_msg(0))
-            return
+            raise ValueError(' ' + self.unknown_flag_msg(0))
 
         # bissection
         mu_min = 0
@@ -90,9 +86,7 @@ class Solver(object):
                 if self.verbose:
                     print(' is infeasible.')
             else:
-                if self.verbose:
-                    print(' ' + self.unknown_flag_msg(mu_test))
-                return
+                raise ValueError(' ' + self.unknown_flag_msg(mu_test))
 
             # next μ to be tested
             mu_test = (mu_min + mu_max) / 2
@@ -116,13 +110,9 @@ class Solver(object):
         if self.lp_solver.is_feasible():
             self.lp_solver.store_results(0.0)
         elif self.lp_solver.is_infeasible():
-            if self.verbose:
-                print('Mu = 0 is infeasible, check matrix consistency.')
-            return
+            raise ValueError('μ = 0 is infeasible, check matrix consistency.')
         else:
-            if self.verbose:
-                print(self.unknown_flag_msg(0))
-            return
+            raise ValueErro(self.unknown_flag_msg(0))
 
         # grid
         vec_mu = numpy.arange(0, 0.8, 0.001)
@@ -132,15 +122,13 @@ class Solver(object):
             self.lp_solver.solve_lp()
             if self.lp_solver.is_feasible():
                 if self.verbose:
-                    print('Mu = ' + str(mu_test) + ' is feasible.')
+                    print('μ = ' + str(mu_test) + ' is feasible.')
                 self.lp_solver.store_results(mu_test)
             elif self.lp_solver.is_infeasible():
                 if self.verbose:
-                    print('Mu = ' + str(mu_test) + ' is infeasible.')
+                    print('μ = ' + str(mu_test) + ' is infeasible.')
             else:
-                if self.verbose:
-                    print(self.unknown_flag_msg(mu_test))
-                return
+                raise ValueError(self.unknown_flag_msg(mu_test))
 
     def unknown_flag_msg(self, mu):
         status = self.lp_solver.get_status()
@@ -154,6 +142,7 @@ class LpSolver(abc.ABC):
     """ Base class for LP solver
 
     Attributes:
+        name (:obj:`str`): name
         rba_solver (:obj:`Solver`): RBA solver
     """
 
@@ -163,6 +152,11 @@ class LpSolver(abc.ABC):
             rba_solver (:obj:`Solver`): RBA solver
         """
         self.rba_solver = rba_solver
+
+    @property
+    @abc.abstractmethod
+    def name(self):
+        pass
 
     @abc.abstractmethod
     def build_lp(self):
@@ -192,6 +186,10 @@ class LpSolver(abc.ABC):
 
 class CplexLpSolver(LpSolver):
     """ CPLEX LP solver """
+
+    @property
+    def name(self):
+        return 'cplex'
 
     def build_lp(self):
         """
@@ -293,6 +291,10 @@ class OptlangLpSolver(LpSolver):
         """
         super(OptlangLpSolver, self).__init__(rba_solver)
         self.lp_solver = lp_solver
+
+    @property
+    def name(self):
+        return self.lp_solver
 
     def build_lp(self):
         """ Build an LP problem based on current matrices. """
