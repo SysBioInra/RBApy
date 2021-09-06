@@ -2,7 +2,7 @@ RBApy
 ==============================
 
 RBApy is a open-source Python package for automated generation of bacterial Resource Balance Analysis (RBA) models.
-RBA models have been developed for *Bacillus subtilis 168* (wild type), *Escherichia coli K-12* (wild type) and CO2-fixing *Escherichia coli K-12* (engineered strain). You can find these models here: https://github.com/SysBioInra/Bacterial-RBA-models.
+RBA models have been developed for *Bacillus subtilis 168* (wild type), *Escherichia coli K-12* (wild type) and CO2-fixing *Escherichia coli K-12* (an engineered strain). You can find these models here: https://github.com/SysBioInra/Bacterial-RBA-models.
 
 For a complete documentation on RBApy installation and usage, please visit the website:
 https://sysbioinra.github.io/RBApy/
@@ -10,13 +10,41 @@ https://sysbioinra.github.io/RBApy/
 
 Installation
 -------------
-For all details on installation and usage of code, please refer to the RBApy website https://sysbioinra.github.io/RBApy/.
-Make sure that you have `scipy` version <= 1.2.1, as the changes that have recently been introduced in the version 1.3.0 are not yet compatible with RBApy.
+
+RBApy requires one of the linear programming solvers `IBM CPLEX <https://www.ibm.com/analytics/cplex-optimizer>`_, `GLPK <https://www.gnu.org/software/glpk/>`_, or `Gurobi <https://www.gurobi.com/products/gurobi-optimizer/>`_. Note, while GLPK is capable of executing the example models in the tutorial, in our experience, GLPK is prohibitively slow for real RBA models. IBM and Gurobi both provide free licenses for academic research.
+
+1. Optionally, install the CPLEX linear programming solver. 
+
+2. Install this package from PyPI:
+    ```
+    pip install rbapy
+    ```
+
+    Optionally, install GLPK by installing RBApy with the ``cplex`` option. Note, this requires a CPLEX license.:
+
+    ```
+    pip install rbapy[cplex]
+    ```
+
+    Optionally, install GLPK by installing RBApy with the ``glpk`` option. Note, this requires ``libglpk-dev``.:
+
+    ```
+    pip install rbapy[glpk]
+    ```
+
+    Optionally, install Gurobi by installing RBApy with the ``gurobi`` option. Note, this requires a Gurobi license.:
+
+    ```
+    pip install rbapy[gurobi]
+    ```
+
+More information about how to install RBApy is available at https://sysbioinra.github.io/RBApy/.
+
 
 Running
 -------
-For more detailed instructions on usage, please refer to the RBApy website https://sysbioinra.github.io/RBApy/.
 
+For more detailed instructions on usage, please refer to the RBApy website https://sysbioinra.github.io/RBApy/.
 
 Put the SBML file containing the GSMM of your organism of interest in the `input` directory and fill in the
 parameter file `input/params.in`. Then open a console at the root
@@ -51,6 +79,15 @@ where the path points to the directory containing the XML files defining
 the RBA model.
 
 
+Running RBApy with Gurobi
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To use RBApy with Gurobi, either:
+
+* Save your license to your home directory (``~/gurobi.lic``) or to the appropriate location for your OS (e.g., ``/opt/gurobi/gurobi.lic`` for Linux).
+* Encode your license variables (e.g., ``WLSACCESSID``, ``WLSSECRET``, ``LICENSEID``) into environment variables with the prefix ``GRB_`` (e.g., ``GRB_WLSACCESSID``, ``GRB_WLSSECRET``, ``GRB_LICENSEID``).
+
+
 SBML file requirements
 ----------------------
 
@@ -63,11 +100,14 @@ Empty fields in Gene-association will be interpreted as a diffusion reaction.
 
 Authors
 -------
+
 Copyright (c) 2018 INRA - MaIAGE - France.
 S. Fischer, A. Bulovic, A. Goelzer, M. Dinh
 
+
 License
 -------
+
 RBApy is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
@@ -81,7 +121,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with RBApy.  If not, see <https://www.gnu.org/licenses/>
 
+
 Citation
 ---------------
-If you wish to cite this work, please refer to https://doi.org/10.1016/j.ymben.2019.06.001 .
 
+If you wish to cite this work, please refer to `https://doi.org/10.1016/j.ymben.2019.06.001 <https://doi.org/10.1016/j.ymben.2019.06.001>`_.

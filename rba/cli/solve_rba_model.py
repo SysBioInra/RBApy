@@ -18,9 +18,13 @@ def main():
                         help='Directory for model')
     parser.add_argument('--lp-solver', type=str, default=None,
                         help=(
-                            'LP solver (`cplex`, `cplex_optlang`, `glpk`, `glpk_exact`, or `scipy`; '
+                            'LP solver (`cplex`, `glpk`, ``gurobi``, or `scipy`; '
                             'default: `cplex` if installed, otherwise `glpk`)'
                         ))
+    parser.add_argument('--mu-min', type=float, default=0.,
+                        help='Minimum μ to check; default: 0.0.')
+    parser.add_argument('--mu-max', type=float, default=2.5,
+                        help='Maximum μ to check; default: 2.5.')
     parser.add_argument('--bissection-tol', type=float, default=1e-6,
                         help='Tolerance for bissection; default: 1e-6.')
     parser.add_argument('--max-bissection-iters', type=int, default=None,
@@ -43,6 +47,8 @@ def main():
     if args.verbose:
         print('Solving RBA model ...')
     results = model.solve(lp_solver=args.lp_solver,
+                          mu_min=args.mu_min,
+                          mu_max=args.mu_max,
                           bissection_tol=args.bissection_tol,
                           max_bissection_iters=args.max_bissection_iters,
                           verbose=args.verbose)

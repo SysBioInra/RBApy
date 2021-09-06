@@ -36,9 +36,18 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install --upgrade setuptools
 
+      
+      # install dependencies
+      - name: Install GLPK
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends \
+            libglpk-dev \
+            gcc
+
       # install package
       - name: Install the package
-        run: python -m pip install .
+        run: python -m pip install .[glpk]
 
       #############################################
       ## Test
@@ -50,7 +59,7 @@ jobs:
         run: python -m pip install .[tests]
 
       - name: Run the tests
-        run: python -m pytest tests/ --cov=./
+        run: python -m pytest tests/ --cov=./rba
 
       #############################################
       ## Release to BioSimulators registry

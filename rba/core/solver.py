@@ -5,63 +5,212 @@ from __future__ import division, print_function, absolute_import
 
 # global imports
 import abc
+import functools
 import numpy
+import os
 # from scipy.sparse import diags
 import sys
+try:
+    import conv_opt
+except ModuleNotFoundError:
+    conv_opt = None
+try:
+    import optlang
+    import optlang.interface
+except ModuleNotFoundError:
+    optlang = None
 try:
     import cplex
 except ModuleNotFoundError:
     cplex = None
+try:
+    import glpk
+except ModuleNotFoundError:
+    glpk = None
+try:
+    import gurobipy
+except ModuleNotFoundError:
+    gurobipy = None
+try:
+    import swiglpk
+except ModuleNotFoundError:
+    swiglpk = None
+
+
+def is_conv_opt_available():
+    """ Determine whether ConvOpt is available for solving LP problems
+
+    Returns:
+        :obj:`bool`: whether ConvOpt is available for solving LP problems
+    """
+    return conv_opt is not None
+
+
+def is_optlang_available():
+    """ Determine whether OptLang is available for solving LP problems
+
+    Returns:
+        :obj:`bool`: whether OptLang is available for solving LP problems
+    """
+    return optlang is not None
+
+
+def is_cplex_available():
+    """ Determine whether CPLEX is available for solving LP problems
+
+    Returns:
+        :obj:`bool`: whether CPLEX is available for solving LP problems
+    """
+    return cplex is not None
+
+
+def is_glpk_available():
+    """ Determine whether GLPK is available for solving LP problems
+
+    Returns:
+        :obj:`bool`: whether GLPK is available for solving LP problems
+    """
+    return glpk is not None
+
+
+def is_swiglpk_available():
+    """ Determine whether GLPK is available for solving LP problems
+
+    Returns:
+        :obj:`bool`: whether GLPK is available for solving LP problems
+    """
+    return swiglpk is not None
+
+
+def get_gurobi_env_vars():
+    """ Get environment variables for Gurobi environment variables
+
+    Returns:
+        :obj:`dict`: dictionary of Gurobi environment variables
+    """
+    params = {}
+    for key, val in os.environ.items():
+        if key.startswith('GRB_') and len(key) > 4:
+            key = key[4:]
+            if key == 'LICENSEID':
+                val = int(val)
+            params[key] = val
+
+    return params
+
+
+def is_gurobi_available():
+    """ Determine whether Gurobi is available for solving LP problems
+
+    Returns:
+        :obj:`bool`: whether Gurobi is available for solving LP problems
+    """
+    return (
+        gurobipy
+        and (
+            get_gurobi_env_vars()
+            or os.path.isfile(os.path.expanduser(os.path.join('~', 'gurobi.lic')))
+            or os.path.isfile(os.path.join('/opt', 'gurobi', 'gurobi.lic'))
+        )
+    )
 
 
 class Solver(object):
     """RBA solver."""
 
-    def __init__(self, matrix, lp_solver=None, bissection_tol=1e-6, max_bissection_iters=None, verbose=False):
+    def __init__(self, matrix, lp_solver=None, mu_min=0, mu_max=2.5, bissection_tol=1e-6, max_bissection_iters=None, verbose=False):
+        """
+        Args:
+            mu_min (:obj:`float`, optional): minimum μ to check
+            mu_max (:obj:`float`, optional): maximum μ to check
+        """
         self.matrix = matrix
 
-        if (cplex and lp_solver is None) or lp_solver == 'cplex':
+        if (
+            (is_cplex_available())
+                and (lp_solver in ['cplex'] or lp_solver is None)
+        ):
             self.lp_solver = CplexLpSolver(self)
-        elif lp_solver == 'cplex_optlang':
+        elif (
+            (is_cplex_available() and is_conv_opt_available())
+            and (lp_solver in ['cplex', 'cplex_conv_opt'] or lp_solver is None)
+        ):
+            self.lp_solver = ConvOptLpSolver(self, 'cplex')
+        elif (
+            (is_cplex_available() and is_optlang_available())
+            and (lp_solver in ['cplex', 'cplex_optlang'] or lp_solver is None)
+        ):
             self.lp_solver = OptlangLpSolver(self, 'cplex')
-        elif (not cplex and lp_solver is None) or lp_solver == 'glpk':
+
+        elif (
+            (is_gurobi_available())
+            and (lp_solver in ['gurobi'] or lp_solver is None)
+        ):
+            self.lp_solver = GurobiLpSolver(self)
+        elif (
+            (is_gurobi_available() and is_conv_opt_available())
+            and (lp_solver in ['gurobi', 'gurobi_conv_opt'] or lp_solver is None)
+        ):
+            self.lp_solver = ConvOptLpSolver(self, 'gurobi')
+        elif (
+            (is_gurobi_available() and is_optlang_available())
+            and (lp_solver in ['gurobi', 'gurobi_optlang'] or lp_solver is None)
+        ):
+            self.lp_solver = OptlangLpSolver(self, 'gurobi')
+
+        elif (
+            (is_glpk_available())
+            and (lp_solver in ['glpk'] or lp_solver is None)
+        ):
+            self.lp_solver = GlpkLpSolver(self)
+        elif (
+            (is_swiglpk_available() and is_optlang_available())
+            and (lp_solver in ['glpk', 'glpk_optlang'] or lp_solver is None)
+        ):
             self.lp_solver = OptlangLpSolver(self, 'glpk')
-        elif lp_solver == 'glpk_exact':
-            self.lp_solver = OptlangLpSolver(self, 'glpk_exact')
-        elif lp_solver == 'scipy':
+        elif (
+            (is_swiglpk_available() and is_conv_opt_available())
+            and (lp_solver in ['glpk', 'glpk_conv_opt'] or lp_solver is None)
+        ):
+            self.lp_solver = ConvOptLpSolver(self, 'glpk')
+
+        elif lp_solver is None or lp_solver == 'scipy':
             self.lp_solver = OptlangLpSolver(self, 'scipy')
+
         else:
             raise NotImplementedError('LP solver `{}` is not implemented'.format(lp_solver))
 
+        self.mu_min = mu_min
+        self.mu_max = mu_max
         self.bissection_tol = bissection_tol
         self.max_bissection_iters = max_bissection_iters
 
         self.verbose = verbose
 
     def solve(self):
-        """Compute configuration corresponding to maximal growth rate."""
+        """ Compute configuration corresponding to maximal growth rate. """
         self._sol_basis = None
         self.X = self.lambda_ = self.mu_opt = None
+        mu_min = self.mu_min
+        mu_max = self.mu_max
 
-        # check that μ=0 is solution
+        # check that μ=μ_min is solution
         if self.verbose:
-            print('  Checking μ = 0 is feasible ...', end='')
+            print('  Checking μ = μ_min = {} is feasible ...'.format(mu_min), end='')
             sys.stdout.flush()
-        self.matrix.build_matrices(0)
+        self.matrix.build_matrices(mu_min)
         self.lp_solver.build_lp()
         self.lp_solver.solve_lp()
         if self.lp_solver.is_feasible():
-            self.lp_solver.store_results(0.0)
+            self.lp_solver.store_results(mu_min)
             if self.verbose:
-                print(' μ = 0 is feasible.')
+                print(' μ = μ_min = {} is feasible.'.format(mu_min))
         elif self.lp_solver.is_infeasible():
-            raise ValueError(' μ = 0 is infeasible, check matrix consistency.')
+            raise ValueError(' μ = μ_min = {} is infeasible, check matrix consistency.'.format(mu_min))
         else:
-            raise ValueError(' ' + self.unknown_flag_msg(0))
+            raise ValueError(' ' + self.unknown_flag_msg(mu_min))
 
         # bissection
-        mu_min = 0
-        mu_max = 2.5
         mu_test = mu_max
         self._sol_basis = None
         iter = 0
@@ -99,23 +248,26 @@ class Solver(object):
         self.matrix.build_matrices(self.mu_opt)
 
     def solve_grid(self):
-        """Compute configuration corresponding to maximal growth rate."""
+        """ Compute configuration corresponding to maximal growth rate. """
         self._sol_basis = None
         self.X = self.lambda_ = self.mu_opt = None
+        mu_min = self.mu_min
+        mu_max = self.mu_max
 
         # check that μ=0 is solution
-        self.matrix.build_matrices(0)
+        self.matrix.build_matrices(mu_min)
         self.lp_solver.build_lp()
         self.lp_solver.solve_lp()
         if self.lp_solver.is_feasible():
-            self.lp_solver.store_results(0.0)
+            self.lp_solver.store_results(mu_min)
         elif self.lp_solver.is_infeasible():
-            raise ValueError('μ = 0 is infeasible, check matrix consistency.')
+            raise ValueError('μ = μ_min = {} is infeasible, check matrix consistency.'.format(mu_min))
         else:
-            raise ValueErro(self.unknown_flag_msg(0))
+            raise ValueError(self.unknown_flag_msg(mu_min))
 
         # grid
-        vec_mu = numpy.arange(0, 0.8, 0.001)
+        # TODO: parallelize with multiprocessing module
+        vec_mu = numpy.arange(mu_min, mu_max, 0.001)
         for mu_test in vec_mu:
             self.matrix.build_matrices(mu_test)
             self.lp_solver.build_lp()
@@ -152,6 +304,14 @@ class LpSolver(abc.ABC):
             rba_solver (:obj:`Solver`): RBA solver
         """
         self.rba_solver = rba_solver
+
+    def init_solver(self, lp_solver):
+        if lp_solver == 'gurobi' and not getattr(gurobipy, '__initialized__', None):
+            params = get_gurobi_env_vars()
+            if params:
+                env = gurobipy.Env(params=params)
+                gurobipy.Model = functools.partial(gurobipy.Model, env=env)  # to make OptLang use the Gurobi environment
+                gurobipy.__initialized__ = True
 
     @property
     @abc.abstractmethod
@@ -281,16 +441,22 @@ class CplexLpSolver(LpSolver):
         rba_solver._sol_basis = self._lp.solution.basis.get_basis()
 
 
-class OptlangLpSolver(LpSolver):
-    """ OptLang LP solver """
+class GlpkLpSolver(LpSolver):
+    """ GLPK LP solver
 
-    def __init__(self, rba_solver, lp_solver):
+    Attributes:
+        rba_solver (:obj:`Solver`): RBA solver
+        verbose (:obj:`bool`): whether to display diagnostic information
+    """
+
+    def __init__(self, rba_solver, verbose=False):
         """
         Args:
             rba_solver (:obj:`Solver`): RBA solver
+            verbose (:obj:`bool`, optional): whether to display diagnostic information
         """
-        super(OptlangLpSolver, self).__init__(rba_solver)
-        self.lp_solver = lp_solver
+        super(GlpkLpSolver, self).__init__(rba_solver)
+        self.verbose = verbose
 
     @property
     def name(self):
@@ -298,7 +464,369 @@ class OptlangLpSolver(LpSolver):
 
     def build_lp(self):
         """ Build an LP problem based on current matrices. """
-        import optlang
+        rba_solver = self.rba_solver
+
+        # define problem
+        lp = glpk.LPX()
+        lp.rows.add(len(rba_solver.matrix.row_names))
+        lp.cols.add(len(rba_solver.matrix.col_names))
+
+        # define variables and objective
+        for i_variable, (lb, ub, obj_coeff) in enumerate(zip(rba_solver.matrix.LB, rba_solver.matrix.UB, rba_solver.matrix.f)):
+            lp.cols[i_variable].bounds = lb, ub
+            lp.obj[i_variable] = obj_coeff
+
+        lp.obj.maximize = False
+
+        # define constraints
+        constraints = rba_solver.matrix.A.tolil()
+        matrix = []
+        for i_constraint, (i_variables, coeffs, rhs, sense) in enumerate(zip(constraints.rows, constraints.data,
+                                                                             rba_solver.matrix.b, rba_solver.matrix.row_signs)):
+
+            for i_variable, coeff in zip(i_variables, coeffs):
+                matrix.append((i_constraint, i_variable, coeff))
+
+            if sense == 'E':  # equality
+                lb = rhs
+                ub = rhs
+            elif sense == 'L':  # less than
+                lb = None
+                ub = rhs
+            elif sense == 'G':  # greater than
+                lb = rhs
+                ub = None
+            else:
+                raise NotImplementedError('Constraint sense `{}` is not supported.'.format(sense))
+
+            lp.rows[i_constraint].bounds = lb, ub
+
+        lp.matrix = matrix
+
+        # define options
+        lp.scale(glpk.LPX.SF_GM)
+        if self.verbose:
+            glpk.env.term_hook = None
+        else:
+            glpk.env.term_hook = lambda output: None
+
+        self._model = lp
+
+    def solve_lp(self):
+        self._model.simplex(tol_bnd=1e-9, tol_dj=1e-9, tol_piv=1e-10)
+
+    def is_feasible(self):
+        return self._model.status == 'opt'
+
+    def is_infeasible(self):
+        return self._model.status in ['infeas', 'nofeas']
+
+    def get_status(self):
+        return {
+            'code': self._model.status,
+            'message': self.get_status_message(self._model.status),
+        }
+
+    def get_status_message(self, code):
+        codes = {
+            'opt': 'solution is optimal',
+            'undef': 'solution is undefined',
+            'feas': 'solution is feasible, but not necessarily optimal',
+            'infeas': 'solution is infeasible',
+            'nofeas': 'problem has no feasible solution',
+            'unbnd': 'problem has an unbounded solution',
+        }
+        return codes.get(code, None)
+
+    def store_results(self, mu):
+        rba_solver = self.rba_solver
+        rba_solver.mu_opt = mu
+        rba_solver.X = numpy.array([row.primal_s for row in self._model.rows])
+        rba_solver.lambda_ = [col.dual_s for col in self._model.cols]
+        rba_solver._sol_basis = None
+
+
+class GurobiLpSolver(LpSolver):
+    """ Gurobi LP solver
+
+    Attributes:
+        rba_solver (:obj:`Solver`): RBA solver
+        verbose (:obj:`bool`): whether to display diagnostic information
+    """
+
+    def __init__(self, rba_solver, verbose=False):
+        """
+        Args:
+            rba_solver (:obj:`Solver`): RBA solver
+            verbose (:obj:`bool`, optional): whether to display diagnostic information
+        """
+        super(GurobiLpSolver, self).__init__(rba_solver)
+        self.verbose = verbose
+
+        self.init_solver('gurobi')
+
+    @property
+    def name(self):
+        return self.lp_solver
+
+    def build_lp(self):
+        """ Build an LP problem based on current matrices. """
+        rba_solver = self.rba_solver
+
+        # define problem
+        model = gurobipy.Model()
+
+        # define variables
+        variables = model.addVars(len(rba_solver.matrix.col_names),
+                                  lb=rba_solver.matrix.LB,
+                                  ub=rba_solver.matrix.UB,
+                                  obj=rba_solver.matrix.f,
+                                  vtype=gurobipy.GRB.CONTINUOUS,
+                                  )
+
+        model.setObjective(model.getObjective(), gurobipy.GRB.MINIMIZE)
+
+        # define constraints
+        constraints = rba_solver.matrix.A.tolil()
+
+        for i_variables, coeffs, rhs, sense in zip(constraints.rows, constraints.data,
+                                                   rba_solver.matrix.b, rba_solver.matrix.row_signs):
+
+            vars = []
+            for i_variable, coeff in zip(i_variables, coeffs):
+                vars.append(variables[i_variable])
+
+            if sense == 'E':  # equality
+                sense = gurobipy.GRB.EQUAL
+            elif sense == 'L':  # less than
+                sense = gurobipy.GRB.LESS_EQUAL
+            elif sense == 'G':  # greater than
+                sense = gurobipy.GRB.GREATER_EQUAL
+            else:
+                raise NotImplementedError('Constraint sense `{}` is not supported.'.format(sense))
+
+            model.addLConstr(gurobipy.LinExpr(coeffs, vars), sense, rhs=rhs)
+
+        # define options
+        model.setParam('FeasibilityTol', 1e-9)
+        model.setParam('OptimalityTol', 1e-9)
+        model.setParam('MarkowitzTol', 0.1)
+        model.setParam("ScaleFlag", 3)
+        if self.verbose:
+            model.setParam('LogToConsole', 1)
+        else:
+            model.setParam('LogToConsole', 0)
+
+        self._model = model
+
+    def solve_lp(self):
+        self._model.optimize()
+
+    def is_feasible(self):
+        return self._model.status == gurobipy.GRB.Status.OPTIMAL
+
+    def is_infeasible(self):
+        return self._model.status == gurobipy.GRB.Status.INFEASIBLE
+
+    def get_status(self):
+        return {
+            'code': self._model.status,
+            'message': self.get_status_message(self._model.status),
+        }
+
+    def get_status_message(self, code):
+        codes = {
+            gurobipy.GRB.LOADED: (
+                'Model is loaded, but no solution information is available.'
+            ),
+            gurobipy.GRB.OPTIMAL: (
+                'Model was solved to optimality (subject to tolerances), and an optimal solution is available.'
+            ),
+            gurobipy.GRB.INFEASIBLE: (
+                'Model was proven to be infeasible.'
+            ),
+            gurobipy.GRB.INF_OR_UNBD: (
+                'Model was proven to be either infeasible or unbounded. To obtain a more definitive conclusion, '
+                'set the DualReductions parameter to 0 and reoptimize.'
+            ),
+            gurobipy.GRB.UNBOUNDED: (
+                'Model was proven to be unbounded. Important note: an unbounded status indicates the presence of an unbounded ray '
+                'that allows the objective to improve without limit. It says nothing about whether the model has a feasible solution. '
+                'If you require information on feasibility, you should set the objective to zero and reoptimize.'
+            ),
+            gurobipy.GRB.CUTOFF: (
+                'Optimal objective for model was proven to be worse than the value specified in the Cutoff parameter. '
+                'No solution information is available.'
+            ),
+            gurobipy.GRB.ITERATION_LIMIT: (
+                'Optimization terminated because the total number of simplex iterations performed exceeded the value specified in the '
+                'IterationLimit parameter, or because the total number of barrier iterations exceeded the value specified in the '
+                'BarIterLimit parameter.'
+            ),
+            gurobipy.GRB.NODE_LIMIT: (
+                'Optimization terminated because the total number of branch-and-cut nodes explored exceeded the value specified '
+                'in the NodeLimit parameter.'
+            ),
+            gurobipy.GRB.TIME_LIMIT: (
+                'Optimization terminated because the time expended exceeded the value specified in the TimeLimit parameter.'
+            ),
+            gurobipy.GRB.SOLUTION_LIMIT: (
+                'Optimization terminated because the number of solutions found reached the value specified in the SolutionLimit parameter.'
+            ),
+            gurobipy.GRB.INTERRUPTED: (
+                'Optimization was terminated by the user.'
+            ),
+            gurobipy.GRB.NUMERIC: (
+                'Optimization was terminated due to unrecoverable numerical difficulties.'
+            ),
+            gurobipy.GRB.SUBOPTIMAL: (
+                'Unable to satisfy optimality tolerances; a sub-optimal solution is available.'
+            ),
+            gurobipy.GRB.INPROGRESS: (
+                'An asynchronous optimization call was made, but the associated optimization run is not yet complete.'
+            ),
+            gurobipy.GRB.USER_OBJ_LIMIT: (
+                'User specified an objective limit (a bound on either the best objective or the best bound), and that '
+                'limit has been reached.'
+            ),
+        }
+        return codes.get(code, None)
+
+    def store_results(self, mu):
+        rba_solver = self.rba_solver
+        rba_solver.mu_opt = mu
+        rba_solver.X = numpy.array([var.getAttr('X') for var in self._model.getVars()])
+        rba_solver.lambda_ = [constraint.getAttr('Pi') for constraint in self._model.getConstrs()]
+        rba_solver._sol_basis = None
+
+
+class ConvOptLpSolver(LpSolver):
+    """ ConvOpt LP solver
+
+    Attributes:
+        rba_solver (:obj:`Solver`): RBA solver
+        lp_solver (:obj:`str`): LP solver
+        verbose (:obj:`bool`): whether to display diagnostic information
+    """
+
+    def __init__(self, rba_solver, lp_solver, verbose=False):
+        """
+        Args:
+            rba_solver (:obj:`Solver`): RBA solver
+            lp_solver (:obj:`str`): LP solver
+            verbose (:obj:`bool`, optional): whether to display diagnostic information
+        """
+        super(ConvOptLpSolver, self).__init__(rba_solver)
+        self.lp_solver = lp_solver
+        self.verbose = verbose
+
+        self.init_solver(lp_solver)
+
+    @property
+    def name(self):
+        return self.lp_solver
+
+    def build_lp(self):
+        """ Build an LP problem based on current matrices. """
+        rba_solver = self.rba_solver
+
+        # define problem
+        model = conv_opt.Model()
+
+        # define columns and add rows
+        for name, lb, ub, obj_coeff in zip(rba_solver.matrix.col_names, rba_solver.matrix.LB,
+                                           rba_solver.matrix.UB, rba_solver.matrix.f):
+            var = conv_opt.Variable(name=name, type=conv_opt.VariableType.continuous, lower_bound=lb, upper_bound=ub)
+            model.variables.append(var)
+
+            model.objective_terms.append(conv_opt.LinearTerm(var, obj_coeff))
+
+        model.objective_direction = conv_opt.ObjectiveDirection.minimize
+
+        constraints = rba_solver.matrix.A.tolil()
+        for name, i_variables, coeffs, rhs, sense in zip(rba_solver.matrix.row_names, constraints.rows, constraints.data,
+                                                         rba_solver.matrix.b, rba_solver.matrix.row_signs):
+
+            terms = []
+            for i_variable, coeff in zip(i_variables, coeffs):
+                var = model.variables[i_variable]
+                terms.append(conv_opt.LinearTerm(var, coeff))
+
+            if sense == 'E':  # equality
+                lb = rhs
+                ub = rhs
+            elif sense == 'L':  # less than
+                lb = None
+                ub = rhs
+            elif sense == 'G':  # greater than
+                lb = rhs
+                ub = None
+            else:
+                raise NotImplementedError('Constraint sense `{}` is not supported.'.format(sense))
+
+            constraint = conv_opt.Constraint(terms, name=name, lower_bound=lb, upper_bound=ub)
+            model.constraints.append(constraint)
+
+        self._model = model
+
+    def solve_lp(self):
+        # set parameters
+        self._options = conv_opt.SolveOptions(
+            solver=getattr(conv_opt.Solver, self.lp_solver),
+            presolve=conv_opt.Presolve.off,
+            verbosity=conv_opt.Verbosity.status if self.verbose else conv_opt.Verbosity.off,
+        )
+
+        self._result = self._model.solve(self._options)
+
+    def is_feasible(self):
+        return self._result.status_code in [conv_opt.StatusCode.optimal]
+
+    def is_infeasible(self):
+        return self._result.status_code in [conv_opt.StatusCode.infeasible]
+
+    def get_status(self):
+        return {
+            'code': self._result.status_code,
+            'message': self._result.status_message,
+        }
+
+    def store_results(self, mu):
+        rba_solver = self.rba_solver
+        rba_solver.mu_opt = mu
+        rba_solver.X = self._result.primals
+        rba_solver.lambda_ = self._result.duals.tolist()
+        rba_solver._sol_basis = None
+
+
+class OptlangLpSolver(LpSolver):
+    """ OptLang LP solver
+
+    Attributes:
+        rba_solver (:obj:`Solver`): RBA solver
+        lp_solver (:obj:`str`): LP solver
+        verbose (:obj:`bool`): whether to display diagnostic information
+    """
+
+    def __init__(self, rba_solver, lp_solver, verbose=False):
+        """
+        Args:
+            rba_solver (:obj:`Solver`): RBA solver
+            lp_solver (:obj:`str`): LP solver
+            verbose (:obj:`bool`, optional): whether to display diagnostic information
+        """
+        super(OptlangLpSolver, self).__init__(rba_solver)
+        self.lp_solver = lp_solver
+        self.verbose = verbose
+
+        self.init_solver(lp_solver)
+
+    @property
+    def name(self):
+        return self.lp_solver
+
+    def build_lp(self):
+        """ Build an LP problem based on current matrices. """
         solver_interface = getattr(optlang, self.lp_solver + '_interface')
 
         rba_solver = self.rba_solver
@@ -307,10 +835,19 @@ class OptlangLpSolver(LpSolver):
         model = solver_interface.Model()
 
         # set parameters
-        model.configuration.tolerances.feasibility = 1e-9
-        model.configuration.tolerances.integrality = 1e-9
-        if self.lp_solver == 'cplex':
+        if self.lp_solver in ['cplex']:
+            model.configuration.tolerances.feasibility = 1e-9
+            model.configuration.tolerances.integrality = 1e-9
             model.configuration.tolerances.optimality = 1e-9
+        elif self.lp_solver in ['glpk']:
+            model.configuration.tolerances.feasibility = 1e-9
+            model.configuration.tolerances.integrality = 1e-9
+        elif self.lp_solver in ['gurobi']:
+            model.configuration.tolerances.feasibility = 1e-9
+            model.configuration.tolerances.integrality = 1e-9
+            model.configuration.tolerances.optimality = 1e-9
+
+        model.configuration.verbosity = 1 if self.verbose else 0
 
         # define columns and add rows
         variables = []
@@ -351,15 +888,12 @@ class OptlangLpSolver(LpSolver):
         self._model.optimize()
 
     def is_feasible(self):
-        import optlang.interface
         return self._model.status in [optlang.interface.OPTIMAL, optlang.interface.FEASIBLE]
 
     def is_infeasible(self):
-        import optlang.interface
         return self._model.status in [optlang.interface.INFEASIBLE]
 
     def get_status(self):
-        import optlang.interface
         return {
             'code': self._model.status,
             'message': optlang.interface.statuses[self._model.status],

@@ -1,17 +1,13 @@
 """ Tutorial (``docs/xml_tutorial.ipynb``) encoded into unit tests
 """
 
+from rba.core import solver
 import numpy.testing
 import os
 import rba
 import shutil
 import tempfile
 import unittest
-
-try:
-    import cplex
-except ModuleNotFoundError:
-    cplex = None
 
 
 class TutorialTestCase(unittest.TestCase):
@@ -21,16 +17,51 @@ class TutorialTestCase(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(self.tmp_dirname)
 
-    @unittest.skipIf(cplex is None, reason='CPLEX is not available')
+    @unittest.skipIf(not solver.is_cplex_available(), reason='CPLEX is not available')
     def test_cplex(self):
         self._test('cplex', rtol=1e-7)
 
-    @unittest.skipIf(cplex is None, reason='CPLEX is not available')
-    def test_cplex_optlang(self):
-        self._test('cplex_optlang', rtol=1e-7)
+    # @unittest.skipIf(
+    #    not (solver.is_conv_opt_available() and solver.is_cplex_available()),
+    #    reason='ConvOpt and/or CPLEX are not available')
+    # def test_cplex_conv_opt(self):
+    #    self._test('cplex_conv_opt', rtol=1e-7)
 
+    # @unittest.skipIf(
+    #    not (solver.is_optlang_available() and solver.is_cplex_available()),
+    #    reason='OptLang and/or CPLEX are not available')
+    # def test_cplex_optlang(self):
+    #    self._test('cplex_optlang', rtol=1e-7)
+
+    @unittest.skipIf(
+        not (solver.is_glpk_available()),
+        reason='GLPK is not available')
     def test_glpk(self):
         self._test('glpk')
+
+    @unittest.skipIf(
+        not (solver.is_optlang_available() and solver.is_swiglpk_available()),
+        reason='OptLang and/or GLPK are not available')
+    def test_glpk_optlang(self):
+        self._test('glpk_optlang')
+
+    @unittest.skipIf(
+        not (solver.is_gurobi_available()),
+        reason='Gurobi is not available')
+    def test_gurobi(self):
+        self._test('gurobi')
+
+    @unittest.skipIf(
+        not (solver.is_conv_opt_available() and solver.is_gurobi_available()),
+        reason='ConvOpt and/or Gurobi are not available')
+    def test_gurobi_conv_opt(self):
+        self._test('gurobi_conv_opt')
+
+    # @unittest.skipIf(
+    #     not (solver.is_optlang_available() and solver.is_gurobi_available()),
+    #     reason='OptLang and/or Gurobi are not available')
+    # def test_gurobi_optlang(self):
+    #    self._test('gurobi_optlang')
 
     def _test(self, lp_solver, rtol=5e-3):
         ######################################################
@@ -144,6 +175,7 @@ class TutorialTestCase(unittest.TestCase):
 
         results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 2.5, rtol=rtol)
+        """        
         self.assertEqual(results.variables, {
             'R_transport': 0.0,
             'R_protein_component_precursor': 0.0,
@@ -152,7 +184,6 @@ class TutorialTestCase(unittest.TestCase):
             'R_protein_precursor_enzyme': 0.0,
             'R_biomass_enzyme': 0.0
         })
-        """
         self.assertEqual(results.dual_values, {
             'M_carbon_source_c': 0.0,
             'M_protein_component_precursor_c': 0.0,
@@ -179,6 +210,7 @@ class TutorialTestCase(unittest.TestCase):
 
         results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 2.5, rtol=rtol)
+        """
         self.assertEqual(results.variables, {
             'R_transport': 0.0,
             'R_protein_component_precursor': 0.0,
@@ -187,7 +219,6 @@ class TutorialTestCase(unittest.TestCase):
             'R_protein_precursor_enzyme': 0.0,
             'R_biomass_enzyme': 0.0
         })
-        """
         self.assertEqual(results.dual_values, {
             'M_carbon_source_c': 0.0,
             'M_protein_component_precursor_c': 0.0,

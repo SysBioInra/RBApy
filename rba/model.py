@@ -159,7 +159,10 @@ class RbaModel(object):
         """Return full path to file contained in output directory."""
         return join(self.output_dir, file_name)
 
-    def solve(self, recompute_matrices=True, lp_solver='cplex', bissection_tol=1e-6, max_bissection_iters=None, verbose=False):
+    def solve(self, recompute_matrices=True, lp_solver='cplex',
+              mu_min=0., mu_max=2.5,
+              bissection_tol=1e-6, max_bissection_iters=None,
+              verbose=False):
         """
         Solve RBA model.
 
@@ -172,7 +175,13 @@ class RbaModel(object):
             concentrations do not appear in the matrices).
 
         lp_solver : str, optional
-            LP solver (``cplex``, ``cplex_optlang``, ``glpk``, ``glpk_exact``, ``scipy``)
+            LP solver (``cplex``, ``glpk``, ``gurobi``, ``scipy``)
+
+        mu_min : float, optional:
+            Minimum μ to check
+
+        mu_max : float, optional:
+            Maximum μ to check
 
         bissection_tol : float, optional
             Tolerance for bissection
@@ -192,6 +201,8 @@ class RbaModel(object):
             self._constraint_matrix = rba.ConstraintMatrix(self)
         solver = rba.Solver(self._constraint_matrix,
                             lp_solver=lp_solver,
+                            mu_min=mu_min,
+                            mu_max=mu_max,
                             bissection_tol=bissection_tol,
                             max_bissection_iters=max_bissection_iters,
                             verbose=verbose)

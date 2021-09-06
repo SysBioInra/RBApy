@@ -1,3 +1,4 @@
+from rba.core import solver
 import rba.cli.generate_rba_model
 import rba.cli.solve_rba_model
 import os
@@ -6,11 +7,6 @@ import shutil
 import tempfile
 import unittest
 import unittest.mock
-
-try:
-    import cplex
-except ModuleNotFoundError:
-    cplex = None
 
 
 class CliTestCase(unittest.TestCase):
@@ -42,11 +38,15 @@ class CliTestCase(unittest.TestCase):
             rba.cli.generate_rba_model.main()
 
         # simulation
-        if cplex:
-            with unittest.mock.patch('sys.argv', ['', self.tmp_dirname, '--bissection-tol', '1e-2']):
+        if (
+            solver.is_cplex_available()
+            or solver.is_glpk_available()
+            or solver.is_gurobi_available()
+        ):
+            with unittest.mock.patch('sys.argv', ['', self.tmp_dirname, '--bissection-tol', '1e-2', '--verbose']):
                 results = rba.cli.solve_rba_model.main()
 
-            with unittest.mock.patch('sys.argv', ['', self.tmp_dirname, '--bissection-tol', '1e-2', '--verbose']):
+            with unittest.mock.patch('sys.argv', ['', self.tmp_dirname, '--bissection-tol', '1e-2']):
                 results = rba.cli.solve_rba_model.main()
 
         """

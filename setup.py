@@ -21,7 +21,7 @@ with open(path.join(here, 'rba', '_version.py'), 'r') as f:
     version = f.readline().split("'")[1]
 
 setup(
-    name='rba',
+    name='rbapy',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
@@ -68,7 +68,7 @@ setup(
     # What does your project relate to?
     keywords=[
         'metabolism',
-        'Resource Balance Analysus',
+        'Resource Balance Analysis',
         'molecular biology',
         'cell biology',
         'biochemistry',
@@ -94,7 +94,6 @@ setup(
         'biopython',
         'lxml',
         'numpy',
-        'optlang',
         'pandas',
         'python-libsbml',
         'scipy',
@@ -106,6 +105,17 @@ setup(
     # $ pip install -e .[dev,test]
     extras_require={
         'cplex': ['cplex'],
+        'cplex_conv_opt': ['conv_opt[cplex]'],
+        'cplex_optlang': ['optlang', 'cplex'],
+
+        'glpk': ['glpk'],
+        'glpk_conv_opt': ['conv_opt'],
+        'glpk_optlang': ['optlang'],
+
+        'gurobi': ['gurobipy'],
+        'gurobi_conv_opt': ['conv_opt[gurobi]'],
+        'gurobi_optlang': ['optlang', 'gurobipy'],
+
         'dev': ['check-manifest'],
         'test': ['pytest', 'pytest-cov', 'coverage'],
     },
