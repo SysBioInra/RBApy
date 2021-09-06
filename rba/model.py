@@ -159,7 +159,7 @@ class RbaModel(object):
         """Return full path to file contained in output directory."""
         return join(self.output_dir, file_name)
 
-    def solve(self, recompute_matrices=True, lp_solver='cplex',
+    def solve(self, recompute_matrices=True, lp_solver=None,
               mu_min=0., mu_max=2.5,
               bissection_tol=1e-6, max_bissection_iters=None,
               verbose=False):

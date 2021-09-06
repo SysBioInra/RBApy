@@ -121,8 +121,13 @@ class Solver(object):
     def __init__(self, matrix, lp_solver=None, mu_min=0, mu_max=2.5, bissection_tol=1e-6, max_bissection_iters=None, verbose=False):
         """
         Args:
+            matrix
+            lp_solver (:obj:`str`, optional): preferred solver
             mu_min (:obj:`float`, optional): minimum μ to check
             mu_max (:obj:`float`, optional): maximum μ to check
+            bissection_tol (:obj:`float`, optional): bissection tolerance
+            max_bissection_iters (:obj:`int`, optional): maximum number of bissection iterations
+            verbose (:obj:`bool`, optional): whether to display diagnostic information
         """
         self.matrix = matrix
 

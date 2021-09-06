@@ -19,7 +19,7 @@ def main():
     parser.add_argument('--lp-solver', type=str, default=None,
                         help=(
                             'LP solver (`cplex`, `glpk`, ``gurobi``, or `scipy`; '
-                            'default: `cplex` if installed, otherwise `glpk`)'
+                            'default: `cplex` if installed, otherwise `gurobi` if installed, otherwise `glpk`)'
                         ))
     parser.add_argument('--mu-min', type=float, default=0.,
                         help='Minimum μ to check; default: 0.0.')
