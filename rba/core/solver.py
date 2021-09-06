@@ -465,7 +465,7 @@ class GlpkLpSolver(LpSolver):
 
     @property
     def name(self):
-        return self.lp_solver
+        return 'glpk'
 
     def build_lp(self):
         """ Build an LP problem based on current matrices. """
@@ -572,7 +572,7 @@ class GurobiLpSolver(LpSolver):
 
     @property
     def name(self):
-        return self.lp_solver
+        return 'gurobi'
 
     def build_lp(self):
         """ Build an LP problem based on current matrices. """
