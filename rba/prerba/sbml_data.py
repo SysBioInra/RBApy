@@ -101,9 +101,11 @@ class SbmlData(object):
         for reaction in model.getListOfReactions():
             try:
                 enzymes = parser.enzyme_composition(reaction)
-            except UserWarning:
-                self._print_invalid_enzyme_notes()
-                raise UserWarning('Invalid SBML.')
+            except UserWarning as warn:
+                raise UserWarning(
+                    'ERROR: In reaction \'{}\':\n'
+                    '{}'.format(reaction.id, warn.args[0])
+                )
             # we create one reaction per associated enzyme
             for suffix, enzyme in enumerate(enzymes):
                 id_ = reaction.getId()
@@ -114,18 +116,19 @@ class SbmlData(object):
                 self.enzymes.append(self._create_enzyme(
                     new_reaction, enzyme, cytosol_id, interface_id
                 ))
+        if not self.enzymes:
+            raise UserWarning(
+                'Your SBML document does not contain any fbc gene products nor uses '
+                'COBRA notes to define enzyme compositions for '
+                'reactions. Please comply with SBML'
+                ' requirements defined in the README and rerun the script.'
+            )
 
     def _create_annotation_parser(self, model):
         if model.getPlugin('fbc'):
             return FbcAnnotationParser(model.getPlugin('fbc'))
         else:
             return CobraNoteParser()
-
-    def _print_invalid_enzyme_notes(self):
-        print('Your SBML file does not contain fbc gene products nor uses '
-              ' COBRA notes to define enzyme composition for every '
-              'reaction. Please comply with SBML'
-              ' requirements defined in the README and rerun script.')
 
     def _create_reaction(self, id_, reaction):
         result = rba.xml.Reaction(id_, reaction.getReversible())
@@ -245,8 +248,13 @@ class FbcAnnotationParser(object):
                 result += self._read_fbc_association_components(assoc)
             return result
         else:
-            print('Invalid association (we only support ors of ands)')
-            raise UserWarning('Invalid SBML.')
+            raise UserWarning(
+                'Invalid or RBApy-incompatible SBML document.\n'
+                'RBApy forbids that gene reaction rules contain OR statements inside '
+                'AND statements. For example a rule "A and (B or C)" is not allowed '
+                'and would have to be converted into "(A and B) or (A and C)". Please '
+                'modify your input model and reformulate the Boolean rules in this way.'
+            )
 
 
 class CobraNoteParser(object):
