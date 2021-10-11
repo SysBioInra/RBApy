@@ -146,7 +146,7 @@ class SbmlData(object):
         enzyme = Enzyme(reaction.id,
                         not self._all_species_in_same_compartment(reaction))
         enzyme.gene_association = composition
-        enzyme.compartments_of_metabolites = self._retrieve_compartments_of_metabolites(reaction)
+	enzyme.compartments_of_metabolites = self._retrieve_compartments_of_metabolites(reaction)
         enzyme.imported_metabolites = self._imported_metabolites(enzyme, reaction, cytosol_id, interface_id)
         enzyme.initialize_efficiencies()
         return enzyme
