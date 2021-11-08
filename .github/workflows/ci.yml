@@ -1,0 +1,74 @@
+name: Continuous integration and deployment
+
+on:
+  push:
+
+jobs:
+  continuousIntegration:
+    name: Test and release
+    runs-on: ubuntu-latest
+    steps:
+      #############################################
+      ## Checkout repository
+      #############################################
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      #############################################
+      ## Install package and its dependencies
+      #############################################
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Setup pip cache
+        uses: actions/cache@v2
+        with:
+          path: /opt/hostedtoolcache/Python
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}-${{ hashFiles('requirements.optional.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install pip and setuptools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --upgrade setuptools
+
+      
+      # install dependencies
+      - name: Install GLPK
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends \
+            libglpk-dev \
+            gcc
+
+      # install package
+      - name: Install the package
+        run: python -m pip install .[glpk]
+
+      #############################################
+      ## Test
+      #############################################
+      - name: Install pytest
+        run: python -m pip install pytest pytest-cov
+
+      - name: Install the requirements for the tests
+        run: python -m pip install .[tests]
+
+      - name: Run the tests
+        run: python -m pytest tests/ --cov=./rba
+
+      #############################################
+      ## Release to BioSimulators registry
+      #############################################
+      - name: Trigger a GitHub action that will build and release the BioSimulators interface to RBApy
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          PACKAGE_VERSION="${GITHUB_REF/refs\/tags\/v/}"
+          curl -X POST \
+               -u ${{ secrets.BIOSIMULATORS_GH_USERNAME }}:${{ secrets.BIOSIMULATORS_GH_TOKEN }} \
+               -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/biosimulators/Biosimulators_RBApy/actions/workflows/ci.yml/dispatches \
+               -d "{\"ref\": \"dev\", \"inputs\": {\"simulatorVersion\": \"${PACKAGE_VERSION}\", \"simulatorVersionLatest\": \"true\"}}"

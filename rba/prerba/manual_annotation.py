@@ -4,6 +4,7 @@
 from __future__ import division, print_function, absolute_import
 
 import os.path
+import warnings
 from collections import namedtuple
 import pandas
 
@@ -21,7 +22,7 @@ class CuratedData(object):
 
     def update_file(self):
         if self._raw_data.update_file() and self._warning:
-            print(self._warning)
+            warnings.warn(self._warning, UserWarning)
 
 
 class CuratedSubunits(CuratedData):
@@ -63,7 +64,7 @@ class CuratedLocations(CuratedData):
             raise UserWarning(filename + ': please fill in the'
                               ' LOCATION column.')
         self._warning = (
-            'WARNING: ambiguous uniprot locations have been added to '
+            'WARNING: ambiguous UniProt locations have been added to '
             'file {}. Execution will continue with default values.'
             .format(filename)
             )
@@ -90,7 +91,7 @@ class CuratedCofactors(CuratedData):
         for row in self._raw_data.rows():
             self._add_to_data(row[0], Cofactor(*row[1:]))
         self._warning = (
-            'WARNING: ambiguous uniprot cofactor notes have been added to '
+            'WARNING: ambiguous UniProt cofactor notes have been added to '
             'file {}. Execution will continue with default values.'
             .format(filename, CurationData.missing_tag)
             )
@@ -126,7 +127,7 @@ class CuratedLocationMap(CuratedData):
         # add mandatory compartments (if they are missing)
         self.data.setdefault('Secreted', 'Secreted')
         self._warning = (
-            'WARNING: uniprot locations with no user-defined '
+            'WARNING: UniProt locations with no user-defined '
             'counterpart have been added to {}.'
             .format(filename)
             )
@@ -148,7 +149,7 @@ class CuratedUnknownProteins(CuratedData):
                               ' UNIPROT GENE column.')
         self.data = {r[0]: r[1] for r in self._raw_data.rows()}
         self._warning = (
-            'WARNING: SBML genes not referenced in uniprot have been added to '
+            'WARNING: SBML genes not referenced in UniProt have been added to '
             'file {}. Execution will continue with default values.'
             .format(filename)
             )

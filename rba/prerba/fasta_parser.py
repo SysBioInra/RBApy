@@ -58,7 +58,7 @@ class RbaFastaParser(object):
             if self._has_missing_info(protein):
                 raise UserWarning(
                     '{}: protein {} has missing information and does not match'
-                    ' a known Uniprot id. Please fill in all information or '
+                    ' a known UniProt id. Please fill in all information or '
                     'adapt identifier.'
                 )
 
@@ -75,7 +75,7 @@ class RbaFastaParser(object):
     def _print_ids_not_found_in_uniprot(self, ids):
         if ids:
             print('Warning ({}): proteins {} could not be retrieved in '
-                  'Uniprot.'.format(self._filename, ', '.join(ids)))
+                  'UniProt.'.format(self._filename, ', '.join(ids)))
 
     def _initialize_molecule(self, molecule, fasta_record):
         molecule.id = fasta_record.id

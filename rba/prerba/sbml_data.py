@@ -4,7 +4,6 @@
 from __future__ import division, print_function, absolute_import
 
 # global imports
-import copy
 import itertools
 import re
 import libsbml

@@ -6,7 +6,6 @@ from __future__ import division, print_function, absolute_import
 # global imports
 import numpy
 from scipy.sparse import coo_matrix, diags, hstack, vstack
-import cplex
 
 # local imports
 from rba.core.constraint_blocks import ConstraintBlocks

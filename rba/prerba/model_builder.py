@@ -19,9 +19,9 @@ import rba.xml
 class ModelBuilder(object):
     """Build a RBA model from user data."""
 
-    def __init__(self, parameter_file):
+    def __init__(self, parameter_file, verbose=False):
         """Constructor."""
-        self.data = UserData(parameter_file)
+        self.data = UserData(parameter_file, verbose=verbose)
         self.default = DefaultData()
 
     def build_model(self):
@@ -115,7 +115,7 @@ class ModelBuilder(object):
     def _density_functions(self):
         return self.default.parameters.density_functions(
             self._cytoplasm(), self._external(), self._other_compartments()
-            )
+        )
 
     def _cytoplasm(self):
         return self.data.compartment('Cytoplasm')
@@ -162,17 +162,17 @@ class ModelBuilder(object):
     def _density_aggregates(self):
         return self.default.parameters.density_aggregates(
             self._cytoplasm(), self._external(), self._other_compartments()
-            )
+        )
 
     def _process_aggregates(self):
         return self.default.parameters.process_aggregates()
 
     def _efficiency_aggregates(self):
         return [self.default.activity.transport_aggregate(
-                    e.reaction, e.imported_metabolites
-                )
-                for e in self.data.transport_enzymes()
-                if e.imported_metabolites]
+            e.reaction, e.imported_metabolites
+        )
+            for e in self.data.transport_enzymes()
+            if e.imported_metabolites]
 
     def build_proteins(self):
         """
@@ -229,7 +229,7 @@ class ModelBuilder(object):
         builder.add_macromolecule(
             self.default.metabolites.mrna, self._cytoplasm(),
             {'A': 0.2818, 'C': 0.2181, 'G': 0.2171, 'U': 0.283}
-            )
+        )
         # machinery rnas
         for rna in itertools.chain(self.data.ribosome.rnas,
                                    self.data.chaperone.rnas):
@@ -255,7 +255,7 @@ class ModelBuilder(object):
         builder.add_macromolecule(
             self.default.metabolites.dna, self._cytoplasm(),
             {'A': 0.2818, 'C': 0.2181, 'G': 0.2171, 'T': 0.283}
-            )
+        )
         return builder.result
 
     def build_enzymes(self):
@@ -274,7 +274,7 @@ class ModelBuilder(object):
         # enzyme corresponding to maintenance ATP reaction
         enzymes.enzymes.append(self._build_enzyme(
             Enzyme(self.default.atpm_reaction, False)
-            ))
+        ))
         return enzymes
 
     def _build_enzyme(self, enzyme):
@@ -394,9 +394,9 @@ class MacromoleculeBuilder(object):
     def add_component(self, id_, name, type_, stoichiometry):
         self.result.components.append(
             rba.xml.Component(id_, name, type_, stoichiometry)
-            )
+        )
 
     def add_macromolecule(self, id_, location, composition):
         self.result.macromolecules.append(
             rba.xml.Macromolecule(id_, location, composition)
-            )
+        )
