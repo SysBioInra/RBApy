@@ -43,12 +43,7 @@ class UniprotData(object):
         annotation_reader = re.compile(r'[0-5]')
 
         # according to uniprot rest api documentation gene-name column should be identified as 'Gene names',
-        # however is denoted 'Gene Names'. In order to assure robustness to changes, we  check for both here.
-        if 'Gene Names' in self.data.columns:
-            gene_name_col='Gene Names'
-        elif 'Gene names' in self.data.columns:
-            gene_name_col='Gene names'
-        #for entry, genes, annotation in zip(self.data.index, self.data[gene_name_col], self.data['Annotation']): #new
+        # however is denoted 'Gene Names'.
         for entry, genes, annotation in zip(self.data.index, self.data['Gene Names'], self.data['Annotation']): #new
             # transform raw UniProt field into standardized list
             if pandas.isnull(genes):
@@ -141,7 +136,6 @@ class UniprotData(object):
             Standardized stoichiometry of protein.
 
         """
-        #return self._subunit_parser.parse(uniprot_line['Subunit structure [CC]'])
         return self._subunit_parser.parse(uniprot_line['Subunit structure'])
 
     def entry(self, gene):
