@@ -48,7 +48,8 @@ class UniprotData(object):
             gene_name_col='Gene Names'
         elif 'Gene names' in self.data.columns:
             gene_name_col='Gene names'
-        for entry, genes, annotation in zip(self.data.index, self.data[gene_name_col], self.data['Annotation']): #new
+        #for entry, genes, annotation in zip(self.data.index, self.data[gene_name_col], self.data['Annotation']): #new
+        for entry, genes, annotation in zip(self.data.index, self.data['Gene Names'], self.data['Annotation']): #new
             # transform raw UniProt field into standardized list
             if pandas.isnull(genes):
                 continue
