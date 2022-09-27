@@ -141,9 +141,8 @@ class UniprotData(object):
             Standardized stoichiometry of protein.
 
         """
-        return self._subunit_parser.parse(
-            uniprot_line['Subunit structure [CC]']
-            )
+        #return self._subunit_parser.parse(uniprot_line['Subunit structure [CC]'])
+        return self._subunit_parser.parse(uniprot_line['Subunit structure'])
 
     def entry(self, gene):
         """
