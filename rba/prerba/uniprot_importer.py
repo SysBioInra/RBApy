@@ -6,12 +6,13 @@ from __future__ import division, print_function, absolute_import
 # global imports
 import os.path
 import sys
-try:
-    from urllib.request import urlopen
-    from urllib.parse import urlencode
-except ImportError:
-    from urllib2 import urlopen
-    from urllib import urlencode
+import requests
+#try:
+#    from urllib.request import urlopen
+#    from urllib.parse import urlencode
+#except ImportError:
+#    from urllib2 import urlopen
+#    from urllib import urlencode
 
 
 def create_uniprot_if_absent(input_file, organism_id):
@@ -52,16 +53,30 @@ class UniprotImporter(object):
         """
         # code adapted from
         # http://www.UniProt.org/help/programmatic_access
-        url = 'http://www.uniprot.org/uniprot/'
-        params = {
-            'format': 'tab',
-            'query': 'organism:' + organism_id,
-            'columns': url_columns()
-        }
-        url_data = urlencode(params)
-        response = urlopen(url + '?' + url_data)
-        self.data = response.read()
+        #url = 'http://www.uniprot.org/uniprot/'
+        #params = {
+        #    'format': 'tab',
+        #    'query': 'organism:' + organism_id,
+        #    'columns': url_columns()
+        #}
+        #url_data = urlencode(params)
+        #response = urlopen(url + '?' + url_data)
+        #self.data = response.read()
 
+        fields_to_look_up=['accession','id','gene_names','annotation_score','protein_name','organism_name','organism_id','reviewed','length','mass','sequence','ec',
+        'cc_catalytic_activity','cc_cofactor','cc_subunit','cc_subcellular_location','cc_tissue_specificity','cc_pathway','cc_function',
+        'temp_dependence','ph_dependence','cc_caution','cc_interaction','cc_ptm','ft_signal','ft_transit','ft_propep','ft_lipid','ft_carbohyd','ft_disulfid','ft_intramem','ft_transmem','redox_potential']
+        #testwise removed:
+        # fields unable to be retreived: 'ft_metal' and 'ft_np_bind'
+
+        payload = {'query':'organism_id:{}'.format(organism_id),
+                   'format':'tsv',
+                   'fields':fields_to_look_up}
+        url = 'https://rest.uniprot.org/uniprotkb/stream'
+        response = requests.get(url, params=payload)
+        self.data = response.content
+
+# obsolete?
 def url_columns():
     """Build the url part that specifies which columns we want."""
     # Information needed to build url was retrieved on
@@ -128,7 +143,7 @@ def url_columns():
 
     return ','.join(cols)
 
-
+# obsolete?
 def reformat(keyword, fields):
     """
     Reformat field name to url format using specific keyword.
