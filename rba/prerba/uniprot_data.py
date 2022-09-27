@@ -41,15 +41,20 @@ class UniprotData(object):
         self._gene_annotation_score = {}
         gene_reader = re.compile(r'([^\s]+)')
         annotation_reader = re.compile(r'[0-5]')
-        for entry, genes, annotation in zip(self.data.index, self.data['Gene Names'], self.data['Annotation']): #new
-        #for entry, genes, annotation in zip(self.data.index, self.data['Gene names'], self.data['Annotation']):
+
+        # according to uniprot rest api documentation gene-name column should be identified as 'Gene names',
+        # however is denoted 'Gene Names'. In order to assure robustness to changes, we  check for both here.
+        if 'Gene Names' in self.data.columns:
+            gene_name_col='Gene Names'
+        elif 'Gene names' in self.data.columns:
+            gene_name_col='Gene names'
+        for entry, genes, annotation in zip(self.data.index, self.data[gene_name_col], self.data['Annotation']): #new
             # transform raw UniProt field into standardized list
             if pandas.isnull(genes):
                 continue
             gene_ids = set(g.upper() for g in gene_reader.findall(genes))
 
             annotation_score = annotation_reader.findall(str(annotation)) #new
-            #annotation_score = annotation_reader.findall(annotation)
             for gene in gene_ids:
                 # test if the gene is already present in the list _gene_to_entry.keys()
                 if gene in self._gene_to_entry.keys():
