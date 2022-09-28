@@ -525,12 +525,13 @@ class SwiglpkLpSolver(LpSolver):
         #GLP_SF_2N round scale factors to nearest power of two;
         #GLP_SF_SKIP skip scaling, if the problem is well scaled.
 
-        swiglpk.glp_init_smcp(swiglpk.glp_smcp())
+        self.glpk_simplex_params=swiglpk.glp_smcp()
+        swiglpk.glp_init_smcp(self.glpk_simplex_params)
         self._model = lp
 
     def solve_lp(self):
-        #swiglpk.glp_simplex(self._model, swiglpk.glp_smcp())
-        swiglpk.glp_simplex(self._model,None)
+        swiglpk.glp_simplex(self._model, self.glpk_simplex_params)
+        #swiglpk.glp_simplex(self._model,None)
 
     def is_feasible(self):
         return swiglpk.glp_get_status(self._model) in [swiglpk.GLP_FEAS,swiglpk.GLP_OPT]
