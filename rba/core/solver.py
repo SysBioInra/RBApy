@@ -481,7 +481,7 @@ class SwiglpkLpSolver(LpSolver):
         rba_solver = self.rba_solver
 
         # define problem
-        swiglpk.glp_term_out(GLP_OFF)
+        swiglpk.glp_term_out(swiglpk.GLP_OFF)
         lp = swiglpk.glp_create_prob()
         swiglpk.glp_create_index(lp)
         swiglpk.glp_scale_prob(lp, swiglpk.GLP_SF_AUTO)
@@ -529,13 +529,14 @@ class SwiglpkLpSolver(LpSolver):
         self._model = lp
 
     def solve_lp(self):
-        swiglpk.glp_simplex(self._model, swiglpk.glp_smcp())
+        #swiglpk.glp_simplex(self._model, swiglpk.glp_smcp())
+        swiglpk.glp_simplex(self._model,None)
 
     def is_feasible(self):
-        return self._model.status in [swiglpk.GLP_FEAS,swiglpk.GLP_OPT]
+        return swiglpk.glp_get_status(self._model) in [swiglpk.GLP_FEAS,swiglpk.GLP_OPT]
 
     def is_infeasible(self):
-        return self._model.status in [swiglpk.GLP_INFEAS,swiglpk.GLP_NOFEAS]
+        return swiglpk.glp_get_status(self._model) in [swiglpk.GLP_INFEAS,swiglpk.GLP_NOFEAS]
 
     def get_status(self):
         return {
