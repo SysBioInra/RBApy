@@ -13,7 +13,7 @@ Installation
 
 RBApy requires one of the linear programming solvers `IBM CPLEX <https://www.ibm.com/analytics/cplex-optimizer>`_, `GLPK <https://www.gnu.org/software/glpk/>`_, or `Gurobi <https://www.gurobi.com/products/gurobi-optimizer/>`_. Note, while GLPK is capable of executing the example models in the tutorial, in our experience, GLPK is prohibitively slow for real RBA models. IBM and Gurobi both provide free licenses for academic research.
 
-1. Optionally, install the CPLEX linear programming solver. 
+1. Optionally, install the CPLEX linear programming solver.
 
 2. Install this package from PyPI:
     ```
@@ -40,7 +40,15 @@ RBApy requires one of the linear programming solvers `IBM CPLEX <https://www.ibm
 
 More information about how to install RBApy is available at https://sysbioinra.github.io/RBApy/.
 
+Remark on usage
+---------------
 
+When using RBApy in own Python code, it must be imported as: rba
+
+    ```
+    import rba
+    ```
+    
 Running
 -------
 
@@ -91,10 +99,10 @@ To use RBApy with Gurobi, either:
 SBML file requirements
 ----------------------
 
-The SBML file must be a valid SBML file, with gene-reaction associations. 
-RBApy assumes that the boolean relation is always “or”s of “and”s, e.g. (g1 and g2) or (g3 and g4) 
+The SBML file must be a valid SBML file, with gene-reaction associations.
+RBApy assumes that the boolean relation is always “or”s of “and”s, e.g. (g1 and g2) or (g3 and g4)
 Moreover, the words  “or” and “and” must be written in lowercase letters.
-Empty fields in Gene-association will be interpreted as a diffusion reaction. 
+Empty fields in Gene-association will be interpreted as a diffusion reaction.
 
 
 
