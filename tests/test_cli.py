@@ -41,6 +41,7 @@ class CliTestCase(unittest.TestCase):
         if (
             solver.is_cplex_available()
             or solver.is_glpk_available()
+            or solver.is_swiglpk_available()
             or solver.is_gurobi_available()
         ):
             with unittest.mock.patch('sys.argv', ['', self.tmp_dirname, '--bissection-tol', '1e-2', '--verbose']):

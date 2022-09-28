@@ -175,7 +175,7 @@ class RbaModel(object):
             concentrations do not appear in the matrices).
 
         lp_solver : str, optional
-            LP solver (``cplex``, ``glpk``, ``gurobi``, ``scipy``)
+            LP solver (``cplex``, ``glpk``, ``gurobi``, ``scipy`` ``swiglpk``)
 
         mu_min : float, optional:
             Minimum μ to check

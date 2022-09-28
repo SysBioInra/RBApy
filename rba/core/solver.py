@@ -8,6 +8,8 @@ import abc
 import functools
 import numpy
 import os
+from scipy.sparse import coo_matrix
+
 # from scipy.sparse import diags
 import sys
 try:
@@ -168,6 +170,11 @@ class Solver(object):
             and (lp_solver in ['glpk'] or lp_solver is None)
         ):
             self.lp_solver = GlpkLpSolver(self)
+        elif (
+            (is_swiglpk_available())
+            and (lp_solver in ['swiglpk'] or lp_solver is None)
+        ):
+            self.lp_solver = SwiglpkLpSolver(self)
         elif (
             (is_swiglpk_available() and is_optlang_available())
             and (lp_solver in ['glpk', 'glpk_optlang'] or lp_solver is None)
@@ -444,6 +451,115 @@ class CplexLpSolver(LpSolver):
         rba_solver.X = numpy.array(self._lp.solution.get_values())
         rba_solver.lambda_ = self._lp.solution.get_dual_values()
         rba_solver._sol_basis = self._lp.solution.basis.get_basis()
+
+
+class SwiglpkLpSolver(LpSolver):
+    """ GLPK LP solver
+
+    Attributes:
+        rba_solver (:obj:`Solver`): RBA solver
+        verbose (:obj:`bool`): whether to display diagnostic information
+    """
+
+    def __init__(self, rba_solver, verbose=False):
+        """
+        Args:
+            rba_solver (:obj:`Solver`): RBA solver
+            verbose (:obj:`bool`, optional): whether to display diagnostic information
+        """
+        super(SwiglpkLpSolver, self).__init__(rba_solver)
+        self.verbose = verbose
+
+    @property
+    def name(self):
+        return 'swiglpk'
+
+    def build_lp(self):
+        """
+        Constructs a GLPK-object.
+        """
+        rba_solver = self.rba_solver
+
+        # define problem
+        swiglpk.glp_term_out(GLP_OFF)
+        lp = swiglpk.glp_create_prob()
+        swiglpk.glp_create_index(lp)
+        swiglpk.glp_scale_prob(lp, swiglpk.GLP_SF_AUTO)
+
+        swiglpk.glp_set_obj_dir(lp, swiglpk.GLP_MIN)
+        swiglpk.glp_add_rows(lp, len(rba_solver.matrix.row_names)) #  3=nrs number of constraints
+        swiglpk.glp_add_cols(lp, len(rba_solver.matrix.col_names)) #  3=nrs number of variables
+
+        row_sign_mapping={'E':swiglpk.GLP_FX,'L':swiglpk.GLP_UP,'G':swiglpk.GLP_LO}
+        for row_index in range(len(rba_solver.matrix.row_names)):
+            swiglpk.glp_set_row_name(lp, row_index+1, rba_solver.matrix.row_names[row_index]) #sets name of first row to p -> note that indexing starts at 1 not 0
+            swiglpk.glp_set_row_bnds(lp, row_index+1, row_sign_mapping[rba_solver.matrix.row_signs[row_index]], rba_solver.matrix.b[row_index], rba_solver.matrix.b[row_index]) #bounds the first row between lb 0 and ub 100
+
+        bound_type_map={False:swiglpk.GLP_DB,True:swiglpk.GLP_FX}
+        for col_index in range(len(rba_solver.matrix.col_names)):
+            swiglpk.glp_set_col_name(lp, col_index+1, rba_solver.matrix.col_names[col_index])
+            swiglpk.glp_set_obj_coef(lp, col_index+1, float(rba_solver.matrix.f[col_index])) #sets name of first variables objective coefficient to to 10 -> note that indexing starts at 1 not 0
+            lb=rba_solver.matrix.LB[col_index]
+            ub=rba_solver.matrix.UB[col_index]
+            swiglpk.glp_set_col_bnds(lp, col_index+1, bound_type_map[lb==ub], float(lb), float(ub))
+
+        constraints = rba_solver.matrix.A.tocoo()
+        nonzero_row_inds=list(constraints.row)
+        nonzero_col_inds=list(constraints.col)
+        nonzero_data=list(constraints.data)
+
+        nonzero_row_indices = swiglpk.intArray(len(nonzero_data)+1)
+        nonzero_col_indices = swiglpk.intArray(len(nonzero_data)+1)
+        nonzero_coefficients = swiglpk.doubleArray(len(nonzero_data)+1)
+
+        for i in range(len(nonzero_data)):
+            nonzero_row_indices[i+1]=int(nonzero_row_inds[i]+1)
+            nonzero_col_indices[i+1]=int(nonzero_col_inds[i]+1)
+            nonzero_coefficients[i+1]=nonzero_data[i]
+
+        swiglpk.glp_load_matrix(lp, len(nonzero_data), nonzero_row_indices, nonzero_col_indices, nonzero_coefficients)
+
+        swiglpk.glp_scale_prob(lp,swiglpk.GLP_SF_EQ) #GLP_SF_EQ
+        #GLP_SF_GM perform geometric mean scaling;
+        #GLP_SF_EQ perform equilibration scaling;
+        #GLP_SF_2N round scale factors to nearest power of two;
+        #GLP_SF_SKIP skip scaling, if the problem is well scaled.
+
+        swiglpk.glp_init_smcp(swiglpk.glp_smcp())
+        self._model = lp
+
+    def solve_lp(self):
+        swiglpk.glp_simplex(self._model, swiglpk.glp_smcp())
+
+    def is_feasible(self):
+        return self._model.status in [swiglpk.GLP_FEAS,swiglpk.GLP_OPT]
+
+    def is_infeasible(self):
+        return self._model.status in [swiglpk.GLP_INFEAS,swiglpk.GLP_NOFEAS]
+
+    def get_status(self):
+        return {
+            'code': swiglpk.glp_get_status(self._model),
+            'message': self.get_status_message(swiglpk.glp_get_status(self._model)),
+        }
+
+    def get_status_message(self, code):
+        codes = {
+            swiglpk.GLP_OPT: 'solution is optimal',
+            swiglpk.GLP_UNDEF: 'solution is undefined',
+            swiglpk.GLP_FEAS: 'solution is feasible, but not necessarily optimal',
+            swiglpk.GLP_INFEAS: 'solution is infeasible',
+            swiglpk.GLP_NOFEAS: 'problem has no feasible solution',
+            swiglpk.GLP_UNBND: 'problem has an unbounded solution',
+        }
+        return codes.get(code, None)
+
+    def store_results(self, mu):
+        rba_solver = self.rba_solver
+        rba_solver.mu_opt = mu
+        rba_solver.X = numpy.array([swiglpk.glp_get_col_prim(self._model, i+1) for i in range(len(rba_solver.matrix.col_names))])
+        rba_solver.lambda_ = [swiglpk.glp_get_row_dual(self._model, i+1) for i in range(len(rba_solver.matrix.row_names))]
+        rba_solver._sol_basis = None
 
 
 class GlpkLpSolver(LpSolver):
