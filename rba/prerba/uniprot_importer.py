@@ -7,12 +7,6 @@ from __future__ import division, print_function, absolute_import
 import os.path
 import sys
 import requests
-#try:
-#    from urllib.request import urlopen
-#    from urllib.parse import urlencode
-#except ImportError:
-#    from urllib2 import urlopen
-#    from urllib import urlencode
 
 
 def create_uniprot_if_absent(input_file, organism_id):
@@ -51,32 +45,18 @@ class UniprotImporter(object):
             a UniProt identifier, a species name, etc.
 
         """
-        # code adapted from
-        # http://www.UniProt.org/help/programmatic_access
-        #url = 'http://www.uniprot.org/uniprot/'
-        #params = {
-        #    'format': 'tab',
-        #    'query': 'organism:' + organism_id,
-        #    'columns': url_columns()
-        #}
-        #url_data = urlencode(params)
-        #response = urlopen(url + '?' + url_data)
-        #self.data = response.read()
-
-        fields_to_look_up=['accession','id','gene_names','annotation_score','protein_name','organism_name','organism_id','reviewed','length','mass','sequence','ec',
-        'cc_catalytic_activity','cc_cofactor','cc_subunit','cc_subcellular_location','cc_tissue_specificity','cc_pathway','cc_function',
-        'temp_dependence','ph_dependence','cc_caution','cc_interaction','cc_ptm','ft_signal','ft_transit','ft_propep','ft_lipid','ft_carbohyd','ft_disulfid','ft_intramem','ft_transmem','redox_potential']
-        #testwise removed:
-        # fields unable to be retreived: 'ft_metal' and 'ft_np_bind'
+        #fields_to_look_up=['accession','id','gene_names','annotation_score','protein_name','organism_name','organism_id','reviewed','length','mass','sequence','ec',
+        #'cc_catalytic_activity','cc_cofactor','cc_subunit','cc_subcellular_location','cc_tissue_specificity','cc_pathway','cc_function',
+        #'temp_dependence','feature_count','ph_dependence','cc_caution','cc_interaction','cc_ptm','ft_signal','ft_transit','ft_propep','ft_lipid','ft_carbohyd','ft_disulfid','ft_intramem','ft_transmem','redox_potential']
+        #fields unable to be retreived: 'ft_metal' and 'ft_np_bind'
 
         payload = {'query':'organism_id:{}'.format(organism_id),
                    'format':'tsv',
-                   'fields':fields_to_look_up}
+                   'fields':url_columns()}
         url = 'https://rest.uniprot.org/uniprotkb/stream'
         response = requests.get(url, params=payload)
         self.data = response.content
 
-# obsolete?
 def url_columns():
     """Build the url part that specifies which columns we want."""
     # Information needed to build url was retrieved on
@@ -85,17 +65,15 @@ def url_columns():
     ######################
     # Names and taxonomy #
     ######################
-    # **Entry**, **Entry name**,
-    # **Gene names**, **Protein names**, **Organism**, **Organism ID**
-    cols = ['id', 'entry name', 'genes', 'protein names', 'organism',
-            'organism-id']
+    # **Entry**, **Entry Name**,
+    # **Gene Names**, **Protein names**, **Organism**, **Organism (ID)**
+    cols= ['accession','id','gene_names','protein_name','organism_name','organism_id']
 
     ######################
     # Annotation quality #
     ######################
-    # **Reviewed**, **Annotation score**
-    cols += ['reviewed', 'annotation score']
-
+    # **Reviewed**, **Annotation**
+    cols += ['reviewed', 'annotation_score']
 
     #############
     # Sequences #
@@ -106,50 +84,49 @@ def url_columns():
     ############
     # Function #
     ############
-    # **EC number**, **Catalytic activity**, **Cofactor**,
-    # **Enzyme regulation**, **Function [CC]**, **Pathway**
-    # **Temperature dependence**, **pH dependence**
+    # **Catalytic activity** , **Pathway** ,
+    # **Function [CC]** , **EC number** ,
+    # **Cofactor** , **Temperature dependence** ,
+    # **pH dependence** , **Redox potential**
+    cols += ['cc_catalytic_activity','cc_pathway','cc_function','ec','cc_cofactor','temp_dependence','ph_dependence','redox_potential']
     # **Metal binding**, **Nucleotide binding**
-    comments = ['catalytic activity', 'cofactor', 'enzyme regulation',
-                'function', 'pathway', 'temperature dependence',
-                'ph dependence']
-    features = ['metal binding', 'np binding']
-    cols += (['ec'] + reformat('comment', comments)
-             + reformat('feature', features))
-
-    #################
-    # Miscellaneous #
-    #################
-    # **Features**, **Caution**, **Keywords**
-    cols += ['features'] + reformat('comment', ['caution'] + ['keywords'])
+    # fields unable to be retreived: 'ft_metal' and 'ft_np_bind'
 
     ###############
     # Interaction #
     ###############
-    # **Subunit structure [CC]**
-    cols += reformat('comment', ['subunit'])
+    # **Subunit structure** , **Interacts with**
+    cols += ['cc_subunit','cc_interaction']
+
+    ########################
+    # Subcellular location #
+    ########################
+    # **Subcellular location [CC]** , **Intramembrane** , **Transmembrane**
+    cols += ['cc_subcellular_location','ft_intramem','ft_transmem']
 
     ##############
     # Expression #
     ##############
     # **Tissue specificity**
-    cols += reformat('comment', ['tissue specificity'])
+    cols += ['cc_tissue_specificity']
 
-    ########################
-    # Subcellular location #
-    ########################
-    # **Subcellular location [CC]**
-    cols += reformat('comment', ['subcellular location'])
+    ##############
+    # Protein processing #
+    ##############
+    # **Post-translational modification** , **Lipidation**
+    # **Glycosylation** , **Disulfide bond**
+    cols += ['cc_ptm','ft_lipid','ft_carbohyd','ft_disulfid']
 
-    return ','.join(cols)
+    ##############
+    # Specific peptides #
+    ##############
+    # **Signal peptide** , **Transit peptide** , **Propeptide**
+    cols += ['ft_signal','ft_transit','ft_propep']
 
-# obsolete?
-def reformat(keyword, fields):
-    """
-    Reformat field name to url format using specific keyword.
+    #################
+    # Miscellaneous #
+    #################
+    #  **Caution**,**Features**, **Keywords**
+    cols += ['cc_caution','feature_count','keyword']
 
-    Example:
-        reformat('comment', ['a','b']) returns
-        ['comment(A)', 'comment(B)']
-    """
-    return ['{}({})'.format(keyword, f.upper()) for f in fields]
+    return cols
