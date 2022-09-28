@@ -40,7 +40,15 @@ RBApy requires one of the linear programming solvers `IBM CPLEX <https://www.ibm
 
 More information about how to install RBApy is available at https://sysbioinra.github.io/RBApy/.
 
+Remark on usage
+---------------
 
+When using RBApy in own Python code, it must be imported as: rba
+
+    ```
+    import rba
+    ```
+    
 Running
 -------
 
