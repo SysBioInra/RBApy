@@ -20,6 +20,9 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 with open(path.join(here, 'rba', '_version.py'), 'r') as f:
     version = f.readline().split("'")[1]
 
+with open(path.join(here, 'rba', '_authors.py'), 'r') as f:
+    authors = f.readline().split("'")[1]
+
 setup(
     name='rbapy',
 
@@ -35,7 +38,7 @@ setup(
     url='https://sysbioinra.github.io/RBApy/',
 
     # Author details
-    author='Ana Bulovic, Stephan Fischer, Anne Goelzer, Felipe Golib',
+    author=authors,
     author_email='anne.goelzer@inra.fr',
 
     # Choose your license
