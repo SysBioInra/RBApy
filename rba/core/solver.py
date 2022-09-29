@@ -454,7 +454,7 @@ class CplexLpSolver(LpSolver):
 
 
 class SwiglpkLpSolver(LpSolver):
-    """ GLPK LP solver
+    """ Swiglpk LP solver
 
     Attributes:
         rba_solver (:obj:`Solver`): RBA solver
