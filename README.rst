@@ -119,7 +119,7 @@ Empty fields in Gene-association will be interpreted as a diffusion reaction.
 Authors
 -------
 
-Fischer S. , A. Bulovic, A. Goelzer, M. Dinh
+Fischer S. , Bulovic A. , Goelzer A. , Dinh M.
 
 
 Citation
