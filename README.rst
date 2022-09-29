@@ -67,6 +67,7 @@ or, more generally:
 ```
 python generate_rba_model.py path/to/params.in
 ```
+
 The script will generate several files used as an input for the RBA solver.
 By default, they will be written to the `output` directory.
 
@@ -78,6 +79,7 @@ these helper files and rerun the script to obtain more relevant output
 (see instructions below).
 
 If rbapy was installed properly, there also exists command-line interface called by:
+
 ```
 generate-rba-model path/to/params.in
 ```
