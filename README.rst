@@ -58,11 +58,13 @@ Put the SBML file containing the GSMM of your organism of interest in the `input
 parameter file `input/params.in`. Then open a console at the root
 of the repository and run:
 
+
 ```
 python generate_rba_model.py input/params.in
 ```
 
 or, more generally:
+
 
 ```
 python generate_rba_model.py path/to/params.in
@@ -80,11 +82,13 @@ these helper files and rerun the script to obtain more relevant output
 
 If rbapy was installed properly, there also exists command-line interface called by:
 
+
 ```
 generate-rba-model path/to/params.in
 ```
 
 Once the RBA model was generated, you can solve it using:
+
 
 ```
 python solve_rba_model.py path/to/model
@@ -94,6 +98,8 @@ where the path points to the directory containing the XML files defining
 the RBA model.
 
 If rbapy was installed properly, there also exists command-line interface called by:
+
+
 ```
 solve-rba-model path/to/model
 ```
