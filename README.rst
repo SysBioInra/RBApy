@@ -26,10 +26,10 @@ RBApy requires one of the linear programming solvers `IBM CPLEX <https://www.ibm
     pip install rbapy[cplex]
     ```
 
-    Optionally, install GLPK by installing RBApy with the ``glpk`` option. Note, this requires ``libglpk-dev``.:
-
+    Optionally, install GLPK by installing RBApy with the ``swiglpk`` option. Note, this requires ``libglpk-dev``.:
+    
     ```
-    pip install rbapy[glpk]
+    pip install rbapy[swiglpk]
     ```
 
     Optionally, install Gurobi by installing RBApy with the ``gurobi`` option. Note, this requires a Gurobi license.:
@@ -77,6 +77,11 @@ to replace these default values with hand-curated values. You should fill in
 these helper files and rerun the script to obtain more relevant output
 (see instructions below).
 
+If rbapy was installed properly, there also exists command-line interface called by:
+```
+generate-rba-model path/to/params.in
+```
+
 Once the RBA model was generated, you can solve it using:
 
 ```
@@ -85,6 +90,11 @@ python solve_rba_model.py path/to/model
 
 where the path points to the directory containing the XML files defining
 the RBA model.
+
+If rbapy was installed properly, there also exists command-line interface called by:
+```
+solve-rba-model path/to/model
+```
 
 
 Running RBApy with Gurobi
