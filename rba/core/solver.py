@@ -537,7 +537,7 @@ class SwiglpkLpSolver(LpSolver):
         return swiglpk.glp_get_status(self._model) in [swiglpk.GLP_FEAS,swiglpk.GLP_OPT]
 
     def is_infeasible(self):
-        return swiglpk.glp_get_status(self._model) in [swiglpk.GLP_INFEAS,swiglpk.GLP_NOFEAS]
+        return swiglpk.glp_get_status(self._model) not in [swiglpk.GLP_FEAS,swiglpk.GLP_OPT]
 
     def get_status(self):
         return {
