@@ -114,17 +114,21 @@ RBApy assumes that the boolean relation is always “or”s of “and”s, e.g. 
 Moreover, the words  “or” and “and” must be written in lowercase letters.
 Empty fields in Gene-association will be interpreted as a diffusion reaction.
 
+Citation
+---------------
+
+If you wish to cite this work, please refer to `https://doi.org/10.1016/j.ymben.2019.06.001 <https://doi.org/10.1016/j.ymben.2019.06.001>`_.
 
 
 Authors
 -------
-
-Copyright (c) 2018 INRA - MaIAGE - France.
 S. Fischer, A. Bulovic, A. Goelzer, M. Dinh
 
 
 License
 -------
+
+Copyright (c) 2018 INRAe - MaIAGE - France.
 
 RBApy is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -140,7 +144,3 @@ You should have received a copy of the GNU General Public License
 along with RBApy.  If not, see <https://www.gnu.org/licenses/>
 
 
-Citation
----------------
-
-If you wish to cite this work, please refer to `https://doi.org/10.1016/j.ymben.2019.06.001 <https://doi.org/10.1016/j.ymben.2019.06.001>`_.
