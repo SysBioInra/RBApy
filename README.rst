@@ -128,7 +128,7 @@ S. Fischer, A. Bulovic, A. Goelzer, M. Dinh
 License
 -------
 
-Copyright (c) 2018 INRAe - MaIAGE - France.
+Copyright (c) 2018 INRAE - MaIAGE - France.
 
 RBApy is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
