@@ -110,6 +110,7 @@ setup(
         'cplex_optlang': ['optlang', 'cplex'],
 
         'glpk': ['glpk'],
+        'swiglpk': ['swiglpk'],
         'glpk_conv_opt': ['conv_opt'],
         'glpk_optlang': ['optlang'],
 

@@ -18,7 +18,7 @@ def main():
                         help='Directory for model')
     parser.add_argument('--lp-solver', type=str, default=None,
                         help=(
-                            'LP solver (`cplex`, `glpk`, ``gurobi``, or `scipy`; '
+                            'LP solver (`cplex`, `glpk`, `swiglpk`, ``gurobi``, or `scipy`; '
                             'default: `cplex` if installed, otherwise `gurobi` if installed, otherwise `glpk`)'
                         ))
     parser.add_argument('--mu-min', type=float, default=0.,

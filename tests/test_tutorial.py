@@ -40,6 +40,12 @@ class TutorialTestCase(unittest.TestCase):
         self._test('glpk')
 
     @unittest.skipIf(
+        not (solver.is_swiglpk_available()),
+        reason='SWIGLPK is not available')
+    def test_swiglpk(self):
+        self._test('swiglpk')
+
+    @unittest.skipIf(
         not (solver.is_optlang_available() and solver.is_swiglpk_available()),
         reason='OptLang and/or GLPK are not available')
     def test_glpk_optlang(self):
@@ -175,7 +181,7 @@ class TutorialTestCase(unittest.TestCase):
 
         results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 2.5, rtol=rtol)
-        """        
+        """
         self.assertEqual(results.variables, {
             'R_transport': 0.0,
             'R_protein_component_precursor': 0.0,
@@ -247,7 +253,7 @@ class TutorialTestCase(unittest.TestCase):
 
         results = my_model.solve(lp_solver=lp_solver)
         numpy.testing.assert_allclose(results.mu_opt, 1.3888883590698242, rtol=rtol)
-        """        
+        """
         self.assertEqual(results.variables, {
             'R_transport': 1.3888883590698242,
             'R_protein_component_precursor': 0.0,
