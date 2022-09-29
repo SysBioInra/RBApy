@@ -116,16 +116,16 @@ RBApy assumes that the boolean relation is always “or”s of “and”s, e.g. 
 Moreover, the words  “or” and “and” must be written in lowercase letters.
 Empty fields in Gene-association will be interpreted as a diffusion reaction.
 
-Citation
----------------
-
-If you wish to cite this work, please refer to `https://doi.org/10.1016/j.ymben.2019.06.001 <https://doi.org/10.1016/j.ymben.2019.06.001>`_.
-
-
 Authors
 -------
 
 S. Fischer, A. Bulovic, A. Goelzer, M. Dinh
+
+
+Citation
+---------------
+
+If you wish to cite this work, please refer to `https://doi.org/10.1016/j.ymben.2019.06.001 <https://doi.org/10.1016/j.ymben.2019.06.001>`_.
 
 
 License
