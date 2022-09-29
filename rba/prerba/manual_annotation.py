@@ -48,8 +48,8 @@ class CuratedSubunits(CuratedData):
         self.data[uniprot_line.name] = value
         self._raw_data.add_row(
             (uniprot_line.name, value) +
-            tuple(uniprot_line[['Gene names', 'Protein names',
-                                'Subunit structure [CC]']])
+            tuple(uniprot_line[['Gene Names', 'Protein names',
+                                'Subunit structure']])
             )
 
 
@@ -74,7 +74,7 @@ class CuratedLocations(CuratedData):
         self.data[uniprot_line.name] = value
         self._raw_data.add_row(
             (uniprot_line.name,) +
-            tuple(uniprot_line[['Gene names', 'Protein names']]) +
+            tuple(uniprot_line[['Gene Names', 'Protein names']]) +
             (value,)
             )
 

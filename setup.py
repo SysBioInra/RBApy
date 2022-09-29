@@ -75,7 +75,7 @@ setup(
         'systems biology',
         'computational biology',
         'mathematical modeling',
-        'numerical simulation',        
+        'numerical simulation',
     ],
 
     # You can just specify the packages manually here if your project is
@@ -97,6 +97,7 @@ setup(
         'pandas',
         'python-libsbml',
         'scipy',
+        'requests'
     ],
 
     # List additional groups of dependencies here (e.g. development
