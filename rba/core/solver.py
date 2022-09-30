@@ -241,11 +241,11 @@ class Solver(object):
                 mu_min = mu_test
                 self.lp_solver.store_results(mu_test)
                 if self.verbose:
-                    print(' is feasible.')
+                    print(' is feasible. At status {} ({})'.format(self.lp_solver.get_status()['code'],self.lp_solver.get_status()['message']))
             elif self.lp_solver.is_infeasible():
                 mu_max = mu_test
                 if self.verbose:
-                    print(' is infeasible. At status {}'.format(self.lp_solver,self.lp_solver.get_status()['message']))
+                    print(' is infeasible. At status {} ({})'.format(self.lp_solver.get_status()['code'],self.lp_solver.get_status()['message']))
             else:
                 raise ValueError(' ' + self.unknown_flag_msg(mu_test))
 
@@ -286,11 +286,11 @@ class Solver(object):
             self.lp_solver.solve_lp()
             if self.lp_solver.is_feasible():
                 if self.verbose:
-                    print('μ = ' + str(mu_test) + ' is feasible.')
+                    print('μ = {} is feasible. At status {} ({})'.format(str(mu_test),self.lp_solver.get_status()['code'],self.lp_solver.get_status()['message']))
                 self.lp_solver.store_results(mu_test)
             elif self.lp_solver.is_infeasible():
                 if self.verbose:
-                    print('μ = ' + str(mu_test) + ' is infeasible.')
+                    print('μ = {} is infeasible. At status {} ({})'.format(str(mu_test),self.lp_solver.get_status()['code'],self.lp_solver.get_status()['message']))
             else:
                 raise ValueError(self.unknown_flag_msg(mu_test))
 
@@ -535,6 +535,7 @@ class SwiglpkLpSolver(LpSolver):
         #swiglpk.glp_simplex(self._model,None)
 
     def is_feasible(self):
+        #return swiglpk.glp_get_status(self._model) in [swiglpk.GLP_FEAS,swiglpk.GLP_OPT,swiglpk.GLP_UNDEF]
         return swiglpk.glp_get_status(self._model) in [swiglpk.GLP_FEAS,swiglpk.GLP_OPT]
 
     def is_infeasible(self):
