@@ -245,7 +245,7 @@ class Solver(object):
             elif self.lp_solver.is_infeasible():
                 mu_max = mu_test
                 if self.verbose:
-                    print(' is infeasible.')
+                    print(' is infeasible. At status {}'.format(self.lp_solver,self.lp_solver.get_status()['message']))
             else:
                 raise ValueError(' ' + self.unknown_flag_msg(mu_test))
 
@@ -293,6 +293,7 @@ class Solver(object):
                     print('μ = ' + str(mu_test) + ' is infeasible.')
             else:
                 raise ValueError(self.unknown_flag_msg(mu_test))
+
 
     def unknown_flag_msg(self, mu):
         status = self.lp_solver.get_status()
