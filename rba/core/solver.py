@@ -375,7 +375,7 @@ class CplexLpSolver(LpSolver):
             matrices.
 
         """
-        import cplex
+        #import cplex
         rba_solver = self.rba_solver
 
         # preprocess matrices
@@ -526,7 +526,14 @@ class SwiglpkLpSolver(LpSolver):
         #GLP_SF_2N round scale factors to nearest power of two;
         #GLP_SF_SKIP skip scaling, if the problem is well scaled.
 
+        #Defining GLPK solver parameters
         self.glpk_simplex_params=swiglpk.glp_smcp()
+        setattr(self.glpk_simplex_params, "tol_bnd", 1e-9)
+        setattr(self.glpk_simplex_params, "tol_dj", 1e-9)
+        setattr(self.glpk_simplex_params, "tol_piv", 1e-10)
+        setattr(self.glpk_simplex_params, "presolve", swiglpk.GLP_OFF)
+        setattr(self.glpk_simplex_params, "tm_lim", 2000)
+
         swiglpk.glp_init_smcp(self.glpk_simplex_params)
         self._model = lp
 
