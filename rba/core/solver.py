@@ -530,7 +530,7 @@ class SwiglpkLpSolver(LpSolver):
         self.glpk_simplex_params=swiglpk.glp_smcp()
         setattr(self.glpk_simplex_params, "tol_bnd", 1e-9)
         setattr(self.glpk_simplex_params, "tol_dj", 1e-9)
-        setattr(self.glpk_simplex_params, "tol_piv", 1e-10)
+        setattr(self.glpk_simplex_params, "tol_piv", 1e-9)
         #setattr(self.glpk_simplex_params, "presolve", swiglpk.GLP_OFF)
         #setattr(self.glpk_simplex_params, "tm_lim", 2000)
 
