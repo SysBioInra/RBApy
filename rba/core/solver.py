@@ -164,7 +164,6 @@ class Solver(object):
             and (lp_solver in ['gurobi', 'gurobi_optlang'] or lp_solver is None)
         ):
             self.lp_solver = OptlangLpSolver(self, 'gurobi')
-
         elif (
             (is_glpk_available())
             and (lp_solver in ['glpk'] or lp_solver is None)
@@ -241,11 +240,11 @@ class Solver(object):
                 mu_min = mu_test
                 self.lp_solver.store_results(mu_test)
                 if self.verbose:
-                    print(' is feasible.')
+                    print(' is feasible. At status {} ({})'.format(self.lp_solver.get_status()['code'],self.lp_solver.get_status()['message']))
             elif self.lp_solver.is_infeasible():
                 mu_max = mu_test
                 if self.verbose:
-                    print(' is infeasible.')
+                    print(' is infeasible. At status {} ({})'.format(self.lp_solver.get_status()['code'],self.lp_solver.get_status()['message']))
             else:
                 raise ValueError(' ' + self.unknown_flag_msg(mu_test))
 
@@ -286,13 +285,14 @@ class Solver(object):
             self.lp_solver.solve_lp()
             if self.lp_solver.is_feasible():
                 if self.verbose:
-                    print('μ = ' + str(mu_test) + ' is feasible.')
+                    print('μ = {} is feasible. At status {} ({})'.format(str(mu_test),self.lp_solver.get_status()['code'],self.lp_solver.get_status()['message']))
                 self.lp_solver.store_results(mu_test)
             elif self.lp_solver.is_infeasible():
                 if self.verbose:
-                    print('μ = ' + str(mu_test) + ' is infeasible.')
+                    print('μ = {} is infeasible. At status {} ({})'.format(str(mu_test),self.lp_solver.get_status()['code'],self.lp_solver.get_status()['message']))
             else:
                 raise ValueError(self.unknown_flag_msg(mu_test))
+
 
     def unknown_flag_msg(self, mu):
         status = self.lp_solver.get_status()
@@ -374,7 +374,7 @@ class CplexLpSolver(LpSolver):
             matrices.
 
         """
-        import cplex
+        #import cplex
         rba_solver = self.rba_solver
 
         # preprocess matrices
@@ -525,7 +525,14 @@ class SwiglpkLpSolver(LpSolver):
         #GLP_SF_2N round scale factors to nearest power of two;
         #GLP_SF_SKIP skip scaling, if the problem is well scaled.
 
+        #Defining GLPK solver parameters
         self.glpk_simplex_params=swiglpk.glp_smcp()
+        setattr(self.glpk_simplex_params, "tol_bnd", 1e-9)
+        setattr(self.glpk_simplex_params, "tol_dj", 1e-9)
+        setattr(self.glpk_simplex_params, "tol_piv", 1e-9)
+        #setattr(self.glpk_simplex_params, "presolve", swiglpk.GLP_OFF)
+        #setattr(self.glpk_simplex_params, "tm_lim", 2000)
+
         swiglpk.glp_init_smcp(self.glpk_simplex_params)
         self._model = lp
 
@@ -534,9 +541,11 @@ class SwiglpkLpSolver(LpSolver):
         #swiglpk.glp_simplex(self._model,None)
 
     def is_feasible(self):
+        #return swiglpk.glp_get_status(self._model) in [swiglpk.GLP_FEAS,swiglpk.GLP_OPT,swiglpk.GLP_UNDEF]
         return swiglpk.glp_get_status(self._model) in [swiglpk.GLP_FEAS,swiglpk.GLP_OPT]
 
     def is_infeasible(self):
+        #return swiglpk.glp_get_status(self._model) not in [swiglpk.GLP_FEAS,swiglpk.GLP_OPT,swiglpk.GLP_UNDEF]
         return swiglpk.glp_get_status(self._model) not in [swiglpk.GLP_FEAS,swiglpk.GLP_OPT]
 
     def get_status(self):
@@ -548,7 +557,7 @@ class SwiglpkLpSolver(LpSolver):
     def get_status_message(self, code):
         codes = {
             swiglpk.GLP_OPT: 'solution is optimal',
-            swiglpk.GLP_UNDEF: 'solution is undefined',
+            swiglpk.GLP_UNDEF: 'solution is undefined (infeasibility is assumed)',
             swiglpk.GLP_FEAS: 'solution is feasible, but not necessarily optimal',
             swiglpk.GLP_INFEAS: 'solution is infeasible',
             swiglpk.GLP_NOFEAS: 'problem has no feasible solution',
