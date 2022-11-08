@@ -164,7 +164,6 @@ class Solver(object):
             and (lp_solver in ['gurobi', 'gurobi_optlang'] or lp_solver is None)
         ):
             self.lp_solver = OptlangLpSolver(self, 'gurobi')
-
         elif (
             (is_glpk_available())
             and (lp_solver in ['glpk'] or lp_solver is None)
@@ -546,6 +545,7 @@ class SwiglpkLpSolver(LpSolver):
         return swiglpk.glp_get_status(self._model) in [swiglpk.GLP_FEAS,swiglpk.GLP_OPT]
 
     def is_infeasible(self):
+        #return swiglpk.glp_get_status(self._model) not in [swiglpk.GLP_FEAS,swiglpk.GLP_OPT,swiglpk.GLP_UNDEF]
         return swiglpk.glp_get_status(self._model) not in [swiglpk.GLP_FEAS,swiglpk.GLP_OPT]
 
     def get_status(self):
@@ -557,7 +557,7 @@ class SwiglpkLpSolver(LpSolver):
     def get_status_message(self, code):
         codes = {
             swiglpk.GLP_OPT: 'solution is optimal',
-            swiglpk.GLP_UNDEF: 'solution is undefined',
+            swiglpk.GLP_UNDEF: 'solution is undefined (infeasibility is assumed)',
             swiglpk.GLP_FEAS: 'solution is feasible, but not necessarily optimal',
             swiglpk.GLP_INFEAS: 'solution is infeasible',
             swiglpk.GLP_NOFEAS: 'problem has no feasible solution',

@@ -25,8 +25,8 @@ def main():
                         help='Minimum μ to check; default: 0.0.')
     parser.add_argument('--mu-max', type=float, default=2.5,
                         help='Maximum μ to check; default: 2.5.')
-    parser.add_argument('--bissection-tol', type=float, default=1e-6,
-                        help='Tolerance for bissection; default: 1e-6.')
+    parser.add_argument('--bissection-tol', type=float, default=1e-4,
+                        help='Tolerance for bissection; default: 1e-4.')
     parser.add_argument('--max-bissection-iters', type=int, default=None,
                         help='Maximum number of iterations for bissection; default: None.')
     parser.add_argument('--output-dir', type=str, default=None,
