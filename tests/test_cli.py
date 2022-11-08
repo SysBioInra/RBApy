@@ -27,13 +27,13 @@ class CliTestCase(unittest.TestCase):
                 rba.cli.solve_rba_model.main()
 
         # model generation
-        parameters_file = os.path.join(os.path.dirname(__file__), '..', 'sample_input', 'params.in')
+        parameters_file = os.path.join(os.path.dirname(__file__), '..', 'sample_input_small', 'params.in')
         with unittest.mock.patch('sys.argv', ['', parameters_file, '--model-dir', self.tmp_dirname]):
             rba.cli.generate_rba_model.main()
 
         self.assertTrue(os.path.join(self.tmp_dirname, 'metabolism.xml'))
 
-        parameters_file = os.path.join(os.path.dirname(__file__), '..', 'sample_input', 'params.in')
+        parameters_file = os.path.join(os.path.dirname(__file__), '..', 'sample_input_small', 'params.in')
         with unittest.mock.patch('sys.argv', ['', parameters_file, '--model-dir', self.tmp_dirname, '--verbose']):
             rba.cli.generate_rba_model.main()
 
