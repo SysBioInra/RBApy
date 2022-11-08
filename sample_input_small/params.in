@@ -1,0 +1,39 @@
+
+#########################
+# Sample parameter file #
+#########################
+
+##############################################################################
+# INPUT_DIR
+# Directory where input files can be found and where helper files will be
+# stored. Can be asolute path or path relative to where program is RUN (!).
+##############################################################################
+
+INPUT_DIR = sample_input_small/data
+
+##############################################################################
+# SBML_FILE
+# Name of SBML file describing metabolism of target organism. Should be
+# located in INPUT_DIR (or provide a path relative to INPUT_DIR).
+##############################################################################
+
+SBML_FILE = sbml.xml
+
+##############################################################################
+# ORGANISM_ID
+# Taxonomy ID of target organism as established by the NCBI. Please retrieve
+# id of your organism on:
+#   www.ncbi.nlm.nih.gov/taxonomy
+# or
+#   www.uniprot.org/taxonomy/
+##############################################################################
+
+ORGANISM_ID = 224308
+
+##############################################################################
+# OUTPUT_DIR
+# Directory where files used to run RBA are stored. Absolute path or path
+# relative to where program is RUN (!).
+##############################################################################
+
+OUTPUT_DIR = sample_input_small
