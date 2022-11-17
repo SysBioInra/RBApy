@@ -54,7 +54,7 @@ Running
 
 For more detailed instructions on usage, please refer to the RBApy website https://sysbioinra.github.io/RBApy/.
 
-Put the SBML file containing the GSMM of your organism of interest in the `input` directory and fill in the
+Put the SBML file containing the Genome Size Metabolic Model (GSMM) of your organism of interest in the `input` directory and fill in the
 parameter file `input/params.in`. Then open a console at the root
 of the repository and run:
 
@@ -80,14 +80,14 @@ to replace these default values with hand-curated values. You should fill in
 these helper files and rerun the script to obtain more relevant output
 (see instructions below).
 
-If rbapy was installed properly, there also exists command-line interface called by:
+If rbapy has been installed properly, there also exists command-line interface called by:
 
 
 ```
 generate-rba-model path/to/params.in
 ```
 
-Once the RBA model was generated, you can solve it using:
+Once the RBA model has been generated, you can solve it using:
 
 
 ```
