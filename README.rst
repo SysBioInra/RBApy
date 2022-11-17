@@ -20,19 +20,19 @@ RBApy requires one of the linear programming solvers `IBM CPLEX <https://www.ibm
     pip install rbapy
     ```
 
-    Optionally, install GLPK by installing RBApy with the ``cplex`` option. Note, this requires a CPLEX license.:
+    Optionally, also install CPLEX by installing RBApy with the ``cplex`` option. Note, this requires a CPLEX license.:
 
     ```
     pip install rbapy[cplex]
     ```
 
-    Optionally, install GLPK by installing RBApy with the ``swiglpk`` option. Note, this requires ``libglpk-dev``.:
+    Optionally, also install GLPK by installing RBApy with the ``swiglpk`` option. Note, this requires ``libglpk-dev``.:
     
     ```
     pip install rbapy[swiglpk]
     ```
 
-    Optionally, install Gurobi by installing RBApy with the ``gurobi`` option. Note, this requires a Gurobi license.:
+    Optionally, also install Gurobi by installing RBApy with the ``gurobi`` option. Note, this requires a Gurobi license.:
 
     ```
     pip install rbapy[gurobi]
