@@ -131,7 +131,7 @@ Fischer S. , Bulovic A. , Goelzer A. , Bodeit, O., Dinh M.
 Citation
 ---------------
 
-If you wish to cite this work, please refer to `https://doi.org/10.1016/j.ymben.2019.06.001 <https://doi.org/10.1016/j.ymben.2019.06.001>`_.
+If you use RBApy for scientific publications, please cite Bulović A., Fischer S., Dinh M., Golib F., Liebermeister W., Poirier C., Tournier L., Klipp E., Fromion V., Goelzer A. (2019), "Automated generation of bacterial resource allocation models", Metabolic Engineering 55 (2019) 12–22. `https://doi.org/10.1016/j.ymben.2019.06.001 <https://doi.org/10.1016/j.ymben.2019.06.001>`_.
 
 
 License
