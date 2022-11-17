@@ -38,7 +38,7 @@ RBApy requires one of the linear programming solvers `IBM CPLEX <https://www.ibm
     pip install rbapy[gurobi]
     ```
 
-More information about how to install RBApy is available at https://sysbioinra.github.io/RBApy/.
+More information about how to install RBApy is available at https://sysbioinra.github.io/RBApy/installation.html.
 
 Remark on usage
 ---------------
