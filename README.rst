@@ -1,7 +1,7 @@
 RBApy
 ==============================
 
-RBApy is a open-source Python package for automated generation of bacterial `Resource Balance Analysis (RBA) <https://rba.inrae.fr>`_ models.
+RBApy is a open-source Python package for the automated generation of bacterial Resource Balance Analysis (RBA) models (https://rba.inrae.fr).
 Existing RBA models for *Bacillus subtilis 168* (wild type), *Escherichia coli K-12* (wild type) and CO2-fixing *Escherichia coli K-12* (an engineered strain) can be found here: https://github.com/SysBioInra/Bacterial-RBA-models.
 
 For a complete documentation on RBApy installation and usage, please visit the website:
