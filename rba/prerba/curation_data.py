@@ -99,7 +99,7 @@ class CurationData(object):
 
         """
         new_rows = pandas.DataFrame(rows, columns=self.data.columns)
-        self.data = self.data.append(new_rows)
+        self.data = pandas.concat([self.data, new_rows], axis=0,ignore_index=True)  
         self._data_added = True
 
     def add_row(self, row):
