@@ -9,6 +9,11 @@ import sys
 import pandas
 import shutil
 
+if sys.version_info >= (3, 9):
+    from importlib import resources
+else:
+    import importlib_resources as resources
+
 # local imports
 from rba.prerba.pipeline_parameters import (PipelineParameters , DefaultInformation)
 from rba.prerba.default_data import DefaultData
@@ -21,8 +26,6 @@ from rba.prerba.manual_annotation import (
 from rba.prerba.fasta_parser import RbaFastaParser
 from rba.prerba import protein_export
 from rba.prerba.macromolecule import Macromolecule
-
-from importlib_resources import files, as_file
 
 class UserData(object):
     """Data contained in files provided by the user."""
@@ -47,25 +50,25 @@ class UserData(object):
         and copies their READMEs from default data.
         """
         if not os.path.isfile(self.input_path("README.rst")):
-            with as_file(files("rba.default_data.READMES").joinpath("README.rst")) as src_path:
+            with resources.as_file(resources.files("rba.default_data.READMES").joinpath("README.rst")) as src_path:
                 shutil.copy(src_path, self.input_path("README.rst"))
         if not os.path.exists(self.input_path('cellular_components')):
             print("")
             print('Directory {} not found and therefore created.'.format(self.input_path('cellular_components')))
             os.makedirs(self.input_path('cellular_components'))
-            with as_file(files("rba.default_data.READMES").joinpath("README_cellular_components.rst")) as src_path:
+            with resources.as_file(resources.files("rba.default_data.READMES").joinpath("README_cellular_components.rst")) as src_path:
                 shutil.copy(src_path, self.input_path("cellular_components/README.rst"))
         if not os.path.exists(self.input_path('machinery_composition')):
             print("")
             print('Directory {} not found and therefore created.'.format(self.input_path('machinery_composition')))
             os.makedirs(self.input_path('machinery_composition'))
-            with as_file(files("rba.default_data.READMES").joinpath("README_machinery_composition.rst")) as src_path:
+            with resources.as_file(resources.files("rba.default_data.READMES").joinpath("README_machinery_composition.rst")) as src_path:
                 shutil.copy(src_path, self.input_path("machinery_composition/README.rst"))
         if not os.path.exists(self.input_path('helper_files')):
             print("")
             print('Directory {} not found and therefore created.'.format(self.input_path('helper_files')))
             os.makedirs(self.input_path('helper_files'))
-            with as_file(files("rba.default_data.READMES").joinpath("README_helper_files.rst")) as src_path:
+            with resources.as_file(resources.files("rba.default_data.READMES").joinpath("README_helper_files.rst")) as src_path:
                 shutil.copy(src_path, self.input_path("helper_files/README.rst"))
         print("")
 
@@ -82,14 +85,14 @@ class UserData(object):
             self.default_input_directory="default_data/EUKARYOTE"
 
         # read default information file
-        path_default_info = files('rba.' + self.default_input_directory.replace("/", ".")).joinpath("default_information.in")
+        path_default_info = resources.files('rba.' + self.default_input_directory.replace("/", ".")).joinpath("default_information.in")
         self._default_information=DefaultInformation(path_default_info).parameters       
         self._average_gene_id = self._default_information['AVERAGE_GENE_ID']
         self._macromolecule_location_separator = self._default_information['MACROMOLECULE_LOCATION_SEPARATOR']
         
         # copy process defineition file from default info directory into input data directory and read it
         if not os.path.isfile(self.input_path("process_definition.tsv")):
-            with as_file(files('rba.' + self.default_input_directory.replace("/", ".")).joinpath("default_process_definition.tsv")) as src_path:
+            with resources.as_file(resources.files('rba.' + self.default_input_directory.replace("/", ".")).joinpath("default_process_definition.tsv")) as src_path:
                 shutil.copy(src_path,self.input_path("process_definition.tsv"))
         process_definition_file=pandas.read_csv(self.input_path("process_definition.tsv"),sep="\t")
         
@@ -98,14 +101,14 @@ class UserData(object):
         
         # copy fasta file with tRNAs from default info directory into input data directory
         if not os.path.isfile(self.input_path("cellular_components/trnas.fasta")):
-            with as_file(files('rba.' + self.default_input_directory.replace("/", ".")).joinpath("trnas.fasta")) as src_path:                
+            with resources.as_file(resources.files('rba.' + self.default_input_directory.replace("/", ".")).joinpath("trnas.fasta")) as src_path:                
                 shutil.copy(src_path,self.input_path("cellular_components/trnas.fasta"))
 
         # copy fasta files with process machinery definitions from default info directory into input data directory
         for i in self.process_definition:
             if not os.path.isfile(self.input_path('machinery_composition/{}.fasta'.format(i["PROCESS"]))):
-                resource_path = files('rba').joinpath(self.default_input_directory, f"{i['PROCESS']}.fasta")
-                with as_file(resource_path) as src_path:
+                resource_path = resources.files('rba').joinpath(self.default_input_directory, f"{i['PROCESS']}.fasta")
+                with resources.as_file(resource_path) as src_path:
                     if src_path.is_file():
                         shutil.copy(src_path, self.input_path(f'machinery_composition/{i["PROCESS"]}.fasta'))
                    
@@ -116,8 +119,8 @@ class UserData(object):
         self.default_genome_location=self._default_information['DEFAULT_GENOME_LOCATION']
 
         # import default sbml rba compartment map
-        resource_path = files('rba').joinpath(self.default_input_directory, "default_sbml_rba_compartment_map.tsv")
-        with as_file(resource_path) as src_path:
+        resource_path = resources.files('rba').joinpath(self.default_input_directory, "default_sbml_rba_compartment_map.tsv")
+        with resources.as_file(resource_path) as src_path:
             default_sbml_rba_compartment_map = pandas.read_csv(src_path, sep="\t")
         self.default_sbml_rba_compartment_map={frozenset(default_sbml_rba_compartment_map.loc[i,"SBML_COMPARTMENT"].split(",")):default_sbml_rba_compartment_map.loc[i,"RBA_COMPARTMENT"] for i in default_sbml_rba_compartment_map.index}
 

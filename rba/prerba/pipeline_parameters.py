@@ -36,7 +36,7 @@ class PipelineParameters(object):
         self.parameters = {}
 
         try:
-            with open(parameter_file, 'rU') as input_stream:
+            with open(parameter_file, 'r') as input_stream:
                 # parse file
                 for line in input_stream:
                     line = line.strip()
@@ -100,7 +100,7 @@ class DefaultInformation(object):
         self.parameters = {}
 
         try:
-            with open(file_name, 'rU') as input_stream:
+            with open(file_name, 'r') as input_stream:
                 # parse file
                 for line in input_stream:
                     line = line.strip()

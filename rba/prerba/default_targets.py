@@ -3,9 +3,15 @@
 # python 2/3 compatibility
 from __future__ import division, print_function, absolute_import
 
+import sys
+
+if sys.version_info >= (3, 9):
+    from importlib import resources
+else:
+    import importlib_resources as resources
+
 # local imports
 import rba.xml
-from importlib_resources import files, as_file
 
 
 class DefaultTargets(object):
@@ -32,8 +38,8 @@ class DefaultTargets(object):
         self.user_data = user_data
         # import default target
         if self.user_data.default_input_directory is not None:
-            resource_path = files('rba').joinpath(self.user_data.default_input_directory, "default_targets.xml")
-            with as_file(resource_path) as src_path:
+            resource_path = resources.files('rba').joinpath(self.user_data.default_input_directory, "default_targets.xml")
+            with resources.as_file(resource_path) as src_path:
                 with open(src_path, 'r') as f:
                     self.default_targets =rba.xml.RbaTargets().from_file(f)
 

@@ -6,11 +6,16 @@ from __future__ import division, print_function, absolute_import
 # global imports
 import os
 import shutil
+import sys
+
+if sys.version_info >= (3, 9):
+    from importlib import resources
+else:
+    import importlib_resources as resources
 
 # local imports
 import rba
 from rba.utils import efficiencies
-from importlib_resources import files, as_file
 
 class RbaModel(object):
     """
@@ -153,7 +158,7 @@ class RbaModel(object):
                     "Localised_Macromolecules":False,
                     "Macromolecule_location_separator":None}
         if os.path.isfile(file_name):
-            with open(file_name, 'rU') as input_stream:
+            with open(file_name, 'r') as input_stream:
                 for line in input_stream:
                     [key, value] = line.rstrip().split('\t')
                     metadata.update({key:value})
@@ -170,7 +175,7 @@ class RbaModel(object):
                 concentrations values.
         """
         concentrations = {}
-        with open(file_name, 'rU') as input_stream:
+        with open(file_name, 'r') as input_stream:
             # skip header
             next(input_stream)
             for line in input_stream:
@@ -285,19 +290,19 @@ class RbaModel(object):
             self.output_dir = output_dir
 
         if not os.path.isfile(self._output("README.rst")):
-            with as_file(files("rba.default_data.READMES").joinpath("README.rst")) as src_path:
+            with resources.as_file(resources.files("rba.default_data.READMES").joinpath("README.rst")) as src_path:
                 shutil.copy(src_path, self._output("README.rst"))
         if not os.path.exists(self._output('model')):
             os.makedirs(self._output('model'))
-            with as_file(files("rba.default_data.READMES").joinpath("README_model.rst")) as src_path:
+            with resources.as_file(resources.files("rba.default_data.READMES").joinpath("README_model.rst")) as src_path:
                 shutil.copy(src_path, self._output("model/README.rst"))
         if not os.path.exists(self._output('outputs')):
             os.makedirs(self._output('outputs'))
-            with as_file(files("rba.default_data.READMES").joinpath("README_outputs.rst")) as src_path:
+            with resources.as_file(resources.files("rba.default_data.READMES").joinpath("README_outputs.rst")) as src_path:
                 shutil.copy(src_path, self._output("outputs/README.rst"))
         if not os.path.exists(self._output('other')):
             os.makedirs(self._output('other'))
-            with as_file(files("rba.default_data.READMES").joinpath("README_other.rst")) as src_path:
+            with resources.as_file(resources.files("rba.default_data.READMES").joinpath("README_other.rst")) as src_path:
                 shutil.copy(src_path, self._output("other/README.rst"))
 
         model_file_index=ModelFileIndex()
@@ -446,7 +451,7 @@ class ModelFileIndex(object):
 
         """
         try:
-            with open(file_path, 'rU') as input_stream:
+            with open(file_path, 'r') as input_stream:
                 # parse file
                 for line in input_stream:
                     line = line.strip()
