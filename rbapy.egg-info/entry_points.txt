@@ -2,4 +2,3 @@
 generate-rba-model = rba.cli.generate_rba_model:main
 solve-rba-model = rba.cli.solve_rba_model:main
 update-rba-model = rba.cli.update_rba_model:main
-
