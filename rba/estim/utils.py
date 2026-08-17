@@ -1,7 +1,8 @@
 # python 2/3 compatibility
 from __future__ import division, print_function, absolute_import
 
-from collections import defaultdict, MutableMapping
+from collections import defaultdict
+from collections.abc import MutableMapping
 import numpy as np
 import pandas as pd
 from numpy.linalg import lstsq

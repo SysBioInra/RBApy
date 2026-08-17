@@ -107,6 +107,8 @@ setup(
         "python-libsbml == 5.19.2; python_version <= '3.10'",
         "python-libsbml >= 5.20; python_version > '3.10'",        
         'scipy',
+        'matplotlib',
+        'cvxopt',
         'requests',
         'importlib_resources',
     ],
