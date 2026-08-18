@@ -150,7 +150,7 @@ if __name__ == '__main__':
 
     for enz_id in enz_ids:
         enz = enzymes[enz_id]
-        enz_kapp_df.loc[enz_id]['kapp'] = enz.kapp / (24*3600)
+        enz_kapp_df.loc[enz_id,'kapp']  = enz.kapp / (24*3600)
 
     fluxes_file = config.get('Output', 'fluxes')
     fluxes_file_type = config.get('Output', 'file_type')
@@ -165,7 +165,7 @@ if __name__ == '__main__':
         flux_distribution_DF.to_excel(fluxes_file)
     elif fluxes_file_type == 'csv':
         delimiter = config.get('Output', 'delimiter')
-        flux_distribution_DF.to_csv(fluxes_file, str(delimiter))
+        flux_distribution_DF.to_csv(fluxes_file, sep=str(delimiter))
 
     output_file = config.get('Output', 'kapps')
     output_file_type = config.get('Output', 'file_type')
@@ -176,4 +176,4 @@ if __name__ == '__main__':
         nz_values.to_excel(output_file)
     elif output_file_type == 'csv':
         delimiter = config.get('Output', 'delimiter')
-        nz_values.to_csv(output_file, str(delimiter))
+        nz_values.to_csv(output_file, sep=str(delimiter))

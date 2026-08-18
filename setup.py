@@ -67,6 +67,10 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9', 
         'Programming Language :: Python :: 3.10',                               
+        'Programming Language :: Python :: 3.11',                               
+        'Programming Language :: Python :: 3.12',                               
+        'Programming Language :: Python :: 3.13',                               
+        'Programming Language :: Python :: 3.14',                               
     ],
 
     # What does your project relate to?
@@ -100,8 +104,11 @@ setup(
         'lxml',
         'numpy',
         'pandas',
-        'python-libsbml == 5.19.2',
+        "python-libsbml == 5.19.2; python_version <= '3.10'",
+        "python-libsbml >= 5.20; python_version > '3.10'",        
         'scipy',
+        'matplotlib',
+        'cvxopt',
         'requests',
         'importlib_resources',
     ],

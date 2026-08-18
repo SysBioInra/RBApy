@@ -6,6 +6,13 @@ from __future__ import division, print_function, absolute_import
 # local imports
 import rba.xml
 import pandas
+import sys
+
+if sys.version_info >= (3, 9):
+    from importlib import resources
+else:
+    import importlib_resources as resources
+
 from importlib_resources import files, as_file
 from rba.xml import Function
 
@@ -46,8 +53,8 @@ class DefaultParameters(object):
 
         #  Import default parameter data
         if default_input_directory is not None:
-            resource_path = files('rba').joinpath(default_input_directory, "default_parameters.xml")
-            with as_file(resource_path) as src_path:
+            resource_path = resources.files('rba').joinpath(default_input_directory, "default_parameters.xml")
+            with resources.as_file(resource_path) as src_path:
                 with open(src_path, 'r') as f:
                     self.default_parameters = rba.xml.RbaParameters().from_file(f)
                     
@@ -202,8 +209,8 @@ class DefaultMetabolites(object):
         
         # import default metabolites if exist
         if default_input_directory is not None:
-            resource_path = files('rba').joinpath(default_input_directory, "default_metabolites.tsv")
-            with as_file(resource_path) as src_path:
+            resource_path = resources.files('rba').joinpath(default_input_directory, "default_metabolites.tsv")
+            with resources.as_file(resource_path) as src_path:
                 default_metabolites_from_file = pandas.read_csv(src_path, sep="\t")
             self.key_metabolites=dict(zip(list(default_metabolites_from_file["ID"]),list(default_metabolites_from_file["NAME"])))
             self.concentration=dict(zip(list(default_metabolites_from_file["ID"]),list(default_metabolites_from_file["CONCENTRATION"])))
@@ -214,16 +221,16 @@ class DefaultMetabolites(object):
         # relative compositions of mrna and dna
         try:
             # import default dna composition 
-            resource_path = files('rba').joinpath(default_input_directory, "default_dna.xml")
-            with as_file(resource_path) as src_path:
+            resource_path = resources.files('rba').joinpath(default_input_directory, "default_dna.xml")
+            with resources.as_file(resource_path) as src_path:
                 with open(src_path, 'r') as f:
                     self.relative_composition_dna = {i.component: i.stoichiometry for i in rba.xml.RbaDNA().from_file(f).macromolecules._elements_by_id["dna__DEFAULT"].composition._elements}
         except:
             self.relative_composition_dna = {'A': 0.2818, 'C': 0.2181, 'G': 0.2171, 'T': 0.283}
         try:
             # import default mrna composition 
-            resource_path = files('rba').joinpath(default_input_directory, "default_mrnas.xml")
-            with as_file(resource_path) as src_path:
+            resource_path = resources.files('rba').joinpath(default_input_directory, "default_mrnas.xml")
+            with resources.as_file(resource_path) as src_path:
                 with open(src_path, 'r') as f:
                     self.relative_composition_mrna={i.component: i.stoichiometry for i in rba.xml.RbaRNAs().from_file(f).macromolecules._elements_by_id["mrna__DEFAULT"].composition._elements}
         except:            

@@ -1,13 +1,12 @@
 Metadata-Version: 2.1
 Name: rbapy
-Version: 3.0
+Version: 3.0.1
 Summary: Package for automated generation, simulation and calibration of Resource Balance Analysis (RBA) models
 Home-page: https://rbagroup.github.io/RBApy/
 Author: RBApy was conceived and implemented originally by INRAE (Oliver Bodeit, Stephan Fischer, Ana Bulovic, Anne Goelzer), and updated regularly by several contributors (Marc Dinh, Jonathan Karr, Michael Jahn)
 Author-email: support-rbapy@inrae.fr
 License: GPLv3
 Keywords: metabolism,Resource Balance Analysis,molecular biology,cell biology,biochemistry,systems biology,computational biology,mathematical modeling,numerical simulation
-Platform: UNKNOWN
 Classifier: Development Status :: 5 - Production/Stable
 Classifier: Intended Audience :: Science/Research
 Classifier: Topic :: Scientific/Engineering
@@ -18,19 +17,50 @@ Classifier: Programming Language :: Python :: 3.7
 Classifier: Programming Language :: Python :: 3.8
 Classifier: Programming Language :: Python :: 3.9
 Classifier: Programming Language :: Python :: 3.10
-Provides-Extra: cplex
-Provides-Extra: cplex_conv_opt
-Provides-Extra: cplex_optlang
-Provides-Extra: glpk
-Provides-Extra: swiglpk
-Provides-Extra: glpk_conv_opt
-Provides-Extra: glpk_optlang
-Provides-Extra: gurobi
-Provides-Extra: gurobi_conv_opt
-Provides-Extra: gurobi_optlang
-Provides-Extra: dev
-Provides-Extra: test
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3.14
 License-File: LICENSE.txt
+Requires-Dist: biopython
+Requires-Dist: lxml
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: python-libsbml==5.19.2; python_version <= "3.10"
+Requires-Dist: python-libsbml>=5.20; python_version > "3.10"
+Requires-Dist: scipy
+Requires-Dist: matplotlib
+Requires-Dist: cvxopt
+Requires-Dist: requests
+Requires-Dist: importlib_resources
+Provides-Extra: cplex
+Requires-Dist: cplex; extra == "cplex"
+Provides-Extra: cplex-conv-opt
+Requires-Dist: conv_opt[cplex]; extra == "cplex-conv-opt"
+Provides-Extra: cplex-optlang
+Requires-Dist: optlang; extra == "cplex-optlang"
+Requires-Dist: cplex; extra == "cplex-optlang"
+Provides-Extra: glpk
+Requires-Dist: glpk; extra == "glpk"
+Provides-Extra: swiglpk
+Requires-Dist: swiglpk; extra == "swiglpk"
+Provides-Extra: glpk-conv-opt
+Requires-Dist: conv_opt; extra == "glpk-conv-opt"
+Provides-Extra: glpk-optlang
+Requires-Dist: optlang; extra == "glpk-optlang"
+Provides-Extra: gurobi
+Requires-Dist: gurobipy; extra == "gurobi"
+Provides-Extra: gurobi-conv-opt
+Requires-Dist: conv_opt[gurobi]; extra == "gurobi-conv-opt"
+Provides-Extra: gurobi-optlang
+Requires-Dist: optlang; extra == "gurobi-optlang"
+Requires-Dist: gurobipy; extra == "gurobi-optlang"
+Provides-Extra: dev
+Requires-Dist: check-manifest; extra == "dev"
+Provides-Extra: test
+Requires-Dist: pytest; extra == "test"
+Requires-Dist: pytest-cov; extra == "test"
+Requires-Dist: coverage; extra == "test"
 
 
 RBApy
@@ -46,7 +76,7 @@ https://rbagroup.github.io/RBApy/
 Installation
 -------------
 
-RBApy requires one of the linear programming solvers `IBM CPLEX <https://www.ibm.com/analytics/cplex-optimizer>`_, `GLPK <https://www.gnu.org/software/glpk/>`_, or `Gurobi <https://www.gurobi.com/products/gurobi-optimizer/>`_. Note, while GLPK is capable of executing the example models in the tutorial, in our experience, GLPK is prohibitively slow for real RBA models. IBM and Gurobi both provide free licenses for academic research.
+RBApy runs on Python >=3.6 and requires one of the linear programming solvers `IBM CPLEX <https://www.ibm.com/analytics/cplex-optimizer>`_, `GLPK <https://www.gnu.org/software/glpk/>`_, or `Gurobi <https://www.gurobi.com/products/gurobi-optimizer/>`_. Note, while GLPK is capable of executing the example models in the tutorial, in our experience, GLPK is prohibitively slow for real RBA models. IBM and Gurobi both provide free licenses for academic research.
 
 1. Optionally, install the CPLEX linear programming solver.
 
@@ -180,7 +210,5 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with RBApy.  If not, see <https://www.gnu.org/licenses/>
-
-
 
 

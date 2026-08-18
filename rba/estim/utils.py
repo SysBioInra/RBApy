@@ -1,7 +1,8 @@
 # python 2/3 compatibility
 from __future__ import division, print_function, absolute_import
 
-from collections import defaultdict, MutableMapping
+from collections import defaultdict
+from collections.abc import MutableMapping
 import numpy as np
 import pandas as pd
 from numpy.linalg import lstsq
@@ -118,10 +119,10 @@ def compute_compartment_data(exp_df, prot_df, loc_df, cm_df, config):
         for exp in comp_data.columns:
             for true_loc in true_locs:
                 prot_w = sum(total[total[loc_col] == loc][exp])/len(true_locs)
-                if np.isnan(comp_data[exp][true_loc]):
-                    comp_data[exp][true_loc] = prot_w
+                if np.isnan(comp_data.loc[true_loc, exp]):
+                    comp_data.loc[true_loc, exp] = prot_w
                 else:
-                    comp_data[exp][true_loc] = comp_data[exp][true_loc] + prot_w
+                    comp_data.loc[true_loc, exp] = comp_data.loc[true_loc, exp] + prot_w
     return comp_data
 
 
@@ -208,12 +209,12 @@ def compute_linear_fits(exp_df, data_df, normalize=False, sums_to_one=False):
     x = sol['x'].T
     for comp in data_df.index:
         if comp2linfit[comp]:
-            solution['slope'][comp] = x[idx]
-            solution['intercept'][comp] = x[idx+1]
+            solution.loc[comp, 'slope']  = x[idx]
+            solution.loc[comp, 'intercept'] = x[idx+1]
             idx = idx + 2
         else:
-            solution['slope'][comp] = 0
-            solution['intercept'][comp] = x[idx]
+            solution.loc[comp, 'slope']  = 0
+            solution.loc[comp, 'intercept'] = x[idx]
             idx = idx + 1
     return solution
 
