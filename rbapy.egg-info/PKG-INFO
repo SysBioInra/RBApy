@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: rbapy
-Version: 3.0.1
+Version: 3.0.2
 Summary: Package for automated generation, simulation and calibration of Resource Balance Analysis (RBA) models
 Home-page: https://rbagroup.github.io/RBApy/
 Author: RBApy was conceived and implemented originally by INRAE (Oliver Bodeit, Stephan Fischer, Ana Bulovic, Anne Goelzer), and updated regularly by several contributors (Marc Dinh, Jonathan Karr, Michael Jahn)
