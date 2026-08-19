@@ -1,0 +1,11 @@
+pandas
+lxml
+python-libsbml
+scipy
+biopython
+
+[dev]
+check-manifest
+
+[test]
+coverage
