@@ -4,7 +4,6 @@ numpy
 pandas
 scipy
 matplotlib
-cvxopt
 requests
 importlib_resources
 
