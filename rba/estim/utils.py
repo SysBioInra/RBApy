@@ -11,18 +11,47 @@ from scipy.stats.mstats import gmean
 import libsbml
 
 import cplex
-from cvxopt import solvers, matrix
 
 R = 6.022140857e23
 
-def numpy_to_cvxopt_matrix(A):
-    if isinstance(A, np.ndarray):
-        if A.ndim == 1:
-            return matrix(A, (A.shape[0], 1), 'd')
-        else:
-            return matrix(A, A.shape, 'd')
-    else:
-        return A
+def solve_nonneg_least_squares_cplex(A, b):
+    """Solve  min ||Ax - b||^2  s.t.  Ax >= 0  using CPLEX's QP solver.
+
+    CPLEX's quadratic objective uses the 1/2 x'Qx + c'x convention,
+    so Q = A'A and c = -A'b carry over directly; 
+
+    Returns a 1-D numpy array with the optimal x (matches sol['x'] from
+    cvxopt, flattened).
+    """
+    A = np.asarray(A, dtype=float)
+    b = np.asarray(b, dtype=float).reshape(-1, 1)
+    m, n = A.shape
+
+    P = A.T @ A
+    q = -(A.T @ b).flatten()
+
+    problem = cplex.Cplex()
+    problem.set_results_stream(None)
+    problem.set_warning_stream(None)
+    problem.set_error_stream(None)
+    problem.objective.set_sense(problem.objective.sense.minimize)
+
+    var_names = ['x{}'.format(i) for i in range(n)]
+    # variables must be free (slope/intercept can be negative);
+    # CPLEX's default lower bound is 0, so this must be set explicitly.
+    problem.variables.add(names=var_names,
+                           lb=[-cplex.infinity] * n,
+                           ub=[cplex.infinity] * n)
+
+    problem.objective.set_linear(list(zip(var_names, q.tolist())))
+    qmat = [[list(range(n)), P[i, :].tolist()] for i in range(n)]
+    problem.objective.set_quadratic(qmat)
+
+    rows = [cplex.SparsePair(list(range(n)), A[i, :].tolist()) for i in range(m)]
+    problem.linear_constraints.add(lin_expr=rows, senses=['G'] * m, rhs=[0.0] * m)
+
+    problem.solve()
+    return np.array(problem.solution.get_values())
 
 
 def read_data(config, category):
@@ -159,7 +188,6 @@ def compute_linear_fits(exp_df, data_df, normalize=False, sums_to_one=False):
 
     A = np.zeros((num_rows, num_cols))
     b = np.zeros((num_rows, 1))
-    b_zero = np.zeros((num_rows, 1))
     gr = np.array(growth_rates)
     ones = np.ones((len(growth_rates),))
 
@@ -192,21 +220,18 @@ def compute_linear_fits(exp_df, data_df, normalize=False, sums_to_one=False):
     if sums_to_one:
         b[last_constraint_idx:, 0] = ones
 
-    A2 = numpy_to_cvxopt_matrix(A)
-    b2 = numpy_to_cvxopt_matrix(b)
-    b_zero2 = numpy_to_cvxopt_matrix(b_zero)
-    sol = solvers.qp(A2.T * A2, -(b2.T * A2).T, -A2, b_zero2)
+    x_qp = solve_nonneg_least_squares_cplex(A, b)
 
     x, residuals, rank, s = lstsq(A, b)
     r, p = pearsonr(np.squeeze(b), np.squeeze(np.dot(A, x)))
-    r2, p2 = pearsonr(np.squeeze(b2), np.squeeze(np.dot(A2, sol['x'])))
+    r2, p2 = pearsonr(np.squeeze(b), np.squeeze(np.dot(A, x_qp)))
     print('R^2 = {}'.format(r2))
     print('p-value = {}'.format(p2))
    
 
     solution = pd.DataFrame(index=data_df.index, columns=['slope', 'intercept'])
     idx = 0
-    x = sol['x'].T
+    x = x_qp
     for comp in data_df.index:
         if comp2linfit[comp]:
             solution.loc[comp, 'slope']  = x[idx]
